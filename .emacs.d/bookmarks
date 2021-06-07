@@ -1,0 +1,15 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Bash Config"
+ (filename . "~/.dotfiles/Bash.org")
+ (front-context-string . "\n* Basic Setup\n\n")
+ (rear-context-string . "hrc :mkdirp yes\n")
+ (position . 110))
+("Emacs Config"
+ (filename . "~/.dotfiles/Emacs.org")
+ (front-context-string . "\n* Welcome!\n\nThi")
+ (rear-context-string . ".el :mkdirp yes\n")
+ (position . 121))
+)

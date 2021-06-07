@@ -67,6 +67,8 @@
 ;; Make sure to have a definition of the macro in your /macros folder
 (global-set-key "\C-x\C-kT" 'transpose-names)
 
+(setq bookmark-default-file "~/.dotfiles/.emacs.d/bookmarks")
+
 (setq-default abbrev-mode t)
 (setq abbrev-file-name             ;; tell emacs where to read abbrev
      "~/.dotfiles/abbrev_defs") 
