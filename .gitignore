@@ -65,6 +65,7 @@ tramp
 
 # elpa packages
 /elpa/
+/.emacs.d/elpa
 
 # reftex files
 *.rel
