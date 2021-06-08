@@ -28,12 +28,12 @@
  (rear-context-string . "STARTUP: folded\n")
  (position . 236))
 ("Bash Config"
- (filename . "~/.dotfiles/Bash.org")
+ (filename . "~/.dotfiles/BashConfig.org")
  (front-context-string . "\n* Basic Setup\n\n")
  (rear-context-string . "hrc :mkdirp yes\n")
  (position . 110))
 ("Emacs Config"
- (filename . "~/.dotfiles/Emacs.org")
+ (filename . "~/.dotfiles/EmacsConfig.org")
  (front-context-string . "\n* Welcome!\n\nThi")
  (rear-context-string . ".el :mkdirp yes\n")
  (position . 121))
