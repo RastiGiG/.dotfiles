@@ -1,25 +1,37 @@
-[[$- != *i* ]] && return
+#+title: MaBest Bash Configuration
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/Bash/.bashrc :mkdirp yes
 
-    [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+* Basic Setup
 
-  xhost +local:root > /dev/null 2>&1
+#+begin_src bash
+      [[$- != *i* ]] && return
 
-  complete -cf sudo
+      [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-  # Bash won't get SIGWINCH if another process is in the foreground.
-  # Enable checkwinsize so that bash will check the terminal size when
-  # it regains control.  #65623
-  # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
-  shopt -s checkwinsize
+    xhost +local:root > /dev/null 2>&1
 
-  shopt -s expand_aliases
+    complete -cf sudo
 
-# export QT_SELECT=4
+    # Bash won't get SIGWINCH if another process is in the foreground.
+    # Enable checkwinsize so that bash will check the terminal size when
+    # it regains control.  #65623
+    # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+    shopt -s checkwinsize
 
-# Enable history appending instead of overwriting.  #139609
-shopt -s histappend
+    shopt -s expand_aliases
 
-colors() {
+  # export QT_SELECT=4
+
+  # Enable history appending instead of overwriting.  #139609
+  shopt -s histappend
+
+
+#+end_src
+
+* Colors and Highligthing 
+
+#+begin_src bash
+  colors() {
           local fgc bgc vals seq0
 
           printf "Color escapes are %s\n" '\e[${value};...;${value}m'
@@ -102,7 +114,10 @@ else
 fi
 
 unset use_color safe_term match_lhs sh
+#+end_src
 
+* Archives
+#+begin_src bash
 #
 # # ex - archive extractor
 # # usage: ex <file>
@@ -128,35 +143,45 @@ ex ()
   fi
 }
 
-#Functions to automatically evaluate shasums
-sha256()
-{
-    echo "$1 $2" | sha256sum --check
-}
+#+end_src
 
-sha512()
-{
-    echo "$1 $2" | sha512sum --check
-}
-sha1()
-{
-    echo "$1 $2" | sha1sum --check
-}
-sha224()
-{
-    echo "$1 $2" | sha224sum --check
-}
-sha384()
-{
-    echo "$1 $2" | sha384sum --check
-}
+* Handling Shasums
 
-alias cp='cp -i'                          # confirm before overwriting something
-alias rm='rm -i'                          # confirm before deleting accidently
-alias la='ls -al'                         # detailed version of ls listing hidden files
-alias ll='ls -l'                          # detailed version of ls listing
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
-alias mkd='mkdir -pv'                     # also creates parent directories (verbose)
+#+begin_src bash
+  #Functions to automatically evaluate shasums
+  sha256()
+  {
+      echo "$1 $2" | sha256sum --check
+  }
+
+  sha512()
+  {
+      echo "$1 $2" | sha512sum --check
+  }
+  sha1()
+  {
+      echo "$1 $2" | sha1sum --check
+  }
+  sha224()
+  {
+      echo "$1 $2" | sha224sum --check
+  }
+  sha384()
+  {
+      echo "$1 $2" | sha384sum --check
+  }
+#+end_src
+
+* Aliases
+
+#+begin_src bash
+  alias cp='cp -i'                          # confirm before overwriting something
+  alias rm='rm -i'                          # confirm before deleting accidently
+  alias la='ls -al'                         # detailed version of ls listing hidden files
+  alias ll='ls -l'                          # detailed version of ls listing
+  alias df='df -h'                          # human-readable sizes
+  alias free='free -m'                      # show sizes in MB
+  alias np='nano -w PKGBUILD'
+  alias more=less
+  alias mkd='mkdir -pv'                     # also creates parent directories (verbose)
+#+end_src

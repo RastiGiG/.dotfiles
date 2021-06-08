@@ -2,7 +2,32 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Bash Config"
+(("Emacs Keybindings"
+ (filename . "~/Org/IT/Texteditoren/Emacs.org")
+ (front-context-string . "\n  + common chor")
+ (rear-context-string . " Key Strokes ==\n")
+ (position . 9395))
+("Linux Installed Software"
+ (filename . "~/Org/IT/Linux.org")
+ (front-context-string . "\n** == 6.1 Insta")
+ (rear-context-string . "6 Quick Looks =\n")
+ (position . 58388))
+("Emacs Kompendium"
+ (filename . "~/Org/IT/Texteditoren/Emacs.org")
+ (front-context-string . "\n* = TOC =\n\n1. [")
+ (rear-context-string . "g][Mainpage]] -\n")
+ (position . 245))
+("Linux Kompendium"
+ (filename . "~/Org/IT/Linux.org")
+ (front-context-string . "\n* = TOC =\n\n1. [")
+ (rear-context-string . "g][Mainpage]] -\n")
+ (position . 259))
+("Index for Personal Wiki"
+ (filename . "~/Org/Index.org")
+ (front-context-string . "\n* = TOC =\n1. [[")
+ (rear-context-string . "STARTUP: folded\n")
+ (position . 236))
+("Bash Config"
  (filename . "~/.dotfiles/Bash.org")
  (front-context-string . "\n* Basic Setup\n\n")
  (rear-context-string . "hrc :mkdirp yes\n")
