@@ -1,4 +1,4 @@
-;; NOTE: init.el is now generated from Emacs.org.  Please edit that file
+;; NOTE: init.el is now generated from EmacsConfig.org.  Please edit that file
 ;;       in Emacs and init.el will be generated automatically!
 
 ;; You will most likely need to adjust this font size for your system!
@@ -211,6 +211,7 @@
 
 (use-package org
   :hook (org-mode . efs/org-mode-setup)
+  :bind (("C-c l" . org-store-link))
   :config
   (setq org-ellipsis " ▾")
 
