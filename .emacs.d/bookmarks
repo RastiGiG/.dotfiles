@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Emacs Keybindings"
+(("Python Kompendium"
+ (filename . "~/Org/IT/Programming/Python.org")
+ (front-context-string . "\n* TOC\n\n1. [[*= ")
+ (rear-context-string . "g][Mainpage]] -\n")
+ (position . 297))
+("Java Kompendium"
+ (filename . "~/Org/IT/Programming/Java.org")
+ (front-context-string . "\n* TOC\n1. [[*= M")
+ (rear-context-string . "Sebastian Zierl\n")
+ (position . 204))
+("Emacs Keybindings"
  (filename . "~/Org/IT/Texteditoren/Emacs.org")
  (front-context-string . "\n  + common chor")
  (rear-context-string . " Key Strokes ==\n")
