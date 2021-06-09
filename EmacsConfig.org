@@ -154,7 +154,7 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (general-create-definer rune/leader-keys
       :keymaps '(normal insert visual emacs)
       :prefix "SPC"
-      :global-prefix "C-SPC")
+      :global-prefix "SPC m")
 
     (rune/leader-keys
       "t"  '(:ignore t :which-key "toggles")
@@ -321,8 +321,22 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
 [[https://magit.vc/][Magit]] is the best Git interface I've ever used.  Common Git operations are easy to execute quickly using Magit's command panel system.
 
 #+begin_src emacs-lisp
-(use-package magit)
+  (use-package magit)
 #+end_src
+
+*** Forge
+
+Forge extends the capabilities of Magit, for example you can do pull requests from within Emacs
+The setup is a little more difficult, just downloading the package won't do
+See [[https://magit.vc/manual/forge/Getting-Started.html#Getting-Started][this guide]] for more detail
+
+#+begin_src emacs-lisp 
+;  (use-package forge
+;    :after magit)
+#+end_src
+
+The flag :after is required to automatically load forge when entering a magit buffer
+UNCOMMENT ONLY WHEN SETUP IS DONE -> see guide
 
 ** Rainbow Delimiters 
 
@@ -330,8 +344,8 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
 
 #+begin_src emacs-lisp
 
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
 
 #+end_src
 
@@ -412,9 +426,9 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-latex-create-formula-image-program 'imagemagick)
 
     (setq org-agenda-files
-          '("~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org"
-            "~/Projects/Code/emacs-from-scratch/OrgFiles/Habits.org"
-            "~/Projects/Code/emacs-from-scratch/OrgFiles/Birthdays.org"))
+          '("~/OrgFiles/Tasks.org"
+            "~/OrgFiles/Habits.org"
+            "~/OrgFiles/Birthdays.org"))
 
     (require 'org-habit)
     (add-to-list 'org-modules 'org-habit)
