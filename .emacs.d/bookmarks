@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Python Kompendium"
+(("Contacts"
+ (filename . "~/Org/personal/Contacts.org")
+ (front-context-string . "\n- Back to [[fil")
+ (rear-context-string . "Sebastian Zierl\n")
+ (position . 255))
+("Tasks"
+ (filename . "~/Org/personal/Tasks.org")
+ (front-context-string . "\n* = Active =\n\n*")
+ (rear-context-string . "TUP: hideblocks\n")
+ (position . 585))
+("Python Kompendium"
  (filename . "~/Org/IT/Programming/Python.org")
  (front-context-string . "\n* TOC\n\n1. [[*= ")
  (rear-context-string . "g][Mainpage]] -\n")

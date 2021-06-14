@@ -152,9 +152,8 @@ This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil
     (use-package general
     :config
     (general-create-definer rune/leader-keys
-      :keymaps '(normal insert visual emacs)
-      :prefix "SPC"
-      :global-prefix "SPC m")
+      :prefix "C-."
+      :global-prefix "C-. m")
 
     (rune/leader-keys
       "t"  '(:ignore t :which-key "toggles")
@@ -295,7 +294,8 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
 
 #+begin_src emacs-lisp
   (defhydra hydra-buffer-menu (:color pink
-                               :hint nil)
+                               :hint nil
+                               :timeout 10)
     "
   ^Mark^             ^Unmark^           ^Actions^          ^Search
   ^^^^^^^^-----------------------------------------------------------------
@@ -327,7 +327,133 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
   (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
 #+end_src
 
+*** Hydra for bookmark list
+
+#+begin_src emacs-lisp
+  (defhydra hydra-bookmark-menu (:color pink
+                                 :hint nil
+                                 :timeout 10)
+    "
+         ^Mark^                ^Actions^              ^Search^            ^Annotations
+        ^^^^^^^^-----------------------------------------------------------------------
+        _m_: mark         _x_: execute          _/_: isearch             _a_: show
+        _u_: unmark       _r_: rename           _w_: locate              _A_: show all
+        _U_: unmark up    _R_: relocate bmk     _S_: show filenames      _e_: edit
+        _d_: delete       _s_: save bmk list    _T_: hide filenames
+        _D_: delete up    _l_: load bmk list    _t_: toggle filenames
+        "
+    ("m" bookmark-bmenu-mark)
+    ("u" bookmark-bmenu-unmark)
+    ("U" bookmark-bmenu-backup-unmark)
+    ("d" bookmark-bmenu-delete)
+    ("D" bookmark-bmenu-delete-backwards)
+    ("x" bookmark-bmenu-execute-deletions)
+    ("r" bookmark-bmenu-rename)
+    ("R" bookmark-bmenu-relocate)  
+    ("s" bookmark-bmenu-save)
+    ("l" bookmark-bmenu-load)  
+    ("/" bookmark-bmenu-search)
+    ("w" bookmark-bmenu-locate)
+    ("S" bookmark-bmenu-show-filenames)  
+    ("T" bookmark-bmenu-hide-filenames)
+    ("t" bookmark-bmenu-toggle-filenames)
+    ("a" bookmark-bmenu-show-annotation)
+    ("A" bookmark-bmenu-show-all-annotations)
+    ("e" bookmark-bmenu-edit-annotation)
+    ("c" nil "cancel")
+    ("v" bookmark-bmenu-select "select" :color blue)
+    ("o" bookmark-bmenu-other-window "other-window" :color blue)
+    ("C-o" bookmark-bmenu-switch-window "switch-other-window" :color blue)
+    ("1" bookmark-bmenu-1-window "full-frame" :color blue)
+    ("2" bookmark-bmenu-2-window "show-on-split-window" :color blue)
+    ("5" bookmark-bmenu-other-frame "other-frame" :color blue)
+    ("q" quit-window "quit" :color blue))
+
+  ;;  (define-key bookmark-bmenu-mode-map "." 'hydra-bookmark-menu/body)
+
+  (rune/leader-keys
+    "b"  '(:ignore lm :which-key "bookmarks")
+    "bl" '(bookmark-bmenu-list :which-key "bookmark list")
+    "bm" '(hydra-bookmark-menu/body :which-key "bookmark list menu"))
+
+#+end_src
+
+*** Hydra for Org-Timers
+
+#+begin_src emacs-lisp
+  (defhydra hydra-global-org-menu (:color blue
+                                     :timeout 4)
+    " Org Utilities
+
+      ^Timer^                ^Clock^              ^Capture
+      ^^^^^^-------------------------------------------------------------------------
+       _t_: Start         _w_: Clock-In          _c_: Capture
+       _s_: Stop          _o_: Clock-Out         _l_: Last Capture
+       _r_: Set           _j_: Clock-Goto        ^ ^
+       _p_: Print
+       "
+
+    ("t" org-timer-start "Start Timer")
+    ("s" org-timer-stop "Stop Timer")
+    ;; This one requires you be in an orgmode doc, as it sets the timer for the header
+    ("r" org-timer-set-timer "Set Timer")
+    ;; output timer value to buffer
+    ("p" org-timer "Print Timer")
+    ;; used with (org-clock-persistence-insinuate) (setq org-clock-persist t)
+    ("w" (org-clock-in '(4)) "Clock-In")
+    ;; you might also want (setq org-log-note-clock-out t)
+    ("o" org-clock-out "Clock-Out")
+    ;; global visit the clocked task
+    ("j" org-clock-goto "Clock Goto")
+    ;; Don't forget to define the captures you want http://orgmode.org/manual/Capture.html
+    ("c" org-capture "Capture")
+    ("l" org-capture-goto-last-stored "Last Capture"))
+
+  (rune/leader-keys
+      "o"  '(:ignore u :which-key "org")
+      "ou" '(hydra-global-org-menu/body :which-key "org global utilities"))
+#+end_src
+
 * Development
+
+** Terminal Modes
+
+*** Term Mode
+
+Setting up the integrated terminal emulator
+
+#+begin_src emacs-lisp
+
+  (use-package term
+    :config
+    (setq explicit-shell-file-name "bash")
+    ;;(setq explicit-zsh-args '())
+    ;; Regexp to use when searching for last prompt
+    (setq term-prompt-regexp "^[^#$%>\\n]*[#$%>] *"))
+
+  ;; add 256 color support
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+
+#+end_src
+
+*** vterm
+
+vterm is a terminal emulater that is written in C and handles the shell, meaning that Emacs is just a wrapper handling formatting of its output. It's normally a lot faster than the normal term mode
+
+You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]]
+
+#+begin_src emacs-lisp
+
+  (use-package vterm
+    :commands vterm
+    :config
+    ;; uncomment this line if you want to use zsh
+    ;; (setq vterm-shell "zsh")
+    ;; set maximum lines of output to be stored in RAM
+    (setq vterm-max-scrollback 10000))
+
+#+end_src
 
 ** Projectile
 
