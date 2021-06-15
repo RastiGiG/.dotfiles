@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Contacts"
+(("Shell Aliases"
+ (filename . "~/.dotfiles/Aliases.org")
+ (front-context-string . "\n+ [[*Basics][Ba")
+ (rear-context-string . "dirp yes\n\n* TOC\n")
+ (position . 128))
+("Zsh Env"
+ (filename . "~/.dotfiles/ZshEnv.org")
+ (front-context-string . "\n+ [[*Default Ap")
+ (rear-context-string . "dirp yes\n\n* TOC\n")
+ (position . 112))
+("Zsh Config"
+ (filename . "~/.dotfiles/ZshConfig.org")
+ (front-context-string . "\n+ [[*General][G")
+ (rear-context-string . "dirp yes\n\n* TOC\n")
+ (position . 100))
+("Contacts"
  (filename . "~/Org/personal/Contacts.org")
  (front-context-string . "\n- Back to [[fil")
  (rear-context-string . "Sebastian Zierl\n")
