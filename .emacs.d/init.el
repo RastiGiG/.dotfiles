@@ -281,6 +281,15 @@ _~_: modified
   ;; set maximum lines of output to be stored in RAM
   (setq vterm-max-scrollback 10000))
 
+;; adds git related prompt elements to eshell
+(use-package eshell-git-prompt)
+
+(use-package eshell
+
+  :config
+  ;; Set the prompt theme to powerline
+  (eshell-git-prompt-use-theme 'powerline))
+
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
@@ -512,3 +521,16 @@ _~_: modified
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(eshell-git-prompt which-key vterm visual-fill-column use-package rainbow-delimiters org-bullets magit latex-extra ivy-rich hydra helpful general eterm-256color doom-themes doom-modeline counsel-projectile command-log-mode cdlatex auctex-latexmk)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

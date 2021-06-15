@@ -1,6 +1,19 @@
 #+title: MaBest Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.dotfiles/.emacs.d/init.el :mkdirp yes
 
+* TOC
+
++ [[*Welcome!][Welcome!]]
++ [[*Tips for Use][Tips for Use]]
++ [[*Package System Setup][Package System Setup]]
++ [[*Basic UI Configuration][Basic UI Configuration]]
++ [[*Quality of Live Adjustments][Quality of Live Adjustments]]
++ [[*Keybinding Configuration][Keybinding Configuration]]
++ [[*UI Configuration][UI Configuration]]
++ [[*Development][Development]]
++ [[*Org Mode][Org Mode]] 
++ [[*Applications][Applications]]
+
 * Welcome!
 
 This is the configuration we've been building in the *Emacs From Scratch* series, now written as an Org Mode document.  This file generates [[file:init.el][init.el]] which can be loaded by Emacs at startup.
@@ -454,6 +467,25 @@ You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]
     (setq vterm-max-scrollback 10000))
 
 #+end_src
+
+*** Eshell
+
+Eshell is a variation of the normal "shell" mode and is a lot more customizable.
+Looking at current developement, it might also be a lot more relevant in the future, as a "emacs-friendly" alternative to "vterm"
+
+#+begin_src emacs-lisp
+
+  ;; adds git related prompt elements to eshell
+  (use-package eshell-git-prompt)
+
+  (use-package eshell
+
+    :config
+    ;; Set the prompt theme to powerline
+    (eshell-git-prompt-use-theme 'powerline))
+#+end_src
+
+For documentation on *eshell-git-prompt* look here: [[https://github.com/xuchunyang/eshell-git-prompt]]
 
 ** Projectile
 
