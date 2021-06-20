@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C0 Shell Aliases"
+(("org-refile-last-stored"
+ (filename . "~/Org/personal/Archive.org")
+ (front-context-string . "** DONE Praktiku")
+ (rear-context-string . "a 20:01]\n:END:\n\n")
+ (position . 1585))
+("C0 Shell Aliases"
  (filename . "~/.dotfiles/Aliases.org")
  (front-context-string . "\n+ [[*Basics][Ba")
  (rear-context-string . "dirp yes\n\n* TOC\n")

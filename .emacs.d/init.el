@@ -44,9 +44,10 @@
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
-		 vterm-mode-hook
+                 vterm-mode-hook
                 shell-mode-hook
-                eshell-mode-hook))
+                eshell-mode-hook
+                treemacs-mode))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
@@ -263,64 +264,6 @@ _~_: modified
     "o"  '(:ignore u :which-key "org")
     "ou" '(hydra-global-org-menu/body :which-key "org global utilities"))
 
-(use-package term
-  :config
-  (setq explicit-shell-file-name "bash")
-  ;;(setq explicit-zsh-args '())
-  ;; Regexp to use when searching for last prompt
-  (setq term-prompt-regexp "^[^#$%>\\n]*[#$%>] *"))
-
-;; add 256 color support
-(use-package eterm-256color
-  :hook (term-mode . eterm-256color-mode))
-
-(use-package vterm
-  :commands vterm
-  :config
-  ;; uncomment this line if you want to use zsh
-  ;; (setq vterm-shell "zsh")
-  ;; set maximum lines of output to be stored in RAM
-  (setq vterm-max-scrollback 10000))
-
-;; adds git related prompt elements to eshell
-(use-package eshell-git-prompt)
-
-(use-package eshell
-
-  :config
-  ;; Set the prompt theme to powerline
-  (eshell-git-prompt-use-theme 'powerline))
-
-(use-package projectile
-  :diminish projectile-mode
-  :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-  ;; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "~/Projects/Programming")
-    (setq projectile-project-search-path '("~/Projects/Programming")))
-  (setq projectile-switch-project-action #'projectile-dired))
-
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
-
-(use-package magit)
-
-;  (use-package forge
-;    :after magit)
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-(use-package auctex)               ; Integrated environment for TeX
-(use-package auctex-latexmk)       ; LatexMK support for AUCTeX
-(use-package latex-extra)          ; Useful features for LaTeX-mode
-(use-package cdlatex)              ; Fast input methods for LaTeX environments and math
-
-(setq exec-path (append exec-path '("/usr/local/texlive/2021")))
-
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
@@ -392,6 +335,7 @@ _~_: modified
        ("@errand" . ?E)
        ("@home" . ?H)
        ("@work" . ?W)
+       ("@study" . ?S)
        ("agenda" . ?a)
        ("planning" . ?p)
        ("publish" . ?P)
@@ -449,28 +393,28 @@ _~_: modified
 
   (setq org-capture-templates
     `(("t" "Tasks / Projects")
-      ("tt" "Task" entry (file+olp "~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org" "Inbox")
+      ("tt" "Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
 
       ("j" "Journal Entries")
       ("jj" "Journal" entry
-           (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           (file+olp+datetree "~/Org/journal/Journal.org")
            "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
            ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
            :clock-in :clock-resume
            :empty-lines 1)
       ("jm" "Meeting" entry
-           (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           (file+olp+datetree "~/Org/journal/Journal.org")
            "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
            :clock-in :clock-resume
            :empty-lines 1)
 
       ("w" "Workflows")
-      ("we" "Checking Email" entry (file+olp+datetree "~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+      ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
            "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
       ("m" "Metrics Capture")
-      ("mw" "Weight" table-line (file+headline "~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
+      ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
        "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
 
   (define-key global-map (kbd "C-c j")
@@ -500,6 +444,13 @@ _~_: modified
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
+;; This is needed as of Org 9.2
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+
 (with-eval-after-load 'ox-latex
 (add-to-list 'org-latex-classes
              '("org-plain-latex"
@@ -522,3 +473,112 @@ _~_: modified
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+(use-package latex                 ; Activates lsp for LaTeX mode
+  :ensure nil
+  :hook (tex-mode . lsp-deferred))
+(use-package auctex)               ; Integrated environment for TeX
+(use-package auctex-latexmk)       ; LatexMK support for AUCTeX
+(use-package latex-extra)          ; Useful features for LaTeX-mode
+(use-package cdlatex)              ; Fast input methods for LaTeX environments and math
+
+(setq exec-path (append exec-path '("/usr/local/texlive/2021")))
+
+(require 'tex)
+(TeX-global-PDF-mode t)            ; default compiled document: pdf
+
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
+
+(use-package python-mode
+  :ensure t
+  :custom
+  (python-shell-interpreter "python3"))
+
+(defun efs/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . efs/lsp-mode-setup)
+  :init
+  (setq lsp-keymap-prefix "C-c s")  ;; Or 'C-l', 's-l'
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom))
+
+(use-package lsp-treemacs
+  :after lsp)
+
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+(use-package term
+  :config
+  (setq explicit-shell-file-name "bash")
+  ;;(setq explicit-zsh-args '())
+  ;; Regexp to use when searching for last prompt
+  (setq term-prompt-regexp "^[^#$%>\\n]*[#$%>] *"))
+
+;; add 256 color support
+(use-package eterm-256color
+  :hook (term-mode . eterm-256color-mode))
+
+(use-package vterm
+  :commands vterm
+  :config
+  ;; uncomment this line if you want to use zsh
+  ;; (setq vterm-shell "zsh")
+  ;; set maximum lines of output to be stored in RAM
+  (setq vterm-max-scrollback 10000))
+
+;; adds git related prompt elements to eshell
+(use-package eshell-git-prompt)
+
+(use-package eshell
+
+  :config
+  ;; Set the prompt theme to powerline
+  (eshell-git-prompt-use-theme 'powerline))
+
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Projects/Programming")
+    (setq projectile-project-search-path '("~/Projects/Programming")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+
+(use-package magit)
+
+;  (use-package forge
+;    :after magit)
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
