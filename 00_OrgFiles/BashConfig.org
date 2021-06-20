@@ -1,5 +1,5 @@
 #+title: MaBest Bash Configuration
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/Bash/.bashrc :mkdirp yes
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D1_Bash/.bashrc :mkdirp yes
 
 * Basic Setup
 

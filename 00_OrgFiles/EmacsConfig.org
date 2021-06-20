@@ -1,5 +1,5 @@
 #+title: MaBest Emacs Configuration
-#+PROPERTY: header-args:emacs-lisp :tangle ~/.dotfiles/.emacs.d/init.el :mkdirp yes
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.dotfiles/C1_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
 #+STARTUP: folded
 
 * TOC
@@ -132,7 +132,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 #+begin_src emacs-lisp
 
-  (load-file "~/.dotfiles/macros/global.macs") ; Save file containing global macros
+  (load-file "~/.dotfiles/C1_EmacsConfiguration/macros/global.macs") ; Save file containing global macros
 
   ;; Set of keybindings for defined macros
   ;; Make sure to have a definition of the macro in your /macros folder
@@ -145,7 +145,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 Setup a location for your bookmarks-file
 
 #+begin_src emacs-lisp
-(setq bookmark-default-file "~/.dotfiles/.emacs.d/bookmarks")
+(setq bookmark-default-file "~/.dotfiles/C1_EmacsConfiguration/bookmarks")
 #+end_src
 
 ** Abbreviations
@@ -154,7 +154,7 @@ Setup a location for your bookmarks-file
 
    (setq-default abbrev-mode t)
    (setq abbrev-file-name             ;; tell emacs where to read abbrev
-	"~/.dotfiles/abbrev_defs") 
+	"~/.dotfiles/C1_EmacsConfiguration/abbrev_defs") 
    (setq save-abbrevs t)
 
 #+end_src
@@ -697,7 +697,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
   ;; Automatically tangle our Emacs.org config file when we save it
   (defun efs/org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        (expand-file-name "~/.dotfiles/Emacs.org"))
+                        (expand-file-name "~/.dotfiles/00_OrgFiles/EmacsConfig.org"))
       ;; Dynamic scoping to the rescue
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))

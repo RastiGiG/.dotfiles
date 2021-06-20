@@ -1,5 +1,5 @@
 #+Title: Zsh Environment Setup
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/Zsh/.zshenv :mkdirp yes
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D2_Zsh/.zshenv :mkdirp yes
 
 * TOC
 
