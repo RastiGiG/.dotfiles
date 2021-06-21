@@ -446,11 +446,65 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
       "ou" '(hydra-global-org-menu/body :which-key "org global utilities"))
 #+end_src
 
+** Tab Bar Mode
+
+Here we configure =Tab Bar Mode= to work in a specific way.
+First we want new tabs to always open with a *scratch* buffer
+#+begin_src emacs-lisp
+
+  ;; Set new tab to scratch buffer
+  (setq tab-bar-new-tab-choice "*scratch*")
+  ;; (tab-bar-new-tab-to right)                ;; right is default
+  ;; (setq tab-bar-tab-name-function tab-bar-current-tab-name)
+
+  (setq tab-bar-close-button-show nil
+        tab-bar-new-button-show nil
+        ;; tab-bar-button-relief               ;; controls outline of buttons
+        ;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
+        )
+
+  (setq tab-bar-show nil)                      ;; tab bar is not automatically shown (set 1 to enable)
+
+  ;; Get the current tab name for use in some other display
+  (defun efs/current-tab-name ()
+    (alist-get 'name (tab-bar--current-tab)))
+
+#+end_src
+
+** Winner Mode
+
+Winner mode is a package that ships with Emacs. It keeps a history of window settings/splits, so you can return to them if you change the view
+
+#+begin_src emacs-lisp
+
+  (use-package winner-mode
+    :ensure nil
+    :config
+    (winner-mode))
+
+#+end_src
+
+** Winum Mode
+
+Winum Mode is an alternative to ace-widow that makes it pretty convenient to swap between windows in your emacs session.
+
+#+begin_src emacs-lisp
+
+  (use-package winum
+    :config
+    (winum-mode)
+    ;; :bind
+    ;; ("M-1" . winum-select-window-1)
+    )
+
+#+end_src
+
 ** PDF viewer
 
 This adds pdf viewer to Emacs. Works very well in combination with latex. Currently not working.
 
 #+begin_src emacs-lisp
+
   ;; (use-package pdf-tools
   ;;   :pin manual
   ;;   :init (pdf-tools-install)

@@ -1,11 +1,9 @@
 # -*- mode: snippet -*-
-# name: latex_setup1
-# key: <ls1
+# name: latex_setup2
+# key: <ls2
 # --
 
-#+LaTeX_CLASS: scrartcl
-#+LaTeX_CLASS_OPTIONS: [a4paper, ngerman]
-# NOTE: The options above don't work for KOMA-script classes
+#+LATEX_HEADER: \documentclass[paper=a4, fontsize=11pt]{scrartcl}
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 #+LATEX_HEADER: \usepackage{babel}

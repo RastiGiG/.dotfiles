@@ -269,6 +269,35 @@ _~_: modified
     "o"  '(:ignore u :which-key "org")
     "ou" '(hydra-global-org-menu/body :which-key "org global utilities"))
 
+;; Set new tab to scratch buffer
+(setq tab-bar-new-tab-choice "*scratch*")
+;; (tab-bar-new-tab-to right)                ;; right is default
+;; (setq tab-bar-tab-name-function tab-bar-current-tab-name)
+
+(setq tab-bar-close-button-show nil
+      tab-bar-new-button-show nil
+      ;; tab-bar-button-relief               ;; controls outline of buttons
+      ;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
+      )
+
+(setq tab-bar-show nil)                      ;; tab bar is not automatically shown (set 1 to enable)
+
+;; Get the current tab name for use in some other display
+(defun efs/current-tab-name ()
+  (alist-get 'name (tab-bar--current-tab)))
+
+(use-package winner-mode
+  :ensure nil
+  :config
+  (winner-mode))
+
+(use-package winum
+  :config
+  (winum-mode)
+  ;; :bind
+  ;; ("M-1" . winum-select-window-1)
+  )
+
 ;; (use-package pdf-tools
 ;;   :pin manual
 ;;   :init (pdf-tools-install)
