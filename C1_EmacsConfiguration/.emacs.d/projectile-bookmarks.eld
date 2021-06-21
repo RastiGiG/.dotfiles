@@ -1,1 +1,1 @@
-("~/.dotfiles/" "~/Documents/01_Akten/02_Personalien/CurriculumVitae/" "~/.emacs.d/")
+("~/Documents/01_Akten/02_Personalien/CurriculumVitae/" "~/.dotfiles/" "~/.emacs.d/")

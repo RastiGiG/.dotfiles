@@ -446,6 +446,39 @@ This is an example of using [[https://github.com/abo-abo/hydra][Hydra]] to desig
       "ou" '(hydra-global-org-menu/body :which-key "org global utilities"))
 #+end_src
 
+** PDF viewer
+
+This adds pdf viewer to Emacs. Works very well in combination with latex. Currently not working.
+
+#+begin_src emacs-lisp
+  ;; (use-package pdf-tools
+  ;;   :pin manual
+  ;;   :init (pdf-tools-install)
+  ;;   :bind (:map pdf-view-mode-map
+  ;;                           ("T" . pdf-annot-add-text-annotation)
+  ;;                           ("D" . pdf-annot-delete)
+  ;;                           ("t" . pdf-annot-add-highlight-markup-annotation)
+  ;;                           ("j" . image-next-line)
+  ;;                           ("k" . image-previous-line)
+  ;;                           ("l" . image-forward-hscroll)
+  ;;                           ("h" . image-backward-hscroll)
+  ;;                           ("G" . pdf-view-last-page)
+  ;;                           ("g" . nil)
+  ;;                           ("gg" . pdf-view-first-page)
+  ;;                           ("C-c C-c" . image-toggle-display)
+  ;;                           ("C-s" . isearch-forward))
+  ;;   :config
+  ;;   (setq-default pdf-view-display-size 'fit-page)
+  ;;   :custom
+  ;;   (yas-minor-mode nil)
+  ;;   (pdf-cache-image-limit 32)
+  ;;   (pdf-view-max-image-width 2048)
+  ;;   (pdf-view-resize-factor 1.8)
+  ;;   (pdf-isearch-batch-mode t)
+  ;;   (pdf-annot-activate-created-annotations t))
+
+#+end_src
+
 * Org Mode
 
 [[https://orgmode.org/][Org Mode]] is one of the hallmark features of Emacs.  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.

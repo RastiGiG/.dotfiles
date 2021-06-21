@@ -269,6 +269,32 @@ _~_: modified
     "o"  '(:ignore u :which-key "org")
     "ou" '(hydra-global-org-menu/body :which-key "org global utilities"))
 
+;; (use-package pdf-tools
+;;   :pin manual
+;;   :init (pdf-tools-install)
+;;   :bind (:map pdf-view-mode-map
+;;                           ("T" . pdf-annot-add-text-annotation)
+;;                           ("D" . pdf-annot-delete)
+;;                           ("t" . pdf-annot-add-highlight-markup-annotation)
+;;                           ("j" . image-next-line)
+;;                           ("k" . image-previous-line)
+;;                           ("l" . image-forward-hscroll)
+;;                           ("h" . image-backward-hscroll)
+;;                           ("G" . pdf-view-last-page)
+;;                           ("g" . nil)
+;;                           ("gg" . pdf-view-first-page)
+;;                           ("C-c C-c" . image-toggle-display)
+;;                           ("C-s" . isearch-forward))
+;;   :config
+;;   (setq-default pdf-view-display-size 'fit-page)
+;;   :custom
+;;   (yas-minor-mode nil)
+;;   (pdf-cache-image-limit 32)
+;;   (pdf-view-max-image-width 2048)
+;;   (pdf-view-resize-factor 1.8)
+;;   (pdf-isearch-batch-mode t)
+;;   (pdf-annot-activate-created-annotations t))
+
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
@@ -613,16 +639,3 @@ _~_: modified
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(evil-nerd-commenter lsp-java pyvenv lsp-pyright dap-mode yasnippet which-key vterm visual-fill-column use-package typescript-mode rainbow-delimiters python-mode org-bullets magit lsp-ui lsp-treemacs latex-extra ivy-rich helpful general eterm-256color eshell-git-prompt doom-themes doom-modeline counsel-projectile company-box command-log-mode cdlatex auctex-latexmk)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
