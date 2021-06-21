@@ -76,6 +76,11 @@
      "~/.dotfiles/C1_EmacsConfiguration/abbrev_defs") 
 (setq save-abbrevs t)
 
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs '("~/.dotfiles/C1_EmacsConfiguration/snippets"))
+  (yas-global-mode 1))
+
 (use-package general
 :config
 (general-create-definer rune/leader-keys
@@ -448,8 +453,8 @@ _~_: modified
 (require 'org-tempo)
 
 (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("py" . "src python"))
+(add-to-list 'org-structure-template-alist '("se" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("sp" . "src python"))
 
 (with-eval-after-load 'ox-latex
 (add-to-list 'org-latex-classes
@@ -474,30 +479,6 @@ _~_: modified
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
-(use-package latex                 ; Activates lsp for LaTeX mode
-  :ensure nil
-  :hook (tex-mode . lsp-deferred))
-(use-package auctex)               ; Integrated environment for TeX
-(use-package auctex-latexmk)       ; LatexMK support for AUCTeX
-(use-package latex-extra)          ; Useful features for LaTeX-mode
-(use-package cdlatex)              ; Fast input methods for LaTeX environments and math
-
-(setq exec-path (append exec-path '("/usr/local/texlive/2021")))
-
-(require 'tex)
-(TeX-global-PDF-mode t)            ; default compiled document: pdf
-
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 2))
-
-(use-package python-mode
-  :ensure t
-  :custom
-  (python-shell-interpreter "python3"))
-
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
@@ -518,6 +499,53 @@ _~_: modified
 (use-package lsp-treemacs
   :after lsp)
 
+(use-package dap-mode
+  :after lsp-mode
+  :config (dap-auto-configure-mode))
+
+(use-package latex                 ; Activates lsp for LaTeX mode
+  :ensure nil
+  :hook (tex-mode . lsp-deferred))
+(use-package auctex)               ; Integrated environment for TeX
+(use-package auctex-latexmk)       ; LatexMK support for AUCTeX
+(use-package latex-extra)          ; Useful features for LaTeX-mode
+(use-package cdlatex)              ; Fast input methods for LaTeX environments and math
+
+(setq exec-path (append exec-path '("/usr/local/texlive/2021")))
+
+(require 'tex)
+(TeX-global-PDF-mode t)            ; default compiled document: pdf
+
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
+
+(use-package python-mode
+  :ensure nil
+  :hook (python-mode . lsp-deferred)
+  :custom
+  ; (python-shell-interpreter "python3")
+  (dab-python-executable "python")
+  (dab-python-debugger 'debugpy)
+  :config
+  (require 'dab-python)
+  )
+
+(use-package lsp-pyright)
+(use-package pyvenv
+  :config
+  (pyvenv-mode 1))
+
+(use-package lsp-java
+  :hook (java-mode . lsp-deferred)
+  :config
+  (require 'dab-node)
+  (dab-node-setup)) ;; automatically installs debug node if needed
+
+(use-package dap-java :ensure nil)
+
 (use-package company
   :after lsp-mode
   :hook (lsp-mode . company-mode)
@@ -531,6 +559,9 @@ _~_: modified
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
+
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (use-package term
   :config
@@ -582,3 +613,16 @@ _~_: modified
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(evil-nerd-commenter lsp-java pyvenv lsp-pyright dap-mode yasnippet which-key vterm visual-fill-column use-package typescript-mode rainbow-delimiters python-mode org-bullets magit lsp-ui lsp-treemacs latex-extra ivy-rich helpful general eterm-256color eshell-git-prompt doom-themes doom-modeline counsel-projectile company-box command-log-mode cdlatex auctex-latexmk)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
