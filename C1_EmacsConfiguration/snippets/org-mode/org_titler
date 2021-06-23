@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: titler
-# key: <tt
+# name: OrgTitler
+# key: <ott
 # --
 
 #+TITLE: ${1:title}

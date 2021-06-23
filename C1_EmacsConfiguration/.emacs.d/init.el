@@ -519,6 +519,11 @@ _~_: modified
 (add-to-list 'org-structure-template-alist '("sp" . "src python"))
 (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
 
+(use-package doct
+  :ensure t
+  ;;recommended: defer until calling doct
+  :commands (doct))
+
 (with-eval-after-load 'ox-latex
 (add-to-list 'org-latex-classes
              '("org-plain-latex"

@@ -788,6 +788,18 @@ You can add more src block templates below by copying one of the lines and chang
 
 #+end_src
 
+** Capture Templates
+
+=Capture templates= are a handy tool in the org mode toolbox, however the syntax for setting them up can sometimes be tricky.
+The package =DOCT= tries to ease the setup. If you need more input, here's the [[https://github.com/progfolio/doct][doc]]
+
+#+begin_src emacs-lisp
+  (use-package doct
+    :ensure t
+    ;;recommended: defer until calling doct
+    :commands (doct))
+#+end_src
+
 ** Org-Mode LaTeX Setup
 
 #+begin_src emacs-lisp
