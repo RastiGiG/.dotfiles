@@ -286,6 +286,13 @@ _~_: modified
 (defun efs/current-tab-name ()
   (alist-get 'name (tab-bar--current-tab)))
 
+(use-package windmove
+  ;; :defer 4
+  :config
+  ;;setup default modifier key
+  ;;(windmove-default-keybindings ')
+)
+
 (use-package winner-mode
   :ensure nil
   :config
@@ -510,6 +517,7 @@ _~_: modified
 (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
 (add-to-list 'org-structure-template-alist '("se" . "src emacs-lisp"))
 (add-to-list 'org-structure-template-alist '("sp" . "src python"))
+(add-to-list 'org-structure-template-alist '("sq" . "src sql"))
 
 (with-eval-after-load 'ox-latex
 (add-to-list 'org-latex-classes

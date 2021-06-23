@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: OrgCaution
+# key: <oca
+# --
+
+:CAUTION:
+$0
+:END:

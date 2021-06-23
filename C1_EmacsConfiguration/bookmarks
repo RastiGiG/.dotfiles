@@ -2,7 +2,27 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-refile-last-stored"
+(("K5 Data Science Kompendium"
+ (filename . "~/Org/IT/Programming/DataScience.org")
+ (front-context-string . "\n1. [[*General][")
+ (rear-context-string . "page]] -\n\n* TOC\n")
+ (position . 527))
+("K5-1 SQL Kompendium"
+ (filename . "~/Org/IT/Programming/SQL.org")
+ (front-context-string . "\n- Back to [[fil")
+ (rear-context-string . "Sebastian Zierl\n")
+ (position . 164))
+("P1 CV"
+ (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
+ (front-context-string . "\n%-----       re")
+ (rear-context-string . "begin{document}\n")
+ (position . 4451))
+("P2 CV"
+ (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/Version-2-Org/CurriculumVitae-2.org")
+ (front-context-string . "#+LaTeX_CLASS: s")
+ (rear-context-string)
+ (position . 1))
+("org-refile-last-stored"
  (filename . "~/Org/personal/Archive.org")
  (front-context-string . "** DONE Praktiku")
  (rear-context-string . "a 20:01]\n:END:\n\n")
