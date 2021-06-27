@@ -296,7 +296,7 @@ _~_: modified
 (use-package winner-mode
   :ensure nil
   :config
-  (winner-mode))
+  (winner-mode 1))
 
 (use-package winum
   :config
@@ -369,6 +369,7 @@ _~_: modified
   :config
   (setq org-ellipsis " ▾")
 
+  (setq org-directory (convert-standard-filename "~/Org"))
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
@@ -458,35 +459,6 @@ _~_: modified
             ((org-agenda-overriding-header "Cancelled Projects")
              (org-agenda-files org-agenda-files)))))))
 
-  (setq org-capture-templates
-    `(("t" "Tasks / Projects")
-      ("tt" "Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-
-      ("j" "Journal Entries")
-      ("jj" "Journal" entry
-           (file+olp+datetree "~/Org/journal/Journal.org")
-           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
-           :clock-in :clock-resume
-           :empty-lines 1)
-      ("jm" "Meeting" entry
-           (file+olp+datetree "~/Org/journal/Journal.org")
-           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-           :clock-in :clock-resume
-           :empty-lines 1)
-
-      ("w" "Workflows")
-      ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
-           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
-      ("m" "Metrics Capture")
-      ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
-       "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
-
-  (define-key global-map (kbd "C-c j")
-    (lambda () (interactive) (org-capture nil "jj")))
-
   (efs/org-font-setup))
 
 (use-package org-bullets
@@ -519,10 +491,120 @@ _~_: modified
 (add-to-list 'org-structure-template-alist '("sp" . "src python"))
 (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
 
+;;;; capture
+(use-package org-capture
+  :ensure nil
+  :config
+  (setq org-capture-templates
+        `(("a" "Acronyms")
+
+          ("ag" "General Acronyms")
+          ("agg" "General Acronyms - General" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "General"
+                     "General")
+           ,(concat "\n"
+                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
+                    "\n %?"))
+          ("agt" "General Acronyms - Terminology" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "General"
+                     "Terminology")
+           ,(concat "\n"
+                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
+                    "\n %?"))
+
+          ("ai" "IT related Acronyms")
+          ("aie" "IT related Acronyms - Emacs" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "IT"
+                     "Emacs")
+           ,(concat "\n"
+                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |"
+                    "\n %?"))
+          ("ail" "IT related Acronyms - LaTeX" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "IT"
+                     "LaTeX")
+           ,(concat "\n"
+                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |"
+                    "\n %?"))
+          ("aim" "IT related Acronyms - Mail" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "IT"
+                     "Mail")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+
+          ("j" "Journal Entries")
+          ("jj" "Journal" entry
+           (file+olp+datetree "~/Org/journal/Journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+          ("jm" "Meeting" entry
+           (file+olp+datetree "~/Org/journal/Journal.org")
+           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)
+
+
+          ("t" "Tasks / Projects")
+          ("tt" "TODO Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+          ("tb" "Basic task for future review" entry
+           (file+headline "personal/Tasks.org" "Inbox")
+           ,(concat "* %^{Title}\n"
+                    ":PROPERTIES:\n"
+                    ":CAPTURED: %U\n"
+                    ":END:\n\n"
+                    "%i%l"))
+          ("td" "Task with a due date" entry
+           (file+headline "personal/Tasks.org" "Inbox")
+           ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                    "SCHEDULED: %^t\n"
+                    ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                    "%i%?"))
+
+
+          ("w" "Workflows")
+          ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+
+
+          ("m" "Metrics Capture")
+          ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
+           "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
+
+
+          ("e" "Email")
+          ("em" "Make email note" entry
+           (file+headline "personal/Tasks.org" "Mail correspondence")
+           ,(concat "* TODO [#A] %:subject :mail:\n"
+                    "SCHEDULED: %t\n:"
+                    "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+                    "%i%?"))))
+
+  (setq org-capture-templates-contexts
+        '(("m" ((in-mode . "notmuch-search-mode")
+                (in-mode . "notmuch-show-mode")
+                (in-mode . "notmuch-tree-mode")))))
+  :bind
+  ("C-c c" . org-capture))
+
+;; Source: https://stackoverflow.com/a/54251825
+(defun contrib/org-capture-no-delete-windows (oldfun args)
+  (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+    (apply oldfun args)))
+
+;; Same source as above
+(advice-add 'org-capture-place-template
+            :around 'contrib/org-capture-no-delete-windows)
+
+  ;; DOCT Package
 (use-package doct
   :ensure t
   ;;recommended: defer until calling doct
   :commands (doct))
+
+(define-key global-map (kbd "C-c j")
+  (lambda () (interactive) (org-capture nil "jj")))
 
 (with-eval-after-load 'ox-latex
 (add-to-list 'org-latex-classes
@@ -602,6 +684,7 @@ _~_: modified
   )
 
 (use-package lsp-pyright)
+
 (use-package pyvenv
   :config
   (pyvenv-mode 1))

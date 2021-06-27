@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("K5 Data Science Kompendium"
+(("Z1 Acronyms"
+ (filename . "~/Org/personal/Acronyms.org")
+ (front-context-string . "\n\n\n* %^{Subject ")
+ (rear-context-string)
+ (position . 1))
+("A2 Journal"
+ (filename . "~/Org/journal/Journal.org")
+ (front-context-string . "\n* 2021\n\n** 2021")
+ (rear-context-string)
+ (position . 2))
+("org-capture-last-stored"
+ (filename . "~/Org/personal/Acronyms.org")
+ (front-context-string . "| Bad template |")
+ (rear-context-string . "--------------|\n")
+ (position . 1938))
+("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")
  (rear-context-string . "page]] -\n\n* TOC\n")
@@ -42,7 +57,7 @@
  (front-context-string . "\n+ [[*General][G")
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 100))
-("A2 Contacts"
+("A3 Contacts"
  (filename . "~/Org/personal/Contacts.org")
  (front-context-string . "\n- Back to [[fil")
  (rear-context-string . "Sebastian Zierl\n")
