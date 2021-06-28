@@ -654,7 +654,11 @@ _~_: modified
   ;; See this link for more info: https://stackoverflow.com/a/43461973
   (setq mu4e-change-filenames-when-moving t)
 
+  ;; Sets the first context to be loaded by default
   (setq mu4e-context-policy 'pick-first)
+
+  ;; Sets the standard download directory for attachments (default: ~)
+  (setq mu4e-attachment-dir "~/Downloads")
 
   ;; Prevent mu4e from permanently deleting trashed items
   ;; This snippet was taken from the following article:
