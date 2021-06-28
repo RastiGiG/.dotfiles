@@ -14,9 +14,9 @@
  (position . 2))
 ("org-capture-last-stored"
  (filename . "~/Org/personal/Acronyms.org")
- (front-context-string . "| Bad template |")
+ (front-context-string . "| MRA     | Mail")
  (rear-context-string . "--------------|\n")
- (position . 1938))
+ (position . 2914))
 ("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")
