@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Z1 Acronyms"
+(("C4 MBSync Config"
+ (filename . "~/.mbsyncrc")
+ (front-context-string . "## T-Online ##\n\n")
+ (rear-context-string)
+ (position . 1))
+("C3-1 Mu4e Account Config"
+ (filename . "~/.config/emacs-configs/MailAccounts.el")
+ (front-context-string . "(use-package mu4")
+ (rear-context-string)
+ (position . 1))
+("Z1 Acronyms"
  (filename . "~/Org/personal/Acronyms.org")
  (front-context-string . "\n\n\n* %^{Subject ")
  (rear-context-string)
@@ -13,10 +23,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/personal/Acronyms.org")
- (front-context-string . "| MRA     | Mail")
- (rear-context-string . "--------------|\n")
- (position . 2914))
+ (filename . "~/Org/journal/Journal.org")
+ (front-context-string . "**** 02:32  - Jo")
+ (rear-context-string . "1-06-28 Montag\n\n")
+ (position . 284))
 ("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")

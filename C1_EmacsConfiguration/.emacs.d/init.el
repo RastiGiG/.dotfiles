@@ -44,7 +44,7 @@
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
-                 vterm-mode-hook
+                vterm-mode-hook
                 shell-mode-hook
                 eshell-mode-hook
                 treemacs-mode))
@@ -85,7 +85,7 @@
 :config
 (general-create-definer rune/leader-keys
   :prefix "C-."
-  :global-prefix "C-. m")
+  :global-prefix "C-.")
 
 (rune/leader-keys
   "t"  '(:ignore t :which-key "toggles")
@@ -629,6 +629,9 @@ _~_: modified
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+;; Load external file with contact information
+(load "~/.config/emacs-configs/MailAccounts.el")
+
 (use-package mu4e
   :ensure nil
   :defer 20 ; Wait until 20 seconds after startup
@@ -651,32 +654,6 @@ _~_: modified
   ;; See this link for more info: https://stackoverflow.com/a/43461973
   (setq mu4e-change-filenames-when-moving t)
 
-  ;; Set up contexts for email accounts
-  (setq mu4e-contexts
-        `(,(make-mu4e-context
-            :name "Web.de"
-            :match-func (lambda (msg) (when msg
-                                        (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
-            :vars '(
-                    (user-full-name . "Georg Rast")
-                    (user-mail-address . "RastiBer@web.de")
-                    (mu4e-sent-folder . "/web.de/Gesendet")
-                    (mu4e-trash-folder . "/web.de/Papierkorb")
-                    (mu4e-drafts-folder . "/web.de/Entwurf")
-                    (mu4e-refile-folder . "/web.de/Archiv")
-                    (mu4e-sent-messages-behavior . sent)
-                    ))
-
-          ;,(make-mu4e-context
-          ;  :name "Personal"
-          ;  :match-func (lambda (msg) (when msg
-          ;                              (string-prefix-p "/Personal" (mu4e-message-field msg :maildir))))
-          ;  :vars '(
-          ;          (mu4e-sent-folder . "/Personal/Sent")
-          ;          (mu4e-trash-folder . "/Personal/Deleted")
-          ;          (mu4e-refile-folder . "/Personal/Archive")
-          ;          ))
-          ))
   (setq mu4e-context-policy 'pick-first)
 
   ;; Prevent mu4e from permanently deleting trashed items
@@ -704,13 +681,6 @@ _~_: modified
   ;; Composing mail
   (setq mu4e-compose-dont-reply-to-self t)
 
-  ;; Use mu4e for sending e-mail
-  (setq mail-user-agent 'mu4e-user-agent
-        message-send-mail-function 'smtpmail-send-it
-        smtpmail-smtp-server "smtp.web.de"
-        smtpmail-smtp-service 587
-        smtpmail-stream-type  'ssl)
-
   ; ;; Signing messages (use mml-secure-sign-pgpmime)
   ; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
 
@@ -718,37 +688,18 @@ _~_: modified
   ;; additional non-Gmail addresses and want assign them different
   ;; behavior.)
 
-  ;; setup some handy shortcuts
-  ;; you can quickly switch to your Inbox -- press ``ji''
-  ;; then, when you want archive some messages, move them to
-  ;; the 'All Mail' folder by pressing ``ma''.
-  (setq mu4e-maildir-shortcuts
-        '(("/web.de/INBOX"       . ?i)
-          ("/web.de/Lists/*"     . ?l)
-          ("/web.de/Sent Mail"   . ?s)
-          ("/web.de/Trash"       . ?t)))
-
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "All Inboxes"
-                :query "maildir:/web.de/INBOX OR maildir:/Personal/Inbox"
-                :key ?i))
-
   ;; don't keep message buffers around
   (setq message-kill-buffer-on-exit t)
 
-  (setq dw/mu4e-inbox-query
-        "(maildir:/Personal/Inbox OR maildir:/web.de/INBOX) AND flag:unread")
-
-  (defun dw/go-to-inbox ()
+  (defun rune/go-to-inbox ()
     (interactive)
-    (mu4e-headers-search dw/mu4e-inbox-query))
+    (mu4e-headers-search rune/mu4e-inbox-query))
 
-  (dw/leader-key-def
+  (rune/leader-keys
     "m"  '(:ignore t :which-key "mail")
     "mm" 'mu4e
     "mc" 'mu4e-compose-new
-    "mi" 'dw/go-to-inbox
+    "mi" 'rune/go-to-inbox
     "ms" 'mu4e-update-mail-and-index)
 
   ;; Start mu4e in the background so that it syncs mail periodically
@@ -758,12 +709,31 @@ _~_: modified
   :after mu4e
   :config
   ;; Show unread emails from all inboxes
-  (setq mu4e-alert-interesting-mail-query dw/mu4e-inbox-query)
+  (setq mu4e-alert-interesting-mail-query rune/mu4e-inbox-query)
 
   ;; Show notifications for mails already notified
   (setq mu4e-alert-notify-repeated-mails nil)
 
   (mu4e-alert-enable-notifications))
+
+(use-package org-mime
+  :config
+  ;; Control how html exports for org-mime are handled
+  (setq org-mime-export-options '(;; :section-numbers nil
+                                  :with-author nil
+                                  :with-toc nil))
+
+;; Format export for source blocks
+(add-hook 'org-mime-html-hook
+          (lambda ()
+            (org-mime-change-element-style
+             "pre" (format "color: %s; background-color: %s; padding: 0.5em;"
+                           "#E6E1DC" "#232323"))))  ;; white letters, gray background
+
+;; This option asks automatically calls 'org-mime-htmlize'
+;; (add-hook 'message-send-hook 'org-mime-htmlize)
+;; This option reminds you when you didn't call 'org-mime-htmlize'
+(add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart))
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
