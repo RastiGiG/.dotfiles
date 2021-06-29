@@ -715,6 +715,12 @@ _~_: modified
     (interactive)
     (mu4e-headers-search rune/mu4e-inbox-query))
 
+  ;; Function to store header queries to reuse them later
+  (defun efs/store-link-to-mu4e-query()
+    (interactive)
+    (let ((mu4e-org-link-query-in-headers-mode t))
+      (call-interactively 'org-store-link)))
+
   ;; Functions to automatically call Org Capture Templates on certain actions
   ;; Follow up messages
   (defun efs/capture-mail-follow-up (msg)
