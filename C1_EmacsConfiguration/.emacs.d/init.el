@@ -513,12 +513,14 @@ _~_: modified
                     "\n %?"))
 
           ("ai" "IT related Acronyms")
+          ("aic" "IT related Acronyms - Encryption" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "IT"
+                     "Encryption")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("aie" "IT related Acronyms - Emacs" table-line
            (file+olp "~/Org/personal/Acronyms.org" "IT"
                      "Emacs")
-           ,(concat "\n"
-                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |"
-                    "\n %?"))
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("ail" "IT related Acronyms - LaTeX" table-line
            (file+olp "~/Org/personal/Acronyms.org" "IT"
                      "LaTeX")
@@ -579,12 +581,17 @@ _~_: modified
            ,(concat "* TODO [#A] %:subject :mail:\n"
                     "SCHEDULED: %t\n:"
                     "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-                    "%i%?"))))
+                    "%i%?"))
+          ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
+           "* TODO %a")
+          ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
+           "* TODO %a")))
 
   (setq org-capture-templates-contexts
-        '(("m" ((in-mode . "notmuch-search-mode")
+        '(("e" ((in-mode . "notmuch-search-mode")
                 (in-mode . "notmuch-show-mode")
-                (in-mode . "notmuch-tree-mode")))))
+                (in-mode . "notmuch-tree-mode")
+                (in-mode . "mu4e-headers-mode")))))
   :bind
   ("C-c c" . org-capture))
 
@@ -638,7 +645,7 @@ _~_: modified
   :config
 
   ;; Load org-mode integration
-  (require 'org-mu4e)
+  (require 'mu4e-org)
 
   ;; Refresh mail using isync every 10 minutes
   (setq mu4e-update-interval (* 10 60))
@@ -677,6 +684,12 @@ _~_: modified
                  :action (lambda (docid msg target)
                            (mu4e~proc-move docid
                                            (mu4e~mark-check-target target) "-N"))))
+
+  (add-to-list 'mu4e-bookmarks
+           (make-mu4e-bookmark
+            :name "FAU"
+            :query "contact:*fau* OR subject:fau"
+            :key ?f))
 
   ;; Display options
   (setq mu4e-view-show-images t)

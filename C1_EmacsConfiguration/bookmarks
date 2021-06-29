@@ -23,10 +23,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/journal/Journal.org")
- (front-context-string . "**** 02:32  - Jo")
- (rear-context-string . "1-06-28 Montag\n\n")
- (position . 284))
+ (filename . "~/Org/personal/Acronyms.org")
+ (front-context-string . "| pRNG | Random ")
+ (rear-context-string . "Generator | n |\n")
+ (position . 620))
 ("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")
