@@ -379,7 +379,8 @@ _~_: modified
 
   (setq org-agenda-files
         '("~/Org/personal"
-          "~/Org/journal"))
+          "~/Org/journal"
+          "~/Org/Mail.org"))
 
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
@@ -582,10 +583,11 @@ _~_: modified
                     "SCHEDULED: %t\n:"
                     "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
                     "%i%?"))
+	    ;; Captures when reading mail, also stores capture date
           ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
-           "* TODO %a")
+           "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)
           ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
-           "* TODO %a")))
+           "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)))
 
   (setq org-capture-templates-contexts
         '(("e" ((in-mode . "notmuch-search-mode")
@@ -675,6 +677,7 @@ _~_: modified
       (let ((last (nthcdr (1- nth) list)))
         (setcdr last (cddr last))
         list)))
+
   (setq mu4e-marks (remove-nth-element 5 mu4e-marks))
   (add-to-list 'mu4e-marks
                '(trash
@@ -711,6 +714,28 @@ _~_: modified
   (defun rune/go-to-inbox ()
     (interactive)
     (mu4e-headers-search rune/mu4e-inbox-query))
+
+  ;; Functions to automatically call Org Capture Templates on certain actions
+  ;; Follow up messages
+  (defun efs/capture-mail-follow-up (msg)
+    (interactive)
+    (call-interactively 'org-store-link)
+    (org-capture nil "ef"))
+  ;; Read later messages
+  (defun efs/capture-mail-read-later (msg)
+    (interactive)
+    (call-interactively 'org-store-link)
+    (org-capture nil "er"))
+
+  ;; Add custom actions for our capture templates
+  (add-to-list 'mu4e-headers-actions
+               '("follow up" . efs/capture-mail-follow-up) t)
+  (add-to-list 'mu4e-view-actions
+               '("follow up" . efs/capture-mail-follow-up) t)
+  (add-to-list 'mu4e-headers-actions
+               '("read later" . efs/capture-mail-read-later) t)
+  (add-to-list 'mu4e-view-actions
+               '("read later" . efs/capture-mail-read-later) t)
 
   (rune/leader-keys
     "m"  '(:ignore t :which-key "mail")

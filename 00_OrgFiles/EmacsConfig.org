@@ -590,109 +590,110 @@ This section contains the basic configuration for =org-mode= plus the configurat
 
 #+begin_src emacs-lisp
 
-  (defun efs/org-mode-setup ()
-    (org-indent-mode)
-    (variable-pitch-mode 1)
-    (visual-line-mode 1)
-    (turn-on-org-cdlatex))
+    (defun efs/org-mode-setup ()
+      (org-indent-mode)
+      (variable-pitch-mode 1)
+      (visual-line-mode 1)
+      (turn-on-org-cdlatex))
 
-  (use-package org
-    :hook (org-mode . efs/org-mode-setup)
-    :bind (("C-c l" . org-store-link))
-    :config
-    (setq org-ellipsis " ▾")
+    (use-package org
+      :hook (org-mode . efs/org-mode-setup)
+      :bind (("C-c l" . org-store-link))
+      :config
+      (setq org-ellipsis " ▾")
 
-    (setq org-directory (convert-standard-filename "~/Org"))
-    (setq org-agenda-start-with-log-mode t)
-    (setq org-log-done 'time)
-    (setq org-log-into-drawer t)
+      (setq org-directory (convert-standard-filename "~/Org"))
+      (setq org-agenda-start-with-log-mode t)
+      (setq org-log-done 'time)
+      (setq org-log-into-drawer t)
 
-    ;; setup inline previewing of latex fragments
-    (setq org-latex-create-formula-image-program 'imagemagick)
+      ;; setup inline previewing of latex fragments
+      (setq org-latex-create-formula-image-program 'imagemagick)
 
-    (setq org-agenda-files
-          '("~/Org/personal"
-            "~/Org/journal"))
+      (setq org-agenda-files
+            '("~/Org/personal"
+              "~/Org/journal"
+              "~/Org/Mail.org"))
 
-    (require 'org-habit)
-    (add-to-list 'org-modules 'org-habit)
-    (setq org-habit-graph-column 60)
+      (require 'org-habit)
+      (add-to-list 'org-modules 'org-habit)
+      (setq org-habit-graph-column 60)
 
-    (setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-        (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+      (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
-    (setq org-refile-targets
-      '(("Archive.org" :maxlevel . 1)
-        ("Tasks.org" :maxlevel . 1)))
+      (setq org-refile-targets
+        '(("Archive.org" :maxlevel . 1)
+          ("Tasks.org" :maxlevel . 1)))
 
-    ;; Save Org buffers after refiling!
-    (advice-add 'org-refile :after 'org-save-all-org-buffers)
+      ;; Save Org buffers after refiling!
+      (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-    (setq org-tag-alist
-      '((:startgroup)
-         ; Put mutually exclusive tags here
-         (:endgroup)
-         ("@errand" . ?E)
-         ("@home" . ?H)
-         ("@work" . ?W)
-         ("@study" . ?S)
-         ("agenda" . ?a)
-         ("planning" . ?p)
-         ("publish" . ?P)
-         ("batch" . ?b)
-         ("note" . ?n)
-         ("idea" . ?i)))
+      (setq org-tag-alist
+        '((:startgroup)
+           ; Put mutually exclusive tags here
+           (:endgroup)
+           ("@errand" . ?E)
+           ("@home" . ?H)
+           ("@work" . ?W)
+           ("@study" . ?S)
+           ("agenda" . ?a)
+           ("planning" . ?p)
+           ("publish" . ?P)
+           ("batch" . ?b)
+           ("note" . ?n)
+           ("idea" . ?i)))
 
-    ;; Configure custom agenda views
-    (setq org-agenda-custom-commands
-     '(("d" "Dashboard"
-       ((agenda "" ((org-deadline-warning-days 7)))
-        (todo "NEXT"
-          ((org-agenda-overriding-header "Next Tasks")))
-        (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+      ;; Configure custom agenda views
+      (setq org-agenda-custom-commands
+       '(("d" "Dashboard"
+         ((agenda "" ((org-deadline-warning-days 7)))
+          (todo "NEXT"
+            ((org-agenda-overriding-header "Next Tasks")))
+          (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
 
-      ("n" "Next Tasks"
-       ((todo "NEXT"
-          ((org-agenda-overriding-header "Next Tasks")))))
+        ("n" "Next Tasks"
+         ((todo "NEXT"
+            ((org-agenda-overriding-header "Next Tasks")))))
 
-      ("W" "Work Tasks" tags-todo "+work-email")
+        ("W" "Work Tasks" tags-todo "+work-email")
 
-      ;; Low-effort next actions
-      ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-       ((org-agenda-overriding-header "Low Effort Tasks")
-        (org-agenda-max-todos 20)
-        (org-agenda-files org-agenda-files)))
+        ;; Low-effort next actions
+        ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+         ((org-agenda-overriding-header "Low Effort Tasks")
+          (org-agenda-max-todos 20)
+          (org-agenda-files org-agenda-files)))
 
-      ("w" "Workflow Status"
-       ((todo "WAIT"
-              ((org-agenda-overriding-header "Waiting on External")
-               (org-agenda-files org-agenda-files)))
-        (todo "REVIEW"
-              ((org-agenda-overriding-header "In Review")
-               (org-agenda-files org-agenda-files)))
-        (todo "PLAN"
-              ((org-agenda-overriding-header "In Planning")
-               (org-agenda-todo-list-sublevels nil)
-               (org-agenda-files org-agenda-files)))
-        (todo "BACKLOG"
-              ((org-agenda-overriding-header "Project Backlog")
-               (org-agenda-todo-list-sublevels nil)
-               (org-agenda-files org-agenda-files)))
-        (todo "READY"
-              ((org-agenda-overriding-header "Ready for Work")
-               (org-agenda-files org-agenda-files)))
-        (todo "ACTIVE"
-              ((org-agenda-overriding-header "Active Projects")
-               (org-agenda-files org-agenda-files)))
-        (todo "COMPLETED"
-              ((org-agenda-overriding-header "Completed Projects")
-               (org-agenda-files org-agenda-files)))
-        (todo "CANC"
-              ((org-agenda-overriding-header "Cancelled Projects")
-               (org-agenda-files org-agenda-files)))))))
+        ("w" "Workflow Status"
+         ((todo "WAIT"
+                ((org-agenda-overriding-header "Waiting on External")
+                 (org-agenda-files org-agenda-files)))
+          (todo "REVIEW"
+                ((org-agenda-overriding-header "In Review")
+                 (org-agenda-files org-agenda-files)))
+          (todo "PLAN"
+                ((org-agenda-overriding-header "In Planning")
+                 (org-agenda-todo-list-sublevels nil)
+                 (org-agenda-files org-agenda-files)))
+          (todo "BACKLOG"
+                ((org-agenda-overriding-header "Project Backlog")
+                 (org-agenda-todo-list-sublevels nil)
+                 (org-agenda-files org-agenda-files)))
+          (todo "READY"
+                ((org-agenda-overriding-header "Ready for Work")
+                 (org-agenda-files org-agenda-files)))
+          (todo "ACTIVE"
+                ((org-agenda-overriding-header "Active Projects")
+                 (org-agenda-files org-agenda-files)))
+          (todo "COMPLETED"
+                ((org-agenda-overriding-header "Completed Projects")
+                 (org-agenda-files org-agenda-files)))
+          (todo "CANC"
+                ((org-agenda-overriding-header "Cancelled Projects")
+                 (org-agenda-files org-agenda-files)))))))
 
-    (efs/org-font-setup))
+      (efs/org-font-setup))
 
 #+end_src
 
@@ -767,127 +768,128 @@ The package =DOCT= tries to ease the setup. If you need more input, here's the [
 Other than that, the *documentation* for =capture templates= is [[https://orgmode.org/manual/Capture.html#Capture][here]]
 
 #+begin_src emacs-lisp
-      ;;;; capture
-    (use-package org-capture
-      :ensure nil
-      :config
-      (setq org-capture-templates
-            `(("a" "Acronyms")
+    ;;;; capture
+  (use-package org-capture
+    :ensure nil
+    :config
+    (setq org-capture-templates
+          `(("a" "Acronyms")
 
-              ("ag" "General Acronyms")
-              ("agg" "General Acronyms - General" table-line
-               (file+olp "~/Org/personal/Acronyms.org" "General"
-                         "General")
-               ,(concat "\n"
-                        "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
-                        "\n %?"))
-              ("agt" "General Acronyms - Terminology" table-line
-               (file+olp "~/Org/personal/Acronyms.org" "General"
-                         "Terminology")
-               ,(concat "\n"
-                        "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
-                        "\n %?"))
+            ("ag" "General Acronyms")
+            ("agg" "General Acronyms - General" table-line
+             (file+olp "~/Org/personal/Acronyms.org" "General"
+                       "General")
+             ,(concat "\n"
+                      "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
+                      "\n %?"))
+            ("agt" "General Acronyms - Terminology" table-line
+             (file+olp "~/Org/personal/Acronyms.org" "General"
+                       "Terminology")
+             ,(concat "\n"
+                      "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
+                      "\n %?"))
 
-              ("ai" "IT related Acronyms")
-              ("aic" "IT related Acronyms - Encryption" table-line
-               (file+olp "~/Org/personal/Acronyms.org" "IT"
-                         "Encryption")
-               "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-              ("aie" "IT related Acronyms - Emacs" table-line
-               (file+olp "~/Org/personal/Acronyms.org" "IT"
-                         "Emacs")
-               "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-              ("ail" "IT related Acronyms - LaTeX" table-line
-               (file+olp "~/Org/personal/Acronyms.org" "IT"
-                         "LaTeX")
-               ,(concat "\n"
-                        "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |"
-                        "\n %?"))
-              ("aim" "IT related Acronyms - Mail" table-line
-               (file+olp "~/Org/personal/Acronyms.org" "IT"
-                         "Mail")
-               "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("ai" "IT related Acronyms")
+            ("aic" "IT related Acronyms - Encryption" table-line
+             (file+olp "~/Org/personal/Acronyms.org" "IT"
+                       "Encryption")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("aie" "IT related Acronyms - Emacs" table-line
+             (file+olp "~/Org/personal/Acronyms.org" "IT"
+                       "Emacs")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("ail" "IT related Acronyms - LaTeX" table-line
+             (file+olp "~/Org/personal/Acronyms.org" "IT"
+                       "LaTeX")
+             ,(concat "\n"
+                      "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |"
+                      "\n %?"))
+            ("aim" "IT related Acronyms - Mail" table-line
+             (file+olp "~/Org/personal/Acronyms.org" "IT"
+                       "Mail")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
 
-              ("j" "Journal Entries")
-              ("jj" "Journal" entry
-               (file+olp+datetree "~/Org/journal/Journal.org")
-               "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-               ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
-               :clock-in :clock-resume
-               :empty-lines 1)
-              ("jm" "Meeting" entry
-               (file+olp+datetree "~/Org/journal/Journal.org")
-               "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-               :clock-in :clock-resume
-               :empty-lines 1)
-
-
-              ("t" "Tasks / Projects")
-              ("tt" "TODO Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
-               "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-
-              ("tb" "Basic task for future review" entry
-               (file+headline "personal/Tasks.org" "Inbox")
-               ,(concat "* %^{Title}\n"
-                        ":PROPERTIES:\n"
-                        ":CAPTURED: %U\n"
-                        ":END:\n\n"
-                        "%i%l"))
-              ("td" "Task with a due date" entry
-               (file+headline "personal/Tasks.org" "Inbox")
-               ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-                        "SCHEDULED: %^t\n"
-                        ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-                        "%i%?"))
+            ("j" "Journal Entries")
+            ("jj" "Journal" entry
+             (file+olp+datetree "~/Org/journal/Journal.org")
+             "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+             ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+             :clock-in :clock-resume
+             :empty-lines 1)
+            ("jm" "Meeting" entry
+             (file+olp+datetree "~/Org/journal/Journal.org")
+             "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+             :clock-in :clock-resume
+             :empty-lines 1)
 
 
-              ("w" "Workflows")
-              ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
-               "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+            ("t" "Tasks / Projects")
+            ("tt" "TODO Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
+             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+            ("tb" "Basic task for future review" entry
+             (file+headline "personal/Tasks.org" "Inbox")
+             ,(concat "* %^{Title}\n"
+                      ":PROPERTIES:\n"
+                      ":CAPTURED: %U\n"
+                      ":END:\n\n"
+                      "%i%l"))
+            ("td" "Task with a due date" entry
+             (file+headline "personal/Tasks.org" "Inbox")
+             ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                      "SCHEDULED: %^t\n"
+                      ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                      "%i%?"))
 
 
-              ("m" "Metrics Capture")
-              ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
-               "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
+            ("w" "Workflows")
+            ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
+             "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
 
-              ("e" "Email")
-              ("em" "Make email note" entry
-               (file+headline "personal/Tasks.org" "Mail correspondence")
-               ,(concat "* TODO [#A] %:subject :mail:\n"
-                        "SCHEDULED: %t\n:"
-                        "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-                        "%i%?"))
-              ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
-               "* TODO %a")
-              ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
-               "* TODO %a")))
+            ("m" "Metrics Capture")
+            ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
+             "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
 
-      (setq org-capture-templates-contexts
-            '(("e" ((in-mode . "notmuch-search-mode")
-                    (in-mode . "notmuch-show-mode")
-                    (in-mode . "notmuch-tree-mode")
-                    (in-mode . "mu4e-headers-mode")))))
-      :bind
-      ("C-c c" . org-capture))
 
-    ;; Source: https://stackoverflow.com/a/54251825
-    (defun contrib/org-capture-no-delete-windows (oldfun args)
-      (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
-        (apply oldfun args)))
+            ("e" "Email")
+            ("em" "Make email note" entry
+             (file+headline "personal/Tasks.org" "Mail correspondence")
+             ,(concat "* TODO [#A] %:subject :mail:\n"
+                      "SCHEDULED: %t\n:"
+                      "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+                      "%i%?"))
+	      ;; Captures when reading mail, also stores capture date
+            ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
+             "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)
+            ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
+             "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)))
 
-    ;; Same source as above
-    (advice-add 'org-capture-place-template
-                :around 'contrib/org-capture-no-delete-windows)
+    (setq org-capture-templates-contexts
+          '(("e" ((in-mode . "notmuch-search-mode")
+                  (in-mode . "notmuch-show-mode")
+                  (in-mode . "notmuch-tree-mode")
+                  (in-mode . "mu4e-headers-mode")))))
+    :bind
+    ("C-c c" . org-capture))
 
-      ;; DOCT Package
-    (use-package doct
-      :ensure t
-      ;;recommended: defer until calling doct
-      :commands (doct))
+  ;; Source: https://stackoverflow.com/a/54251825
+  (defun contrib/org-capture-no-delete-windows (oldfun args)
+    (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
+      (apply oldfun args)))
 
-    (define-key global-map (kbd "C-c j")
-      (lambda () (interactive) (org-capture nil "jj")))
+  ;; Same source as above
+  (advice-add 'org-capture-place-template
+              :around 'contrib/org-capture-no-delete-windows)
+
+    ;; DOCT Package
+  (use-package doct
+    :ensure t
+    ;;recommended: defer until calling doct
+    :commands (doct))
+
+  (define-key global-map (kbd "C-c j")
+    (lambda () (interactive) (org-capture nil "jj")))
 #+end_src
 
 ** Org-Mode LaTeX Setup
@@ -972,6 +974,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
         (let ((last (nthcdr (1- nth) list)))
           (setcdr last (cddr last))
           list)))
+
     (setq mu4e-marks (remove-nth-element 5 mu4e-marks))
     (add-to-list 'mu4e-marks
                  '(trash
@@ -1008,6 +1011,28 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
     (defun rune/go-to-inbox ()
       (interactive)
       (mu4e-headers-search rune/mu4e-inbox-query))
+
+    ;; Functions to automatically call Org Capture Templates on certain actions
+    ;; Follow up messages
+    (defun efs/capture-mail-follow-up (msg)
+      (interactive)
+      (call-interactively 'org-store-link)
+      (org-capture nil "ef"))
+    ;; Read later messages
+    (defun efs/capture-mail-read-later (msg)
+      (interactive)
+      (call-interactively 'org-store-link)
+      (org-capture nil "er"))
+
+    ;; Add custom actions for our capture templates
+    (add-to-list 'mu4e-headers-actions
+                 '("follow up" . efs/capture-mail-follow-up) t)
+    (add-to-list 'mu4e-view-actions
+                 '("follow up" . efs/capture-mail-follow-up) t)
+    (add-to-list 'mu4e-headers-actions
+                 '("read later" . efs/capture-mail-read-later) t)
+    (add-to-list 'mu4e-view-actions
+                 '("read later" . efs/capture-mail-read-later) t)
 
     (rune/leader-keys
       "m"  '(:ignore t :which-key "mail")
