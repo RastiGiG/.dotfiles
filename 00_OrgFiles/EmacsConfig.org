@@ -7,6 +7,7 @@
 + [[*Welcome!][Welcome!]]
 + [[*Tips for Use][Tips for Use]]
 + [[*Package System Setup][Package System Setup]]
++ [[*Keeping Folders Clean][Keeping Folders Clean]]
 + [[*Basic UI Configuration][Basic UI Configuration]]
 + [[*Quality of Live Adjustments][Quality of Live Adjustments]]
 + [[*Keybinding Configuration][Keybinding Configuration]]
@@ -62,6 +63,34 @@ Emacs has a built in package manager but it doesn't make it easy to automaticall
   (require 'use-package)
   (setq use-package-always-ensure t)
 
+#+end_src
+
+* Keeping Folders Clean
+
+** Backup Files
+
+:NOTE:
+Can't seem to get these settings to work, need to look into it further
+:END:
+
+~Backup Files~ are files with a "\~" at the end: Emacs.org~
+First we are gonna set the the directory for our backup files, to store them in a single place instead of all over the system
+More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html]]
+
+#+begin_src emacs-lisp
+  ;; (setq backup-directory-alist '(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+#+end_src
+
+** Auto Save Files
+
+~Auto Save Files~ are files with "#" on both ends: like #Emacs.org#. Next we are gonna save auto save files to a centralized location
+#+begin_src emacs-lisp
+  ;; auto-save-mode doesn't create the path automatically!
+  ;; (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
+
+  ;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
+  ;; this moves it to a more centralized location (tmp)
+  ;; (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory) auto-save-file-name-transforms '((".*" ,(expand-file-name ;;"tmp/auto-saves/" user-emacs-directory) t)))
 #+end_src
 
 * Basic UI Configuration
