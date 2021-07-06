@@ -917,7 +917,20 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
   
             ("ll" "Literature")
             ("lls" "Scientific Literature")
-            ("llsp" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
+            ("llss" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsg" "History" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsm" "Maths" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsp" "Physics" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsc" "Chemistry" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsb" "Biology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsh" "Medicine and Health" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "* [ ] %^{Author} - %^{Title}")
+            ("llse" "Politics, Economy and Ecology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "* [ ] %^{Author} - %^{Title}")
+            ("llsi" "IT" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "* [ ] %^{Author} - %^{Title}")
+            ("llst" "Technology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "* [ ] %^{Author} - %^{Title}")
+            
+            ("llr" "Novels" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "** [ ] %^{Author} - %^{Title}")
+            ("llrk" "Classics" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "* [ ] %^{Author} - %^{Title}")
+  
   
             ("lm" "Music")
             ("lmm" "Scientific Literature")
