@@ -43,27 +43,60 @@ In this document I've added links in many places that lead you to documentation 
 
 Emacs has a built in package manager but it doesn't make it easy to automatically install packages on a new system the first time you pull down your configuration.  [[https://github.com/jwiegley/use-package][use-package]] is a really helpful package used in this configuration to make it a lot easier to automate the installation and configuration of everything else we use.
 
+We also use ~straight.el~ to manage our packages instead of ~package.el~, because it allows for more detailed customization and enables more streamlined installation of packages from ~github~ or ~gitLab~, that are not yet part of *elpa* or *melpa*.
+The *bootstrap* script is needed to install straight.el without the need for package.el. It should work cross platform without the need to update anytime soon. It's recommended by the authors to use. If straight.el is already installed, the script won't run again!
+A guide from System Crafters to straight.el can be found [[https://systemcrafters.cc/advanced-package-management/using-straight-el/][here]].
+
+If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-package) you have to replace =:ensure= with =:straight=
+
 #+begin_src emacs-lisp
 
-  ;; Initialize package sources
-  (require 'package)
+  ;; bootstrap script to install straight.el
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
 
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("org" . "https://orgmode.org/elpa/")
-                           ("elpa" . "https://elpa.gnu.org/packages/")))
+  ;; Use straight.el for use-package expressions
+  (straight-use-package 'use-package)
 
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
-
-  ;; Initialize use-package on non-Linux platforms
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-
-  (require 'use-package)
-  (setq use-package-always-ensure t)
+  ;; Make sure to always install packages (pendant to use-package-always-ensure)
+  (setq straight-use-package-by-default t)
 
 #+end_src
+
+:NOTE:
+Old setup. Use this if you don't intend to use straight.el
+##+begin_src emacs-lisp
+#
+#  ;; Initialize package sources
+#  (require 'package)
+#
+#  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+#                           ("org" . "https://orgmode.org/elpa/")
+#                           ("elpa" . "https://elpa.gnu.org/packages/")))
+#
+#  (package-initialize)
+#  (unless package-archive-contents
+#    (package-refresh-contents))
+#
+#  ;; Initialize use-package on non-Linux platforms
+#  (unless (package-installed-p 'use-package)
+#    (package-install 'use-package))
+#
+#  (require 'use-package)
+#  (setq use-package-always-ensure t)
+#
+##+end_src
+:END:
 
 * Keeping Folders Clean
 
@@ -520,7 +553,7 @@ Winner mode is a package that ships with Emacs. It keeps a history of window set
 #+begin_src emacs-lisp
 
   (use-package winner-mode
-    :ensure nil
+    :straight nil
     :config
     (winner-mode 1))
 
@@ -799,11 +832,11 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
 #+begin_src emacs-lisp
     ;;;; capture
   (use-package org-capture
-    :ensure nil
+    :straight nil
     :config
     (setq org-capture-templates
           `(("a" "Acronyms")
-
+  
             ("ag" "General Acronyms")
             ("agg" "General Acronyms - General" table-line
              (file+olp "~/Org/personal/Acronyms.org" "General"
@@ -817,7 +850,7 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
              ,(concat "\n"
                       "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
                       "\n %?"))
-
+  
             ("ai" "IT related Acronyms")
             ("aic" "IT related Acronyms - Encryption" table-line
              (file+olp "~/Org/personal/Acronyms.org" "IT"
@@ -837,7 +870,7 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
              (file+olp "~/Org/personal/Acronyms.org" "IT"
                        "Mail")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-
+  
             ("j" "Journal Entries")
             ("jj" "Journal" entry
              (file+olp+datetree "~/Org/journal/Journal.org")
@@ -850,12 +883,12 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
              "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
              :clock-in :clock-resume
              :empty-lines 1)
-
-
+  
+  
             ("t" "Tasks / Projects")
             ("tt" "TODO Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
              "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-
+  
             ("tb" "Basic task for future review" entry
              (file+headline "personal/Tasks.org" "Inbox")
              ,(concat "* %^{Title}\n"
@@ -869,31 +902,29 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
                       "SCHEDULED: %^t\n"
                       ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
                       "%i%?"))
-
-
+  
+  
             ("w" "Workflows")
             ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
              "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
-
-            ("m" "Metrics Capture")
-            ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
-             "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
-
-
-            ("e" "Email")
-            ("em" "Make email note" entry
-             (file+headline "personal/Tasks.org" "Mail correspondence")
-             ,(concat "* TODO [#A] %:subject :mail:\n"
-                      "SCHEDULED: %t\n:"
-                      "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-                      "%i%?"))
-	      ;; Captures when reading mail, also stores capture date
-            ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
-             "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)
-            ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
-             "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)))
-
+  
+  
+            ("l" "Lists")
+  
+            ("ls" "Shopping List")
+            ("lsv" "Shopping List" entry (file+olp "~/Org/checklists/ListeEinkauf.org")
+             "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+  
+            ("ll" "Literature")
+            ("lls" "Scientific Literature")
+            ("llsp" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
+  
+            ("lm" "Music")
+            ("lmm" "Scientific Literature")
+            ("lmm" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeMusik.org" "Sachbücher" "Philosophie und Soziologie") "* [ ] %^{Author} - %^{Title}")
+            ))
+  
+  
     (setq org-capture-templates-contexts
           '(("e" ((in-mode . "notmuch-search-mode")
                   (in-mode . "notmuch-show-mode")
@@ -901,22 +932,21 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
                   (in-mode . "mu4e-headers-mode")))))
     :bind
     ("C-c c" . org-capture))
-
+  
   ;; Source: https://stackoverflow.com/a/54251825
   (defun contrib/org-capture-no-delete-windows (oldfun args)
     (cl-letf (((symbol-function 'delete-other-windows) 'ignore))
       (apply oldfun args)))
-
+  
   ;; Same source as above
   (advice-add 'org-capture-place-template
               :around 'contrib/org-capture-no-delete-windows)
-
+  
     ;; DOCT Package
   (use-package doct
-    :ensure t
     ;;recommended: defer until calling doct
     :commands (doct))
-
+  
   (define-key global-map (kbd "C-c j")
     (lambda () (interactive) (org-capture nil "jj")))
 #+end_src
@@ -968,7 +998,7 @@ This snippet adds a hook to =org-mode= buffers so that =efs/org-babel-tangle-con
   (load "~/.config/emacs-configs/MailAccounts.el")
 
   (use-package mu4e
-    :ensure nil
+    :straight nil
     :defer 20 ; Wait until 20 seconds after startup
     :config
 
@@ -1222,7 +1252,7 @@ There's a companion mode for lps-mode specifically for debugging
 #+begin_src  emacs-lisp
 
   (use-package latex                 ; Activates lsp for LaTeX mode
-    :ensure nil
+    :straight nil
     :hook (tex-mode . lsp-deferred))
   (use-package auctex)               ; Integrated environment for TeX
   (use-package auctex-latexmk)       ; LatexMK support for AUCTeX
@@ -1262,7 +1292,7 @@ This will install the typescript-language-server and the TypeScript compiler pac
 #+begin_src emacs-lisp
 
   (use-package python-mode
-    :ensure nil
+    :straight nil
     :hook (python-mode . lsp-deferred)
     :custom
     ; (python-shell-interpreter "python3")
@@ -1294,7 +1324,7 @@ Python debugger is set to debugpy (don't forget to pip install that one), becaus
     (require 'dab-node)
     (dab-node-setup)) ;; automatically installs debug node if needed
 
-  (use-package dap-java :ensure nil)
+  (use-package dap-java :straight nil)
 
 #+end_src
 

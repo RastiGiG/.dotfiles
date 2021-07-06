@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("A1-2 Mail"
+(("L3 Musikliste"
+ (filename . "~/Org/checklists/ListeMusik.org")
+ (front-context-string . "\n* TODO Musik zu")
+ (rear-context-string . "g][Mainpage]] -\n")
+ (position . 271))
+("L2 Literaturliste"
+ (filename . "~/Org/checklists/ListeLiteratur.org")
+ (front-context-string . "\n+ [[Sachbücher]")
+ (rear-context-string . "=][Mainpage]] -\n")
+ (position . 355))
+("L1 Einkaufliste"
+ (filename . "~/Org/checklists/ListeEinkauf.org")
+ (front-context-string . "\n* = TOC =\n  + [")
+ (rear-context-string . "=][Mainpage]] -\n")
+ (position . 432))
+("A1-2 Mail"
  (filename . "~/Org/Mail.org")
  (front-context-string . "\n* Follow Up\n** ")
  (rear-context-string . " \n\n:PROPERTIES:\n")
@@ -29,9 +44,9 @@
  (position . 2))
 ("org-capture-last-stored"
  (filename . "~/Org/Mail.org")
- (front-context-string . "** TODO Read Vie")
- (rear-context-string . "<2021-07-01 Do>\n")
- (position . 1481))
+ (front-context-string . "** TODO Read ZiM")
+ (rear-context-string . "<2021-07-06 Di>\n")
+ (position . 2682))
 ("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")

@@ -5,23 +5,25 @@
 (defvar efs/default-font-size 160)
 (defvar efs/default-variable-font-size 160)
 
-;; Initialize package sources
-(require 'package)
+;; bootstrap script to install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+;; Use straight.el for use-package expressions
+(straight-use-package 'use-package)
 
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
+;; Make sure to always install packages (pendant to use-package-always-ensure)
+(setq straight-use-package-by-default t)
 
 ;; (setq backup-directory-alist '(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
@@ -303,7 +305,7 @@ _~_: modified
 )
 
 (use-package winner-mode
-  :ensure nil
+  :straight nil
   :config
   (winner-mode 1))
 
@@ -503,7 +505,7 @@ _~_: modified
 
 ;;;; capture
 (use-package org-capture
-  :ensure nil
+  :straight nil
   :config
   (setq org-capture-templates
         `(("a" "Acronyms")
@@ -580,23 +582,21 @@ _~_: modified
            "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
 
-          ("m" "Metrics Capture")
-          ("mw" "Weight" table-line (file+headline "~/Org/personal/Metrics.org" "Weight")
-           "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
+          ("l" "Lists")
 
+          ("ls" "Shopping List")
+          ("lsv" "Shopping List" entry (file+olp "~/Org/checklists/ListeEinkauf.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
-          ("e" "Email")
-          ("em" "Make email note" entry
-           (file+headline "personal/Tasks.org" "Mail correspondence")
-           ,(concat "* TODO [#A] %:subject :mail:\n"
-                    "SCHEDULED: %t\n:"
-                    "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-                    "%i%?"))
-	    ;; Captures when reading mail, also stores capture date
-          ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
-           "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)
-          ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
-           "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i" :immediate-finish t)))
+          ("ll" "Literature")
+          ("lls" "Scientific Literature")
+          ("llsp" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
+
+          ("lm" "Music")
+          ("lmm" "Scientific Literature")
+          ("lmm" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeMusik.org" "Sachbücher" "Philosophie und Soziologie") "* [ ] %^{Author} - %^{Title}")
+          ))
+
 
   (setq org-capture-templates-contexts
         '(("e" ((in-mode . "notmuch-search-mode")
@@ -617,7 +617,6 @@ _~_: modified
 
   ;; DOCT Package
 (use-package doct
-  :ensure t
   ;;recommended: defer until calling doct
   :commands (doct))
 
@@ -651,7 +650,7 @@ _~_: modified
 (load "~/.config/emacs-configs/MailAccounts.el")
 
 (use-package mu4e
-  :ensure nil
+  :straight nil
   :defer 20 ; Wait until 20 seconds after startup
   :config
 
@@ -817,7 +816,7 @@ _~_: modified
   :config (dap-auto-configure-mode))
 
 (use-package latex                 ; Activates lsp for LaTeX mode
-  :ensure nil
+  :straight nil
   :hook (tex-mode . lsp-deferred))
 (use-package auctex)               ; Integrated environment for TeX
 (use-package auctex-latexmk)       ; LatexMK support for AUCTeX
@@ -836,7 +835,7 @@ _~_: modified
   (setq typescript-indent-level 2))
 
 (use-package python-mode
-  :ensure nil
+  :straight nil
   :hook (python-mode . lsp-deferred)
   :custom
   ; (python-shell-interpreter "python3")
@@ -858,7 +857,7 @@ _~_: modified
   (require 'dab-node)
   (dab-node-setup)) ;; automatically installs debug node if needed
 
-(use-package dap-java :ensure nil)
+(use-package dap-java :straight nil)
 
 (use-package company
   :after lsp-mode
