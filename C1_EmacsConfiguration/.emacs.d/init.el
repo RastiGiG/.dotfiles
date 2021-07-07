@@ -508,6 +508,7 @@ _~_: modified
   :straight nil
   :config
   (setq org-capture-templates
+        ;; Acronym captures
         `(("a" "Acronyms")
 
           ("ag" "General Acronyms")
@@ -543,7 +544,27 @@ _~_: modified
            (file+olp "~/Org/personal/Acronyms.org" "IT"
                      "Mail")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("aip" "IT related Acronyms - Programming" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "IT"
+                     "Programming")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
 
+
+          ;; Email captures
+          ("e" "Email")
+          ("em" "Make email note" entry
+           (file+headline "personal/Tasks.org" "Mail correspondence")
+           ,(concat "* TODO [#A] %:subject :mail:\n"
+                    "SCHEDULED: %t\n:"
+                    "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+                    "%i%?"))
+          ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
+           "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+          ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
+           "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+
+
+          ;; Journal captures
           ("j" "Journal Entries")
           ("jj" "Journal" entry
            (file+olp+datetree "~/Org/journal/Journal.org")
@@ -556,6 +577,84 @@ _~_: modified
            "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
            :clock-in :clock-resume
            :empty-lines 1)
+
+
+          ;; Checklist captures
+          ("l" "Lists")
+
+          ("ls" "Shopping List")
+          ("lsp" "Permanent & Long Lasting")
+          ("lspw" "Living" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
+           "+ [ ] %^{Itemname}")
+          ("lspd" "Technology" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Technik =")
+           "+ [ ] %^{Itemname}")
+          ("lspdc" "Computer" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
+           "+ [ ] %^{Itemname}")
+          ("lspdh" "Appliances" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
+           "+ [ ] %^{Itemname}")
+          ("lspt" "Transport" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Transport =")
+           "+ [ ] %^{Itemname}")
+          ("lsv" "Consumables & Usables")
+          ("lsvb" "Office Supplies" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
+           "+ [ ] %^{Itemname}")
+          ("lsvl" "Groceries" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
+           "+ [ ] %^{Itemname}")
+          ("lsvr" "Cleaning Supplies" entry
+           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
+           "+ [ ] %^{Itemname}")
+
+          ("ll" "Literature")
+          ("lls" "Scientific Literature")
+          ("llsb" "Biology" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llsc" "Chemistry" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llse" "Politics, Economy and Ecology" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llsg" "History" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llsh" "Medicine and Health" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llsi" "IT" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llsm" "Maths" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llsp" "Physics" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llss" "Philosophy and Sociology" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==")
+           "* [ ] %^{Author} - %^{Title}")
+          ("llst" "Technology" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==")
+           "* [ ] %^{Author} - %^{Title}")
+
+          ("llr" "Novels" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =")
+           "** [ ] %^{Author} - %^{Title}")
+          ("llrk" "Classics" entry
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==")
+           "* [ ] %^{Author} - %^{Title}")
+
+
+          ("lm" "Music")
+          ("lmd" "Downlaodable" entry
+           (file+olp "~/Org/checklists/ListeMusik.org" "TODO Musik zum Downloaden")
+           "+ [ ] %^{Interpret} - %^{Title}")
 
 
           ("t" "Tasks / Projects")
@@ -579,36 +678,7 @@ _~_: modified
 
           ("w" "Workflows")
           ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
-           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
-
-          ("l" "Lists")
-
-          ("ls" "Shopping List")
-          ("lsv" "Shopping List" entry (file+olp "~/Org/checklists/ListeEinkauf.org")
-           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
-          ("ll" "Literature")
-          ("lls" "Scientific Literature")
-          ("llss" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsg" "History" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsm" "Maths" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsp" "Physics" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsc" "Chemistry" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsb" "Biology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsh" "Medicine and Health" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "* [ ] %^{Author} - %^{Title}")
-          ("llse" "Politics, Economy and Ecology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "* [ ] %^{Author} - %^{Title}")
-          ("llsi" "IT" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "* [ ] %^{Author} - %^{Title}")
-          ("llst" "Technology" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "* [ ] %^{Author} - %^{Title}")
-
-          ("llr" "Novels" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "** [ ] %^{Author} - %^{Title}")
-          ("llrk" "Classics" entry (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "* [ ] %^{Author} - %^{Title}")
-
-
-          ("lm" "Music")
-          ("lmm" "Scientific Literature")
-          ("lmm" "Philosophy and Sociology" entry (file+olp "~/Org/checklists/ListeMusik.org" "Sachbücher" "Philosophie und Soziologie") "* [ ] %^{Author} - %^{Title}")
-          ))
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
 
 
   (setq org-capture-templates-contexts
