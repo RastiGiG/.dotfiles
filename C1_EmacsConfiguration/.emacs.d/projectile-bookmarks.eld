@@ -1,1 +1,1 @@
-("~/Projects/Programming/J2-MTII_Workspace/" "~/.dotfiles/" "~/.emacs.d/" "~/Documents/01_Akten/02_Personalien/CurriculumVitae/")
+("~/.dotfiles/" "~/Projects/Programming/J2-MTII_Workspace/" "~/.emacs.d/" "~/Documents/01_Akten/02_Personalien/CurriculumVitae/")

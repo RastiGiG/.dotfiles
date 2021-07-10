@@ -25,14 +25,15 @@
 ;; Make sure to always install packages (pendant to use-package-always-ensure)
 (setq straight-use-package-by-default t)
 
-;; (setq backup-directory-alist '(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
 ;; auto-save-mode doesn't create the path automatically!
-;; (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
+(make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
 
 ;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
 ;; this moves it to a more centralized location (tmp)
-;; (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory) auto-save-file-name-transforms '((".*" ,(expand-file-name ;;"tmp/auto-saves/" user-emacs-directory) t)))
+(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
 
 (setq inhibit-startup-message t)
 
@@ -341,6 +342,28 @@ _~_: modified
 ;;   (pdf-view-resize-factor 1.8)
 ;;   (pdf-isearch-batch-mode t)
 ;;   (pdf-annot-activate-created-annotations t))
+
+(use-package dired
+  :straight nil
+  ;; Defer loading of dired config til one of the commands is used
+  :commands (dired dired-jump)
+  ;; The prefixes are arguments given to "ls" by dired
+  :custom ((dired-listing-switches "-aghl --group-directories-first"))
+  :bind (("C-x C-j" . dired-jump))
+  )
+
+;; Adds icons to files and directories in dired           
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+;; Use the following setup if you want to open files with an external program automatically
+;; (use-package dired-open
+;;   :config
+;;   ;; Doesn't work as expected!
+;;   (add-to-list 'dired-open-functions #'dired-open-xdg t)
+;;   ;; -- OR! --
+;;   (setq dired-open-extensions '(("png" . "feh")
+;;                               ("mkv" . "mpv"))))
 
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot

@@ -44,9 +44,9 @@
  (position . 2))
 ("org-capture-last-stored"
  (filename . "~/Org/Mail.org")
- (front-context-string . "** TODO Read [TF")
- (rear-context-string . "<2021-07-06 Di>\n")
- (position . 1970))
+ (front-context-string . "** TODO Read Mat")
+ (rear-context-string . "<2021-07-10 Sa>\n")
+ (position . 3042))
 ("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")
