@@ -965,6 +965,30 @@ _~_: modified
 
 (use-package dap-java :straight nil)
 
+(defun efs/ielm-send-line-or-region ()
+  (interactive)
+  (unless (use-region-p)
+    (forward-line 0)
+    (set-mark-command nil)
+    (forward-line 1))
+  (backward-char 1)
+  (let ((text (buffer-substring-no-properties (region-beginning)
+                                              (region-end))))
+    (with-current-buffer "*ielm*"
+      (insert text)
+      (ielm-send-input))
+
+    (deactivate-mark)))
+
+(defun efs/show-ielm ()
+  (interactive)
+  (select-window (split-window-vertically -10))
+  (ielm)
+  (text-scale-set 1))
+
+(define-key org-mode-map (kbd "C-c e e") 'efs/ielm-send-line-or-region)
+(define-key org-mode-map (kbd "C-c e E") 'efs/show-ielm)
+
 (use-package company
   :after lsp-mode
   :hook (lsp-mode . company-mode)

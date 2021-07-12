@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("L3 Musikliste"
+(("Lisp"
+ (filename . "~/Org/IT/Programming/Lisp.org")
+ (front-context-string . "\n* TOC\n\n* About ")
+ (rear-context-string . " \n\n:PROPERTIES:\n")
+ (position . 248))
+("L3 Musikliste"
  (filename . "~/Org/checklists/ListeMusik.org")
  (front-context-string . "\n* TODO Musik zu")
  (rear-context-string . "g][Mainpage]] -\n")
@@ -43,10 +48,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/Mail.org")
- (front-context-string . "** TODO Read Mat")
- (rear-context-string . "<2021-07-10 Sa>\n")
- (position . 3042))
+ (filename . "~/Org/personal/Tasks.org")
+ (front-context-string . "** MEET Infovera")
+ (rear-context-string . "ungsphase\n:END:\n")
+ (position . 3561))
 ("K5 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")
