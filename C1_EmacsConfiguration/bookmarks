@@ -2,7 +2,7 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Lisp"
+(("K4 Lisp Kompendium"
  (filename . "~/Org/IT/Programming/Lisp.org")
  (front-context-string . "\n* TOC\n\n* About ")
  (rear-context-string . " \n\n:PROPERTIES:\n")
@@ -48,16 +48,16 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/personal/Tasks.org")
- (front-context-string . "** MEET Infovera")
- (rear-context-string . "ungsphase\n:END:\n")
- (position . 3561))
-("K5 Data Science Kompendium"
+ (filename . "~/Org/checklists/ListeLiteratur.org")
+ (front-context-string . "*** [ ] David Go")
+ (rear-context-string . " Petzold - Code\n")
+ (position . 3871))
+("K6 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")
  (rear-context-string . "page]] -\n\n* TOC\n")
  (position . 527))
-("K5-1 SQL Kompendium"
+("K6-1 SQL Kompendium"
  (filename . "~/Org/IT/Programming/SQL.org")
  (front-context-string . "\n- Back to [[fil")
  (rear-context-string . "Sebastian Zierl\n")
@@ -107,7 +107,7 @@
  (front-context-string . "\n* TOC\n\n1. [[*= ")
  (rear-context-string . "g][Mainpage]] -\n")
  (position . 297))
-("K4 Java Kompendium"
+("K5 Java Kompendium"
  (filename . "~/Org/IT/Programming/Java.org")
  (front-context-string . "\n* TOC\n1. [[*= M")
  (rear-context-string . "Sebastian Zierl\n")
