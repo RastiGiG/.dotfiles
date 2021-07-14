@@ -12,8 +12,10 @@
 + [[*Quality of Live Adjustments][Quality of Live Adjustments]]
 + [[*Keybinding Configuration][Keybinding Configuration]]
 + [[*UI Configuration][UI Configuration]]
++ [[*File Management][File Management]]
++ [[*Org Mode][Org Mode]]
++ [[*Email][Email]]
 + [[*Development][Development]]
-+ [[*Org Mode][Org Mode]] 
 + [[*Applications][Applications]]
 
 * Welcome!
