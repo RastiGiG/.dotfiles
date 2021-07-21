@@ -48,10 +48,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/checklists/ListeLiteratur.org")
- (front-context-string . "*** [ ] David Go")
- (rear-context-string . " Petzold - Code\n")
- (position . 3871))
+ (filename . "~/Org/personal/Tasks.org")
+ (front-context-string . "** TODO Auszug a")
+ (rear-context-string . " end of the day\n")
+ (position . 776))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")

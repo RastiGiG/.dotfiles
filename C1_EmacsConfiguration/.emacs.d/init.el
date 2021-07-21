@@ -809,11 +809,23 @@ _~_: modified
             :key ?f))
 
   ;; Display options
-  (setq mu4e-view-show-images t)
+  (setq mu4e-view-show-images t
+        ;; This one is normally not required
+        ;; mu4e-view-image-max-width 800
+        )
   (setq mu4e-view-show-addresses 't)
 
   ;; Composing mail
   (setq mu4e-compose-dont-reply-to-self t)
+
+  ;; give me ISO(ish) format date-time stamps in the header list
+  (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
+
+  ;; customize the reply-quote-string
+  ;; M-x find-function RET message-citation-line-format for docs
+  (setq message-citation-line-format "On %Y-%m-%d %H:%M %Z %N wrote:\n")
+  ;; This message makes use of above specified string, replaces 'message-insert-citation-line
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
 
   ; ;; Signing messages (use mml-secure-sign-pgpmime)
   ; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
