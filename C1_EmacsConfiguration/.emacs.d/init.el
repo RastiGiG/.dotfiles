@@ -636,32 +636,32 @@ _~_: modified
           ("ll" "Literature")
           ("lls" "Scientific Literature")
           ("llsb" "Biology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "%^{Author} - %^{Title}")
           ("llsc" "Chemistry" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==")  "%^{Author} - %^{Title}")
           ("llse" "Politics, Economy and Ecology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "%^{Author} - %^{Title}")
           ("llsg" "History" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==")  "%^{Author} - %^{Title}")
           ("llsh" "Medicine and Health" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "%^{Author} - %^{Title}")
           ("llsi" "IT" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "%^{Author} - %^{Title}")
           ("llsm" "Maths" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "%^{Author} - %^{Title}")
           ("llsp" "Physics" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "%^{Author} - %^{Title}")
           ("llss" "Philosophy and Sociology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "%^{Author} - %^{Title}")
           ("llst" "Technology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "%^{Author} - %^{Title}")
           ("llsl" "Languages" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen ==") "%^{Author} - %^{Title}")
 
           ("llr" "Novels" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane ="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "%^{Author} - %^{Title}")
           ("llrk" "Classics" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker =="))
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "%^{Author} - %^{Title}")
 
 
           ("lm" "Music")
