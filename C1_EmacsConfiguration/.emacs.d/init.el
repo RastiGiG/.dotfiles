@@ -607,77 +607,67 @@ _~_: modified
 
           ("ls" "Shopping List")
           ("lsp" "Permanent & Long Lasting")
-          ("lspw" "Living" entry
+          ("lspw" "Living" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
-           "+ [ ] %^{Itemname}")
-          ("lspd" "Technology" entry
+           "%^{Itemname}")
+          ("lspd" "Technology" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Technik =")
-           "+ [ ] %^{Itemname}")
-          ("lspdc" "Computer" entry
+           "%^{Itemname}")
+          ("lspdc" "Computer" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
-           "+ [ ] %^{Itemname}")
-          ("lspdh" "Appliances" entry
+           "%^{Itemname}")
+          ("lspdh" "Appliances" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
-           "+ [ ] %^{Itemname}")
-          ("lspt" "Transport" entry
+           "%^{Itemname}")
+          ("lspt" "Transport" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Transport =")
-           "+ [ ] %^{Itemname}")
+           "%^{Itemname}")
           ("lsv" "Consumables & Usables")
-          ("lsvb" "Office Supplies" entry
+          ("lsvb" "Office Supplies" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
-           "+ [ ] %^{Itemname}")
-          ("lsvl" "Groceries" entry
+           "%^{Itemname}")
+          ("lsvl" "Groceries" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
-           "+ [ ] %^{Itemname}")
-          ("lsvr" "Cleaning Supplies" entry
+           "%^{Itemname}")
+          ("lsvr" "Cleaning Supplies" checkitem
            (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
-           "+ [ ] %^{Itemname}")
+           "%^{Itemname}")
 
           ("ll" "Literature")
           ("lls" "Scientific Literature")
-          ("llsb" "Biology" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llsc" "Chemistry" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llse" "Politics, Economy and Ecology" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llsg" "History" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llsh" "Medicine and Health" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llsi" "IT" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llsm" "Maths" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llsp" "Physics" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llss" "Philosophy and Sociology" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==")
-           "* [ ] %^{Author} - %^{Title}")
-          ("llst" "Technology" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==")
-           "* [ ] %^{Author} - %^{Title}")
+          ("llsb" "Biology" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie =="))
+          ("llsc" "Chemistry" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie =="))
+          ("llse" "Politics, Economy and Ecology" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie =="))
+          ("llsg" "History" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History =="))
+          ("llsh" "Medicine and Health" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin =="))
+          ("llsi" "IT" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI =="))
+          ("llsm" "Maths" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik =="))
+          ("llsp" "Physics" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik =="))
+          ("llss" "Philosophy and Sociology" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie =="))
+          ("llst" "Technology" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik =="))
+          ("llsl" "Languages" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen =="))
 
-          ("llr" "Novels" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =")
-           "** [ ] %^{Author} - %^{Title}")
-          ("llrk" "Classics" entry
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==")
-           "* [ ] %^{Author} - %^{Title}")
+          ("llr" "Novels" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane ="))
+          ("llrk" "Classics" checkitem
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker =="))
 
 
           ("lm" "Music")
-          ("lmd" "Downlaodable" entry
+          ("lmd" "Downlaodable" checkitem
            (file+olp "~/Org/checklists/ListeMusik.org" "TODO Musik zum Downloaden")
-           "+ [ ] %^{Interpret} - %^{Title}")
+           "%^{Interpret} - %^{Title}")
 
 
           ("t" "Tasks / Projects")

@@ -49,7 +49,7 @@
  (position . 2))
 ("org-capture-last-stored"
  (filename . "~/Org/personal/Tasks.org")
- (front-context-string . "** TODO Auszug a")
+ (front-context-string . "** MEET Kaggle 3")
  (rear-context-string . " end of the day\n")
  (position . 776))
 ("K6 Data Science Kompendium"
@@ -91,7 +91,8 @@
  (filename . "~/.dotfiles/00_OrgFiles/ZshConfig.org")
  (front-context-string . "\n+ [[*General][G")
  (rear-context-string . "dirp yes\n\n* TOC\n")
- (position . 100))
+ (position . 100)
+ (annotation . ""))
 ("A3 Contacts"
  (filename . "~/Org/personal/Contacts.org")
  (front-context-string . "\n- Back to [[fil")
