@@ -742,6 +742,20 @@ _~_: modified
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
+(use-package org-roam
+  :straight t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/OrgRoam")
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i"    . completion-at-point))
+  :config
+  (org-roam-setup))
+
 ;; Load external file with contact information
 (load "~/.config/emacs-configs/MailAccounts.el")
 
@@ -792,11 +806,6 @@ _~_: modified
                            (mu4e~proc-move docid
                                            (mu4e~mark-check-target target) "-N"))))
 
-  (add-to-list 'mu4e-bookmarks
-           (make-mu4e-bookmark
-            :name "FAU"
-            :query "contact:*fau* OR subject:fau"
-            :key ?f))
 
   ;; Display options
   (setq mu4e-view-show-images t
