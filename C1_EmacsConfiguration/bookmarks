@@ -49,9 +49,9 @@
  (position . 2))
 ("org-capture-last-stored"
  (filename . "~/Org/checklists/ListeLiteratur.org")
- (front-context-string . "- Parag Khanna -")
- (rear-context-string . "tschaftsmärchen\n")
- (position . 3661))
+ (front-context-string . "- [ ] Jeffrey E.")
+ (rear-context-string . " Petzold - Code\n")
+ (position . 2649))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/IT/Programming/DataScience.org")
  (front-context-string . "\n1. [[*General][")

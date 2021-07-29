@@ -526,7 +526,20 @@ _~_: modified
 (add-to-list 'org-structure-template-alist '("sp" . "src python"))
 (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
 
-;;;; capture
+;; Functions useful for defining capture templates
+;; Checklist item
+;; (defun efs/org-capture-checklist-string (string1 string2)
+;;   "This function is used as a template. It creates a string of the form '[ ] %^{string1} - %^{string2}'"
+;;  (format "[ ] %^{%s} - %^{%s}") string1 string2)
+;; Literature List
+;; (defun efs/org-capture-literature-string ()
+;;   "This function uses the template efs/org-capture-checklist-string to create a string for the literature list"
+;;   "[ ] %^{Author} - %^{Title}")
+;; (defun efs/org-capture-music-string ()
+;;   "This function uses the template efs/org-capture-checklist-string to create a string for the music list"
+;;  "[ ] %^{Interpret} - %^{Title}")
+
+;; Org-Capture
 (use-package org-capture
   :straight nil
   :config
@@ -538,15 +551,11 @@ _~_: modified
           ("agg" "General Acronyms - General" table-line
            (file+olp "~/Org/personal/Acronyms.org" "General"
                      "General")
-           ,(concat "\n"
-                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
-                    "\n %?"))
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
           ("agt" "General Acronyms - Terminology" table-line
            (file+olp "~/Org/personal/Acronyms.org" "General"
                      "Terminology")
-           ,(concat "\n"
-                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|"
-                    "\n %?"))
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
           ("ai" "IT related Acronyms")
           ("aic" "IT related Acronyms - Encryption" table-line
@@ -560,9 +569,7 @@ _~_: modified
           ("ail" "IT related Acronyms - LaTeX" table-line
            (file+olp "~/Org/personal/Acronyms.org" "IT"
                      "LaTeX")
-           ,(concat "\n"
-                    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |"
-                    "\n %?"))
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("aim" "IT related Acronyms - Mail" table-line
            (file+olp "~/Org/personal/Acronyms.org" "IT"
                      "Mail")
@@ -571,6 +578,10 @@ _~_: modified
            (file+olp "~/Org/personal/Acronyms.org" "IT"
                      "Programming")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("aiu" "IT related Acronyms - Encoding" table-line
+           (file+olp "~/Org/personal/Acronyms.org" "IT"
+                     "Encoding")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")  
 
 
           ;; Email captures
@@ -636,38 +647,38 @@ _~_: modified
           ("ll" "Literature")
           ("lls" "Scientific Literature")
           ("llsb" "Biology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
           ("llsc" "Chemistry" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==")  "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==") "[ ] %^{Author} - %^{Title}")
           ("llse" "Politics, Economy and Ecology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "[ ] %^{Author} - %^{Title}")
           ("llsg" "History" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==")  "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==") "[ ] %^{Author} - %^{Title}")
           ("llsh" "Medicine and Health" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "[ ] %^{Author} - %^{Title}")
           ("llsi" "IT" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "[ ] %^{Author} - %^{Title}")
           ("llsm" "Maths" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "[ ] %^{Author} - %^{Title}")
           ("llsp" "Physics" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "[ ] %^{Author} - %^{Title}")
           ("llss" "Philosophy and Sociology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
           ("llst" "Technology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
           ("llsl" "Languages" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
 
           ("llr" "Novels" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
           ("llrk" "Classics" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "%^{Author} - %^{Title}")
+           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "[ ] %^{Author} - %^{Title}")
 
 
           ("lm" "Music")
           ("lmd" "Downlaodable" checkitem
            (file+olp "~/Org/checklists/ListeMusik.org" "TODO Musik zum Downloaden")
-           "%^{Interpret} - %^{Title}")
+           "[ ] %^{Interpret} - %^{Title}")
 
 
           ("t" "Tasks / Projects")
@@ -711,7 +722,7 @@ _~_: modified
 (advice-add 'org-capture-place-template
             :around 'contrib/org-capture-no-delete-windows)
 
-  ;; DOCT Package
+;; DOCT Package
 (use-package doct
   ;;recommended: defer until calling doct
   :commands (doct))
