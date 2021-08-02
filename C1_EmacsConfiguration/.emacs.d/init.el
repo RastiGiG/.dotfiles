@@ -414,7 +414,7 @@ _~_: modified
   (setq org-agenda-files
         '("~/Org/personal"
           "~/Org/journal"
-          "~/Org/Mail.org"))
+          "~/Org/personal-mail.org"))
 
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
@@ -425,8 +425,8 @@ _~_: modified
       (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
   (setq org-refile-targets
-    '(("Archive.org" :maxlevel . 1)
-      ("Tasks.org" :maxlevel . 1)))
+    '(("personal-archive.org" :maxlevel . 1)
+      ("personal-tasks.org" :maxlevel . 1)))
 
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -494,7 +494,9 @@ _~_: modified
             ((org-agenda-overriding-header "Cancelled Projects")
              (org-agenda-files org-agenda-files)))))))
 
-  (efs/org-font-setup))
+  (efs/org-font-setup)
+
+  (setq org-clock-sound "/home/sebastian/Org/tones/Rush.wav"))
 
 (use-package org-bullets
   :after org
@@ -549,37 +551,45 @@ _~_: modified
 
           ("ag" "General Acronyms")
           ("agg" "General Acronyms - General" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "General"
+           (file+olp "~/Org/acronyms.org" "General"
                      "General")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
           ("agt" "General Acronyms - Terminology" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "General"
+           (file+olp "~/Org/acronyms.org" "General"
                      "Terminology")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
           ("ai" "IT related Acronyms")
           ("aic" "IT related Acronyms - Encryption" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "IT"
+           (file+olp "~/Org/acronyms.org" "IT"
                      "Encryption")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-          ("aie" "IT related Acronyms - Emacs" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "IT"
-                     "Emacs")
-           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-          ("ail" "IT related Acronyms - LaTeX" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "IT"
-                     "LaTeX")
-           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("aim" "IT related Acronyms - Mail" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "IT"
+           (file+olp "~/Org/acronyms.org" "IT"
                      "Mail")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("aie" "IT related Acronyms - Emacs" table-line
+           (file+olp "~/Org/acronyms.org" "IT"
+                     "Emacs")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("aig" "IT related Acronyms - General" table-line
+           (file+olp "~/Org/acronyms.org" "IT"
+                     "General")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("ail" "IT related Acronyms - LaTeX" table-line
+           (file+olp "~/Org/acronyms.org" "IT"
+                     "LaTeX")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("ain" "IT related Acronyms - Networks" table-line
+           (file+olp "~/Org/acronyms.org" "IT"
+                     "Networks")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("aip" "IT related Acronyms - Programming" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "IT"
+           (file+olp "~/Org/acronyms.org" "IT"
                      "Programming")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("aiu" "IT related Acronyms - Encoding" table-line
-           (file+olp "~/Org/personal/Acronyms.org" "IT"
+           (file+olp "~/Org/acronyms.org" "IT"
                      "Encoding")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")  
 
@@ -587,27 +597,27 @@ _~_: modified
           ;; Email captures
           ("e" "Email")
           ("em" "Make email note" entry
-           (file+headline "personal/Tasks.org" "Mail correspondence")
+           (file+headline "~/Org/personal-tasks.org" "Mail correspondence")
            ,(concat "* TODO [#A] %:subject :mail:\n"
                     "SCHEDULED: %t\n:"
                     "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
                     "%i%?"))
-          ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
+          ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
            "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
-          ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
+          ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
            "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
 
 
           ;; Journal captures
           ("j" "Journal Entries")
           ("jj" "Journal" entry
-           (file+olp+datetree "~/Org/journal/Journal.org")
+           (file+olp+datetree "~/Org/journal/journal.org")
            "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
            ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
            :clock-in :clock-resume
            :empty-lines 1)
           ("jm" "Meeting" entry
-           (file+olp+datetree "~/Org/journal/Journal.org")
+           (file+olp+datetree "~/Org/journal/journal.org")
            "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
            :clock-in :clock-resume
            :empty-lines 1)
@@ -619,81 +629,81 @@ _~_: modified
           ("ls" "Shopping List")
           ("lsp" "Permanent & Long Lasting")
           ("lspw" "Living" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
            "%^{Itemname}")
           ("lspd" "Technology" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Technik =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Technik =")
            "%^{Itemname}")
           ("lspdc" "Computer" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
            "%^{Itemname}")
           ("lspdh" "Appliances" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
            "%^{Itemname}")
           ("lspt" "Transport" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Transport =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Transport =")
            "%^{Itemname}")
           ("lsv" "Consumables & Usables")
           ("lsvb" "Office Supplies" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
            "%^{Itemname}")
           ("lsvl" "Groceries" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
            "%^{Itemname}")
           ("lsvr" "Cleaning Supplies" checkitem
-           (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
+           (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
            "%^{Itemname}")
 
           ("ll" "Literature")
           ("lls" "Scientific Literature")
           ("llsb" "Biology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
           ("llsc" "Chemistry" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Chemie ==") "[ ] %^{Author} - %^{Title}")
           ("llse" "Politics, Economy and Ecology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "[ ] %^{Author} - %^{Title}")
           ("llsg" "History" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== History ==") "[ ] %^{Author} - %^{Title}")
           ("llsh" "Medicine and Health" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Medizin ==") "[ ] %^{Author} - %^{Title}")
           ("llsi" "IT" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "[ ] %^{Author} - %^{Title}")
           ("llsm" "Maths" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Mathematik ==") "[ ] %^{Author} - %^{Title}")
           ("llsp" "Physics" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Physik ==") "[ ] %^{Author} - %^{Title}")
           ("llss" "Philosophy and Sociology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
           ("llst" "Technology" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
           ("llsl" "Languages" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
 
           ("llr" "Novels" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
           ("llrk" "Classics" checkitem
-           (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "[ ] %^{Author} - %^{Title}")
+           (file+olp "~/Org/lists-literature.org" "= Romane =" "== Klassiker ==") "[ ] %^{Author} - %^{Title}")
 
 
           ("lm" "Music")
           ("lmd" "Downlaodable" checkitem
-           (file+olp "~/Org/checklists/ListeMusik.org" "TODO Musik zum Downloaden")
+           (file+olp "~/Org/lists-music.org" "TODO Musik zum Downloaden")
            "[ ] %^{Interpret} - %^{Title}")
 
 
           ("t" "Tasks / Projects")
-          ("tt" "TODO Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
+          ("tt" "TODO Task" entry (file+olp "~/Org/personal-tasks.org" "Inbox")
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
 
           ("tb" "Basic task for future review" entry
-           (file+headline "personal/Tasks.org" "Inbox")
+           (file+headline "~/Org/personal-tasks.org" "Inbox")
            ,(concat "* %^{Title}\n"
                     ":PROPERTIES:\n"
                     ":CAPTURED: %U\n"
                     ":END:\n\n"
                     "%i%l"))
           ("td" "Task with a due date" entry
-           (file+headline "personal/Tasks.org" "Inbox")
+           (file+headline "~Org/personal-tasks.org" "Inbox")
            ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
                     "SCHEDULED: %^t\n"
                     ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
@@ -758,7 +768,7 @@ _~_: modified
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/OrgRoam")
+  (org-roam-directory "~/Org")
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)

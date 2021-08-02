@@ -685,112 +685,113 @@ The =efs/org-font-setup= function configures various text faces to tweak the siz
 This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.  There's a lot to unpack in here so I'd recommend watching the videos for [[https://youtu.be/VcgjTEa0kU4][Part 5]] and [[https://youtu.be/PNE-mgkZ6HM][Part 6]] for a full explanation.
 
 #+begin_src emacs-lisp
-
-    (defun efs/org-mode-setup ()
-      (org-indent-mode)
-      (variable-pitch-mode 1)
-      (visual-line-mode 1)
-      (turn-on-org-cdlatex))
-
-    (use-package org
-      :hook (org-mode . efs/org-mode-setup)
-      :bind (("C-c l" . org-store-link))
-      :config
-      (setq org-ellipsis " ▾")
-
-      (setq org-directory (convert-standard-filename "~/Org"))
-      (setq org-agenda-start-with-log-mode t)
-      (setq org-log-done 'time)
-      (setq org-log-into-drawer t)
-
-      ;; setup inline previewing of latex fragments
-      (setq org-latex-create-formula-image-program 'imagemagick)
-
-      (setq org-agenda-files
-            '("~/Org/personal"
-              "~/Org/journal"
-              "~/Org/Mail.org"))
-
-      (require 'org-habit)
-      (add-to-list 'org-modules 'org-habit)
-      (setq org-habit-graph-column 60)
-
-      (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
-
-      (setq org-refile-targets
-        '(("Archive.org" :maxlevel . 1)
-          ("Tasks.org" :maxlevel . 1)))
-
-      ;; Save Org buffers after refiling!
-      (advice-add 'org-refile :after 'org-save-all-org-buffers)
-
-      (setq org-tag-alist
-        '((:startgroup)
-           ; Put mutually exclusive tags here
-           (:endgroup)
-           ("@errand" . ?E)
-           ("@home" . ?H)
-           ("@work" . ?W)
-           ("@study" . ?S)
-           ("agenda" . ?a)
-           ("planning" . ?p)
-           ("publish" . ?P)
-           ("batch" . ?b)
-           ("note" . ?n)
-           ("idea" . ?i)))
-
-      ;; Configure custom agenda views
-      (setq org-agenda-custom-commands
-       '(("d" "Dashboard"
-         ((agenda "" ((org-deadline-warning-days 7)))
-          (todo "NEXT"
-            ((org-agenda-overriding-header "Next Tasks")))
-          (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-
-        ("n" "Next Tasks"
-         ((todo "NEXT"
-            ((org-agenda-overriding-header "Next Tasks")))))
-
-        ("W" "Work Tasks" tags-todo "+work-email")
-
-        ;; Low-effort next actions
-        ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-         ((org-agenda-overriding-header "Low Effort Tasks")
-          (org-agenda-max-todos 20)
-          (org-agenda-files org-agenda-files)))
-
-        ("w" "Workflow Status"
-         ((todo "WAIT"
-                ((org-agenda-overriding-header "Waiting on External")
-                 (org-agenda-files org-agenda-files)))
-          (todo "REVIEW"
-                ((org-agenda-overriding-header "In Review")
-                 (org-agenda-files org-agenda-files)))
-          (todo "PLAN"
-                ((org-agenda-overriding-header "In Planning")
-                 (org-agenda-todo-list-sublevels nil)
-                 (org-agenda-files org-agenda-files)))
-          (todo "BACKLOG"
-                ((org-agenda-overriding-header "Project Backlog")
-                 (org-agenda-todo-list-sublevels nil)
-                 (org-agenda-files org-agenda-files)))
-          (todo "READY"
-                ((org-agenda-overriding-header "Ready for Work")
-                 (org-agenda-files org-agenda-files)))
-          (todo "ACTIVE"
-                ((org-agenda-overriding-header "Active Projects")
-                 (org-agenda-files org-agenda-files)))
-          (todo "COMPLETED"
-                ((org-agenda-overriding-header "Completed Projects")
-                 (org-agenda-files org-agenda-files)))
-          (todo "CANC"
-                ((org-agenda-overriding-header "Cancelled Projects")
-                 (org-agenda-files org-agenda-files)))))))
-
-      (efs/org-font-setup))
-
+  
+  (defun efs/org-mode-setup ()
+    (org-indent-mode)
+    (variable-pitch-mode 1)
+    (visual-line-mode 1)
+    (turn-on-org-cdlatex))
+  
+  (use-package org
+    :hook (org-mode . efs/org-mode-setup)
+    :bind (("C-c l" . org-store-link))
+    :config
+    (setq org-ellipsis " ▾")
+  
+    (setq org-directory (convert-standard-filename "~/Org"))
+    (setq org-agenda-start-with-log-mode t)
+    (setq org-log-done 'time)
+    (setq org-log-into-drawer t)
+  
+    ;; setup inline previewing of latex fragments
+    (setq org-latex-create-formula-image-program 'imagemagick)
+  
+    (setq org-agenda-files
+          '("~/Org/personal"
+            "~/Org/journal"
+            "~/Org/personal-mail.org"))
+  
+    (require 'org-habit)
+    (add-to-list 'org-modules 'org-habit)
+    (setq org-habit-graph-column 60)
+  
+    (setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+        (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+  
+    (setq org-refile-targets
+      '(("personal-archive.org" :maxlevel . 1)
+        ("personal-tasks.org" :maxlevel . 1)))
+  
+    ;; Save Org buffers after refiling!
+    (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  
+    (setq org-tag-alist
+      '((:startgroup)
+         ; Put mutually exclusive tags here
+         (:endgroup)
+         ("@errand" . ?E)
+         ("@home" . ?H)
+         ("@work" . ?W)
+         ("@study" . ?S)
+         ("agenda" . ?a)
+         ("planning" . ?p)
+         ("publish" . ?P)
+         ("batch" . ?b)
+         ("note" . ?n)
+         ("idea" . ?i)))
+  
+    ;; Configure custom agenda views
+    (setq org-agenda-custom-commands
+     '(("d" "Dashboard"
+       ((agenda "" ((org-deadline-warning-days 7)))
+        (todo "NEXT"
+          ((org-agenda-overriding-header "Next Tasks")))
+        (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+  
+      ("n" "Next Tasks"
+       ((todo "NEXT"
+          ((org-agenda-overriding-header "Next Tasks")))))
+  
+      ("W" "Work Tasks" tags-todo "+work-email")
+  
+      ;; Low-effort next actions
+      ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+       ((org-agenda-overriding-header "Low Effort Tasks")
+        (org-agenda-max-todos 20)
+        (org-agenda-files org-agenda-files)))
+  
+      ("w" "Workflow Status"
+       ((todo "WAIT"
+              ((org-agenda-overriding-header "Waiting on External")
+               (org-agenda-files org-agenda-files)))
+        (todo "REVIEW"
+              ((org-agenda-overriding-header "In Review")
+               (org-agenda-files org-agenda-files)))
+        (todo "PLAN"
+              ((org-agenda-overriding-header "In Planning")
+               (org-agenda-todo-list-sublevels nil)
+               (org-agenda-files org-agenda-files)))
+        (todo "BACKLOG"
+              ((org-agenda-overriding-header "Project Backlog")
+               (org-agenda-todo-list-sublevels nil)
+               (org-agenda-files org-agenda-files)))
+        (todo "READY"
+              ((org-agenda-overriding-header "Ready for Work")
+               (org-agenda-files org-agenda-files)))
+        (todo "ACTIVE"
+              ((org-agenda-overriding-header "Active Projects")
+               (org-agenda-files org-agenda-files)))
+        (todo "COMPLETED"
+              ((org-agenda-overriding-header "Completed Projects")
+               (org-agenda-files org-agenda-files)))
+        (todo "CANC"
+              ((org-agenda-overriding-header "Cancelled Projects")
+               (org-agenda-files org-agenda-files)))))))
+  
+    (efs/org-font-setup)
+  
+    (setq org-clock-sound "/home/sebastian/Org/tones/Rush.wav"))
 #+end_src
 
 *** Nicer Heading Bullets
@@ -887,37 +888,45 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
   
             ("ag" "General Acronyms")
             ("agg" "General Acronyms - General" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "General"
+             (file+olp "~/Org/acronyms.org" "General"
                        "General")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
             ("agt" "General Acronyms - Terminology" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "General"
+             (file+olp "~/Org/acronyms.org" "General"
                        "Terminology")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
   
             ("ai" "IT related Acronyms")
             ("aic" "IT related Acronyms - Encryption" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "IT"
+             (file+olp "~/Org/acronyms.org" "IT"
                        "Encryption")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-            ("aie" "IT related Acronyms - Emacs" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "IT"
-                       "Emacs")
-             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-            ("ail" "IT related Acronyms - LaTeX" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "IT"
-                       "LaTeX")
-             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
             ("aim" "IT related Acronyms - Mail" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "IT"
+             (file+olp "~/Org/acronyms.org" "IT"
                        "Mail")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("aie" "IT related Acronyms - Emacs" table-line
+             (file+olp "~/Org/acronyms.org" "IT"
+                       "Emacs")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("aig" "IT related Acronyms - General" table-line
+             (file+olp "~/Org/acronyms.org" "IT"
+                       "General")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("ail" "IT related Acronyms - LaTeX" table-line
+             (file+olp "~/Org/acronyms.org" "IT"
+                       "LaTeX")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+            ("ain" "IT related Acronyms - Networks" table-line
+             (file+olp "~/Org/acronyms.org" "IT"
+                       "Networks")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
             ("aip" "IT related Acronyms - Programming" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "IT"
+             (file+olp "~/Org/acronyms.org" "IT"
                        "Programming")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
             ("aiu" "IT related Acronyms - Encoding" table-line
-             (file+olp "~/Org/personal/Acronyms.org" "IT"
+             (file+olp "~/Org/acronyms.org" "IT"
                        "Encoding")
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")  
   
@@ -925,27 +934,27 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
             ;; Email captures
             ("e" "Email")
             ("em" "Make email note" entry
-             (file+headline "personal/Tasks.org" "Mail correspondence")
+             (file+headline "~/Org/personal-tasks.org" "Mail correspondence")
              ,(concat "* TODO [#A] %:subject :mail:\n"
                       "SCHEDULED: %t\n:"
                       "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
                       "%i%?"))
-            ("ef" "Follow Up" entry (file+olp "~/Org/Mail.org" "Follow Up")
+            ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
              "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
-            ("er" "Read Later" entry (file+olp "~/Org/Mail.org" "Read Later")
+            ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
              "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
   
   
             ;; Journal captures
             ("j" "Journal Entries")
             ("jj" "Journal" entry
-             (file+olp+datetree "~/Org/journal/Journal.org")
+             (file+olp+datetree "~/Org/journal/journal.org")
              "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
              ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
              :clock-in :clock-resume
              :empty-lines 1)
             ("jm" "Meeting" entry
-             (file+olp+datetree "~/Org/journal/Journal.org")
+             (file+olp+datetree "~/Org/journal/journal.org")
              "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
              :clock-in :clock-resume
              :empty-lines 1)
@@ -957,81 +966,81 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
             ("ls" "Shopping List")
             ("lsp" "Permanent & Long Lasting")
             ("lspw" "Living" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
              "%^{Itemname}")
             ("lspd" "Technology" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Technik =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Technik =")
              "%^{Itemname}")
             ("lspdc" "Computer" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
              "%^{Itemname}")
             ("lspdh" "Appliances" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
              "%^{Itemname}")
             ("lspt" "Transport" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Permanentgüter =" "TODO = Transport =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Transport =")
              "%^{Itemname}")
             ("lsv" "Consumables & Usables")
             ("lsvb" "Office Supplies" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
              "%^{Itemname}")
             ("lsvl" "Groceries" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
              "%^{Itemname}")
             ("lsvr" "Cleaning Supplies" checkitem
-             (file+olp "~/Org/checklists/ListeEinkauf.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
+             (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
              "%^{Itemname}")
   
             ("ll" "Literature")
             ("lls" "Scientific Literature")
             ("llsb" "Biology" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
             ("llsc" "Chemistry" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Chemie ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Chemie ==") "[ ] %^{Author} - %^{Title}")
             ("llse" "Politics, Economy and Ecology" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "[ ] %^{Author} - %^{Title}")
             ("llsg" "History" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== History ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== History ==") "[ ] %^{Author} - %^{Title}")
             ("llsh" "Medicine and Health" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Medizin ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Medizin ==") "[ ] %^{Author} - %^{Title}")
             ("llsi" "IT" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "[ ] %^{Author} - %^{Title}")
             ("llsm" "Maths" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Mathematik ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Mathematik ==") "[ ] %^{Author} - %^{Title}")
             ("llsp" "Physics" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Physik ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Physik ==") "[ ] %^{Author} - %^{Title}")
             ("llss" "Philosophy and Sociology" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
             ("llst" "Technology" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
             ("llsl" "Languages" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
   
             ("llr" "Novels" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
             ("llrk" "Classics" checkitem
-             (file+olp "~/Org/checklists/ListeLiteratur.org" "= Romane =" "== Klassiker ==") "[ ] %^{Author} - %^{Title}")
+             (file+olp "~/Org/lists-literature.org" "= Romane =" "== Klassiker ==") "[ ] %^{Author} - %^{Title}")
   
   
             ("lm" "Music")
             ("lmd" "Downlaodable" checkitem
-             (file+olp "~/Org/checklists/ListeMusik.org" "TODO Musik zum Downloaden")
+             (file+olp "~/Org/lists-music.org" "TODO Musik zum Downloaden")
              "[ ] %^{Interpret} - %^{Title}")
   
   
             ("t" "Tasks / Projects")
-            ("tt" "TODO Task" entry (file+olp "~/Org/personal/Tasks.org" "Inbox")
+            ("tt" "TODO Task" entry (file+olp "~/Org/personal-tasks.org" "Inbox")
              "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
   
             ("tb" "Basic task for future review" entry
-             (file+headline "personal/Tasks.org" "Inbox")
+             (file+headline "~/Org/personal-tasks.org" "Inbox")
              ,(concat "* %^{Title}\n"
                       ":PROPERTIES:\n"
                       ":CAPTURED: %U\n"
                       ":END:\n\n"
                       "%i%l"))
             ("td" "Task with a due date" entry
-             (file+headline "personal/Tasks.org" "Inbox")
+             (file+headline "~Org/personal-tasks.org" "Inbox")
              ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
                       "SCHEDULED: %^t\n"
                       ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
@@ -1116,7 +1125,7 @@ For installation, first make sure to have ~SQLite~ and a C++ compiler like ~gcc~
     :init
     (setq org-roam-v2-ack t)
     :custom
-    (org-roam-directory "~/OrgRoam")
+    (org-roam-directory "~/Org")
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
            ("C-c n i" . org-roam-node-insert)
