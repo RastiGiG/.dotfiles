@@ -1030,8 +1030,7 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
   
             ("t" "Tasks / Projects")
             ("tt" "TODO Task" entry (file+olp "~/Org/personal-tasks.org" "Inbox")
-             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-  
+             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
             ("tb" "Basic task for future review" entry
              (file+headline "~/Org/personal-tasks.org" "Inbox")
              ,(concat "* %^{Title}\n"
@@ -1039,10 +1038,16 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
                       ":CAPTURED: %U\n"
                       ":END:\n\n"
                       "%i%l"))
-            ("td" "Task with a due date" entry
-             (file+headline "~Org/personal-tasks.org" "Inbox")
+            ("ts" "Task with a due date (scheduled)" entry
+             (file+headline "~/Org/personal-tasks.org" "Inbox")
              ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
                       "SCHEDULED: %^t\n"
+                      ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                      "%i%?"))
+            ("td" "Task with a due date (deadline)" entry
+             (file+headline "~/Org/personal-tasks.org" "Inbox")
+             ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                      "DEADLINE: %^t\n"
                       ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
                       "%i%?"))
   
@@ -1406,7 +1411,7 @@ There's a companion mode for lps-mode specifically for debugging
 *** LaTeX
 
 #+begin_src  emacs-lisp
-
+  
   (use-package latex                 ; Activates lsp for LaTeX mode
     :straight nil
     :hook (tex-mode . lsp-deferred))
@@ -1414,12 +1419,13 @@ There's a companion mode for lps-mode specifically for debugging
   (use-package auctex-latexmk)       ; LatexMK support for AUCTeX
   (use-package latex-extra)          ; Useful features for LaTeX-mode
   (use-package cdlatex)              ; Fast input methods for LaTeX environments and math
-
+  
   (setq exec-path (append exec-path '("/usr/local/texlive/2021")))
-
+  
   (require 'tex)
   (TeX-global-PDF-mode t)            ; default compiled document: pdf
-
+  (setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
+  
 #+end_src
 
 + latex mode doesn't need to be installed. It in the config to add the lsp-deferred hook when editing latex files

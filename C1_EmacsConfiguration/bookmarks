@@ -2,28 +2,33 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("K4 Lisp Kompendium"
- (filename . "~/Org/IT/Programming/Lisp.org")
+(("C5 ZathuraConfig.org"
+ (filename . "~/.dotfiles/00_OrgFiles/ZathuraConfig.org")
+ (front-context-string . "\n* TOC\n\n1) [[*UI")
+ (rear-context-string . "STARTUP: folded\n")
+ (position . 173))
+("K4 Lisp Kompendium"
+ (filename . "~/Org/lisp.org")
  (front-context-string . "\n* TOC\n\n* About ")
  (rear-context-string . " \n\n:PROPERTIES:\n")
  (position . 248))
 ("L3 Musikliste"
- (filename . "~/Org/checklists/ListeMusik.org")
+ (filename . "~/Org/lists-music.org")
  (front-context-string . "\n* TODO Musik zu")
  (rear-context-string . "g][Mainpage]] -\n")
  (position . 271))
 ("L2 Literaturliste"
- (filename . "~/Org/checklists/ListeLiteratur.org")
+ (filename . "~/Org/lists-literature.org")
  (front-context-string . "\n+ [[Sachbücher]")
  (rear-context-string . "=][Mainpage]] -\n")
  (position . 355))
 ("L1 Einkaufliste"
- (filename . "~/Org/checklists/ListeEinkauf.org")
+ (filename . "~/Org/lists-shopping.org")
  (front-context-string . "\n* = TOC =\n  + [")
  (rear-context-string . "=][Mainpage]] -\n")
  (position . 432))
 ("A1-2 Mail"
- (filename . "~/Org/Mail.org")
+ (filename . "~/Org/personal-mail.org")
  (front-context-string . "\n* Follow Up\n** ")
  (rear-context-string . " \n\n:PROPERTIES:\n")
  (position . 303))
@@ -38,7 +43,7 @@
  (rear-context-string)
  (position . 1))
 ("Z1 Acronyms"
- (filename . "~/Org/personal/Acronyms.org")
+ (filename . "~/Org/acronyms.org")
  (front-context-string . "\n\n\n* %^{Subject ")
  (rear-context-string)
  (position . 1))
@@ -48,17 +53,17 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/OrgRoam/acronyms.org")
- (front-context-string . "| FOSS    | Free")
+ (filename . "~/Org/acronyms.org")
+ (front-context-string . "| tty     | tele")
  (rear-context-string . "--------------|\n")
- (position . 2391))
+ (position . 7407))
 ("K6 Data Science Kompendium"
- (filename . "~/Org/IT/Programming/DataScience.org")
+ (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")
  (rear-context-string . "page]] -\n\n* TOC\n")
  (position . 527))
 ("K6-1 SQL Kompendium"
- (filename . "~/Org/IT/Programming/SQL.org")
+ (filename . "~/Org/sql.org")
  (front-context-string . "\n- Back to [[fil")
  (rear-context-string . "Sebastian Zierl\n")
  (position . 164))
@@ -73,7 +78,7 @@
  (rear-context-string)
  (position . 1))
 ("org-refile-last-stored"
- (filename . "~/Org/personal/Archive.org")
+ (filename . "~/Org/personal-archive.org")
  (front-context-string . "** DONE Praktiku")
  (rear-context-string . "a 20:01]\n:END:\n\n")
  (position . 1585))
@@ -94,42 +99,42 @@
  (position . 100)
  (annotation . ""))
 ("A3 Contacts"
- (filename . "~/Org/personal/Contacts.org")
+ (filename . "~/Org/personal-contacts.org")
  (front-context-string . "\n- Back to [[fil")
  (rear-context-string . "Sebastian Zierl\n")
  (position . 255))
 ("A1 Tasks"
- (filename . "~/Org/personal/Tasks.org")
+ (filename . "~/Org/personal-tasks.org")
  (front-context-string . "\n* = Active =\n\n*")
  (rear-context-string . "TUP: hideblocks\n")
  (position . 585))
 ("K3 Python Kompendium"
- (filename . "~/Org/IT/Programming/Python.org")
+ (filename . "~/Org/python.org")
  (front-context-string . "\n* TOC\n\n1. [[*= ")
  (rear-context-string . "g][Mainpage]] -\n")
  (position . 297))
 ("K5 Java Kompendium"
- (filename . "~/Org/IT/Programming/Java.org")
+ (filename . "~/Org/java.org")
  (front-context-string . "\n* TOC\n1. [[*= M")
  (rear-context-string . "Sebastian Zierl\n")
  (position . 204))
 ("K2-1 Emacs Keybindings"
- (filename . "~/Org/IT/Texteditoren/Emacs.org")
+ (filename . "~/Org/emacs-keybindings.org")
  (front-context-string . "\n  + common chor")
  (rear-context-string . " Key Strokes ==\n")
  (position . 9395))
 ("K1-1 Linux Installed Software"
- (filename . "~/Org/IT/Linux.org")
+ (filename . "~/Org/linux-installed_software.org")
  (front-context-string . "\n** == 6.1 Insta")
  (rear-context-string . "6 Quick Looks =\n")
  (position . 58388))
 ("K2 Emacs Kompendium"
- (filename . "~/Org/IT/Texteditoren/Emacs.org")
+ (filename . "~/Org/emacs.org")
  (front-context-string . "\n* = TOC =\n\n1. [")
  (rear-context-string . "g][Mainpage]] -\n")
  (position . 245))
 ("K1 Linux Kompendium"
- (filename . "~/Org/IT/Linux.org")
+ (filename . "~/Org/linux.org")
  (front-context-string . "\n* = TOC =\n\n1. [")
  (rear-context-string . "g][Mainpage]] -\n")
  (position . 259))

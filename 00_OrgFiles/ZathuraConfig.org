@@ -1,0 +1,110 @@
+#+TITLE: Zathura Configuration
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D9_Zathura/.config/zathura/zathurarc :mkdirp yes
+#+DATE: <2021-08-04 Mi> 
+#+STARTUP: folded
+
+* TOC
+
+1) [[*UI Configuration][UI Configuration]]
+2) [[*Key Mappings][Key Mappings]]
+
+* UI Configuration
+
+UI Settings
+Look up possible options here:
+[[id:58af16cc-ea91-45af-9f8b-0708ecaee419][Zathura Configuration]]
+[[id:80f2ee1f-438f-495d-a7fa-2c2d332e4bf3][Girara Interface Configuration]]
+
+#+begin_src bash :tangle ~/.dotfiles/D9_Zathura/.config/zathura/zathurarc
+  ### activate clipboard functionality
+  set selection-clipboard clipboard
+  
+  ### Defines if the search results should be cleared on abort.
+  set abort-clear-search true
+  
+  ### Defines which auto adjustment mode should be used if a document is loaded. Possible options are "best-fit" and "width".
+  # adjust-open best-fit
+  
+  ### Defines if the number of pages per row should be honored when advancing a page.
+  # advance-pages-per-row false
+  
+  ### Defines the used database backend. Possible options are 'plain' and 'sqlite'
+  # database plain
+  
+  ### Defines the color that is used for highlighting parts of the document (e.g.: show search results)
+  # highlight-color #9FBC00
+  
+  ### Defines the color that is used to show the current selected highlighted element (e.g: current search result)
+  # highlight-active-color #00BC00
+  
+  ### Defines the opacity of a highlighted element
+  # highlight-transparency 0.5
+  
+  ### The page padding defines the gap in pixels between each rendered page.
+  # page-padding 1
+  
+  ### Pages that are not visible get unloaded after some time. Every page that has not been visible for page-store-treshold seconds will be unloaded.
+  # page-store-threshold 30
+  
+  ### Defines the amount of seconds between the check to unload invisible pages.
+  # page-store-interval 30
+  
+  ### Defines the number of pages that are rendered next to each other in a row.
+  # pages-per-row 1
+  
+  ### En/Disables recoloring
+  set recolor true
+  
+  ### Defines the color value that is used to represent dark colors in recoloring mode
+  set recolor-darkcolor #FFFFFF
+  
+  ### Defines the color value that is used to represent light colors in recoloring mode
+  set recolor-lightcolor #000000
+  
+  ### Defines if the "Loading..." text should be displayed if a page is rendered.
+  # render-loading true
+  
+  ### Defines the step size of scrolling by calling the scroll command once
+  # scroll-step
+  
+  ### Defines if the last/first page should be wrapped
+  # scroll-wrap false
+  
+  ### Defines the maximum percentage that the zoom level can be
+  # zoom-max 1000
+  
+  ### Defines the minimum percentage that the zoom level can be
+  # zoom-min 10
+  
+  ### Defines the amount of percent that is zoomed in or out on each command.
+  # zoom-step 10
+  
+  ### Sets sandbox
+  # set sandbox none
+  
+  ### Defines horizontal padding
+  # set statusbar-h-padding 0
+  
+  ### Defines vertical padding
+  # set statusbar-v-padding 0
+  
+  ### Defines page padding
+  # set page-padding 1
+#+end_src
+
+* Key Mappings
+
+Setting the ~Keybindings~. Look up options here: [[id:9c0bb2b4-8ec6-427c-9f12-ab672fb66939][Zathura Key Mapping]]
+
+#+begin_src bash :tangle ~/.dotfiles/D9_Zathura/.config/zathura/zathurarc
+  map u scroll half-up
+  map d scroll half-down
+  map D toggle_page_mode
+  map r reload
+  map R rotate
+  map K zoom in
+  map J zoom out
+  map i recolor
+  map p print
+  map g goto top
+#+end_src

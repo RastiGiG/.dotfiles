@@ -693,8 +693,7 @@ _~_: modified
 
           ("t" "Tasks / Projects")
           ("tt" "TODO Task" entry (file+olp "~/Org/personal-tasks.org" "Inbox")
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
           ("tb" "Basic task for future review" entry
            (file+headline "~/Org/personal-tasks.org" "Inbox")
            ,(concat "* %^{Title}\n"
@@ -702,10 +701,16 @@ _~_: modified
                     ":CAPTURED: %U\n"
                     ":END:\n\n"
                     "%i%l"))
-          ("td" "Task with a due date" entry
-           (file+headline "~Org/personal-tasks.org" "Inbox")
+          ("ts" "Task with a due date (scheduled)" entry
+           (file+headline "~/Org/personal-tasks.org" "Inbox")
            ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
                     "SCHEDULED: %^t\n"
+                    ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                    "%i%?"))
+          ("td" "Task with a due date (deadline)" entry
+           (file+headline "~/Org/personal-tasks.org" "Inbox")
+           ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                    "DEADLINE: %^t\n"
                     ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
                     "%i%?"))
 
@@ -965,6 +970,7 @@ _~_: modified
 
 (require 'tex)
 (TeX-global-PDF-mode t)            ; default compiled document: pdf
+(setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
