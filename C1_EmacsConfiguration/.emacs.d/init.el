@@ -343,6 +343,20 @@ _~_: modified
 ;;   (pdf-isearch-batch-mode t)
 ;;   (pdf-annot-activate-created-annotations t))
 
+(use-package treemacs
+  :bind
+  (:map global-map
+        ([f8] . treemacs)
+        ("C-<f8>" . treemacs-select-window))
+  :config
+  ;; ensure that treemacs-buffer is ignored when switching windows 
+  (setq treemacs-is-never-other-window t)
+
+  (rune/leader-keys
+    "tt" 'treemacs
+    "tw" 'treemacs-select-window)
+  )
+
 (use-package dired
   :straight nil
   ;; Defer loading of dired config til one of the commands is used
@@ -496,7 +510,7 @@ _~_: modified
 
   (efs/org-font-setup)
 
-  (setq org-clock-sound "/home/sebastian/Org/tones/Rush.wav"))
+  (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav"))
 
 (use-package org-bullets
   :after org
@@ -689,6 +703,14 @@ _~_: modified
           ("lmd" "Downlaodable" checkitem
            (file+olp "~/Org/lists-music.org" "TODO Musik zum Downloaden")
            "[ ] %^{Interpret} - %^{Title}")
+
+          ("q" "Quotes")
+          ("qt" "Talks" entry
+           (file+olp "~/Org/personal-quotes.org" "Reden und Interviews")
+           "* %^{Originator} \n %?")
+          ("ql" "Literature" entry
+           (file+olp "~/Org/personal-quotes.org" "Literatur")
+           "* %^{Originator} \n %?")
 
 
           ("t" "Tasks / Projects")
@@ -971,6 +993,10 @@ _~_: modified
 (require 'tex)
 (TeX-global-PDF-mode t)            ; default compiled document: pdf
 (setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
+
+(setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "Zathura") (output-html "xdg-open")))
+
+;;(add-to-list 'TeX-view-program-selection '(output-pdf "zathura"))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"

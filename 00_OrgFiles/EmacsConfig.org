@@ -611,6 +611,27 @@ This adds pdf viewer to Emacs. Works very well in combination with latex. Curren
 
 #+end_src
 
+** Treemacs Mode
+
+=Treemacs= is a handy tree-style *file directory viewer* that's very similar to what you are used from commercial IDEs.
+It's got good integration with =Projectile=
+
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :bind
+    (:map global-map
+          ([f8] . treemacs)
+          ("C-<f8>" . treemacs-select-window))
+    :config
+    ;; ensure that treemacs-buffer is ignored when switching windows 
+    (setq treemacs-is-never-other-window t)
+  
+    (rune/leader-keys
+      "tt" 'treemacs
+      "tw" 'treemacs-select-window)
+    )
+#+end_src
+
 * File Management
 
 ** Dired
@@ -791,7 +812,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
   
     (efs/org-font-setup)
   
-    (setq org-clock-sound "/home/sebastian/Org/tones/Rush.wav"))
+    (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav"))
 #+end_src
 
 *** Nicer Heading Bullets
@@ -1026,6 +1047,14 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
             ("lmd" "Downlaodable" checkitem
              (file+olp "~/Org/lists-music.org" "TODO Musik zum Downloaden")
              "[ ] %^{Interpret} - %^{Title}")
+  
+            ("q" "Quotes")
+            ("qt" "Talks" entry
+             (file+olp "~/Org/personal-quotes.org" "Reden und Interviews")
+             "* %^{Originator} \n %?")
+            ("ql" "Literature" entry
+             (file+olp "~/Org/personal-quotes.org" "Literatur")
+             "* %^{Originator} \n %?")
   
   
             ("t" "Tasks / Projects")
@@ -1426,6 +1455,9 @@ There's a companion mode for lps-mode specifically for debugging
   (TeX-global-PDF-mode t)            ; default compiled document: pdf
   (setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
   
+  (setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "Zathura") (output-html "xdg-open")))
+  
+  ;;(add-to-list 'TeX-view-program-selection '(output-pdf "zathura"))
 #+end_src
 
 + latex mode doesn't need to be installed. It in the config to add the lsp-deferred hook when editing latex files
@@ -1668,7 +1700,7 @@ UNCOMMENT ONLY WHEN SETUP IS DONE -> see guide
 #+end_src
 
 * Applications
-emacs-elp
+
 ** Some App
 
 This is an example of configuring another non-Emacs application using org-mode.  Not only do we write out the configuration at =.config/some-app/config=, we also compute the value that gets stored in this configuration from the Emacs Lisp block above it.

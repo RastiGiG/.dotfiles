@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C5 ZathuraConfig.org"
+(("Quotes"
+ (filename . "~/Org/personal-quotes.org")
+ (front-context-string . ":ID:       28152")
+ (rear-context-string)
+ (position . 14))
+("C5 ZathuraConfig.org"
  (filename . "~/.dotfiles/00_OrgFiles/ZathuraConfig.org")
  (front-context-string . "\n* TOC\n\n1) [[*UI")
  (rear-context-string . "STARTUP: folded\n")
@@ -53,10 +58,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/acronyms.org")
- (front-context-string . "| tty     | tele")
- (rear-context-string . "--------------|\n")
- (position . 7407))
+ (filename . "~/Org/journal/journal.org")
+ (front-context-string . "**** 11:18  - Jo")
+ (rear-context-string . "-05 Donnerstag\n\n")
+ (position . 57))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")
@@ -142,7 +147,8 @@
  (filename . "~/Org/Index.org")
  (front-context-string . "\n* = TOC =\n1. [[")
  (rear-context-string . "STARTUP: folded\n")
- (position . 236))
+ (position . 236)
+ (annotation . ""))
 ("C1 Bash Config"
  (filename . "~/.dotfiles/00_OrgFiles/BashConfig.org")
  (front-context-string . "\n* Basic Setup\n\n")

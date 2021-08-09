@@ -1,5 +1,7 @@
 * Default
-** CurriculumVitae
- - path :: ~/Documents/01_Akten/02_Personalien/CurriculumVitae
-** exercises-ss2021-main
- - path :: ~/Projects/Programming/J2-MTII_Workspace/exercises-ss2021-main
+** J2-MTII_Workspace
+ - path :: ~/Projects/Programming/J2-MTII_Workspace
+** MTII_Project
+ - path :: ~/Projects/Writing/MTII_Project
+** XX_LaTeX
+ - path :: ~/Documents/06_Studium/XX_LaTeX
