@@ -47,6 +47,9 @@ Thumbs.db
 \#*\#
 /.emacs.desktop
 /.emacs.desktop.lock
+/*/.emacs.d/.cache/
+/*/.emacs.d/.dap-breakpoints
+/*/.emacs.d/workspace/
 *.elc
 auto-save-list
 tramp

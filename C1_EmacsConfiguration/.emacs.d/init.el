@@ -796,6 +796,21 @@ _~_: modified
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory "~/Org")
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+      :unnarrowed t)
+     ("l" "programming language" plain
+      "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+      :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)  
+     ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/EmacsCapture_BookNoteTemplate.org")
+      :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)
+     ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+      :if-new (file+head "${slug}.org" "#+title: ${title}\n#+filetags: Project")
+      :unnarrowed t)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -856,7 +871,7 @@ _~_: modified
 
 
   ;; Display options
-  (setq mu4e-view-show-images t
+  (setq mu4e-view-show-images nil     ;; set to nil for security
         ;; This one is normally not required
         ;; mu4e-view-image-max-width 800
         )
