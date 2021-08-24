@@ -149,6 +149,30 @@
   :config
   (counsel-mode 1))
 
+;; (use-package vertico
+;;   :bind (:map vertico-map
+;;          ("C-j" . vertico-next)
+;;          ("C-k" . vertico-previous)
+;;          ("C-f" . vertico-exit)
+;;          :map minibuffer-local-map
+;;          ("M-h" . backward-kill-word))
+;;   :custom
+;;   (vertico-cycle t)
+;;   :init
+;;   (vertico-mode))
+
+;; (use-package savehist
+;;   :straight nil
+;;   :init
+;;   (savehist-mode))
+
+;; (use-package marginalia
+;;   :after vertico
+;;   :custom
+;;   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+;;   :init
+;;   (marginalia-mode))
+
 (use-package helpful
   :custom
   (counsel-describe-function-function #'helpful-callable)
@@ -796,28 +820,36 @@ _~_: modified
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory "~/Org")
+  (org-roam-dailies-directory "journal/")
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+date: %U\n")
       :unnarrowed t)
      ("l" "programming language" plain
       "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
-      :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+      :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
       :unnarrowed t)  
      ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/EmacsCapture_BookNoteTemplate.org")
-      :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+      :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
       :unnarrowed t)
      ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-      :if-new (file+head "${slug}.org" "#+title: ${title}\n#+filetags: Project")
+      :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
       :unnarrowed t)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
          :map org-mode-map
-         ("C-M-i"    . completion-at-point))
+         ("C-M-i"    . completion-at-point)
+         :map org-roam-dailies-map
+         ("Y" . org-roam-dailies-capture-yesterday)
+         ("T" . org-roam-dailies-capture-tomorrow))
+  :bind-keymap
+  ("C-c n d" . org-roam-dailies-map)
   :config
-  (org-roam-setup))
+  ;; (org-roam-setup)
+  (require 'org-roam-dailies) ;; Ensure the keymap is available
+  (org-roam-db-autosync-mode))
 
 ;; Load external file with contact information
 (load "~/.config/emacs-configs/MailAccounts.el")

@@ -58,10 +58,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/journal/journal.org")
- (front-context-string . "**** 11:18  - Jo")
- (rear-context-string . "-05 Donnerstag\n\n")
- (position . 57))
+ (filename . "~/Org/acronyms.org")
+ (front-context-string . "| IETF    | Inte")
+ (rear-context-string . "--------------|\n")
+ (position . 8711))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")
@@ -144,7 +144,7 @@
  (rear-context-string . "g][Mainpage]] -\n")
  (position . 259))
 ("00 Index for Personal Wiki"
- (filename . "~/Org/Index.org")
+ (filename . "~/Org/index.org")
  (front-context-string . "\n* = TOC =\n1. [[")
  (rear-context-string . "STARTUP: folded\n")
  (position . 236)
