@@ -58,10 +58,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/acronyms.org")
- (front-context-string . "| IETF    | Inte")
- (rear-context-string . "--------------|\n")
- (position . 8711))
+ (filename . "~/Org/personal-mail.org")
+ (front-context-string . "** TODO Read [TF")
+ (rear-context-string . "<2021-08-26 Do>\n")
+ (position . 2754))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")

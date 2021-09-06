@@ -50,6 +50,7 @@ Thumbs.db
 /*/.emacs.d/.cache/
 /*/.emacs.d/.dap-breakpoints
 /*/.emacs.d/workspace/
+/*/.emacs.d/session*
 *.elc
 auto-save-list
 tramp

@@ -821,6 +821,8 @@ _~_: modified
   :custom
   (org-roam-directory "~/Org")
   (org-roam-dailies-directory "journal/")
+
+  ;; org roam capture templates
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
@@ -836,6 +838,12 @@ _~_: modified
      ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
       :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
       :unnarrowed t)))
+
+  ;; dailies capture template
+  (setq org-roam-dailies-capture-templates
+    '(("d" "default" entry "* %<%I:%M %p>: %?"
+       :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -847,7 +855,7 @@ _~_: modified
   :bind-keymap
   ("C-c n d" . org-roam-dailies-map)
   :config
-  ;; (org-roam-setup)
+  (org-roam-setup)
   (require 'org-roam-dailies) ;; Ensure the keymap is available
   (org-roam-db-autosync-mode))
 
@@ -1041,8 +1049,7 @@ _~_: modified
 (TeX-global-PDF-mode t)            ; default compiled document: pdf
 (setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
 
-(setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "Zathura") (output-html "xdg-open")))
-
+(setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "zathura") (output-html "xdg-open")))
 ;;(add-to-list 'TeX-view-program-selection '(output-pdf "zathura"))
 
 (use-package typescript-mode
