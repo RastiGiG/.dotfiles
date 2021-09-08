@@ -597,6 +597,16 @@ _~_: modified
                      "Terminology")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
+          ("as" "Scientific Acronyms")
+          ("asg" "Scientific Acronyms - General" table-line
+           (file+olp "~/Org/acronyms.org" "Science"
+                     "General")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+          ("asm" "Scientific Acronyms - Maths" table-line
+           (file+olp "~/Org/acronyms.org" "Science"
+                     "Maths")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+
           ("ai" "IT related Acronyms")
           ("aic" "IT related Acronyms - Encryption" table-line
            (file+olp "~/Org/acronyms.org" "IT"
