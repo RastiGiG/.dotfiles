@@ -598,6 +598,10 @@ _~_: modified
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
           ("as" "Scientific Acronyms")
+          ("ase" "Scientific Acronyms - Economy" table-line
+           (file+olp "~/Org/acronyms.org" "Science"
+                     "Economy")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
           ("asg" "Scientific Acronyms - General" table-line
            (file+olp "~/Org/acronyms.org" "Science"
                      "General")
@@ -825,18 +829,19 @@ _~_: modified
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
 (use-package org-roam
-  :straight t
   :init
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory "~/Org")
   (org-roam-dailies-directory "journal/")
 
+  (org-roam-completion-everywhere t)
+
   ;; org roam capture templates
   (org-roam-capture-templates
    '(("d" "default" plain
       "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+date: %U\n")
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
       :unnarrowed t)
      ("l" "programming language" plain
       "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
@@ -857,6 +862,7 @@ _~_: modified
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
+         ("C-c n I" . org-roam-node-insert-immediate)
          :map org-mode-map
          ("C-M-i"    . completion-at-point)
          :map org-roam-dailies-map
@@ -868,6 +874,13 @@ _~_: modified
   (org-roam-setup)
   (require 'org-roam-dailies) ;; Ensure the keymap is available
   (org-roam-db-autosync-mode))
+
+(defun org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
 
 ;; Load external file with contact information
 (load "~/.config/emacs-configs/MailAccounts.el")

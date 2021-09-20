@@ -948,6 +948,10 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
   
             ("as" "Scientific Acronyms")
+            ("ase" "Scientific Acronyms - Economy" table-line
+             (file+olp "~/Org/acronyms.org" "Science"
+                       "Economy")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
             ("asg" "Scientific Acronyms - General" table-line
              (file+olp "~/Org/acronyms.org" "Science"
                        "General")
@@ -1195,18 +1199,19 @@ For installation, first make sure to have ~SQLite~ and a C++ compiler like ~gcc~
 
 #+begin_src emacs-lisp
   (use-package org-roam
-    :straight t
     :init
     (setq org-roam-v2-ack t)
     :custom
     (org-roam-directory "~/Org")
     (org-roam-dailies-directory "journal/")
   
+    (org-roam-completion-everywhere t)
+  
     ;; org roam capture templates
     (org-roam-capture-templates
      '(("d" "default" plain
         "%?"
-        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+date: %U\n")
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
         :unnarrowed t)
        ("l" "programming language" plain
         "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
@@ -1227,6 +1232,7 @@ For installation, first make sure to have ~SQLite~ and a C++ compiler like ~gcc~
     :bind (("C-c n l" . org-roam-buffer-toggle)
            ("C-c n f" . org-roam-node-find)
            ("C-c n i" . org-roam-node-insert)
+           ("C-c n I" . org-roam-node-insert-immediate)
            :map org-mode-map
            ("C-M-i"    . completion-at-point)
            :map org-roam-dailies-map
@@ -1238,6 +1244,17 @@ For installation, first make sure to have ~SQLite~ and a C++ compiler like ~gcc~
     (org-roam-setup)
     (require 'org-roam-dailies) ;; Ensure the keymap is available
     (org-roam-db-autosync-mode))
+#+end_src
+
+*** Org Roam Helper Functions
+
+#+begin_src emacs-lisp
+(defun org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
 #+end_src
 
 * Email
