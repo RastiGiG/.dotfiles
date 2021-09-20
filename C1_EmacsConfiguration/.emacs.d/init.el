@@ -628,6 +628,10 @@ _~_: modified
            (file+olp "~/Org/acronyms.org" "IT"
                      "General")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+          ("aii" "IT related Acronyms - General" table-line
+           (file+olp "~/Org/acronyms.org" "IT"
+                     "Internet")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
           ("ail" "IT related Acronyms - LaTeX" table-line
            (file+olp "~/Org/acronyms.org" "IT"
                      "LaTeX")
