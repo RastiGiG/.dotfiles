@@ -94,7 +94,7 @@
   (yas-global-mode 1)
   ;; Trick to enable snippets being shared between modes
   (add-hook 'yas-minor-mode-hook (lambda ()
-                                   yas-activate-extra-mode 'fundamental-mode)))
+                                   (yas-activate-extra-mode 'fundamental-mode))))
 
 (use-package general
 :config

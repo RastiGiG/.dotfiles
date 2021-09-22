@@ -58,7 +58,7 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Projects/Writing/Letters/LetterTest2.org")
+ (filename . "~/Projects/Writing/Letters/Anschreiben-QE2-Verwaltungsdienst-Polizeipraesidium-Muenchen.org.org")
  (front-context-string . "#+SETUPFILE: ~/.")
  (rear-context-string)
  (position . 1))
