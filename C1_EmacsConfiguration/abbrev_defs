@@ -1,3 +1,4 @@
+
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'global-abbrev-table
   '(
@@ -6,10 +7,10 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("#+au" "#+AUTHOR:" nil :count 0)
-    ("#+da" "#+DATE:" nil :count 0)
-    ("#+op" "#+OPTIONS:" nil :count 1)
-    ("#+ti" "#+TITLE:" nil :count 0)
+    ("omau" "#+AUTHOR:" nil :count 0)
+    ("omda" "#+DATE:" nil :count 0)
+    ("ompt" "#+OPTIONS:" nil :count 1)
+    ("omti" "#+TITLE:" nil :count 0)
     ("lc" "#+LATEX_CLASS:" nil :count 0)
     ("lh" "#+LATEX_HEADER:" nil :count 4)
    ))

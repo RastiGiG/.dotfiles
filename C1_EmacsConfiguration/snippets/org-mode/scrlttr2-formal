@@ -3,6 +3,7 @@
 # key: /lcf
 # --
 
+#+LATEX_HEADER: \usepackage{marvosym} % Allows the use of symbols
 
 #+LATEX_HEADER: \firstfoot{
 #+LATEX_HEADER: \centering
@@ -26,6 +27,7 @@ ${5: Country Receiver}
 
 \opening{${7: Formal Address}}
 
-
+$0
 
 \closing{${8: Greetings}}
+\end{letter}

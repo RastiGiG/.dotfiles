@@ -3,9 +3,9 @@
 # key: <ott
 # --
 
-#+TITLE: ${1:title}
-#+AUTHOR: ${2:author}
-#+DATE: ${3:date} 
+#+TITLE: ${1: title}
+#+AUTHOR: ${2: author}
+#+DATE: ${3: `(format-time-string "[%Y-%m-%d]")`} 
 
 :PROPERTIES:
 
