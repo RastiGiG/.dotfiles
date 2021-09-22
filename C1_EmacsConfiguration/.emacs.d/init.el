@@ -91,7 +91,10 @@
 (use-package yasnippet
   :config
   (setq yas-snippet-dirs '("~/.dotfiles/C1_EmacsConfiguration/snippets"))
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  ;; Trick to enable snippets being shared between modes
+  (add-hook 'yas-minor-mode-hook (lambda ()
+                                   yas-activate-extra-mode 'fundamental-mode)))
 
 (use-package general
 :config
@@ -579,6 +582,13 @@ _~_: modified
 ;;   "This function uses the template efs/org-capture-checklist-string to create a string for the music list"
 ;;  "[ ] %^{Interpret} - %^{Title}")
 
+(defun efs/create-documents-file ()
+  "Create an org file in ~/notes/."
+  (interactive)
+  (let ((name (read-string "Filename: ")))
+    (expand-file-name
+     (format "%s.org" name))))
+
 ;; Org-Capture
 (use-package org-capture
   :straight nil
@@ -628,7 +638,7 @@ _~_: modified
            (file+olp "~/Org/acronyms.org" "IT"
                      "General")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
-          ("aii" "IT related Acronyms - General" table-line
+          ("aii" "IT related Acronyms - Internet" table-line
            (file+olp "~/Org/acronyms.org" "IT"
                      "Internet")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
@@ -648,6 +658,21 @@ _~_: modified
            (file+olp "~/Org/acronyms.org" "IT"
                      "Encoding")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")  
+
+
+          ;; Documents
+          ("d" "Documents")
+          ("dl" "Letter")
+          ("dlf" "Letter Form" plain (file efs/create-documents-file)
+           "%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
+           :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+           :unnarrowed t
+           )
+          ("dlh" "Letter Home" plain (file efs/create-documents-file)
+           "%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
+           :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+           :unnarrowed t
+           )
 
 
           ;; Email captures
@@ -820,7 +845,26 @@ _~_: modified
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(add-to-list 'org-latex-classes
+           '("org-plain-scrlttr2"
+             "\\documentclass[a4paper, 11pt, ngerman]{scrlttr2}
+              \\usepackage{hyperref}
+         [NO-DEFAULT-PACKAGES]
+         [PACKAGES]
+         [EXTRA]"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+;; Load language packages for pdflatex of lualatex / xelatex compilers
+(add-to-list 'org-latex-packages-alist
+             '("AUTO" "babel" t ("pdflatex")))
+(add-to-list 'org-latex-packages-alist
+             '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+)
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
@@ -841,28 +885,6 @@ _~_: modified
 
   (org-roam-completion-everywhere t)
 
-  ;; org roam capture templates
-  (org-roam-capture-templates
-   '(("d" "default" plain
-      "%?"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
-      :unnarrowed t)
-     ("l" "programming language" plain
-      "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
-      :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-      :unnarrowed t)  
-     ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/EmacsCapture_BookNoteTemplate.org")
-      :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-      :unnarrowed t)
-     ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-      :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
-      :unnarrowed t)))
-
-  ;; dailies capture template
-  (setq org-roam-dailies-capture-templates
-    '(("d" "default" entry "* %<%I:%M %p>: %?"
-       :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
-
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -875,6 +897,28 @@ _~_: modified
   :bind-keymap
   ("C-c n d" . org-roam-dailies-map)
   :config
+      ;; org roam capture templates
+  (setq org-roam-capture-templates
+        `(("d" "default" plain
+           "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
+           :unnarrowed t)
+          ("l" "programming language" plain
+           "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
+           :unnarrowed t)  
+          ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
+           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
+           :unnarrowed t)
+          ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
+           :unnarrowed t)))
+
+  ;; dailies capture template
+  (setq org-roam-dailies-capture-templates
+        `(("d" "default" entry "* %<%I:%M %p>: %?"
+           :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+
   (org-roam-setup)
   (require 'org-roam-dailies) ;; Ensure the keymap is available
   (org-roam-db-autosync-mode))

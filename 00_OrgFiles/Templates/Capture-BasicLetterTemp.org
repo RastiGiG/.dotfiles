@@ -1,0 +1,8 @@
+#+LATEX_CLASS: org-plain-scrlttr2
+
+#+LATEX_HEADER: \usepackage{lmodern} % Vectorfont: Ensures we have the right font
+
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+#+OPTIONS: author:nil
+#+OPTIONS: title:nil

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: scrlttr2-formal
+# key: /lcf
+# --
+
+
+#+LATEX_HEADER: \firstfoot{
+#+LATEX_HEADER: \centering
+#+LATEX_HEADER: \scshape
+#+LATEX_HEADER: {
+#+LATEX_HEADER: \renewcommand{\\\\}{\ {\large\textperiodcentered}\ }
+#+LATEX_HEADER: \usekomavar{fromaddress}
+#+LATEX_HEADER: }\\\\
+#+LATEX_HEADER: % If you want your fax number or website URL showing, add it here
+#+LATEX_HEADER: {\Large\Letter} \usekomavar{fromemail} \ {\Large\Telefon} \usekomavar{fromphone} 
+#+LATEX_HEADER: }
+
+\begin{letter}{
+${1: Name Receiver} \\\\
+${2: Address Receiver} \\\\
+${3: Postcode Receiver} ${4: City Receiver} \\\\
+${5: Country Receiver}
+}
+
+\setkomavar{subject}{${6: Subject of Letter}} 
+
+\opening{${7: Formal Address}}
+
+
+
+\closing{${8: Greetings}}

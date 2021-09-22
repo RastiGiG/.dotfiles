@@ -1,0 +1,13 @@
+#+SETUPFILE: ~/.dotfiles/00_OrgFiles/Templates/Capture-BasicLetterTemp.org
+
+#+LATEX_HEADER: \setkomavar{fromname}{%^{Sender Address}} % Your name
+#+LATEX_HEADER: \setkomavar{fromaddress}{%^{Street}\\%^{Postcode} %^{City}\\%^{Country}} % Your address
+#+LATEX_HEADER: \setkomavar{fromphone}{%^{Phonenumber}} % Your phone number
+#+LATEX_HEADER: \setkomavar{fromemail}{%^{E-Mail Address}} % Your email address
+#+LATEX_HEADER: \setkomavar{place}{%^{City as written before Date}} % City written before the date
+#+LATEX_HEADER: \setkomavar{signature}{%^{Name for Signature}} % Your name as you want it to appear in the signature
+
+# These are not used in this document, uncomment if you would like to use them and refer
+#+LATEX_HEADER: \setkomavar{fromfax}{%^{Faxnumber}} % Your fax number
+#+LATEX_HEADER: \setkomavar{fromurl}{%^{Personal Website URL}} % Your personal website
+#+LATEX_HEADER: \setkomavar{frombank}{%^{Personal Banking Information}} % Your Bank

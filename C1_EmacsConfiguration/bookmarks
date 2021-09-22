@@ -58,10 +58,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/personal-quotes.org")
- (front-context-string . "** Johann Wolfga")
- (rear-context-string . "lltag entgegen.\n")
- (position . 2761))
+ (filename . "~/Projects/Writing/Letters/LetterTest2.org")
+ (front-context-string . "#+SETUPFILE: ~/.")
+ (rear-context-string)
+ (position . 1))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")
