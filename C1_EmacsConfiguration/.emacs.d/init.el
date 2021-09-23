@@ -620,6 +620,10 @@ _~_: modified
            (file+olp "~/Org/acronyms.org" "Science"
                      "Maths")
            "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+          ("asp" "Scientific Acronyms - Physics" table-line
+           (file+olp "~/Org/acronyms.org" "Science"
+                     "Physics")
+           "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
           ("ai" "IT related Acronyms")
           ("aic" "IT related Acronyms - Encryption" table-line

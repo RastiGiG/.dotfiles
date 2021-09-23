@@ -58,10 +58,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Projects/Writing/Letters/Anschreiben-QE2-Verwaltungsdienst-Polizeipraesidium-Muenchen.org.org")
- (front-context-string . "#+SETUPFILE: ~/.")
- (rear-context-string)
- (position . 1))
+ (filename . "~/Org/acronyms.org")
+ (front-context-string . "| GUI     | Grap")
+ (rear-context-string . "--------------|\n")
+ (position . 16180))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")
