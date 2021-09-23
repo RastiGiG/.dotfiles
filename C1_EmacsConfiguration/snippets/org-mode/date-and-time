@@ -1,0 +1,4 @@
+# key: <odt
+# name: date-and-time
+# --
+#+DATE: ${1: `(format-time-string "[%Y-%m-%d %H:%M:%S]")`}

@@ -1,0 +1,6 @@
+# key: <im
+# name: insert-image
+# --
+#+BEGIN_CENTER #+ATTR_LATEX: :width \textwidth
+$0
+#+END_CENTER

@@ -1,4 +1,4 @@
-# key: <da
+# key: <oda
 # name: date
 # --
 #+DATE: ${1: `(format-time-string "[%Y-%m-%d]")`}
