@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: concat-pdf
+# key: \catpdf
+# --
+\documentclass{scrartcl}
+\usepackage{pdfpages}
+
+\begin{document}
+\includepdf[pages={-}]{${1:<Path-To-Document>}}
+\end{document}

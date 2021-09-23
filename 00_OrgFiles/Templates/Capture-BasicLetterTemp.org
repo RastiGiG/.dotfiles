@@ -1,4 +1,4 @@
-#+LATEX_CLASS: org-plain-scrlttr2
+#+LATEX_CLASS: org-plain-scrlttr2-german
 
 #+LATEX_HEADER: \usepackage{lmodern} % Vectorfont: Ensures we have the right font
 
