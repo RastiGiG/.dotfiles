@@ -1,0 +1,8 @@
+# key: <m
+# name: main
+# --
+# Main function for running file as main
+def main():
+
+if __name__ == '__main__':
+   main()
