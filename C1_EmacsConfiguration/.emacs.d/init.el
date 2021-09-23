@@ -851,9 +851,14 @@ _~_: modified
                ("\\paragraph{%s}" . "\\paragraph*{%s}")
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 (add-to-list 'org-latex-classes
-           '("org-plain-scrlttr2"
-             "\\documentclass[a4paper, 11pt, ngerman]{scrlttr2}
+           '("org-plain-scrlttr2-german"
+             "\\documentclass[a4paper, 
+              parskip=half,%
+              fromalign=right, 
+              fromrule=false, 
+              11pt, ngerman]{scrlttr2}
               \\usepackage{hyperref}
+              \\usepackage{babel}
          [NO-DEFAULT-PACKAGES]
          [PACKAGES]
          [EXTRA]"
@@ -864,10 +869,10 @@ _~_: modified
              ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 ;; Load language packages for pdflatex of lualatex / xelatex compilers
-(add-to-list 'org-latex-packages-alist
-             '("AUTO" "babel" t ("pdflatex")))
-(add-to-list 'org-latex-packages-alist
-             '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+;; (add-to-list 'org-latex-packages-alist
+;;              '("AUTO" "babel" t ("pdflatex")))
+;; (add-to-list 'org-latex-packages-alist
+;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
 )
 
 ;; Automatically tangle our Emacs.org config file when we save it
