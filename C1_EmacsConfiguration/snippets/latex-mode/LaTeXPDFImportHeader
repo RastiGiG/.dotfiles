@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: LaTeXPDFImportHeader
+# key: /ltxpdfh
+# --
+\\documentclass{scrartcl}
+\\usepackage{pdfpages}
+
+\\begin{document}
+\\includepdf[pages={-}]{${1:PathToDocument}}
+\\end{document}

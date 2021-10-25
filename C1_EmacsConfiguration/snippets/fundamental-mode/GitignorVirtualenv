@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: GitignorVirtualenv
+# key: /give
+# --
+
+### Ignore Virtualenv Files
+*/bin/*
+*/lib/*

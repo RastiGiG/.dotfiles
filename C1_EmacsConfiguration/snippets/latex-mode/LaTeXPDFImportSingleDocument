@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: LaTeXPDFImportSingleDocument
+# key: /ltxpdfsd
+# --
+\\includepdf[pages={-}]{${1:PathToDocument}}

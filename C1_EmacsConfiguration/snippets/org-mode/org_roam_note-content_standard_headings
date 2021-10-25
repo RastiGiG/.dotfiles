@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Org_Roam-Note_Content_Standard_Headings
+# key: <orncsh
+# --
+* ${1: Title}
+
+* Read On
+
+* References

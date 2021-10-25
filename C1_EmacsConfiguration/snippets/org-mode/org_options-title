@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Org_Options-Title
+# key: <ti
+# --
+
+#+TITLE: ${1: `(file-name-nondirectory (buffer-file-name))`}

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Org-Image_Insert
+# key: <oiim
+# --
+
+#+BEGIN_CENTER #+ATTR_LATEX: :width {$1:width}
+${0:link_to_image}
+#+END_CENTER

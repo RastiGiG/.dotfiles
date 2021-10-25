@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Cpp_Tail
+# key: <orncppt
+# --
+* Read On
+
+[[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]]
+
+* References
+
+[[id:de761c46-b491-4652-b93f-7bd14c369937][References]]
+1. [[https://csharp-station.com][Csharp-Station.com]]
+   1) [[https://csharp-station.com/understanding-the-differences-between-c-c-and-c/][Csharp-Station.com: Understanding the Differences between C, C++ and C#]]

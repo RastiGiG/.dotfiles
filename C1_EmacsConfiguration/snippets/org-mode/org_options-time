@@ -1,0 +1,4 @@
+# key: <oti
+# name: Org_Options-Time
+# --
+#+DATE: ${1: `(format-time-string "[%H:%M:%S]")`}

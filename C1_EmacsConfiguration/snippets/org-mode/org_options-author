@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Org_Options-Author
+# key: <au
+# --
+
+#+AUTHOR: ${1: Georg Rast}

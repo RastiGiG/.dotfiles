@@ -1,0 +1,3 @@
+#+LATEX_CLASS: org-plain-latex
+
+#+LATEX_HEADER: \usepackage{lmodern} % Vectorfont: Ensures we have the right font

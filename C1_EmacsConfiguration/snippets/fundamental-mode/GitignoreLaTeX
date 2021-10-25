@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: GitignoreLaTeX
+# key: /giltx
+# --
+### Ignore TeX log files
+*.log
+*.aux

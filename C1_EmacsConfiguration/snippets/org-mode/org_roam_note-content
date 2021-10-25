@@ -1,0 +1,8 @@
+# key: <ornc
+# name: Org_Roam-Note_Content
+# --
+* ${1:Title}
+
+* Read On
+
+* References

@@ -1,0 +1,6 @@
+# key: <otss
+# name: Org_Tasks-Study_Subject
+# --
+** ${1: Subject}                                                 :@study:
+SCHEDULED: ${2: `(format-time-string "<%Y-%m-%d %a %H:%M-%H:%M +1w>")`}
+: Raum: ${3: Room}

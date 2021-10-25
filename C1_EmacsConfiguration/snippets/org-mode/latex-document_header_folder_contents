@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: LaTeX-Document_Header_Folder_Contents
+# key: <ldhfc
+# --
+
+#+TITLE: ${1: Title}
+
+#+SETUPFILE: ~/.dotfiles/00_OrgFiles/Templates/Capture-ContentDocumentTemp.org
+
+#+LATEX_CLASS_OPTIONS: [a4paper, 10pt, ngerman, pagenumber=false]
+
+#+OPTIONS: title:t
+#+OPTIONS: author:nil
+#+OPTIONS: date:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: num:t
+
+* ${2: Section}
+
+** ${3: Section}
+
+1. ${4:Item 1}

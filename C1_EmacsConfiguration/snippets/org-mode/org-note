@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Org-Note
+# key: <ono
+# --
+
+:NOTE:
+$0
+:END:

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Org_Tasks-Study_Subject_Exam
+# key: <otsse
+# --
+* TODO Klausur ${1: Subject}                                                 :@study:
+DEADLINE: ${2: `(format-time-string "<%Y-%m-%d %H:%M:%S>")`}
+: Raum: ${3: Room}
+
+
++ Zugelassene Hilfsmittel (siehe <file>):
+- Skript
+- Handouts
+- Mitschriften zur Vorlesung, Übungssammlung mit Lösung
+- selbst erstellte Formelsammlung
+- Mathematisch/Physikalische Formelsammlung
+- Taschenrechner
