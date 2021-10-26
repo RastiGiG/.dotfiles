@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: latex-document_header_letter_german
+# name: LaTeX-document_header-letter_german
 # key: \ldhlg
 # --
 #+LATEX_CLASS_OPTIONS: [${1:a4paper}, ${2:parskip=yes}, ${3:11pt}, ${4:ngerman}, ${5:pagenumber=false}, ${6:BCOR=0mm}, ${7:DIV=13}, ${8:firsthead=false}, ${9:enlargefirstpage=on}]

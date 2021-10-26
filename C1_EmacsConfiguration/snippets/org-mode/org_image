@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: OrgImage
-# key: <oim
-# --
-
-#+BEGIN_CENTER #+ATTR_LATEX: :width {$1:width}
-${0:link_to_image}
-#+END_CENTER

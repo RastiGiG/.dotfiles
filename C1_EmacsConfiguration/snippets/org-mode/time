@@ -1,4 +1,0 @@
-# key: <oti
-# name: time
-# --
-#+DATE: ${1: `(format-time-string "[%H:%M:%S]")`}
