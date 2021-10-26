@@ -58,10 +58,10 @@
  (rear-context-string)
  (position . 2))
 ("org-capture-last-stored"
- (filename . "~/Org/acronyms.org")
- (front-context-string . "| GUI     | Grap")
- (rear-context-string . "--------------|\n")
- (position . 16180))
+ (filename . "~/Org/personal-mail.org")
+ (front-context-string . "** TODO Read Ihr")
+ (rear-context-string . "<2021-10-06 Mi>\n")
+ (position . 3745))
 ("K6 Data Science Kompendium"
  (filename . "~/Org/data_science.org")
  (front-context-string . "\n1. [[*General][")

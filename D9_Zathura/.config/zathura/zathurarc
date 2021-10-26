@@ -5,7 +5,7 @@ set selection-clipboard clipboard
 set abort-clear-search true
 
 ### Defines which auto adjustment mode should be used if a document is loaded. Possible options are "best-fit" and "width".
-# adjust-open best-fit
+# adjust-open width
 
 ### Defines if the number of pages per row should be honored when advancing a page.
 # advance-pages-per-row false
@@ -21,6 +21,12 @@ set abort-clear-search true
 
 ### Defines the opacity of a highlighted element
 # highlight-transparency 0.5
+
+### Set Window height
+set window-height 3000
+
+### Set Window width
+set window-width 3000
 
 ### The page padding defines the gap in pixels between each rendered page.
 # page-padding 1

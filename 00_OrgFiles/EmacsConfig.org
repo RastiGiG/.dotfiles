@@ -1113,6 +1113,8 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
             ("llsl" "Languages" checkitem
              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
+            ("llsz" "Psychology" checkitem
+             (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Psychologie ==") "[ ] %^{Author} - %^{Title}")
   
             ("llr" "Novels" checkitem
              (file+olp "~/Org/lists-literature.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
@@ -1196,6 +1198,8 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
   (add-to-list 'org-latex-classes
                '("org-plain-latex"
                  "\\documentclass{article}
+                  \\usepackage{hyperref}
+                  \\usepackage{babel}
              [NO-DEFAULT-PACKAGES]
              [PACKAGES]
              [EXTRA]"
@@ -1694,21 +1698,6 @@ Here we define a function to help out when developing ~lisp~ (or ~elisp~) code.
   
   (define-key org-mode-map (kbd "C-c e e") 'efs/ielm-send-line-or-region)
   (define-key org-mode-map (kbd "C-c e E") 'efs/show-ielm)
-#+end_src
-
-*** Octave/Matlab
-
-Just a short config adjusting the auto-mode alist
-#+begin_src emacs-lisp
-  (setq auto-mode-alist
-        (cons '("\\.m$" . octave-mode) auto-mode-alist))
-
-  (add-hook 'octave-mode-hook
-          (lambda ()
-            (abbrev-mode 1)
-            (auto-fill-mode 1)
-            (if (eq window-system 'x)
-                (font-lock-mode 1))))
 #+end_src
 
 ** Company Mode
