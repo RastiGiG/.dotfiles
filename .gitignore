@@ -95,6 +95,7 @@ flycheck_*.el
 
 # projectiles files
 .projectile
+*/.emacs.d/projectile-bookmarks.eld
 
 # directory configuration
 .dir-locals.el
