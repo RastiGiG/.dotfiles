@@ -1700,6 +1700,21 @@ Here we define a function to help out when developing ~lisp~ (or ~elisp~) code.
   (define-key org-mode-map (kbd "C-c e E") 'efs/show-ielm)
 #+end_src
 
+*** Octave/Matlab
+
+Just a short config adjusting the auto-mode alist
+#+begin_src emacs-lisp
+  (setq auto-mode-alist
+        (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+  (add-hook 'octave-mode-hook
+          (lambda ()
+            (abbrev-mode 1)
+            (auto-fill-mode 1)
+            (if (eq window-system 'x)
+                (font-lock-mode 1))))
+
+
 ** Company Mode
 
 =Company Mode= provides a nicer in-buffer completion interface than completion-at-point which is more reminiscent of what you would expect from an IDE. We add a simple configuration to make the keybindings a little more useful (TAB now completes the selection and initiates completion at the current location if needed).
