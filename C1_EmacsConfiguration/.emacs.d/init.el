@@ -940,137 +940,137 @@ _~_: modified
     (apply #'org-roam-node-insert args)))
 
 ;; Load external file with contact information
-(load "~/.config/emacs-configs/MailAccounts.el")
-
-(use-package mu4e
-  :straight nil
-  :defer 20 ; Wait until 20 seconds after startup
-  :config
-
-  ;; Load org-mode integration
-  (require 'mu4e-org)
-
-  ;; Refresh mail using isync every 10 minutes
-  (setq mu4e-update-interval (* 10 60))
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir "~/Mail")
-
-  ;; Use Ivy for mu4e completions (maildir folders, etc)
-  (setq mu4e-completing-read-function #'ivy-completing-read)
-
-  ;; Make sure that moving a message (like to Trash) causes the
-  ;; message to get a new file name.  This helps to avoid the
-  ;; dreaded "UID is N beyond highest assigned" error.
-  ;; See this link for more info: https://stackoverflow.com/a/43461973
-  (setq mu4e-change-filenames-when-moving t)
-
-  ;; Sets the first context to be loaded by default
-  (setq mu4e-context-policy 'pick-first)
-
-  ;; Sets the standard download directory for attachments (default: ~)
-  (setq mu4e-attachment-dir "~/Downloads")
-
-  ;; Prevent mu4e from permanently deleting trashed items
-  ;; This snippet was taken from the following article:
-  ;; http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/
-  (defun remove-nth-element (nth list)
-    (if (zerop nth) (cdr list)
-      (let ((last (nthcdr (1- nth) list)))
-        (setcdr last (cddr last))
-        list)))
-
-  (setq mu4e-marks (remove-nth-element 5 mu4e-marks))
-  (add-to-list 'mu4e-marks
-               '(trash
-                 :char ("d" . "▼")
-                 :prompt "dtrash"
-                 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
-                 :action (lambda (docid msg target)
-                           (mu4e~proc-move docid
-                                           (mu4e~mark-check-target target) "-N"))))
-
-
-  ;; Display options
-  (setq mu4e-view-show-images nil     ;; set to nil for security
-        ;; This one is normally not required
-        ;; mu4e-view-image-max-width 800
-        )
-  (setq mu4e-view-show-addresses 't)
-
-  ;; Composing mail
-  (setq mu4e-compose-dont-reply-to-self t)
-
-  ;; give me ISO(ish) format date-time stamps in the header list
-  (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
-
-  ;; customize the reply-quote-string
-  ;; M-x find-function RET message-citation-line-format for docs
-  (setq message-citation-line-format "On %Y-%m-%d %H:%M %Z %N wrote:\n")
-  ;; This message makes use of above specified string, replaces 'message-insert-citation-line
-  (setq message-citation-line-function 'message-insert-formatted-citation-line)
-
-  ; ;; Signing messages (use mml-secure-sign-pgpmime)
-  ; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
-
-  ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
-  ;; additional non-Gmail addresses and want assign them different
-  ;; behavior.)
-
-  ;; don't keep message buffers around
-  (setq message-kill-buffer-on-exit t)
-
-  (defun rune/go-to-inbox ()
-    (interactive)
-    (mu4e-headers-search rune/mu4e-inbox-query))
-
-  ;; Function to store header queries to reuse them later
-  (defun efs/store-link-to-mu4e-query()
-    (interactive)
-    (let ((mu4e-org-link-query-in-headers-mode t))
-      (call-interactively 'org-store-link)))
-
-  ;; Functions to automatically call Org Capture Templates on certain actions
-  ;; Follow up messages
-  (defun efs/capture-mail-follow-up (msg)
-    (interactive)
-    (call-interactively 'org-store-link)
-    (org-capture nil "ef"))
-  ;; Read later messages
-  (defun efs/capture-mail-read-later (msg)
-    (interactive)
-    (call-interactively 'org-store-link)
-    (org-capture nil "er"))
-
-  ;; Add custom actions for our capture templates
-  (add-to-list 'mu4e-headers-actions
-               '("follow up" . efs/capture-mail-follow-up) t)
-  (add-to-list 'mu4e-view-actions
-               '("follow up" . efs/capture-mail-follow-up) t)
-  (add-to-list 'mu4e-headers-actions
-               '("read later" . efs/capture-mail-read-later) t)
-  (add-to-list 'mu4e-view-actions
-               '("read later" . efs/capture-mail-read-later) t)
-
-  (rune/leader-keys
-    "m"  '(:ignore t :which-key "mail")
-    "mm" 'mu4e
-    "mc" 'mu4e-compose-new
-    "mi" 'rune/go-to-inbox
-    "ms" 'mu4e-update-mail-and-index)
-
-  ;; Start mu4e in the background so that it syncs mail periodically
-  (mu4e t))
-
-(use-package mu4e-alert
-  :after mu4e
-  :config
-  ;; Show unread emails from all inboxes
-  (setq mu4e-alert-interesting-mail-query rune/mu4e-inbox-query)
-
-  ;; Show notifications for mails already notified
-  (setq mu4e-alert-notify-repeated-mails nil)
-
-  (mu4e-alert-enable-notifications))
+;;(load "~/.config/emacs-configs/MailAccounts.el")
+;;
+;;(use-package mu4e
+;;  :straight nil
+;;  :defer 20 ; Wait until 20 seconds after startup
+;;  :config
+;;
+;;  ;; Load org-mode integration
+;;  (require 'mu4e-org)
+;;
+;;  ;; Refresh mail using isync every 10 minutes
+;;  (setq mu4e-update-interval (* 10 60))
+;;  (setq mu4e-get-mail-command "mbsync -a")
+;;  (setq mu4e-maildir "~/Mail")
+;;
+;;  ;; Use Ivy for mu4e completions (maildir folders, etc)
+;;  (setq mu4e-completing-read-function #'ivy-completing-read)
+;;
+;;  ;; Make sure that moving a message (like to Trash) causes the
+;;  ;; message to get a new file name.  This helps to avoid the
+;;  ;; dreaded "UID is N beyond highest assigned" error.
+;;  ;; See this link for more info: https://stackoverflow.com/a/43461973
+;;  (setq mu4e-change-filenames-when-moving t)
+;;
+;;  ;; Sets the first context to be loaded by default
+;;  (setq mu4e-context-policy 'pick-first)
+;;
+;;  ;; Sets the standard download directory for attachments (default: ~)
+;;  (setq mu4e-attachment-dir "~/Downloads")
+;;
+;;  ;; Prevent mu4e from permanently deleting trashed items
+;;  ;; This snippet was taken from the following article:
+;;  ;; http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/
+;;  (defun remove-nth-element (nth list)
+;;    (if (zerop nth) (cdr list)
+;;      (let ((last (nthcdr (1- nth) list)))
+;;        (setcdr last (cddr last))
+;;        list)))
+;;
+;;  (setq mu4e-marks (remove-nth-element 5 mu4e-marks))
+;;  (add-to-list 'mu4e-marks
+;;               '(trash
+;;                 :char ("d" . "▼")
+;;                 :prompt "dtrash"
+;;                 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
+;;                 :action (lambda (docid msg target)
+;;                           (mu4e~proc-move docid
+;;                                           (mu4e~mark-check-target target) "-N"))))
+;;
+;;
+;;  ;; Display options
+;;  (setq mu4e-view-show-images nil     ;; set to nil for security
+;;        ;; This one is normally not required
+;;        ;; mu4e-view-image-max-width 800
+;;        )
+;;  (setq mu4e-view-show-addresses 't)
+;;
+;;  ;; Composing mail
+;;  (setq mu4e-compose-dont-reply-to-self t)
+;;
+;;  ;; give me ISO(ish) format date-time stamps in the header list
+;;  (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
+;;
+;;  ;; customize the reply-quote-string
+;;  ;; M-x find-function RET message-citation-line-format for docs
+;;  (setq message-citation-line-format "On %Y-%m-%d %H:%M %Z %N wrote:\n")
+;;  ;; This message makes use of above specified string, replaces 'message-insert-citation-line
+;;  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+;;
+;;  ; ;; Signing messages (use mml-secure-sign-pgpmime)
+;;  ; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
+;;
+;;  ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
+;;  ;; additional non-Gmail addresses and want assign them different
+;;  ;; behavior.)
+;;
+;;  ;; don't keep message buffers around
+;;  (setq message-kill-buffer-on-exit t)
+;;
+;;  (defun rune/go-to-inbox ()
+;;    (interactive)
+;;    (mu4e-headers-search rune/mu4e-inbox-query))
+;;
+;;  ;; Function to store header queries to reuse them later
+;;  (defun efs/store-link-to-mu4e-query()
+;;    (interactive)
+;;    (let ((mu4e-org-link-query-in-headers-mode t))
+;;      (call-interactively 'org-store-link)))
+;;
+;;  ;; Functions to automatically call Org Capture Templates on certain actions
+;;  ;; Follow up messages
+;;  (defun efs/capture-mail-follow-up (msg)
+;;    (interactive)
+;;    (call-interactively 'org-store-link)
+;;    (org-capture nil "ef"))
+;;  ;; Read later messages
+;;  (defun efs/capture-mail-read-later (msg)
+;;    (interactive)
+;;    (call-interactively 'org-store-link)
+;;    (org-capture nil "er"))
+;;
+;;  ;; Add custom actions for our capture templates
+;;  (add-to-list 'mu4e-headers-actions
+;;               '("follow up" . efs/capture-mail-follow-up) t)
+;;  (add-to-list 'mu4e-view-actions
+;;               '("follow up" . efs/capture-mail-follow-up) t)
+;;  (add-to-list 'mu4e-headers-actions
+;;               '("read later" . efs/capture-mail-read-later) t)
+;;  (add-to-list 'mu4e-view-actions
+;;               '("read later" . efs/capture-mail-read-later) t)
+;;
+;;  (rune/leader-keys
+;;    "m"  '(:ignore t :which-key "mail")
+;;    "mm" 'mu4e
+;;    "mc" 'mu4e-compose-new
+;;    "mi" 'rune/go-to-inbox
+;;    "ms" 'mu4e-update-mail-and-index)
+;;
+;;  ;; Start mu4e in the background so that it syncs mail periodically
+;;  (mu4e t))
+;;
+;;(use-package mu4e-alert
+;;  :after mu4e
+;;  :config
+;;  ;; Show unread emails from all inboxes
+;;  (setq mu4e-alert-interesting-mail-query rune/mu4e-inbox-query)
+;;
+;;  ;; Show notifications for mails already notified
+;;  (setq mu4e-alert-notify-repeated-mails nil)
+;;
+;;  (mu4e-alert-enable-notifications))
 
 (use-package org-mime
   :config
@@ -1186,6 +1186,16 @@ _~_: modified
 
 (define-key org-mode-map (kbd "C-c e e") 'efs/ielm-send-line-or-region)
 (define-key org-mode-map (kbd "C-c e E") 'efs/show-ielm)
+
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(add-hook 'octave-mode-hook
+        (lambda ()
+          (abbrev-mode 1)
+          (auto-fill-mode 1)
+          (if (eq window-system 'x)
+              (font-lock-mode 1))))
 
 (use-package company
   :after lsp-mode
