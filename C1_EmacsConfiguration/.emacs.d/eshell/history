@@ -25,3 +25,14 @@ cd Programming/P1-AlgoKS/Blatt07
 cd Programming/P1-AlgoKS/Blatt_07
 cd 
 cd .dotfiles
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave Maschinengenauigkeit.sci 
+octave exp_series.sci 
+octave exp-series.sci 
+octave exp-series.sci 
