@@ -36,3 +36,9 @@ octave Maschinengenauigkeit.sci
 octave exp_series.sci 
 octave exp-series.sci 
 octave exp-series.sci 
+cd /media/rastibasti/HeronsVault/Documents/04_Finanzen/00_Jahresfinanzberichte/
+rsync -avtu --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
+rsync -avtu --exclude 'lib' --exlude 'bin' --exclude 'share' --exclude 'include' --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
+rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
+rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
+exit
