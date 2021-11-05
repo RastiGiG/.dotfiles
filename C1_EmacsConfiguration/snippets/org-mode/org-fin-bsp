@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Org-Fin-BSp
+# key: <ofibsp
+# --
+| ${1:0} | ${2:0} | ${3:Bsp}   | 24 |  -5000 | 9 | 1 |
+| ${1:$(+ 1 (string-to-number (or (yas-field-value 1) "0")))} | `(yas-field-value 2)` | $3 | 24 |   5000 | 3 | 1 |
+$0

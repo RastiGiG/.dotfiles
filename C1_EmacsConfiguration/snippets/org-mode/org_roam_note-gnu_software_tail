@@ -1,0 +1,19 @@
+# key: <orngnuswt
+# name: Org_Roam_Note-GNU_Software_Tail
+# --
+* Read On
+
+[[id:9e4f766d-37a6-4901-b5a4-d6041335ec67][GNU Software]]
+1. [[id:5dc04892-9105-45aa-845a-01b89448d753][GnuPG - GNU Privacy Guard]]
+2. [[id:42a721a2-1e18-4345-9a65-23b942a457fe][GNU Mailutils]]
+[[id:397d76b6-ef1f-4232-8af1-3006e61f05c3][Linux]]
+
+* References
+
+[[id:5bd550e3-ab35-4ffc-ac23-8742a0c85a62][References]]
+1. [[https://www.fsf.org/][FSF.org: The Free Software Foundation]]
+2. [[http://www.gnu.org/][GNU.org: The GNU Project]]
+3. [[https://gnupg.org/][GnuPG.org]]
+   1) [[https://gnupg.org/documentation/manuals/gnupg/index.html#SEC_Contents][GnuPG.org: Documentation]]
+4. [[https://mailutils.org][Mailutils.org]]
+   1) [[https://mailutils.org/manual/mailutils.html][Mailutils.org: Manual]]

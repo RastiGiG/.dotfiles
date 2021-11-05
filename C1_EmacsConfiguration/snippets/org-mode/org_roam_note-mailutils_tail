@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Mailutils_Tail
+# key: <ornmailt
+# --
+* Read On
+
+[[id:9e4f766d-37a6-4901-b5a4-d6041335ec67][GNU Software]]
+1. [[id:1585e6e7-3f1f-41ca-a266-1297a6c6a590][GNU Coreutils]]
+2. [[id:5dc04892-9105-45aa-845a-01b89448d753][GnuPG - GNU Privacy Guard]]
+
+* References
+
+[[id:0c81782d-7b55-4902-b9de-5a7500674784][References]]
+1. [[https://www.fsf.org/][FSF.org: The Free Software Foundation]]
+2. [[http://www.gnu.org/][GNU.org: The GNU Project]]
+3. [[https://mailutils.org][Mailutils.org]]
+   1) [[https://mailutils.org/manual/mailutils.html][Mailutils.org: Manual]]

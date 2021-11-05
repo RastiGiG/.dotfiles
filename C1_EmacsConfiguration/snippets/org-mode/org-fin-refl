@@ -1,0 +1,5 @@
+# key: <ofimi
+# name: Org-Fin-RenFl
+# --
+| ${1:0} | ${2:0} | Miete                                          |         115 |  -27400 |         9 |          14 |
+$0

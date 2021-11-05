@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-LaTeX_Tail
+# key: <ornltxt
+# --
+* Read On
+
+
+* References
+
+1. [[https://tug.org/][TUG.org: The TeX User Group]]
+   1) [[https://tug.org/texlive/][TUG.org: TeXLive]]
+      - [[https://tug.org/texlive/quickinstall.html][TUG.org: TeXLive - Quickinstall]]
+      - [[https://tug.org/texlive/doc/texlive-en/texlive-en.html][TUG.org: TeXLive - Documentation]]
+        + [[https://tug.org/texlive/doc/texlive-en/texlive-en.html#installation][TUG.org: TeXLive - Documentation - Installation]]
