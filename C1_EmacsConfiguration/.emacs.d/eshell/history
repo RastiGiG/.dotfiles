@@ -42,3 +42,32 @@ rsync -avtu --exclude 'lib' --exlude 'bin' --exclude 'share' --exclude 'include'
 rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
 rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
 exit
+git remote add origin git@gitlab.cs.fau.de:ak42ulol/introml.git
+exit
+cd ..
+git branch -m master main
+git status
+exit
+git status
+git reset --hard
+git status
+exit
+git status
+git checkout origin/main
+git status
+git checkout main
+git status
+exit
+rsyn -avtu --dry-run . /media/rastibasti/HeronsVault/Documents/04_Finanzen/00_Jahresfinanzberichte/
+rsync -avtu --dry-run . /media/rastibasti/HeronsVault/Documents/04_Finanzen/00_Jahresfinanzberichte/
+rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' --dry-run . /media/rastibasti/HeronsVault/Documents/04_Finanzen/00_Jahresfinanzberichte/
+rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' . /media/rastibasti/HeronsVault/Documents/04_Finanzen/00_Jahresfinanzberichte/
+exit
+rsync -avtu --dry-run . /media/rastibasti/HeronsVault/Org/
+rsync -avtu --delete --dry-run . /media/rastibasti/HeronsVault/Org/
+rsync -avtu --delete . /media/rastibasti/HeronsVault/Org/
+.git/refs/heads/
+exit
+rsync -avtu --delete --dry-run . /media/rastibasti/HeronsVault/Org/
+rsync -avtu --delete . /media/rastibasti/HeronsVault/Org/
+exit
