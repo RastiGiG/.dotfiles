@@ -71,3 +71,17 @@ exit
 rsync -avtu --delete --dry-run . /media/rastibasti/HeronsVault/Org/
 rsync -avtu --delete . /media/rastibasti/HeronsVault/Org/
 exit
+rsync -avtun ~/Projects/Programming/OCT-01-NumerikI/ /media/rastibasti/HeronsVault/Projects/Programming/OCT-01-NumerikI/
+rsync -avtu ~/Projects/Programming/OCT-01-NumerikI/ /media/rastibasti/HeronsVault/Projects/Programming/OCT-01-NumerikI/
+rsync -avtun /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/ ~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+rsync -avtu /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/ ~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+exit
+la
+exit
+ls -a
+cd Projects
+la
+ls -a
+exit
+jupyter notebook
+exit

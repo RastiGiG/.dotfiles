@@ -761,7 +761,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (setq org-latex-create-formula-image-program 'imagemagick)
   
     (setq org-agenda-files
-          '("~/Org/personal"
+          '("~/Org/personal-tasks.org"
             "~/Org/journal"
             "~/Org/personal-mail.org"))
   
