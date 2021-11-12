@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Org-List-Literature
+# key: <olili
+# --
+- [ ] ${1:Author} - ${2:Series} - ${3:Title}
+$0

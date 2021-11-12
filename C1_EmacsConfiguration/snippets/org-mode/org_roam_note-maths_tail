@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Maths_Tail
+# key: <ornmat
+# --
+* Read On
+
+[[id:8cf54725-a619-43b8-ad9b-0956ecf1a1f1][Maths]]
+1. [[id:b0039a5f-1eb2-456e-8a6b-9df59010c1fe][Algebra]]
+
+* References
+
+[[id:3d29588b-3e7c-4e1c-b5ec-8613f0bab30b][References]]
+1. [[https://www.wikipedia.org/][WikiPedia.org]]
+   1) [[https://de.wikipedia.org/wiki/Lie-Gruppe][De.WikiPedia.org: Lie-Gruppe]]

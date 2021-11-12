@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-people_standard
+# key: <ornpps
+# --
+* ${1:Name}
+
+1) GEBOREN: [${2:Date of Birth}]
+2) GEBURTSORT: ~${3:Place of Birth}~
+3) GESTORBEN: [${4:Date of Death}]
+4) STERBEORT: ~${5:Place of Death}~
+5) BERUFE:
+   1. ~${7:Job}~
+6) ${8:Place of Work}: ~${9:Name}~
+7) STILRICHTUNG: ~${10:Name}~
+
+* Leben
+
+$0
+
+* Werke
+
+* References

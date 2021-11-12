@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-People_with_Pseudonyms
+# key: <ornpwp
+# --
+* ${1:Name} aka. ${2:Pseudonym}
+
+1) GEBOREN: [${3:Date of Birth}]
+2) GEBURTSORT: ~${4:Place of Birth}~
+3) GESTORBEN: [${5:Date of Death}]
+4) STERBEORT: ~${6:Place of Death}~
+5) PSEUDONYME: ~${7:Place of Death}~
+6) BERUFE:
+   1. ~${8:Job}~
+7) ${9:Place of Work}: ~${10:Name}~
+8) STILRICHTUNG: ~${11:Name}~
+
+* Leben
+
+$0
+
+* Werke
+
+* References
