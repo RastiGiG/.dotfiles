@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-GNU_Project
+# key: <olgnu
+# --
+[[http://www.gnu.org/][GNU.org: The GNU Project]]

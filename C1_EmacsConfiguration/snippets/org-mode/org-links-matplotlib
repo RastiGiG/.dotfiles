@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-Matplotlib
+# key: <olmpl
+# --
+[[https://matplotlib.org/][Matplotlib.org]]

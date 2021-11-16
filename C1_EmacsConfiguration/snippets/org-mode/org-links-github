@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-Github
+# key: <olg
+# --
+[[https://www.github.com/][GitHub.com - Software Developement Platform]]

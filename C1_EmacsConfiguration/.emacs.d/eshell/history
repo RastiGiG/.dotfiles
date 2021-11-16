@@ -85,3 +85,19 @@ ls -a
 exit
 jupyter notebook
 exit
+jupyter notebook
+exit
+pip3 install python-lsp-server
+exti
+exit
+python main.py 
+python3 main.py 
+python3 main.py 
+python3 main.py 
+python3 main.py 
+la
+cd ..
+ls
+source bin/activate
+cd ..
+source bin/activate

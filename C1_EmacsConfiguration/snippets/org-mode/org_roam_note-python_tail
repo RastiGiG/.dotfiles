@@ -6,6 +6,11 @@
 
 [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]]
 1. [[id:61cfbdfe-a162-4749-9ec9-1f5eb9d95fbe][Packages]]
+   1) [[id:ec3b27a2-8fba-4282-9579-c8efabd338ea][Matplotlib]]
+   2) [[id:1f70bfc8-224f-469e-833b-4943dce92ca5][Numpy]]
+   3) [[id:4da18e7a-5bb5-41e1-81fd-6a40d577a8f3][Scipy]]
+   4) [[id:df3ce71a-5242-4ee3-a8db-18d703825ef7][Pandas]]
+   5) [[id:cbcb33f5-9562-426d-8846-00f88a3369c3][Tkinter]]
 2. [[id:baa87bc9-4ec9-4126-9308-17ac7b05d201][Package Overview]]
 
 * References

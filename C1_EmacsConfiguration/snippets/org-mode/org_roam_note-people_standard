@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: org_roam_note-people_standard
+# name: Org_Roam_Note-People_Standard
 # key: <ornpps
 # --
 * ${1:Name}

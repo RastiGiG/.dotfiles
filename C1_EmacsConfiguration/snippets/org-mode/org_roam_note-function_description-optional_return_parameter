@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Function_Description-Optional_Return_Parameter
+# key: <ornfdorp
+# --
+- =${1:Return Parameter}=:
+  ${2:Return Parameter Type} ~optional~ (${3:Return Condition})
+  ${4:Return Parameter Description}
+$0

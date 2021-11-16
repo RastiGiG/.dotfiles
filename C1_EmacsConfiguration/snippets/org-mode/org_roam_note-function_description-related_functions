@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Function_Description-Related_Functions
+# key: <ornfdrf
+# --
++ =${1:Function Name}=
+  ${2:Short Description}
+$0

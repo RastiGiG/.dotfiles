@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-Wikipedia
+# key: <olwp
+# --
+[[https://en.wikipedia.org][Wikipedia.org - The Free Encyclopedia]]

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-Python
+# key: <olpy
+# --
+[[https://www.python.org/][Python.org]]

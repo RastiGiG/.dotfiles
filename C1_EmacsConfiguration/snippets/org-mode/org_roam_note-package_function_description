@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Package_Function_Description
+# key: <ornpfd
+# --
+* ${1:Package Name} - Function: ${2:Function Name}
+
+** Overview
+
+- ~Name~: =${3:Function Name}=
+
+- ~Functionality~: ${4: Description}
+
+** Call Signature
+
+  #+begin_src python
+    ${5:Call Signature}
+  #+end_src
+
+** Parameters
+
+- =${6:Parameter 1}=:
+  ${7:Parameter Type}
+  ${8:Parameter Description}
+
+** Returns
+
+- =${9:Return Parameter 1}=:
+  ${10:Return Parameter Type}
+  ${11:Return Parameter Description}
+
+** Examples
+
+*** Basic Example
+
+#+begin_src python
+${12:Example 1}
+#+end_src
+
+** Related/Recommended Functions
+
++ =${13:Function Name}=
+  ${14:Short Description}

@@ -739,47 +739,48 @@ The =efs/org-font-setup= function configures various text faces to tweak the siz
 This section contains the basic configuration for =org-mode= plus the configuration for Org agendas and capture templates.  There's a lot to unpack in here so I'd recommend watching the videos for [[https://youtu.be/VcgjTEa0kU4][Part 5]] and [[https://youtu.be/PNE-mgkZ6HM][Part 6]] for a full explanation.
 
 #+begin_src emacs-lisp
-  
+
   (defun efs/org-mode-setup ()
     (org-indent-mode)
     (variable-pitch-mode 1)
     (visual-line-mode 1)
     (turn-on-org-cdlatex))
-  
+
   (use-package org
     :hook (org-mode . efs/org-mode-setup)
     :bind (("C-c l" . org-store-link))
     :config
     (setq org-ellipsis " ▾")
-  
+
     (setq org-directory (convert-standard-filename "~/Org"))
     (setq org-agenda-start-with-log-mode t)
     (setq org-log-done 'time)
     (setq org-log-into-drawer t)
-  
+
     ;; setup inline previewing of latex fragments
     (setq org-latex-create-formula-image-program 'imagemagick)
-  
+
     (setq org-agenda-files
-          '("~/Org/personal-tasks.org"
-            "~/Org/journal"
-            "~/Org/personal-mail.org"))
-  
+          '("~/Org/journal"
+            "~/Org/personal-tasks.org"
+            "~/Org/personal-mail.org"
+            "~/Org/personal-chores.org"))
+
     (require 'org-habit)
     (add-to-list 'org-modules 'org-habit)
     (setq org-habit-graph-column 60)
-  
+
     (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
         (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
-  
+
     (setq org-refile-targets
       '(("personal-archive.org" :maxlevel . 1)
         ("personal-tasks.org" :maxlevel . 1)))
-  
+
     ;; Save Org buffers after refiling!
     (advice-add 'org-refile :after 'org-save-all-org-buffers)
-  
+
     (setq org-tag-alist
       '((:startgroup)
          ; Put mutually exclusive tags here
@@ -794,7 +795,7 @@ This section contains the basic configuration for =org-mode= plus the configurat
          ("batch" . ?b)
          ("note" . ?n)
          ("idea" . ?i)))
-  
+
     ;; Configure custom agenda views
     (setq org-agenda-custom-commands
      '(("d" "Dashboard"
@@ -802,19 +803,19 @@ This section contains the basic configuration for =org-mode= plus the configurat
         (todo "NEXT"
           ((org-agenda-overriding-header "Next Tasks")))
         (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-  
+
       ("n" "Next Tasks"
        ((todo "NEXT"
           ((org-agenda-overriding-header "Next Tasks")))))
-  
+
       ("W" "Work Tasks" tags-todo "+work-email")
-  
+
       ;; Low-effort next actions
       ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
        ((org-agenda-overriding-header "Low Effort Tasks")
         (org-agenda-max-todos 20)
         (org-agenda-files org-agenda-files)))
-  
+
       ("w" "Workflow Status"
        ((todo "WAIT"
               ((org-agenda-overriding-header "Waiting on External")
@@ -842,9 +843,9 @@ This section contains the basic configuration for =org-mode= plus the configurat
         (todo "CANC"
               ((org-agenda-overriding-header "Cancelled Projects")
                (org-agenda-files org-agenda-files)))))))
-  
+
     (efs/org-font-setup)
-  
+
     (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav"))
 #+end_src
 
@@ -1300,7 +1301,7 @@ For installation, first make sure to have ~SQLite~ and a C++ compiler like ~gcc~
     ;; dailies capture template
     (setq org-roam-dailies-capture-templates
           `(("d" "default" entry "* %<%I:%M %p>: %?"
-             :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+             :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
     
     (org-roam-setup)
     (require 'org-roam-dailies) ;; Ensure the keymap is available

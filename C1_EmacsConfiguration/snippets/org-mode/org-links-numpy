@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-Numpy
+# key: <olnp
+# --
+[[https://www.numpy.org/][NumPy.org]]

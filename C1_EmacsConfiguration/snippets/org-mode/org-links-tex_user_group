@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-TeX_User_Group
+# key: <oltug
+# --
+[[https://tug.org/][TUG.org: The TeX User Group]]
