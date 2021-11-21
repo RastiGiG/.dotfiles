@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Org-Fin-TiDB
+# key: <ofitidb
+# --
+| ${1:0} | ${2:0} | Ticket ${3:Origin}-${4:Dest}    |      53 |  ${5:0}  |         2 |           5 |
+$0

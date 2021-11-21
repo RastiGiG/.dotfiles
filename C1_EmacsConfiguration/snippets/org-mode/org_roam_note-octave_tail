@@ -4,7 +4,18 @@
 # --
 * Read On
 
-[[id:f57117c3-dda3-4c8d-96f8-f6942eb0f5d4][Octave]]
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:f57117c3-dda3-4c8d-96f8-f6942eb0f5d4][Octave]]
+1. Basics
+   1) [[id:bb4f206c-0d8e-4f88-8eb0-436c097cb58a][Getting Help]]
+   2) [[id:df907773-c9f2-4b9c-81f9-73b34a852bfe][Basic Input Conventions]]
+   3) [[id:38a08aed-6c8c-471c-a028-ed134171d543][Elementary Math Functions]]
+   4) [[id:d3fff5b8-8963-430c-9335-fc881f9506b9][Elementary Logic Operators]]
+2. [[id:bb27fe17-7046-4479-b90e-bfd2d85d9d06][Functions]]
+   1) [[id:a2a649a9-ea69-4354-b205-8066fee18926][Common Functions]]
+2. Linear Algebra
+   1. [[id:07489e6a-d5be-488b-a2ef-fdc3e6878229][Vectors]]
+   2. [[id:d2b05d06-2090-4cdb-affd-09aa9db605b3][Matrices]]
 
 * References 
 

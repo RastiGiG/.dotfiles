@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org-Links-Scipy
+# key: <olscipy
+# --
+[[https://www.scipy.org/][SciPy.org - Scientific Python]]

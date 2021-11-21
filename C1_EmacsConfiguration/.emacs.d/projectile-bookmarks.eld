@@ -1,1 +1,1 @@
-("~/.dotfiles/" "~/Projects/Programming/PY-07-IntroML/" "~/Projects/Programming/OCT-01-NumerikI/" "~/Templates/" "~/.dotfiles/C1_EmacsConfiguration/.emacs.d/straight/repos/auctex/" "~/.emacs.d/")
+("~/.dotfiles/" "~/Documents/04_Finanzen/00_Jahresfinanzberichte/" "~/Org/" "~/Projects/Programming/OCT-01-NumerikI/" "~/Projects/Writing/Documents/" "~/Projects/Writing/Letters/" "~/Projects/Programming/PY-07-IntroML/" "~/Templates/" "~/.dotfiles/C1_EmacsConfiguration/.emacs.d/straight/repos/auctex/" "~/.emacs.d/")

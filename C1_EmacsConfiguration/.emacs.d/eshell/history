@@ -101,3 +101,5 @@ ls
 source bin/activate
 cd ..
 source bin/activate
+jupyter notebook
+exit
