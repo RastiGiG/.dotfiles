@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Org_Roam_Note-Package_Method_Description
+# key: <ornpmd
+# --
+* ${1:Package Name} - Class: ${2:Class Name} - Function: ${3:Method Name}
+
+** Overview
+
+- ~Name~: =${4:Full Method Name}=
+
+- ~Functionality~: ${5: Description}
+
+** Call Signature
+
+  #+begin_src python
+    ${6:Call Signature}
+  #+end_src
+
+** Parameters
+
+- =${7:Parameter 1}=:
+  ${8:Parameter Type}
+  ${9:Parameter Description}
+
+** Returns
+
+- =${10:Return Parameter 1}=:
+  ${11:Return Parameter Type}
+  ${12:Return Parameter Description}
+
+** Examples
+
+*** Basic Example
+
+#+begin_src python
+${3:Example 1}
+#+end_src
+
+** Related/Recommended Functions, Methods and Classes
+
++ =${14:Name}=
+  ${15:Short Description}

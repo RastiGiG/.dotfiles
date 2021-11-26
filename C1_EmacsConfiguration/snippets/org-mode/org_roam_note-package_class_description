@@ -1,14 +1,14 @@
 # -*- mode: snippet -*-
-# name: Org_Roam_Note-Package_Function_Description
-# key: <ornpfd
+# name: Org_Roam_Note-Package_Class_Description
+# key: <ornpcd
 # --
-* ${1:Package Name} - Function: ${2:Function Name}
+* ${1:Package Name} - Class: ${2:Class Name}
 
 ** Overview
 
-- ~Name~: =${3:Full Function Name}=
+- ~Name~: =${3:Full Class Name}=
 
-- ~Functionality~: ${4: Description}
+- ~Purpose~: ${4: Description}
 
 ** Call Signature
 
@@ -36,7 +36,7 @@
 ${12:Example 1}
 #+end_src
 
-** Related/Recommended Functions
+** Related/Recommended Functions, Methods and Classes
 
-+ =${13:Function Name}=
++ =${13:Name}=
   ${14:Short Description}
