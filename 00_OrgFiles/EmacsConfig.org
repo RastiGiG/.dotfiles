@@ -243,6 +243,18 @@ Documentation can be found here: [[https://github.com/joaotavora/yasnippet]]
   
 #+end_src
 
+** Multiline Cursors
+
+#+begin_src emacs-lisp
+  ;; Multiple cusors are a must. Make <return> insert a newline; multiple-cursors-mode can still be disabled with C-g.
+  (use-package multiple-cursors
+    :config
+    (setq mc/always-run-for-all 1)
+    (global-set-key (kbd "s-d") 'mc/mark-next-like-this)
+    (global-set-key (kbd "s-D") 'mc/mark-all-dwim)
+    (define-key mc/keymap (kbd "<return>") nil))
+#+end_src
+
 * Keybinding Configuration
 
 This configuration uses [[https://evil.readthedocs.io/en/latest/index.html][evil-mode]] for a Vi-like modal editing experience.  [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with which-key.  [[https://github.com/emacs-evil/evil-collection][evil-collection]] is used to automatically configure various Emacs modes with Vi-like keybindings for evil-mode.
@@ -1705,19 +1717,24 @@ Here we define a function to help out when developing ~lisp~ (or ~elisp~) code.
 
 Just a short config adjusting the auto-mode alist
 #+begin_src emacs-lisp
-  (setq auto-mode-alist
-        (cons '("\\.m$" . octave-mode) auto-mode-alist))
-  (setq auto-mode-alist
-        (cons '("\\.sci$" . octave-mode) auto-mode-alist))
-  
+    (setq auto-mode-alist
+          (cons '("\\.m$" . octave-mode) auto-mode-alist))
+    (setq auto-mode-alist
+          (cons '("\\.sci$" . octave-mode) auto-mode-alist))
 
-  (add-hook 'octave-mode-hook
-          (lambda ()
-            (abbrev-mode 1)
-            (auto-fill-mode 1)
-            (if (eq window-system 'x)
-                (font-lock-mode 1))))
 
+    (add-hook 'octave-mode-hook
+            (lambda ()
+              (abbrev-mode 1)
+              (auto-fill-mode 1)
+              (if (eq window-system 'x)
+                  (font-lock-mode 1))))
+
+  ;; Use Infodocs within Emacs
+  (autoload 'octave-help "octave-hlp" nil t)
+  (require 'gnuserv)
+  (gnuserv-start)
+#+end_src
 
 ** Company Mode
 
@@ -1726,7 +1743,6 @@ Just a short config adjusting the auto-mode alist
 We also use =company-box= to further enhance the look of the completions with icons and better overall presentation.
 
 #+begin_src emacs-lisp
-
   (use-package company
     :after lsp-mode
     :hook (lsp-mode . company-mode)
