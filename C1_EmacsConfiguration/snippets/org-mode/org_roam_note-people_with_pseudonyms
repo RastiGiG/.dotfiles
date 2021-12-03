@@ -4,6 +4,10 @@
 # --
 * ${1:Name} aka. ${2:Pseudonym}
 
+#+BEGIN_CENTER #+ATTR_LATEX: :width \textwidth
+
+#+END_CENTER
+
 1) GEBOREN: [${3:Date of Birth}]
 2) GEBURTSORT: ~${4:Place of Birth}~
 3) GESTORBEN: [${5:Date of Death}]
@@ -23,5 +27,9 @@ $0
 * Read On
 
 [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:04430200-1ad1-4c5c-a6a3-3ace40bf3e29][People]]
+** [[id:28152212-95f6-4f26-b059-57f64d39830d][Quotes]]
+*** [[id:aa3c4206-b101-498c-9ea7-10945d74c007][Famous People]]
+** [[id:05e48f5c-03e1-49f1-a6a4-f44af83ef5fd][Literaturliste]]
 
 * References

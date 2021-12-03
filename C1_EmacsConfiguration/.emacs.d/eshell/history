@@ -1,56 +1,3 @@
-ipython
-python
-la
-ls -a
-cd Projects
-ls
-cd Programming/
-ls
-cd T1_CodingTest/
-ls
-cd Python/
-ls
-cd ..
-virtualenv Python
-ls
-cd Python
-ls
-activat bin/source
-activate bin/source
-source bin/activate
-source bin/activate
-switch-theme
-cd Projects/
-cd Programming/P1-AlgoKS/Blatt07
-cd Programming/P1-AlgoKS/Blatt_07
-cd 
-cd .dotfiles
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave Maschinengenauigkeit.sci 
-octave exp_series.sci 
-octave exp-series.sci 
-octave exp-series.sci 
-cd /media/rastibasti/HeronsVault/Documents/04_Finanzen/00_Jahresfinanzberichte/
-rsync -avtu --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
-rsync -avtu --exclude 'lib' --exlude 'bin' --exclude 'share' --exclude 'include' --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
-rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' --dry-run ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
-rsync -avtu --exclude 'lib' --exclude 'bin' --exclude 'share' --exclude 'include' ~/Documents/04_Finanzen/00_Jahresfinanzberichte/ .
-exit
-git remote add origin git@gitlab.cs.fau.de:ak42ulol/introml.git
-exit
-cd ..
-git branch -m master main
-git status
-exit
-git status
-git reset --hard
-git status
 exit
 git status
 git checkout origin/main
@@ -101,5 +48,81 @@ ls
 source bin/activate
 cd ..
 source bin/activate
+jupyter notebook
+exit
+jupyter notebook
+exit
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/
+cd ..
+cd ..
+cd ..
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/
+cd ..
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/08_Ehrenamt_und_Hobbys/
+rsync -avt . /media/rastibasti/HeronsVault/Documents/08_Ehrenamt_und_Hobbys/
+cd ..
+cd 06_Studium/
+cd 01_FAU_Erlangen_Nuernberg/
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+rsync -avtn . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+rsync -avtn --delete . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+rsync -avt --delete . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
+cd ..
+cd ..
+cd 04_Finanzen/
+rsync -avtn --delete . /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+rsync -avtn --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+rsync -avtn --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+cd ..
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+cd 04_Finanzen/
+rsync -vtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
+cd /media/rastibasti/HeronsVault/
+cd Projects/
+cd Progr
+cd Programming/
+la
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./SQL-01-Book-Codes/ /home/rastibasti/Projects/Programming/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./SQL-01-Book-Codes/ /home/rastibasti/Projects/Programming/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-01-Tutorials/ /home/rastibasti/Projects/Programming/PY-01-Tutorials/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-01-Tutorials/ /home/rastibasti/Projects/Programming/PY-01-Tutorials/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-02-PythonPractice/ /home/rastibasti/Projects/Programming/PY-02-PythonPractice/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-02-PythonPractice/ /home/rastibasti/Projects/Programming/PY-02-PythonPractice/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-03-PythonDataScience/ /home/rastibasti/Projects/Programming/PY-03-PythonDataScience/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-03-PythonDataScience/ /home/rastibasti/Projects/Programming/PY-03-PythonDataScience/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-05-BookCodes/ /home/rastibasti/Projects/Programming/PY-05-BookCodes/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-05-BookCodes/ /home/rastibasti/Projects/Programming/PY-05-BookCodes/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-06-UsefulPrograms/ /home/rastibasti/Projects/Programming/PY-06-UsefulPrograms/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./PY-06-UsefulPrograms/ /home/rastibasti/Projects/Programming/PY-06-UsefulPrograms/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./JUP-01-JupyterExamples/ /home/rastibasti/Projects/Programming/JUP-01-JupyterExamples/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./JUP-01-JupyterExamples/ /home/rastibasti/Projects/Programming/JUP-01-JupyterExamples/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./T1-CodingTest/ /home/rastibasti/Projects/Programming/T1-CodingTest/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./T1-CodingTest/ /home/rastibasti/Projects/Programming/T1-CodingTest/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./T2-JuypterTest/ /home/rastibasti/Projects/Programming/T2-JupyterTest/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./T2-JuypterTest/ /home/rastibasti/Projects/Programming/T2-JupyterTest/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./TV-TestingVarious/ /home/rastibasti/Projects/Programming/TV-TestingVarious/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./TV-TestingVarious/ /home/rastibasti/Projects/Programming/TV-TestingVarious/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' /home/rastibasti/Projects/Programming/OCT-01-NumerikI/ ./OCT-01-NumerikI/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete /home/rastibasti/Projects/Programming/OCT-01-NumerikI/ ./OCT-01-NumerikI/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete /home/rastibasti/Projects/Programming/OCT-01-NumerikI/ ./OCT-01-NumerikI/
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete /home/rastibasti/Projects/Programming/PY-07-IntroML/ ./PY-07-IntroML/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete /home/rastibasti/Projects/Programming/PY-07-IntroML/ ./PY-07-IntroML/
+exit
+rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ~/Org/ /media/rastibasti/HeronsVault/Org/
+rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ~/Org/ /media/rastibasti/HeronsVault/Org/
+exit
+cd ..
+la
+ls
+source bin/activate
+python3
+exit
+python3
+exit
 jupyter notebook
 exit
