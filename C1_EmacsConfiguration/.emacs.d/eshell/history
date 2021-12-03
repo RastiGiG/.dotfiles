@@ -1,7 +1,3 @@
-exit
-git status
-git checkout origin/main
-git status
 git checkout main
 git status
 exit
@@ -125,4 +121,8 @@ exit
 python3
 exit
 jupyter notebook
+exit
+virtualenv Webscrape
+la
+ls -a
 exit

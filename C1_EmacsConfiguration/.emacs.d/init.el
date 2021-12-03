@@ -953,7 +953,7 @@ _~_: modified
     (apply #'org-roam-node-insert args)))
 
 ;; Load external file with contact information
-(load "~/.config/emacs-configs/MailAccounts.el")
+;; (load "~/.config/emacs-configs/MailAccounts.el")
 
 (use-package mu4e
   :straight nil
@@ -1116,6 +1116,12 @@ _~_: modified
   :config
   (lsp-enable-which-key-integration t))
 
+;; Increase amount of data read from process for lsp
+(setq read-process-output-max (* 1024 1024))
+
+;; Increase threshold for Garbage Collection to speed up lsp
+(setq gc-cons-threshold (* 2 800000))
+
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
@@ -1215,8 +1221,8 @@ _~_: modified
 
 ;; Use Infodocs within Emacs
 (autoload 'octave-help "octave-hlp" nil t)
-(require 'gnuserv)
-(gnuserv-start)
+;; (require 'gnuserv)
+;; (gnuserv-start)
 
 (use-package company
   :after lsp-mode
