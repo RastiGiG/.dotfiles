@@ -6,6 +6,27 @@
 
 ** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
 ** [[id:397d76b6-ef1f-4232-8af1-3006e61f05c3][Linux]]
+*** [[id:57ed0999-b115-4d3e-ac56-80c5c4e0a19c][Setup]]
+*** [[id:7b97cf7b-a024-4119-a128-f59016c74fb4][Security]]
+*** [[id:e2c58814-2eff-4366-864c-924164128010][Customization]]
+*** [[id:b188122a-c212-4d3e-adc4-121bcd517fba][Tipps]]
+*** Details
+**** [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][Command Line Programs]]
+**** [[id:bb0a5a29-7a02-4780-8612-5c656475e543][Distributions]]
+***** [[id:57f0dbac-bd4c-414b-befb-ea580683d08c][Arch Linux]]
+**** [[id:d603af74-0546-4c32-a8be-6d9c0a175d12][Desktops and Window Managers]]
+***** Desktops
+****** [[id:18e63c95-9e4b-4ca6-baf0-152d5f8d9e2c][KDE Plasma]]
+****** [[id:8294b629-efab-4ed8-9899-1e51c37b5fcb][Xfce]]
+****** [[id:5ac17b69-44ce-4a21-b726-51af787b68c0][GNOME]]
+***** Window Managers
+****** [[id:b60b505a-b9f9-4cc6-bd33-d796f316324e][dwm]]
+****** [[id:c6336a0c-da6d-4579-9df7-8bd6362f4726][XMonad]]
+****** [[id:e146e24f-b1b3-4a44-88ad-b181eb6bc180][Qtile]]
+****** [[id:f80eb8f5-6e3e-4475-b2b8-2736c7dc3558][i3]]
+****** [[id:b6215cc7-d001-4831-8754-75c32587cd4c][awesomeWM]]
+****** [[id:72912b95-3a2a-47df-b5c5-16c8a218f1ef][herbstluftWM]]
+****** [[id:3b9c0407-b88c-4dc1-841a-e3e57514c4e9][bspwm]]
 
 * References
 
