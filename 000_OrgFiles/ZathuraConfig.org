@@ -1,5 +1,5 @@
 #+TITLE: Zathura Configuration
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D9_Zathura/.config/zathura/zathurarc :mkdirp yes
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D09_Zathura/.config/zathura/zathurarc :mkdirp yes
 #+DATE: <2021-08-04 Mi> 
 #+STARTUP: folded
 
@@ -15,7 +15,7 @@ Look up possible options here:
 [[id:58af16cc-ea91-45af-9f8b-0708ecaee419][Zathura Configuration]]
 [[id:80f2ee1f-438f-495d-a7fa-2c2d332e4bf3][Girara Interface Configuration]]
 
-#+begin_src bash :tangle ~/.dotfiles/D9_Zathura/.config/zathura/zathurarc
+#+begin_src bash :tangle ~/.dotfiles/D09_Zathura/.config/zathura/zathurarc
   ### activate clipboard functionality
   set selection-clipboard clipboard
   
@@ -96,7 +96,7 @@ Look up possible options here:
 
 Setting the ~Keybindings~. Look up options here: [[id:9c0bb2b4-8ec6-427c-9f12-ab672fb66939][Zathura Key Mapping]]
 
-#+begin_src bash :tangle ~/.dotfiles/D9_Zathura/.config/zathura/zathurarc
+#+begin_src bash :tangle ~/.dotfiles/D09_Zathura/.config/zathura/zathurarc
   map u scroll half-up
   map d scroll half-down
   map D toggle_page_mode

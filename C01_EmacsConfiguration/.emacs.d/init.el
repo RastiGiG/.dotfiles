@@ -75,22 +75,22 @@
 ;; set date format to %DD-%MM-%YYYY
 (setq european-calender-style 't)
 
-(load-file "~/.dotfiles/C1_EmacsConfiguration/macros/global.macs") ; Save file containing global macros
+(load-file "~/.dotfiles/C01_EmacsConfiguration/macros/global.macs") ; Save file containing global macros
 
 ;; Set of keybindings for defined macros
 ;; Make sure to have a definition of the macro in your /macros folder
 (global-set-key "\C-x\C-kT" 'transpose-names)
 
-(setq bookmark-default-file "~/.dotfiles/C1_EmacsConfiguration/bookmarks")
+(setq bookmark-default-file "~/.dotfiles/C01_EmacsConfiguration/bookmarks")
 
 (setq-default abbrev-mode t)
 (setq abbrev-file-name             ;; tell emacs where to read abbrev
-     "~/.dotfiles/C1_EmacsConfiguration/abbrev_defs") 
+     "~/.dotfiles/C01_EmacsConfiguration/abbrev_defs") 
 (setq save-abbrevs t)
 
 (use-package yasnippet
   :config
-  (setq yas-snippet-dirs '("~/.dotfiles/C1_EmacsConfiguration/snippets"))
+  (setq yas-snippet-dirs '("~/.dotfiles/C01_EmacsConfiguration/snippets"))
   (yas-global-mode 1)
   ;; Trick to enable snippets being shared between modes
   (add-hook 'yas-minor-mode-hook (lambda ()
@@ -894,7 +894,7 @@ _~_: modified
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.dotfiles/00_OrgFiles/EmacsConfig.org"))
+                      (expand-file-name "~/.dotfiles/000_OrgFiles/EmacsConfig.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))

@@ -1,48 +1,3 @@
-cd Projects
-la
-ls -a
-exit
-jupyter notebook
-exit
-jupyter notebook
-exit
-pip3 install python-lsp-server
-exti
-exit
-python main.py 
-python3 main.py 
-python3 main.py 
-python3 main.py 
-python3 main.py 
-la
-cd ..
-ls
-source bin/activate
-cd ..
-source bin/activate
-jupyter notebook
-exit
-jupyter notebook
-exit
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/
-cd ..
-cd ..
-cd ..
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/
-cd ..
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/08_Ehrenamt_und_Hobbys/
-rsync -avt . /media/rastibasti/HeronsVault/Documents/08_Ehrenamt_und_Hobbys/
-cd ..
-cd 06_Studium/
-cd 01_FAU_Erlangen_Nuernberg/
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
-rsync -avtn . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
-rsync -avtn --delete . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
-rsync -avt --delete . /media/rastibasti/HeronsVault/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/
-cd ..
-cd ..
 cd 04_Finanzen/
 rsync -avtn --delete . /media/rastibasti/HeronsVault/Documents/04_Finanzen/
 rsync -avtn --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
@@ -125,4 +80,49 @@ exit
 zathura BTFD_Lecture_04.pdf 
 zathura BTFD_Lecture_03.pdf 
 zathura BTFD_Lecture_02.pdf 
+exit
+cd Backup/
+ls
+cd Backup-Skripts/
+ls
+la
+ls -al
+chmod 333 rsync-dry-runs-download.sh 
+ls -al
+chmod 444 rsync-dry-runs-download.sh 
+ls -al
+chmod 777 rsync-dry-runs-download.sh 
+ls -al
+chmod 600 rsync-dry-runs-download.sh 
+ls -al
+chmod 500 rsync-dry-runs-download.sh  
+ls -al
+chmod 755 rsync-dry-runs-download.sh  
+ls -al
+rsync-dry-runs-download.sh
+./rsync-dry-runs-download.sh
+./rsync-dry-runs-download.sh
+./rsync-download.sh
+rsync-download.sh
+./rsync-download.sh
+exit
+./rsync-dry-runs-download.sh
+./rsync-dry-runs-download.sh
+./rsync-dry-run-download-finances.sh
+./rsync-download-templates-dr.sh
+./rsync-download-templates-dr.sh
+./rsync-download-templates.sh
+./rsync-download-programming-introml-dr.sh
+./rsync-download-programming-introml.sh
+./rsync-download-programming-numi-dr.sh
+./rsync-download-programming-numi.sh
+./rsync-download-programming-numi.sh
+./rsync-download-projects-data-dr.sh
+./rsync-download-projects-data.sh
+./rsync-download-university-dr.sh
+./rsync-download-university.sh
+./rsync-download-personal-docs-dr.sh
+./rsync-download-knowledge-dr.sh
+./rsync-download-knowledge.sh
+./rsync-download-knowledge-dr.sh
 exit

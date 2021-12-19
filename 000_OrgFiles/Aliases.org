@@ -1,5 +1,5 @@
 #+Title: Shell Aliases
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D0_Aliases/.config/shellconfig/aliasrc :mkdirp yes
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D00_Aliases/.config/shellconfig/aliasrc :mkdirp yes
 
 * TOC
 

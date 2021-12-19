@@ -72,10 +72,10 @@ tramp
 /*-old/
 /.emacs.d/elpa
 /straight/
-/D5_Emacs/.emacs.d/elpa
-/C1_EmacsConfiguration/.emacs.d/elpa
-/C1_EmacsConfiguration/.emacs.d/*-old
-/C1_EmacsConfiguration/.emacs.d/straight
+/D05_Emacs/.emacs.d/elpa
+/C01_EmacsConfiguration/.emacs.d/elpa
+/C01_EmacsConfiguration/.emacs.d/*-old
+/C01_EmacsConfiguration/.emacs.d/straight
 
 # reftex files
 *.rel
@@ -95,7 +95,7 @@ flycheck_*.el
 
 # projectiles files
 .projectile
-C1_EmacsConfiguration/.emacs.d/projectile-bookmarks.eld
+C01_EmacsConfiguration/.emacs.d/projectile-bookmarks.eld
 
 # directory configuration
 .dir-locals.el

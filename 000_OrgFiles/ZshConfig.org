@@ -1,5 +1,5 @@
 #+Title: Zsh Config
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D2_Zsh/.zshrc :mkdirp yes
+#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D02_Zsh/.zshrc :mkdirp yes
 
 * TOC
 
