@@ -14,4 +14,5 @@
  (magit-rebase
   ("--autostash"))
  (magit-revert
-  ("--edit")))
+  ("--edit"))
+ (magit-stash nil))

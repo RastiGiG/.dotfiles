@@ -1,17 +1,3 @@
-cd 04_Finanzen/
-rsync -avtn --delete . /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-rsync -avtn --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-rsync -avtn --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-cd ..
-rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-cd 04_Finanzen/
-rsync -vtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-rsync -avt --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' --delete ./ /media/rastibasti/HeronsVault/Documents/04_Finanzen/
-cd /media/rastibasti/HeronsVault/
-cd Projects/
-cd Progr
 cd Programming/
 la
 rsync -avtn --exclude 'bin' --exclude 'share' --exclude 'include' --exclude 'lib' ./SQL-01-Book-Codes/ /home/rastibasti/Projects/Programming/
@@ -126,3 +112,17 @@ exit
 ./rsync-download-knowledge.sh
 ./rsync-download-knowledge-dr.sh
 exit
+zathura IntroML_Exercise_03.pdf 
+cd ..
+cd 1-Vorlesung/
+ls
+zathura IntroML_06_edge_detection_no_anim.pdf 
+cd ..
+cd 2-Uebung/
+zathura IntroML_Exercise_03.pdf 
+exit
+ls
+virtualenv PY-08-DeepLearning/
+cd PY-08-DeepLearning/
+ls
+source bin/activate
