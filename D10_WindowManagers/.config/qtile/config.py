@@ -99,28 +99,28 @@ keys = [
 #          #     desc="move focused window to group {}".format(i.name)),
 #      ])
   
-  group_names = 'WWW DEV SYS ETC'.split()
-  groups = [Group(name, layout='max') for name in group_names]
-  for i, name in enumerate(group_names, 1):
+group_names = 'WEB VID MED DEV SYS ETC'.split()
+groups = [Group(name, layout='max') for name in group_names]
+for i, name in enumerate(group_names, 1):
     indx = str(i)
     keys += [
-      Key([mod], indx, lazy.group[name].toscreen()),
-      Key([mod, 'shift'], indx, lazy.window.togroup(name))]
+        Key([mod], indx, lazy.group[name].toscreen()),
+        Key([mod, 'shift'], indx, lazy.window.togroup(name))]
 
 layouts = [
     layout.Columns(border_focus_stack=['#d75f5f', '#8f3d3d'], border_width=4),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
+    layout.Stack(num_stacks=2),
+    layout.Bsp(),
+    layout.Matrix(),
+    layout.MonadTall(),
+    layout.MonadWide(),
+    layout.RatioTile(),
+    layout.Tile(),
+    layout.TreeTab(),
+    layout.VerticalTile(),
+    layout.Zoomy(),
 ]
 
 widget_defaults = dict(
