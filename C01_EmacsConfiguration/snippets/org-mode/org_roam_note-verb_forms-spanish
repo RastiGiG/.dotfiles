@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-verb_forms-spanish
+# key: <ornvfesp
+# --
+|-------------+---------|
+| yo                  | ${1: 1}      |
+| tu                  | ${2: 2}      |
+| Usted/el/ella       | ${3: 3}      |
+|-------------+---------|
+| nosotros            | ${4: 4}      |
+| Vosotros            | ${5: 5}     |
+| Ustedes/ellos/ellas | ${6: 6}     |
+|-------------+---------|
