@@ -56,9 +56,11 @@ auto-save-list
 tramp
 .\#*
 
-# Org-mode
+#########################
+# Org-mode and Org Roam
 .org-id-locations
 *_archive
+/C01_EmacsConfiguration/**/org-roam.db
 
 # flymake-mode
 *_flymake.*
@@ -95,7 +97,7 @@ flycheck_*.el
 
 # projectiles files
 .projectile
-C01_EmacsConfiguration/.emacs.d/projectile-bookmarks.eld
+C01_EmacsConfiguration/**/projectile-bookmarks.eld
 
 # directory configuration
 .dir-locals.el
