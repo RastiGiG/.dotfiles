@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-version_control_tail
+# key: <ornvct
+# --
+* Read On
+
+[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:755da73e-ff37-4103-986d-6dc62a9fc7f8][Version Control]]
+*** [[id:1f5328c3-41a1-429a-8ddf-669d4b949033][Git and Github]]
+
+* References
+
+[[id:b7754471-9c13-4d8a-a394-a776f05ed385][References]]
+1. [[https://git-scm.com][Git-SCM.com - Official Git Page]]
+   1) [[https://git-scm.com/docs][Git-SCM.com: Documentation]]
+2. [[https://stackoverflow.com][StackOverflow.com]]
+3. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
+4. [[https://www.git-tower.com][Git-Tower.com]]
