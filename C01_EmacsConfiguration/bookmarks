@@ -1,42 +1,22 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*-
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Quotes"
- (filename . "~/Org/personal-quotes.org")
- (front-context-string . ":ID:       28152")
- (rear-context-string)
- (position . 14))
+(("D01-1 WS 2021/22"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/6_WS_2021-2022/")
+ (front-context-string . "B_6_8_2_Biotherm")
+ (rear-context-string . "4  9. Jan 12:14 ")
+ (position . 222))
+("D01 FAU"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/")
+ (front-context-string . "1_SS_2019\n  drwx")
+ (rear-context-string . "K 22. Apr 2021  ")
+ (position . 207))
 ("C5 ZathuraConfig.org"
  (filename . "~/.dotfiles/00_OrgFiles/ZathuraConfig.org")
  (front-context-string . "\n* TOC\n\n1) [[*UI")
  (rear-context-string . "STARTUP: folded\n")
  (position . 173))
-("K4 Lisp Kompendium"
- (filename . "~/Org/lisp.org")
- (front-context-string . "\n* TOC\n\n* About ")
- (rear-context-string . " \n\n:PROPERTIES:\n")
- (position . 248))
-("L3 Musikliste"
- (filename . "~/Org/lists-music.org")
- (front-context-string . "\n* TODO Musik zu")
- (rear-context-string . "g][Mainpage]] -\n")
- (position . 271))
-("L2 Literaturliste"
- (filename . "~/Org/lists-literature.org")
- (front-context-string . "\n+ [[Sachbücher]")
- (rear-context-string . "=][Mainpage]] -\n")
- (position . 355))
-("L1 Einkaufliste"
- (filename . "~/Org/lists-shopping.org")
- (front-context-string . "\n* = TOC =\n  + [")
- (rear-context-string . "=][Mainpage]] -\n")
- (position . 432))
-("A1-2 Mail"
- (filename . "~/Org/personal-mail.org")
- (front-context-string . "\n* Follow Up\n** ")
- (rear-context-string . " \n\n:PROPERTIES:\n")
- (position . 303))
 ("C4 MBSync Config"
  (filename . "~/.mbsyncrc")
  (front-context-string . "## T-Online ##\n\n")
@@ -47,31 +27,6 @@
  (front-context-string . "(use-package mu4")
  (rear-context-string)
  (position . 1))
-("Z1 Acronyms"
- (filename . "~/Org/acronyms.org")
- (front-context-string . "\n\n\n* %^{Subject ")
- (rear-context-string)
- (position . 1))
-("A2 Journal"
- (filename . "~/Org/journal/Journal.org")
- (front-context-string . "\n* 2021\n\n** 2021")
- (rear-context-string)
- (position . 2))
-("org-capture-last-stored"
- (filename . "~/Org/personal-mail.org")
- (front-context-string . "** TODO Read Ihr")
- (rear-context-string . "<2021-10-06 Mi>\n")
- (position . 3745))
-("K6 Data Science Kompendium"
- (filename . "~/Org/data_science.org")
- (front-context-string . "\n1. [[*General][")
- (rear-context-string . "page]] -\n\n* TOC\n")
- (position . 527))
-("K6-1 SQL Kompendium"
- (filename . "~/Org/sql.org")
- (front-context-string . "\n- Back to [[fil")
- (rear-context-string . "Sebastian Zierl\n")
- (position . 164))
 ("P1 CV"
  (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
  (front-context-string . "\n%-----       re")
@@ -82,11 +37,6 @@
  (front-context-string . "#+LaTeX_CLASS: s")
  (rear-context-string)
  (position . 1))
-("org-refile-last-stored"
- (filename . "~/Org/personal-archive.org")
- (front-context-string . "** DONE Praktiku")
- (rear-context-string . "a 20:01]\n:END:\n\n")
- (position . 1585))
 ("C0 Shell Aliases"
  (filename . "~/.dotfiles/00_OrgFiles/Aliases.org")
  (front-context-string . "\n+ [[*Basics][Ba")
@@ -103,46 +53,6 @@
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 100)
  (annotation . ""))
-("A3 Contacts"
- (filename . "~/Org/personal-contacts.org")
- (front-context-string . "\n- Back to [[fil")
- (rear-context-string . "Sebastian Zierl\n")
- (position . 255))
-("A1 Tasks"
- (filename . "~/Org/personal-tasks.org")
- (front-context-string . "\n* = Active =\n\n*")
- (rear-context-string . "TUP: hideblocks\n")
- (position . 585))
-("K3 Python Kompendium"
- (filename . "~/Org/python.org")
- (front-context-string . "\n* TOC\n\n1. [[*= ")
- (rear-context-string . "g][Mainpage]] -\n")
- (position . 297))
-("K5 Java Kompendium"
- (filename . "~/Org/java.org")
- (front-context-string . "\n* TOC\n1. [[*= M")
- (rear-context-string . "Sebastian Zierl\n")
- (position . 204))
-("K2-1 Emacs Keybindings"
- (filename . "~/Org/emacs-keybindings.org")
- (front-context-string . "\n  + common chor")
- (rear-context-string . " Key Strokes ==\n")
- (position . 9395))
-("K1-1 Linux Installed Software"
- (filename . "~/Org/linux-installed_software.org")
- (front-context-string . "\n** == 6.1 Insta")
- (rear-context-string . "6 Quick Looks =\n")
- (position . 58388))
-("K2 Emacs Kompendium"
- (filename . "~/Org/emacs.org")
- (front-context-string . "\n* = TOC =\n\n1. [")
- (rear-context-string . "g][Mainpage]] -\n")
- (position . 245))
-("K1 Linux Kompendium"
- (filename . "~/Org/linux.org")
- (front-context-string . "\n* = TOC =\n\n1. [")
- (rear-context-string . "g][Mainpage]] -\n")
- (position . 259))
 ("00 Index for Personal Wiki"
  (filename . "~/Org/index.org")
  (front-context-string . "\n* = TOC =\n1. [[")

@@ -63,9 +63,9 @@ tramp
 # flymake-mode
 *_flymake.*
 
-# eshell files
-/eshell/history
-/eshell/lastdir
+# eshell files - This excludes history and dir
+/C01_EmacsConfiguration/**/eshell/history
+/C01_EmacsConfiguration/**/eshell/lastdir
 
 # elpa packages
 /elpa/
