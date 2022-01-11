@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-color_theory_tail
+# key: <ornctt
+# --
+* Read On
+
+[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:324e0518-ee3c-4e13-930c-ac75ddf83317][Color Theory]]
+*** [[id:470e571d-c427-47f2-ac12-2c89d61ebe69][Color Systems]]
+**** [[id:9528b676-e4d8-40b8-b7fd-065d99a91037][Additive and Subtractive]]
+***** [[id:af78f3b3-5892-40ec-81c2-439786997276][Primary Colors]]
+***** [[id:eb52f5d8-c962-4d06-8cb0-9902d182c196][Secondary and Tertiary Colors]]
+**** [[id:b414f8b5-42d6-4856-bdb3-fab5423317a0][RGB]]
+**** [[id:3979610c-1bb9-434f-a40f-b1b0ecdca646][RYB]]
+**** [[id:115f6147-c3d4-45ba-98a9-5c5faa76d66b][CMYK]]
+**** [[id:3e3261b4-301d-412a-91da-c9ab7574ae2d][HSV and HSL]]
+**** [[id:f1e347a8-85d0-4ebb-b047-3582d0b3fd77][Color Depth]]
+*** [[id:405e1a0a-33e1-4159-b32d-b6763d2fc2de][The Visible Spectrum]]
+**** [[id:150ab72a-db48-48d2-b9c6-b864713ddf2d][Color Vision]]
+**** [[id:018a2317-da19-4390-8436-e8c258aa41b9][Spectral Colors]]
+*** Organizing Colors
+**** [[id:de05e163-e31b-4656-82f4-b180bc904a2a][Color Wheels]]
+**** [[id:ed688d05-40f2-4078-a141-691dc3d826d9][Color Gamuts
+]]
+* References
+
+[[id:e7bf4f34-da8d-4ad3-bb57-8fec653215a8][References]]
+1. [[https://encycolorpedia.de][EncyColorPedia.de]]
