@@ -47,8 +47,8 @@
           ("https://www.kuketz-blog.de/feed/" it blogs security privacy)
           ("https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" it blogs security data-science)
           ;; Podcasts
-          ("http://feed.pippa.io/public/shows/teamhuman" podcast culture)
-          ("https://feeds.buzzsprout.com/1875696.rss" podcast culture politics)
+          ("http://feed.pippa.io/public/shows/teamhuman" podcasts culture)
+          ("https://feeds.buzzsprout.com/1875696.rss" podcasts culture politics)
           ("https://wakingup.libsyn.com/rss" podcasts culture politics)
           ("https://feeds.lagedernation.org/feeds/ldn-aac.xml" podcasts culture politics)
           ("https://neuezwanziger.de/feed/mp3/" podcasts culture politics)
@@ -63,19 +63,35 @@
           ))
 
   (defface python-elfeed-entry
-    '((t :background "Darkseagreen1"))
+    '((t :background "ff00ff"))         ;; prev: "Darkseagreen1"
     "Marks a python Elfeed entry."
-    :group 'scimax-elfeed)
+    :group 'personal-elfeed)
 
   (defface emacs-elfeed-entry
-    '((t :background "Lightblue1"))
-    "Marks a python Elfeed entry."
-    :group 'scimax-elfeed)
+    '((t :background "008888"))               ;; prev: "Lightblue1"
+    "Marks a Emacs Elfeed entry."
+    :group 'personal-elfeed)
+
+  (defface blogs-elfeed-entry
+    '((t :background "7fe757"))
+    "Marks a Blog Elfeed entry."
+    :group 'personal-elfeed)
+
+  (defface podcasts-elfeed-entry
+    '((t :background "941f27"))
+    "Marks a Podcast Elfeed entry."
+    :group 'personal-elfeed)
 
   (push '(python python-elfeed-entry)
         elfeed-search-face-alist)
 
   (push '(emacs emacs-elfeed-entry)
+        elfeed-search-face-alist)
+
+  (push '(blogs blogs-elfeed-entry)
+        elfeed-search-face-alist)
+
+  (push '(podcasts podcasts-elfeed-entry)
         elfeed-search-face-alist)
 
 #+end_src
