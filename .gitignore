@@ -69,6 +69,10 @@ tramp
 /C01_EmacsConfiguration/**/eshell/history
 /C01_EmacsConfiguration/**/eshell/lastdir
 
+#############
+## Elfeed
+/C01_EmacsConfiguration/**/elfeed.stats
+
 # elpa packages
 /elpa/
 /*-old/
