@@ -47,6 +47,7 @@
 ;; Start Emacs in Fullscreen mode
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 
+(set-language-environment "UTF-8")
 ;; Set up the visible bell
 (setq visible-bell t)
 
@@ -447,7 +448,8 @@ _~_: modified
   (org-indent-mode)
   (variable-pitch-mode 1)
   (visual-line-mode 1)
-  (turn-on-org-cdlatex))
+  ;; (turn-on-org-cdlatex)
+  )
 
 (use-package org
   :hook (org-mode . efs/org-mode-setup)
@@ -1107,6 +1109,48 @@ _~_: modified
 ;; This option reminds you when you didn't call 'org-mime-htmlize'
 (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart))
 
+(use-package elfeed
+  :config
+  (
+   ;; Various Necessary/Helpful Settings
+   (setq elfeed-use-curl t)
+   (setq elfeed-curl-max-connections 10)
+   (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
+   (setq elfeed-enclosure-default-dir "~/Downloads/")
+   (setq elfeed-search-filter "@4-months-ago +unread")
+   (setq elfeed-sort-order 'descending)
+   (setq elfeed-search-clipboard-type 'CLIPBOARD)
+   (setq elfeed-search-title-max-width 150)
+   (setq elfeed-search-title-min-width 30)
+   (setq elfeed-search-trailing-width 25)
+   (setq elfeed-show-truncate-long-urls t)
+   (setq elfeed-show-unique-buffers t)
+   (setq elfeed-search-date-format '("%F %R" 16 :left))
+   ;; A snippet for periodic update for feeds (3 mins since Emacs start, then every
+   ;; half hour)
+   (run-at-time 180 1800 (lambda () (unless elfeed-waiting (elfeed-update))))
+
+   ;; Set Keybindings
+   (define-key global-map (kbd "C-c e") #'elfeed)
+   (let ((map elfeed-search-mode-map))
+     (define-key map (kbd "w") #'elfeed-search-yank)
+     (define-key map (kbd "g") #'elfeed-update)
+     (define-key map (kbd "G") #'elfeed-search-update--force)
+     (let ((map elfeed-show-mode-map))
+       (define-key map (kbd "w") #'elfeed-show-yank))
+     )
+   )
+  )
+;; Load Feeds and Feed Settings  
+(load "~/.dotfiles/D05_Emacs/.config/emacs-config/EmacsRSSFeed.el")
+
+;; Load Elfeed Score
+(use-package elfeed-score
+  :config
+  (progn
+    (elfeed-score-enable)
+    (define-key elfeed-search-mode-map "=" elfeed-score-map)))
+
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
@@ -1143,7 +1187,14 @@ _~_: modified
 (use-package auctex)               ; Integrated environment for TeX
 (use-package auctex-latexmk)       ; LatexMK support for AUCTeX
 (use-package latex-extra)          ; Useful features for LaTeX-mode
-(use-package cdlatex)              ; Fast input methods for LaTeX environments and math
+;; (use-package cdlatex
+;;   :bind (:map cdlatex-mode-map
+;;               (nil . cdlatex-math-symbol)
+;;               ("C-`" . cdlatex-math-symbol)
+;;          :map org-cdlatex-mode-map
+;;          (nil . cdlatex-math-symbol)
+;;          ("C-`" . cdlatex-math-symbol))
+;; )              ; Fast input methods for LaTeX environments and math
 
 (setq exec-path (append exec-path '("/usr/local/texlive/2021")))
 

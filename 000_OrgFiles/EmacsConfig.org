@@ -108,7 +108,7 @@ Old setup. Use this if you don't intend to use straight.el
 Can't seem to get these settings to work, need to look into it further
 :END:
 
-~Backup Files~ are files with a "\~" at the end: Emacs.org~
+~Backup Files~ are files with a ="\~"= at the end: =Emacs.org~=
 First we are gonna set the the directory for our backup files, to store them in a single place instead of all over the system
 More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html]]
 
@@ -118,7 +118,7 @@ More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Back
 
 ** Auto Save Files
 
-~Auto Save Files~ are files with "#" on both ends: like #Emacs.org#. Next we are gonna save auto save files to a centralized location
+~Auto Save Files~ are files with ="#"= on both ends: like =#Emacs.org#=. Next we are gonna save auto save files to a centralized location
 #+begin_src emacs-lisp
   ;; auto-save-mode doesn't create the path automatically!
   (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
@@ -147,6 +147,7 @@ This section configures basic UI settings that remove unneeded elements to make 
   ;; Start Emacs in Fullscreen mode
   (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 
+  (set-language-environment "UTF-8")
   ;; Set up the visible bell
   (setq visible-bell t)
 
@@ -170,13 +171,13 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 
 #+begin_src emacs-lisp
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
+  (set-face-attribute 'default nil :font "Fira Code Retina" :height efs/default-font-size)
 
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height efs/default-font-size)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height efs/default-font-size)
 
-;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Cantarell" :height efs/default-font-size :weight 'regular)
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "Cantarell" :height efs/default-font-size :weight 'regular)
 
 #+end_src
 
@@ -210,7 +211,7 @@ I am using the [[https://github.com/tonsky/FiraCode][Fira Code]] and [[https://f
 Setup a location for your bookmarks-file
 
 #+begin_src emacs-lisp
-(setq bookmark-default-file "~/.dotfiles/C01_EmacsConfiguration/bookmarks")
+  (setq bookmark-default-file "~/.dotfiles/C01_EmacsConfiguration/bookmarks")
 #+end_src
 
 ** Abbreviations
@@ -759,7 +760,8 @@ This section contains the basic configuration for =org-mode= plus the configurat
     (org-indent-mode)
     (variable-pitch-mode 1)
     (visual-line-mode 1)
-    (turn-on-org-cdlatex))
+    ;; (turn-on-org-cdlatex)
+    )
 
   (use-package org
     :hook (org-mode . efs/org-mode-setup)
@@ -1516,6 +1518,62 @@ The lambda function adds is loaded as a hook and adds formatting to source block
 - "h2": second level heading
 - ...
 
+* Elfeed - Emacs RSS Feed
+
+~Elfeed~ is a package, that enables you to see your ~RSS Feed~ in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]. We also set up ~elfeed-score~
+Great inspirations for ~Elfeed~ Configurations can be found here:
+- [[https://protesilaos.com/emacs/dotemacs#h:0cd8ddab-55d1-40df-b3db-1234850792ba][Protesilaos.com]]
+- [[https://github.com/jkitchin/scimax/blob/master/scimax-elfeed.el][GitHub.com: John Kitchin - Scimax-Elfeed]]
+#+begin_src emacs-lisp
+  (use-package elfeed
+    :config
+    (
+     ;; Various Necessary/Helpful Settings
+     (setq elfeed-use-curl t)
+     (setq elfeed-curl-max-connections 10)
+     (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
+     (setq elfeed-enclosure-default-dir "~/Downloads/")
+     (setq elfeed-search-filter "@4-months-ago +unread")
+     (setq elfeed-sort-order 'descending)
+     (setq elfeed-search-clipboard-type 'CLIPBOARD)
+     (setq elfeed-search-title-max-width 150)
+     (setq elfeed-search-title-min-width 30)
+     (setq elfeed-search-trailing-width 25)
+     (setq elfeed-show-truncate-long-urls t)
+     (setq elfeed-show-unique-buffers t)
+     (setq elfeed-search-date-format '("%F %R" 16 :left))
+     ;; A snippet for periodic update for feeds (3 mins since Emacs start, then every
+     ;; half hour)
+     (run-at-time 180 1800 (lambda () (unless elfeed-waiting (elfeed-update))))
+
+     ;; Set Keybindings
+     (define-key global-map (kbd "C-c e") #'elfeed)
+     (let ((map elfeed-search-mode-map))
+       (define-key map (kbd "w") #'elfeed-search-yank)
+       (define-key map (kbd "g") #'elfeed-update)
+       (define-key map (kbd "G") #'elfeed-search-update--force)
+       (let ((map elfeed-show-mode-map))
+         (define-key map (kbd "w") #'elfeed-show-yank))
+       )
+     )
+    )
+  ;; Load Feeds and Feed Settings  
+  (load "~/.dotfiles/D05_Emacs/.config/emacs-config/EmacsRSSFeed.el")
+#+end_src
+
+** Elfeed-Score
+
+~Elfeed-Score~ is a ~package~ that applies [[https://www.gnu.org/software/emacs/manual/html_node/gnus/Scoring.html#Scoring][Gnu-Style Scoring]] to [[id:211d12c6-29db-4550-bd06-ef6f8b32640c][Elfeed]]
+
+#+begin_src emacs-lisp
+  ;; Load Elfeed Score
+  (use-package elfeed-score
+    :config
+    (progn
+      (elfeed-score-enable)
+      (define-key elfeed-search-mode-map "=" elfeed-score-map)))
+#+end_src
+
 * Development
 
 ** Language Servers
@@ -1610,23 +1668,30 @@ There's a companion mode for lps-mode specifically for debugging
 *** LaTeX
 
 #+begin_src  emacs-lisp
-  
-  (use-package latex                 ; Activates lsp for LaTeX mode
-    :straight nil
-    :hook (tex-mode . lsp-deferred))
-  (use-package auctex)               ; Integrated environment for TeX
-  (use-package auctex-latexmk)       ; LatexMK support for AUCTeX
-  (use-package latex-extra)          ; Useful features for LaTeX-mode
-  (use-package cdlatex)              ; Fast input methods for LaTeX environments and math
-  
-  (setq exec-path (append exec-path '("/usr/local/texlive/2021")))
-  
-  (require 'tex)
-  (TeX-global-PDF-mode t)            ; default compiled document: pdf
-  (setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
-  
-  (setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "zathura") (output-html "xdg-open")))
-  ;;(add-to-list 'TeX-view-program-selection '(output-pdf "zathura"))
+
+    (use-package latex                 ; Activates lsp for LaTeX mode
+      :straight nil
+      :hook (tex-mode . lsp-deferred))
+    (use-package auctex)               ; Integrated environment for TeX
+    (use-package auctex-latexmk)       ; LatexMK support for AUCTeX
+    (use-package latex-extra)          ; Useful features for LaTeX-mode
+    ;; (use-package cdlatex
+    ;;   :bind (:map cdlatex-mode-map
+    ;;               (nil . cdlatex-math-symbol)
+    ;;               ("C-`" . cdlatex-math-symbol)
+    ;;          :map org-cdlatex-mode-map
+    ;;          (nil . cdlatex-math-symbol)
+    ;;          ("C-`" . cdlatex-math-symbol))
+    ;; )              ; Fast input methods for LaTeX environments and math
+
+    (setq exec-path (append exec-path '("/usr/local/texlive/2021")))
+
+    (require 'tex)
+    (TeX-global-PDF-mode t)            ; default compiled document: pdf
+    (setq TeX-view-program-list '(("zathura" "zathura --page=%(outpage) %o")))
+
+    (setq TeX-view-program-selection '(((output-dvi has-no-display-manager) "dvi2tty") ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf "zathura") (output-html "xdg-open")))
+    ;;(add-to-list 'TeX-view-program-selection '(output-pdf "zathura"))
 #+end_src
 
 + latex mode doesn't need to be installed. It in the config to add the lsp-deferred hook when editing latex files
