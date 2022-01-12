@@ -72,6 +72,7 @@ tramp
 #############
 ## Elfeed
 /C01_EmacsConfiguration/**/elfeed.stats
+/C01_EmacsConfiguration/**/elfeed/
 
 # elpa packages
 /elpa/

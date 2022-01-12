@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("D01-1 WS 2021/22"
+(("C3-2 Elfeed Score Config"
+ (filename . "~/.dotfiles/C01_EmacsConfiguration/.emacs.d/elfeed.score")
+ (front-context-string . "\n;; ((\"title\"\n;;")
+ (rear-context-string . " -*- lisp -*-\n()")
+ (position . 74))
+("D01-1 WS 2021/22"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/6_WS_2021-2022/")
  (front-context-string . "B_6_8_2_Biotherm")
  (rear-context-string . "4  9. Jan 12:14 ")

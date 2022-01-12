@@ -28,12 +28,12 @@ The following variables are used to tweak some of the configuration pieces for u
 
 #+begin_src emacs-lisp
 
-;; NOTE: init.el is now generated from EmacsConfig.org.  Please edit that file
-;;       in Emacs and init.el will be generated automatically!
+  ;; NOTE: init.el is now generated from EmacsConfig.org.  Please edit that file
+  ;;       in Emacs and init.el will be generated automatically!
 
-;; You will most likely need to adjust this font size for your system!
-(defvar efs/default-font-size 160)
-(defvar efs/default-variable-font-size 160)
+  ;; You will most likely need to adjust this font size for your system!
+  (defvar efs/default-font-size 160)
+  (defvar efs/default-variable-font-size 160)
 
 #+end_src
 
@@ -1336,6 +1336,16 @@ For installation, first make sure to have ~SQLite~ and a C++ compiler like ~gcc~
     (apply #'org-roam-node-insert args)))
 #+end_src
 
+** Org-Drill
+
+~Org-Drill~ is a ~spaced repetition program~ (like ~Anki~)  built to work with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+
+#+begin_src emacs-lisp
+  (use-package org-drill
+    ;; :config
+    )
+#+end_src
+
 * Email
 
 ** Mu4e
@@ -1526,37 +1536,39 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
 - [[https://github.com/jkitchin/scimax/blob/master/scimax-elfeed.el][GitHub.com: John Kitchin - Scimax-Elfeed]]
 #+begin_src emacs-lisp
   (use-package elfeed
-    :config
-    (
-     ;; Various Necessary/Helpful Settings
-     (setq elfeed-use-curl t)
-     (setq elfeed-curl-max-connections 10)
-     (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
-     (setq elfeed-enclosure-default-dir "~/Downloads/")
-     (setq elfeed-search-filter "@4-months-ago +unread")
-     (setq elfeed-sort-order 'descending)
-     (setq elfeed-search-clipboard-type 'CLIPBOARD)
-     (setq elfeed-search-title-max-width 150)
-     (setq elfeed-search-title-min-width 30)
-     (setq elfeed-search-trailing-width 25)
-     (setq elfeed-show-truncate-long-urls t)
-     (setq elfeed-show-unique-buffers t)
-     (setq elfeed-search-date-format '("%F %R" 16 :left))
-     ;; A snippet for periodic update for feeds (3 mins since Emacs start, then every
-     ;; half hour)
-     (run-at-time 180 1800 (lambda () (unless elfeed-waiting (elfeed-update))))
-
-     ;; Set Keybindings
-     (define-key global-map (kbd "C-c e") #'elfeed)
-     (let ((map elfeed-search-mode-map))
-       (define-key map (kbd "w") #'elfeed-search-yank)
-       (define-key map (kbd "g") #'elfeed-update)
-       (define-key map (kbd "G") #'elfeed-search-update--force)
-       (let ((map elfeed-show-mode-map))
-         (define-key map (kbd "w") #'elfeed-show-yank))
+    :bind (("C-c f" . elfeed)
+           :map elfeed-search-mode-map
+           ("n" . (lambda () (interactive) (next-line) (call-interactively 'elfeed-search-show-entry)))
+           ("p" . (lambda () (interactive) (previous-line) (call-interactively 'elfeed-search-show-entry)))
+           ("m" . (lambda () (interactive) (apply 'elfeed-search-toggle-all '(star))))
+           ("g" . elfeed-update)
+           ("G" . elfeed-search-update--force)
+           ;;:map elfeed-show-mode-map
+           ;;("w" . elfeed-show-yank))
        )
-     )
-    )
+  :config
+  (setq elfeed-show-entry-switch 'display-buffer)
+  (setq elfeed-search-remain-on-entry t)
+   ;; Various Necessary/Helpful Settings
+  (setq elfeed-use-curl t)
+  (setq elfeed-curl-max-connections 10)
+  (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
+  (setq elfeed-enclosure-default-dir "~/Downloads/")
+  (setq elfeed-search-filter "@4-months-ago +unread")
+  (setq elfeed-sort-order 'descending)
+  (setq elfeed-search-clipboard-type 'CLIPBOARD)
+  (setq elfeed-search-title-max-width 150)
+  (setq elfeed-search-title-min-width 30)
+  (setq elfeed-search-trailing-width 25)
+  (setq elfeed-show-truncate-long-urls t)
+  (setq elfeed-show-unique-buffers t)
+  (setq elfeed-search-date-format '("%F %R" 16 :left))
+  ;; A snippet for periodic update for feeds (3 mins since Emacs start, then every
+  ;; half hour)
+  (run-at-time 180 1800 (lambda () (unless elfeed-waiting (elfeed-update))))
+
+  ;; Set Keybindings
+  )
   ;; Load Feeds and Feed Settings  
   (load "~/.dotfiles/D05_Emacs/.config/emacs-config/EmacsRSSFeed.el")
 #+end_src
@@ -1571,7 +1583,8 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
     :config
     (progn
       (elfeed-score-enable)
-      (define-key elfeed-search-mode-map "=" elfeed-score-map)))
+      (define-key elfeed-search-mode-map "=" elfeed-score-map))
+    (setq elfeed-search-print-entry-function #'elfeed-score-print-entry))
 #+end_src
 
 * Development

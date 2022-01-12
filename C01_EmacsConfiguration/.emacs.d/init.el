@@ -957,6 +957,10 @@ _~_: modified
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
+(use-package org-drill
+  ;; :config
+  )
+
 ;; Load external file with contact information
 ;; (load "~/.config/emacs-configs/MailAccounts.el")
 
@@ -1110,37 +1114,39 @@ _~_: modified
 (add-hook 'message-send-hook 'org-mime-confirm-when-no-multipart))
 
 (use-package elfeed
-  :config
-  (
-   ;; Various Necessary/Helpful Settings
-   (setq elfeed-use-curl t)
-   (setq elfeed-curl-max-connections 10)
-   (setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
-   (setq elfeed-enclosure-default-dir "~/Downloads/")
-   (setq elfeed-search-filter "@4-months-ago +unread")
-   (setq elfeed-sort-order 'descending)
-   (setq elfeed-search-clipboard-type 'CLIPBOARD)
-   (setq elfeed-search-title-max-width 150)
-   (setq elfeed-search-title-min-width 30)
-   (setq elfeed-search-trailing-width 25)
-   (setq elfeed-show-truncate-long-urls t)
-   (setq elfeed-show-unique-buffers t)
-   (setq elfeed-search-date-format '("%F %R" 16 :left))
-   ;; A snippet for periodic update for feeds (3 mins since Emacs start, then every
-   ;; half hour)
-   (run-at-time 180 1800 (lambda () (unless elfeed-waiting (elfeed-update))))
-
-   ;; Set Keybindings
-   (define-key global-map (kbd "C-c e") #'elfeed)
-   (let ((map elfeed-search-mode-map))
-     (define-key map (kbd "w") #'elfeed-search-yank)
-     (define-key map (kbd "g") #'elfeed-update)
-     (define-key map (kbd "G") #'elfeed-search-update--force)
-     (let ((map elfeed-show-mode-map))
-       (define-key map (kbd "w") #'elfeed-show-yank))
+  :bind (("C-c f" . elfeed)
+         :map elfeed-search-mode-map
+         ("n" . (lambda () (interactive) (next-line) (call-interactively 'elfeed-search-show-entry)))
+         ("p" . (lambda () (interactive) (previous-line) (call-interactively 'elfeed-search-show-entry)))
+         ("m" . (lambda () (interactive) (apply 'elfeed-search-toggle-all '(star))))
+         ("g" . elfeed-update)
+         ("G" . elfeed-search-update--force)
+         ;;:map elfeed-show-mode-map
+         ;;("w" . elfeed-show-yank))
      )
-   )
-  )
+:config
+(setq elfeed-show-entry-switch 'display-buffer)
+(setq elfeed-search-remain-on-entry t)
+ ;; Various Necessary/Helpful Settings
+(setq elfeed-use-curl t)
+(setq elfeed-curl-max-connections 10)
+(setq elfeed-db-directory (concat user-emacs-directory "elfeed/"))
+(setq elfeed-enclosure-default-dir "~/Downloads/")
+(setq elfeed-search-filter "@4-months-ago +unread")
+(setq elfeed-sort-order 'descending)
+(setq elfeed-search-clipboard-type 'CLIPBOARD)
+(setq elfeed-search-title-max-width 150)
+(setq elfeed-search-title-min-width 30)
+(setq elfeed-search-trailing-width 25)
+(setq elfeed-show-truncate-long-urls t)
+(setq elfeed-show-unique-buffers t)
+(setq elfeed-search-date-format '("%F %R" 16 :left))
+;; A snippet for periodic update for feeds (3 mins since Emacs start, then every
+;; half hour)
+(run-at-time 180 1800 (lambda () (unless elfeed-waiting (elfeed-update))))
+
+;; Set Keybindings
+)
 ;; Load Feeds and Feed Settings  
 (load "~/.dotfiles/D05_Emacs/.config/emacs-config/EmacsRSSFeed.el")
 
@@ -1149,7 +1155,8 @@ _~_: modified
   :config
   (progn
     (elfeed-score-enable)
-    (define-key elfeed-search-mode-map "=" elfeed-score-map)))
+    (define-key elfeed-search-mode-map "=" elfeed-score-map))
+  (setq elfeed-search-print-entry-function #'elfeed-score-print-entry))
 
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
