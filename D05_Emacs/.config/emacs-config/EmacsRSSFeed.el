@@ -3,16 +3,19 @@
 (require 'elfeed)
 
 (setq elfeed-feeds
-      '(("https://www.archlinux.org/feeds/news/" linux distro)
-        ("https://planet.emacslife.com/atom.xml" emacs community)
-        ("https://www.ecb.europa.eu/rss/press.html" economics eu)
-        ("http://planetpython.org/rss20.xml" python)
-        ("http://planet.scipy.org/rss20.xml" python)
-        ("http://planet.emacsen.org/atom.xml" emacs)
+      '(("https://www.archlinux.org/feeds/news/" it linux distro)
+        ("https://planet.emacslife.com/atom.xml" it emacs community)
+        ("https://www.ecb.europa.eu/rss/press.html" it economics eu)
+        ("http://planetpython.org/rss20.xml" it python)
+        ("http://planet.scipy.org/rss20.xml" it python)
+        ("http://planet.emacsen.org/atom.xml" it emacs)
+        ("https://ctan.org/ctan-ann/atom" it tex)
         ;; Blogs
-        ("https://irreal.org/blog/?feed=rss2" emacs blogs)
+        ("https://irreal.org/blog/?feed=rss2" it emacs blogs)
         ("https://www.kuketz-blog.de/feed/" it blogs security privacy)
-        ("https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" it blogs security data-science)
+        ("https://komascript.de/node/feed" it blogs tex) ("https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" it blogs security data-science)
+        ("https://latex-ninja.com/feed/" it blogs tex)
+        ("https://zettelkasten.de/feed.atom" blogs methodology zettelkasten)
         ;; Podcasts
         ("http://feed.pippa.io/public/shows/teamhuman" podcasts culture)
         ("https://feeds.buzzsprout.com/1875696.rss" podcasts culture politics)
@@ -27,25 +30,32 @@
         ;;;;; Webcomics
         ("http://nedroid.com/feed/" webcomic)
         ("https://xkcd.com/atom.xml" webcomic)
+        ;;;;; Videos/YouTube
+        ;; ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" personal video)
         ))
 
 (defface python-elfeed-entry
-  '((t :background "ff00ff"))         ;; prev: "Darkseagreen1"
+  '((t :background "#ForestGreen"))         ;; prev: "Darkseagreen1"
+  "Marks a python Elfeed entry."
+  :group 'personal-elfeed)
+
+(defface tex-elfeed-entry
+  '((t :background "#LimeGreen"))         
   "Marks a python Elfeed entry."
   :group 'personal-elfeed)
 
 (defface emacs-elfeed-entry
-  '((t :background "008888"))               ;; prev: "Lightblue1"
+  '((t :background "SpringGreen"))               ;; prev: "Lightblue1"
   "Marks a Emacs Elfeed entry."
   :group 'personal-elfeed)
 
 (defface blogs-elfeed-entry
-  '((t :background "7fe757"))
+  '((t :background "Maroon"))
   "Marks a Blog Elfeed entry."
   :group 'personal-elfeed)
 
 (defface podcasts-elfeed-entry
-  '((t :background "941f27"))
+  '((t :background "MediumVioletRed"))
   "Marks a Podcast Elfeed entry."
   :group 'personal-elfeed)
 
@@ -59,4 +69,7 @@
       elfeed-search-face-alist)
 
 (push '(podcasts podcasts-elfeed-entry)
+      elfeed-search-face-alist)
+
+(push '(tex tex-elfeed-entry)
       elfeed-search-face-alist)

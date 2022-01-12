@@ -567,10 +567,14 @@ _~_: modified
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
+;; (use-package ob-ipython)
+
+;; (require-package 'ob-ipython)
 (org-babel-do-load-languages
   'org-babel-load-languages
   '((emacs-lisp . t)
     (python . t)
+    ;; (ipython . t)
     (latex . t)))
 
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
@@ -578,10 +582,23 @@ _~_: modified
 ;; This is needed as of Org 9.2
 (require 'org-tempo)
 
-(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-(add-to-list 'org-structure-template-alist '("se" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("sp" . "src python"))
-(add-to-list 'org-structure-template-alist '("sq" . "src sql"))
+(cl-loop for block in '(("sh" . "src shell")
+			("se" . "src emacs-lisp")
+			("sp" . "src python")
+			("sq" . "src sql")
+			("so" . "src octave")
+			;; ("si" . "ipython")
+			;; ("sio" . "src ipython :session :async :results output")
+			;; ("sip" . "src ipython :session :async :exports both :results raw drawer")
+			)
+       do
+       (add-to-list 'org-structure-template-alist block))
+
+;; Old version
+;; (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+;; (add-to-list 'org-structure-template-alist '("se" . "src emacs-lisp"))
+;; (add-to-list 'org-structure-template-alist '("sp" . "src python"))
+;; (add-to-list 'org-structure-template-alist '("sq" . "src sql"))
 
 ;; Functions useful for defining capture templates
 ;; Checklist item
@@ -958,7 +975,14 @@ _~_: modified
     (apply #'org-roam-node-insert args)))
 
 (use-package org-drill
-  ;; :config
+  :config
+  (progn
+    (add-to-list 'org-modules 'org-drill)
+    (setq org-drill-add-random-noise-to-intervals-p t)
+    (setq org-drill-hint-separator "||")
+    (setq org-drill-left-cloze-delimiter "<[")
+    (setq org-drill-right-cloze-delimiter "]>")
+    (setq org-drill-learn-fraction 1.0))
   )
 
 ;; Load external file with contact information

@@ -2,7 +2,42 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C3-2 Elfeed Score Config"
+(("D02 Akten"
+ (filename . "~/Documents/01_Akten/")
+ (front-context-string . "01_Arbeit\n  drwx")
+ (rear-context-string . "K 23. Feb 2021  ")
+ (position . 179))
+("P01 Data"
+ (filename . "~/Projects/Data/")
+ (front-context-string)
+ (rear-context-string . "K  4. Dez 14:37 ")
+ (position . 171))
+("P02 Programming"
+ (filename . "~/Projects/Programming/")
+ (front-context-string . "JUP-01-JupyterEx")
+ (rear-context-string . "K  8. Jan 22:18 ")
+ (position . 181))
+("P00 Projects"
+ (filename . "~/Projects/")
+ (front-context-string . "Data\n  drwxrwxrw")
+ (rear-context-string . "K  4. Dez 14:37 ")
+ (position . 169))
+("P03 Writing"
+ (filename . "~/Projects/Writing/")
+ (front-context-string . "Concat_Arbeitsve")
+ (rear-context-string . "4 12. Jan 23:47 ")
+ (position . 174))
+("D00 Documents"
+ (filename . "~/Documents/")
+ (front-context-string . "01_Akten\n  drwxr")
+ (rear-context-string . "K 28. Okt 17:18 ")
+ (position . 170))
+("C3-2 Elfeed Feeds Config"
+ (filename . "~/.dotfiles/000_OrgFiles/EmacsRSSFeed.org")
+ (front-context-string . "\n** IT\n- python\n")
+ (rear-context-string . "\n* List of Tags\n")
+ (position . 181))
+("C3-3 Elfeed Score Config"
  (filename . "~/.dotfiles/C01_EmacsConfiguration/.emacs.d/elfeed.score")
  (front-context-string . "\n;; ((\"title\"\n;;")
  (rear-context-string . " -*- lisp -*-\n()")
@@ -32,12 +67,12 @@
  (front-context-string . "(use-package mu4")
  (rear-context-string)
  (position . 1))
-("P1 CV"
+("D02-1 CV1"
  (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
  (front-context-string . "\n%-----       re")
  (rear-context-string . "begin{document}\n")
  (position . 4451))
-("P2 CV"
+("D02-2 CV2"
  (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/Version-2-Org/CurriculumVitae-2.org")
  (front-context-string . "#+LaTeX_CLASS: s")
  (rear-context-string)
@@ -70,7 +105,7 @@
  (rear-context-string . "hrc :mkdirp yes\n")
  (position . 110))
 ("C3 Emacs Config"
- (filename . "~/.dotfiles/00_OrgFiles/EmacsConfig.org")
+ (filename . "~/.dotfiles/000_OrgFiles/EmacsConfig.org")
  (front-context-string . "\n* Welcome!\n\nThi")
  (rear-context-string . ".el :mkdirp yes\n")
  (position . 121))
