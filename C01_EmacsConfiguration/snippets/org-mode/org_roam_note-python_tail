@@ -1,20 +1,48 @@
 # -*- mode: snippet -*-
-# name: Org_Roam_Note-Python_Tail
+# name: org_roam_note-python_tail
 # key: <ornpyt
 # --
+* Topic Overview
+
 * Read On
 
 [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
-** [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]]
-1. [[id:61cfbdfe-a162-4749-9ec9-1f5eb9d95fbe][Packages]]
-   1) [[id:ec3b27a2-8fba-4282-9579-c8efabd338ea][Matplotlib]]
-   2) [[id:1f70bfc8-224f-469e-833b-4943dce92ca5][NumPy]]
-   3) [[id:4da18e7a-5bb5-41e1-81fd-6a40d577a8f3][SciPy]]
-   4) [[id:df3ce71a-5242-4ee3-a8db-18d703825ef7][Pandas]]
-   5) [[id:cbcb33f5-9562-426d-8846-00f88a3369c3][Tkinter]]
-   6) [[id:fcda74ad-d87a-417f-8e89-937fecfb316b][BeautifulSoup]]
-2. [[id:baa87bc9-4ec9-4126-9308-17ac7b05d201][Package Overview]]
+** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+*** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
+**** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+***** [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]]
+****** Managing Python
+******* [[id:7ad07200-c347-41fe-958d-0fbb9864ee00][Package Managers]]
+******* [[id:61cfbdfe-a162-4749-9ec9-1f5eb9d95fbe][Packages]]
+******** [[id:baa87bc9-4ec9-4126-9308-17ac7b05d201][Packages Overview]]
+        List of all the installed or previously used packages
+******** [[id:ec3b27a2-8fba-4282-9579-c8efabd338ea][Matplotlib]]
+******** [[id:1f70bfc8-224f-469e-833b-4943dce92ca5][Numpy]]
+******** [[id:4da18e7a-5bb5-41e1-81fd-6a40d577a8f3][Scipy]]
+******** [[id:df3ce71a-5242-4ee3-a8db-18d703825ef7][Pandas]]
+******** [[id:cbcb33f5-9562-426d-8846-00f88a3369c3][Tkinter]]
+******** [[id:fcda74ad-d87a-417f-8e89-937fecfb316b][BeautifulSoup]]
+******** [[id:e23a6dfe-b3b1-4d05-a090-e92f6015dd79][Plotly]]
+******* [[id:11edeeed-8455-4293-a1d1-756074cfdc35][Virtual Environments]]
+****** Python Syntax
+******* [[id:488d7a03-b34e-44ad-97b2-2614940a702b][Datatypes]]
+******* [[id:c70755ef-6e3d-4ce7-bdf0-b9fe07f592c3][List of Functions and Methods]]
+******* [[id:f9e73946-a815-4d3b-ad59-b19a614e34ca][Iterators]]
+******* [[id:87ee1135-7395-4bb6-bdf5-a2f066971c1c][Generators]]
+******* [[id:71f6c434-16e7-47ee-9427-ed115912d3d8][Decorators]]
+****** [[id:1ca550d9-6f4e-4c04-8a5e-25b6f3050cd4][Tipps]]
+******* [[id:d1e7a1f9-d272-4590-a5c6-9dea756cca6c][Best Practices]]
+**** [[id:387fe10d-6d4b-4eb8-b3ed-cf5bffe506de][Editors]]
+***** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+***** [[id:8212a283-520d-495c-86ee-fc47d1a00363][VIM]]
+***** [[id:5fe7783f-d441-40a9-983c-7f671966c6e1][Jupyter]]
 
 * References
 
 [[id:2d3c338c-2be6-4a73-bcc0-16438874a77c][References]]
+1. [[https://www.python.org/][Python.org]]
+   2) [[https://docs.python.org/3/][Python 3.9.7 Documentation]]
+   3) [[https://wiki.python.org/moin/][The Python Wiki]]
+   4) [[https://www.python.org/dev/peps/][Python.org: PEPs - Python Enhancement Protocols]]
+2. [[https://pypi.org][PyPI.org - The Python Package Index]]
+3. [[https:www.pypa.io/en/latest/index.html][PyPA.org - The Python Packaging Authority]]

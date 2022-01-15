@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-terminology_tail
+# key: <orntermt
+# --
+* Topic Overview
+
+** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+*** [[id:e0428cca-9e69-4804-98d7-888ce3e2c7d6][Terminology Computer Science]]
+*** [[id:f3a38690-14a7-400a-a15a-c54b919fb85d][Terminology Lisp]]
+*** [[id:da251fe5-2d32-4155-a020-3dc5eed22f5c][Terminology Medicine]]
+*** [[id:4a519f2d-bbd7-497f-b1d3-342de258c723][Terminology Statistics]]
+
+* Read On
+
+[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+** Related Entries in the Wiki
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+*** [[id:d39c8d44-02d6-4a12-b94f-497fd7b3a53e][Medicine]]
+
+* References
+
+[[id:6f8140d6-9292-402c-b7e9-ef4de6abd53d][References]]

@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-lisp_tail
+# key: <ornlispt
+# --
+
+* Topic Overview
+
+** [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
+*** Basics
+**** [[id:f174b93c-320d-4ba3-919d-20fbf0d26114][EVAL - Lisp Code Evaluation]]
+**** [[id:45e6ccf4-dc7b-40bc-a36c-cb787cbbeada][Types]]
+***** [[id:86186926-e90b-43e6-a04d-b3b2c91b3c65][Numbers]]
+***** [[id:d235bf0b-1c4e-43ad-95b7-5d62c3f5e92d][Character Type]]
+***** [[id:16aef7b2-14bb-43ad-986b-8f568029ab17][Symbols]]
+****** [[id:e0e87f82-3c26-479c-b659-3a978534a1b5][Boolean Type]]
+**** [[id:622aba8a-ab87-4886-a1ef-aa76235cd1e6][Sequences]]
+**** [[id:3049eed5-3635-42e5-bb5e-7a3ec947a546][Variables and Scopes]]
+*** Structures
+**** [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]]
+***** [[id:6c8c2a69-657e-4d89-aaa1-d6355f4562d8][Predicates]]
+**** [[id:2b694b6b-aa97-4da2-af04-2259530cf95c][Logic Expressions]]
+**** [[id:9b062cd3-2d90-4aed-825a-7cd710f9177f][Conditional Expressions]]
+*** [[id:e6c63b60-2703-474c-9481-56f603ce87cd][List of Functions]]
+**** [[id:ad2210e4-641c-477b-b7fd-3f8064b4b903][Basic Operations]]
+*** [[id:e6540ce2-06d4-4cff-8028-4a4f065b50ff][Tipps]]
+**** [[id:685565ce-2076-4826-beab-02c5a48f2c4d][Reading and Writing Buffers]]
+**** [[id:fab15bf0-8891-459f-8ad3-4cd6ed4b7453][IELM]]
+*** [[id:f3a38690-14a7-400a-a15a-c54b919fb85d][Lisp Terminology]]
+
+* Read On
+
+[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+*** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+**** [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
+*** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+*** [[id:f3a38690-14a7-400a-a15a-c54b919fb85d][Lisp Terminology]]
+
+* References
+
+[[id:822aa9c2-566b-4ae9-b8db-7a99f0ea5ae4][References]]

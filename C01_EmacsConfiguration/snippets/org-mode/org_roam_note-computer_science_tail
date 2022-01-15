@@ -1,13 +1,29 @@
 # -*- mode: snippet -*-
-# name: Org_Roam_Note-Computer_Science_Tail
+# name: org_roam_note-computer_science_tail
 # key: <orncst
 # --
+* Topic Overview
+
+* [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+** [[id:e0428cca-9e69-4804-98d7-888ce3e2c7d6][Terminology]]
+*** [[id:df54793b-dce8-47e7-93f6-86ca9678c315][Software]]
+*** [[id:fb7c6213-55f1-4fd9-acd5-7158eb78aa17][Operating System]]
+** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
+*** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+** [[id:e946a409-5efb-467a-a459-2d5841a22438][Data Science]]
+** [[id:8efaf08d-1d5d-428f-80cf-90da3bb92684][Machine Learing]]
+** [[id:9b4211ec-05ce-48be-a12e-5c9eaeb60dc9][Encoding]]
+*** [[id:e1462d13-6ac4-4f76-9129-d866e90baad2][ASCII: American Standard Code for Information Interchange]]
+*** [[id:40f3f142-cf2a-44f0-a9fb-da5f5bf448cc][Unicode: Universal Coded Character Set (UCS)]]
 
 * Read On
 
-** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
 ** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
-** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
 
 * References
 

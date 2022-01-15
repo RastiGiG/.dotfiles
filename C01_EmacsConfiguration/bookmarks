@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("D02 Akten"
+(("D04 Downloads"
+ (filename . "~/Downloads/")
+ (front-context-string . "Deutsche_Bahn-FZ")
+ (rear-context-string . "K 13. Jan 01:02 ")
+ (position . 170))
+("D03 Finanzen"
+ (filename . "~/Documents/04_Finanzen/")
+ (front-context-string . "00_Jahresfinanzb")
+ (rear-context-string . "K  7. Jan 23:43 ")
+ (position . 182))
+("D02 Akten"
  (filename . "~/Documents/01_Akten/")
  (front-context-string . "01_Arbeit\n  drwx")
  (rear-context-string . "K 23. Feb 2021  ")
