@@ -4,49 +4,54 @@
 # --
 * Topic Overview
 
-* Read On
-
-** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
 ** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
-*** General
+*** Setup
 **** [[id:89a73091-1048-4a87-b014-ecb5d774e9f8][Installation]]
 ***** [[id:aa42ae5f-317c-45de-920c-c79304abf294][Build Emacs from Source]]
 ***** [[id:091c4616-71cc-488f-adff-e558cff5ae3d][Adding additional Manuals to Emacs Info Tree]]
-**** [[id:3e72c7e6-43f6-42b1-ab01-449b471b50ce][Settings]]
-**** [[id:4427137c-bd0d-4178-a1b2-23ded8aeded3][Keybindings]]
-***** [[id:617cbcd7-d327-446c-8ab2-a7527140a2fd][Basic Key Strokes]]
-***** [[id:cb9537b7-6568-49a2-9a01-8c9db989c616][Basic Movement]]
-***** [[id:0e3a153f-7e92-42df-8403-d93f59778932][Structural Movement]]
-***** [[id:b8592b35-35f6-4018-b2c5-d6e6a979501e][Special Movements]]
-***** [[id:b37b73ed-0e9c-4ac2-abc3-a43e9d4223a5][Searching]]
-***** [[id:63c77d41-1979-4efd-832f-2abd07cb0cf4][Mark, Point and Region]]
-***** [[id:4d51d9bb-4897-4120-98ab-4311a2ecd420][Cut, Copy and Paste]]
-***** [[id:62289077-7b0c-475f-ad5f-574e7e93ff15][Undo/Redo]]
-***** [[id:7108e8fd-a0ee-4b78-81f8-8b634640045f][Rectangles]]
-***** [[id:bdb7fcc6-b630-4719-82cf-5842d7b5a256][Replace Text]]
-***** [[id:1119b53d-679c-4873-ba6a-4e4e09ea1ce1][Universal Arguments]]
-***** [[id:854a4b21-f62c-4369-8954-da3709cafaa8][Macros]]
-***** [[id:57656a0e-a08a-4389-bb43-7067c1469297][Getting Help]]
-***** [[id:1c175af2-1638-43cd-8a5c-bbe50c0dd39b][Multiple Buffer Management]]
-***** [[id:83452ceb-8fc4-4492-82aa-c866449c2a1b][Window Management]]
-***** [[id:f094fb60-4f12-4ddb-914e-3b7bc7944894][Compiling Code]]
-***** Mode Specific Keybindings
-****** [[id:2153429b-3061-46e9-b722-d83efe9956d2][Ivy Mode]]
-****** [[id:a91b9699-0168-4abf-9888-f3d2361f7c0d][Org Mode]]
-****** [[id:6024fca7-a0ce-4c29-afdf-f31b66bfeeb1][Dired Mode]]
-****** [[id:010d4a84-6817-477f-a63e-52aaac56b135][Terminal Modes]]
-****** [[id:85b30754-92f7-4f00-b63f-9372533fc1fd][Tab Bar Mode]]
-****** [[id:83fedc4e-9eea-499c-91f2-f07db41ae432][Winner Mode]] 
-****** [[id:6cdf0fb1-747c-44b6-9135-41c191bfcf34][mu4e Mode]]
-******* [[id:dffb2e00-44ee-428d-a172-7cbb5aa7b18c][Message View Mode]]
-**** [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Modes]]
-***** Major Modes
-****** [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]]
-****** [[id:459e7903-23b0-4716-a08c-6a4b8f80f2db][Dired Mode]]
-****** [[id:211d12c6-29db-4550-bd06-ef6f8b32640c][Elfeed Mode]]
-***** Minor Modes
-****** [[id:e36e8756-f8c7-4525-8283-173a66f45b58][Treemacs Mode]]
-****** [[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippet Mode]]
+**** [[id:3e72c7e6-43f6-42b1-ab01-449b471b50ce][Customization]]
+*** [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Modes]]
+**** Major Modes
+***** [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]]
+***** [[id:459e7903-23b0-4716-a08c-6a4b8f80f2db][Dired Mode]]
+***** [[id:211d12c6-29db-4550-bd06-ef6f8b32640c][Elfeed Mode]]
+**** Minor Modes
+***** [[id:e36e8756-f8c7-4525-8283-173a66f45b58][Treemacs Mode]]
+***** [[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippet Mode]]
+***** [[id:cfb0e412-7d18-4c22-9a71-6d57d4dde7d4][Customization Mode]]
+***** [[id:34b85112-9fb9-4b50-85ea-dc85c2c82708][Evil Mode]]
+*** [[id:4427137c-bd0d-4178-a1b2-23ded8aeded3][Keybindings]]
+**** [[id:617cbcd7-d327-446c-8ab2-a7527140a2fd][Basic Key Strokes]]
+**** [[id:cb9537b7-6568-49a2-9a01-8c9db989c616][Basic Movement]]
+**** [[id:0e3a153f-7e92-42df-8403-d93f59778932][Structural Movement]]
+**** [[id:b8592b35-35f6-4018-b2c5-d6e6a979501e][Special Movements]]
+**** [[id:b37b73ed-0e9c-4ac2-abc3-a43e9d4223a5][Searching]]
+**** [[id:63c77d41-1979-4efd-832f-2abd07cb0cf4][Mark, Point and Region]]
+**** [[id:4d51d9bb-4897-4120-98ab-4311a2ecd420][Cut, Copy and Paste]]
+**** [[id:62289077-7b0c-475f-ad5f-574e7e93ff15][Undo/Redo]]
+**** [[id:7108e8fd-a0ee-4b78-81f8-8b634640045f][Rectangles]]
+**** [[id:bdb7fcc6-b630-4719-82cf-5842d7b5a256][Replace Text]]
+**** [[id:1119b53d-679c-4873-ba6a-4e4e09ea1ce1][Universal Arguments]]
+**** [[id:854a4b21-f62c-4369-8954-da3709cafaa8][Macros]]
+**** [[id:57656a0e-a08a-4389-bb43-7067c1469297][Getting Help]]
+**** [[id:1c175af2-1638-43cd-8a5c-bbe50c0dd39b][Multiple Buffer Management]]
+**** [[id:83452ceb-8fc4-4492-82aa-c866449c2a1b][Window Management]]
+**** [[id:f094fb60-4f12-4ddb-914e-3b7bc7944894][Compiling Code]]
+**** Mode Specific Keybindings
+***** [[id:2153429b-3061-46e9-b722-d83efe9956d2][Ivy Mode]]
+***** [[id:a91b9699-0168-4abf-9888-f3d2361f7c0d][Org Mode]]
+***** [[id:6024fca7-a0ce-4c29-afdf-f31b66bfeeb1][Dired Mode]]
+***** [[id:c3caab90-cb74-4c7b-8b29-d6ef2cbdbb72][Evil Mode]]
+***** [[id:010d4a84-6817-477f-a63e-52aaac56b135][Terminal Modes]]
+***** [[id:85b30754-92f7-4f00-b63f-9372533fc1fd][Tab Bar Mode]]
+***** [[id:83fedc4e-9eea-499c-91f2-f07db41ae432][Winner Mode]] 
+***** [[id:6cdf0fb1-747c-44b6-9135-41c191bfcf34][mu4e Mode]]
+****** [[id:dffb2e00-44ee-428d-a172-7cbb5aa7b18c][Message View Mode]]
+*** [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Packages]]
+**** [[id:3d0f5144-1102-48b6-9900-1442758edef2][Chemacs]]
+*** [[id:6ec7ca8f-2e7a-4e41-bffb-e37bd52cec98][Distributions]]
+**** [[id:316edbc0-fb88-411b-b459-6be42b9263e7][Doom Emacs]]
+**** [[id:bed238fc-fd6a-4b63-bce0-5fa35d0ec178][Spacemacs]]
 *** Additional Functionality
 **** [[id:6b687480-63b4-4119-8e9a-1de49996ade4][Project Utilities]]
 **** [[id:04089742-0aca-4398-b24a-5bad40d8162c][Developement Functionality]]
@@ -54,8 +59,26 @@
 **** [[id:4b2d6c6b-bc5a-4bc9-b5cb-2f1f608927cf][Additional Functionality - Others]]
 *** More
 **** [[id:2fd9cb61-7b4b-43d9-8f96-704aede346e4][Getting Help]]
+**** [[id:b828f453-da9c-4c41-94b5-584418e9ec5d][Tipps]]
 **** [[id:ef460edf-b607-4e72-ae3a-2b6b923ea900][ToolTime Tutorials]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:387fe10d-6d4b-4eb8-b3ed-cf5bffe506de][Editors]]
+****** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+****** [[id:8212a283-520d-495c-86ee-fc47d1a00363][VIM]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+****** [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
 
 * References
 
 [[id:dfd46519-50c1-45fa-b612-81ac21797382][References]]
+
+** Websites
+
+** Literature
