@@ -2,7 +2,47 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("D04 Downloads"
+(("C3-T EmacsTestConfig.org"
+ (filename . "~/.dotfiles/000_OrgFiles/EmacsTestConfig.org")
+ (front-context-string . "#+TITLE: Persona")
+ (rear-context-string)
+ (position . 1))
+("I01-1 Org Latex Preview.org"
+ (filename . "~/Projects/InfoFiles/Emacs/Worg/org-tutorials/org-latex-preview.org")
+ (front-context-string . "# This file is r")
+ (rear-context-string)
+ (position . 1))
+("I01 Worg Index"
+ (filename . "~/Projects/InfoFiles/Emacs/Worg/index.org")
+ (front-context-string . "# in your load-p")
+ (rear-context-string . "e/elisp/worg.el\n")
+ (position . 654))
+("D01-5 SS 2021"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/5_SS_2021/")
+ (front-context-string)
+ (rear-context-string . "0. Dez 21:41 ..\n")
+ (position . 172))
+("D01-4 WS 2020/2021"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/4_WS_2020-2021/")
+ (front-context-string)
+ (rear-context-string . "0. Dez 21:41 ..\n")
+ (position . 177))
+("D01-3 SS 2020"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/3_SS_2020/")
+ (front-context-string)
+ (rear-context-string . "0. Dez 21:41 ..\n")
+ (position . 172))
+("D01-2 WS 2019/2020"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/2_WS_2019-2020/")
+ (front-context-string)
+ (rear-context-string . "0. Dez 21:41 ..\n")
+ (position . 177))
+("D01-1 SS 2019"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/1_SS_2019/")
+ (front-context-string)
+ (rear-context-string . "0. Dez 21:41 ..\n")
+ (position . 172))
+("D04 Downloads"
  (filename . "~/Downloads/")
  (front-context-string . "Deutsche_Bahn-FZ")
  (rear-context-string . "K 13. Jan 01:02 ")
@@ -48,11 +88,11 @@
  (rear-context-string . "\n* List of Tags\n")
  (position . 181))
 ("C3-3 Elfeed Score Config"
- (filename . "~/.dotfiles/C01_EmacsConfiguration/.emacs.d/elfeed.score")
+ (filename . "~/.dotfiles/D05_Emacs/elfeed.score")
  (front-context-string . "\n;; ((\"title\"\n;;")
  (rear-context-string . " -*- lisp -*-\n()")
  (position . 74))
-("D01-1 WS 2021/22"
+("D01-6 WS 2021/22"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/6_WS_2021-2022/")
  (front-context-string . "B_6_8_2_Biotherm")
  (rear-context-string . "4  9. Jan 12:14 ")

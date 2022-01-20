@@ -1,0 +1,63 @@
+;;; Elfeed score file                                     -*- lisp -*-
+(
+ ;; Title Only Score Rules
+ ("title"
+  (:text "LdN" :value 100 :type S :tag (t . podcasts) :comment "Add 100 to Podcast 'Lage der Nation'")
+  (:text "python" :value 10 :type s :comment "Add 10 to Feeds addressing Python")
+  )
+
+ ;; Content only Score Rules
+ ("content"
+  (:text "org-mode" :value 10 :type s :comment )
+  )
+
+ ;; Title or Content Rules
+ ("title-or-content"
+  (:text "emacs" :title-value 20 :content-value 10 :type s)
+  )
+
+ ;; Feed Score Rules - Applying to feednames
+ ("feed"
+  (:text "Lage der Nation" :value 100 :type s :attr a :comment "Add 100 to Podcast 'Lage der Nation'")
+  (:text "tex" :value 100 :type s :attr a :comment "Add 100 to TeX/LaTeX related feeds"))
+
+ ;; Tag Score Rules
+ ("tag"
+  (:tags (t . podcasts)
+	 :value 100
+	 :comment "Add 100 to Podcasts" )
+  (:tags (t . mailinglists)
+	 :value -100
+	 :comment "Subtract 100 from Mailinglists" )
+  (:tags (t . blogs)
+	 :value 50
+	 :comment "Add 50 to Blogs" )
+  (:tags (t . reddit)
+	 :value -50
+	 :comment "Subtract 50 from Reddit Posts" )
+  )
+
+ ;; Mark Entries below a certain threshold as 'read'
+ (mark -1000)
+ )
+;; (("title"
+;;   (:text "OPEN THREAD" :value -1000 :type S)
+;;   (:text "raymond c\\(hen\\)?" :value 250 :type r) :tags (t .(@dev)))
+;;  ("content"
+;;   (:text "type erasure" :value 500 :type s))
+;;  ("title-or-content"
+;;   (:text "california" 150 100 :type s)
+;;   (:text "china" 150 100 :type w))
+;;  ("feed"
+;;   (:text "Essays in Idleness" :value 250 :type S :attr t)
+;;   (:text "Irreal" :value 250 :type S :attr t)
+;;   (:text "Julia Evans" :value 100 :type :type s :attr t)
+;;   (:text "National Weather Service" :value 400 :type S :attr t)
+;;   (:text "emacs-news – sacha chua" :value 350 :type S :attr t :comment "Essential!"))
+;;  ("authors"
+;;    (:text "Jim Geraghty" :value 500 :type s))
+;;  ("tag"
+;;   (:tags (t . reddit-question)
+;;    :value 750
+;;    :comment "Add 750 points to any entry with a tag of reddit-question"))
+;;  (mark -2500))
