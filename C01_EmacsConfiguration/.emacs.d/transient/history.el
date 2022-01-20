@@ -1,4 +1,7 @@
-((magit-branch nil)
+((emoji--command-Emoji nil)
+ (emoji--command-Emoji\ >\ Smileys nil)
+ (emoji--command-Emoji\ >\ Smileys\ >\ hat nil)
+ (magit-branch nil)
  (magit-cherry-pick
   ("--ff"))
  (magit-commit nil)

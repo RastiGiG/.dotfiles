@@ -83,6 +83,8 @@ tramp
 /C01_EmacsConfiguration/**/elpa
 /C01_EmacsConfiguration/**/*-old
 /C01_EmacsConfiguration/**/straight
+/C01_EmacsConfiguration/**/emoji
+/C01_EmacsConfiguration/**/dropbox
 
 # reftex files
 *.rel
