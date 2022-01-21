@@ -26,32 +26,32 @@
 (defvar pet/default-variable-font-size 120)
 
 ;; bootstrap script to install straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+ (defvar bootstrap-version)
+ (let ((bootstrap-file
+	(expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+       (bootstrap-version 5))
+   (unless (file-exists-p bootstrap-file)
+     (with-current-buffer
+	 (url-retrieve-synchronously
+	  "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	  'silent 'inhibit-cookies)
+       (goto-char (point-max))
+       (eval-print-last-sexp)))
+   (load bootstrap-file nil 'nomessage))
 
-;; Use straight.el for use-package expressions
-(straight-use-package 'use-package)
+ ;; Use straight.el for use-package expressions
+ (straight-use-package 'use-package)
 
-;; Make sure to always install packages (pendant to use-package-always-ensure)
-(setq straight-use-package-by-default t)
+ ;; Make sure to always install packages (pendant to use-package-always-ensure)
+ (setq straight-use-package-by-default t)
 
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-	("melpa-stable" . "https://stable.melpa.org/packages/")
-	("org" . "https://orgmode.org/elpa/")
-	("elpa" . "https://elpa.gnu.org/packages/")))
+       '(("melpa" . "https://melpa.org/packages/")
+ 	 ("melpa-stable" . "https://stable.melpa.org/packages/")
+ 	 ("org" . "https://orgmode.org/elpa/")
+ 	 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;; A few basic settings
 
@@ -457,13 +457,9 @@
   (setq elfeed-search-date-format
 	'("%F %R" 16 :left))
 
-;; Snippet for periodic update for feeds
-;; (3 mins since Emacs start, then every
-;; half hour)
-  (run-at-time 180 1800
-	       (lambda ()
-		 (unless elfeed-waiting
-		   (elfeed-update))))
+  ;; Snippet for periodic update for feeds
+  (add-to-list 'elfeed-update-hooks 'elfeed-update)
+  (run-with-timer 0 (* 60 60 4) 'elfeed-update)
   )
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
@@ -502,7 +498,7 @@
   :commands (dired dired-jump)
   ;; The prefixes are arguments given to "ls" by dired
   :custom ((dired-listing-switches
-            "-aghlv --group-directories-first"))
+	    "-aghlv --group-directories-first"))
   :bind (("C-x C-j" . dired-jump))
     )
 
@@ -522,47 +518,61 @@
 			      ("mp4" . "mpv")
 			      ("pdf" . "zathura")))
 
+;; Add Filters by file extension to dired buffer
+(use-package dired-filter)
+
+;; Add Ranger Directory Explorer
+(use-package ranger
+  :config
+  ;; I don't want ranger to be the default
+  (ranger-override-dired-mode nil)
+  )
+
 ;; Helper Functions for Org
-(defun pet/org-font-setup ()
-  ;; Replace list hyphen with dot
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+  (defun pet/org-font-setup ()
+    ;; Set faces for heading levels
+    (dolist (face '((org-level-1 . 1.2)
+		    (org-level-2 . 1.15)
+		    (org-level-3 . 1.1)
+		    (org-level-4 . 1.05)
+		    (org-level-5 . 1.02)
+		    (org-level-6 . 1.0)
+		    (org-level-7 . 1.0)
+		    (org-level-8 . 1.0)))
+      (set-face-attribute
+       (car face)
+       nil
+       :font "Cantarell"
+       :weight 'regular
+       :height (cdr face)))
 
-  ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.15)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.05)
-                  (org-level-5 . 1.02)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
-    (set-face-attribute
-     (car face)
-     nil
-     :font "Cantarell"
-     :weight 'regular
-     :height (cdr face)))
+    ;; Ensure that anything that should be
+    ;; fixed-pitch in Org files appears that way
+    (set-face-attribute 'org-block nil
+			:foreground nil
+			:inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil
+			:inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil
+			:inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil
+			:inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil
+			:inherit '(font-lock-comment-face
+				   fixed-pitch))
+    (set-face-attribute 'org-meta-line nil
+			:inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil
+			:inherit 'fixed-pitch))
 
-  ;; Ensure that anything that should be
-  ;; fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil
-                      :foreground nil
-                      :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil
-                      :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil
-                      :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil
-                      :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil
-                      :inherit '(font-lock-comment-face
-                                 fixed-pitch))
-  (set-face-attribute 'org-meta-line nil
-                      :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil
-                      :inherit 'fixed-pitch))
+;; Replace list hyphen with dot
+(defun pet/org-replace-hyphen ()
+  (font-lock-add-keywords
+     'org-mode '(("^ *\\([-]\\) "
+		  (0 (prog1 () (compose-region
+				(match-beginning 1)
+				(match-end 1) "•"))))))
+  )
 
 ;; Setting Up Org Mode
 (use-package org
@@ -588,6 +598,9 @@
 
   ;; Set Org Clock Sound File
   (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav")
+
+  ;; Enable helper function replacing hyphen
+  (pet/org-replace-hyphen)
   )
 
 ;; Setup Org Superstar
@@ -1447,30 +1460,30 @@
 (autoload 'octave-help "octave-hlp" nil t)
 
 ;; Integrated environment for TeX
-  ;;(use-package auctex
-  ;;  :config
-  ;;  ;; enable completion
-  ;;  (setq-default TeX-master nil)
-  ;;  ;; 
-  ;;  (setq TeX-parse-self t)
-  ;;  ;; enable auto saving tex files
-  ;;  (setq TeX-auto-save t))
+(use-package tex-site
+  :straight auctex)
 
-  ;; LatexMK support for AUCTeX
-  ;; (use-package auctex-latexmk)
+;; enable completion
+(setq-default TeX-master nil)
+(setq TeX-parse-self t)
+;; enable auto saving tex files
+(setq TeX-auto-save t)
 
-  ;; Useful features for LaTeX-mode
-  ;;(use-package latex-extra)
+;; LatexMK support for AUCTeX
+;; (use-package auctex-latexmk)
 
-  ;; Fast input methods for LaTeX environments and math
-  ;; (use-package cdlatex
-  ;;   :bind (:map cdlatex-mode-map
-  ;;               (nil . cdlatex-math-symbol)
-  ;;               ("C-`" . cdlatex-math-symbol)
-  ;;          :map org-cdlatex-mode-map
-  ;;          (nil . cdlatex-math-symbol)
-  ;;          ("C-`" . cdlatex-math-symbol))
-  ;; )              
+;; Useful features for LaTeX-mode
+;;(use-package latex-extra)
+
+;; Fast input methods for LaTeX environments and math
+;; (use-package cdlatex
+;;   :bind (:map cdlatex-mode-map
+;;               (nil . cdlatex-math-symbol)
+;;               ("C-`" . cdlatex-math-symbol)
+;;          :map org-cdlatex-mode-map
+;;          (nil . cdlatex-math-symbol)
+;;          ("C-`" . cdlatex-math-symbol))
+;; )              
 
 ;;   (require 'tex)
 ;;   ; default compiled document: pdf

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-it_security_tail
+# key: <ornitsect
+# --
+* Topic Overview
+
+** [[id:17da7523-4cb2-4e94-95cb-8f33f5985ac6][IT Security]]
+*** [[id:e9c61a47-545b-4b98-8cb4-918be64f3d66][Localhost]]
+*** [[id:4f449be3-2045-4868-b714-883598c8b7ea][Encryption]]
+*** [[id:07afdc4a-12e0-45c6-ac7b-52011e623940][Secure Hash Functions]]
+*** [[id:e607e470-408a-4504-a075-d20229e5540d][PGP]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+*** [[id:17da7523-4cb2-4e94-95cb-8f33f5985ac6][IT Security]]
+**** [[id:e9c61a47-545b-4b98-8cb4-918be64f3d66][Localhost]]
+**** [[id:4f449be3-2045-4868-b714-883598c8b7ea][Encryption]]
+**** [[id:07afdc4a-12e0-45c6-ac7b-52011e623940][Secure Hash Functions]]
+**** [[id:e607e470-408a-4504-a075-d20229e5540d][PGP]]
+** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:9cb9758e-3017-4efe-9f1b-b233984b4734][IT Security References]]
+
+** Websites
+
+** Literature

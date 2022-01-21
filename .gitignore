@@ -74,7 +74,29 @@ tramp
 /C01_EmacsConfiguration/**/elfeed.stats
 /C01_EmacsConfiguration/**/elfeed/
 
-# elpa packages
+#############
+## Emojis
+/C01_EmacsConfiguration/**/emojis/
+
+#############
+## Prescient 
+/C01_EmacsConfiguration/**/prescient-save.el
+/C01_EmacsConfiguration/**/recentf
+
+#############
+## LSP Server 
+/C01_EmacsConfiguration/**/.lsp*
+
+#############
+## Magit
+/C01_EmacsConfiguration/**/history.el
+
+#############
+## Treemacs
+/C01_EmacsConfiguration/**/treemacs-persist
+
+############
+# ELPA packages
 /elpa/
 /*-old/
 /**/elpa

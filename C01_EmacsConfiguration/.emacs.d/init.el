@@ -32,9 +32,9 @@
       (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
@@ -44,6 +44,14 @@
 
 ;; Make sure to always install packages (pendant to use-package-always-ensure)
 (setq straight-use-package-by-default t)
+
+;; This is set just to be able to lookup packages
+;; It's not required since we use straight anyway
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+	("melpa-stable" . "https://stable.melpa.org/packages/")
+	("org" . "https://orgmode.org/elpa/")
+	("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;; A few basic settings
 
@@ -59,9 +67,9 @@
 ;; Start Emacs in Fullscreen mode and set transparancy
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 
 ;; Set default Encoding to UTF-8
 (set-language-environment "UTF-8")
@@ -74,8 +82,10 @@
 (column-number-mode)
 ;; Set Line Numbers Globally
 (global-display-line-numbers-mode t)
-;; Set Visual Line Mode Globally
-(global-visual-line-mode t)
+
+;; Set Visual Line Mode for text modes only
+;; Preferred over global-visual-line-mode
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
@@ -258,7 +268,7 @@
 (use-package doom-modeline
   ;; Activate Doom Modeline
   ;; :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+  :custom ((doom-modeline-height 20)))
 
 ;; Load which-key
 ;; Loads a more helpful UI Completion buffer 
@@ -302,19 +312,19 @@
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
-         ("C-r" . swiper)
-         :map ivy-minibuffer-map
-         ("TAB" . ivy-alt-done)
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
+	 ("C-r" . swiper)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
 
@@ -322,16 +332,38 @@
 (use-package counsel
   :after ivy
   :bind (("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
   :config
-  (counsel-mode 1))
+  (counsel-mode 1)
 
-  ;; Ivy-Rich: Add Descriptions alongside M-x commands
+  ;; Add Counsel function to leader key space
+  (pet/leader-keys
+    "r"   '(ivy-resume :which-key "ivy resume")
+    "f"   '(:ignore t :which-key "files")
+    "ff"  '(counsel-find-file :which-key "open file")
+    "C-f" 'counsel-find-file
+    "fr"  '(counsel-recentf :which-key "recent files")
+    "fR"  '(revert-buffer :which-key "revert file")
+    "fj"  '(counsel-file-jump :which-key "jump to file"))
+  )  
+;; Ivy-Rich: Add Descriptions alongside M-x commands
 (use-package ivy-rich
   :after ivy
   :init
   (ivy-rich-mode 1))
+
+;; Add Prescient for spooky Emacs Memory (history)
+(use-package prescient
+  :after counsel
+  :config
+  (prescient-persist-mode 1))
+
+;; Enable Prescient in Ivy
+(use-package ivy-prescient
+  :after prescient
+  :config
+  (ivy-prescient-mode 1))
 
 ;; Use Helpful to get a better help buffer
 (use-package helpful
@@ -341,9 +373,10 @@
   (counsel-describe-variable-function
    #'helpful-variable)
   :bind
-  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-function] . helpful-function)
+  ([remap describe-symbol] . helpful-symbol)
   ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key))
 
 ;; Add Perspective to use sets of 
@@ -355,6 +388,10 @@
   ;; 	   ("C-x k" . persp-kill-buffer*))
   :custom
   (persp-initial-frame-name "Main")
+  ;; Set default file for states
+  (persp-state-default-file
+   (concat pet/dotfiles-emacsconfig-dir
+	   "perspective/default-state"))
   :config
   ;; Running `persp-mode' multiple times resets the perspective list...
   (unless (equal persp-mode t)
@@ -427,12 +464,8 @@
       '("%F %R" 16 :left))
 
 ;; Snippet for periodic update for feeds
-;; (3 mins since Emacs start, then every
-;; half hour)
-(run-at-time 180 1800
-	     (lambda ()
-	       (unless elfeed-waiting
-		 (elfeed-update))))
+(add-to-list 'elfeed-update-hooks 'elfeed-update)
+(run-with-timer 0 (* 60 60 4) 'elfeed-update)
 )
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
@@ -480,22 +513,38 @@
   :hook
   (dired-mode . all-the-icons-dired-mode))
 
+;; Use dired-open to launch external apps 
+(use-package dired-open)
+;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
+;; open .pdf in 'zahtura'
+(setq dired-open-extensions '(("gif" . "sxiv")
+			      ("jpg" . "sxiv")
+			      ("png" . "sxiv")
+			      ("mkv" . "mpv")
+			      ("mp4" . "mpv")
+			      ("pdf" . "zathura")))
+
+;; Add Filters by file extension to dired buffer
+(use-package dired-filter)
+
+;; Add Ranger Directory Explorer
+(use-package ranger
+  :config
+  ;; I don't want ranger to be the default
+  (ranger-override-dired-mode nil)
+  )
+
 ;; Helper Functions for Org
 (defun pet/org-font-setup ()
-  ;; Replace list hyphen with dot
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
-                  (org-level-2 . 1.15)
-                  (org-level-3 . 1.1)
-                  (org-level-4 . 1.05)
-                  (org-level-5 . 1.02)
-                  (org-level-6 . 1.0)
-                  (org-level-7 . 1.0)
-                  (org-level-8 . 1.0)))
+		  (org-level-2 . 1.15)
+		  (org-level-3 . 1.1)
+		  (org-level-4 . 1.05)
+		  (org-level-5 . 1.02)
+		  (org-level-6 . 1.0)
+		  (org-level-7 . 1.0)
+		  (org-level-8 . 1.0)))
     (set-face-attribute
      (car face)
      nil
@@ -506,21 +555,30 @@
   ;; Ensure that anything that should be
   ;; fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil
-                      :foreground nil
-                      :inherit 'fixed-pitch)
+		      :foreground nil
+		      :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil
-                      :inherit '(shadow fixed-pitch))
+		      :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-table nil
-                      :inherit '(shadow fixed-pitch))
+		      :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-verbatim nil
-                      :inherit '(shadow fixed-pitch))
+		      :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-special-keyword nil
-                      :inherit '(font-lock-comment-face
-                                 fixed-pitch))
+		      :inherit '(font-lock-comment-face
+				 fixed-pitch))
   (set-face-attribute 'org-meta-line nil
-                      :inherit '(font-lock-comment-face fixed-pitch))
+		      :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil
-                      :inherit 'fixed-pitch))
+		      :inherit 'fixed-pitch))
+
+;; Replace list hyphen with dot
+(defun pet/org-replace-hyphen ()
+  (font-lock-add-keywords
+   'org-mode '(("^ *\\([-]\\) "
+		(0 (prog1 () (compose-region
+			      (match-beginning 1)
+			      (match-end 1) "•"))))))
+  )
 
 ;; Setting Up Org Mode
 (use-package org
@@ -546,6 +604,10 @@
 
   ;; Set Org Clock Sound File
   (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav")
+
+
+  ;; Enable helper function replacing hyphen
+  (pet/org-replace-hyphen)
   )
 
 ;; Setup Org Superstar
@@ -1126,6 +1188,7 @@
   :bind
   ("C-c c" . org-capture))
 
+;; Org Roam is very handy to create a 'second brain'
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
@@ -1136,51 +1199,70 @@
   (org-roam-completion-everywhere t)
 
   :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n I" . org-roam-node-insert-immediate)
-         :map org-mode-map
-         ("C-M-i"    . completion-at-point)
-         :map org-roam-dailies-map
-         ("Y" . org-roam-dailies-capture-yesterday)
-         ("T" . org-roam-dailies-capture-tomorrow))
+	 ("C-c n f" . org-roam-node-find)
+	 ("C-c n i" . org-roam-node-insert)
+	 ("C-c n I" . org-roam-node-insert-immediate)
+	 :map org-mode-map
+	 ("C-M-i"    . completion-at-point)
+	 :map org-roam-dailies-map
+	 ("Y" . org-roam-dailies-capture-yesterday)
+	 ("T" . org-roam-dailies-capture-tomorrow))
   :bind-keymap
   ("C-c n d" . org-roam-dailies-map)
   :config
-      ;; org roam capture templates
+  ;; org roam capture templates
   (setq org-roam-capture-templates
-        `(("d" "default" plain
-          "%?"
-          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
-          :unnarrowed t)
-          ("l" "programming language" plain
-           "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
-           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-           :unnarrowed t)  
-          ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
-           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-           :unnarrowed t)
-          ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
-           :unnarrowed t)
-          ))
+	`(("d" "default" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
+	   :unnarrowed t)
+	  ("l" "programming language" plain
+	   "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+	   :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
+	   :unnarrowed t)  
+	  ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
+	   :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
+	   :unnarrowed t)
+	  ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+	   :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
+	   :unnarrowed t)
+	  ))
 
 
-  ;; dailies capture template
+   ;; dailies capture template
   (setq org-roam-dailies-capture-templates
-        `(("d" "default" entry "* %<%I:%M %p>: %?"
-           :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
+	`(("d" "default" entry "* %<%I:%M %p>: %?"
+	   :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
 
   (org-roam-setup)
-  (require 'org-roam-dailies) ;; Ensure the keymap is available
+  ;; Ensure the keymap is available
+  (require 'org-roam-dailies)
   (org-roam-db-autosync-mode))
 
+;; Helper Function to insert org note immediately
 (defun org-roam-node-insert-immediate (arg &rest args)
   (interactive "P")
   (let ((args (push arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
+	(org-roam-capture-templates
+	 (list (append (car org-roam-capture-templates)
+		       '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
+
+;; A Visualization of your org roam node structure
+(use-package org-roam-ui
+  :straight
+  (:host github :repo "org-roam/org-roam-ui"
+	 :branch "main" :files ("*.el" "out"))
+  :after org-roam
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+ :config
+ (setq org-roam-ui-sync-theme t
+      org-roam-ui-follow t
+      org-roam-ui-update-on-save t
+      org-roam-ui-open-on-start t))
 
 (use-package org-drill
   :config
@@ -1264,7 +1346,179 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
-(use-package magit)
+;; Add Language Server Support
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook ((typescript-mode js2-mode web-mode) . lsp)
+  :bind (:map lsp-mode-map
+	      ("TAB" . completion-at-point))
+  :custom (lsp-headerline-breadcrumb-enable nil)
+  :config (lsp-enable-which-key-integration t))
+
+;; Add Lsp Functions to Leader Keys
+(pet/leader-keys
+ "tl"  '(:ignore t :which-key "lsp")
+ "tld" 'xref-find-definitions
+ "tlr" 'xref-find-references
+ "tln" 'lsp-ui-find-next-reference
+ "tlp" 'lsp-ui-find-prev-reference
+ "tls" 'counsel-imenu
+ "tle" 'lsp-ui-flycheck-list
+ "tlS" 'lsp-ui-sideline-mode
+ "tlX" 'lsp-execute-code-action)
+
+;; Increase amount of data read from process for lsp
+(setq read-process-output-max (* 1024 1024))
+
+;; Add lsp ui for higher level ui options
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  ;; Show lsp info on sideline
+  :config
+  (setq lsp-ui-sideline-enable t)
+  (setq lsp-ui-sideline-show-hover nil)
+  (setq lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-show))
+
+;; Extend lsp and treemacs integration
+(use-package lsp-treemacs
+  :after lsp)
+
+(use-package dap-mode
+  :after lsp-mode
+  :config (dap-auto-configure-mode))
+(use-package dap-mode
+  :after lsp-mode
+  :custom
+  (lsp-enable-dap-auto-configure nil)
+  :config
+  (dap-ui-mode 1)
+  (dap-tooltip-mode 1)
+  (require 'dap-node)
+  (dap-node-setup))
+
+;; Enable Flycheck for syntax checking.
+;; Defer loading until used with lsp-mode
+(use-package flycheck
+  :defer t
+  :hook (lsp-mode . flycheck-mode))
+
+;; Easier Commenting, not just for evil-mode
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+
+(use-package magit
+  :bind ("C-x g" . magit-status)
+  :commands (magit-status magit-get-current-branch)
+  :custom
+  (magit-display-buffer-function
+    #'magit-display-buffer-same-window-except-diff-v1))
+
+;; Add Magit Commands to Leader Key Space
+(pet/leader-keys
+  "g"   '(:ignore t :which-key "git")
+  "gs"  'magit-status
+  "gd"  'magit-diff-unstaged
+  "gc"  'magit-branch-or-checkout
+  "gl"   '(:ignore t :which-key "log")
+  "glc" 'magit-log-current
+  "glf" 'magit-log-buffer-file
+  "gb"  'magit-branch
+  "gP"  'magit-push-current
+  "gp"  'magit-pull-branch
+  "gf"  'magit-fetch
+  "gF"  'magit-fetch-all
+  "gr"  'magit-rebase)
+
+;; Add Flycheck to elisp mode
+(add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
+
+(pet/leader-keys
+  "e"   '(:ignore t :which-key "eval")
+  "eb"  '(eval-buffer :which-key "eval buffer"))
+
+(pet/leader-keys
+  :keymaps '(visual)
+  "er" '(eval-region :which-key "eval region"))
+
+;; Load Octave Mode automatically for specified files
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+(setq auto-mode-alist
+      (cons '("\\.sci$" . octave-mode) auto-mode-alist))
+
+;; Setup Octave Mode
+(add-hook 'octave-mode-hook
+	  (lambda ()
+	    (abbrev-mode 1)
+	    (auto-fill-mode 1)
+	    (if (eq window-system 'x)
+		(font-lock-mode 1))))
+
+;; Use Infodocs within Emacs
+(autoload 'octave-help "octave-hlp" nil t)
+
+;; Integrated environment for TeX
+(use-package tex-site
+  :straight auctex)
+
+;; enable completion
+(setq-default TeX-master nil)
+(setq TeX-parse-self t)
+;; enable auto saving tex files
+(setq TeX-auto-save t)
+
+;; LatexMK support for AUCTeX
+;; (use-package auctex-latexmk)
+
+;; Useful features for LaTeX-mode
+;;(use-package latex-extra)
+
+;; Fast input methods for LaTeX environments and math
+;; (use-package cdlatex
+;;   :bind (:map cdlatex-mode-map
+;;               (nil . cdlatex-math-symbol)
+;;               ("C-`" . cdlatex-math-symbol)
+;;          :map org-cdlatex-mode-map
+;;          (nil . cdlatex-math-symbol)
+;;          ("C-`" . cdlatex-math-symbol))
+;; )              
+
+;;   (require 'tex)
+;;   ; default compiled document: pdf
+;;   (TeX-global-PDF-mode t)            
+;;   (setq TeX-view-program-list
+;; 	'(("zathura" "zathura --page=%(outpage) %o")))
+;; 
+;;   (setq TeX-view-program-selection
+;; 	'(((output-dvi has-no-display-manager) "dvi2tty")
+;; 	  ((output-dvi style-pstricks) "dvips and gv")
+;; 	  (output-dvi "xdvi")
+;; 	  (output-pdf "zathura")
+;; 	  (output-html "xdg-open")))
+
+;; Customize Python Mode for emacs, add lsp
+(use-package python-mode
+  :straight nil
+  :hook (python-mode . lsp-deferred)
+  :custom
+  ; (python-shell-interpreter "python3")
+  (dab-python-executable "python")
+  (dab-python-debugger 'debugpy)
+  :config
+  (require 'dab-python)
+  )
+
+;; Setup lsp-pyright Server
+(use-package lsp-pyright
+  :hook (python-mode . (lambda ()
+			 (require 'lsp-pyright)
+			 (lsp-deferred))))  ; or lsp
+
+;; Enable Virtual Environment Support
+(use-package pyvenv
+  :config
+  (pyvenv-mode 1))
 
 ;; Setup Automatic Tangling of Files
 
