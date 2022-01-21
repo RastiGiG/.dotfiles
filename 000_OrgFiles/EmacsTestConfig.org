@@ -21,7 +21,6 @@ The following variables are used to tweak some of the configuration pieces for u
 
 #+end_src
 
-
 ** Setting Up Needed Variables
 
 #+begin_src emacs-lisp
@@ -58,15 +57,15 @@ If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-packag
   ;; bootstrap script to install straight.el
   (defvar bootstrap-version)
   (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
+	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	(bootstrap-version 5))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
+	  (url-retrieve-synchronously
+	   "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	   'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
   ;; Use straight.el for use-package expressions
@@ -74,6 +73,14 @@ If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-packag
 
   ;; Make sure to always install packages (pendant to use-package-always-ensure)
   (setq straight-use-package-by-default t)
+
+  ;; This is set just to be able to lookup packages
+  ;; It's not required since we use straight anyway
+  (setq package-archives
+	'(("melpa" . "https://melpa.org/packages/")
+	  ("melpa-stable" . "https://stable.melpa.org/packages/")
+	  ("org" . "https://orgmode.org/elpa/")
+	  ("elpa" . "https://elpa.gnu.org/packages/")))
 
 #+end_src
 
@@ -93,8 +100,12 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   (menu-bar-mode -1)          ; Disable the menu bar
 
-  ;; Start Emacs in Fullscreen mode
+  ;; Start Emacs in Fullscreen mode and set transparancy
   (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+  (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+  (set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 
   ;; Set default Encoding to UTF-8
   (set-language-environment "UTF-8")
@@ -103,16 +114,21 @@ This section configures basic UI settings that remove unneeded elements to make 
   ;; Set up the visible bell
   (setq visible-bell t)
 
+  ;; Set Column Numbers
   (column-number-mode)
+  ;; Set Line Numbers Globally
   (global-display-line-numbers-mode t)
+  ;; Set Visual Line Mode for text modes only
+  ;; Preferred over global-visual-line-mode
+  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
   ;; Disable line numbers for some modes
   (dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  vterm-mode-hook
-                  shell-mode-hook
-                  eshell-mode-hook
-                  treemacs-mode))
+		  term-mode-hook
+		  vterm-mode-hook
+		  shell-mode-hook
+		  eshell-mode-hook
+		  treemacs-mode))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
@@ -134,41 +150,34 @@ These ~Fonts~ are using the =pet/default-font-size= variable defined earlier
 #+end_src
 
 * Quality of Live Adjustments
+** Startup
 
-** Keeping Folders Clean
-*** Backup Files
-
-:NOTE:
-Can't seem to get these settings to work, need to look into it further
-:END:
-
-~Backup Files~ are files with a ="\~"= at the end: =Emacs.org~=
-First we are gonna set the the directory for our backup files, to store them in a single place instead of all over the system
-More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html]]
+Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
 
 #+begin_src emacs-lisp
-  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+  ;; Setting garbage collection threshold (default is 800)
+  ;; Required for speed and also LSP
+  (setq gc-cons-threshold (* 50 1000 1000)
+	gc-cons-percentage 0.6)
+
+  ;; Profile emacs startup
+  (add-hook 'emacs-startup-hook
+	    (lambda ()
+	      (message "*** Emacs loaded in %s with %d garbage collections."
+		       (format "%.2f seconds"
+			       (float-time
+				(time-subtract after-init-time before-init-time)))
+		       gcs-done)))
+
+  ;; Silence compiler warnings as they can be pretty disruptive
+  ;;(setq comp-async-report-warnings-errors nil)
 #+end_src
-
-*** Auto Save Files
-
-~Auto Save Files~ are files with ="#"= on both ends: like =#Emacs.org#=. Next we are gonna save auto save files to a centralized location
-#+begin_src emacs-lisp
-  ;; auto-save-mode doesn't create the path automatically!
-  (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
-  
-  ;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
-  ;; this moves it to a more centralized location (tmp)
-  (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-        auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
-#+end_src
-
 ** Calender
 
 #+begin_src emacs-lisp
 
   ;; Show Calendar on StartUp                      
-  (calendar)
+  ;; (calendar)
 
   ;; set date format to %DD-%MM-%YYYY
   (setq european-calender-style 't)
@@ -195,7 +204,7 @@ Setup a location for your bookmarks-file
 
 #+begin_src emacs-lisp
   ;; Set Location for bookmarks file/s
-  (setq bookmark-default-fil
+  (setq bookmark-default-file
         (concat pet/dotfiles-emacsconfig-dir
                 "bookmarks"))
 #+end_src
@@ -217,6 +226,24 @@ Setup a location for your bookmarks-file
 
 #+end_src
 
+** World Clocks
+[[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] can display the curren clocktime for various places around the world with the command =world-clock=
+#+begin_src emacs-lisp
+  ;; Setup World Clock list
+  ;; If not set, zoneinfo-style-world-list is used
+  (setq world-clock-list
+	'(("Europe/Berlin" "Berlin")
+	  ("Europe/Paris" "Paris")
+	  ("Europe/London" "London")
+	  ("America/New_York" "New York")
+	  ("America/Los_Angeles" "Seattle")
+	  ("Asia/Calcutta" "Bangalore")
+	  ("Asia/Tokyo" "Tokyo"))
+	)
+
+  ;; Adjust how time is displayed
+  (setq display-time-world-time-format "%a, %d %b %H:%M %p %Z")
+#+end_src
 ** YASnippets
 
 Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration)
@@ -269,6 +296,14 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
                            "<return>") nil))
 #+end_src
 
+** Display Emojis
+[[https://github.com/iqbalansari/emacs-emojify][Emojify]] is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] extension to display ~emojis. It can display github style emojis like :smile: or plain ascii ones like :).
+[[id:40f3f142-cf2a-44f0-a9fb-da5f5bf448cc][Unicode Emojis]] können auch ohne dieses Paket schon angezeigt werden
+#+begin_src emacs-lisp
+  ;; Extend Emacs Emoji capability (apart from Unicode)
+  (use-package emojify
+    :hook (after-init . global-emojify-mode))
+#+end_src
 * Keybinding Configuration
 
  [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
@@ -284,10 +319,41 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
     (pet/leader-keys
      "t"  '(:ignore t :which-key "toggles")
      "tt" '(counsel-load-theme
-            :which-key "choose theme")))
+	    :which-key "choose theme")
+     "tw" 'whitespace-mode
+     "tc" 'world-clock
+     "l"  '(:ignore t :which-key "layout")
+    ))
 #+end_src
 
 * Extended UI Configuration
+** Dashboard
+[[https://github.com/emacs-dashboard/emacs-dashboard][Emacs Dashboard]] ads a start up screen to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Index Emacs]]
+#+begin_src emacs-lisp
+  ;; Add Dashboard to Emacs
+  (use-package dashboard
+    :init      ;; tweak dashboard config before loading it
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
+    (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+    ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")  ;; use custom image as banner
+    (setq dashboard-center-content nil) ;; set to 't' for centered content
+    (setq dashboard-items '((recents . 5)
+			    (agenda . 5 )
+			    (bookmarks . 3)
+			    (projects . 3)
+			    (registers . 3)))
+    :config
+    (dashboard-setup-startup-hook)
+    (dashboard-modify-heading-icons '((recents . "file-text")
+				(bookmarks . "book"))))
+#+end_src
+*** Dashboard as Client Startup
+#+begin_src emacs-lisp
+  ;; Make Emacsclient start up into dashboard
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+#+end_src
 ** Command Log Mode
 
 [[https://github.com/lewang/command-log-mode][command-log-mode]] is useful for displaying a panel showing each key binding you use in a panel on the right side of the frame.  Great for live streams and screencasts!
@@ -303,6 +369,7 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
 
 #+begin_src emacs-lisp
   ;; Load Doom Themes
+  ;; DISABLED TO DISTINGUISH TEST CONFIG
   (use-package doom-themes
     ;; :init (load-theme 'doom-dracula t)
     )
@@ -324,8 +391,8 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
   ;; Load doom modeline
   (use-package doom-modeline
     ;; Activate Doom Modeline
-    ;; :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 15)))
+    :init (doom-modeline-mode 1)
+    :custom ((doom-modeline-height 20)))
 #+end_src
 
 ** Which Key
@@ -382,6 +449,121 @@ First we want new tabs to always open with a *scratch* buffer
       (alist-get 'name (tab-bar--current-tab)))
 #+end_src
 
+** Ivy and Counsel
+
+[[https://oremacs.com/swiper/][Ivy]] is an excellent completion framework for Emacs.  It provides a minimal yet powerful selection menu that appears when you open files, switch buffers, and for many other tasks in Emacs.
+
+~Counsel~ is a customized set of commands to replace =find-file= with =counsel-find-file=, etc which provide useful commands for each of the default completion commands.
+
+[[https://github.com/Yevgnen/ivy-rich][ivy-rich]] adds extra columns to a few of the Counsel commands to provide more information about each item.
+
+#+begin_src emacs-lisp
+  ;; Load Ivy Completion Framework
+  (use-package ivy
+    :diminish
+    :bind (("C-s" . swiper)
+	   ("C-r" . swiper)
+	   :map ivy-minibuffer-map
+	   ("TAB" . ivy-alt-done)
+	   ("C-l" . ivy-alt-done)
+	   ("C-j" . ivy-next-line)
+	   ("C-k" . ivy-previous-line)
+	   :map ivy-switch-buffer-map
+	   ("C-k" . ivy-previous-line)
+	   ("C-l" . ivy-done)
+	   ("C-d" . ivy-switch-buffer-kill)
+	   :map ivy-reverse-i-search-map
+	   ("C-k" . ivy-previous-line)
+	   ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
+
+  ;; Add Counsel for customized find files etc..
+  (use-package counsel
+    :after ivy
+    :bind (("C-M-j" . 'counsel-switch-buffer)
+	   :map minibuffer-local-map
+	   ("C-r" . 'counsel-minibuffer-history))
+    :config
+    (counsel-mode 1)
+    ;; Add Counsel function to leader key space
+    (pet/leader-keys
+      "r"   '(ivy-resume :which-key "ivy resume")
+      "f"   '(:ignore t :which-key "files")
+      "ff"  '(counsel-find-file :which-key "open file")
+      "C-f" 'counsel-find-file
+      "fr"  '(counsel-recentf :which-key "recent files")
+      "fR"  '(revert-buffer :which-key "revert file")
+      "fj"  '(counsel-file-jump :which-key "jump to file")))
+
+    ;; Ivy-Rich: Add Descriptions alongside M-x commands
+  (use-package ivy-rich
+    :after ivy
+    :init
+    (ivy-rich-mode 1))
+#+end_src
+
+*** Prescient
+
+[[https://github.com/raxod502/prescient.el][Prescient]] makes emacs safe your recent history when accessing menus (like =C-h= or =M-x=)
+#+begin_src emacs-lisp
+  ;; Add Prescient for spooky Emacs Memory (history)
+  (use-package prescient
+    :after counsel
+    :config
+    (prescient-persist-mode 1))
+
+  ;; Enable Prescient in Ivy
+  (use-package ivy-prescient
+    :after prescient
+    :config
+    (ivy-prescient-mode 1))
+#+end_src
+** Helpful Help Commands
+
+[[https://github.com/Wilfred/helpful][Helpful]] adds a lot of very helpful (get it?) information to Emacs' =describe-= command buffers.  For example, if you use =describe-function=, you will not only get the documentation about the function, you will also see the source code of the function and where it gets used in other places in the Emacs configuration.  It is very useful for figuring out how things work in Emacs.
+
+#+begin_src emacs-lisp
+  ;; Use Helpful to get a better help buffer
+  (use-package helpful
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . helpful-function)
+    ([remap describe-symbol] . helpful-symbol)
+    ([remap describe-variable] . helpful-variable)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-key] . helpful-key))
+#+end_src
+** Perspective
+#+begin_src emacs-lisp
+  ;; Add Perspective to use sets of 
+  (use-package perspective
+    :demand t
+    ;; Setup Keybindings
+    ;; :bind (("C-M-k" . persp-switch)
+    ;; 	   ("C-M-n" . persp-next)
+    ;; 	   ("C-x k" . persp-kill-buffer*))
+    :custom
+    (persp-initial-frame-name "Main")
+    (persp-state-default-file
+     (concat pet/dotfiles-emacsconfig-dir
+	     "perspective/default-state"))
+    :config
+    ;; Running `persp-mode' multiple times resets the perspective list...
+    (unless (equal persp-mode t)
+      (persp-mode))
+
+    ;; Add Perspective Functions to User Leader Keys
+    (pet/leader-keys
+     "P"  '(:ignore t :which-key "Perspectives")
+     "Pn"  'persp-next  
+     "Ps"  'persp-switch-to-buffer*
+     "Pk"  'persp-kill-buffer*
+    )
+    )
+#+end_src
 ** Treemacs Mode
 
 =Treemacs= is a handy tree-style *file directory viewer* that's very similar to what you are used from commercial IDEs.
@@ -401,8 +583,9 @@ It's got good integration with =Projectile=
     ;; Add shortcut for treemacs to
     ;; personal keyspace
     (pet/leader-keys
-      "tt" 'treemacs
-      "tw" 'treemacs-select-window)
+     "lt"  '(:ignore t :which-key "treemacs")
+     "ltt" 'treemacs
+     "ltw" 'treemacs-select-window)
     )
 #+end_src
 
@@ -415,49 +598,58 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
 #+begin_src emacs-lisp
   (use-package elfeed
     :bind (("C-c f" . elfeed)
-           :map elfeed-search-mode-map
-           ("n" . (lambda () (interactive) (next-line) (call-interactively 'elfeed-search-show-entry)))
-           ("p" . (lambda () (interactive) (previous-line) (call-interactively 'elfeed-search-show-entry)))
-           ("m" . (lambda () (interactive) (apply 'elfeed-search-toggle-all '(star))))
-           ("g" . elfeed-update)
-           ("G" . elfeed-search-update--force)
-           ;;:map elfeed-show-mode-map
-           ;;("w" . elfeed-show-yank))
-       )
-  :config
-  (setq elfeed-show-entry-switch 'display-buffer)
-  (setq elfeed-search-remain-on-entry t)
-   ;; Various Necessary/Helpful Settings
-  (setq elfeed-use-curl t)
-  (setq elfeed-curl-max-connections 10)
-  (setq elfeed-db-directory
-        (concat pet/dotfiles-emacsconfig-dir
-                "elfeed/"))
-  (setq elfeed-enclosure-default-dir
-        "~/Downloads/")
-  (setq elfeed-search-filter
-        "@4-months-ago +unread")
-  (setq elfeed-sort-order 'descending)
-  (setq elfeed-search-clipboard-type 'CLIPBOARD)
-  (setq elfeed-search-title-max-width 150)
-  (setq elfeed-search-title-min-width 30)
-  (setq elfeed-search-trailing-width 25)
-  (setq elfeed-show-truncate-long-urls t)
-  (setq elfeed-show-unique-buffers t)
-  (setq elfeed-search-date-format
-        '("%F %R" 16 :left))
+	   :map elfeed-search-mode-map
+	   ("n" . (lambda () (interactive)
+		    (next-line)
+		    (call-interactively
+		     'elfeed-search-show-entry)))
+	   ("p" . (lambda () (interactive)
+		    (previous-line)
+		    (call-interactively
+		     'elfeed-search-show-entry)))
+	   ("m" . (lambda () (interactive)
+		    (apply
+		     'elfeed-search-toggle-all
+		     '(star))))
+	   ("g" . elfeed-update)
+	   ("G" . elfeed-search-update--force)
+	   ;;:map elfeed-show-mode-map
+	   ;;("w" . elfeed-show-yank))
+	   )
+    :config
+    (setq elfeed-show-entry-switch 'display-buffer)
+    (setq elfeed-search-remain-on-entry t)
+    ;; Various Necessary/Helpful Settings
+    (setq elfeed-use-curl t)
+    (setq elfeed-curl-max-connections 10)
+    (setq elfeed-db-directory
+	  (concat pet/dotfiles-emacsconfig-dir
+		  "elfeed/"))
+    (setq elfeed-enclosure-default-dir
+	  "~/Downloads/")
+    (setq elfeed-search-filter
+	  "@4-months-ago +unread")
+    (setq elfeed-sort-order 'descending)
+    (setq elfeed-search-clipboard-type 'CLIPBOARD)
+    (setq elfeed-search-title-max-width 150)
+    (setq elfeed-search-title-min-width 30)
+    (setq elfeed-search-trailing-width 25)
+    (setq elfeed-show-truncate-long-urls t)
+    (setq elfeed-show-unique-buffers t)
+    (setq elfeed-search-date-format
+	  '("%F %R" 16 :left))
 
   ;; Snippet for periodic update for feeds
   ;; (3 mins since Emacs start, then every
   ;; half hour)
-  (run-at-time 180 1800
-               (lambda ()
-                 (unless elfeed-waiting
-                   (elfeed-update))))
-  )
+    (run-at-time 180 1800
+		 (lambda ()
+		   (unless elfeed-waiting
+		     (elfeed-update))))
+    )
   ;; Load Feeds and Feed Settings  
   (load (concat pet/dotfiles-emacsconfig-dir
-                "EmacsRSSFeed.el"))
+		"EmacsRSSFeed.el"))
 #+end_src
 
 ** Elfeed-Score
@@ -482,31 +674,163 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
                   "elfeed.stats")))
 #+end_src
 
-* Org Mode
+* File Management
+
+** Keeping Folders Clean
+*** Backup Files
+
+:NOTE:
+Can't seem to get these settings to work, need to look into it further
+:END:
+
+~Backup Files~ are files with a ="\~"= at the end: =Emacs.org~=
+First we are gonna set the the directory for our backup files, to store them in a single place instead of all over the system
+More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html]]
 
 #+begin_src emacs-lisp
+  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+#+end_src
+
+*** Auto Save Files
+
+~Auto Save Files~ are files with ="#"= on both ends: like =#Emacs.org#=. Next we are gonna save auto save files to a centralized location
+#+begin_src emacs-lisp
+  ;; auto-save-mode doesn't create the path automatically!
+  (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
+  
+  ;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
+  ;; this moves it to a more centralized location (tmp)
+  (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+        auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+#+end_src
+
+** Dired
+
+Add the keybinding =C-x C-j= to <dired-jump>. Also we setup up the *base view* of the directory to *first list* *subdirectories* and then files
+#+begin_src emacs-lisp
+  ;; Configuring Dired
+  (use-package dired
+    :straight nil
+    ;; Defer loading of dired config til one of the commands is used
+    :commands (dired dired-jump)
+    ;; The prefixes are arguments given to "ls" by dired
+    :custom ((dired-listing-switches
+              "-aghlv --group-directories-first"))
+    :bind (("C-x C-j" . dired-jump))
+      )
+
+  ;; Adds icons to files and directories in dired           
+  (use-package all-the-icons-dired
+    :hook
+    (dired-mode . all-the-icons-dired-mode))
+#+end_src
+
+** Dired Open
+#+begin_src emacs-lisp
+  ;; Use dired-open to launch external apps 
+  (use-package dired-open)
+  ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
+  ;; open .pdf in 'zahtura'
+  (setq dired-open-extensions '(("gif" . "sxiv")
+				("jpg" . "sxiv")
+				("png" . "sxiv")
+				("mkv" . "mpv")
+				("mp4" . "mpv")
+				("pdf" . "zathura")))
+#+end_src
+
+* Org Mode
+
+[[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] is one of THE killer-features of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
+
+** Org Font Faces
+
+The =pet/org-font-setup= function configures various text faces to tweak the sizes of headings and use variable width fonts in most cases so that it looks more like we're editing a document in =org-mode=.  We switch back to fixed width (monospace) fonts for code blocks and tables so that they display correctly.
+
+#+begin_src emacs-lisp
+  ;; Helper Functions for Org
+  (defun pet/org-font-setup ()
+    ;; Replace list hyphen with dot
+    (font-lock-add-keywords 'org-mode
+                            '(("^ *\\([-]\\) "
+                               (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+    ;; Set faces for heading levels
+    (dolist (face '((org-level-1 . 1.2)
+                    (org-level-2 . 1.15)
+                    (org-level-3 . 1.1)
+                    (org-level-4 . 1.05)
+                    (org-level-5 . 1.02)
+                    (org-level-6 . 1.0)
+                    (org-level-7 . 1.0)
+                    (org-level-8 . 1.0)))
+      (set-face-attribute
+       (car face)
+       nil
+       :font "Cantarell"
+       :weight 'regular
+       :height (cdr face)))
+
+    ;; Ensure that anything that should be
+    ;; fixed-pitch in Org files appears that way
+    (set-face-attribute 'org-block nil
+                        :foreground nil
+                        :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil
+                        :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-table nil
+                        :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-verbatim nil
+                        :inherit '(shadow fixed-pitch))
+    (set-face-attribute 'org-special-keyword nil
+                        :inherit '(font-lock-comment-face
+                                   fixed-pitch))
+    (set-face-attribute 'org-meta-line nil
+                        :inherit '(font-lock-comment-face fixed-pitch))
+    (set-face-attribute 'org-checkbox nil
+                        :inherit 'fixed-pitch))
+#+end_src
+
+** Basic Org Config
+
+#+begin_src emacs-lisp
+  ;; Setting Up Org Mode
   (use-package org
     :bind (("C-c l" . org-store-link))
     :config
     (setq org-ellipsis " ▾")
 
-    (setq org-directory (convert-standard-filename "~/Org"))
+    (setq org-directory
+	  (convert-standard-filename "~/Org"))
     (setq org-agenda-start-with-log-mode t)
     (setq org-log-done 'time)
     (setq org-log-into-drawer t)
 
     ;; setup inline previewing of latex fragments
-    (setq org-latex-create-formula-image-program 'imagemagick)
+    (setq org-latex-create-formula-image-program
+	  'imagemagick)
 
     (setq org-agenda-files
-          '("~/Org/journal"
-            "~/Org/personal-tasks.org"
-            "~/Org/personal-mail.org"
-            "~/Org/personal-chores.org"))
+	  '("~/Org/journal"
+	    "~/Org/personal-tasks.org"
+	    "~/Org/personal-mail.org"
+	    "~/Org/personal-chores.org"))
 
+    ;; Set Org Clock Sound File
+    (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav")
     )
   #+end_src
   
+** Prettier Org Heading Stars
+
+[[https://github.com/sabof/org-bullets][org-bullets]] replaces the heading stars in =org-mode= buffers with nicer looking characters that you can control.  Another option for this is [[https://github.com/integral-dw/org-superstar-mode][org-superstar-mode]]l
+
+#+begin_src emacs-lisp
+  ;; Setup Org Superstar
+  (use-package org-superstar
+    :after org)
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+#+end_src
 ** Org-Capture
 
 #+begin_src emacs-lisp
@@ -799,10 +1123,330 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
   )
 #+end_src
 
+** Use Ipython with Org
+
+The package [[https://github.com/gregsexton/ob-ipython][ob-ipython]] is require get [[id:5fe7783f-d441-40a9-983c-7f671966c6e1][ipython]]-like functionality in [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] WIP
+
+#+begin_src emacs-lisp
+  (use-package ob-ipython)
+#+end_src
   
+** Configure Babel Languages
+
+To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use. [[file:~/Projects/InfoFiles/Emacs/Worg/org-contrib/babel/languages/index.org][Org Babel Supported Languages]] documents all of the languages that you can use with =org-babel=.
+
+#+begin_src emacs-lisp
+  ;; (require-package 'ob-ipython)
+
+  ;; enable/disable languages for org-babel
+  (org-babel-do-load-languages
+    'org-babel-load-languages
+    '((emacs-lisp . t)    ;; Elisp
+      (lisp . t)          ;; Lisp
+      (clojure . t)       ;; Clojure     
+      (scheme . t)        ;; Scheme
+      (python . t)        ;; Python
+      (ipython . t)       ;; IPython
+      ;;  the following two require ob-c
+      ;; (c . t)             ;; C 
+      ;; (cpp . t)           ;; C++
+      
+      (R . t)             ;; R
+      (shell . t)         ;; Command Line Programs 
+      (latex . t)         ;; LaTeX  
+      (sql . t)           ;; SQL
+      (sqlite . t)        ;; SQLite
+      (octave . t)        ;; Octave
+      (gnuplot . t)       ;; Gnuplot
+      (awk . t)           ;; awk
+      (sed . t)))         ;; GNUsed
+
+  ;; Add conf-unix to be recognized
+  (push '("conf-unix" . conf-unix) org-src-lang-modes)
+#+end_src
+
+** Structure Templates
+
+[[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]]’s =structure templates= feature enables you to quickly insert code blocks into your Org files in combination with =org-tempo= by typing =<= followed by the template name like el or py and then press TAB. For example, to insert an empty ~emacs-lisp~ block below, you can type =<se= and press TAB to expand into such a block.
+
+The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to contain the *name* of the ~language~ as it is known by [[https://orgmode.org/worg/org-contrib/babel/languages/index.html][Org Babel]]. (see =org-src-lang-modes=)
+
+#+begin_src emacs-lisp
+  ;; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  ;; Setup Source Block Templates
+  (cl-loop for block in
+           '(("sh" . "src shell")
+             ("se" . "src emacs-lisp")
+             ("sp" . "src python")
+             ("sq" . "src sql")
+             ("so" . "src octave")
+             ("si" . "src ipython :session :async :exports both :results raw drawer")
+             ;; This is an alternative Block
+             ;; For IPython
+             ;; ("si" . "src ipython :session :async :results output")
+             )
+           do
+           (add-to-list
+            'org-structure-template-alist block))
+#+end_src
+
+** Capture Templates
+
+=Capture templates= are a handy tool in the org mode toolbox, however the syntax for setting them up can sometimes be tricky.
+The package =DOCT= tries to ease the setup. If you need more input, here's the [[https://github.com/progfolio/doct][doc]]
+Other than that, the *documentation* for =capture templates= is [[https://orgmode.org/manual/Capture.html#Capture][here]]
+
+#+begin_src emacs-lisp  
+  (defun pet/create-documents-file ()
+    "Create an org file in ~/notes/."
+    (interactive)
+    (let ((name (read-string "Filename: ")))
+      (expand-file-name
+       (format "%s.org" name))))
+
+  ;; Org-Capture
+  (use-package org-capture
+    :straight nil
+    :config
+     (setq org-capture-templates
+           ;; Acronym captures
+           `(("a" "Acronyms")
+
+             ("ag" "General Acronyms")
+             ("agg" "General Acronyms - General" table-line
+              (file+olp "~/Org/acronyms.org" "General"
+                        "General")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+             ("agt" "General Acronyms - Terminology" table-line
+              (file+olp "~/Org/acronyms.org" "General"
+                        "Terminology")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+
+             ("as" "Scientific Acronyms")
+             ("ase" "Scientific Acronyms - Economy" table-line
+              (file+olp "~/Org/acronyms.org" "Science"
+                        "Economy")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+             ("asg" "Scientific Acronyms - General" table-line
+              (file+olp "~/Org/acronyms.org" "Science"
+                        "General")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+             ("asm" "Scientific Acronyms - Maths" table-line
+              (file+olp "~/Org/acronyms.org" "Science"
+                        "Maths")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+             ("asp" "Scientific Acronyms - Physics" table-line
+              (file+olp "~/Org/acronyms.org" "Science"
+                        "Physics")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+
+             ("ai" "IT related Acronyms")
+             ("aic" "IT related Acronyms - Encryption" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Encryption")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("aim" "IT related Acronyms - Mail" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Mail")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("aie" "IT related Acronyms - Emacs" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Emacs")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("aig" "IT related Acronyms - General" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "General")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("aii" "IT related Acronyms - Internet" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Internet")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("ail" "IT related Acronyms - LaTeX" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "LaTeX")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("ain" "IT related Acronyms - Networks" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Networks")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("aip" "IT related Acronyms - Programming" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Programming")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")
+             ("aiu" "IT related Acronyms - Encoding" table-line
+              (file+olp "~/Org/acronyms.org" "IT"
+                        "Encoding")
+              "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION} |")  
+
+
+             ;; Documents
+             ("d" "Documents")
+             ("dl" "Letter")
+             ("dlf" "Letter Form" plain (file efs/create-documents-file)
+              "%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
+              :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+              :unnarrowed t
+              )
+             ("dlh" "Letter Home" plain (file efs/create-documents-file)
+              "%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
+              :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+              :unnarrowed t
+              )
+
+
+             ;; Email captures
+             ("e" "Email")
+             ("em" "Make email note" entry
+              (file+headline "~/Org/personal-tasks.org" "Mail correspondence")
+              ,(concat "* TODO [#A] %:subject :mail:\n"
+                       "SCHEDULED: %t\n:"
+                       "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+                       "%i%?"))
+             ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
+              "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+             ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
+              "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+
+
+             ;; Journal captures
+             ("j" "Journal Entries")
+             ("jj" "Journal" entry
+              (file+olp+datetree "~/Org/journal/journal.org")
+              "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+              ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+              :clock-in :clock-resume
+              :empty-lines 1)
+             ("jm" "Meeting" entry
+              (file+olp+datetree "~/Org/journal/journal.org")
+              "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+              :clock-in :clock-resume
+              :empty-lines 1)
+
+
+             ;; Checklist captures
+             ("l" "Lists")
+
+             ("ls" "Shopping List")
+             ("lsp" "Permanent & Long Lasting")
+             ("lspw" "Living" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =")
+              "%^{Itemname}")
+             ("lspd" "Technology" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Technik =")
+              "%^{Itemname}")
+             ("lspdc" "Computer" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Computer =")
+              "%^{Itemname}")
+             ("lspdh" "Appliances" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Wohnung =" "TODO = Haushaltsgeräte =")
+              "%^{Itemname}")
+             ("lspt" "Transport" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Permanentgüter =" "TODO = Transport =")
+              "%^{Itemname}")
+             ("lsv" "Consumables & Usables")
+             ("lsvb" "Office Supplies" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Büromaterial =")
+              "%^{Itemname}")
+             ("lsvl" "Groceries" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Lebensmittel =")
+              "%^{Itemname}")
+             ("lsvr" "Cleaning Supplies" checkitem
+              (file+olp "~/Org/lists-shopping.org" "TODO = Verbrauchsgüter =" "TODO = Reinigungs- und Pflegemittel =")
+              "%^{Itemname}")
+
+             ("ll" "Literature")
+             ("lls" "Scientific Literature")
+             ("llsb" "Biology" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
+             ("llsc" "Chemistry" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Chemie ==") "[ ] %^{Author} - %^{Title}")
+             ("llse" "Politics, Economy and Ecology" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Politik, Ökonomie und Ökologie ==") "[ ] %^{Author} - %^{Title}")
+             ("llsg" "History" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== History ==") "[ ] %^{Author} - %^{Title}")
+             ("llsh" "Medicine and Health" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Medizin ==") "[ ] %^{Author} - %^{Title}")
+             ("llsi" "IT" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Informatik, Data-Science und AI ==") "[ ] %^{Author} - %^{Title}")
+             ("llsm" "Maths" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Mathematik ==") "[ ] %^{Author} - %^{Title}")
+             ("llsp" "Physics" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Physik ==") "[ ] %^{Author} - %^{Title}")
+             ("llss" "Philosophy and Sociology" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Philosophie und Soziologie ==") "[ ] %^{Author} - %^{Title}")
+             ("llst" "Technology" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Technik ==") "[ ] %^{Author} - %^{Title}")
+             ("llsl" "Languages" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Sprachen ==") "[ ] %^{Author} - %^{Title}")
+             ("llsz" "Psychology" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Sachbücher =" "== Psychologie ==") "[ ] %^{Author} - %^{Title}")
+
+             ("llr" "Novels" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Romane =") "[ ] %^{Author} - %^{Title}")
+             ("llrk" "Classics" checkitem
+              (file+olp "~/Org/lists-literature.org" "= Romane =" "== Klassiker ==") "[ ] %^{Author} - %^{Title}")
+
+
+             ("lm" "Music")
+             ("lmd" "Downlaodable" checkitem
+              (file+olp "~/Org/lists-music.org" "TODO Musik zum Downloaden")
+              "[ ] %^{Interpret} - %^{Title}")
+
+             ("q" "Quotes")
+             ("qt" "Talks" entry
+              (file+olp "~/Org/personal-quotes.org" "Reden und Interviews")
+              "* %^{Originator} \n %?")
+             ("ql" "Literature" entry
+              (file+olp "~/Org/personal-quotes.org" "Literatur")
+              "* %^{Originator} \n %?")
+
+
+             ("t" "Tasks / Projects")
+             ("tt" "TODO Task" entry (file+olp "~/Org/personal-tasks.org" "Inbox")
+              "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
+             ("tb" "Basic task for future review" entry
+              (file+headline "~/Org/personal-tasks.org" "Inbox")
+              ,(concat "* %^{Title}\n"
+                       ":PROPERTIES:\n"
+                       ":CAPTURED: %U\n"
+                       ":END:\n\n"
+                       "%i%l"))
+             ("ts" "Task with a due date (scheduled)" entry
+              (file+headline "~/Org/personal-tasks.org" "Inbox")
+              ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                       "SCHEDULED: %^t\n"
+                       ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                       "%i%?"))
+             ("td" "Task with a due date (deadline)" entry
+              (file+headline "~/Org/personal-tasks.org" "Inbox")
+              ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                       "DEADLINE: %^t\n"
+                       ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                       "%i%?"))
+
+
+             ("w" "Workflows")
+             ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
+              "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
+
+
+    (setq org-capture-templates-contexts
+          '(("e" ((in-mode . "notmuch-search-mode")
+                  (in-mode . "notmuch-show-mode")
+                  (in-mode . "notmuch-tree-mode")
+                  (in-mode . "mu4e-headers-mode")))))
+    :bind
+    ("C-c c" . org-capture))
+#+end_src
+
 ** Org Roam
 
+[[https://www.orgroam.com/][Org Roam]] is a very handy extension that enables you to fulfill your own personal ~Zettelkasten~ in [[id:8510330a-9746-4684-ba60-04255df37924][Org]] 
+
   #+begin_src emacs-lisp
+    ;; Org Roam is very handy to create a 'second brain'
     (use-package org-roam
       :init
       (setq org-roam-v2-ack t)
@@ -813,40 +1457,47 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
       (org-roam-completion-everywhere t)
 
       :bind (("C-c n l" . org-roam-buffer-toggle)
-             ("C-c n f" . org-roam-node-find)
-             ("C-c n i" . org-roam-node-insert)
-             ("C-c n I" . org-roam-node-insert-immediate)
-             :map org-mode-map
-             ("C-M-i"    . completion-at-point)
-             :map org-roam-dailies-map
-             ("Y" . org-roam-dailies-capture-yesterday)
-             ("T" . org-roam-dailies-capture-tomorrow))
+	     ("C-c n f" . org-roam-node-find)
+	     ("C-c n i" . org-roam-node-insert)
+	     ("C-c n I" . org-roam-node-insert-immediate)
+	     :map org-mode-map
+	     ("C-M-i"    . completion-at-point)
+	     :map org-roam-dailies-map
+	     ("Y" . org-roam-dailies-capture-yesterday)
+	     ("T" . org-roam-dailies-capture-tomorrow))
       :bind-keymap
       ("C-c n d" . org-roam-dailies-map)
       :config
-          ;; org roam capture templates
+
+      ;; org roam capture templates
       (setq org-roam-capture-templates
-            `(("d" "default" plain
-              "%?"
-              :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
-              :unnarrowed t)
-              ("l" "programming language" plain
-               "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
-               :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-               :unnarrowed t)  
-              ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
-               :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-               :unnarrowed t)
-              ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-               :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
-               :unnarrowed t)
-              ))
+	    `(("d" "default" plain
+	      "%?"
+	      :if-new (file+head
+		       "%<%Y%m%d%H%M%S>-${slug}.org"
+		       "#+TITLE: ${title}\n#+DATE: %U\n")
+	      :unnarrowed t)
+	      ("l" "programming language" plain
+	       "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+	       :if-new (file+head "${slug}.org"
+				  "#+TITLE: ${title}\n")
+	       :unnarrowed t)  
+	      ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
+	       :if-new (file+head "${slug}.org"
+				  "#+TITLE: ${title}\n")
+	       :unnarrowed t)
+	      ("p" "project" plain
+	       "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+	       :if-new (file+head "${slug}.org"
+				  "#+TITLE: ${title}\n#+filetags: Project")
+	       :unnarrowed t)
+	      ))
 
 
       ;; dailies capture template
       (setq org-roam-dailies-capture-templates
-            `(("d" "default" entry "* %<%I:%M %p>: %?"
-               :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
+	    `(("d" "default" entry "* %<%I:%M %p>: %?"
+	       :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
 
       (org-roam-setup)
       (require 'org-roam-dailies) ;; Ensure the keymap is available
@@ -856,14 +1507,37 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
 *** Org Roam Helper Functions
 
 #+begin_src emacs-lisp
-(defun org-roam-node-insert-immediate (arg &rest args)
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args)))
+  ;; Helper Function to insert org note immediately
+  (defun org-roam-node-insert-immediate (arg &rest args)
+    (interactive "P")
+    (let ((args (push arg args))
+	  (org-roam-capture-templates
+	   (list (append (car org-roam-capture-templates)
+
+			 '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
 #+end_src
 
+*** Org Roam UI
+
+[[https://github.com/org-roam/org-roam-ui][Org Roam UI]] is a super neat extension that visualizes your Org Roam Note Node Structure. It uses a websocket to display that visualization in a webbrowser. The webserver started will run here: http://127.0.0.1:35901/
+#+begin_src emacs-lisp
+    ;;
+    (use-package org-roam-ui
+      :straight
+      (:host github :repo "org-roam/org-roam-ui"
+	     :branch "main" :files ("*.el" "out"))
+      :after org-roam
+      ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+      ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+      :config
+      (setq org-roam-ui-sync-theme t
+	    org-roam-ui-follow t
+	    org-roam-ui-update-on-save t
+	    org-roam-ui-open-on-start t))
+#+end_src
 ** Org-Drill
 
 ~Org-Drill~ is a ~spaced repetition program~ (like ~Anki~)  built to work with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
@@ -886,9 +1560,380 @@ You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][sp
       )
 #+end_src
 
+* Developement Tools
+** Rainbow Delimiters 
+
+[[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is useful in programming modes because it colorizes nested parentheses and brackets according to their nesting depth.  This makes it a lot easier to visually match parentheses in Emacs Lisp code without having to count them yourself.
+
+#+begin_src emacs-lisp
+  ;; Add rainbow delimiters for better readability
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+** Matching Parenthesis
+
+Emacs highlights matching parenthesis by default.
+This Setting is meant to make that highlighting stand out more
+
+#+begin_src emacs-lisp
+  ;; Customize highlighting of matching parenthesis
+  (use-package paren
+  :config
+  (set-face-attribute
+   'show-paren-match-expression nil :background "#363e4a")
+  (show-paren-mode 1))
+#+end_src
+
+** Terminal Modes
+
+*** Term Mode
+
+Setting up the integrated terminal emulator
+
+#+begin_src emacs-lisp
+
+  (use-package term
+    :config
+    (setq explicit-shell-file-name "bash")
+    ;;(setq explicit-zsh-args '())
+    ;; Regexp to use when searching for last prompt
+    (setq term-prompt-regexp
+          "^[^#$%>\\n]*[#$%>] *"))
+
+  ;; add 256 color support
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
+
+#+end_src
+
+*** vterm
+
+vterm is a terminal emulater that is written in C and handles the shell, meaning that Emacs is just a wrapper handling formatting of its output. It's normally a lot faster than the normal term mode
+
+You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]]
+
+#+begin_src emacs-lisp
+
+  (use-package vterm
+    :commands vterm
+    :config
+    ;; uncomment this line if you want to use zsh
+    ;; (setq vterm-shell "zsh")
+    ;; set maximum lines of output to be stored in RAM
+    (setq vterm-max-scrollback 10000))
+
+#+end_src
+
+*** Eshell
+
+Eshell is a variation of the normal "shell" mode and is a lot more customizable.
+Looking at current developement, it might also be a lot more relevant in the future, as a "emacs-friendly" alternative to "vterm"
+
+#+begin_src emacs-lisp
+
+  ;; adds git related prompt elements to eshell
+  (use-package eshell-git-prompt)
+
+  (use-package eshell
+
+    :config
+    ;; Set the prompt theme to powerline
+    (eshell-git-prompt-use-theme 'powerline))
+#+end_src
+
+For documentation on *eshell-git-prompt* look here: [[https://github.com/xuchunyang/eshell-git-prompt]]
+
+** Projectile
+
+[[https://projectile.mx/][Projectile]] is a project management library for Emacs which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
+
+#+begin_src emacs-lisp
+  ;; Use Projectile for project management
+  (use-package projectile
+    :diminish projectile-mode
+    :config (projectile-mode)
+    :custom ((projectile-completion-system 'ivy))
+    ;; Setup default keybinding for projectile
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+    ;; NOTE: Set this to the folder where you keep your Git repos!
+    (when (file-directory-p "~/Projects/Programming")
+      (setq projectile-project-search-path
+	    '("~/Projects/Programming")))
+    (setq projectile-switch-project-action
+	  #'projectile-dired)
+	;; Add Projectile Functions to User Leader Keys
+    (pet/leader-keys
+     "p"  '(:ignore t :which-key "projects")
+     "pf"  'counsel-projectile-find-file
+     "ps"  'counsel-projectile-switch-project
+     "pF"  'counsel-projectile-rg
+     ;; "pF"  'consult-ripgrep
+     "pp"  'counsel-projectile
+     "pc"  'projectile-compile-project
+     "pd"  'projectile-dired)
+    )
+
+  ;; Projectile Counsel Integration
+  (use-package counsel-projectile
+    :config (counsel-projectile-mode))
+#+end_src
+** Language Servers
+
+We use the excellent [[ https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] to enable ~IDE-like functionality~ for many different programming languages via “language servers” that speak the *Language Server Protocol*. Before trying to set up =lsp-mode= for a particular language, check out the documentation for your language so that you can learn which [[https://emacs-lsp.github.io/lsp-mode/page/languages/][language servers are available]] and how to install them.
+
+The lsp-keymap-prefix setting enables you to define a prefix for where lsp-mode’s default keybindings will be added. I highly recommend using the prefix to find out what you can do with lsp-mode in a buffer.
+
+The which-key integration adds helpful descriptions of the various keys so you should be able to learn a lot just by pressing C-c s in a lsp-mode buffer and trying different things that you find there.
+
+#+begin_src emacs-lisp 
+  ;; Add Language Server Support
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred)
+    :hook ((typescript-mode js2-mode web-mode) . lsp)
+    :bind (:map lsp-mode-map
+		("TAB" . completion-at-point))
+    :custom (lsp-headerline-breadcrumb-enable nil)
+    :config (lsp-enable-which-key-integration t))
+
+  ;; Add Lsp Functions to Leader Keys
+  (pet/leader-keys
+   "tl"  '(:ignore t :which-key "lsp")
+   "tld" 'xref-find-definitions
+   "tlr" 'xref-find-references
+   "tln" 'lsp-ui-find-next-reference
+   "tlp" 'lsp-ui-find-prev-reference
+   "tls" 'counsel-imenu
+   "tle" 'lsp-ui-flycheck-list
+   "tlS" 'lsp-ui-sideline-mode
+   "tlX" 'lsp-execute-code-action)
+
+  ;; Increase amount of data read from process for lsp
+  (setq read-process-output-max (* 1024 1024))
+#+end_src
+
+*** lsp-ui
+
+=lsp-ui= is a set of UI enhancements built on top of lsp-mode which make Emacs feel even more like an IDE. Check out the screenshots on the [[https://emacs-lsp.github.io/lsp-ui/][lsp-ui homepage]] to see examples of what it can do.
+
+#+begin_src emacs-lisp
+  ;; Add lsp ui for higher level ui options
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode)
+    ;; Show lsp info on sideline
+    :config
+    (setq lsp-ui-sideline-enable t)
+    (setq lsp-ui-sideline-show-hover nil)
+    (setq lsp-ui-doc-position 'bottom)
+    (lsp-ui-doc-show))
+#+end_src
+*** lsp-treemacs
+
+=lsp-treemacs= provides nice tree views for different aspects of your code like symbols in a file, references of a symbol, or diagnostic messages (errors and warnings) that are found in your code.
+
+Try these commands with =M-x=:
+
+- =lsp-treemacs-symbols= - Show a tree view of the symbols in the current file
+- =lsp-treemacs-references= - Show a tree view for the references of the symbol under the cursor
+- =lsp-treemacs-error-list= - Show a tree view for the diagnostic messages in the project
+
+This package is built on the =treemacs= ~package~ which might be of some interest to you if you like to have a file browser at the left side of your screen in your editor.
+
+#+begin_src emacs-lisp
+  ;; Extend lsp and treemacs integration
+  (use-package lsp-treemacs
+    :after lsp)
+#+end_src
+
+*** Debugging
+
+There's a companion mode for =lps-mode= specifically for debugging
+Dap stands for Debug Adapter
+#+begin_src emacs-lisp
+    (use-package dap-mode
+      :after lsp-mode
+      :config (dap-auto-configure-mode))
+  (use-package dap-mode
+    :after lsp-mode
+    :custom
+    (lsp-enable-dap-auto-configure nil)
+    :config
+    (dap-ui-mode 1)
+    (dap-tooltip-mode 1)
+    (require 'dap-node)
+    (dap-node-setup))
+#+end_src
+
+** Flycheck
+[[https://www.flycheck.org/en/latest/user/quickstart.html][Flycheck]] adds syntax checking capagilities. We set it up to be loaded together with =lsp-mode=. You could also load it globally.
+#+begin_src emacs-lisp
+  ;; Enable Flycheck for syntax checking.
+  ;; Defer loading until used with lsp-mode
+  (use-package flycheck
+    :defer t
+    :hook (lsp-mode . flycheck-mode))
+#+end_src
+
+** Easier Commenting
+
+If you want to make commenting easier, the following package is very helpful. Despite the name, it is not only restricted to =evil-mode=
+#+begin_src emacs-lisp
+  ;; Easier Commenting, not just for evil-mode
+  (use-package evil-nerd-commenter
+    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+#+end_src
+
+** Magit
+
+[[https://magit.vc/][Magit]] is one of the best Git interfaces. Common Git operations are easy to execute quickly using Magit's command panel system.
+
+#+begin_src emacs-lisp
+  ;; Magit is one of THE killer features
+  (use-package magit
+    :bind ("C-x g" . magit-status)
+    :commands (magit-status magit-get-current-branch)
+    :custom
+    (magit-display-buffer-function
+     #'magit-display-buffer-same-window-except-diff-v1))
+
+  ;; Add Magit Commands to Leader Key Space
+  (pet/leader-keys
+    "g"   '(:ignore t :which-key "git")
+    "gs"  'magit-status
+    "gd"  'magit-diff-unstaged
+    "gc"  'magit-branch-or-checkout
+    "gl"   '(:ignore t :which-key "log")
+    "glc" 'magit-log-current
+    "glf" 'magit-log-buffer-file
+    "gb"  'magit-branch
+    "gP"  'magit-push-current
+    "gp"  'magit-pull-branch
+    "gf"  'magit-fetch
+    "gF"  'magit-fetch-all
+    "gr"  'magit-rebase)
+#+end_src
+** Languages
+
+Language specific Settings can be found here
+*** Elisp
+
+#+begin_src emacs-lisp
+  ;; Add Flycheck to elisp mode
+  (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
+
+  (pet/leader-keys
+    "e"   '(:ignore t :which-key "eval")
+    "eb"  '(eval-buffer :which-key "eval buffer"))
+
+  (pet/leader-keys
+    :keymaps '(visual)
+    "er" '(eval-region :which-key "eval region"))
+#+end_src
+*** Octave/Matlab
+
+Just a short config adjusting the =auto-mode-alist=
+#+begin_src emacs-lisp
+  ;; Load Octave Mode automatically for specified files
+  (setq auto-mode-alist
+	(cons '("\\.m$" . octave-mode) auto-mode-alist))
+  (setq auto-mode-alist
+	(cons '("\\.sci$" . octave-mode) auto-mode-alist))
+
+  ;; Setup Octave Mode
+  (add-hook 'octave-mode-hook
+	    (lambda ()
+	      (abbrev-mode 1)
+	      (auto-fill-mode 1)
+	      (if (eq window-system 'x)
+		  (font-lock-mode 1))))
+
+  ;; Use Infodocs within Emacs
+  (autoload 'octave-help "octave-hlp" nil t)
+#+end_src
+
+*** LaTeX
+
+Improve [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]] support for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+Lsp for latex should not be needed since its part of [[https://www.gnu.org/software/auctex/documentation.html][AUCTex]]
+#+begin_src  emacs-lisp
+  ;; Integrated environment for TeX
+  ;;(use-package auctex
+  ;;  :config
+  ;;  ;; enable completion
+  ;;  (setq-default TeX-master nil)
+  ;;  ;; 
+  ;;  (setq TeX-parse-self t)
+  ;;  ;; enable auto saving tex files
+  ;;  (setq TeX-auto-save t))
+
+  ;; LatexMK support for AUCTeX
+  ;; (use-package auctex-latexmk)
+
+  ;; Useful features for LaTeX-mode
+  ;;(use-package latex-extra)
+
+  ;; Fast input methods for LaTeX environments and math
+  ;; (use-package cdlatex
+  ;;   :bind (:map cdlatex-mode-map
+  ;;               (nil . cdlatex-math-symbol)
+  ;;               ("C-`" . cdlatex-math-symbol)
+  ;;          :map org-cdlatex-mode-map
+  ;;          (nil . cdlatex-math-symbol)
+  ;;          ("C-`" . cdlatex-math-symbol))
+  ;; )              
+
+;;   (require 'tex)
+;;   ; default compiled document: pdf
+;;   (TeX-global-PDF-mode t)            
+;;   (setq TeX-view-program-list
+;; 	'(("zathura" "zathura --page=%(outpage) %o")))
+;; 
+;;   (setq TeX-view-program-selection
+;; 	'(((output-dvi has-no-display-manager) "dvi2tty")
+;; 	  ((output-dvi style-pstricks) "dvips and gv")
+;; 	  (output-dvi "xdvi")
+;; 	  (output-pdf "zathura")
+;; 	  (output-html "xdg-open")))
+#+end_src
+
+*** Python
+Improve [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] functionality of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+
+The commented lines are for distributions like Ubuntu, where =python= referes to python 2 and python 3 need to be called by =python3=
+
+Pyrigth is a language server written in C# that is a lot faster then the normal pyls.
+Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alternative to "ptvsd>=4.2"), because it is recommended over the default ptsd
+#+begin_src emacs-lisp
+  ;; Customize Python Mode for emacs, add lsp
+  (use-package python-mode
+    :straight nil
+    :hook (python-mode . lsp-deferred)
+    :custom
+    ; (python-shell-interpreter "python3")
+    (dab-python-executable "python")
+    (dab-python-debugger 'debugpy)
+    :config
+    (require 'dab-python)
+    )
+
+  ;; Setup lsp-pyright Server
+  (use-package lsp-pyright
+    :hook (python-mode . (lambda ()
+			   (require 'lsp-pyright)
+			   (lsp-deferred))))  ; or lsp
+
+  ;; Enable Virtual Environment Support
+  (use-package pyvenv
+    :config
+    (pyvenv-mode 1))
+
+#+end_src
+
 * Automatically Tangle Files
 
-** Config File
+** Emacs
+*** Config File
 
 #+begin_src emacs-lisp
   ;; Setup Automatic Tangling of Files
@@ -899,10 +1944,9 @@ You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][sp
     (when (string-equal
            (buffer-file-name)
            (concat pet/dotfiles-dir
-                   "000_OrgFiles/EmacsTestConfig.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
+                   "000_OrgFiles/EmacsConfig.org"))
+      ;; Have the user confirm tangle
+      (let ((org-confirm-babel-evaluate t))
         (org-babel-tangle))))
 
   ;; This hook automatically evaluates the helper
@@ -914,25 +1958,50 @@ You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][sp
                #'pet/org-babel-tangle-config)))
 #+end_src
 
-** Test Config File
+*** Test Config File
 
 #+begin_src emacs-lisp
   ;; Automatically tangle test config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-testconfig ()
     (when (string-equal
-           (buffer-file-name)
-           (concat pet/dotfiles-dir
-                   "000_OrgFiles/EmacsTestConfig.org"))
-        (org-babel-tangle)))
+	   (buffer-file-name)
+	   (concat pet/dotfiles-dir
+		   "000_OrgFiles/EmacsTestConfig.org"))
+      ;; Have user confirm tangle 
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
 
   ;; This hook automatically evaluates the helper
   ;; function after saving the buffer
   (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook
-               'after-save-hook
-               #'pet/org-babel-tangle-testconfig)))
+	    (lambda ()
+	      (add-hook
+	       'after-save-hook
+	       #'pet/org-babel-tangle-testconfig)))
+#+end_src
+
+*** Backup Config File
+
+#+begin_src emacs-lisp
+  ;; Automatically tangle backup config file
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-backupconfig ()
+    (when (string-equal
+	   (buffer-file-name)
+	   (concat pet/dotfiles-dir
+		   "000_OrgFiles/EmacsBackupConfig.org"))
+      ;; Have user confirm tangle 
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (add-hook
+	       'after-save-hook
+	       #'pet/org-babel-tangle-backupconfig)))
 #+end_src
 
 ** RSS Feeds File
