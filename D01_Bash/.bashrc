@@ -1,6 +1,10 @@
 #########################################
 # ~/.bashrc
 #########################################
+### RANDOM COLOR SCRIPT ###
+## requires shell color scripts:
+## https://gitlab.com/dwt1/shell-color-scripts/-/tree/master
+colorscript random
 
 [[ $- != *i* ]] && return
 

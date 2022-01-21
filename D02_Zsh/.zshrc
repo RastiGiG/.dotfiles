@@ -11,6 +11,11 @@
 # Enable colors and change prompt:
 autoload -U colors && colors
 
+### RANDOM COLOR SCRIPT ###
+## requires shell color scripts:
+## https://gitlab.com/dwt1/shell-color-scripts/-/tree/master
+colorscript random
+
 # History in cache directory:
 HISTSIZE=3000
 SAVEHIST=3000
