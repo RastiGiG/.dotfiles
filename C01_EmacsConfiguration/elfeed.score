@@ -1,27 +1,36 @@
 ;;; Elfeed score file                                     -*- lisp -*-
 ((version 10)
  ("title"
-  (:text "LdN" :value 100 :type S :comment "Add 100 to Podcast 'Lage der Nation'")
-  (:text "python" :value 10 :type s :comment "Add 10 to Feeds addressing Python"))
+  (:text "LdN" :value 100 :type S :comment "Add 1000 to Podcast 'Lage der Nation'")
+  (:text "python" :value 100 :type s :comment "Add 100 to Feeds addressing Python"))
  ("content")
  ("title-or-content"
-  (:text "emacs" :title-value 20 :content-value 10 :type s :comment "Add 20 to titles containing emacs and 10 to bodies containing emacs"))
+  (:text "emacs" :title-value 20 :content-value 10 :type s :comment "Add 200 to titles containing emacs and 100 to bodies containing emacs"))
  ("tag"
   (:tags
    (t mailinglists)
-   :value -100 :comment "-100 for Mailinglists")
+   :value -1000 :comment "-1000 for Mailinglists")
   (:tags
    (t reddit)
-   :value -50 :comment "-50 for Reddit Posts")
+   :value -500 :comment "-500 for Reddit Posts")
   (:tags
    (t blogs)
-   :value 50 :comment "+50 for Blogs")
+   :value 500 :comment "+500 for Blogs")
   (:tags
-   (t podcasts :comment "+100 for Podcasts")
-   :value 100))
+   (t podcasts :comment "+1000 for Podcasts")
+   :value 1000))
  ("authors")
  ("feed"
-  (:text "https://feeds.lagedernation.org/feeds/ldn-aac.xml" :value 100 :type s :attr u))
+  (:text "https://www.ndr.de/nachrichten/info/podcast4684.xml" :value 900 :type s :attr u)
+  (:text "https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" :value 1300 :type s :attr u)
+  (:text "https://www.mdr.de/nachrichten/podcast/kekule-corona/kompass-104-podcast.xml" :value 800 :type s :attr u)
+  (:text "https://www.kuketz-blog.de/feed/" :value 800 :type s :attr u)
+  (:text "https://logbuch-netzpolitik.de/feed/m4a" :value 1200 :type s :attr u)
+  (:text "https://neuezwanziger.de/feed/mp3/" :value 1500 :type s :attr u)
+  (:text "https://alias-podcast.de/feed/mp3/" :value 1100 :type s :attr u)
+  (:text "http://feed.pippa.io/public/shows/teamhuman" :value 500 :type s :attr u)
+  (:text "https://feeds.transistor.fm/the-drug-science-podcast" :value 700 :type s :attr u)
+  (:text "https://feeds.lagedernation.org/feeds/ldn-aac.xml" :value 1300 :type s :attr u))
  ("link")
  ("udf")
  (mark -1000)

@@ -42,6 +42,97 @@ The following variables are used to tweak some of the configuration pieces for u
 
 #+end_src
 
+** Setting Up Needed Functions
+
+These are some helpful [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]] to be used in [[id:89a73091-1048-4a87-b014-ecb5d774e9f8][Emacs]].
+The Function for syntax color highlighting needs to be reworked
+#+begin_src emacs-lisp
+  ;; Returns the color substring from given range
+  (defun pet/substring-from-range (str range)
+    "Return substring from a given STR by specified RANGE"
+    (substring str (first range) (second range)))
+
+  ;; Return a range for specified colorchannel in a 6-digit
+  ;; hexnumber
+  (defun pet/colorchannel-into-range (color)
+    "Returns the range to look for a specified color.
+    Inputs must be in 'rgbRGB' " 
+    (setq color (s-lower-camel-case color))
+    (cond ((equal color "r") '(1 3))
+	  ((equal color "g") '(3 5))
+	  ((equal color "b") '(5 7))))
+
+
+  ;; Return the substring for a specified
+  (defun pet/colorsubstr-from-colorstr (colorstr colorchannel)
+    "Returns the channelstr of the specified colorchannel from
+     colorstrings like「#011f00」"
+    (setq range (pet/colorchannel-into-range colorchannel))
+    (pet/substring-from-range colorstring range))
+
+  ;; Return the value of a specified colorchannel
+  (defun pet/number-from-string-by-channel
+      (colorstring colorchannel)
+    "Returns the numeric value of the specified colorchannel from
+     colorstrings like「#011f00」"
+    (string-to-number
+    (pet/colorsubstr-from-colorstr
+     (colorstr colorchannel)) 16))
+
+  ;; Calculate Color average across channels from colorstr
+  (defun pet/avg-color (color)
+    "Calculates the Color Average from COLOR"
+    (/ (+ (pet/number-from-string-by-channel color "r")
+	  (pet/number-from-string-by-channel color "g")
+	  (pet/number-from-string-by-channel color "b"))
+       3))
+
+  ;; Returns a Color that contrasts background
+  (defun pet/contrast-color (bg-avg-decimal)
+    "Returns the foreground color based on the avg background 
+    being below 128. Returns White 「#000000」 if average is
+    above"
+    (if (> bg-avg-decimal 128) "#000000" "#ffffff"))
+
+  ;; Takes a color string like #ffe0e0 and returns a light
+  ;; or dark foreground color to make sure text is readable.
+  (defun pet/fg-from-bg (bg)
+    "Returns the foreground color based on the avg background
+     being below 128. Returns White 「#000000」 if average is
+     above"
+    (setq avg (pet/avg-color bg))
+    (pet/contrast-color avg))
+
+
+  (defun pet/syntax-color-hex ()
+    "Syntax color text of the form 「#ff1100」 and 「#abc」 in
+    current buffer."
+      (interactive)
+      (font-lock-add-keywords
+       nil
+       '(("#[ABCDEFabcdef0-9]\\{3\\}[^ABCDEFabcdef0-9]"
+	  (0 (progn (let* (
+	       (ms (match-string-no-properties 0))
+	       (r (pet/colorsubstr-from-colorstr bgstr "r"))
+	       (g (pet/colorsubstr-from-colorstr bgstr "g"))
+	       (b (pet/colorsubstr-from-colorstr bgstr "b"))
+	       (bgstr (concat "#" r r g g b b))
+	       (fgstr (pet/fg-from-bg bgstr))))
+	       (put-text-property
+		     (match-beginning 0)
+		     (match-end 0)
+	      'face (list :background bgstr :foreground fgstr)))
+	      ))
+	 ("#[ABCDEFabcdef0-9]\\{6\\}"
+	  (0 (progn (let* ((bgstr (match-string-no-properties 0))
+			   (fgstr (pet/fg-from-bg bgstr))))
+	      (put-text-property
+	      (match-beginning 0)
+	      (match-end 0)
+	      'face (list :background  bgstr :foreground fgstr
+			  )))))))
+      (font-lock-fontify-buffer))
+#+end_src
 * Package System Setup
 
 Emacs has a built in package manager but it doesn't make it easy to automatically install packages on a new system the first time you pull down your configuration.  [[https://github.com/jwiegley/use-package][use-package]] is a really helpful package used in this configuration to make it a lot easier to automate the installation and configuration of everything else we use.

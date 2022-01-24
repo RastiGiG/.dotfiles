@@ -2,17 +2,32 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored"
- (filename . "~/Org/20220121150318-emacs_tipps_org_mode_customization.org")
- (front-context-string . "\n* Topic Overvie")
- (rear-context-string . "01-21 Fr 15:03]\n")
- (position . 193))
-("C3-B Emacs Backup Config"
+(("C5-1-2 Qtile Backup Config"
+ (filename . "~/.dotfiles/000_OrgFiles/QtileBackupConfig.org")
+ (front-context-string . "#+TITLE: Persona")
+ (rear-context-string)
+ (position . 1))
+("C5-1-1 Qtile Config"
+ (filename . "~/.dotfiles/000_OrgFiles/QtileConfig.org")
+ (front-context-string . "#+TITLE: Persona")
+ (rear-context-string)
+ (position . 1))
+("C0 OrgFiles"
+ (filename . "~/.dotfiles/000_OrgFiles/")
+ (front-context-string . "Templates\n  -rw-")
+ (rear-context-string . "K  5. Jan 03:26 ")
+ (position . 183))
+("org-capture-last-stored"
+ (filename . "~/Org/20220123220836-terminology_it_floating_window_manager.org")
+ (front-context-string . "\n* Terminology -")
+ (rear-context-string . "01-23 So 22:08]\n")
+ (position . 206))
+("C2-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
  (rear-context-string . " Projects\")))))\n")
  (position . 30876))
-("C3-T Emacs Test Config"
+("C2-T Emacs Test Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsTestConfig.org")
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
@@ -92,12 +107,12 @@
  (front-context-string . "01_Akten\n  drwxr")
  (rear-context-string . "K 28. Okt 17:18 ")
  (position . 170))
-("C3-2 Elfeed Feeds Config"
+("C2-2 Elfeed Feeds Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsRSSFeed.org")
  (front-context-string . "\n** IT\n- python\n")
  (rear-context-string . "\n* List of Tags\n")
  (position . 181))
-("C3-3 Elfeed Score Config"
+("C2-3 Elfeed Score Config"
  (filename . "~/.dotfiles/C01_EmacsConfiguration/elfeed.score")
  (front-context-string . "\n;; ((\"title\"\n;;")
  (rear-context-string . " -*- lisp -*-\n()")
@@ -112,17 +127,17 @@
  (front-context-string . "1_SS_2019\n  drwx")
  (rear-context-string . "K 22. Apr 2021  ")
  (position . 207))
-("C5 ZathuraConfig.org"
- (filename . "~/.dotfiles/00_OrgFiles/ZathuraConfig.org")
+("C4 ZathuraConfig.org"
+ (filename . "~/.dotfiles/000_OrgFiles/ZathuraConfig.org")
  (front-context-string . "\n* TOC\n\n1) [[*UI")
  (rear-context-string . "STARTUP: folded\n")
  (position . 173))
-("C4 MBSync Config"
+("C3 MBSync Config"
  (filename . "~/.mbsyncrc")
  (front-context-string . "## T-Online ##\n\n")
  (rear-context-string)
  (position . 1))
-("C3-1 Mu4e Account Config"
+("C2-1 Mu4e Account Config"
  (filename . "~/.config/emacs-configs/MailAccounts.el")
  (front-context-string . "(use-package mu4")
  (rear-context-string)
@@ -137,18 +152,18 @@
  (front-context-string . "#+LaTeX_CLASS: s")
  (rear-context-string)
  (position . 1))
-("C0 Shell Aliases"
- (filename . "~/.dotfiles/00_OrgFiles/Aliases.org")
+("C1-1 Shell Aliases"
+ (filename . "~/.dotfiles/000_OrgFiles/Aliases.org")
  (front-context-string . "\n+ [[*Basics][Ba")
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 128))
-("C2-1 Zsh Env"
- (filename . "~/.dotfiles/00_OrgFiles/ZshEnv.org")
+("C1-4 Zsh Env"
+ (filename . "~/.dotfiles/000_OrgFiles/ZshEnv.org")
  (front-context-string . "\n+ [[*Default Ap")
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 112))
-("C2 Zsh Config"
- (filename . "~/.dotfiles/00_OrgFiles/ZshConfig.org")
+("C1-3 Zsh Config"
+ (filename . "~/.dotfiles/000_OrgFiles/ZshConfig.org")
  (front-context-string . "\n+ [[*General][G")
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 100)
@@ -159,12 +174,12 @@
  (rear-context-string . "STARTUP: folded\n")
  (position . 236)
  (annotation . ""))
-("C1 Bash Config"
- (filename . "~/.dotfiles/00_OrgFiles/BashConfig.org")
+("C1-2 Bash Config"
+ (filename . "~/.dotfiles/000_OrgFiles/BashConfig.org")
  (front-context-string . "\n* Basic Setup\n\n")
  (rear-context-string . "hrc :mkdirp yes\n")
  (position . 110))
-("C3 Emacs Config"
+("C2 Emacs Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsConfig.org")
  (front-context-string . "\n* Welcome!\n\nThi")
  (rear-context-string . ".el :mkdirp yes\n")

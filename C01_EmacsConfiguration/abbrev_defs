@@ -1,17 +1,22 @@
-
 ;;-*-coding: utf-8;-*-
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("chatper" "chapter" nil :count 1)
     ("elp" "emacs-lisp" nil :count 3)
+    ("inforamtion" "information" nil :count 0)
+    ("prhase" "phrase" nil :count 1)
+    ("sotred" "sorted" nil :count 1)
+    ("work" "wrok" nil :count 0)
    ))
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
+    ("osa" "#+STARTUP:" nil :count 0)
+    ("lc" "#+LATEX_CLASS:" nil :count 0)
+    ("lh" "#+LATEX_HEADER:" nil :count 4)
     ("omau" "#+AUTHOR:" nil :count 0)
     ("omda" "#+DATE:" nil :count 0)
     ("ompt" "#+OPTIONS:" nil :count 1)
     ("omti" "#+TITLE:" nil :count 0)
-    ("lc" "#+LATEX_CLASS:" nil :count 0)
-    ("lh" "#+LATEX_HEADER:" nil :count 4)
    ))
 
