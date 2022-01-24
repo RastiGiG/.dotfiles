@@ -133,3 +133,8 @@ C01_EmacsConfiguration/**/projectile-bookmarks.eld
 
 # network security
 /network-security.data
+
+#########################
+# Python Files
+
+/**/__pycache__
