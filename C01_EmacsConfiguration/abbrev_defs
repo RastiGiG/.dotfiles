@@ -6,12 +6,12 @@
     ("inforamtion" "information" nil :count 0)
     ("prhase" "phrase" nil :count 1)
     ("sotred" "sorted" nil :count 1)
-    ("work" "wrok" nil :count 0)
+    ("wrok" "work" nil :count 0)
    ))
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("osa" "#+STARTUP:" nil :count 0)
+    ("osta" "#+STARTUP:" nil :count 0)
     ("lc" "#+LATEX_CLASS:" nil :count 0)
     ("lh" "#+LATEX_HEADER:" nil :count 4)
     ("omau" "#+AUTHOR:" nil :count 0)

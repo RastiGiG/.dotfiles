@@ -95,6 +95,15 @@ tramp
 ## Treemacs
 /C01_EmacsConfiguration/**/treemacs-persist
 
+#############
+## Projectile
+.projectile
+C01_EmacsConfiguration/**/projectile-bookmarks.eld
+
+#############
+## Perspective
+C01_EmacsConfiguration/**/fin-state
+
 ############
 # ELPA packages
 /elpa/
@@ -123,10 +132,6 @@ flycheck_*.el
 
 # server auth directory
 /server/
-
-# projectiles files
-.projectile
-C01_EmacsConfiguration/**/projectile-bookmarks.eld
 
 # directory configuration
 .dir-locals.el

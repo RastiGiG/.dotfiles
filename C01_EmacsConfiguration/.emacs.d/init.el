@@ -297,6 +297,7 @@
 	("Europe/Athens" "Athens")
 	("America/New_York" "New York")
 	("America/Los_Angeles" "Seattle")
+	("America/Mexico_City" "Mexico City")
 	("Asia/Shanghai" "Shanghai")
 	("Asia/Calcutta" "Bangalore")
 	("Asia/Tokyo" "Tokyo")
@@ -749,6 +750,9 @@
 
   ;; Enable helper function replacing hyphen
   (pet/org-replace-hyphen)
+
+  ;; Open PDFs with Zathura
+  (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))
   )
 
 ;; Setup Org Superstar
@@ -862,10 +866,8 @@
 	 ;; Acronym captures
 	 `(("a" "Acronyms")
 
-	   ("ai" "Acronyms Inbox")
-	   ("agg" "General Acronyms - General" table-line
-	    (file+olp "~/Org/acronyms.org" "General"
-		      "General")
+	   ("ai" "Acronyms Inbox" table-line
+	    (file+olp "~/Org/acronyms.org" "Inbox")
 	    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
 	   ;; Documents
@@ -915,11 +917,11 @@
 
 	   ("ls" "Shopping List" checkitem
 	    (file+olp "~/Org/lists-shopping.org" "Inbox")
-	    "%^{Itemname}")
+	    "[ ] %^{Itemname}")
 
 	   ("ll" "Literature" checkitem
 	    (file+olp "~/Org/lists-literature.org" "Inbox")
-	    "%^{Itemname}")
+	    "[ ] %^{Author} - %^{Titel}")
 
 	   ("lm" "Music" checkitem
 	    (file+olp "~/Org/lists-music.org" "Inbox")
