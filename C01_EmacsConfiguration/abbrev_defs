@@ -11,12 +11,13 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("osta" "#+STARTUP:" nil :count 0)
     ("lc" "#+LATEX_CLASS:" nil :count 0)
     ("lh" "#+LATEX_HEADER:" nil :count 4)
+    ("oftag" "#+FILETAGS:" nil :count 1)
     ("omau" "#+AUTHOR:" nil :count 0)
     ("omda" "#+DATE:" nil :count 0)
     ("ompt" "#+OPTIONS:" nil :count 1)
     ("omti" "#+TITLE:" nil :count 0)
+    ("osa" "#+STARTUP:" nil :count 2)
    ))
 

@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C5-1-2 Qtile Backup Config"
+(("org-refile-last-stored"
+ (filename . "~/Org/personal-archive.org")
+ (front-context-string . "** DONE Kaution ")
+ (rear-context-string . "i 16:45]\n:END:\n\n")
+ (position . 9174))
+("C2-4 Abbreviations"
+ (filename . "~/.dotfiles/C01_EmacsConfiguration/abbrev_defs")
+ (front-context-string . ";;-*-coding: utf")
+ (rear-context-string)
+ (position . 1))
+("C5-1-2 Qtile Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/QtileBackupConfig.org")
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
@@ -18,10 +28,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220124132333-python_matplotlib_multiple_plots_in_one_figure.org")
- (front-context-string . "\n* Python - Matp")
- (rear-context-string . "01-24 Mo 13:23]\n")
- (position . 217))
+ (filename . "~/Org/20220126202446-linux_tipps_system_hardening.org")
+ (front-context-string . "\n* Linux - Tipps")
+ (rear-context-string . "01-26 Mi 20:24]\n")
+ (position . 199))
 ("C2-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")

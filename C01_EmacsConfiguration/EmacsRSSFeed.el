@@ -28,6 +28,8 @@
 	("https://zettelkasten.de/feed.atom" blogs methodology zettelkasten)
 	("https://waitbutwhy.com/feed" blogs philosophy culture)
 	("https://www.cgpgrey.com/blog?format=rss" blogs culture politics)
+	;; Comments on 'Web3'
+	("https://web3isgoinggreat.com/feed.xml" blogs culture it)
 
 	;;;; PODCASTS
 
@@ -53,6 +55,10 @@
 	("https://xkcd.com/atom.xml" webcomic)
 
 	;;;; VIDEOS
+	;; System Crafters YouTube
+	("https://youtu.be/NlP3EDS6WGE" videos it emacs)
+	;; YouTube Podcast WfA
+	("https://youtu.be/XAO14MeVns0" videos podcast economics politics culture)
 	;; ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" personal video)
 
 	;;;; REDDIT

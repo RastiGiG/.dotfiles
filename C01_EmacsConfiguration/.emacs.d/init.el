@@ -369,6 +369,9 @@
    "tc" 'world-clock     
    "l"  '(:ignore t :which-key "Layout")
    "o"  '(:ignore t :which-key "Org Mode")
+   "w"  '(:ignore t :which-key "Words")
+   "wM-u" 'upcase-initials
+   "wC-uM-u" 'upcase-initials-region
   ))
 
 ;; Add Dashboard to Emacs
@@ -722,6 +725,16 @@
 			      (match-end 1) "•"))))))
   )
 
+;; Helper Function to quickly toggle Babel Confirm Evaluation
+(defun pet/org-toggle-babel-confirm-evaluate ()
+(interactive)
+"Toogle org-babel-confirm-evaluate on/ff"
+(if org-confirm-babel-evaluate
+    (setq org-confirm-babel-evaluate nil)
+  (setq org-confirm-babel-evaluate t))
+(print (concat "Org Babel Confirm State: "
+	       (format "%s" org-confirm-babel-evaluate))))
+
 ;; Setting Up Org Mode
 (use-package org
   :bind (("C-c l" . org-store-link))
@@ -748,11 +761,73 @@
   (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav")
 
 
+  ;; Startup with inline images displayed
+  (setq org-startup-with-inline-images t)
+
+
   ;; Enable helper function replacing hyphen
   (pet/org-replace-hyphen)
 
-  ;; Open PDFs with Zathura
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . "zathura %s"))
+
+  ;; Customize Apps for Filelinks
+  (cl-loop for type in
+	   ;; Open PDFs with Zathura
+	 '(("\\.pdf\\'" . "zathura %s")
+	   ;; Open Pictures with sxiv 
+	   ("\\.png\\'" . "sxiv %s")
+	   ("\\.jpg\\'" . "sxiv %s")
+	   ("\\.jpeg\\'" . "sxiv %s")
+	   ;; Open Youtube links with freetube
+	   ("\\.\\*youtu\\.\\*" . "freetube %s")
+	   )
+	 do
+	 (add-to-list 'org-file-apps type))
+
+  ;; Add Custom TODO Keywords - in 2 seperate Sequences
+  (setq org-todo-keywords
+	;; Sequence 1 
+	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+	  ;; Sequence 2
+	  (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
+		    "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)"
+		    "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+
+  ;; Set Keywords with shortcuts
+  (setq org-tag-alist
+	'((:startgroup)
+	  ;; Put mutually exclusive tags here
+	  (:endgroup)
+	  ("@errand" . ?E)
+	  ("@home" . ?H)
+	  ("@work" . ?W)
+	  ("@study" . ?S)
+	  ("agenda" . ?a)
+	  ("planning" . ?p)
+	  ("publish" . ?P)
+	  ("batch" . ?b)
+	  ("note" . ?n)
+	  ("idea" . ?i)))
+
+  ;; Set Refile Targets to be considered, Emphasis on Archive 
+  (setq org-refile-targets
+    '(("personal-archive.org" :maxlevel . 1)
+      ("personal-tasks.org" :maxlevel . 1)))
+
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (pet/leader-keys
+    "ot" '(:ignore t :which-key "Toggle")
+    "otb" '(pet/org-toggle-babel-confirm-evaluate
+	    :which-key "Babel Confirm Evaluation")
+    "oti" '(org-toggle-inline-images
+	    :which-key "Inline Images")
+    "otp" '(org-toggle-pretty-entities
+	    :which-key "Pretty entities")
+    "oi" '(:ignore t :which-key "Import")
+    "oit" '(org-table-import
+	    :which-key "Table")
+    )
   )
 
 ;; Setup Org Superstar
@@ -864,10 +939,8 @@
   :config
    (setq org-capture-templates
 	 ;; Acronym captures
-	 `(("a" "Acronyms")
-
-	   ("ai" "Acronyms Inbox" table-line
-	    (file+olp "~/Org/acronyms.org" "Inbox")
+	 `(("a" "Acronyms" table-line
+	    (file+headline "~/Org/acronyms.org" "Inbox")
 	    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
 	   ;; Documents
