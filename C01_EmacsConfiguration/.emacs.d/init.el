@@ -12,14 +12,22 @@
 ;; Setting Variables
 ;; for better customization and readability
 
+
+;; Save Home Dir for later use
+(setq pet/home-dir
+      (convert-standard-filename
+       (expand-file-name "~/")))
+
 ;; Save Dotfiles Dirs for later use
 (setq pet/dotfiles-dir
-      (expand-file-name
-       (convert-standard-filename
-       "~/.dotfiles/")))
+      (concat pet/home-dir
+	      (convert-standard-filename
+	       ".dotfiles/")))
+
 (setq pet/dotfiles-emacsconfig-dir
-        (concat pet/dotfiles-dir
-         "C01_EmacsConfiguration/"))
+	(concat pet/dotfiles-dir
+		(convert-standard-filename
+		 "C01_EmacsConfiguration/")))
 
 ;; Adjust font size to match your system
 (defvar pet/default-font-size 140)
@@ -344,9 +352,13 @@
   (define-key mc/keymap (kbd
                          "<return>") nil))
 
+(use-package visual-regexp)
+
 ;; Extend Emacs Emoji capability (apart from Unicode)
 (use-package emojify
-  :hook (after-init . global-emojify-mode))
+  ;; if you want to enable emojis globally:
+  ;; :hook (after-init . global-emojify-mode)
+  )
 
 ;; Setup general for easier key config
 (use-package general
@@ -356,22 +368,44 @@
   :global-prefix "C-.")
 
   (pet/leader-keys
-   "t"  '(:ignore t :which-key "Toggles")
-   "tt" '(counsel-load-theme
-	  :which-key "Choose Theme")
-   "tw" 'whitespace-mode
-   "th"  '(:ignore t :which-key "Highlighting")
+
+    ;; Layouts
+   "l"    '(:ignore t :which-key "Layout")
+
+   ;; Editing Tools
+   "e"     '(:ignore t :which-key "Editing Tools")
+   ;; Letters
+   "el"    '(:ignore t :which-key "Letters")
+   "elM-u" 'upcase-initials
+   "elC-uM-u" 'upcase-initials-region
+   ;; Tabs
+   "et"    '(untabify
+	     :which-key "Untabify")
+   "er"    '(regexp-builder
+	     :which-key "Regexp Builder")
+
+   ;; Org Mode
+   "o"    '(:ignore t :which-key "Org Mode")
+
+   ;; Toggles
+   "t"    '(:ignore t :which-key "Toggles")
+   "tc"   'world-clock
+   "tt"   '(counsel-load-theme
+	    :which-key "Choose Theme")
+
+   ;; Toggles - Highlighting
+   "th"   '(:ignore t :which-key "Highlighting")
+   ;; Toggles - Highlighting - Colors
    "thc"  '(:ignore t :which-key "Colors")
    "thcr" '(pet/syntax-color-rgb
-	  :which-key "RGB")
+	    :which-key "RGB")
    "thch" '(pet/syntax-color-hsv
-	  :which-key "HSV")
-   "tc" 'world-clock     
-   "l"  '(:ignore t :which-key "Layout")
-   "o"  '(:ignore t :which-key "Org Mode")
-   "w"  '(:ignore t :which-key "Words")
-   "wM-u" 'upcase-initials
-   "wC-uM-u" 'upcase-initials-region
+	    :which-key "HSV")
+   ;; Toggles - Modes
+   "tm"   '(:ignore t :which-key "Modes")
+   "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
+   "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
+   "tme"  '(emojify-mode :which-key "Emojify Mode")
   ))
 
 ;; Add Dashboard to Emacs
@@ -735,30 +769,37 @@
 (print (concat "Org Babel Confirm State: "
 	       (format "%s" org-confirm-babel-evaluate))))
 
+;; Store Org Directory
+(setq pet/org-dir
+      (concat pet/home-dir
+	      (convert-standard-filename
+	       "Org/")))
+
 ;; Setting Up Org Mode
 (use-package org
   :bind (("C-c l" . org-store-link))
   :config
   (setq org-ellipsis " ▾")
 
-  (setq org-directory
-	(convert-standard-filename "~/Org"))
+  (setq org-directory pet/org-dir)
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
 
-  ;; setup inline previewing of latex fragments
+  ;; Setup inline previewing of latex fragments
   (setq org-latex-create-formula-image-program
 	'imagemagick)
 
+  ;; Specify Agenda Files
   (setq org-agenda-files
-	'("~/Org/journal"
-	  "~/Org/personal-tasks.org"
-	  "~/Org/personal-mail.org"
-	  "~/Org/personal-chores.org"))
+	(cons (concat pet/org-dir "journal")
+	      ;; Add Files a starting with "personal-"
+	      (directory-files pet/org-dir t
+			   "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
+	      ))
 
   ;; Set Org Clock Sound File
-  (setq org-clock-sound "/home/sebastian/Org/sounds/Rush.wav")
+  (setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
 
 
   ;; Startup with inline images displayed
@@ -812,6 +853,9 @@
   (setq org-refile-targets
     '(("personal-archive.org" :maxlevel . 1)
       ("personal-tasks.org" :maxlevel . 1)))
+
+  ;; The default here is 999, which is a little to constricting for SQL and such
+  (setq org-table-convert-region-max-lines 9999)
 
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
@@ -876,7 +920,7 @@
 ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
 )
 
-(use-package ob-ipython)
+;; (use-package ob-ipython)
 
 ;; (require-package 'ob-ipython)
 
@@ -888,7 +932,8 @@
     (clojure . t)       ;; Clojure     
     (scheme . t)        ;; Scheme
     (python . t)        ;; Python
-    (ipython . t)       ;; IPython
+    ;; (ipython . t)       ;; IPython
+
     ;;  the following two require ob-c
     ;; (c . t)             ;; C 
     ;; (cpp . t)           ;; C++
@@ -916,7 +961,7 @@
            ("sp" . "src python")
            ("sq" . "src sql")
            ("so" . "src octave")
-           ("si" . "src ipython :session :async :exports both :results raw drawer")
+           ;; ("si" . "src ipython :session :async :exports both :results raw drawer")
            ;; This is an alternative Block
            ;; For IPython
            ;; ("si" . "src ipython :session :async :results output")
@@ -1312,12 +1357,12 @@
 (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
 (pet/leader-keys
-  "e"   '(:ignore t :which-key "eval")
-  "eb"  '(eval-buffer :which-key "eval buffer"))
+  "E"   '(:ignore t :which-key "eval")
+  "Eb"  '(eval-buffer :which-key "eval buffer"))
 
 (pet/leader-keys
   :keymaps '(visual)
-  "er" '(eval-region :which-key "eval region"))
+  "Er" '(eval-region :which-key "eval region"))
 
 ;; Load Octave Mode automatically for specified files
 (setq auto-mode-alist
@@ -1381,7 +1426,7 @@
   ;; don't hook lsp straight away
   ;; :hook (python-mode . lsp-deferred)
   :custom
-  ; (python-shell-interpreter "python3")
+  (python-shell-interpreter "python")
   (dab-python-executable "python")
   (dab-python-debugger 'debugpy)
   :config
