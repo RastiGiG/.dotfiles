@@ -5,37 +5,37 @@
 * List of Tags
 
 ** IT
-- python
-- lisp
-- emacs
-  - org-mode
-- linux
-- distro
-- security
-- privacy
-- it
-- data-science
++ python
++ lisp
++ emacs
+  * org-mode
++ linux
++ distro
++ security
++ privacy
++ it
++ data-science
   
 ** Knowledge
-- science
-- medicine
-- culture
-- politics
-- economics
-- klimate
-- energy
-- technology
-- methodology
-- zettelkasten
-- philosophy
++ science
++ medicine
++ culture
++ politics
++ economics
++ klimate
++ energy
++ technology
++ methodology
++ zettelkasten
++ philosophy
 
 ** Media
-- video
-- youtube
-- podcasts
-- blogs
-- mailinglists
-- reddit
++ video
++ youtube
++ podcasts
++ blogs
++ mailinglists
++ reddit
   
 * List of Subscriptions
 
@@ -85,6 +85,8 @@
 	  ("https://logbuch-netzpolitik.de/feed/m4a" podcasts it culture politics)
 	  ("https://www.netzpolitik.org/category/netzpolitik-podcast/feed/itunes" podcasts it culture politics)
 	  ("https://dasisteinegutefrage.podigee.io/feed/mp3" podcasts klimate energy technology)
+	  ;; Terra X Podcast
+	  ("https://terrax.podigee.io/feed/mp3" podcasts technology science culture)
 	  ;; NDR Corona Podcast
 	  ("https://www.ndr.de/nachrichten/info/podcast4684.xml" podcasts corona medicine science)
 	  ;; Kekules Corona Kompass

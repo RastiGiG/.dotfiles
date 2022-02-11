@@ -43,6 +43,8 @@
 	("https://logbuch-netzpolitik.de/feed/m4a" podcasts it culture politics)
 	("https://www.netzpolitik.org/category/netzpolitik-podcast/feed/itunes" podcasts it culture politics)
 	("https://dasisteinegutefrage.podigee.io/feed/mp3" podcasts klimate energy technology)
+	;; Terra X Podcast
+	("https://terrax.podigee.io/feed/mp3" podcasts technology science culture)
 	;; NDR Corona Podcast
 	("https://www.ndr.de/nachrichten/info/podcast4684.xml" podcasts corona medicine science)
 	;; Kekules Corona Kompass
