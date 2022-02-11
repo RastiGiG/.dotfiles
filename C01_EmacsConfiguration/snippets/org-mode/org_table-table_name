@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org_table-table_name
+# key: <otbln
+# --
+#+TBLNAME: ${1:Tablename}

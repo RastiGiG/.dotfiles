@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: org_mode-sql_block_headers
+# key: <osqlbh
+# --
+#+NAME: ${1:Name}
+#+HEADER: :engine ${2:postgres|bi|monetdb|mssql|mysql|postgresql|postgres|sqsh|vertica|oracle|saphana}
+#+HEADER: :dbhost ${3:<hostname>|localhost}
+#+HEADER: :dbpassword ${4:database-passwd}
+#+HEADER: :dbuser ${5:database-user}
+#+HEADER: :database ${6:database-name}
+#+begin_src sql
+    $0
+#+end_src

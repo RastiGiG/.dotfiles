@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-postgresql_tail
+# key: <ornpsqlt
+# --
+* Topic Overview
+
+** [[id:9ce0bc43-b942-4652-9629-a96f54f9dedd][PostgreSQL]]
+*** [[id:8b23e2cc-c1a5-4dab-a366-89e12bedd2e5][Setup]]
+*** [[id:c12161f0-3c37-4a43-b2c8-c218195ac4ab][Administration Tools]]
+**** [[id:fe4797b6-25fb-40ca-a8e8-d757871cd821][PGAdmin]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+****** [[id:a8dba982-5fa1-4d61-9dbd-8e135eae6b14][SQL]]
+******* [[id:9b3cf819-74d1-4c54-928f-e77d33ab131a][Introduction]]
+******* [[id:bd7358bb-6206-4d8f-a72a-42c1a3570bae][Structure of the Language]]
+******** [[id:36440f69-d791-492b-84d6-1f624e83a872][Syntax]]
+******** [[id:510e3dca-92d2-4262-ac89-7408dd7f8112][Operators]]
+******* [[id:3d122f76-54e6-43a9-87db-545a6c0d5fee][Distributions]]
+******** [[id:9ce0bc43-b942-4652-9629-a96f54f9dedd][PostgreSQL]]
+******* [[id:97e326dd-da4c-4d1d-a154-12c4f7ced43c][Tipps]]
+***** [[id:e946a409-5efb-467a-a459-2d5841a22438][Data Science]]
+****** [[id:025a523d-040a-4c26-9219-392d8e7198f3][Relational Databases]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:3ae73a46-a32a-4bcf-bc54-f70166a316fa][SQL References]]
+1. [[id:20cc3729-abd9-475e-956a-1b21e49415b9][PostgreSQL References]]
+
+** Websites
+
+1. [[https://www.postgresql.org/][PostgreSQL.org]]
+
+** Literature
+
+1. [[file:~/Documents/07_Wissen_und_Bildung/Literatur/IT/practical-sql.pdf][Anthony DeBarros - Practical SQL (First Edition)]]
+2. [[file:~/Documents/07_Wissen_und_Bildung/Literatur/IT/SQL_Cookbook_2nd_Edition.pdf][The SQL Cookbook (Second Edition)]]
