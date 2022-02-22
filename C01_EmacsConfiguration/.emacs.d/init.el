@@ -15,14 +15,14 @@
 
 ;; Save Home Dir for later use
 (setq pet/home-dir
-      (convert-standard-filename
-       (expand-file-name "~/")))
+  (convert-standard-filename
+   (expand-file-name "~/")))
 
 ;; Save Dotfiles Dirs for later use
 (setq pet/dotfiles-dir
-      (concat pet/home-dir
-	      (convert-standard-filename
-	       ".dotfiles/")))
+  (concat pet/home-dir
+	  (convert-standard-filename
+	   ".dotfiles/")))
 
 (setq pet/dotfiles-emacsconfig-dir
 	(concat pet/dotfiles-dir
@@ -97,7 +97,7 @@
   (font-lock-add-keywords
    nil
    '(("#[ABCDEFabcdef0-9]\\{3\\}[^ABCDEFabcdef0-9]"
-      (0 (put-text-property
+  (0 (put-text-property
 	  (match-beginning 0)
 	  (match-end 0)
 	  'face (list
@@ -109,11 +109,11 @@
 			     )
 		  (concat "#" r r g g b b))))))
      ("#[ABCDEFabcdef0-9]\\{6\\}"
-      (0 (put-text-property
+  (0 (put-text-property
 	  (match-beginning 0)
 	  (match-end 0)
 	  'face (list :background
-		      (match-string-no-properties 0)))))))
+		  (match-string-no-properties 0)))))))
   (font-lock-flush))
 
 ;; Function to Colorstring with their corresponding Colors
@@ -127,7 +127,7 @@
    nil
    '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *,
     *\\([0-9]\\{1,3\\}\\)% *)"
-      (0 (put-text-property
+  (0 (put-text-property
 	  (+ (match-beginning 0) 3)
 	  (match-end 0)
 	  'face
@@ -138,11 +138,11 @@
 	    (mapconcat
 	     'identity
 	     (mapcar
-	      (lambda (x) (format "%02x" (round (* x 255))))
-	      (color-hsl-to-rgb
-	       (/ (string-to-number (match-string-no-properties 1)) 360.0)
-	       (/ (string-to-number (match-string-no-properties 2)) 100.0)
-	       (/ (string-to-number (match-string-no-properties 3)) 100.0)))
+	  (lambda (x) (format "%02x" (round (* x 255))))
+	  (color-hsl-to-rgb
+	   (/ (string-to-number (match-string-no-properties 1)) 360.0)
+	   (/ (string-to-number (match-string-no-properties 2)) 100.0)
+	   (/ (string-to-number (match-string-no-properties 3)) 100.0)))
 	     "" )) ;  "#00aa00"
 	   ))))))
   (font-lock-flush))
@@ -158,15 +158,15 @@
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+  (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
 	(url-retrieve-synchronously
 	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
 	 'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
+  (goto-char (point-max))
+  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 ;; Use straight.el for use-package expressions
@@ -178,7 +178,7 @@
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
+  '(("melpa" . "https://melpa.org/packages/")
 	("melpa-stable" . "https://stable.melpa.org/packages/")
 	("org" . "https://orgmode.org/elpa/")
 	("elpa" . "https://elpa.gnu.org/packages/")))
@@ -242,15 +242,15 @@
 ;; Setting garbage collection threshold (default is 800)
 ;; Required for speed and also LSP
 (setq gc-cons-threshold (* 50 1000 1000)
-     gc-cons-percentage 0.6)
+ gc-cons-percentage 0.6)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
 	  (lambda ()
 	    (message "*** Emacs loaded in %s with %d garbage collections."
-		     (format "%.2f seconds"
+		 (format "%.2f seconds"
 			    (float-time
-			     (time-subtract after-init-time before-init-time)))
+			 (time-subtract after-init-time before-init-time)))
 		    gcs-done)))
 
 ;; Silence compiler warnings as they can be pretty
@@ -258,11 +258,11 @@
 ;;(setq comp-async-report-warnings-errors nil)
 
 ;; Set tabs to be 4 spaces
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 ;; Set the default, fallback tabstop to be 4 spaces
-(setq tab-stop-list (number-sequence 4 120 4))
+(setq-default tab-stop-list (number-sequence 4 120 4))
 ;; Set Number of Spaces displayed for a tab stop
-(setq tab-width 4)
+(setq-default tab-width 4)
 
 ;; Show Calendar on StartUp                      
 ;; (calendar)
@@ -298,7 +298,7 @@
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list
-      '(("Etc/UTC" "UTC")
+  '(("Etc/UTC" "UTC")
 	("Europe/Berlin" "Berlin")
 	("Europe/Paris" "Paris")
 	("Europe/London" "London")
@@ -310,11 +310,11 @@
 	("Asia/Calcutta" "Bangalore")
 	("Asia/Tokyo" "Tokyo")
 	("Pacific/Auckland" "Auckland"))
-      )
+  )
 
 ;; Adjust how time is displayed
 (setq display-time-world-time-format
-      "%A, %d %B %Y %H:%M %p %Z")
+  "%A, %d %B %Y %H:%M %p %Z")
 
 (setq pet/yasnippet-dir
       (concat pet/dotfiles-emacsconfig-dir
@@ -609,7 +609,7 @@
 	 :map elfeed-search-mode-map
 	 ("n" . (lambda () (interactive)
 		  (next-line) (call-interactively
-			       'elfeed-search-show-entry)))
+			   'elfeed-search-show-entry)))
 	 ("p" . (lambda () (interactive)
 		  (previous-line) (call-interactively
 				   'elfeed-search-show-entry)))
@@ -627,12 +627,12 @@
 (setq elfeed-use-curl t)
 (setq elfeed-curl-max-connections 10)
 (setq elfeed-db-directory
-      (concat pet/dotfiles-emacsconfig-dir
-	      "elfeed/"))
+  (concat pet/dotfiles-emacsconfig-dir
+	  "elfeed/"))
 (setq elfeed-enclosure-default-dir
-      "~/Downloads/")
+  "~/Downloads/")
 (setq elfeed-search-filter
-      "@4-months-ago +unread")
+  "@4-months-ago +unread")
 (setq elfeed-sort-order 'descending)
 (setq elfeed-search-clipboard-type 'CLIPBOARD)
 (setq elfeed-search-title-max-width 150)
@@ -641,10 +641,10 @@
 (setq elfeed-show-truncate-long-urls t)
 (setq elfeed-show-unique-buffers t)
 (setq elfeed-search-date-format
-      '("%F %R" 16 :left)))
+  '("%F %R" 16 :left)))
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
-	      "EmacsRSSFeed.el"))
+	  "EmacsRSSFeed.el"))
 
 ;; Snippet for periodic update for feeds
 ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
@@ -697,11 +697,11 @@
 ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
 ;; open .pdf in 'zahtura'
 (setq dired-open-extensions '(("gif" . "sxiv")
-			      ("jpg" . "sxiv")
-			      ("png" . "sxiv")
-			      ("mkv" . "mpv")
-			      ("mp4" . "mpv")
-			      ("pdf" . "zathura")))
+			  ("jpg" . "sxiv")
+			  ("png" . "sxiv")
+			  ("mkv" . "mpv")
+			  ("mp4" . "mpv")
+			  ("pdf" . "zathura")))
 
 ;; Add Filters by file extension to dired buffer
 (use-package dired-filter)
@@ -734,29 +734,29 @@
   ;; Ensure that anything that should be
   ;; fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil
-		      :foreground nil
-		      :inherit 'fixed-pitch)
+		  :foreground nil
+		  :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil
-		      :inherit '(shadow fixed-pitch))
+		  :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-table nil
-		      :inherit '(shadow fixed-pitch))
+		  :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-verbatim nil
-		      :inherit '(shadow fixed-pitch))
+		  :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-special-keyword nil
-		      :inherit '(font-lock-comment-face
+		  :inherit '(font-lock-comment-face
 				 fixed-pitch))
   (set-face-attribute 'org-meta-line nil
-		      :inherit '(font-lock-comment-face fixed-pitch))
+		  :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil
-		      :inherit 'fixed-pitch))
+		  :inherit 'fixed-pitch))
 
 ;; Replace list hyphen with dot
 (defun pet/org-replace-hyphen ()
   (font-lock-add-keywords
    'org-mode '(("^ *\\([-]\\) "
 		(0 (prog1 () (compose-region
-			      (match-beginning 1)
-			      (match-end 1) "•"))))))
+			  (match-beginning 1)
+			  (match-end 1) "•"))))))
   )
 
 ;; Helper Function to quickly toggle Babel Confirm Evaluation
@@ -767,13 +767,13 @@
     (setq org-confirm-babel-evaluate nil)
   (setq org-confirm-babel-evaluate t))
 (print (concat "Org Babel Confirm State: "
-	       (format "%s" org-confirm-babel-evaluate))))
+	   (format "%s" org-confirm-babel-evaluate))))
 
 ;; Store Org Directory
 (setq pet/org-dir
-      (concat pet/home-dir
-	      (convert-standard-filename
-	       "Org/")))
+  (concat pet/home-dir
+	  (convert-standard-filename
+	   "Org/")))
 
 ;; Setting Up Org Mode
 (use-package org
@@ -793,10 +793,10 @@
   ;; Specify Agenda Files
   (setq org-agenda-files
 	(cons (concat pet/org-dir "journal")
-	      ;; Add Files a starting with "personal-"
-	      (directory-files pet/org-dir t
+	  ;; Add Files a starting with "personal-"
+	  (directory-files pet/org-dir t
 			   "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
-	      ))
+	  ))
 
   ;; Set Org Clock Sound File
   (setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
@@ -852,7 +852,7 @@
   ;; Set Refile Targets to be considered, Emphasis on Archive 
   (setq org-refile-targets
     '(("personal-archive.org" :maxlevel . 1)
-      ("personal-tasks.org" :maxlevel . 1)))
+  ("personal-tasks.org" :maxlevel . 1)))
 
   ;; The default here is 999, which is a little to constricting for SQL and such
   (setq org-table-convert-region-max-lines 9999)
@@ -975,8 +975,8 @@
   "Create an org file in ~/Org/."
   (interactive)
   (let ((name (read-string "Filename: ")))
-    (expand-file-name
-     (format "%s.org" name))))
+(expand-file-name
+ (format "%s.org" name))))
 
 ;; Org-Capture
 (use-package org-capture
@@ -985,97 +985,97 @@
    (setq org-capture-templates
 	 ;; Acronym captures
 	 `(("a" "Acronyms" table-line
-	    (file+headline "~/Org/acronyms.org" "Inbox")
-	    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+	(file+headline "~/Org/acronyms.org" "Inbox")
+	"| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
 	   ;; Documents
 	   ("d" "Documents")
 	   ("dl" "Letter")
 	   ("dlf" "Letter Form" plain (file pet/create-documents-file)
-	    "%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
-	    :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
-	    :unnarrowed t
-	    )
+	"%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
+	:if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+	:unnarrowed t
+	)
 	   ("dlh" "Letter Home" plain (file pet/create-documents-file)
-	    "%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
-	    :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
-	    :unnarrowed t
-	    )
+	"%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
+	:if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+	:unnarrowed t
+	)
 
 	   ;; Email captures
 	   ("e" "Email")
 	   ("em" "Make email note" entry
-	    (file+headline "~/Org/personal-tasks.org" "Mail correspondence")
-	    ,(concat "* TODO [#A] %:subject :mail:\n"
-		     "SCHEDULED: %t\n:"
-		     "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-		     "%i%?"))
+	(file+headline "~/Org/personal-tasks.org" "Mail correspondence")
+	,(concat "* TODO [#A] %:subject :mail:\n"
+		 "SCHEDULED: %t\n:"
+		 "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+		 "%i%?"))
 	   ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
-	    "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+	"* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
 	   ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
-	    "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+	"* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
 
 
 	   ;; Journal captures
 	   ("j" "Journal Entries")
 	   ("jj" "Journal" entry
-	    (file+olp+datetree "~/Org/journal/journal.org")
-	    "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-	    ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
-	    :clock-in :clock-resume
-	    :empty-lines 1)
+	(file+olp+datetree "~/Org/journal/journal.org")
+	"\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+	;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+	:clock-in :clock-resume
+	:empty-lines 1)
 	   ("jm" "Meeting" entry
-	    (file+olp+datetree "~/Org/journal/journal.org")
-	    "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-	    :clock-in :clock-resume
-	    :empty-lines 1)
+	(file+olp+datetree "~/Org/journal/journal.org")
+	"* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+	:clock-in :clock-resume
+	:empty-lines 1)
 
 	   ;; Checklist captures
 	   ("l" "Lists")
 
 	   ("ls" "Shopping List" checkitem
-	    (file+olp "~/Org/lists-shopping.org" "Inbox")
-	    "[ ] %^{Itemname}")
+	(file+olp "~/Org/lists-shopping.org" "Inbox")
+	"[ ] %^{Itemname}")
 
 	   ("ll" "Literature" checkitem
-	    (file+olp "~/Org/lists-literature.org" "Inbox")
-	    "[ ] %^{Author} - %^{Titel}")
+	(file+olp "~/Org/lists-literature.org" "Inbox")
+	"[ ] %^{Author} - %^{Titel}")
 
 	   ("lm" "Music" checkitem
-	    (file+olp "~/Org/lists-music.org" "Inbox")
-	    "[ ] %^{Interpret} - %^{Title}")
+	(file+olp "~/Org/lists-music.org" "Inbox")
+	"[ ] %^{Interpret} - %^{Title}")
 
 	   ("q" "Quotes" entry
-	    (file+olp "~/Org/quotes.org" "Inbox")
-	    "* %^{Originator}\n\n#+begin_quote\n%?\n#+end_quote")
+	(file+olp "~/Org/quotes.org" "Inbox")
+	"* %^{Originator}\n\n#+begin_quote\n%?\n#+end_quote")
 
 	   ("t" "Tasks / Projects")
 	   ("tt" "TODO Task" entry (file+olp
-				    "~/Org/personal-tasks.org" "Inbox")
-	    "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
+				"~/Org/personal-tasks.org" "Inbox")
+	"* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
 	   ("tb" "Basic task for future review" entry
-	    (file+headline "~/Org/personal-tasks.org" "Inbox")
-	    ,(concat "* %^{Title}\n"
-		     ":PROPERTIES:\n"
-		     ":CAPTURED: %U\n"
-		     ":END:\n\n"
-		     "%i%l"))
+	(file+headline "~/Org/personal-tasks.org" "Inbox")
+	,(concat "* %^{Title}\n"
+		 ":PROPERTIES:\n"
+		 ":CAPTURED: %U\n"
+		 ":END:\n\n"
+		 "%i%l"))
 	   ("ts" "Task with a due date (scheduled)" entry
-	    (file+headline "~/Org/personal-tasks.org" "Inbox")
-	    ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-		     "SCHEDULED: %^t\n"
-		     ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-		     "%i%?"))
+	(file+headline "~/Org/personal-tasks.org" "Inbox")
+	,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+		 "SCHEDULED: %^t\n"
+		 ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+		 "%i%?"))
 	   ("td" "Task with a due date (deadline)" entry
-	    (file+headline "~/Org/personal-tasks.org" "Inbox")
-	    ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-		     "DEADLINE: %^t\n"
-		     ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-		     "%i%?"))
+	(file+headline "~/Org/personal-tasks.org" "Inbox")
+	,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+		 "DEADLINE: %^t\n"
+		 ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+		 "%i%?"))
 
 	   ("w" "Workflows")
 	   ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
-	    "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
+	"* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
 
   ;; Activate Context Templates for Email 
   (setq org-capture-templates-contexts
@@ -1118,18 +1118,18 @@
 	  ("wn" "wiki node" plain
 	   "\n* ${title}\n\n%?" 
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-			      "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
+			  "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
 	   :unnarrowed t)
 	  ("wi" "wiki index node" plain
-	       "\n* ${title} Kompendium Index\n\n%?" 
-	       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+	   "\n* ${title} Kompendium Index\n\n%?" 
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 				  "\n#+filetags: :index:%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-	       :unnarrowed t)
+	   :unnarrowed t)
 	  ("wr" "wiki references node" plain
-	       "\n* References\n%?\n** Websites\n\n** Literature" 
-	       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+	   "\n* References\n%?\n** Websites\n\n** Literature" 
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 				  "\n#+filetags: :%^{filetag}:references:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-	       :unnarrowed t)
+	   :unnarrowed t)
 	  ("l" "programming language" plain
 	   "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
 	   :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
@@ -1154,12 +1154,12 @@
   (org-roam-db-autosync-mode)
 
   (pet/leader-keys
-    "or"  '(:ignore t :which-key "Org Roam")
-    "ort" 'org-roam-tag-add
-    "ora" 'org-roam-alias-add
-    "ord" 'org-roam-diagnostics
-    "oru" 'org-roam-ui-open
-    )
+"or"  '(:ignore t :which-key "Org Roam")
+"ort" 'org-roam-tag-add
+"ora" 'org-roam-alias-add
+"ord" 'org-roam-diagnostics
+"oru" 'org-roam-ui-open
+)
   )
 
 ;; Helper Function to insert org note immediately
@@ -1168,7 +1168,7 @@
   (let ((args (push arg args))
 	(org-roam-capture-templates
 	 (list (append (car org-roam-capture-templates)
-		       '(:immediate-finish t)))))
+		   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
 ;; A Visualization of your org roam node structure
@@ -1183,9 +1183,9 @@
   ;;  :hook (after-init . org-roam-ui-mode)
  :config
  (setq org-roam-ui-sync-theme t
-      org-roam-ui-follow t
-      org-roam-ui-update-on-save t
-      org-roam-ui-open-on-start t))
+  org-roam-ui-follow t
+  org-roam-ui-update-on-save t
+  org-roam-ui-open-on-start t))
 
 (use-package org-drill
   :config
@@ -1253,7 +1253,7 @@
 	  '("~/Projects/Programming")))
   (setq projectile-switch-project-action
 	#'projectile-dired)
-      ;; Add Projectile Functions to User Leader Keys
+  ;; Add Projectile Functions to User Leader Keys
   (pet/leader-keys
    "p"  '(:ignore t :which-key "projects")
    "pf"  'counsel-projectile-find-file
@@ -1271,37 +1271,81 @@
 
 ;; Add Language Server Support
 (use-package lsp-mode
+  :hook ((c-mode          ;; clangd
+          c++-mode        ;; clangd
+          c-or-c++-mode   ;; clangd
+          python-mode     ;; pyright
+          typescript-mode ;; ts-ls (tsserver wrapper)
+          js-mode         ;; ts-ls (tsserver wrapper)
+          web-mode        ;; ts-ls/HTML/CSS
+          ) . lsp-deferred)
   :commands (lsp lsp-deferred)
-  :hook ((typescript-mode js2-mode web-mode) . lsp)
   :bind (:map lsp-mode-map
-	      ("SPC TAB" . completion-at-point))
+      ("SPC TAB" . completion-at-point))
   :custom (lsp-headerline-breadcrumb-enable nil)
-  :config (lsp-enable-which-key-integration t))
+  :config (lsp-enable-which-key-integration t)
+  ;; automatically set project root as determined by projectile
+  ;; (setq lsp-auto-guess-root t)
+  ;; Disable logging of all language server message for performance
+  (setq lsp-log-io nil)
+  ;; Set LSP Restart to auto (interactive by default)
+  ;; (setq lsp-restart 'auto-restart)
+  ;; disable symbol references
+  (setq lsp-enable-symbol-highlighting nil)
+  ;; disable on type formatting
+  (setq lsp-enable-on-type-formatting nil)
+  ;; disable signature conditions and documentation
+  (setq lsp-signature-auto-activate nil)
+  (setq lsp-signature-render-documentation nil)
+  ;; disable eldoc hook
+  (setq lsp-eldoc-hook nil)
+  ;; disable modeline informations
+  (setq lsp-modeline-code-actions-enable nil)
+  (setq lsp-modeline-diagnostics-enable nil)
+  ;; disable breadcrumb/headerline
+  (setq lsp-headerline-breadcrumb-enable nil)
+  ;; disable semantic tokens
+  (setq lsp-semantic-tokens-enable nil)
+  ;; disable code folding
+  (setq lsp-enable-folding nil)
+  ;; dont enable imenu automatically
+  (setq lsp-enable-imenu nil)
+  ;; disable snippet completion
+  (setq lsp-enable-snippet nil)
+  ;; Set delay (0.5 is default)
+  (setq lsp-idle-delay 0.5)
+  ;; Increase amount of data read from process for lsp (1MB)
+  (setq read-process-output-max (* 1024 1024))
 
-;; Add Lsp Functions to Leader Keys
-(pet/leader-keys
- "tl"  '(:ignore t :which-key "lsp")
- "tld" 'xref-find-definitions
- "tlr" 'xref-find-references
- "tln" 'lsp-ui-find-next-reference
- "tlp" 'lsp-ui-find-prev-reference
- "tls" 'counsel-imenu
- "tle" 'lsp-ui-flycheck-list
- "tlS" 'lsp-ui-sideline-mode
- "tlX" 'lsp-execute-code-action)
-
-;; Increase amount of data read from process for lsp
-(setq read-process-output-max (* 1024 1024))
+  ;; Add Lsp Functions to Leader Keys
+  (pet/leader-keys
+    "tl"  '(:ignore t :which-key "lsp")
+    "tld" 'xref-find-definitions
+    "tlr" 'xref-find-references
+    "tln" 'lsp-ui-find-next-reference
+    "tlp" 'lsp-ui-find-prev-reference
+    "tls" 'counsel-imenu
+    "tle" 'lsp-ui-flycheck-list
+    "tlS" 'lsp-ui-sideline-mode
+    "tlX" 'lsp-execute-code-action)
+  )
 
 ;; Add lsp ui for higher level ui options
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
+  :commands lsp-ui-mode
+  ;; :hook (lsp-mode . lsp-ui-mode)
   ;; Show lsp info on sideline
   :config
-  (setq lsp-ui-sideline-enable t)
-  (setq lsp-ui-sideline-show-hover nil)
-  (setq lsp-ui-doc-position 'bottom)
-  (lsp-ui-doc-show))
+  (setq lsp-ui-doc-enable nil)
+  (setq lsp-ui-doc-header t)
+  (setq lsp-ui-doc-include-signature t)
+  (setq lsp-ui-doc-border (face-foreground 'default))
+  (setq lsp-ui-sideline-show-code-actions t)
+  (setq lsp-ui-sideline-delay 0.05)
+  ;; (setq lsp-ui-sideline-enable t)
+  ;; (setq lsp-ui-sideline-show-hover nil)
+  ;; (setq lsp-ui-doc-position 'bottom)
+  )
 
 ;; Extend lsp and treemacs integration
 (use-package lsp-treemacs
@@ -1310,15 +1354,15 @@
 (use-package dap-mode
   :after lsp-mode
   :config (dap-auto-configure-mode))
-(use-package dap-mode
-  :after lsp-mode
-  :custom
-  (lsp-enable-dap-auto-configure nil)
-  :config
-  (dap-ui-mode 1)
-  (dap-tooltip-mode 1)
-  (require 'dap-node)
-  (dap-node-setup))
+;;(use-package dap-mode
+;;  :after lsp-mode
+;;  :custom
+;;  (lsp-enable-dap-auto-configure nil)
+;;  :config
+;;  (dap-ui-mode 1)
+;;  (dap-tooltip-mode 1)
+;;  (require 'dap-node)
+;;  (dap-node-setup))
 
 ;; Enable Flycheck for syntax checking.
 ;; Defer loading until used with lsp-mode
@@ -1366,9 +1410,9 @@
 
 ;; Load Octave Mode automatically for specified files
 (setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+  (cons '("\\.m$" . octave-mode) auto-mode-alist))
 (setq auto-mode-alist
-      (cons '("\\.sci$" . octave-mode) auto-mode-alist))
+  (cons '("\\.sci$" . octave-mode) auto-mode-alist))
 
 ;; Setup Octave Mode
 (add-hook 'octave-mode-hook
@@ -1435,10 +1479,12 @@
 
 ;; Setup lsp-pyright Server
 (use-package lsp-pyright
-  ;; :hook (python-mode . (lambda ()
-  ;;   		   (require 'lsp-pyright)
-  ;;			   (lsp-deferred)))      ;; or lsp
+  :hook (python-mode . (lambda () (require 'lsp-pyright)))
+  ;; Use Python 3 in case Python 2 is installed as well
+  :init (when (executable-find "python3")
+        (setq lsp-pyright-python-executable-cmd "python3"))
   )
+
 
 ;; Enable Virtual Environment Support
 (use-package pyvenv
@@ -1538,7 +1584,7 @@
 
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
+  (org-babel-tangle))))
 
 ;; This hook automatically evaluates the helper
 ;; function after saving the buffer
@@ -1560,7 +1606,7 @@
 
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
+  (org-babel-tangle))))
 
 ;; This hook automatically evaluates the helper
 ;; function after saving the buffer

@@ -322,11 +322,11 @@ Make startup faster by reducing the frequency of garbage collection and then use
 I Prefer ~Spaces~ over ~Tabs~, if you need to enable it for certain modes, add a hook to it.
 #+begin_src emacs-lisp
   ;; Set tabs to be 4 spaces
-  (setq indent-tabs-mode nil)
+  (setq-default indent-tabs-mode nil)
   ;; Set the default, fallback tabstop to be 4 spaces
-  (setq tab-stop-list (number-sequence 4 120 4))
+  (setq-default tab-stop-list (number-sequence 4 120 4))
   ;; Set Number of Spaces displayed for a tab stop
-  (setq tab-width 4)
+  (setq-default tab-width 4)
 #+end_src
 ** Calender
 
@@ -1651,27 +1651,64 @@ The which-key integration adds helpful descriptions of the various keys so you s
 #+begin_src emacs-lisp 
   ;; Add Language Server Support
   (use-package lsp-mode
+    :hook ((c-mode          ;; clangd
+            c++-mode        ;; clangd
+            c-or-c++-mode   ;; clangd
+            python-mode     ;; pyright
+            typescript-mode ;; ts-ls (tsserver wrapper)
+            js-mode         ;; ts-ls (tsserver wrapper)
+            web-mode        ;; ts-ls/HTML/CSS
+            ) . lsp-deferred)
     :commands (lsp lsp-deferred)
-    :hook ((typescript-mode js2-mode web-mode) . lsp)
     :bind (:map lsp-mode-map
-		("SPC TAB" . completion-at-point))
+        ("SPC TAB" . completion-at-point))
     :custom (lsp-headerline-breadcrumb-enable nil)
-    :config (lsp-enable-which-key-integration t))
+    :config (lsp-enable-which-key-integration t)
+    ;; automatically set project root as determined by projectile
+    ;; (setq lsp-auto-guess-root t)
+    ;; Disable logging of all language server message for performance
+    (setq lsp-log-io nil)
+    ;; Set LSP Restart to auto (interactive by default)
+    ;; (setq lsp-restart 'auto-restart)
+    ;; disable symbol references
+    (setq lsp-enable-symbol-highlighting nil)
+    ;; disable on type formatting
+    (setq lsp-enable-on-type-formatting nil)
+    ;; disable signature conditions and documentation
+    (setq lsp-signature-auto-activate nil)
+    (setq lsp-signature-render-documentation nil)
+    ;; disable eldoc hook
+    (setq lsp-eldoc-hook nil)
+    ;; disable modeline informations
+    (setq lsp-modeline-code-actions-enable nil)
+    (setq lsp-modeline-diagnostics-enable nil)
+    ;; disable breadcrumb/headerline
+    (setq lsp-headerline-breadcrumb-enable nil)
+    ;; disable semantic tokens
+    (setq lsp-semantic-tokens-enable nil)
+    ;; disable code folding
+    (setq lsp-enable-folding nil)
+    ;; dont enable imenu automatically
+    (setq lsp-enable-imenu nil)
+    ;; disable snippet completion
+    (setq lsp-enable-snippet nil)
+    ;; Set delay (0.5 is default)
+    (setq lsp-idle-delay 0.5)
+    ;; Increase amount of data read from process for lsp (1MB)
+    (setq read-process-output-max (* 1024 1024))
 
-  ;; Add Lsp Functions to Leader Keys
-  (pet/leader-keys
-   "tl"  '(:ignore t :which-key "lsp")
-   "tld" 'xref-find-definitions
-   "tlr" 'xref-find-references
-   "tln" 'lsp-ui-find-next-reference
-   "tlp" 'lsp-ui-find-prev-reference
-   "tls" 'counsel-imenu
-   "tle" 'lsp-ui-flycheck-list
-   "tlS" 'lsp-ui-sideline-mode
-   "tlX" 'lsp-execute-code-action)
-
-  ;; Increase amount of data read from process for lsp
-  (setq read-process-output-max (* 1024 1024))
+    ;; Add Lsp Functions to Leader Keys
+    (pet/leader-keys
+      "tl"  '(:ignore t :which-key "lsp")
+      "tld" 'xref-find-definitions
+      "tlr" 'xref-find-references
+      "tln" 'lsp-ui-find-next-reference
+      "tlp" 'lsp-ui-find-prev-reference
+      "tls" 'counsel-imenu
+      "tle" 'lsp-ui-flycheck-list
+      "tlS" 'lsp-ui-sideline-mode
+      "tlX" 'lsp-execute-code-action)
+    )
 #+end_src
 
 *** lsp-ui
@@ -1681,13 +1718,20 @@ The which-key integration adds helpful descriptions of the various keys so you s
 #+begin_src emacs-lisp
   ;; Add lsp ui for higher level ui options
   (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode)
+    :commands lsp-ui-mode
+    ;; :hook (lsp-mode . lsp-ui-mode)
     ;; Show lsp info on sideline
     :config
-    (setq lsp-ui-sideline-enable t)
-    (setq lsp-ui-sideline-show-hover nil)
-    (setq lsp-ui-doc-position 'bottom)
-    (lsp-ui-doc-show))
+    (setq lsp-ui-doc-enable nil)
+    (setq lsp-ui-doc-header t)
+    (setq lsp-ui-doc-include-signature t)
+    (setq lsp-ui-doc-border (face-foreground 'default))
+    (setq lsp-ui-sideline-show-code-actions t)
+    (setq lsp-ui-sideline-delay 0.05)
+    ;; (setq lsp-ui-sideline-enable t)
+    ;; (setq lsp-ui-sideline-show-hover nil)
+    ;; (setq lsp-ui-doc-position 'bottom)
+    )
 #+end_src
 *** lsp-treemacs
 
@@ -1715,15 +1759,15 @@ Dap stands for Debug Adapter
   (use-package dap-mode
     :after lsp-mode
     :config (dap-auto-configure-mode))
-  (use-package dap-mode
-    :after lsp-mode
-    :custom
-    (lsp-enable-dap-auto-configure nil)
-    :config
-    (dap-ui-mode 1)
-    (dap-tooltip-mode 1)
-    (require 'dap-node)
-    (dap-node-setup))
+  ;;(use-package dap-mode
+  ;;  :after lsp-mode
+  ;;  :custom
+  ;;  (lsp-enable-dap-auto-configure nil)
+  ;;  :config
+  ;;  (dap-ui-mode 1)
+  ;;  (dap-tooltip-mode 1)
+  ;;  (require 'dap-node)
+  ;;  (dap-node-setup))
 #+end_src
 ** Flycheck
 [[https://www.flycheck.org/en/latest/user/quickstart.html][Flycheck]] adds syntax checking capagilities. We set it up to be loaded together with =lsp-mode=. You could also load it globally.
@@ -1879,10 +1923,12 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 
   ;; Setup lsp-pyright Server
   (use-package lsp-pyright
-    ;; :hook (python-mode . (lambda ()
-    ;;   		   (require 'lsp-pyright)
-    ;;			   (lsp-deferred)))      ;; or lsp
+    :hook (python-mode . (lambda () (require 'lsp-pyright)))
+    ;; Use Python 3 in case Python 2 is installed as well
+    :init (when (executable-find "python3")
+          (setq lsp-pyright-python-executable-cmd "python3"))
     )
+
 
   ;; Enable Virtual Environment Support
   (use-package pyvenv
