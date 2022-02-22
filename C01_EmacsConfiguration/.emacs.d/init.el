@@ -295,6 +295,30 @@
 ;; Save Abbrevs when saving Files
 (setq save-abbrevs t)
 
+;; Remember recently accessed files
+(recentf-mode t)
+
+;; Limit history file to 50 entries to speed up start
+(setq history-length 50)
+;; Save command and file history
+(savehist-mode t)
+
+;; Remember Cursor Positions on accessed files 
+(save-place-mode t)
+
+;; Avoid Clutter by saving Customization Settings to a different file
+(setq custom-file (locate-user-emacs-file "customization_variables.el"))
+(load custom-file 'no-error 'no-message)
+
+;; Don't show windowed Dialog Box on Prompts
+(setq use-dialog-box nil)
+
+;; Revert Buffers when Files changed on disk
+(global-auto-revert-mode t)
+
+;; Automatically revert Dired (and similar) Buffers without confirmation
+(setq global-auto-revert-non-file-buffers t)
+
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list
@@ -380,9 +404,13 @@
    "elC-uM-u" 'upcase-initials-region
    ;; Tabs
    "et"    '(untabify
-	     :which-key "Untabify")
+         :which-key "Untabify")
    "er"    '(regexp-builder
-	     :which-key "Regexp Builder")
+         :which-key "Regexp Builder")
+
+   ;; Files
+   "f"   '(:ignore t :which-key "Files")
+   "fR"   'recentf-open-files
 
    ;; Org Mode
    "o"    '(:ignore t :which-key "Org Mode")
@@ -391,16 +419,16 @@
    "t"    '(:ignore t :which-key "Toggles")
    "tc"   'world-clock
    "tt"   '(counsel-load-theme
-	    :which-key "Choose Theme")
+        :which-key "Choose Theme")
 
    ;; Toggles - Highlighting
    "th"   '(:ignore t :which-key "Highlighting")
    ;; Toggles - Highlighting - Colors
    "thc"  '(:ignore t :which-key "Colors")
    "thcr" '(pet/syntax-color-rgb
-	    :which-key "RGB")
+        :which-key "RGB")
    "thch" '(pet/syntax-color-hsv
-	    :which-key "HSV")
+        :which-key "HSV")
    ;; Toggles - Modes
    "tm"   '(:ignore t :which-key "Modes")
    "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
@@ -520,7 +548,7 @@
   ;; Add Counsel function to leader key space
   (pet/leader-keys
     "r"   '(ivy-resume :which-key "ivy resume")
-    "f"   '(:ignore t :which-key "files")
+
     "ff"  '(counsel-find-file :which-key "open file")
     "C-f" 'counsel-find-file
     "fr"  '(counsel-recentf :which-key "recent files")
