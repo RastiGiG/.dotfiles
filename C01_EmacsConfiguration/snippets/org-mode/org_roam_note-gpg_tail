@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-gpg_tail
+# key: <orngpgt
+# --
+* Topic Overview
+
+** [[id:5dc04892-9105-45aa-845a-01b89448d753][GnuPG - GNU Privacy Guard]]
+*** [[id:a408384b-b673-4c9e-a750-1ca852a2b435][Administration]]
+**** [[id:a7ddc3ea-a6f5-4dac-b377-84308eeec3ac][Configuration]]
+**** [[id:58065f25-301f-455f-9f4e-728995410df3][Managing Keys]]
+**** [[id:fcb7cb63-568f-4ae2-b07c-c3a5bf646326][Keyservers]]
+*** [[id:53d4763a-fbe5-4873-999a-712dc2ee16c8][Features]]
+**** [[id:6a93416d-693f-4a6f-9438-591148efcc96][Signing and Verifying Data]]
+**** [[id:b03eba40-2026-4c4f-95d7-b5b938a12898][Enrypting Data and Directories]]
+*** [[id:ef4605da-ffe2-4649-891c-1150ac1efea3][Additional Functionality]]
+**** [[id:0a1f0d25-0d0a-40d3-b2f7-bb73c6633cf4][Symmetric Encryption]]
+**** [[id:6a615e17-a1ac-43a5-bef7-1974fb714400][Trusting a Key]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+**** [[id:9e4f766d-37a6-4901-b5a4-d6041335ec67][GNU Software]]
+***** [[id:1585e6e7-3f1f-41ca-a266-1297a6c6a590][GNU Coreutils]]
+***** [[id:5dc04892-9105-45aa-845a-01b89448d753][GPG - GNU Privacy Guard]]
+***** [[id:42a721a2-1e18-4345-9a65-23b942a457fe][GNU Mailutils]]
+***** [[id:cd5846e8-b8c9-43d9-a3e4-db4e95e370e8][GNU Texinfo]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:52c212f2-d44a-4a05-acd9-979f906e7427][GPG References]]
+
+** Websites
+
+1. [[https://sparewotw.wordpress.com/2012/10/31/how-to-verify-signature-using-sig-file/][SpareWOTW.WordPress.com: How to verify signature using sig file]]
+
+** Literature

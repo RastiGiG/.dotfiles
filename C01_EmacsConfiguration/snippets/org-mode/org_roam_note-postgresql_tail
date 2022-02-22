@@ -6,6 +6,8 @@
 
 ** [[id:9ce0bc43-b942-4652-9629-a96f54f9dedd][PostgreSQL]]
 *** [[id:8b23e2cc-c1a5-4dab-a366-89e12bedd2e5][Setup]]
+*** [[id:bb761b2e-baef-4c18-98fb-29607985721d][Security]]
+*** [[id:c40fa55f-4f6f-418d-ae38-358bb1ac60d9][Locale Settings]]
 *** [[id:c12161f0-3c37-4a43-b2c8-c218195ac4ab][Administration Tools]]
 **** [[id:fe4797b6-25fb-40ca-a8e8-d757871cd821][PGAdmin]]
 
