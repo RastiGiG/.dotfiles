@@ -1,0 +1,12 @@
+configuration {
+  display-drun: "Applications:";
+  display-window: "Windows:";
+  drun-display-format: "{name}";
+  font: "JetBrains Mono Medium 10";
+  modi: "window,run,drun";
+  show-icons: true;
+  icon-theme: "Papirus";
+  application-fallback-icon: "";
+}
+
+@theme "~/.config/rofi/themes/dark_purple_theme.rasi"

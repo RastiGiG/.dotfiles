@@ -1,0 +1,80 @@
+#+TITLE: Personal Rofi Themes Configuration
+#+PROPERTY: header-args:css :tangle ../D11_RunLaunchers/.config/rofi/themes/theme.rasi :mkdirp yes
+#+STARTUP: hideblocks show2levels
+
+* Introduction
+This is a collection of ~themes~ to use with [[id:d4db3c4c-5afa-4e96-874b-e0dc70d1e144][rofi]].
+Don't forget to include the desired one into your [[file:RofiConfig.org][rofi Configuration]]
+* Themes
+** Dark Purple Theme
+If you don't have your [[id:d603af74-0546-4c32-a8be-6d9c0a175d12][Window Manager]] configured to handle the [[id:b414f8b5-42d6-4856-bdb3-fab5423317a0][Alpha Channel]], you can omit the last two digits
+#+begin_src css tangle: ../D11_RunLaunchers/.config/rofi/themes/dark_purple_theme.rasi
+  * {
+    bg: #11121D77;
+    bg-alt: #444b6a77;
+
+    fg: #FFFFFF;
+    fg-alt: #787c99;
+
+    background-color: @bg;
+
+    border: 0;
+    margin: 0;
+    padding: 0;
+    spacing: 0;
+  }
+
+  window {
+    width: 30%;
+  }
+
+  element {
+    padding: 8 0;
+    text-color: @fg-alt;
+  }
+
+  element selected {
+    text-color: @fg;
+  }
+
+  element-text {
+    background-color: inherit;
+    text-color: inherit;
+    vertical-align: 0.5;
+  }
+
+  element-icon {
+    padding: 5;
+    size: 30;
+  }
+
+  entry {
+    background-color: @bg-alt;
+    padding: 12;
+    text-color: @fg;
+  }
+
+  inputbar {
+    children: [prompt, entry];
+  }
+
+  listview {
+    padding: 8 12;
+    background-color: @bg;
+    columns: 1;
+    lines: 5;
+  }
+
+  mainbox {
+    background-color: @bg;
+    children: [inputbar, listview];
+  }
+
+  prompt {
+    background-color: @bg-alt;
+    enabled: true;
+    padding: 12 0 0 12;
+    text-color: @fg;
+  }
+#+end_src
+** Light Blue Theme

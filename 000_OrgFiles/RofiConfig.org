@@ -1,0 +1,35 @@
+#+TITLE: Personal Rofi Configuration
+#+PROPERTY: header-args:css :tangle ../D11_RunLaunchers/.config/rofi/config.rasi :mkdirp yes
+#+STARTUP: hideblocks show2levels
+
+* Setup
+
+#+begin_src css tangle: yes
+  configuration {
+      display-drun: "Applications:";
+      display-window: "Windows:";
+      drun-display-format: "{icon} {name}";
+      font: "Iosevka Medium";
+      modi: "window,run,drun";
+      font: "JetBrains Mono Medium 10";
+      modi: "window,run,drun";
+      show-icons: true;
+      icon-theme: "Papirus";
+      application-fallback-icon: "";
+  }
+#+end_src
+
+* Theme 
+
+*Theme Setting* copied from [[https://github.com/ericmurphyxyz][GitHub.com: Eric Murphy XYZ]]
+:NOTE:
+If you want to include the ~theme~ here, you need to set the first line to =/dev/null=:
+#+begin_example
+  @theme "/dev/null"
+#+end_example
+:END:
+
+Include one of the *themes* defined by the [[file:RofiThemesConfig.org][rofi Themes Configuration]]
+#+begin_src css tangle: yes
+  @theme "~/.config/rofi/themes/dark_purple_theme.rasi"
+#+end_src
