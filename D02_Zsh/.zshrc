@@ -18,6 +18,10 @@ colorscript random
 
 # History in cache directory:
 HISTSIZE=3000
+# Don't put duplicate lines or lines starting with spaces into the history
+HISTCONTROL=ignoreboth
+# Add Time String to History
+HISTTIMEFORMAT="%Y-%m-%d %T "
 SAVEHIST=3000
 HISTFILE=~/.cache/zsh/history
 

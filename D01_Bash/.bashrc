@@ -108,6 +108,11 @@ shopt -s expand_aliases
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
+# Don't put duplicate lines or lines starting with spaces into the history
+HISTCONTROL=ignoreboth
+# Add Time String to History
+HISTTIMEFORMAT="%Y-%m-%d %T "
+
 
 #
 # # ex - archive extractor
