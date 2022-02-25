@@ -1,0 +1,113 @@
+#+TITLE: Personal Redshift Configuration
+#+PROPERTY: header-args:shell :tangle ../D12_DisplaySettings/.config/redshift/redshift.conf :mkdirp yes
+#+STARTUP: hideblocks show2levels
+
+* Introduction
+
+~Redshift~ is an application that *automatically adjust* the ~Display Lights~ depending on the *time of day*.
+This is done by adjusting the ~Color Temperature~ using *Gamma Ramps*.
+It's more of a hack, but supposedly helps especially *at night* when ~Blue Light~ might be problematic.
+
+* Global Settings
+
+#+begin_src shell tangle: yes
+  ; Global settings for redshift
+  [redshift]
+#+end_src
+
+** Day/Night Temperatures
+#+begin_src shell tangle: yes
+  ; Set the day and night screen temperatures
+  temp-day=5700
+  temp-night=3500
+#+end_src
+
+** Smooth Fading on Start/Stop
+#+begin_src shell tangle: yes
+  ; Disable the smooth fade between temperatures when Redshift starts and stops.
+  ; 0 will cause an immediate change between screen temperatures.
+  ; 1 will gradually apply the new screen temperature over a couple of seconds.
+  fade=1
+#+end_src
+
+** Specify Start/Stop Criteria
+#+begin_src shell tangle: yes
+  ; Solar elevation thresholds.
+  ; By default, Redshift will use the current elevation of the sun to determine
+  ; whether it is daytime, night or in transition (dawn/dusk). When the sun is
+  ; above the degrees specified with elevation-high it is considered daytime and
+  ; below elevation-low it is considered night.
+  ;elevation-high=3
+  ;elevation-low=-6
+
+  ; Custom dawn/dusk intervals.
+  ; Instead of using the solar elevation, the time intervals of dawn and dusk
+  ; can be specified manually. The times must be specified as HH:MM in 24-hour
+  ; format.
+  dawn-time=6:00-7:45
+  dusk-time=18:35-20:15
+#+end_src
+
+** Screen Brightness
+#+begin_src shell tangle: yes
+  ; Set the screen brightness. Default is 1.0.
+  ;brightness=0.9
+  ; It is also possible to use different settings for day and night
+  ; since version 1.8.
+  brightness-day=0.7
+  brightness-night=0.4
+#+end_src
+
+** Screen Gamma
+#+begin_src shell tangle: yes
+  ; Set the screen gamma (for all colors, or each color channel
+  ; individually)
+  gamma=0.8
+  ;gamma=0.8:0.7:0.8
+  ; This can also be set individually for day and night since
+  ; version 1.10.
+  ;gamma-day=0.8:0.7:0.8
+  ;gamma-night=0.6
+#+end_src
+
+** Location Provider
+#+begin_src shell tangle: yes
+  ; Set the location-provider: 'geoclue2', 'manual'
+  ; type 'redshift -l list' to see possible values.
+  ; The location provider settings are in a different section.
+  location-provider=manual
+#+end_src
+
+** Adustment Method
+#+begin_src shell tangle: yes
+  ; Set the adjustment-method: 'randr', 'vidmode'
+  ; type 'redshift -m list' to see all possible values.
+  ; 'randr' is the preferred method, 'vidmode' is an older API.
+  ; but works in some cases when 'randr' does not.
+  ; The adjustment method settings are in a different section.
+  adjustment-method=randr
+#+end_src
+
+* Configuration of Location Provider
+#+begin_src shell tangle: yes
+  ; Configuration of the location-provider:
+  ; type 'redshift -l PROVIDER:help' to see the settings.
+  ; ex: 'redshift -l manual:help'
+  ; Keep in mind that longitudes west of Greenwich (e.g. the Americas)
+  ; are negative numbers.
+  [manual]
+  lat=48.1
+  lon=11.6
+#+end_src
+
+* Configuration of Adjustment Method
+#+begin_src shell tangle: yes
+  ; Configuration of the adjustment-method
+  ; type 'redshift -m METHOD:help' to see the settings.
+  ; ex: 'redshift -m randr:help'
+  ; In this example, randr is configured to adjust only screen 0.
+  ; Note that the numbering starts from 0, so this is actually the first screen.
+  ; If this option is not specified, Redshift will try to adjust _all_ screens.
+  [randr]
+  screen=0
+#+end_src

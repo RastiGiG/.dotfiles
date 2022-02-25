@@ -1,5 +1,5 @@
 #+TITLE: Personal Picom Themes Configuration
-#+PROPERTY: header-args:css :tangle ../D11_WindowManagers/.config/picom/picom.conf :mkdirp yes
+#+PROPERTY: header-args:css :tangle ../D12_DisplaySettings/.config/picom/picom.conf :mkdirp yes
 #+STARTUP: hideblocks show2levels
 
 * Introduction
