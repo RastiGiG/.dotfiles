@@ -65,7 +65,16 @@ tramp
 # flymake-mode
 *_flymake.*
 
-# eshell files - This excludes history and dir
+#############################################
+# Emacs Standard Files
+# --This excludes history and places--
+/C01_EmacsConfiguration/**/history
+/C01_EmacsConfiguration/**/places
+
+
+#############################################
+# eshell files
+# --This excludes history and dir--
 /C01_EmacsConfiguration/**/eshell/history
 /C01_EmacsConfiguration/**/eshell/lastdir
 
@@ -102,7 +111,7 @@ C01_EmacsConfiguration/**/projectile-bookmarks.eld
 
 #############
 ## Perspective
-C01_EmacsConfiguration/**/fin-state
+C01_EmacsConfiguration/**/*fin*
 
 ############
 # ELPA packages
