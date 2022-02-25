@@ -974,7 +974,9 @@
     (octave . t)        ;; Octave
     (gnuplot . t)       ;; Gnuplot
     (awk . t)           ;; awk
-    (sed . t)))         ;; GNUsed
+    (sed . t)           ;; GNUsed
+    (css . t)           ;; CSS
+    ))         
 
 ;; Add conf-unix to be recognized
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
@@ -1540,13 +1542,12 @@
              'after-save-hook
              #'pet/org-babel-tangle-config)))
 
-;; Automatically tangle test config file
 ;; Helper Function to that does the tangling
 (defun pet/org-babel-tangle-testconfig ()
   (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/EmacsTestConfig.org"))
+     (buffer-file-name)
+     (concat pet/dotfiles-dir
+         "000_OrgFiles/EmacsTestConfig.org"))
     ;; Have user confirm tangle 
     (let ((org-confirm-babel-evaluate t))
       (org-babel-tangle))))
@@ -1554,12 +1555,11 @@
 ;; This hook automatically evaluates the helper
 ;; function after saving the buffer
 (add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-testconfig)))
+      (lambda ()
+        (add-hook
+         'after-save-hook
+         #'pet/org-babel-tangle-testconfig)))
 
-;; Automatically tangle backup config file
 ;; Helper Function to that does the tangling
 (defun pet/org-babel-tangle-backupconfig ()
   (when (string-equal
@@ -1577,8 +1577,6 @@
 	    (add-hook
 	     'after-save-hook
 	     #'pet/org-babel-tangle-backupconfig)))
-
-;; Setup Automatic Tangling of Files
 
 ;; Automatically tangle config file
 ;; Helper Function to that does the tangling
@@ -1600,8 +1598,6 @@
              'after-save-hook
              #'pet/org-babel-tangle-feeds)))
 
-;; Setup Automatic Tangling of Files
-
 ;; Automatically tangle config file
 ;; Helper Function to that does the tangling
 (defun pet/org-babel-tangle-qtile ()
@@ -1622,8 +1618,6 @@
 	     'after-save-hook
 	     #'pet/org-babel-tangle-qtile)))
 
-;; Setup Automatic Tangling of Files
-
 ;; Automatically tangle config file
 ;; Helper Function to that does the tangling
 (defun pet/org-babel-tangle-qtilebackup ()
@@ -1643,3 +1637,25 @@
 	    (add-hook
 	     'after-save-hook
 	     #'pet/org-babel-tangle-qtilebackup)))
+
+;; Setup Automatic Tangling of Run Launchers
+
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-rofi ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/RofiConfig.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+  (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-rofi)))

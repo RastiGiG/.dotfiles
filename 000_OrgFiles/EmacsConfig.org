@@ -1270,7 +1270,9 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       (octave . t)        ;; Octave
       (gnuplot . t)       ;; Gnuplot
       (awk . t)           ;; awk
-      (sed . t)))         ;; GNUsed
+      (sed . t)           ;; GNUsed
+      (css . t)           ;; CSS
+      ))         
 
   ;; Add conf-unix to be recognized
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
@@ -2009,13 +2011,12 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 *** Test Config File
 
 #+begin_src emacs-lisp
-  ;; Automatically tangle test config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-testconfig ()
     (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/EmacsTestConfig.org"))
+       (buffer-file-name)
+       (concat pet/dotfiles-dir
+           "000_OrgFiles/EmacsTestConfig.org"))
       ;; Have user confirm tangle 
       (let ((org-confirm-babel-evaluate t))
         (org-babel-tangle))))
@@ -2023,16 +2024,15 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   ;; This hook automatically evaluates the helper
   ;; function after saving the buffer
   (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-testconfig)))
+        (lambda ()
+          (add-hook
+           'after-save-hook
+           #'pet/org-babel-tangle-testconfig)))
 #+end_src
 
 *** Backup Config File
 
 #+begin_src emacs-lisp
-  ;; Automatically tangle backup config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-backupconfig ()
     (when (string-equal
@@ -2055,8 +2055,6 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 ** RSS Feeds File
 
 #+begin_src emacs-lisp
-  ;; Setup Automatic Tangling of Files
-
   ;; Automatically tangle config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-feeds ()
@@ -2079,12 +2077,9 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 #+end_src
 
 ** Qtile
-
 *** Config
 
-#+begin_src emacs-lisp
-  ;; Setup Automatic Tangling of Files
-  
+#+begin_src emacs-lisp  
   ;; Automatically tangle config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-qtile ()
@@ -2108,8 +2103,6 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 *** Backup Config
 
 #+begin_src emacs-lisp
-  ;; Setup Automatic Tangling of Files
-
   ;; Automatically tangle config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-qtilebackup ()
@@ -2131,3 +2124,30 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 	       #'pet/org-babel-tangle-qtilebackup)))
 #+end_src
 
+** Run Launchers
+*** Rofi
+**** Config
+
+#+begin_src emacs-lisp
+  ;; Setup Automatic Tangling of Run Launchers
+  
+  ;; Automatically tangle config file
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-rofi ()
+    (when (string-equal
+	   (buffer-file-name)
+	   (concat pet/dotfiles-dir
+		   "000_OrgFiles/RofiConfig.org"))
+
+      ;; Dynamic scoping to the rescue
+      (let ((org-confirm-babel-evaluate nil))
+	(org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (add-hook
+	       'after-save-hook
+	       #'pet/org-babel-tangle-rofi)))
+#+end_src
