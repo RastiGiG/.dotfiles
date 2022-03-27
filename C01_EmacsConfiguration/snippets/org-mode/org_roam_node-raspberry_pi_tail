@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-raspberry_pi_tail
+# key: <ornraspt
+# --
+* Topic Overview
+
+** [[id:94cd961a-0446-46d9-86e6-d78fdfe4ee9b][Raspberry Pi]]
+*** [[id:0ae9fdd3-7242-402c-894e-76095b416a97][Setup]]
+*** [[id:baace51c-3da9-48a9-8341-05dd57da49c5][Projects]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:a00ef2f9-38cf-4dae-81a8-6685aa1a2035][Projects]]
+**** [[id:94cd961a-0446-46d9-86e6-d78fdfe4ee9b][Raspberry Pi]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:d17b7793-10ff-4448-ab39-c7519296ef5f][Raspberry Pi References]]
+
+** Websites
+
+1. [[https://www.raspberrypi.com][RaspberryPi.com]]
+   1) [[https://www.raspberrypi.com/software/][RaspberryPi.com: Raspberry Pi OS]]
+2. [[https://dietpi.com/][DietPi.com]]
+
+** Literature
