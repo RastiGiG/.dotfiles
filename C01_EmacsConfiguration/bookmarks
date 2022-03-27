@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-refile-last-stored"
+(("C0 Dotfiles"
+ (filename . "~/.dotfiles/")
+ (front-context-string . ".git\n  drwxr-xr-")
+ (rear-context-string . "K 27. Feb 11:56 ")
+ (position . 173))
+("org-refile-last-stored"
  (filename . "~/Org/personal-archive.org")
  (front-context-string . "** DONE Neuer Te")
  (rear-context-string . "ON: 09131 32586\n")
@@ -22,16 +27,16 @@
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
  (position . 1))
-("C0 OrgFiles"
+("C1 OrgFiles"
  (filename . "~/.dotfiles/000_OrgFiles/")
  (front-context-string . "Templates\n  -rw-")
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220224234335-linux_command_line_programs_program_su.org")
- (front-context-string . "\n* Linux - Comma")
- (rear-context-string . "02-24 Do 23:43]\n")
- (position . 198))
+ (filename . "~/Org/20220227002012-people_vegetius.org")
+ (front-context-string . "\n* People - Vege")
+ (rear-context-string . "02-27 So 00:20]\n")
+ (position . 173))
 ("C2-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
@@ -88,7 +93,7 @@
  (rear-context-string . "K  7. Jan 23:43 ")
  (position . 182))
 ("D02 Akten"
- (filename . "~/Documents/01_Akten/")
+ (filename . "~/Documents/01_Private_Dokumente/")
  (front-context-string . "01_Arbeit\n  drwx")
  (rear-context-string . "K 23. Feb 2021  ")
  (position . 179))
@@ -153,12 +158,12 @@
  (rear-context-string)
  (position . 1))
 ("D02-1 CV1"
- (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
+ (filename . "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
  (front-context-string . "\n%-----       re")
  (rear-context-string . "begin{document}\n")
  (position . 4451))
 ("D02-2 CV2"
- (filename . "~/Documents/01_Akten/02_Personalien/CurriculumVitae/Version-2-Org/CurriculumVitae-2.org")
+ (filename . "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/Version-2-Org/CurriculumVitae-2.org")
  (front-context-string . "#+LaTeX_CLASS: s")
  (rear-context-string)
  (position . 1))

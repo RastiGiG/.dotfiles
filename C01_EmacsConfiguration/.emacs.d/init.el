@@ -433,6 +433,7 @@
    "tm"   '(:ignore t :which-key "Modes")
    "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
    "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
+   "tmo"  '(org-mode :which-key "Org Mode")
    "tme"  '(emojify-mode :which-key "Emojify Mode")
   ))
 

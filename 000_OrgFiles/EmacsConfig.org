@@ -566,6 +566,7 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
      "tm"   '(:ignore t :which-key "Modes")
      "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
      "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
+     "tmo"  '(org-mode :which-key "Org Mode")
      "tme"  '(emojify-mode :which-key "Emojify Mode")
     ))
 #+end_src
