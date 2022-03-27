@@ -1,5 +1,4 @@
 #+TITLE: Personal Rofi Themes Configuration
-#+PROPERTY: header-args:css :tangle ../D11_RunLaunchers/.config/rofi/themes/theme.rasi :mkdirp yes
 #+STARTUP: hideblocks show2levels
 
 * Introduction
@@ -62,7 +61,7 @@ If you don't have your [[id:d603af74-0546-4c32-a8be-6d9c0a175d12][Window Manager
     padding: 8 12;
     background-color: @bg;
     columns: 1;
-    lines: 5;
+    lines: 6;
   }
 
   mainbox {
