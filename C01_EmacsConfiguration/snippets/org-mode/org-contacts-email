@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org-contacts-email
+# key: <oce
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+:EMAIL-${1:NR}:            ${2:Email}@${3:Domain}

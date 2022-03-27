@@ -1,0 +1,17 @@
+# key: <ocs
+# name: org-contact_standard
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+** ${1:Fullname}
+:PROPERTIES:
+:FIRSTNAME:          ${2:Firstname}
+:SECONDNAME:         ${3:Secondname}
+:BIRTHNAME:          ${4:Birthname}
+:LASTNAME:           ${5:Lastname}
+:BIRTHDAY:           ${6:`(format-time-string "<%Y-%m-%d %a +1y>")`}
+:MOBILEPHONE-1:      +${7:Countryprefix} (0) ${8:Numberprefix} ${9:Mobilephone}
+:PHONE-1:            +${10:Countryprefix} (0) ${11 Numberprefix} ${12: Phone}
+:EMAIL-1:            ${13:Email}@${14:Domain}
+:INSTITUTION:        ${15:Institution}
+:NOTES:              ${16:Notes}
+:END:

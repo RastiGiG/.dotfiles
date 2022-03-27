@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org-contacts-mobilephone
+# key: <ocmp
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+:MOBILEPHONE-${1:NR}:      +${2:Countryprefix} (0) ${3:Numberprefix} ${4:Mobilephone}
