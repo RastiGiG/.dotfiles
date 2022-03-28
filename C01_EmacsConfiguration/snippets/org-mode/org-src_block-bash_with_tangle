@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: org-src_block-bash_with_tangle
+# key: <osbt
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+#+begin_src bash :tangle ./${1:filename}.sh
+    $0
+#+end_src

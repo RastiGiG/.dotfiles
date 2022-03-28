@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: org-source_block-bash_script_head
+# key: <osbs
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+#+begin_src bash :tangle ./${1:filename}.sh
+    #!/bin/bash ${2:optional -x for debugging}
+
+    $0
+#+end_src
