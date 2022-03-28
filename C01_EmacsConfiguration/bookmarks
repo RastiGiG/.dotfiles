@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C0 Dotfiles"
+(("P00-0 InfoFiles"
+ (filename . "~/Projects/InfoFiles/")
+ (front-context-string . "Books\n  drwxr-xr")
+ (rear-context-string . "K 15. Mär 22:56 ")
+ (position . 179))
+("D07-0 Literatur"
+ (filename . "~/Documents/07_Wissen_und_Bildung/00-Literatur/")
+ (front-context-string . "Articles\n  drwxr")
+ (rear-context-string . "K 27. Feb 12:06 ")
+ (position . 262))
+("C0 Dotfiles"
  (filename . "~/.dotfiles/")
  (front-context-string . ".git\n  drwxr-xr-")
  (rear-context-string . "K 27. Feb 11:56 ")
@@ -47,7 +57,7 @@
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
  (position . 1))
-("I01-1 Org Latex Preview.org"
+("I01-1 Org Latex Preview"
  (filename . "~/Projects/InfoFiles/Emacs/Worg/org-tutorials/org-latex-preview.org")
  (front-context-string . "# This file is r")
  (rear-context-string)

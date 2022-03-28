@@ -1430,6 +1430,48 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
       ("C-c c" . org-capture))
 #+end_src
   
+** Org Crypt
+
+~Org Crypt~ *encrypts* the *text of an entry*, but *not* the ~headline~, or ~properties~.
+Behind the scene, it uses the (=epa=)~Emacs EasyPG Library~ to encrypt and decrypt files, and ~EasyPG~ needs a correct (=gnupg=)[[id:5dc04892-9105-45aa-845a-01b89448d753][GnuPG]] setup.
+
+Any text below a headline that has a =‘crypt’= ~tag~ is automatically encrypted when the file is saved.
+To use a *different tag*, customize the =org-crypt-tag-matcher= setting.
+
+Excluding the =‘crypt’= ~tag~ from ~inheritance~ prevents already *encrypted text* from being *encrypted again*.
+
+It’s possible to use ~different keys~ for different headings by specifying the respective key as property =‘CRYPTKEY’=, e.g.:
+
+#+begin_example
+  * Totally secret :crypt:
+    :PROPERTIES:
+    :CRYPTKEY: 0x0123456789012345678901234567890123456789
+    :END:
+#+end_example
+
+To turn ~auto-save~ off *only locally*, you can insert this:
+#+begin_example
+# -*- buffer-auto-save-file-name: nil; -*-
+#+end_example
+
+#+begin_src emacs-lisp
+  (require 'org-crypt)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance '("crypt"))
+
+  (setq org-crypt-key nil)
+  ;; GPG key to use for encryption
+  ;; Either the Key ID or set to nil to use symmetric encryption.
+
+  ;; (setq auto-save-default nil)
+  ;; Auto-saving does not cooperate with org-crypt.el: so you need to
+  ;; turn it off if you plan to use org-crypt.el quite often.  Otherwise,
+  ;; you'll get an (annoying) message each time you start Org.
+
+  ;; To turn it off only locally, you can insert this:
+  ;;
+  ;; # -*- buffer-auto-save-file-name: nil; -*-
+#+end_src
 ** Org Roam
 [[https://www.orgroam.com/][Org Roam]] is a very handy extension that enables you to fulfill your own personal ~Zettelkasten~ in [[id:8510330a-9746-4684-ba60-04255df37924][Org]]
 
@@ -1543,9 +1585,9 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
 	org-roam-ui-update-on-save t
 	org-roam-ui-open-on-start t))
 #+end_src
-** Org-Drill
+** Org Drill
 
-~Org-Drill~ is a ~spaced repetition program~ (like ~Anki~)  built to work with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+~Org Drill~ is a ~spaced repetition program~ (like ~Anki~)  built to work with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
 
 The ~Hint-Separator~ is set to =||= from =|=
 The ~Left and Right Clozer~-delimiters are set to =<[= and =]>= respectively from the default =[= and =]=.
