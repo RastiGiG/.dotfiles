@@ -4,13 +4,27 @@
 # --
 * Topic Overview
 
+** [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]]
+*** [[id:30e0dabc-680b-4bb8-92f0-282955e60245][C Standards]]
+**** [[id:4bb03b1c-c08b-4370-ae89-f6d3332a4e5e][Date String Format Codes]]
+
 * Read On
 
 ** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
-** [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+****** [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
 
 * References
 
-[[id:de761c46-b491-4652-b93f-7bd14c369937][References]]
+[[id:de761c46-b491-4652-b93f-7bd14c369937][C/C++/C# References]]
+
+** Websites
+
 1. [[https://csharp-station.com][Csharp-Station.com]]
    1) [[https://csharp-station.com/understanding-the-differences-between-c-c-and-c/][Csharp-Station.com: Understanding the Differences between C, C++ and C#]]
+   
+** Literature 

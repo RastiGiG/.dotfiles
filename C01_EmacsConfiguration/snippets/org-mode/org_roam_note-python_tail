@@ -10,6 +10,7 @@
 **** [[id:61cfbdfe-a162-4749-9ec9-1f5eb9d95fbe][Packages]]
 ***** [[id:baa87bc9-4ec9-4126-9308-17ac7b05d201][Packages Overview]]
           List of all the installed or previously used packages
+***** [[id:f0cd13ef-1e7d-4379-bbdc-89a907f997f6][Datetime]]
 ***** [[id:ec3b27a2-8fba-4282-9579-c8efabd338ea][Matplotlib]]
 ***** [[id:1f70bfc8-224f-469e-833b-4943dce92ca5][Numpy]]
 ***** [[id:4da18e7a-5bb5-41e1-81fd-6a40d577a8f3][Scipy]]
@@ -17,6 +18,7 @@
 ***** [[id:cbcb33f5-9562-426d-8846-00f88a3369c3][Tkinter]]
 ***** [[id:fcda74ad-d87a-417f-8e89-937fecfb316b][BeautifulSoup]]
 ***** [[id:e23a6dfe-b3b1-4d05-a090-e92f6015dd79][Plotly]]
+***** [[id:0666de1c-366e-47f8-892f-9226f335da93][PYTZ]]
 **** [[id:11edeeed-8455-4293-a1d1-756074cfdc35][Virtual Environments]]
 *** Python Syntax
 **** [[id:488d7a03-b34e-44ad-97b2-2614940a702b][Datatypes]]
@@ -29,6 +31,7 @@
 **** Tipps for Packages
 ***** [[id:ec3b27a2-8fba-4282-9579-c8efabd338ea][Matplotlib]]
 ***** [[id:1f70bfc8-224f-469e-833b-4943dce92ca5][Numpy]]
+***** [[id:0666de1c-366e-47f8-892f-9226f335da93][PYTZ]]
 **** Troubleshooting Packages
 ***** [[id:ec3b27a2-8fba-4282-9579-c8efabd338ea][Matplotlib]]
 
