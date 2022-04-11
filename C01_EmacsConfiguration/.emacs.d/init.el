@@ -817,15 +817,15 @@
 
   ;; Setup inline previewing of latex fragments
   (setq org-latex-create-formula-image-program
-	'imagemagick)
+    'imagemagick)
 
   ;; Specify Agenda Files
   (setq org-agenda-files
-	(cons (concat pet/org-dir "journal")
-	  ;; Add Files a starting with "personal-"
-	  (directory-files pet/org-dir t
-			   "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
-	  ))
+    (cons (concat pet/org-dir "journal")
+      ;; Add Files a starting with "personal-"
+      (directory-files pet/org-dir t
+               "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
+      ))
 
   ;; Set Org Clock Sound File
   (setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
@@ -841,42 +841,44 @@
 
   ;; Customize Apps for Filelinks
   (cl-loop for type in
-	   ;; Open PDFs with Zathura
-	 '(("\\.pdf\\'" . "zathura %s")
-	   ;; Open Pictures with sxiv 
-	   ("\\.png\\'" . "sxiv %s")
-	   ("\\.jpg\\'" . "sxiv %s")
-	   ("\\.jpeg\\'" . "sxiv %s")
-	   ;; Open Youtube links with freetube
-	   ("\\.\\*youtu\\.\\*" . "freetube %s")
-	   )
-	 do
-	 (add-to-list 'org-file-apps type))
+       ;; Open PDFs with Zathura
+     '(("\\.pdf\\'" . "zathura %s")
+       ;; Open Pictures with sxiv 
+       ("\\.png\\'" . "sxiv %s")
+       ("\\.jpg\\'" . "sxiv %s")
+       ("\\.jpeg\\'" . "sxiv %s")
+       ;; Open Youtube links with freetube
+       ("\\.\\*youtu\\.\\*" . "freetube %s")
+       )
+     do
+     (add-to-list 'org-file-apps type))
 
   ;; Add Custom TODO Keywords - in 2 seperate Sequences
   (setq org-todo-keywords
-	;; Sequence 1 
-	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-	  ;; Sequence 2
-	  (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
-		    "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)"
-		    "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+    ;; Sequence 1 
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+      ;; Sequence 2
+      (sequence "MEET(m)")
+      ;; Sequence 3
+      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
+            "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)"
+            "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
   ;; Set Keywords with shortcuts
   (setq org-tag-alist
-	'((:startgroup)
-	  ;; Put mutually exclusive tags here
-	  (:endgroup)
-	  ("@errand" . ?E)
-	  ("@home" . ?H)
-	  ("@work" . ?W)
-	  ("@study" . ?S)
-	  ("agenda" . ?a)
-	  ("planning" . ?p)
-	  ("publish" . ?P)
-	  ("batch" . ?b)
-	  ("note" . ?n)
-	  ("idea" . ?i)))
+    '((:startgroup)
+      ;; Put mutually exclusive tags here
+      (:endgroup)
+      ("@errand" . ?E)
+      ("@home" . ?H)
+      ("@work" . ?W)
+      ("@study" . ?S)
+      ("agenda" . ?a)
+      ("planning" . ?p)
+      ("publish" . ?P)
+      ("batch" . ?b)
+      ("note" . ?n)
+      ("idea" . ?i)))
 
   ;; Set Refile Targets to be considered, Emphasis on Archive 
   (setq org-refile-targets
@@ -892,14 +894,14 @@
   (pet/leader-keys
     "ot" '(:ignore t :which-key "Toggle")
     "otb" '(pet/org-toggle-babel-confirm-evaluate
-	    :which-key "Babel Confirm Evaluation")
+        :which-key "Babel Confirm Evaluation")
     "oti" '(org-toggle-inline-images
-	    :which-key "Inline Images")
+        :which-key "Inline Images")
     "otp" '(org-toggle-pretty-entities
-	    :which-key "Pretty entities")
+        :which-key "Pretty entities")
     "oi" '(:ignore t :which-key "Import")
     "oit" '(org-table-import
-	    :which-key "Table")
+        :which-key "Table")
     )
   )
 
@@ -1677,3 +1679,25 @@
 	    (add-hook
 	     'after-save-hook
 	     #'pet/org-babel-tangle-rofi)))
+
+;; Setup Automatic Tangling of Run Launchers
+
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-dunst ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/DunstConfig.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+  (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-dunst)))
