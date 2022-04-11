@@ -1,41 +1,57 @@
-#########################################
-# ~/.bashrc
-#########################################
-### RANDOM COLOR SCRIPT ###
-## requires shell color scripts:
-## https://gitlab.com/dwt1/shell-color-scripts/-/tree/master
-colorscript random
-
+# If not run in interactive mode do nothing and return
+# Return himBHs -> see man bash -> SHELL BUILTIN COMMANDS -> set subsection for the meaning
 [[ $- != *i* ]] && return
 
-colors() {
-	local fgc bgc vals seq0
-
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
-
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
-
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
-
-			seq0="${vals:+\e[${vals}m}"
-			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
-}
-
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+xhost +local:root > /dev/null 2>&1
+
+complete -cf sudo
+
+# Bash won't get SIGWINCH if another process is in the foreground.
+# Enable checkwinsize so that bash will check the terminal size when
+# it regains control.  #65623
+# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+shopt -s checkwinsize
+
+shopt -s expand_aliases
+
+# export QT_SELECT=4
+
+# Don't put duplicate lines or lines starting with spaces into the history
+HISTCONTROL=ignoreboth
+# Add Time String to History
+HISTTIMEFORMAT="%Y-%m-%d %T "
+
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
+
+colors() {
+          local fgc bgc vals seq0
+
+          printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+          printf "Values 30..37 are \e[33mforeground colors\e[m\n"
+          printf "Values 40..47 are \e[43mbackground colors\e[m\n"
+          printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+
+          # foreground colors
+          for fgc in {30..37}; do
+                  # background colors
+                  for bgc in {40..47}; do
+                          fgc=${fgc#37} # white
+                          bgc=${bgc#40} # black
+
+                          vals="${fgc:+$fgc;}${bgc}"
+                          vals=${vals%%;}
+
+                          seq0="${vals:+\e[${vals}m}"
+                          printf "  %-9s" "${seq0:-(default)}"
+                          printf " ${seq0}TEXT\e[m"
+                          printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+                  done
+                  echo; echo
+          done
+  }
 
 # Change the window title of X terminals
 case ${TERM} in
@@ -94,25 +110,37 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-xhost +local:root > /dev/null 2>&1
+###################################################
+# Pretty-print man(1) pages. See Termcap / Terminfo
+###################################################
 
-# Bash won't get SIGWINCH if another process is in the foreground.
-# Enable checkwinsize so that bash will check the terminal size when
-# it regains control.  #65623
-# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
-shopt -s checkwinsize
+# Start blinking
+# export LESS_TERMCAP_mb=$'\E[1;91m'
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
 
-shopt -s expand_aliases
+# Start bold
+# export LESS_TERMCAP_md=$'\E[1;91m'
+export LESS_TERMCAP_md=$(tput bold; tput setaf 2) # green
 
-# export QT_SELECT=4
+# Start stand out
+#export LESS_TERMCAP_so=$'\E[1;93m'
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3) # yellow
 
-# Enable history appending instead of overwriting.  #139609
-shopt -s histappend
-# Don't put duplicate lines or lines starting with spaces into the history
-HISTCONTROL=ignoreboth
-# Add Time String to History
-HISTTIMEFORMAT="%Y-%m-%d %T "
+# End standout
+# export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
 
+# Start underline
+# export LESS_TERMCAP_us=$'\E[1;92m'
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1) # red
+
+# End Underline
+# export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_ue=$(tput sgr0)
+
+# End bold, blinking, standout, underline
+# export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_me=$(tput sgr0)
 
 #
 # # ex - archive extractor

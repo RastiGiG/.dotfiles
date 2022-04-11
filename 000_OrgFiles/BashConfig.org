@@ -1,10 +1,19 @@
 #+title: MaBest Bash Configuration
 #+PROPERTY: header-args:bash :tangle ~/.dotfiles/D01_Bash/.bashrc :mkdirp yes
+#+STARTUP: overview
 
 * Basic Setup
 
+=$-= expands to =himBHs= in [[id:a7e2ab1a-458f-429f-851e-ab5dce72908d][Bash]]. Which shows your ~Builtin Set Flags~. You can find the meaning for those flags under =man bash= in the *Section* ~SHELL BUILTIN COMMANDS~ under the *Subsection* ~set subsection~:
++ =h=: Remember the *location* of [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][commands]] as they are looked up for execution.
++ =i=: ~interactive~
++ =m=: ~Monitor mode~. Job control enabled
++ =B=: The [[id:a7e2ab1a-458f-429f-851e-ab5dce72908d][shell]] performs [[id:8e120944-23a6-4182-a8fd-f769bf2748fb][Brace Expansion]]
++ =H=: Enable =!=-style [[id:44e97bd4-affc-49b4-8bcd-d03572bf1ec2][History]] ~Substition~
 #+begin_src bash
-  [[$- != *i* ]] && return
+  # If not run in interactive mode do nothing and return
+  # Return himBHs -> see man bash -> SHELL BUILTIN COMMANDS -> set subsection for the meaning
+  [[ $- != *i* ]] && return
 
   [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
@@ -117,6 +126,42 @@ else
 fi
 
 unset use_color safe_term match_lhs sh
+#+end_src
+
+* Colorful Manpages
+
+#+begin_src bash
+  ###################################################
+  # Pretty-print man(1) pages. See Termcap / Terminfo
+  ###################################################
+
+  # Start blinking
+  # export LESS_TERMCAP_mb=$'\E[1;91m'
+  export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+
+  # Start bold
+  # export LESS_TERMCAP_md=$'\E[1;91m'
+  export LESS_TERMCAP_md=$(tput bold; tput setaf 2) # green
+
+  # Start stand out
+  #export LESS_TERMCAP_so=$'\E[1;93m'
+  export LESS_TERMCAP_so=$(tput bold; tput setaf 3) # yellow
+
+  # End standout
+  # export LESS_TERMCAP_se=$'\E[0m'
+  export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+
+  # Start underline
+  # export LESS_TERMCAP_us=$'\E[1;92m'
+  export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1) # red
+
+  # End Underline
+  # export LESS_TERMCAP_ue=$'\E[0m'
+  export LESS_TERMCAP_ue=$(tput sgr0)
+  
+  # End bold, blinking, standout, underline
+  # export LESS_TERMCAP_me=$'\E[0m'
+  export LESS_TERMCAP_me=$(tput sgr0)
 #+end_src
 
 * Archives
