@@ -4,7 +4,7 @@
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 #+begin_src bash :tangle ./${1:filename}.sh
-    #!/bin/bash ${2:optional -x for debugging}
+    #!/bin/env bash ${2:optional -x for debugging}
 
     $0
 #+end_src

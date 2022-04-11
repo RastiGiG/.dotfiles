@@ -1,0 +1,56 @@
+# -*- mode: snippet -*-
+# name: org-shell_script-template
+# key: <oshsctemp
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+#+TITLE: ${1:FileTitle}
+#+AUTHOR: ${2:Author}
+#+DATE:  ${3: `(format-time-string "[%Y-%m-%d]")`}
+
+:PROPERTIES:
+
+* Script Header
+#+begin_src sh :shebang "#!/usr/bin/env bash" :tangle yes
+  # Script name: ${4:ScriptName}
+  # Description: ${5:Description}
+  # Dependencies: ${6:Dependencies}
+  # 
+  # GitLab: https://github.com/RastiGiG
+  # Contributors: ${7:Contributor}
+#+end_src
+
+* Source External Files
+#+begin_src sh :tangle yes
+  #######################################################
+  #             Source External Files                   #
+  #######################################################
+
+  $0
+  
+#+end_src
+* Helper Variables
+#+begin_src sh :tangle yes
+  #######################################################
+  #                Helper Variables                     #
+  #######################################################
+
+#+end_src
+* Helper Function
+#+begin_src sh :tangle yes
+  #######################################################
+  #               Helper Functions                      #
+  #######################################################
+
+#+end_src
+* Main Function
+#+begin_src sh :tangle yes
+  #######################################################
+  #                Main Function                        #
+  #######################################################
+
+  main() {
+
+  }
+
+  [[ "\${BASH_SOURCE[0]}" == "\${0}" ]] && main "$@"
+#+end_src

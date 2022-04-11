@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org-shell_script-contributor
+# key: <oshsccontr
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+  # Contributors: ${1:Contributor}

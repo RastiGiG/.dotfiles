@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: shell-base_template
+# key: <shbt
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+#!/usr/bin/env bash
+#
+# Script name: ${1:script-name}
+# Description: ${2:description}
+# Dependencies: ${3:script-name}
+# GitHub: https://github.com/RastiGiG
+# License: ${4:license}
+# Contributors: ${4:contributors}
+
+#######################################################
+#              Source External File                   #
+#######################################################
+
+$0
+
+#######################################################
+#                Helper Variables                     #
+#######################################################
+
+
+
+#######################################################
+#                Helper Function                      #
+#######################################################
+
+
+
+#######################################################
+#                Main Function                        #
+#######################################################

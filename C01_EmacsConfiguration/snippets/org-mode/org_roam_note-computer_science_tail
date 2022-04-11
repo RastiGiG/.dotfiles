@@ -5,34 +5,33 @@
 * Topic Overview
 
 ** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
-*** [[id:e0428cca-9e69-4804-98d7-888ce3e2c7d6][Terminology]]
-**** [[id:df54793b-dce8-47e7-93f6-86ca9678c315][Software]]
-**** [[id:fb7c6213-55f1-4fd9-acd5-7158eb78aa17][Operating System]]
-**** [[id:aaca657c-b263-46d6-b4b0-526bdc4a328a][Terminal]]
-**** [[id:a7e2ab1a-458f-429f-851e-ab5dce72908d][Shell]]
-**** [[id:aaca657c-b263-46d6-b4b0-526bdc4a328a][Terminal Emulator]]
 *** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
-*** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
-**** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
-**** [[id:6fc72f5c-8006-4d06-a45f-1ffb1b4f3e8a][Interpreter]]
 *** [[id:e946a409-5efb-467a-a459-2d5841a22438][Data Science]]
 *** [[id:8efaf08d-1d5d-428f-80cf-90da3bb92684][Machine Learing]]
-*** [[id:9b4211ec-05ce-48be-a12e-5c9eaeb60dc9][Encoding]]
-**** [[id:e1462d13-6ac4-4f76-9129-d866e90baad2][ASCII: American Standard Code for Information Interchange]]
-**** [[id:40f3f142-cf2a-44f0-a9fb-da5f5bf448cc][Unicode: Universal Coded Character Set (UCS)]]
+*** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
+**** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+*** [[id:e0428cca-9e69-4804-98d7-888ce3e2c7d6][Terminology]]
+**** [[id:fb7c6213-55f1-4fd9-acd5-7158eb78aa17][Operating System]]
+**** [[id:aaca657c-b263-46d6-b4b0-526bdc4a328a][Terminal]]
+**** [[id:aaca657c-b263-46d6-b4b0-526bdc4a328a][Terminal Emulator]]
+**** [[id:a7e2ab1a-458f-429f-851e-ab5dce72908d][Shell]]
+**** [[id:df54793b-dce8-47e7-93f6-86ca9678c315][Software]]
 
 * Read On
 
 ** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
 *** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
-**** Operating Systems
-***** [[id:397d76b6-ef1f-4232-8af1-3006e61f05c3][Linux]]
 *** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
 **** [[id:17da7523-4cb2-4e94-95cb-8f33f5985ac6][IT Security]]
 ***** [[id:e9c61a47-545b-4b98-8cb4-918be64f3d66][Localhost]]
 ***** [[id:4f449be3-2045-4868-b714-883598c8b7ea][Encryption]]
 ***** [[id:07afdc4a-12e0-45c6-ac7b-52011e623940][Secure Hash Functions]]
 ***** [[id:e607e470-408a-4504-a075-d20229e5540d][PGP]]
+**** [[id:9b4211ec-05ce-48be-a12e-5c9eaeb60dc9][Encoding]]
+***** [[id:e1462d13-6ac4-4f76-9129-d866e90baad2][ASCII: American Standard Code for Information Interchange]]
+***** [[id:40f3f142-cf2a-44f0-a9fb-da5f5bf448cc][Unicode: Universal Coded Character Set (UCS)]]
+**** Operating Systems
+***** [[id:397d76b6-ef1f-4232-8af1-3006e61f05c3][Linux]]
 *** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
 *** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
 
@@ -42,5 +41,5 @@
 [[id:1d2c9e02-a012-4786-8552-f56afa0b20a7][Computer Programming References]]
 
 ** Websites
-  
+
 ** Literature

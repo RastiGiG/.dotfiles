@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-sed_tail
+# key: <ornsedt
+# --
+* Topic Overview
+
+** [[id:562dc9a1-33d4-4459-8f36-a39ba19d01fb][GNU Sed]]
+*** [[id:4d74bde3-4318-4716-af11-854f8dec4659][Example Collections]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+**** [[id:9e4f766d-37a6-4901-b5a4-d6041335ec67][GNU Programs]]
+***** [[id:1585e6e7-3f1f-41ca-a266-1297a6c6a590][GNU Coreutils]]
+***** [[id:562dc9a1-33d4-4459-8f36-a39ba19d01fb][GNU Sed]]
+***** [[id:6f2da8f9-4a64-464b-97bf-6797b66ad501][GNU Awk]]
+***** [[id:5dc04892-9105-45aa-845a-01b89448d753][GPG - GNU Privacy Guard]]
+***** [[id:42a721a2-1e18-4345-9a65-23b942a457fe][GNU Mailutils]]
+***** [[id:cd5846e8-b8c9-43d9-a3e4-db4e95e370e8][GNU Texinfo]]
+**** Operating Systems
+***** [[id:397d76b6-ef1f-4232-8af1-3006e61f05c3][Linux]]
+****** [[id:dec94196-4859-4fe6-be58-4237c61d9fad][Command Line]]
+******* [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][Commands]]
+******** [[id:3789c9a7-e4b9-4fbf-b0a1-955b7adb5429][Command: sed]]
+****** [[id:d8f69b88-c85b-45e1-b6c4-7aeff1c67e85][Shell Scripting]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:5bd550e3-ab35-4ffc-ac23-8742a0c85a62][GNU References]]
+
+** Websites
+
+1. [[https://www.fsf.org/][FSF.org: The Free Software Foundation]]
+2. [[http://www.gnu.org/][GNU.org: The GNU Project]]
+
+** Literature
