@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: org-src_block-comment_header
+# key: <osch
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+###################################################################################################
+#                                         ${1:TITLE}                                              #
+#                                        ${2:Subtitle}                                            #
+#                                    -${1:Additional Info}-                                       #
+###################################################################################################
