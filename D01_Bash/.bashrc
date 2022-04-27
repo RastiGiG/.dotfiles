@@ -167,6 +167,13 @@ ex ()
   fi
 }
 
+overview ()
+{
+    du -h --max-depth=1 | sed -r '
+       $d; s/^([.0-9]+[KMGTPEZY]\t)\.\//\1/
+     ' | sort -hr | column
+}
+
 #Functions to automatically evaluate shasums
 sha256()
 {
