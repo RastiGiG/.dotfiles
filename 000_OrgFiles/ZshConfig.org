@@ -20,13 +20,19 @@
 * General
 
 #+begin_src bash
-
+  #----------------------------------------------------------------------------------------------------------------------
   #  _________  _   _ ____   ____ 
   # |__  / ___|| | | |  _ \ / ___|
   #   / /\___ \| |_| | |_) | |    
   #  / /_ ___) |  _  |  _ <| |___ 
   # /____|____/|_| |_|_| \_\\____|
   #                               
+  # - Configuration for Zsh, the enhanced shell -
+  # Source:         - .dotfiles/000_OrgFiles/ZshConfig.org
+  # Target:         - .dotfiles/D02_Zsh/.zshrc
+  # Author Email:   - randomly.ventilates@simplelogin.co
+  # Author GitHub:  - https://github.com/RastiGiG/
+  #----------------------------------------------------------------------------------------------------------------------    
 
   # If not running interactively, don't do anything
     [[ $- != *i* ]] && return
@@ -218,17 +224,17 @@ The function below helps communication between the shell and vterm
 
 #+begin_src bash
 
-vterm_printf(){
-    if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
-        # Tell tmux to pass the escape sequences through
-        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
-    elif [ "${TERM%%-*}" = "screen" ]; then
-        # GNU screen (screen, screen-256color, screen-256color-bce)
-        printf "\eP\e]%s\007\e\\" "$1"
-    else
-        printf "\e]%s\e\\" "$1"
-    fi
-}
+  vterm_printf(){
+      if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
+          # Tell tmux to pass the escape sequences through
+          printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+      elif [ "${TERM%%-*}" = "screen" ]; then
+          # GNU screen (screen, screen-256color, screen-256color-bce)
+          printf "\eP\e]%s\007\e\\" "$1"
+      else
+          printf "\e]%s\e\\" "$1"
+      fi
+  }
 
 #+end_src
 

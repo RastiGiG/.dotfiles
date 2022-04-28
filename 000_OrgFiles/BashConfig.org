@@ -11,6 +11,20 @@
 + =B=: The [[id:a7e2ab1a-458f-429f-851e-ab5dce72908d][shell]] performs [[id:8e120944-23a6-4182-a8fd-f769bf2748fb][Brace Expansion]]
 + =H=: Enable =!=-style [[id:44e97bd4-affc-49b4-8bcd-d03572bf1ec2][History]] ~Substition~
 #+begin_src bash
+  #----------------------------------------------------------------------------------------------------------------------
+  #  ____    _    ____  _   _ 
+  # | __ )  / \  / ___|| | | |
+  # |  _ \ / _ \ \___ \| |_| |
+  # | |_) / ___ \ ___) |  _  |
+  # |____/_/   \_\____/|_| |_|
+  #                               
+  # - Bash, the Bourne Again Shell -
+  # Source:         - .dotfiles/00_OrgFiles/BashConfig.org
+  # Target:         - .dotfiles/D01_Bash/.bashrc
+  # Author Email:   - randomly.ventilates@simplelogin.co
+  # Author GitHub:  - https://github.com/RastiGiG/
+  #----------------------------------------------------------------------------------------------------------------------    
+
   # If not run in interactive mode do nothing and return
   # Return himBHs -> see man bash -> SHELL BUILTIN COMMANDS -> set subsection for the meaning
   [[ $- != *i* ]] && return
