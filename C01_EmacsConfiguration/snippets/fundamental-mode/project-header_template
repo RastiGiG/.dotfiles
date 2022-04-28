@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: project-header_template
+# key: <pht
+# --
+#----------------------------------------------------------------------------------------------------------------------
+# 
+# ${1:<figlet>}
+# 
+# 
+# 
+# 
+#                               
+# - Configuration ${2:Subtitle} -
+# Source:         - .dotfiles/${3:PATHS/TO/SOURCE}
+# Target:         - .dotfiles/${4:PATHS/TO/TARGET}
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#----------------------------------------------------------------------------------------------------------------------    
+$0
