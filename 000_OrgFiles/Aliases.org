@@ -1,43 +1,69 @@
 #+Title: Shell Aliases
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D00_Aliases/.config/shellconfig/aliasrc :mkdirp yes
+#+PROPERTY: header-args:shell :tangle ../D00_Aliases/aliases :mkdirp yes
+#+STARTUP: show2levels
 
-* TOC
+* Header
 
-+ [[*Basics][Basics]]
-  - [[*Safe Cut, Copy and Remove][Safe Cut, Copy and Remove]]
-  - [[*Reading and Listing][Reading and Listing]]
-
-* Basics
-
-** Safe Cut, Copy and Remove
-
-#+begin_src bash
-
+#+begin_src shell
+  #----------------------------------------------------------------------------------------------------------------------
   #     _    _ _                     
   #    / \  | (_) __ _ ___  ___  ___ 
   #   / _ \ | | |/ _` / __|/ _ \/ __|
   #  / ___ \| | | (_| \__ \  __/\__ \
   # /_/   \_\_|_|\__,_|___/\___||___/
-  #                                  
-  # 
+  #                               
+  # - Collection of Aliases used in Bash and Zsh -
+  # Source:         - .dotfiles/000_OrgFiles/Aliases.org
+  # Target:         - .dotfiles/D00_Aliases/aliases
+  # Author Email:   - randomly.ventilates@simplelogin.co
+  # Author GitHub:  - https://github.com/RastiGiG/
+  #----------------------------------------------------------------------------------------------------------------------    
 
+#+end_src
+
+* Basics
+** Safe Cut, Copy and Remove
+
+Some of these options are part of the [[file:BashFuncs.org][Functions]] ~file~ and can be activated there
+#+begin_src shell
   # A bunch of safety aliases
-  alias cp='cp -i'                          # confirm before overwriting something
-  alias rm='rm -i'                          # confirm before deleting accidently
-  alias mkd='mkdir -pv'                     # also creates parent directories (verbose)
+  alias cp='cp -vi'                         # confirm before overwriting something
+  alias rm='rm -vi --preserve-root'         # confirm before deleting accidently, disable changes to root
+  alias mv='mv -vi'                         # confirm before moving/renaming
+  alias ln='ln -vi'                         # confirm before overwriting
+
+  alias chown='chown -v --preserve-root'    # disable changes to root
+  alias chgrp='chgrp -v --preserve-root'    # disable changes to root
+  alias chmod='chmod -v --preserve-root'    # disable changes to root
+
+  alias rmdir='rmdir -v'                    # verbose
+  alias mkdir='mkdir -v'                    # verbose
+  alias mkd='mkdir -p'                      # also creates parent directories
 
 #+end_src
 
 ** Reading and Listing
+:NOTE:
+Quick note on [[id:28da9d49-b484-4ac7-9340-c800bbee5aff][ls]]:
+the =--quoting-style= option determines how ~files~ and ~directories~ with ~whitespace characters~ are displayed.
+=literal= means *without any* ~quotation marks~
+Default is the =shell= version.
+=--show-control-chars= displays characters like =/= for ~directories~
+:END:
+#+begin_src shell
+  # Better defaults for ls
+  alias ls='ls --quoting-style=shell -pq\
+           --time-style=iso --color=auto\
+           --group-directories-first\
+           --show-control-chars -v'
 
-#+begin_src bash
-
+  # Reading and Listing aliases
   alias la='ls -al'                         # detailed version of ls listing hidden files
   alias ll='ls -l'                          # detailed version of ls listing
+  alias lq='ls --quoting-style=literal'     # don't quote files/dirs with whitespaces
   alias df='df -h'                          # human-readable sizes
   alias free='free -m'                      # show sizes in MB
   alias np='nano -w PKGBUILD'
-  alias more=less
+  alias more=less                           # more is pretty much useless noadays
 
 #+end_src
-

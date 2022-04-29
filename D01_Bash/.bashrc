@@ -1,67 +1,207 @@
+#----------------------------------------------------------------------------------------------------------------------
+#  ____    _    ____  _   _ 
+# | __ )  / \  / ___|| | | |
+# |  _ \ / _ \ \___ \| |_| |
+# | |_) / ___ \ ___) |  _  |
+# |____/_/   \_\____/|_| |_|
+#                               
+# - Bash, the Bourne Again Shell -
+# Source:         - .dotfiles/00_OrgFiles/BashConfig.org
+# Target:         - .dotfiles/D01_Bash/.bashrc
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#
+# Parts of this Configuration were adapted from:
+# - TerminalForLife:   https://github.com/terminalforlife
+#
+#----------------------------------------------------------------------------------------------------------------------
+
+#----------------------------BASICS
 # If not run in interactive mode do nothing and return
 # Return himBHs -> see man bash -> SHELL BUILTIN COMMANDS -> set subsection for the meaning
 [[ $- != *i* ]] && return
 
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-
+# Control Access to Local XServer
 xhost +local:root > /dev/null 2>&1
 
+# Adjust completions for sudo
 complete -cf sudo
 
+# export QT_SELECT=4
+
+#----------------------------SHELL OPTIONS
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
 # it regains control.  #65623
 # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+# Enabled by default for interactive shells
 shopt -s checkwinsize
 
+# Enabled by default for interactive shells
 shopt -s expand_aliases
 
-# export QT_SELECT=4
-
-# Don't put duplicate lines or lines starting with spaces into the history
-HISTCONTROL=ignoreboth
-# Add Time String to History
-HISTTIMEFORMAT="%Y-%m-%d %T "
-
-# Enable history appending instead of overwriting.  #139609
+# Enable history appending instead of overwriting.
 shopt -s histappend
 
-colors() {
-          local fgc bgc vals seq0
+#----------------------------PROMPT
+# Safe certain ANSI color escape sequences.
+PROMPT_PARSER() {
+    # Initialize Variables
+    local GitSymbs GitStatus GitTopDir GitCheck GitBranch CurrentGitBranch\
+        X Z Line Desc Buffer ModifiedFiles TTLCommits Basename Dirname Slashes\
+        TempColumns StatusColor Line CWD NFTTL ExitStatus
 
-          printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-          printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-          printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-          printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+    # Set Colors
+    local C_Cyan='\033[36m' C_BCyan='\033[96m' CB_Cyan='\033[2;36m' CB_BCyan='\033[2;96m'\
+          C_Red='\e[31m' C_BRed='\e[91m' CB_Red='\e[2;31m' CB_BRed='\e[2;91m'\
+          C_Green='\e[32m' C_BGreen='\e[92m' CB_Green='\e[02;32m' CB_BGreen='\e[02;92m'\
+          C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' C_Grey='\e[01;97m'\
+          C_Magenta='\033[35m' C_BMagenta='\033[95m' CB_Magenta='\033[2;35m'\
+          CB_BMagenta='\033[2;95m' C_Reset='\e[0m'\
 
-          # foreground colors
-          for fgc in {30..37}; do
-                  # background colors
-                  for bgc in {40..47}; do
-                          fgc=${fgc#37} # white
-                          bgc=${bgc#40} # black
+    X="$1 "
+    (( ${X% } == 0 )) && X=
 
-                          vals="${fgc:+$fgc;}${bgc}"
-                          vals=${vals%%;}
+    # SSH - Prompt for Working Remotely
+    # If I'm on a remote server, just use a barebones prompt, with the exit
+    # status, if non-zero, and a note saying you're working remotely.
+    if [[ -n $SSH_CLIENT ]]; then
+        if [[ -n $X ]]; then
+            PS1="\[$C_Grey\]<remote>\[$C_Reset\] \[$C_BRed\]$X\[$C_Reset\] \[$C_Grey\]\n\$\[$C_Reset\] "
+        else
+            PS1="\[$C_Grey\]<remote>\[$C_Reset\] \[$C_Grey\]\n\$\[$C_Reset\] "
+        fi
 
-                          seq0="${vals:+\e[${vals}m}"
-                          printf "  %-9s" "${seq0:-(default)}"
-                          printf " ${seq0}TEXT\e[m"
-                          printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-                  done
-                  echo; echo
-          done
-  }
+        return
+    fi
 
+    # GIT - Prompt customization for Working in Git Repos
+
+    # The first check was added as a result of Issue #3 and a recent (April -
+    # 2022) change to git(1) which was pushed in response to a CVE.
+    GitCheck=`git rev-parse --is-inside-work-tree 2>&1`
+    if [[ $GitCheck == 'fatal: unsafe repository '* ]]; then
+        Desc="${C_BRed}!!  ${C_Grey}Unsafe repository detected."
+    elif [[ $GitCheck == 'fatal: '* ]]; then
+        # Don't want to catch all fatals straight away, because not being in a
+        # git(1) repository is a 'fatal' error -- stupid git(1).
+        #
+        # This lets me catch specific unwanted fatal errors, as well as general
+        # fatal errors which are one of the specific ones.
+        if [[ $GitCheck != 'fatal: not a git repository '* ]]; then
+            Desc="${C_BRed}!!  ${C_Grey}Unrecognised fatal error detected."
+        fi
+    elif [[ $GitCheck == true ]]; then
+        # Custom Symbols for git
+        GitSymbs=(
+            '≎' # 0: Clean
+            '≍' # 1: Uncommitted changes
+            '≭' # 2: Unstaged changes
+            '≺' # 3: New file(s)
+            '⊀' # 4: Removed file(s)
+            '≔' # 5: Initial commit
+            '∾' # 6: Branch is ahead
+            '⮂' # 7: Fix conflicts
+            '-' # 8: Removed file(s)
+        )
+
+        # Store current Git Status
+        GitStatus=`git status 2>&1`
+        # Store Toplevel Directory
+        GitTopDir=`git rev-parse --show-toplevel 2>&1`
+        # Store Name of GIT-Subdir in current Repo
+        GitDir=`git rev-parse --git-dir 2>&1`
+
+        # Evaluate Exit Status
+        # (only really necessary in Projects)
+        # ExitStatus="$(printf '%0.3d' $?)" # didn't work. Have to look into that more
+        printf '%0.3d | ' $?;
+
+        # Change Description if in GIT-Subdir
+        if [[ $GitDir == . || $GitDir == "${PWD%%/.git/*}/.git" ]]; then
+            Desc="${C_BRed}∷  ${C_Grey}Looking under the hood..."
+        else
+            if [[ -n $GitTopDir ]]; then
+                # Get the current branch name.
+                IFS='/' read -a A < "$GitTopDir/.git/HEAD"
+                CurrentGitBranch=${A[${#A[@]}-1]}
+            fi
+
+            # The following is in a very specific order of priority.
+            if [[ -z $(git rev-parse --branches 2>&1) ]]; then
+                Desc="${C_BCyan}${GitSymbs[5]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' awaits its initial commit."
+            else
+                while read -ra Line; do
+                    if [[ ${Line[0]}${Line[1]}${Line[2]} == \(fixconflictsand ]]; then
+                        Desc="${C_BCyan}${GitSymbs[7]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has conflict(s)."
+                        break
+                    elif [[ ${Line[0]}${Line[1]} == Untrackedfiles: ]]; then
+                        NFTTL=0
+                        while read -a Line; do
+                            [[ ${Line[0]} == ?? ]] && (( NFTTL++ ))
+                        done <<< "$(git status --short 2>&1)"
+                        printf -v NFTTL "%'d" $NFTTL
+
+                        Desc="${C_BCyan}${GitSymbs[3]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has $NFTTL new file(s)."
+                        break
+                    elif [[ ${Line[0]} == deleted: ]]; then
+                        Desc="${C_BCyan}${GitSymbs[8]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' detects removed file(s)."
+                        break
+                    elif [[ ${Line[0]} == modified: ]]; then
+                        readarray Buffer <<< "$(git --no-pager diff --name-only 2>&1)"
+                        printf -v ModifiedFiles "%'d" ${#Buffer[@]}
+                        Desc="${C_BCyan}${GitSymbs[2]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has $ModifiedFiles modified file(s)."
+                        break
+                    elif [[ ${Line[0]}${Line[1]}${Line[2]}${Line[3]} == Changestobecommitted: ]]; then
+                        Desc="${C_BCyan}${GitSymbs[1]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has changes to commit."
+                        break
+                    elif [[ ${Line[0]}${Line[1]}${Line[3]} == Yourbranchahead ]]; then
+                        printf -v TTLCommits "%'d" "${Line[7]}"
+                        Desc="${C_BCyan}${GitSymbs[6]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' leads by $TTLCommits commit(s)."
+                        break
+                    elif [[ ${Line[0]}${Line[1]}${Line[2]} == nothingtocommit, ]]; then
+                        printf -v TTLCommits "%'d" "$(git rev-list --count HEAD 2>&1)"
+
+                        Desc="${C_BCyan}${GitSymbs[0]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' is $TTLCommits commit(s) clean."
+                        break
+                    fi
+                done <<< "$GitStatus"
+            fi
+        fi
+    fi
+
+    # Set the Default Prompt here
+    if [[ -n $Desc ]]; then
+        PS1="\[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Grey\]\$\[$C_Reset\] "
+    else
+        PS1="\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \w\[${CB_BMagenta}\]]\n${C_Reset}\$\[${C_Reset}\] "
+        # PS1="\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[$C_Grey\]\$\[$C_Reset\] "
+    fi
+}
+
+# Set the Prompt Command
+PROMPT_COMMAND='PROMPT_PARSER $?'
+
+#----------------------------HISTORY
+# HISTORY SETTINGS
+HISTSIZE=10000
+# Move History to .cache
+HISTFILE='$HOME/.cache/shell/history'
+# Don't put duplicate lines or lines starting with spaces into the history
+HISTCONTROL='ignoreboth'
+# Add Time String to History
+HISTTIMEFORMAT='%Y-%m-%d %T '
+
+#----------------------------COLORFUL TERMINAL
 # Change the window title of X terminals
-case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-		;;
-	screen*)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
-esac
+# case ${TERM} in
+#     xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
+#         PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+#         ;;
+#     screen*)
+#         PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+#         ;;
+# esac
 
 use_color=true
 
@@ -75,62 +215,63 @@ match_lhs=""
 [[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
 [[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
 [[ -z ${match_lhs}    ]] \
-	&& type -P dircolors >/dev/null \
-	&& match_lhs=$(dircolors --print-database)
+    && type -P dircolors >/dev/null \
+    && match_lhs=$(dircolors --print-database)
 [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
 
-if ${use_color} ; then
-	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	if type -P dircolors >/dev/null ; then
-		if [[ -f ~/.dir_colors ]] ; then
-			eval $(dircolors -b ~/.dir_colors)
-		elif [[ -f /etc/DIR_COLORS ]] ; then
-			eval $(dircolors -b /etc/DIR_COLORS)
-		fi
-	fi
-
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-	fi
-
-	alias ls='ls --color=auto'
-	alias grep='grep --colour=auto'
-	alias egrep='egrep --colour=auto'
-	alias fgrep='fgrep --colour=auto'
-else
-	if [[ ${EUID} == 0 ]] ; then
-		# show root@ when we don't have colors
-		PS1='\u@\h \W \$ '
-	else
-		PS1='\u@\h \w \$ '
-	fi
-fi
+#  if ${use_color} ; then
+#      # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+#      if type -P dircolors >/dev/null ; then
+#          if [[ -f ~/.dir_colors ]] ; then
+#              eval $(dircolors -b ~/.dir_colors)
+#          elif [[ -f /etc/DIR_COLORS ]] ; then
+#              eval $(dircolors -b /etc/DIR_COLORS)
+#          fi
+#      fi
+#
+#      if [[ ${EUID} == 0 ]] ; then
+#          PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] \\n'
+#      else
+#          PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\n\]'
+#      fi
+#
+#      # Some where moved to funcs
+#      # alias ls='ls --color=auto'
+#      # alias grep='grep --colour=auto'
+#      # alias egrep='egrep --colour=auto'
+#      # alias fgrep='fgrep --colour=auto'
+#  else
+#      if [[ ${EUID} == 0 ]] ; then
+#          # show root@ when we don't have colors
+#          PS1='\u@\h \W \$\n'
+#      else
+#          PS1='\u@\h \w \$\n'
+#      fi
+#  fi
 
 unset use_color safe_term match_lhs sh
 
-###################################################
+#----------------------------MANPAGES
+
 # Pretty-print man(1) pages. See Termcap / Terminfo
-###################################################
 
 # Start blinking
-# export LESS_TERMCAP_mb=$'\E[1;91m'
+# export LESS_TERMCAP_mb=$'\E[1;92m'
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
 
 # Start bold
-# export LESS_TERMCAP_md=$'\E[1;91m'
+# export LESS_TERMCAP_md=$'\E[1;93m'
 export LESS_TERMCAP_md=$(tput bold; tput setaf 2) # green
 
 # Start stand out
 #export LESS_TERMCAP_so=$'\E[1;93m'
 export LESS_TERMCAP_so=$(tput bold; tput setaf 3) # yellow
 
-# End standout
+# End stand out
 # export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
 
-# Start underline
+# Start Underline
 # export LESS_TERMCAP_us=$'\E[1;92m'
 export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1) # red
 
@@ -142,67 +283,14 @@ export LESS_TERMCAP_ue=$(tput sgr0)
 # export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_me=$(tput sgr0)
 
-#
-# # ex - archive extractor
-# # usage: ex <file>
-ex ()
-{
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
+#----------------------------EXTERNAL FILES
 
-overview ()
-{
-    du -h --max-depth=1 | sed -r '
-       $d; s/^([.0-9]+[KMGTPEZY]\t)\.\//\1/
-     ' | sort -hr | column
-}
+# Load Bash Functions
+BSHFuncs="$HOME/.dotfiles/D01_Bash/.bash_functions"
+[[ -f $BSHFuncs && -r $BSHFuncs ]] && . "$BSHFuncs"
 
-#Functions to automatically evaluate shasums
-sha256()
-{
-    echo "$1 $2" | sha256sum --check
-}
+# Load Shell Aliases
+SHAlias="$HOME/.dotfiles/D00_Aliases/aliases"
+[[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
 
-sha512()
-{
-    echo "$1 $2" | sha512sum --check
-}
-sha1()
-{
-    echo "$1 $2" | sha1sum --check
-}
-sha224()
-{
-    echo "$1 $2" | sha224sum --check
-}
-sha384()
-{
-    echo "$1 $2" | sha384sum --check
-}
-
-alias cp='cp -i'                          # confirm before overwriting something
-alias rm='rm -i'                          # confirm before deleting accidently
-alias la='ls -al'                         # detailed version of ls listing hidden files
-alias ll='ls -l'                          # detailed version of ls listing
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
-alias mkd='mkdir -pv'                     # also creates parent directories (verbose)
+unset SHAlias BSHFuncs UsrBashComp

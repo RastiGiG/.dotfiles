@@ -1,0 +1,42 @@
+#----------------------------------------------------------------------------------------------------------------------
+#     _    _ _                     
+#    / \  | (_) __ _ ___  ___  ___ 
+#   / _ \ | | |/ _` / __|/ _ \/ __|
+#  / ___ \| | | (_| \__ \  __/\__ \
+# /_/   \_\_|_|\__,_|___/\___||___/
+#                               
+# - Collection of Aliases used in Bash and Zsh -
+# Source:         - .dotfiles/000_OrgFiles/Aliases.org
+# Target:         - .dotfiles/D00_Aliases/aliases
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#----------------------------------------------------------------------------------------------------------------------
+
+# A bunch of safety aliases
+alias cp='cp -vi'                         # confirm before overwriting something
+alias rm='rm -vi --preserve-root'         # confirm before deleting accidently, disable changes to root
+alias mv='mv -vi'                         # confirm before moving/renaming
+alias ln='ln -vi'                         # confirm before overwriting
+
+alias chown='chown -v --preserve-root'    # disable changes to root
+alias chgrp='chgrp -v --preserve-root'    # disable changes to root
+alias chmod='chmod -v --preserve-root'    # disable changes to root
+
+alias rmdir='rmdir -v'                    # verbose
+alias mkdir='mkdir -v'                    # verbose
+alias mkd='mkdir -p'                      # also creates parent directories
+
+# Better defaults for ls
+alias ls='ls --quoting-style=shell -pq\
+         --time-style=iso --color=auto\
+         --group-directories-first\
+         --show-control-chars -v'
+
+# Reading and Listing aliases
+alias la='ls -al'                         # detailed version of ls listing hidden files
+alias ll='ls -l'                          # detailed version of ls listing
+alias lq='ls --quoting-style=literal'     # don't quote files/dirs with whitespaces
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less                           # more is pretty much useless noadays
