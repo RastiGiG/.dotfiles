@@ -22,7 +22,7 @@ You can look at the [[file:AlacrittyOrigConfig.org][original]] for more detail a
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #
-  # This Configurations was adapted from:
+  # This Configuration was adapted from:
   # - Brodie Robertson:  https://github.com/BrodieRobertson
   # - TerminalForLife:   https://github.com/terminalforlife
   #

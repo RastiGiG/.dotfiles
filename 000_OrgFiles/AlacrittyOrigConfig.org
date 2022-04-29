@@ -22,7 +22,7 @@ You might want to use the cleaned up Version
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #
-  # This Configurations was adapted from:
+  # This Configuration was adapted from:
   # - Brodie Robertson:  https://github.com/BrodieRobertson
   # - TerminalForLife:   https://github.com/terminalforlife
   #
