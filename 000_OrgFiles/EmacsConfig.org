@@ -2035,7 +2035,7 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   
   ;; Automatically tangle config file
   ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-config ()
+  (defun pet/org-babel-tangle-emacs-config ()
     (when (string-equal
            (buffer-file-name)
            (concat pet/dotfiles-dir
@@ -2050,7 +2050,7 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
             (lambda ()
               (add-hook
                'after-save-hook
-               #'pet/org-babel-tangle-config)))
+               #'pet/org-babel-tangle-emacs-config)))
 #+end_src
 
 *** Test Config File
@@ -2169,6 +2169,30 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 	       #'pet/org-babel-tangle-qtilebackup)))
 #+end_src
 
+** I3 WM
+*** Config
+
+#+begin_src emacs-lisp  
+  ;; Automatically tangle config file
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-i3-config ()
+    (when (string-equal
+	   (buffer-file-name)
+	   (concat pet/dotfiles-dir
+		   "000_OrgFiles/I3Config.org"))
+
+      ;; Dynamic scoping to the rescue
+      (let ((org-confirm-babel-evaluate nil))
+	(org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (add-hook
+	       'after-save-hook
+	       #'pet/org-babel-tangle-i3-config)))
+#+end_src
 ** Run Launchers
 *** Rofi
 **** Config
@@ -2224,3 +2248,118 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 	       'after-save-hook
 	       #'pet/org-babel-tangle-dunst)))
 #+end_src
+
+** Bash
+*** Config File
+
+#+begin_src emacs-lisp
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-bash-config ()
+    (when (string-equal
+           (buffer-file-name)
+           (concat pet/dotfiles-dir
+                   "000_OrgFiles/BashConfig.org"))
+      ;; Have the user confirm tangle
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-hook
+               'after-save-hook
+               #'pet/org-babel-tangle-bash-config)))
+#+end_src
+
+*** Bashfunctions File
+
+#+begin_src emacs-lisp
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-bashfuncs ()
+    (when (string-equal
+       (buffer-file-name)
+       (concat pet/dotfiles-dir
+           "000_OrgFiles/BashFuncs.org"))
+      ;; Have user confirm tangle 
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+        (lambda ()
+          (add-hook
+           'after-save-hook
+           #'pet/org-babel-tangle-bashfuncs)))
+#+end_src
+
+*** Alias File
+
+#+begin_src emacs-lisp
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-shell-aliases ()
+    (when (string-equal
+	   (buffer-file-name)
+	   (concat pet/dotfiles-dir
+		   "000_OrgFiles/Aliases.org"))
+      ;; Have user confirm tangle 
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (add-hook
+	       'after-save-hook
+	       #'pet/org-babel-tangle-shell-aliases)))
+#+end_src
+** Alacritty
+*** Config File
+
+#+begin_src emacs-lisp
+  ;; Setup Automatic Tangling of Files
+  
+  ;; Automatically tangle config file
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-alacritty-config ()
+    (when (string-equal
+           (buffer-file-name)
+           (concat pet/dotfiles-dir
+                   "000_OrgFiles/AlacrittyConfig.org"))
+      ;; Have the user confirm tangle
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-hook
+               'after-save-hook
+               #'pet/org-babel-tangle-alacritty-config)))
+#+end_src
+
+*** Original Config File
+
+#+begin_src emacs-lisp
+  ;; Helper Function to that does the tangling
+  (defun pet/org-babel-tangle-alacritty-orig-config ()
+    (when (string-equal
+       (buffer-file-name)
+       (concat pet/dotfiles-dir
+           "000_OrgFiles/AlacrittyOrigConfig.org"))
+      ;; Have user confirm tangle 
+      (let ((org-confirm-babel-evaluate t))
+        (org-babel-tangle))))
+
+  ;; This hook automatically evaluates the helper
+  ;; function after saving the buffer
+  (add-hook 'org-mode-hook
+        (lambda ()
+          (add-hook
+           'after-save-hook
+           #'pet/org-babel-tangle-alacritty-orig-config)))
+#+end_src
+

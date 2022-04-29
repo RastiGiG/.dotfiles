@@ -1545,7 +1545,7 @@
 
 ;; Automatically tangle config file
 ;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-config ()
+(defun pet/org-babel-tangle-emacs-config ()
   (when (string-equal
          (buffer-file-name)
          (concat pet/dotfiles-dir
@@ -1560,7 +1560,7 @@
           (lambda ()
             (add-hook
              'after-save-hook
-             #'pet/org-babel-tangle-config)))
+             #'pet/org-babel-tangle-emacs-config)))
 
 ;; Helper Function to that does the tangling
 (defun pet/org-babel-tangle-testconfig ()
@@ -1658,6 +1658,26 @@
 	     'after-save-hook
 	     #'pet/org-babel-tangle-qtilebackup)))
 
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-i3-config ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/I3Config.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+  (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-i3-config)))
+
 ;; Setup Automatic Tangling of Run Launchers
 
 ;; Automatically tangle config file
@@ -1701,3 +1721,96 @@
 	    (add-hook
 	     'after-save-hook
 	     #'pet/org-babel-tangle-dunst)))
+
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-bash-config ()
+  (when (string-equal
+         (buffer-file-name)
+         (concat pet/dotfiles-dir
+                 "000_OrgFiles/BashConfig.org"))
+    ;; Have the user confirm tangle
+    (let ((org-confirm-babel-evaluate t))
+      (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-hook
+             'after-save-hook
+             #'pet/org-babel-tangle-bash-config)))
+
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-bashfuncs ()
+  (when (string-equal
+     (buffer-file-name)
+     (concat pet/dotfiles-dir
+         "000_OrgFiles/BashFuncs.org"))
+    ;; Have user confirm tangle 
+    (let ((org-confirm-babel-evaluate t))
+      (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+      (lambda ()
+        (add-hook
+         'after-save-hook
+         #'pet/org-babel-tangle-bashfuncs)))
+
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-shell-aliases ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/Aliases.org"))
+    ;; Have user confirm tangle 
+    (let ((org-confirm-babel-evaluate t))
+      (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-shell-aliases)))
+
+;; Setup Automatic Tangling of Files
+
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-alacritty-config ()
+  (when (string-equal
+         (buffer-file-name)
+         (concat pet/dotfiles-dir
+                 "000_OrgFiles/AlacrittyConfig.org"))
+    ;; Have the user confirm tangle
+    (let ((org-confirm-babel-evaluate t))
+      (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-hook
+             'after-save-hook
+             #'pet/org-babel-tangle-alacritty-config)))
+
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-alacritty-orig-config ()
+  (when (string-equal
+     (buffer-file-name)
+     (concat pet/dotfiles-dir
+         "000_OrgFiles/AlacrittyOrigConfig.org"))
+    ;; Have user confirm tangle 
+    (let ((org-confirm-babel-evaluate t))
+      (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+      (lambda ()
+        (add-hook
+         'after-save-hook
+         #'pet/org-babel-tangle-alacritty-orig-config)))

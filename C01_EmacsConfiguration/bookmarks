@@ -2,7 +2,32 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("P00-0 InfoFiles"
+(("C5-2-1 I3 Config"
+ (filename . "~/.dotfiles/000_OrgFiles/I3Config.org")
+ (front-context-string . "\n  # This font i")
+ (rear-context-string . "ngo:monospace 8\n")
+ (position . 3067))
+("T00 Templates"
+ (filename . "~/Templates/")
+ (front-context-string . ".git\n  drwxrwxrw")
+ (rear-context-string . "K  1. Nov 07:27 ")
+ (position . 173))
+("C6-1 Original Alacritty Config"
+ (filename . "~/.dotfiles/000_OrgFiles/AlacrittyOrigConfig.org")
+ (front-context-string . "#+TITLE: Origina")
+ (rear-context-string)
+ (position . 1))
+("C6 Alacritty Config"
+ (filename . "~/.dotfiles/000_OrgFiles/AlacrittyConfig.org")
+ (front-context-string . "#+TITLE: Persona")
+ (rear-context-string)
+ (position . 1))
+("C1-2-1 Bash Functions"
+ (filename . "~/.dotfiles/000_OrgFiles/BashFuncs.org")
+ (front-context-string . "* Header\n\n#+begi")
+ (rear-context-string . "ompatibility!)\n\n")
+ (position . 419))
+("P00-0 InfoFiles"
  (filename . "~/Projects/InfoFiles/")
  (front-context-string . "Books\n  drwxr-xr")
  (rear-context-string . "K 15. Mär 22:56 ")
