@@ -314,3 +314,6 @@ mouse_right_click = close_all
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     default_icon = ~/.config/dunst/urgent.png
+
+[shortcuts]
+    close = ctrl+space

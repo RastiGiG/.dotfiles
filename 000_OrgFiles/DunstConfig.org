@@ -2,6 +2,16 @@
 #+PROPERTY: header-args:sh :tangle ../D13_NotificationDaemon/.config/dunst/dunstrc :mkdirp yes
 #+STARTUP: overview
 
+* Introduction
+
+~Dunst~ is a very good ~notifications daemon~ that's also highly and easily configurable.
+
+Whenever you make changes, you need to manually reload ~Dunst~ (workaround):
+
+#+begin_src shell :tangle no
+  killall dunst; notify-send 'hi'
+#+end_src
+
 * Global Settings
 ** Header
 #+begin_src shell :tangle ../D13_NotificationDaemon/.config/dunst/dunstrc :mkdirp yes
@@ -369,6 +379,11 @@
       default_icon = ~/.config/dunst/urgent.png
 #+end_src
 
+* Shortcuts
+#+begin_src shell :tangle ../D13_NotificationDaemon/.config/dunst/dunstrc :mkdirp yes
+  [shortcuts]
+      close = ctrl+space
+#+end_src
 * Experimental
 #+begin_src shell
   # Experimental features that may or may not work correctly. Do not expect them

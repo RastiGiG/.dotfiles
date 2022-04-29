@@ -19,11 +19,11 @@
   # 
 
   # Default Apps
-  export EDITOR="nvim"
+  export EDITOR="vim"
   export CODEEDITOR="emacs"
   export READER="zathura"
-  export VISUAL="nvim"
-  # export TERMINAL="alacritty"
+  export VISUAL="vim"
+  export TERMINAL="alacritty"
   export BROWSER="brave"
   # export VIDEO="mpv"
   # export IMAGE="sxiv"
