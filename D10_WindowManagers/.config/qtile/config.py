@@ -1,4 +1,18 @@
 # -*- coding: utf-8 -*-
+#----------------------------------------------------------------------------------------------------------------------
+#   ___ _____ ___ _     _____ 
+#  / _ \_   _|_ _| |   | ____|
+# | | | || |  | || |   |  _|  
+# | |_| || |  | || |___| |___ 
+#  \__\_\|_| |___|_____|_____|
+#                                                            
+# - Configuration for Qtile Window Manager -
+# Source:         - .dotfiles/000_OrgFiles/QtileConfig.org
+# Target:         - .dotfiles/D10_WindowManagers/.config/qtile/config.py
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#----------------------------------------------------------------------------------------------------------------------    
+#
 # Copyright (c) 2010 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
 # Copyright (c) 2012 Randall Ma

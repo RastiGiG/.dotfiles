@@ -1,3 +1,24 @@
+# -*- coding: utf-8 -*-
+#----------------------------------------------------------------------------------------------------------------------
+#  ____    _    ____ _  ___   _ ____  
+# | __ )  / \  / ___| |/ / | | |  _ \ 
+# |  _ \ / _ \| |   | ' /| | | | |_) |
+# | |_) / ___ \ |___| . \| |_| |  __/ 
+# |____/_/   \_\____|_|\_\\___/|_|
+#
+#   ___ _____ ___ _     _____ 
+#  / _ \_   _|_ _| |   | ____|
+# | | | || |  | || |   |  _|  
+# | |_| || |  | || |___| |___ 
+#  \__\_\|_| |___|_____|_____|
+#
+# - Configuration for Qtile Window Manager -
+# Source:         - .dotfiles/000_OrgFiles/QtileBackupConfig.org
+# Target:         - .dotfiles/D10_WindowManagers/.config/qtile/config-back.py
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#----------------------------------------------------------------------------------------------------------------------    
+#
 # Copyright (c) 2010 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
 # Copyright (c) 2012 Randall Ma
