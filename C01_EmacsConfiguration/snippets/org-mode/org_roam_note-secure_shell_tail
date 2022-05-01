@@ -10,12 +10,14 @@
 **** [[id:a351bed7-5356-4bec-8c92-1690160d317b][Setting Up the Target Device]]
 *** [[id:5726318f-2748-4435-b2e7-e7e357e14936][Extensions]]
 **** [[id:e441b27a-fd45-4b72-8491-b23e0c085f79][SSH-Agent]] - Managing Keys and Passphrases easily
+**** [[id:71debfd0-e3ae-4afb-b417-ed11f772007c][SSH-Ident]] - Securily Manage Keys and Passphrases 
 **** [[id:d7b76702-4024-41f9-bb7f-708c36ab9d8d][SSHFS]] - Mount Network Filesystems safely
 *** [[id:b9d0ef97-7bef-4fd2-ac89-09994e5d0869][Tipps]]
 **** [[id:b42972c4-7d65-4b43-ad09-504f2515a47f][Disable Password Login]]
 **** [[id:36d8b2c7-1e22-49c9-8740-620e7ee437ee][Using Non-Standard Keynames]]
 **** [[id:e65d4e21-0488-4bfe-a189-27e8b8be2937][User Configuration File]]
 **** [[id:32b677d4-09fd-40fa-99d5-587dfbe08ddc][Recommended Encryption Algorithms]]
+**** [[id:798530bd-8ee2-487a-ab36-8541a064a871][Check if SSH-Agent is running]]
 *** [[id:5d75ada6-1b54-4f7a-ad6e-1869579ecf82][Troubleshooting]]
 **** [[id:e796e0ab-c47b-4a97-a559-2cce5622fa61][Using Logfiles]]
 **** [[id:58525291-6dc8-4153-8733-ee04f77e15a2][Permissions]]

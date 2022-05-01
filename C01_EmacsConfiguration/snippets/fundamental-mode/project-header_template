@@ -15,5 +15,7 @@
 # Target:         - .dotfiles/${4:PATHS/TO/TARGET}
 # Author Email:   - randomly.ventilates@simplelogin.co
 # Author GitHub:  - https://github.com/RastiGiG/
+# Created:        - ${5:`(format-time-string "%Y-%m-%d %H:%M:%S")`}
+# Last Changed:   - ${6:`(format-time-string "%Y-%m-%d %H:%M:%S")`}
 #----------------------------------------------------------------------------------------------------------------------    
 $0
