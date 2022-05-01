@@ -96,6 +96,25 @@ arcext ()
     fi
 }
 
+# short helper to list path in PATH
+path_env () {
+    # backup old IFS
+    OLD_IFS="$IFS"
+    IFS=":"
+
+    # -a splits input into array
+    read -ra paths <<< "$PATH"
+    for f in "${paths[@]}"; do
+        echo "$f"
+    done
+    IFS="$OLD_IFS"
+}
+
+# short function to timestamp in long date format
+timestamp () {
+    printf '%(%F %T)T'
+}
+
 #Functions to automatically evaluate shasums
 sha256()
 {

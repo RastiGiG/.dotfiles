@@ -30,18 +30,60 @@ complete -cf sudo
 # export QT_SELECT=4
 
 #----------------------------SHELL OPTIONS
+
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
 # it regains control.  #65623
 # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
-# Enabled by default for interactive shells
+# default: enabled (for interactive shells)
 shopt -s checkwinsize
 
-# Enabled by default for interactive shells
+# Enable Parameter Expansion, Command Substitution etc for Prompts
+# default: enabled
+shopt -s promptvars
+
+# Use $PATH to locate arguments supplied to 'source'
+# default: enabled
+shopt -s sourcepath
+
+# default: enabled (for interactive shells)
 shopt -s expand_aliases
 
 # Enable history appending instead of overwriting.
 shopt -s histappend
+
+# Safe multiline commands to one line in history
+shopt -s cmdhist
+
+# Literate History, multiline comments with literal '\n'
+# requires: cmdhist
+shopt -s lithist
+
+# Bash attemps spelling correction on dirs
+shopt -s dirspell
+
+# Replace directory names with results of word expansion
+shopt -s direxpand
+
+# Pattern '**' matches everything in Path Expansion
+shopt -s globstar
+
+# Allow '#' comments in interactive shells
+shopt -s interactive_comments
+
+# Case insensitive matches for '[[' or 'case'
+shopt -s nocasematch
+
+# Bash will attempt hostcompletion when @ is involved
+# default: enabled
+shopt -s hostcomplete
+
+# Enable Programmable Completion
+# default: enabled
+shopt -s progcomp
+
+# Default since Bash 4.2.
+shopt -s complete_fullquote
 
 #----------------------------PROMPT
 # Safe certain ANSI color escape sequences.
@@ -55,10 +97,19 @@ PROMPT_PARSER() {
     local C_Cyan='\033[36m' C_BCyan='\033[96m' CB_Cyan='\033[2;36m' CB_BCyan='\033[2;96m'\
           C_Red='\e[31m' C_BRed='\e[91m' CB_Red='\e[2;31m' CB_BRed='\e[2;91m'\
           C_Green='\e[32m' C_BGreen='\e[92m' CB_Green='\e[02;32m' CB_BGreen='\e[02;92m'\
+          CL_Green='\e[01;32m' CL_BGreen='\e[01;92m' C_Green_Back='\e[42m'\
+          C_BGreen_Back='\e[102m'\
+          C_Blue='\e[34m' C_BBlue='\e[94m' CB_Blue='\e[02;34m' CB_BBlue='\e[02;94m'\
+          CL_Blue='\e[01;34m' CL_BBlue='\e[01;94m' C_Blue_Back='\e[44m'\
+          C_BBlue_Back='\e[104m'\
+          C_Yellow='\e[33m' C_BYellow='\e[93m' CB_Yellow='\e[02;33m' CB_BYellow='\e[02;93m'\
           C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' C_Grey='\e[01;97m'\
           C_Magenta='\033[35m' C_BMagenta='\033[95m' CB_Magenta='\033[2;35m'\
-          CB_BMagenta='\033[2;95m' C_Reset='\e[0m'\
+          CB_BMagenta='\033[2;95m' CL_BMagenta='\033[1;95m' C_Magenta_Back='\033[45m'\
+          C_BMagenta_Back='\033[105m' CD_BMagenta_Back='\033[02;105m'\
+          C_Reset='\e[0m'
 
+    # Evaluate Exit Status (safed to arg1, see below)
     X="$1 "
     (( ${X% } == 0 )) && X=
 
@@ -67,9 +118,9 @@ PROMPT_PARSER() {
     # status, if non-zero, and a note saying you're working remotely.
     if [[ -n $SSH_CLIENT ]]; then
         if [[ -n $X ]]; then
-            PS1="\[$C_Grey\]<remote>\[$C_Reset\] \[$C_BRed\]$X\[$C_Reset\] \[$C_Grey\]\n\$\[$C_Reset\] "
+            PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$C_BRed\]\n$X\[$C_Reset\] \[$CB_BMagenta\]\$\[$C_Reset\] "
         else
-            PS1="\[$C_Grey\]<remote>\[$C_Reset\] \[$C_Grey\]\n\$\[$C_Reset\] "
+            PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$CB_BMagenta\]\n\$\[$C_Reset\] "
         fi
 
         return
@@ -109,13 +160,10 @@ PROMPT_PARSER() {
         GitStatus=`git status 2>&1`
         # Store Toplevel Directory
         GitTopDir=`git rev-parse --show-toplevel 2>&1`
+        # Store basename of Toplevel Directory
+        GitTopDirBase=${GitTopDir##*/}
         # Store Name of GIT-Subdir in current Repo
         GitDir=`git rev-parse --git-dir 2>&1`
-
-        # Evaluate Exit Status
-        # (only really necessary in Projects)
-        # ExitStatus="$(printf '%0.3d' $?)" # didn't work. Have to look into that more
-        printf '%0.3d | ' $?;
 
         # Change Description if in GIT-Subdir
         if [[ $GitDir == . || $GitDir == "${PWD%%/.git/*}/.git" ]]; then
@@ -172,21 +220,21 @@ PROMPT_PARSER() {
 
     # Set the Default Prompt here
     if [[ -n $Desc ]]; then
-        PS1="\[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Grey\]\$\[$C_Reset\] "
+        PS1="\n\[${C_Green_Back}${C_White}\]${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
     else
-        PS1="\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \w\[${CB_BMagenta}\]]\n${C_Reset}\$\[${C_Reset}\] "
+        PS1="\n\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \w\[${CB_BMagenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_BMagenta}\]\$ \[${C_Reset}\]"
         # PS1="\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[$C_Grey\]\$\[$C_Reset\] "
     fi
 }
 
-# Set the Prompt Command
+# Set the Prompt Command (Safe Exit Status to variable X)
 PROMPT_COMMAND='PROMPT_PARSER $?'
 
 #----------------------------HISTORY
 # HISTORY SETTINGS
 HISTSIZE=10000
 # Move History to .cache
-HISTFILE='$HOME/.cache/shell/history'
+HISTFILE=$HOME/.cache/shell/history
 # Don't put duplicate lines or lines starting with spaces into the history
 HISTCONTROL='ignoreboth'
 # Add Time String to History
@@ -293,4 +341,15 @@ BSHFuncs="$HOME/.dotfiles/D01_Bash/.bash_functions"
 SHAlias="$HOME/.dotfiles/D00_Aliases/aliases"
 [[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
 
+# Load Bash Completion
+UsrBashComp='/usr/share/bash-completion/bash_completion'
+[[ -f $UsrBashComp && -r $UsrBashComp ]] && . "$UsrBashComp"
+
 unset SHAlias BSHFuncs UsrBashComp
+
+#----------------------------EXTERNAL PROGRAMS AND SCRIPTS
+
+# RANDOM COLOR SCRIPT
+# requires shell color scripts to be installed:
+# https://gitlab.com/dwt1/shell-color-scripts/-/tree/master
+# colorscript random           # disabled for now, slows down loading

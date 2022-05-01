@@ -1,5 +1,5 @@
 #+title: Helpful Bash Functions
-#+PROPERTY: header-args:shell :tangle ../.dotfiles/D01_Bash/.bash_functions :mkdirp yes
+#+PROPERTY: header-args:shell :tangle ../D01_Bash/.bash_functions :mkdirp yes
 #+STARTUP: show2levels
 
 * Introduction
@@ -173,7 +173,31 @@ Short function to *automatically extract* ~archives~ based on the ~file extensio
   }
 
 #+end_src
+** List Paths in PATH
 
+#+begin_src shell
+  # short helper to list path in PATH
+  path_env () {
+      # backup old IFS
+      OLD_IFS="$IFS"
+      IFS=":"
+
+      # -a splits input into array
+      read -ra paths <<< "$PATH"
+      for f in "${paths[@]}"; do
+          echo "$f"
+      done
+      IFS="$OLD_IFS"
+  }
+#+end_src
+** Timestamp
+#+begin_src shell
+  # short function to timestamp in long date format
+  timestamp () {
+      printf '%(%F %T)T'
+  }
+  
+#+end_src
 ** Handling Shasums
 
 #+begin_src shell

@@ -12,6 +12,7 @@
 # Author GitHub:  - https://github.com/RastiGiG/
 #----------------------------------------------------------------------------------------------------------------------
 
+#-----------------------------------------SAFETY ALIASES
 # A bunch of safety aliases
 alias cp='cp -vi'                         # confirm before overwriting something
 alias rm='rm -vi --preserve-root'         # confirm before deleting accidently, disable changes to root
@@ -26,12 +27,19 @@ alias rmdir='rmdir -v'                    # verbose
 alias mkdir='mkdir -v'                    # verbose
 alias mkd='mkdir -p'                      # also creates parent directories
 
+#-----------------------------------------BETTER DEFAULTS
 # Better defaults for ls
 alias ls='ls --quoting-style=shell -pq\
          --time-style=iso --color=auto\
          --group-directories-first\
          --show-control-chars -v'
 
+# Colors for grep
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+
+#-----------------------------------------READING AND LISTING
 # Reading and Listing aliases
 alias la='ls -al'                         # detailed version of ls listing hidden files
 alias ll='ls -l'                          # detailed version of ls listing

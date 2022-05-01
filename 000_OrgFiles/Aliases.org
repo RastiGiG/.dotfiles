@@ -22,10 +22,11 @@
 #+end_src
 
 * Basics
-** Safe Cut, Copy and Remove
+** Safer Defaults
 
 Some of these options are part of the [[file:BashFuncs.org][Functions]] ~file~ and can be activated there
 #+begin_src shell
+  #-----------------------------------------SAFETY ALIASES
   # A bunch of safety aliases
   alias cp='cp -vi'                         # confirm before overwriting something
   alias rm='rm -vi --preserve-root'         # confirm before deleting accidently, disable changes to root
@@ -41,7 +42,22 @@ Some of these options are part of the [[file:BashFuncs.org][Functions]] ~file~ a
   alias mkd='mkdir -p'                      # also creates parent directories
 
 #+end_src
+** Better Defaults
 
+#+begin_src shell
+  #-----------------------------------------BETTER DEFAULTS
+  # Better defaults for ls
+  alias ls='ls --quoting-style=shell -pq\
+           --time-style=iso --color=auto\
+           --group-directories-first\
+           --show-control-chars -v'
+
+  # Colors for grep
+  alias grep='grep --colour=auto'
+  alias egrep='egrep --colour=auto'
+  alias fgrep='fgrep --colour=auto'
+  
+#+end_src
 ** Reading and Listing
 :NOTE:
 Quick note on [[id:28da9d49-b484-4ac7-9340-c800bbee5aff][ls]]:
@@ -51,12 +67,7 @@ Default is the =shell= version.
 =--show-control-chars= displays characters like =/= for ~directories~
 :END:
 #+begin_src shell
-  # Better defaults for ls
-  alias ls='ls --quoting-style=shell -pq\
-           --time-style=iso --color=auto\
-           --group-directories-first\
-           --show-control-chars -v'
-
+  #-----------------------------------------READING AND LISTING
   # Reading and Listing aliases
   alias la='ls -al'                         # detailed version of ls listing hidden files
   alias ll='ls -l'                          # detailed version of ls listing
