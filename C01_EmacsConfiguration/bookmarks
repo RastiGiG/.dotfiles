@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C5-2-1 I3 Config"
+(("C5-2-2 I3 Backup Config"
+ (filename . "~/.dotfiles/000_OrgFiles/I3BackupConfig.org")
+ (front-context-string . "\n  # Last Change")
+ (rear-context-string . "eated:        - ")
+ (position . 1143))
+("C5-2-3 I3 Keybindings"
+ (filename . "~/.dotfiles/000_OrgFiles/I3Keybindings.org")
+ (front-context-string)
+ (rear-context-string . "   \n\n#+end_src\n\n")
+ (position . 1182))
+("C5-2-1 I3 Config"
  (filename . "~/.dotfiles/000_OrgFiles/I3Config.org")
  (front-context-string . "\n  # This font i")
  (rear-context-string . "ngo:monospace 8\n")
@@ -68,10 +78,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220401150211-linux_terminals_ansi_escape_characters.org")
- (front-context-string . "\n* Linux - Termi")
- (rear-context-string . "04-01 Fr 15:02]\n")
- (position . 201))
+ (filename . "~/Org/20220430110117-linux_tipps_restart_systemd_daemons.org")
+ (front-context-string . "\n* Linux - Tipps")
+ (rear-context-string . "04-30 Sa 11:01]\n")
+ (position . 221))
 ("C2-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")

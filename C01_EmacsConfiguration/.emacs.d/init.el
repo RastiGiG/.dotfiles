@@ -412,7 +412,7 @@
    "f"   '(:ignore t :which-key "Files")
    "fR"   'recentf-open-files
 
-   ;; Org Mode
+   ;; Org Mode related
    "o"    '(:ignore t :which-key "Org Mode")
 
    ;; Toggles
@@ -740,6 +740,16 @@
   :config
   ;; I don't want ranger to be the default
   (setq ranger-override-dired-mode nil)
+  ;; Enable Image preview
+  (setq ranger-show-literal nil)
+  ;; Set Max Preview Size to 50MB
+  ;; !!careful, this can really slow down your machine!!
+  (setq ranger-max-preview-size 50)
+  ;; Don't preview video/audio files
+  (setq ranger-excluded-extensions ' ("mkv" "iso" "mp4" "mp3"))
+  (pet/leader-keys
+    "tmr"  '(ranger-mode :which-key "Ranger Mode")
+    )
   )
 
 ;; Helper Functions for Org
@@ -1677,6 +1687,46 @@
 	    (add-hook
 	     'after-save-hook
 	     #'pet/org-babel-tangle-i3-config)))
+
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-i3-backup ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/I3BackupConfig.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+  (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-i3-backup)))
+
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-i3-bindings ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/I3ConfigKeybindings.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+  (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-i3-bindings)))
 
 ;; Setup Automatic Tangling of Run Launchers
 
