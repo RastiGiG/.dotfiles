@@ -222,8 +222,7 @@ PROMPT_PARSER() {
     if [[ -n $Desc ]]; then
         PS1="\n\[${C_Green_Back}${C_White}\]${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
     else
-        PS1="\n\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \w\[${CB_BMagenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_BMagenta}\]\$ \[${C_Reset}\]"
-        # PS1="\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[$C_Grey\]\$\[$C_Reset\] "
+        PS1="\n\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \[${CB_Blue}\]\w\[${C_Reset}\]\[${CB_BMagenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_BMagenta}\]\$ \[${C_Reset}\]"
     fi
 }
 
