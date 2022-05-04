@@ -111,6 +111,7 @@ PROMPT_PARSER() {
 
     # Evaluate Exit Status (safed to arg1, see below)
     X="$1 "
+    # if the smallest match for X is 0 (no error), set X to be an empty string 
     (( ${X% } == 0 )) && X=
 
     # SSH - Prompt for Working Remotely
