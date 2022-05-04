@@ -6,8 +6,8 @@
 ;;                                   
 
 ;; NOTE: init.el is generated from EmacsTestConfig.org.
- ;; Please change your settings in that file
- ;; using Emacs and init.el will be generated automatically!
+;; Please change your settings in that file
+;; using Emacs and init.el will be generated automatically!
 
 ;; Setting Variables
 ;; for better customization and readability

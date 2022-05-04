@@ -78,10 +78,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220430110117-linux_tipps_restart_systemd_daemons.org")
+ (filename . "~/Org/20220503192108-linux_tipps_show_current_ip_address.org")
  (front-context-string . "\n* Linux - Tipps")
- (rear-context-string . "04-30 Sa 11:01]\n")
- (position . 221))
+ (rear-context-string . "05-03 Di 19:21]\n")
+ (position . 210))
 ("C2-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")

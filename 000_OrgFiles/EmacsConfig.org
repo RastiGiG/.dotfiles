@@ -2,10 +2,39 @@
 #+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
 #+STARTUP: hideblocks show2levels
 
-* Personal Emacs Configuration
+* Introduction
 
-The following variables are used to tweak some of the configuration pieces for use in the live streams so you might need to adjust them for your local machine if you try to use this configuration directly.
+This is my personal [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs Configuration]] and therefore its geared towards my needs.
+It is not meant as a prime example or template nor is it aimed to be a general purpose setup.
 
+Feel free to adopt parts that you find useful.
+A big chunk of the Configuration was inspired by the ~Emacs From Scratch Youtube-Series~ from [[https://systemcrafters.net/emacs-from-scratch/][SystemCrafters.net]], which i highly recommend as a starting point to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Configuring Emacs]]. I added and changed alot however since starting out.
+
+Another good source is [[https://protesilaos.com/emacs/dotemacs][Protesilaos.com: Dotemacs]], which i took inspiration from for the [[*Capture Templates][Org Capture Templates]].
+ 
+** Starting Emacs Daemon
+
+To get the best out of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]], it's recommended to use the ~Daemon Capabilities~ it offers. This *might slow down your system Startup* time, but it definitely *significantly increases* [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Startup Time~ if you connect to the server with the =emacsclient= [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][command]].
+
+If you want to *startup* the [[id:0e90f8b7-dd79-42fd-928f-c6b2ff4a63a2][Emacs Daemon]] automatically and your ~System~ makes use of [[id:c0a74747-b48a-49a4-ae88-a612f27a3b28][systemd]], simply create the file =emacs.service= under =~/.config/systemd/user/= with the following contents:
+#+begin_src shell
+  [Unit]
+  Description=Emacs text editor
+  Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+
+  [Service]
+  Type=forking
+  ExecStart=/usr/bin/emacs --daemon
+  ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+  Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+  Restart=on-failure
+
+  [Install]
+  WantedBy=default.target
+#+end_src
+
+* Initial Section
+** Header
 #+begin_src emacs-lisp
 
   ;;   _____ __  __    _    ____ ____  
@@ -16,8 +45,8 @@ The following variables are used to tweak some of the configuration pieces for u
   ;;                                   
 
   ;; NOTE: init.el is generated from EmacsTestConfig.org.
-   ;; Please change your settings in that file
-   ;; using Emacs and init.el will be generated automatically!
+  ;; Please change your settings in that file
+  ;; using Emacs and init.el will be generated automatically!
 
 #+end_src
 
@@ -254,6 +283,8 @@ If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-packag
 #+end_src
 
 * Basic UI Configuration
+
+The following variables are used to tweak some of the configuration pieces like font and fontsize so you might need to adjust them for your local machine if you try to use this configuration directly.
 
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
 

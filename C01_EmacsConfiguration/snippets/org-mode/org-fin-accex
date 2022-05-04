@@ -1,6 +1,6 @@
 # key: <ofium
 # name: Org-Fin-AccEx
 # --
-| ${1:0} | ${2:0} | Umbuchung  | ${3:7amx/47com/82pp/94ing/110bw/137gb/169stud} |  ${5:0} | ${6:2amx/4-6com/7fau/8-10ing/12pp/13pm/14-15spb/16vi} | 3 |
-| ${1:$(+ 1 (string-to-number (or (yas-field-value 1) "0")))} | $2 | Umbuchung | ${4:7amx/47com/82pp/94ing/110bw/137gb/169stud} |  -$5 | ${7:2amx/4-6com/7fau/8-10ing/12pp/13pm/14-15spb/16vi} | 3 |
+| ${1:0} | ${2:0} | Umbuchung  | ${3:7amx/47com/82gb/94ing/110bw/137pp/169stud} |  ${5:0} | ${6:2amx/4-6com/7fau/8-10ing/12pp/13pm/14-15spb/16vi} | 3 |
+| ${1:$(+ 1 (string-to-number (or (yas-field-value 1) "0")))} | $2 | Umbuchung | ${4:7amx/47com/82gb/94ing/110bw/137pp/169stud} |  -$5 | ${7:2amx/4-6com/7fau/8-10ing/12pp/13pm/14-15spb/16vi} | 3 |
 $0
