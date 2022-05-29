@@ -145,8 +145,8 @@ You can look at the [[file:AlacrittyOrigConfig.org][original]] for more detail a
   colors:
     # Default colors
     primary:
-      background: '#191919'
-      foreground: '#d8dee9'
+      background: '#191919'  # previous '#282a36'
+      foreground: '#f8f8f2'  # previous '#d8dee9'
 
       dim_foreground: '#9a9a9a'
       bright_foreground: '#ffffff'
@@ -162,29 +162,48 @@ You can look at the [[file:AlacrittyOrigConfig.org][original]] for more detail a
       text: CellBackground
       cursor: CellForeground
 
+    search:
+      matches:
+        foreground: '#44475a'
+        background: '#50fa7b'
+      focused_match:
+        foreground: '#44475a'
+        background: '#ffb86c'
+      bar:
+        background: '#282a36'
+        foreground: '#f8f8f2'
+
+    hints:
+      start:
+        foreground: '#282a36'
+        background: '#f1fa8c'
+      end:
+        foreground: '#f1fa8c'
+        background: '#282a36'
+
     selection:
-      text: '#191919'
-      background: '#d8dee9'
+      text: CellForeground   # Previous: '#191919'
+      background: '#44475a'  # Previous: '#d8dee9'
 
     normal:
-      black:   '#191919'
-      red:     '#b02626'
-      green:   '#40a62f'
-      yellow:  '#f2e635'
-      blue:    '#314ad0'
-      magenta: '#b30ad0'
-      cyan:    '#32d0fc'
-      white:   '#acadb1'
+      black:   '#21222c'     # Previous: '#191919'
+      red:     '#ff5555'     # Previous: '#b02626'
+      green:   '#50fa7b'     # Previous: '#40a62f'
+      yellow:  '#f1fa8c'     # Previous: '#f2e635'
+      blue:    '#bd93f9'     # Previous: '#314ad0'
+      magenta: '#ff79c6'     # Previous: '#b30ad0'
+      cyan:    '#8be9fd'     # Previous: '#32d0fc'
+      white:   '#f8f8f2'     # Previous: '#acadb1'
 
     bright:
-      black:   '#36393d'
-      red:     '#ce2727'
-      green:   '#47c930'
-      yellow:  '#fff138'
-      blue:    '#2e4bea'
-      magenta: '#cc15ed'
-      cyan:    '#54d9ff'
-      white:   '#dbdbdb'
+      black:   '#6272a4'     # Previous: '#36393d'
+      red:     '#ff6e6e'     # Previous: '#ce2727'
+      green:   '#69ff94'     # Previous: '#47c930'
+      yellow:  '#ffffa5'     # Previous: '#fff138'
+      blue:    '#d6acff'     # Previous: '#2e4bea'
+      magenta: '#ff92df'     # Previous: '#cc15ed'
+      cyan:    '#a4ffff'     # Previous: '#54d9ff'
+      white:   '#ffffff'     # Previous: '#dbdbdb'
 
     dim:
       black:   '#676f78'
