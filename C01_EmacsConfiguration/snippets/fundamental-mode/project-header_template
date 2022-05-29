@@ -5,17 +5,15 @@
 #----------------------------------------------------------------------------------------------------------------------
 # 
 # ${1:<figlet>}
-# 
-# 
-# 
-# 
 #                               
-# - Configuration ${2:Subtitle} -
-# Source:         - .dotfiles/${3:PATHS/TO/SOURCE}
-# Target:         - .dotfiles/${4:PATHS/TO/TARGET}
+# - ${2:Subtitle} -
+# Script Name:    - ${3:ScriptName}
+# Source:         - ${4:PATHS/TO/SOURCE}
+# Target:         - ${5:PATHS/TO/TARGET}
 # Author Email:   - randomly.ventilates@simplelogin.co
 # Author GitHub:  - https://github.com/RastiGiG/
-# Created:        - ${5:`(format-time-string "%Y-%m-%d %H:%M:%S")`}
-# Last Changed:   - ${6:`(format-time-string "%Y-%m-%d %H:%M:%S")`}
+# Created:        - ${6:`(format-time-string "%Y-%m-%d %H:%M:%S")`}
+# Last Changed:   - ${7:`(format-time-string "%Y-%m-%d %H:%M:%S")`}
+# Dependencies:   - ${8:Dependencies}
 #----------------------------------------------------------------------------------------------------------------------    
 $0

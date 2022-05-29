@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: org_projects-language_drawer
+# key: <opld
+# --
+:LANGUAGES:
+Completed in
++ [ ] [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]]
++ [ ] [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
++ [ ] [[id:80f8e5d6-6ae5-4c16-8267-30eadb793de6][Perl]]
++ [ ] [[id:d8f69b88-c85b-45e1-b6c4-7aeff1c67e85][Bash]]
++ [ ] [[id:e1de446b-1f80-422b-80b2-864443615fcb][Scheme]]
++ [ ] [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]]
++ [ ] [[id:1732511b-7e46-4929-815c-91af041295b8][PHP]]
++ [ ] [[id:051c3b3a-828b-4a8d-9d56-fc0f825589a3][JavaScript]]
++ [ ] [[id:fb74fd68-dba3-471f-b6ec-dbc5ed5380c2][Java]]
++ [ ] [[id:dba40df2-5499-492a-8a69-ad1b0b10cdf0][Ruby]]
++ [ ] [[id:a3286d40-db6c-4757-a586-bcfbedd7afa2][Rust]]
++ [ ] [[id:6d158d61-0fac-4071-8069-759b7510cbc9][Haskell]]
+:END:

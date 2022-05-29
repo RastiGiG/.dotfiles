@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org-drawer
+# key: <odr
+# --
+:${1:Drawername}:
+$0
+:END: 

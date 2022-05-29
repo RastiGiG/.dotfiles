@@ -4,17 +4,30 @@
 # --
 * Topic Overview
 
-* Read On
-
-[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
 ** [[id:755da73e-ff37-4103-986d-6dc62a9fc7f8][Version Control]]
 *** [[id:1f5328c3-41a1-429a-8ddf-669d4b949033][Git and Github]]
+*** [[id:51dfb2be-8d64-4d33-852e-6d1e62f92f00][Tipps]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+**** [[id:755da73e-ff37-4103-986d-6dc62a9fc7f8][Version Control]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
 
 * References
 
-[[id:b7754471-9c13-4d8a-a394-a776f05ed385][References]]
+[[id:b7754471-9c13-4d8a-a394-a776f05ed385][Version Control References]]
+
+** Websites
+
 1. [[https://git-scm.com][Git-SCM.com - Official Git Page]]
    1) [[https://git-scm.com/docs][Git-SCM.com: Documentation]]
 2. [[https://stackoverflow.com][StackOverflow.com]]
 3. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
 4. [[https://www.git-tower.com][Git-Tower.com]]
+
+** Literature
