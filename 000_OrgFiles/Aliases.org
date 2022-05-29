@@ -78,3 +78,13 @@ Default is the =shell= version.
   alias more=less                           # more is pretty much useless noadays
 
 #+end_src
+** Emacs Daemon and Client
+
+Using [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] in ~Daemon-Server-Mode~ has a lot of advantages. Read more here: [[id:0e90f8b7-dd79-42fd-928f-c6b2ff4a63a2][Emacs Daemon]]
+#+begin_src shell
+  #-----------------------------------------EMACS DAEMON
+  # Aliases to use emacs as a daemon 
+  alias ed="emacs --daemon"                     # Start daemon
+  alias ec="emacsclient -tc"                    # Connect to daemon
+  alias ek="emacsclient --eval '(kill-emacs)'"  # Kill Daemon
+#+end_src

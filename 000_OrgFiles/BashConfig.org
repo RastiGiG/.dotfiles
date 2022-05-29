@@ -418,6 +418,10 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
   UsrBashComp='/usr/share/bash-completion/bash_completion'
   [[ -f $UsrBashComp && -r $UsrBashComp ]] && . "$UsrBashComp"
 
+  # Make Bash show the available options first
+  bind 'set show-all-if-ambiguous on'
+  # Set up tab to cycle completion options and show options first
+  bind 'TAB:menu-complete'
 #+end_src
 ** Release Temporary Variables
 

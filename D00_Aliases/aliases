@@ -48,3 +48,9 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less                           # more is pretty much useless noadays
+
+#-----------------------------------------EMACS DAEMON
+# Aliases to use emacs as a daemon 
+alias ed="emacs --daemon"                     # Start daemon
+alias ec="emacsclient -tc"                    # Connect to daemon
+alias ek="emacsclient --eval '(kill-emacs)'"  # Kill Daemon

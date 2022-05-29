@@ -345,6 +345,11 @@ SHAlias="$HOME/.dotfiles/D00_Aliases/aliases"
 UsrBashComp='/usr/share/bash-completion/bash_completion'
 [[ -f $UsrBashComp && -r $UsrBashComp ]] && . "$UsrBashComp"
 
+# Make Bash show the available options first
+bind 'set show-all-if-ambiguous on'
+# Set up tab to cycle completion options and show options first
+bind 'TAB:menu-complete'
+
 unset SHAlias BSHFuncs UsrBashComp
 
 #----------------------------EXTERNAL PROGRAMS AND SCRIPTS
