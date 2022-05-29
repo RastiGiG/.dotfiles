@@ -2,6 +2,7 @@
 #+PROPERTY: header-args:shell :tangle ../D10_WindowManagers/.config/i3/bindings :mkdirp yes
 #+STARTUP: show2levels
 #+DATE:  [2022-04-29]
+#+STARTUP: show2levels
 
 * Header
 
@@ -27,7 +28,7 @@
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   # Created:        - 2022-04-29 22:59:59
-  # Last Changed:   - 2022-04-29 23:00:02
+  # Last Changed:   - 2022-05-19 11:29:02
   #
   # Please see https://i3wm.org/docs/userguide.html for a complete reference!
   #
@@ -38,112 +39,286 @@
 #+end_src
 
 * Keybindings
-
+** General
 #+begin_src shell
-  #-------------------------------KEYBINDINGS
-  # start a terminal
-  bindsym Mod1+Return exec i3-sensible-terminal
+  #----------------------------------------------------GENERAL
+
+  set $mod Mod4
+  set $alt_mod Mod1
+
+  # use these keys for focus, movement, and resize directions when reaching for
+  # the arrows is not convenient
+  set $left h
+  set $down j
+  set $up k
+  set $right l
+
+  bindsym $alt_mod+Shift+space floating toggle
+  bindsym $alt_mod+space focus mode_toggle
+  bindsym $alt_mod+Shift+s sticky toggle
+
+  #bindsym $alt_mod+Return exec --no-startup-id alacritty
+  #bindsym $alt_mod+Shift+M exec --no-startup-id perl ~/.i3a/toggle_pad
+  #bindsym Ctrl+Shift+$alt_mod+L exec pkill -u "$USER"
+  #bindsym Ctrl+$alt_mod+B exec --no-startup-id blueman-manager
+  #bindsym Ctrl+Shift+K exec --no-startup-id sh ~/.i3a/key_autorepeat
+  #bindsym Mod4+L exec --no-startup-id sh ~/.i3a/lockscreen
+  #bindsym $alt_mod+d exec --no-startup-id sh ~/.i3a/launcher
+  #bindsym $alt_mod+c exec --no-startup-id bash ~/.i3a/comp_toggle
+  # bindsym XF86Calculator exec --no-startup-id xcalc
+
+  # reload the configuration file
+  bindsym $alt_mod+Shift+c reload
+  # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+  bindsym $alt_mod+Shift+r restart
 
   # kill focused window
-  bindsym Mod1+Shift+q kill
+  bindsym $mod+Shift+q kill
+
+  # exit i3 (logs you out of your X session)
+  bindsym $alt_mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+  # start a terminal
+  bindsym $mod+Return exec i3-sensible-terminal
+
 
   # start dmenu (a program launcher)
-  bindsym Mod1+d exec --no-startup-id dmenu_run
+  bindsym $mod+Shift+r exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'Programs: '"
+  bindsym $mod+d exec --no-startup-id dmenu_run
   # A more modern dmenu replacement is rofi:
-  # bindsym Mod1+d exec "rofi -modi drun,run -show drun"
+  # bindsym $alt_mod+d exec "rofi -modi drun,run -show drun"
   # There also is i3-dmenu-desktop which only displays applications shipping a
   # .desktop file. It is a wrapper around dmenu, so you need that installed.
-  # bindsym Mod1+d exec --no-startup-id i3-dmenu-desktop
+  # bindsym $alt_mod+d exec --no-startup-id i3-dmenu-desktop
 
-  # change focus
-  bindsym Mod1+$left focus left
-  bindsym Mod1+$down focus down
-  bindsym Mod1+$up focus up
-  bindsym Mod1+$right focus right
+#+end_src
+** Workspaces
+#+begin_src shell
+  #----------------------------------------------------WORKSPACES
 
-  # alternatively, you can use the cursor keys:
-  bindsym Mod1+Left focus left
-  bindsym Mod1+Down focus down
-  bindsym Mod1+Up focus up
-  bindsym Mod1+Right focus right
+  # switch to workspace
+  bindsym $mod+1 workspace number $ws1
+  bindsym $mod+2 workspace number $ws2
+  bindsym $mod+3 workspace number $ws3
+  bindsym $mod+4 workspace number $ws4
+  bindsym $mod+5 workspace number $ws5
+  bindsym $mod+6 workspace number $ws6
+  bindsym $mod+7 workspace number $ws7
+  bindsym $mod+8 workspace number $ws8
+  bindsym $mod+9 workspace number $ws9
+  bindsym $mod+0 workspace number $ws10
 
-  # move focused window
-  bindsym Mod1+Shift+$left move left
-  bindsym Mod1+Shift+$down move down
-  bindsym Mod1+Shift+$up move up
-  bindsym Mod1+Shift+$right move right
+  # cycle through workspace
+  bindsym $mod+Ctrl+$right workspace next
+  bindsym $mod+Ctrl+Right  workspace next
+  bindsym $mod+Ctrl+$left  workspace prev
+  bindsym $mod+Ctrl+Left   workspace prev
 
-  # alternatively, you can use the cursor keys:
-  bindsym Mod1+Shift+Left move left
-  bindsym Mod1+Shift+Down move down
-  bindsym Mod1+Shift+Up move up
-  bindsym Mod1+Shift+Right move right
+  # switch workspace back and forth
+  bindsym $mod+Ctrl+$up    workspace back_and_forth
+  bindsym $mod+Ctrl+Up     workspace back_and_forth
+  bindsym $mod+Ctrl+$down  workspace back_and_forth
+  bindsym $mod+Ctrl+Down   workspace back_and_forth
+#+end_src
+** Container
+#+begin_src shell
+  #----------------------------------------------------CONTAINER MOVEMENT
 
-  # split in horizontal orientation
-  bindsym Mod1+h split h
+  # move focused container to workspace
+  bindsym $mod+Shift+1 move container to workspace number $ws1
+  bindsym $mod+Shift+2 move container to workspace number $ws2
+  bindsym $mod+Shift+3 move container to workspace number $ws3
+  bindsym $mod+Shift+4 move container to workspace number $ws4
+  bindsym $mod+Shift+5 move container to workspace number $ws5
+  bindsym $mod+Shift+6 move container to workspace number $ws6
+  bindsym $mod+Shift+7 move container to workspace number $ws7
+  bindsym $mod+Shift+8 move container to workspace number $ws8
+  bindsym $mod+Shift+9 move container to workspace number $ws9
+  bindsym $mod+Shift+0 move container to workspace number $ws10
 
-  # split in vertical orientation
-  bindsym Mod1+v split v
+  # Cycle-move container through workspaces
+  bindsym $mod+Ctrl+Shift+$right move container to workspace next
+  bindsym $mod+Ctrl+Shift+Right  move container to workspace next
+  bindsym $mod+Ctrl+Shift+$left  move container to workspace prev
+  bindsym $mod+Ctrl+Shift+Left   move container to workspace prev
 
-  # enter fullscreen mode for the focused container
-  bindsym Mod1+f fullscreen toggle
-
-  # change container layout (stacked, tabbed, toggle split)
-  bindsym Mod1+s layout stacking
-  bindsym Mod1+w layout tabbed
-  bindsym Mod1+e layout toggle split
-
-  # toggle tiling / floating
-  bindsym Mod1+Shift+space floating toggle
-
-  # change focus between tiling / floating windows
-  bindsym Mod1+space focus mode_toggle
+  # Move Container Back and Forth
+  bindsym $mod+Ctrl+Shift+$up    move container to workspace back_and_forth
+  bindsym $mod+Ctrl+Shift+Up     move container to workspace back_and_forth
+  bindsym $mod+Ctrl+Shift+$down  move container to workspace back_and_forth
+  bindsym $mod+Ctrl+Shift+Down   move container to workspace back_and_forth
 
   # focus the parent container
-  bindsym Mod1+a focus parent
+  bindsym $mod+a focus parent
 
   # focus the child container
-  #bindsym Mod1+d focus child
+  #bindsym $mod+d focus child
 
+#+end_src
+** Transparency
+#+begin_src shell
+  #----------------------------------------------------TRANSPARENCY
+
+  bindsym $alt_mod+Shift+0 exec --no-startup-id transset --inc -a 0.01
+  bindsym $alt_mod+Shift+9 exec --no-startup-id transset --dec -a 0.01
+  
+#+end_src
+** Layouts
+#+begin_src shell
+  #----------------------------------------------------Layouts
+
+  # change container layout (stacked, tabbed, toggle split)
+  bindsym $mod+s layout stacking
+  bindsym $mod+w layout tabbed
+  bindsym $mod+e layout toggle split
+
+  # toggle tiling / floating
+  bindsym $mod+Shift+space floating toggle
+
+  # use Mouse+$alt_mod to drag floating windows to their wanted position
+  floating_modifier $mod
+
+#+end_src
+** Window Focus
+#+begin_src shell
+  #----------------------------------------------------WINDOW FOCUS
+
+  # change focus using VIM keys
+  bindsym $mod+$left focus left
+  bindsym $mod+$down focus down
+  bindsym $mod+$up focus up
+  bindsym $mod+$right focus right
+
+  # alternatively use the cursor keys:
+  bindsym $mod+Left focus left
+  bindsym $mod+Down focus down
+  bindsym $mod+Up focus up
+  bindsym $mod+Right focus right
+
+  # change focus between tiling / floating windows
+  bindsym $mod+space focus mode_toggle
+
+#+end_src
+
+** Window Movement
+#+begin_src shell
+  #----------------------------------------------------WINDOW MOVEMENT
+
+  # move focused window using VIM keys
+  bindsym $mod+Shift+$left move left
+  bindsym $mod+Shift+$down move down
+  bindsym $mod+Shift+$up move up
+  bindsym $mod+Shift+$right move right
+
+  # alternatively use the cursor keys:
+  bindsym $mod+Shift+Left move left
+  # bindsym $mod+Shift+Left move left 10 px
+  bindsym $mod+Shift+Down move down
+  # bindsym $mod+Shift+Down move down 10 px
+  bindsym $mod+Shift+Up move up
+  # bindsym $mod+Shift+Up move up 10 px
+  bindsym $mod+Shift+Right move right
+  # bindsym $mod+Shift+Right move right 10 px
+
+#+end_src
+** Window Resizing
+#+begin_src shell
+  #----------------------------------------------------WINDOW RESIZING
+
+  # These are used in the resize mode for now
+  # bindsym shift+$mod+$left resize shrink width 100 px
+  # bindsym shift+$mod+$up resize grow height 100 px
+  # bindsym shift+$mod+$down resize shrink height 100 px
+  # bindsym shift+$mod+$right resize grow width 100 px
+  # 
+  # bindsym shift+$mod+Left resize shrink width 1 px
+  # bindsym shift+$mod+Up resize grow height 1 px
+  # bindsym shift+$mod+Down resize shrink height 1 px
+  # bindsym shift+$mod+Right resize grow width 1 px
+  bindsym $mod+Ctrl+f fullscreen
+
+  # enter fullscreen mode for the focused container
+  bindsym $mod+f fullscreen toggle
+
+#+end_src
+** Window Splitting
+#+begin_src shell
+  #----------------------------------------------------WINDOW SPLITTING
+
+  # split in horizontal orientation
+  bindsym $mod+b split h
+  # split in vertical orientation
+  bindsym $mod+v split v
+
+#+end_src
+** Modes
+#+begin_src shell
+  #----------------------------------------------------SCRATCHPAD
+  
+  # Mode Bindings
+  bindsym $mod+Ctrl+r mode "resize"
+
+#+end_src
+** X11 Display
+#+begin_src shell
+  #----------------------------------------------------X11 DISPLAY
+
+  bindsym $mod+m exec --no-startup-id sleep 1s && xset dpms force off
+  #bindsym Ctrl+Mod4+R exec --no-startup-id xrandr --output HDMI-1 --rotate right
+  #bindsym Ctrl+Mod4+L exec --no-startup-id xrandr --output HDMI-1 --rotate left
+  #bindsym Ctrl+Mod4+N exec --no-startup-id xrandr --output HDMI-1 --rotate normal
+  
+#+end_src
+** I3 Scratchpad
+#+begin_src shell
+  #----------------------------------------------------SCRATCHPAD
+  
   # move the currently focused window to the scratchpad
-  bindsym Mod1+Shift+minus move scratchpad
+  bindsym $mod+Shift+minus move scratchpad
 
   # Show the next scratchpad window or hide the focused scratchpad window.
   # If there are multiple scratchpad windows, this command cycles through them.
-  bindsym Mod1+minus scratchpad show
+  bindsym $mod+minus scratchpad show
 
-    # switch to workspace
-  bindsym Mod1+1 workspace number $ws1
-  bindsym Mod1+2 workspace number $ws2
-  bindsym Mod1+3 workspace number $ws3
-  bindsym Mod1+4 workspace number $ws4
-  bindsym Mod1+5 workspace number $ws5
-  bindsym Mod1+6 workspace number $ws6
-  bindsym Mod1+7 workspace number $ws7
-  bindsym Mod1+8 workspace number $ws8
-  bindsym Mod1+9 workspace number $ws9
-  bindsym Mod1+0 workspace number $ws10
+#+end_src
+** Audio Control
+#+begin_src shell
+  #----------------------------------------------------AUDIO CONTROL
 
-  # move focused container to workspace
-  bindsym Mod1+Shift+1 move container to workspace number $ws1
-  bindsym Mod1+Shift+2 move container to workspace number $ws2
-  bindsym Mod1+Shift+3 move container to workspace number $ws3
-  bindsym Mod1+Shift+4 move container to workspace number $ws4
-  bindsym Mod1+Shift+5 move container to workspace number $ws5
-  bindsym Mod1+Shift+6 move container to workspace number $ws6
-  bindsym Mod1+Shift+7 move container to workspace number $ws7
-  bindsym Mod1+Shift+8 move container to workspace number $ws8
-  bindsym Mod1+Shift+9 move container to workspace number $ws9
-  bindsym Mod1+Shift+0 move container to workspace number $ws10
+  # Use pactl to adjust volume in PulseAudio.
+  set $refresh_i3status killall -SIGUSR1 i3status
+  bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+  bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+  bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+  bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-  # reload the configuration file
-  bindsym Mod1+Shift+c reload
-  # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-  bindsym Mod1+Shift+r restart
-  # exit i3 (logs you out of your X session)
-  bindsym Mod1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+  # requires .i3a scripts
+  #bindsym Shift+F2 exec --no-startup-id sh ~/.i3a/sink_mute
+  #bindsym Shift+F3 exec --no-startup-id sh ~/.i3a/sink_lower
+  #bindsym Shift+F4 exec --no-startup-id bash ~/.i3a/sink_raise
+  #bindsym Shift+Ctrl+F2 exec --no-startup-id sh ~/.i3a/source_mute
+  #bindsym Shift+Ctrl+F3 exec --no-startup-id sh ~/.i3a/source_lower
+  #bindsym Shift+Ctrl+F4 exec --no-startup-id bash ~/.i3a/source_raise
+  #bindsym Shift+F6 exec --no-startup-id bash ~/.i3a/sink_switch
+  #bindsym Ctrl+Mod4+$alt_mod+l exec --no-startup-id bash ~/.i3a/toggle_loopback
 
-  # Mode Bindings
-  bindsym Mod1+r mode "resize"
+#+end_src
+** Programs
+#+begin_src shell
+  #----------------------------------------------------PROGRAMS
 
+  # Start Emacsclient or alternatively Emacs directly
+  bindsym $mod+Shift+e exec "emacsclient -s 'Emacs' -c 'Emacs' &"
+
+  # Start TexStudio
+  bindsym $mod+Shift+t exec "texstudio &"
+
+  # Start XournalPP
+  bindsym $mod+Shift+x exec "xournalpp &"
+
+  # Start VeraCrypt
+  bindsym $mod+Shift+v exec "veracrypt &"
+
+  # Start KeePass
+  bindsym $mod+Shift+c exec "keepass &"
 #+end_src
