@@ -2,177 +2,197 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C5-2-2 I3 Backup Config"
+(("C 05-2-4 I3 Program Rules"
+ (filename . "~/.dotfiles/000_OrgFiles/I3ProgramRules.org")
+ (front-context-string . "#+title: Persona")
+ (rear-context-string)
+ (position . 1))
+("D XX LaTeX Science Kompendiums"
+ (filename . "~/Documents/06_Studium/XX_LaTeX/")
+ (front-context-string . "Mathematik.pdf\n ")
+ (rear-context-string . "K 16. Apr 2021  ")
+ (position . 710))
+("B 01 Web-Bookmarks"
+ (filename . "~/Backup/Web-Bookmarks/")
+ (front-context-string . "1-bookmarks-impo")
+ (rear-context-string . "K 10. Mai 18:26 ")
+ (position . 178))
+("B 00 Backup"
+ (filename . "~/Backup/")
+ (front-context-string . "Web-Bookmarks\n  ")
+ (rear-context-string . "K 10. Mai 14:23 ")
+ (position . 231))
+("C 05-2-2 I3 Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/I3BackupConfig.org")
  (front-context-string . "\n  # Last Change")
  (rear-context-string . "eated:        - ")
  (position . 1143))
-("C5-2-3 I3 Keybindings"
+("C 05-2-3 I3 Keybindings"
  (filename . "~/.dotfiles/000_OrgFiles/I3Keybindings.org")
  (front-context-string)
  (rear-context-string . "   \n\n#+end_src\n\n")
  (position . 1182))
-("C5-2-1 I3 Config"
+("C 05-2-1 I3 Config"
  (filename . "~/.dotfiles/000_OrgFiles/I3Config.org")
  (front-context-string . "\n  # This font i")
  (rear-context-string . "ngo:monospace 8\n")
  (position . 3067))
-("T00 Templates"
+("T 00 Templates"
  (filename . "~/Templates/")
  (front-context-string . ".git\n  drwxrwxrw")
  (rear-context-string . "K  1. Nov 07:27 ")
  (position . 173))
-("C6-1 Original Alacritty Config"
+("C 06-1 Original Alacritty Config"
  (filename . "~/.dotfiles/000_OrgFiles/AlacrittyOrigConfig.org")
  (front-context-string . "#+TITLE: Origina")
  (rear-context-string)
  (position . 1))
-("C6 Alacritty Config"
+("C 06 Alacritty Config"
  (filename . "~/.dotfiles/000_OrgFiles/AlacrittyConfig.org")
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
  (position . 1))
-("C1-2-1 Bash Functions"
+("C 01-2-1 Bash Functions"
  (filename . "~/.dotfiles/000_OrgFiles/BashFuncs.org")
  (front-context-string . "* Header\n\n#+begi")
  (rear-context-string . "ompatibility!)\n\n")
  (position . 419))
-("P00-0 InfoFiles"
+("P 00-0 InfoFiles"
  (filename . "~/Projects/InfoFiles/")
  (front-context-string . "Books\n  drwxr-xr")
  (rear-context-string . "K 15. Mär 22:56 ")
  (position . 179))
-("D07-0 Literatur"
+("D 07-0 Literatur"
  (filename . "~/Documents/07_Wissen_und_Bildung/00-Literatur/")
  (front-context-string . "Articles\n  drwxr")
  (rear-context-string . "K 27. Feb 12:06 ")
  (position . 262))
-("C0 Dotfiles"
+("C 00 Dotfiles"
  (filename . "~/.dotfiles/")
  (front-context-string . ".git\n  drwxr-xr-")
  (rear-context-string . "K 27. Feb 11:56 ")
  (position . 173))
 ("org-refile-last-stored"
- (filename . "~/Org/personal-archive.org")
- (front-context-string . "** DONE Nachunte")
- (rear-context-string . "ON: 09131 32586\n")
- (position . 7989))
-("C2-4 Abbreviations"
+ (filename . "~/Backup/Web-Bookmarks/1-bookmarks-import.org")
+ (front-context-string . "** [[https://www")
+ (rear-context-string . "ics:technology:\n")
+ (position . 9036))
+("C 02-4 Abbreviations"
  (filename . "~/.dotfiles/C01_EmacsConfiguration/abbrev_defs")
  (front-context-string . ";;-*-coding: utf")
  (rear-context-string)
  (position . 1))
-("C5-1-2 Qtile Backup Config"
+("C 05-1-2 Qtile Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/QtileBackupConfig.org")
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
  (position . 1))
-("C5-1-1 Qtile Config"
+("C 05-1-1 Qtile Config"
  (filename . "~/.dotfiles/000_OrgFiles/QtileConfig.org")
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
  (position . 1))
-("C1 OrgFiles"
+("C 01 OrgFiles"
  (filename . "~/.dotfiles/000_OrgFiles/")
  (front-context-string . "Templates\n  -rw-")
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220503192108-linux_tipps_show_current_ip_address.org")
- (front-context-string . "\n* Linux - Tipps")
- (rear-context-string . "05-03 Di 19:21]\n")
- (position . 210))
-("C2-B Emacs Backup Config"
+ (filename . "~/Org/20220519134510-people_robert_brandom.org")
+ (front-context-string . "\n* People - Robe")
+ (rear-context-string . "05-19 Do 13:45]\n")
+ (position . 179))
+("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
  (rear-context-string . " Projects\")))))\n")
  (position . 30876))
-("C2-T Emacs Test Config"
+("C 02-T Emacs Test Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsTestConfig.org")
  (front-context-string . "#+TITLE: Persona")
  (rear-context-string)
  (position . 1))
-("I01-1 Org Latex Preview"
+("I 01-1 Org Latex Preview"
  (filename . "~/Projects/InfoFiles/Emacs/Worg/org-tutorials/org-latex-preview.org")
  (front-context-string . "# This file is r")
  (rear-context-string)
  (position . 1))
-("I01 Worg Index"
+("I 01 Worg Index"
  (filename . "~/Projects/InfoFiles/Emacs/Worg/index.org")
  (front-context-string . "# in your load-p")
  (rear-context-string . "e/elisp/worg.el\n")
  (position . 654))
-("D01-5 SS 2021"
+("D 01-5 SS 2021"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/5_SS_2021/")
  (front-context-string)
  (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 172))
-("D01-4 WS 2020/2021"
+("D 01-4 WS 2020/2021"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/4_WS_2020-2021/")
  (front-context-string)
  (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 177))
-("D01-3 SS 2020"
+("D 01-3 SS 2020"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/3_SS_2020/")
  (front-context-string)
  (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 172))
-("D01-2 WS 2019/2020"
+("D 01-2 WS 2019/2020"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/2_WS_2019-2020/")
  (front-context-string)
  (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 177))
-("D01-1 SS 2019"
+("D 01-1 SS 2019"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/1_SS_2019/")
  (front-context-string)
  (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 172))
-("D04 Downloads"
+("D 04 Downloads"
  (filename . "~/Downloads/")
  (front-context-string . "Deutsche_Bahn-FZ")
  (rear-context-string . "K 13. Jan 01:02 ")
  (position . 170))
-("D03 Finanzen"
+("D 03 Finanzen"
  (filename . "~/Documents/04_Finanzen/")
  (front-context-string . "00_Jahresfinanzb")
  (rear-context-string . "K  7. Jan 23:43 ")
  (position . 182))
-("D02 Akten"
+("D 02 Akten"
  (filename . "~/Documents/01_Private_Dokumente/")
  (front-context-string . "01_Arbeit\n  drwx")
  (rear-context-string . "K 23. Feb 2021  ")
  (position . 179))
-("P01 Data"
+("P 01 Data"
  (filename . "~/Projects/Data/")
  (front-context-string)
  (rear-context-string . "K  4. Dez 14:37 ")
  (position . 171))
-("P02 Programming"
+("P 02 Programming"
  (filename . "~/Projects/Programming/")
  (front-context-string . "JUP-01-JupyterEx")
  (rear-context-string . "K  8. Jan 22:18 ")
  (position . 181))
-("P00 Projects"
+("P 00 Projects"
  (filename . "~/Projects/")
  (front-context-string . "Data\n  drwxrwxrw")
  (rear-context-string . "K  4. Dez 14:37 ")
  (position . 169))
-("P03 Writing"
+("P 03 Writing"
  (filename . "~/Projects/Writing/")
  (front-context-string . "Concat_Arbeitsve")
  (rear-context-string . "4 12. Jan 23:47 ")
  (position . 174))
-("D00 Documents"
+("D 00 Documents"
  (filename . "~/Documents/")
  (front-context-string . "01_Akten\n  drwxr")
  (rear-context-string . "K 28. Okt 17:18 ")
  (position . 170))
-("C2-2 Elfeed Feeds Config"
+("C 02-2 Elfeed Feeds Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsRSSFeed.org")
  (front-context-string . "\n** IT\n- python\n")
  (rear-context-string . "\n* List of Tags\n")
  (position . 181))
-("C2-3 Elfeed Score Config"
+("C 02-3 Elfeed Score Config"
  (filename . "~/.dotfiles/C01_EmacsConfiguration/elfeed.score")
  (front-context-string . "\n;; ((\"title\"\n;;")
  (rear-context-string . " -*- lisp -*-\n()")
@@ -182,47 +202,47 @@
  (front-context-string . "B_6_8_2_Biotherm")
  (rear-context-string . "4  9. Jan 12:14 ")
  (position . 222))
-("D01 FAU"
+("D 01 FAU"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/")
  (front-context-string . "1_SS_2019\n  drwx")
  (rear-context-string . "K 22. Apr 2021  ")
  (position . 207))
-("C4 ZathuraConfig.org"
+("C 04 ZathuraConfig.org"
  (filename . "~/.dotfiles/000_OrgFiles/ZathuraConfig.org")
  (front-context-string . "\n* TOC\n\n1) [[*UI")
  (rear-context-string . "STARTUP: folded\n")
  (position . 173))
-("C3 MBSync Config"
+("C 03 MBSync Config"
  (filename . "~/.mbsyncrc")
  (front-context-string . "## T-Online ##\n\n")
  (rear-context-string)
  (position . 1))
-("C2-1 Mu4e Account Config"
+("C 02-1 Mu4e Account Config"
  (filename . "~/.config/emacs-configs/MailAccounts.el")
  (front-context-string . "(use-package mu4")
  (rear-context-string)
  (position . 1))
-("D02-1 CV1"
+("D 02-1 CV1"
  (filename . "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
  (front-context-string . "\n%-----       re")
  (rear-context-string . "begin{document}\n")
  (position . 4451))
-("D02-2 CV2"
+("D 02-2 CV2"
  (filename . "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/Version-2-Org/CurriculumVitae-2.org")
  (front-context-string . "#+LaTeX_CLASS: s")
  (rear-context-string)
  (position . 1))
-("C1-1 Shell Aliases"
+("C 01-1 Shell Aliases"
  (filename . "~/.dotfiles/000_OrgFiles/Aliases.org")
  (front-context-string . "\n+ [[*Basics][Ba")
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 128))
-("C1-4 Zsh Env"
+("C 01-4 Zsh Env"
  (filename . "~/.dotfiles/000_OrgFiles/ZshEnv.org")
  (front-context-string . "\n+ [[*Default Ap")
  (rear-context-string . "dirp yes\n\n* TOC\n")
  (position . 112))
-("C1-3 Zsh Config"
+("C 01-3 Zsh Config"
  (filename . "~/.dotfiles/000_OrgFiles/ZshConfig.org")
  (front-context-string . "\n+ [[*General][G")
  (rear-context-string . "dirp yes\n\n* TOC\n")
@@ -234,12 +254,12 @@
  (rear-context-string . "STARTUP: folded\n")
  (position . 236)
  (annotation . ""))
-("C1-2 Bash Config"
+("C 01-2 Bash Config"
  (filename . "~/.dotfiles/000_OrgFiles/BashConfig.org")
  (front-context-string . "\n* Basic Setup\n\n")
  (rear-context-string . "hrc :mkdirp yes\n")
  (position . 110))
-("C2 Emacs Config"
+("C 02 Emacs Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsConfig.org")
  (front-context-string . "\n* Welcome!\n\nThi")
  (rear-context-string . ".el :mkdirp yes\n")

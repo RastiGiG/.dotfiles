@@ -228,16 +228,25 @@
 
 ;; Set default font face
 (set-face-attribute 'default nil :font "Iosevka"
-		    :height pet/default-font-size)
+            :height pet/default-font-size)
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil :font "Iosevka"
-		    :height pet/default-font-size)
+            :height pet/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Cantarell"
-		    :height pet/default-font-size
-		    :weight 'regular)
+            :height pet/default-font-size
+            :weight 'regular)
+
+;; Use specific Fontsets for Symbols
+(setq use-default-font-for-symbols nil)
+
+;; Use Symbols Nerd Font as Default Symbols Font, otherwise fall back to Symbola (or else)
+(set-fontset-font t 'unicode "Symbols Nerd Font")
+(set-fontset-font t '(#xF500 . #xF8FF) "Symbols Nerd Font")
+(set-fontset-font t 'unicode "Symbola" nil 'append)
+(set-fontset-font t 'unicode (font-spec :script 'unicode) nil 'append)
 
 ;; Setting garbage collection threshold (default is 800)
 ;; Required for speed and also LSP
@@ -892,8 +901,17 @@
 
   ;; Set Refile Targets to be considered, Emphasis on Archive 
   (setq org-refile-targets
-    '(("personal-archive.org" :maxlevel . 1)
-  ("personal-tasks.org" :maxlevel . 1)))
+    '(
+      (nil :maxlevel . 9)
+      ("~/Org/personal-archive.org" :maxlevel . 1)
+      ("~/Org/personal-tasks.org" :maxlevel . 1)
+      ("~/Org/personal-sources.org" :maxlevel . 1)
+      ("~/Backup/Web-Bookmarks/1-bookmarks-import.org" :maxlevel . 9)
+      ("~/Backup/Web-Bookmarks/2-bookmarks-export.org" :maxlevel . 9)
+      ))
+
+  ;; Allow Creation of Parent nodes but ask for confirmation
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
 
   ;; The default here is 999, which is a little to constricting for SQL and such
   (setq org-table-convert-region-max-lines 9999)
@@ -912,6 +930,7 @@
     "oi" '(:ignore t :which-key "Import")
     "oit" '(org-table-import
         :which-key "Table")
+    "oa"  '(org-agenda :which-key "Org Agenda")
     )
   )
 
@@ -1517,12 +1536,12 @@
 ;;   (setq TeX-view-program-list
 ;; 	'(("zathura" "zathura --page=%(outpage) %o")))
 ;; 
-;;   (setq TeX-view-program-selection
-;; 	'(((output-dvi has-no-display-manager) "dvi2tty")
-;; 	  ((output-dvi style-pstricks) "dvips and gv")
-;; 	  (output-dvi "xdvi")
-;; 	  (output-pdf "zathura")
-;; 	  (output-html "xdg-open")))
+(setq TeX-view-program-selection
+      '(((output-dvi has-no-display-manager) "dvi2tty")
+        ((output-dvi style-pstricks) "dvips and gv")
+        (output-dvi "xdvi")
+        (output-pdf "zathura")
+        (output-html "xdg-open")))
 
 ;; Customize Python Mode for emacs, add lsp
 (use-package python-mode
@@ -1714,7 +1733,7 @@
   (when (string-equal
 	 (buffer-file-name)
 	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/I3ConfigKeybindings.org"))
+		 "000_OrgFiles/I3Keybindings.org"))
 
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
@@ -1727,6 +1746,26 @@
 	    (add-hook
 	     'after-save-hook
 	     #'pet/org-babel-tangle-i3-bindings)))
+
+;; Automatically tangle config file
+;; Helper Function to that does the tangling
+(defun pet/org-babel-tangle-i3-rules ()
+  (when (string-equal
+	 (buffer-file-name)
+	 (concat pet/dotfiles-dir
+		 "000_OrgFiles/I3ProgramRules.org"))
+
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+  (org-babel-tangle))))
+
+;; This hook automatically evaluates the helper
+;; function after saving the buffer
+(add-hook 'org-mode-hook
+	  (lambda ()
+	    (add-hook
+	     'after-save-hook
+	     #'pet/org-babel-tangle-i3-rules)))
 
 ;; Setup Automatic Tangling of Run Launchers
 
