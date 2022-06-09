@@ -94,19 +94,28 @@ PROMPT_PARSER() {
         TempColumns StatusColor Line CWD NFTTL ExitStatus
 
     # Set Colors
-    local C_Cyan='\033[36m' C_BCyan='\033[96m' CB_Cyan='\033[2;36m' CB_BCyan='\033[2;96m'\
-          C_Red='\e[31m' C_BRed='\e[91m' CB_Red='\e[2;31m' CB_BRed='\e[2;91m'\
-          C_Green='\e[32m' C_BGreen='\e[92m' CB_Green='\e[02;32m' CB_BGreen='\e[02;92m'\
-          CL_Green='\e[01;32m' CL_BGreen='\e[01;92m' C_Green_Back='\e[42m'\
+    # Legend:
+    # "C" only - Normal
+    # "CB"     - Bold Variant
+    # "C_B"    - Bright Variant
+    # "CB_B"   - Bright and Bold Variant
+    # "C_D"    - Dark Variant
+    # "C_DB"   - Darkend Bright Variant
+    local C_Cyan='\033[36m' C_BCyan='\033[96m' CB_Cyan='\033[01;36m' CB_BCyan='\033[01;96m'\
+          C_Cyan_Back='\033[46m' C_BCyan_Back='\033[106m'
+          C_Red='\e[31m' C_BRed='\e[91m' CB_Red='\e[01;31m' CB_BRed='\e[01;91m'\
+          C_Green='\e[32m' C_BGreen='\e[92m' CB_Green='\e[01;32m' CB_BGreen='\e[01;92m'\
+          C_DGreen='\e[02;32m' C_DBGreen='\e[02;92m' C_Green_Back='\e[42m'\
           C_BGreen_Back='\e[102m'\
-          C_Blue='\e[34m' C_BBlue='\e[94m' CB_Blue='\e[02;34m' CB_BBlue='\e[02;94m'\
-          CL_Blue='\e[01;34m' CL_BBlue='\e[01;94m' C_Blue_Back='\e[44m'\
+          C_Blue='\e[34m' C_BBlue='\e[94m' C_DBlue='\e[02;34m' C_DBBlue='\e[02;94m'\
+          CB_Blue='\e[01;34m' CB_BBlue='\e[01;94m' C_Blue_Back='\e[44m'\
           C_BBlue_Back='\e[104m'\
-          C_Yellow='\e[33m' C_BYellow='\e[93m' CB_Yellow='\e[02;33m' CB_BYellow='\e[02;93m'\
-          C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' C_Grey='\e[01;97m'\
-          C_Magenta='\033[35m' C_BMagenta='\033[95m' CB_Magenta='\033[2;35m'\
-          CB_BMagenta='\033[2;95m' CL_BMagenta='\033[1;95m' C_Magenta_Back='\033[45m'\
+          C_Yellow='\e[33m' C_BYellow='\e[93m' C_DYellow='\e[02;33m' C_DBYellow='\e[02;93m'\
+          C_Magenta='\033[35m' C_BMagenta='\033[95m' C_DMagenta='\033[2;35m'\
+          C_DBMagenta='\033[02;95m' CB_BMagenta='\033[01;95m' C_Magenta_Back='\033[45m'\
           C_BMagenta_Back='\033[105m' CD_BMagenta_Back='\033[02;105m'\
+          C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' CB_White='\e[01;97m'\
+          C_Black='\033[30m' C_Black_Back='\033[40m' CB_Black='\033[01;30m' \
           C_Reset='\e[0m'
 
     # Evaluate Exit Status (safed to arg1, see below)
@@ -122,6 +131,19 @@ PROMPT_PARSER() {
             PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$C_BRed\]\n$X\[$C_Reset\] \[$CB_BMagenta\]\$\[$C_Reset\] "
         else
             PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$CB_BMagenta\]\n\$\[$C_Reset\] "
+        fi
+
+        return
+    fi
+
+    # PYVENV - Python Virtualenv Prompt to show if virtualenv is active
+    # If I'm on a remote server, just use a barebones prompt, with the exit
+    # status, if non-zero, and a note saying you're working remotely.
+    if [[ -n $VIRTUAL_ENV ]]; then
+        if [[ -n $X ]]; then
+            PS1="\n\[${C_Cyan_Back}${C_Black}\]${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${C_Cyan}\]\W\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Cyan\]\$\[$C_Reset\] "
+        else
+            PS1="\n\[${C_Cyan_Back}${C_Black}\]${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${CB_Cyan}\]\W\[${C_Reset}\]\n\[$C_Cyan\]\$\[$C_Reset\] "
         fi
 
         return
@@ -221,7 +243,7 @@ PROMPT_PARSER() {
 
     # Set the Default Prompt here
     if [[ -n $Desc ]]; then
-        PS1="\n\[${C_Green_Back}${C_White}\]${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
+        PS1="\n\[${C_Green_Back}${C_Black}\]${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
     else
         PS1="\n\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \[${CB_Blue}\]\w\[${C_Reset}\]\[${CB_BMagenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_BMagenta}\]\$ \[${C_Reset}\]"
     fi
