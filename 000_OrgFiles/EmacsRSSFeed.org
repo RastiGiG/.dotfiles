@@ -28,6 +28,9 @@
 + methodology
 + zettelkasten
 + philosophy
++ society
++ critical-thinking
++ social-critique
 
 ** Media
 + video
@@ -36,6 +39,9 @@
 + blogs
 + mailinglists
 + reddit
+  
+** Entertainment
++ comedy
   
 * List of Subscriptions
 
@@ -73,6 +79,8 @@
       ("https://blog.fefe.de/" böogs it culture politics security)
       ;; Comments on 'Web3'
       ("https://web3isgoinggreat.com/feed.xml" blogs culture it)
+      ;; Nachdenkseiten - Sozialkritik
+      ("https://www.nachdenkseiten.de/?feed=rss2" blog culture politics society critical-thinking social-critique)
 
       ;;;; PODCASTS
 
@@ -80,7 +88,9 @@
       ("https://feeds.buzzsprout.com/1875696.rss" podcasts culture politics)
       ("https://wakingup.libsyn.com/rss" podcasts culture politics)
       ("https://feeds.lagedernation.org/feeds/ldn-aac.xml" podcasts culture politics)
+      ;; Die Neuen Zwanziger - Wolfgang M. Schmitt, Stefan Schulz
       ("https://neuezwanziger.de/feed/mp3/" podcasts culture politics)
+      ;; Alias Fernsehpodcast - Stefan Schulz
       ("https://alias-podcast.de/feed/mp3/" podcasts culture politics)
       ("https://feeds.transistor.fm/the-drug-science-podcast" podcasts science medicine)
       ("https://logbuch-netzpolitik.de/feed/m4a" podcasts it culture politics)
@@ -94,6 +104,8 @@
       ("https://www.ndr.de/nachrichten/info/podcast4684.xml" podcasts corona medicine science)
       ;; Kekules Corona Kompass
       ("https://www.mdr.de/nachrichten/podcast/kekule-corona/kompass-104-podcast.xml" podcasts science medicine corona)
+      ;; Schroeder und Somuncu
+      ("https://www.radioeins.de/archiv/podcast/schroeder-%20somuncu.xml/feed=podcast.xml" podcasts culture politics comedy)
 
       ;;;; ENTERTAINMENT ;;;;
 
@@ -104,7 +116,7 @@
       ;;;; VIDEOS
       ;; System Crafters YouTube
       ("https://youtu.be/NlP3EDS6WGE" videos it emacs)
-      ;; YouTube Podcast WfA
+      ;; YouTube Podcast WfA - Ole Nymoen, Wolfgang M. Schmitt
       ("https://youtu.be/XAO14MeVns0" videos podcast economics politics culture)
       ;; ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" personal video)
 
