@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: uml-puml-template
+# key: <umlpumltemp
+# --
+@startuml
+!define ${1:LIGHT|DARK}${2:BLUE|RED|GREEN|ORANGE}
+!include reddress-styles.puml
+
+$0
+
+@enduml

@@ -1,51 +1,52 @@
-# -*- mode: snippet -*-
-# name: org-shell_script-template
-# key: <oshsctemp
+# key: <opytemp
+# name: org-python_template
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 #+TITLE: ${1:FileTitle}
 #+AUTHOR: ${2:Author}
 #+DATE:  ${3: `(format-time-string "[%Y-%m-%d]")`}
+#+STARTUP: show2levels
 
 :PROPERTIES:
 
-* Script Header
-#+begin_src sh :shebang "#!/usr/bin/env bash" :tangle yes
+* Introduction
+* Header
+#+begin_src python
   <pht$0
 #+end_src
 
-* Source External Files
-#+begin_src sh :tangle yes
+* Import Packages
+#+begin_src python :tangle yes
   #######################################################
-  #             Source External Files                   #
+  #                    Packages                         #
   #######################################################
 
   
   
 #+end_src
-* Helper Variables
-#+begin_src sh :tangle yes
+* Global Variables
+#+begin_src python :tangle yes
   #######################################################
   #                Helper Variables                     #
   #######################################################
 
 #+end_src
-* Helper Function
-#+begin_src sh :tangle yes
+* Functions
+#+begin_src python :tangle yes
   #######################################################
   #               Helper Functions                      #
   #######################################################
 
 #+end_src
 * Main Function
-#+begin_src sh :tangle yes
+#+begin_src python :tangle yes
   #######################################################
   #                Main Function                        #
   #######################################################
 
-  main() {
-
-  }
-
-  [[ "\${BASH_SOURCE[0]}" == "\${0}" ]] && main "$@"
+  # Main function for running file as main
+  def main():
+  
+  if __name__ == '__main__':
+     main()
 #+end_src

@@ -1,16 +1,14 @@
 # -*- mode: snippet -*-
-# name: org_roam_note-postgresql_tail
-# key: <ornpsqlt
+# name: org_roam_note-sqlite_tail
+# key: <ornsqlitet
 # --
 * Topic Overview
 
-** [[id:9ce0bc43-b942-4652-9629-a96f54f9dedd][PostgreSQL]]
-*** [[id:8b23e2cc-c1a5-4dab-a366-89e12bedd2e5][Setup]]
-*** [[id:bb761b2e-baef-4c18-98fb-29607985721d][Security]]
-*** [[id:c40fa55f-4f6f-418d-ae38-358bb1ac60d9][Locale Settings]]
+** [[id:72461949-86d9-40ff-befe-962b0afe2576][SQLite]]
+*** [[id:a1cb4df8-a2a4-470e-a26c-df31295440b0][Setup and Management]]
 *** [[id:680a1437-7cbd-48c9-b14a-29e6e2c425ff][Commands]]
-*** [[id:c12161f0-3c37-4a43-b2c8-c218195ac4ab][Administration Tools]]
-**** [[id:fe4797b6-25fb-40ca-a8e8-d757871cd821][PGAdmin]]
+*** Extensions
+**** [[id:6e1ef911-bcc8-45a3-a92c-1b3c8f4fab87][SQLiteBrowser]]
 
 * Read On
 
@@ -25,6 +23,7 @@
 ******** [[id:510e3dca-92d2-4262-ac89-7408dd7f8112][Operators]]
 ******* [[id:3d122f76-54e6-43a9-87db-545a6c0d5fee][Distributions]]
 ******** [[id:9ce0bc43-b942-4652-9629-a96f54f9dedd][PostgreSQL]]
+******** [[id:72461949-86d9-40ff-befe-962b0afe2576][SQLite]]
 ******* [[id:97e326dd-da4c-4d1d-a154-12c4f7ced43c][Tipps]]
 ***** [[id:e946a409-5efb-467a-a459-2d5841a22438][Data Science]]
 ****** [[id:025a523d-040a-4c26-9219-392d8e7198f3][Relational Databases]]
@@ -35,12 +34,12 @@
 * References
 
 [[id:3ae73a46-a32a-4bcf-bc54-f70166a316fa][SQL References]]
-1. [[id:20cc3729-abd9-475e-956a-1b21e49415b9][PostgreSQL References]]
+1. [[id:b679fe14-ed2f-48dc-8702-0924152a4a8b][SQLite References]]
 
 ** Websites
 
-1. [[https://www.postgresql.org/][PostgreSQL.org]]
-
+1. [[https://www.sqlite.org/index.html][SQLite.org]]
+   
 ** Literature
 
 1. [[file:~/Documents/07_Wissen_und_Bildung/Literatur/IT/practical-sql.pdf][Anthony DeBarros - Practical SQL (First Edition)]]
