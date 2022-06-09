@@ -2,7 +2,27 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C 05-2-4 I3 Program Rules"
+(("D 08-1-1 Finanzen Basketball"
+ (filename . "~/Documents/08_Ehrenamt_und_Hobbys/Sport/Basketball/Abteilung/Finanzen/")
+ (front-context-string . "..\n  drwxr-xr-x ")
+ (rear-context-string . "K  6. Jun 15:45 ")
+ (position . 179))
+("D 08-1 Basketball"
+ (filename . "~/Documents/08_Ehrenamt_und_Hobbys/Sport/Basketball/")
+ (front-context-string . "..\n  drwxr-xr-x ")
+ (rear-context-string . "K 10. Apr 22:35 ")
+ (position . 160))
+("D 08 Ehrenamt_und_Hobbys"
+ (filename . "~/Documents/08_Ehrenamt_und_Hobbys/")
+ (front-context-string . "..\n  drwxr-xr-x ")
+ (rear-context-string . "K 25. Mai 21:16 ")
+ (position . 143))
+("D 07 Wissen und Bildung"
+ (filename . "~/Documents/07_Wissen_und_Bildung/")
+ (front-context-string . "00-Literatur\n  d")
+ (rear-context-string . "K 26. Mai 16:02 ")
+ (position . 192))
+("C 05-2-4 I3 Program Rules"
  (filename . "~/.dotfiles/000_OrgFiles/I3ProgramRules.org")
  (front-context-string . "#+title: Persona")
  (rear-context-string)
@@ -98,10 +118,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220519134510-people_robert_brandom.org")
- (front-context-string . "\n* People - Robe")
- (rear-context-string . "05-19 Do 13:45]\n")
- (position . 179))
+ (filename . "~/Org/20220531091700-people_albert_einstein.org")
+ (front-context-string . "\n* People - Albe")
+ (rear-context-string . "05-31 Di 09:17]\n")
+ (position . 180))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
