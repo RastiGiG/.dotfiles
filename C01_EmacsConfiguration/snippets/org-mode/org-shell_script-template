@@ -1,21 +1,27 @@
 # -*- mode: snippet -*-
 # name: org-shell_script-template
-# key: <oshsctemp
+# key: <oshtemp
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 #+TITLE: ${1:FileTitle}
 #+AUTHOR: ${2:Author}
 #+DATE:  ${3: `(format-time-string "[%Y-%m-%d]")`}
+#+PROPERTY: header-args :tangle ${4:PathToFile/FileName}
+#+auto_tangle: t
 
 :PROPERTIES:
 
 * Script Header
-#+begin_src sh :shebang "#!/usr/bin/env bash" :tangle yes
+#+begin_src sh :shebang "#!/usr/bin/env bash"
   <pht$0
+  
+  # Handle Exit Codes
+  set -euo pipefail
+
 #+end_src
 
 * Source External Files
-#+begin_src sh :tangle yes
+#+begin_src sh
   #######################################################
   #             Source External Files                   #
   #######################################################
@@ -24,21 +30,21 @@
   
 #+end_src
 * Helper Variables
-#+begin_src sh :tangle yes
+#+begin_src sh
   #######################################################
   #                Helper Variables                     #
   #######################################################
 
 #+end_src
-* Helper Function
-#+begin_src sh :tangle yes
+* Helper Functions
+#+begin_src sh
   #######################################################
   #               Helper Functions                      #
   #######################################################
 
 #+end_src
 * Main Function
-#+begin_src sh :tangle yes
+#+begin_src sh
   #######################################################
   #                Main Function                        #
   #######################################################

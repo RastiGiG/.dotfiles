@@ -5,18 +5,21 @@
 #+TITLE: ${1:FileTitle}
 #+AUTHOR: ${2:Author}
 #+DATE:  ${3: `(format-time-string "[%Y-%m-%d]")`}
+#+PROPERTY: header-args :tangle ${4:Path/FileName}
+#+auto_tangle: t
 #+STARTUP: show2levels
+
 
 :PROPERTIES:
 
 * Introduction
 * Header
-#+begin_src python
+#+begin_src python :shebang "#!/usr/bin/env python"
   <pht$0
 #+end_src
 
 * Import Packages
-#+begin_src python :tangle yes
+#+begin_src python
   #######################################################
   #                    Packages                         #
   #######################################################
@@ -25,21 +28,23 @@
   
 #+end_src
 * Global Variables
-#+begin_src python :tangle yes
+#+begin_src python
   #######################################################
   #                Helper Variables                     #
   #######################################################
 
+
 #+end_src
 * Functions
-#+begin_src python :tangle yes
+#+begin_src python
   #######################################################
   #               Helper Functions                      #
   #######################################################
 
+
 #+end_src
 * Main Function
-#+begin_src python :tangle yes
+#+begin_src python
   #######################################################
   #                Main Function                        #
   #######################################################

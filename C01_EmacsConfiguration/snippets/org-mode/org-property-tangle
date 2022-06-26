@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-property-tangle
+# key: <optang
+# --
+#+PROPERTY: header-args :tangle ${1:<path-to-file>/<filename>}

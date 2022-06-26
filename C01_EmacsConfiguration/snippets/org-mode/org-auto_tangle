@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-auto_tangle
+# key: <aut
+# --
+#+auto_tangle: t

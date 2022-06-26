@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: org-shell_script-source_external
+# key: <oshsrcext
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+# saves the origin path of this script for use outside
+# of its respective directory
+_path="\$(cd "\$(dirname "\${BASH_SOURCE[0]}")" && cd "\$(dirname "\$(readlink "\${BASH_SOURCE[0]}" || echo ".")")" && pwd)"
+if [[  -f "\${_path}/${1:Filename}" ]]; then
+# shellcheck disable=SC1090,SC1091
+    source "\${_path}/$1"
+else
+    # send notification via notify send if possible
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send -u critical "${2:ErrorMessage}"
+    else
+        echo "$2"
+    fi
+    exit "${3:ExitCode(0-255)}"
+fi
+
+$0
