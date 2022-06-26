@@ -112,8 +112,8 @@ PROMPT_PARSER() {
           C_BBlue_Back='\e[104m'\
           C_Yellow='\e[33m' C_BYellow='\e[93m' C_DYellow='\e[02;33m' C_DBYellow='\e[02;93m'\
           C_Magenta='\033[35m' C_BMagenta='\033[95m' C_DMagenta='\033[2;35m'\
-          C_DBMagenta='\033[02;95m' CB_BMagenta='\033[01;95m' C_Magenta_Back='\033[45m'\
-          C_BMagenta_Back='\033[105m' CD_BMagenta_Back='\033[02;105m'\
+          C_DBMagenta='\033[02;95m' CB_Magenta='\033[01;35m' CB_BMagenta='\033[01;95m'\
+          C_Magenta_Back='\033[45m' C_BMagenta_Back='\033[105m' CD_BMagenta_Back='\033[02;105m'\
           C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' CB_White='\e[01;97m'\
           C_Black='\033[30m' C_Black_Back='\033[40m' CB_Black='\033[01;30m' \
           C_Reset='\e[0m'
@@ -141,9 +141,9 @@ PROMPT_PARSER() {
     # status, if non-zero, and a note saying you're working remotely.
     if [[ -n $VIRTUAL_ENV ]]; then
         if [[ -n $X ]]; then
-            PS1="\n\[${C_Cyan_Back}${C_Black}\]${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${C_Cyan}\]\W\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Cyan\]\$\[$C_Reset\] "
+            PS1="\n\[${C_Cyan_Back}${C_Black}\] ${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${C_Cyan}\]\W\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Cyan\]\$\[$C_Reset\] "
         else
-            PS1="\n\[${C_Cyan_Back}${C_Black}\]${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${CB_Cyan}\]\W\[${C_Reset}\]\n\[$C_Cyan\]\$\[$C_Reset\] "
+            PS1="\n\[${C_Cyan_Back}${C_Black}\] ${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${CB_Cyan}\]\W\[${C_Reset}\]\n\[$C_Cyan\]\$\[$C_Reset\] "
         fi
 
         return
@@ -243,9 +243,9 @@ PROMPT_PARSER() {
 
     # Set the Default Prompt here
     if [[ -n $Desc ]]; then
-        PS1="\n\[${C_Green_Back}${C_Black}\]${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
+        PS1="\n\[${C_Green_Back}${C_Black}\] ${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
     else
-        PS1="\n\[${CB_BMagenta}\][\u@\h\[${C_Reset}\] \[${CB_Blue}\]\w\[${C_Reset}\]\[${CB_BMagenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_BMagenta}\]\$ \[${C_Reset}\]"
+        PS1="\n\[${CB_Magenta}\][\u@\h\[${C_Reset}\] \[${CB_Blue}\]\w\[${C_Reset}\]\[${CB_Magenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_Magenta}\]\$ \[${C_Reset}\]"
     fi
 }
 
@@ -261,6 +261,13 @@ HISTFILE=$HOME/.cache/shell/history
 HISTCONTROL='ignoreboth'
 # Add Time String to History
 HISTTIMEFORMAT='%Y-%m-%d %T '
+# Ignore Commands
+HISTIGNORE="exit:qpdf --encrypt*:history"
+
+#--------------ENVIRONMENT VARIABLES
+
+# Set the Default File for Remind
+export DOTREMINDERS="$HOME/Calendar/00_reminders.rem"
 
 #----------------------------COLORFUL TERMINAL
 # Change the window title of X terminals

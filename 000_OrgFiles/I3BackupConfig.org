@@ -1,5 +1,6 @@
 #+title: Personal I3 Backup Configuration
 #+PROPERTY: header-args:shell :tangle ../D10_WindowManagers/.config/i3/bindings :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: show2levels
 #+DATE:  [2022-04-29]
 

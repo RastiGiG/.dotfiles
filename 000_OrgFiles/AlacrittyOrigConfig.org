@@ -1,5 +1,6 @@
 #+TITLE: Original Alacritty Configuration
-#+PROPERTY: header-args:sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml :mkdirp yes
+#+PROPERTY: header-args:sh :tangle ../D14_Terminals/.config/alacritty/alacritty-orig.yml :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: overview
 
 THIS IS THE ORIGINAL CONFIGURATION FILE SETUP AS ORG FILE
@@ -8,7 +9,7 @@ You might want to use the cleaned up Version
 * Introduction
 
 ~Alacritty~ uses =.yml= ~files~ for configuration
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   #----------------------------------------------------------------------------------------------------------------------
   #      _    _        _    ____ ____  ___ _____ _______   __
   #     / \  | |      / \  / ___|  _ \|_ _|_   _|_   _\ \ / /
@@ -33,7 +34,7 @@ You might want to use the cleaned up Version
 
 * Import Additional Configuration Files
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Import additional configuration files
   #
   # Imports are loaded in order, skipping all missing files, with the importing
@@ -49,7 +50,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * Setup Environment
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Any items in the `env` entry below will be added as
   # environment variables. Some entries may override variables
   # set by alacritty itself.
@@ -66,7 +67,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * Window Configuration
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   window:
     # Window dimensions (changes require restart)
     #
@@ -148,7 +149,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * Scrolling
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   scrolling:
     # Maximum number of lines in the scrollback buffer.
     # Specifying '0' will disable scrolling.
@@ -162,7 +163,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * Font Configuration
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Font configuration
   font:
     # Normal (roman) font face
@@ -243,7 +244,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * Colors
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Colors (Tomorrow Night)
   colors:
     # Default colors
@@ -394,7 +395,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * Visual Bell
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Bell
   #
   # The bell is rung every time the BEL control character is received.
@@ -441,7 +442,7 @@ You might want to use the cleaned up Version
 
 * Selection Characters
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   selection:
     # This string contains all characters that are used as separators for
     # "semantic words" in Alacritty.
@@ -455,7 +456,7 @@ You might want to use the cleaned up Version
 
 * Cursor Styles
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   cursor:
     # Cursor style
     style: Underline
@@ -499,7 +500,7 @@ You might want to use the cleaned up Version
 #+end_src
 * Live Config Reload
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Live config reload (changes require restart)
   live_config_reload: true
 
@@ -508,7 +509,7 @@ You might want to use the cleaned up Version
 
 * Shell Program
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Shell
   #
   # You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
@@ -540,7 +541,7 @@ You might want to use the cleaned up Version
 
 * Mouse Settings
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   mouse:
     # Click settings
     #
@@ -558,7 +559,7 @@ You might want to use the cleaned up Version
 
 * Regex Hints
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Regex hints
   #
   # Terminal hints can be used to find text in the visible part of the terminal
@@ -608,7 +609,7 @@ You might want to use the cleaned up Version
 
 * Mouse Bindings
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Mouse bindings
   #
   # Mouse bindings are specified as a list of objects, much like the key
@@ -648,7 +649,7 @@ You might want to use the cleaned up Version
 
 * Key Bindings
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   # Key bindings
   #
   # Key bindings are specified as a list of objects. For example, this is the
@@ -942,7 +943,7 @@ You might want to use the cleaned up Version
 #+end_src
 
 * URL Launcher
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
     url:
       # URL launcher
       #
@@ -969,7 +970,7 @@ You might want to use the cleaned up Version
 #+end_src
 * Debug
 
-#+begin_src sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml
+#+begin_src sh
   debug:
     # Display the time it takes to redraw each frame.
     render_timer: false

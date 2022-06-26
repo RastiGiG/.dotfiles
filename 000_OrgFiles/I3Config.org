@@ -1,5 +1,6 @@
 #+title: Personal I3 Configuration
 #+PROPERTY: header-args:shell :tangle ../D10_WindowManagers/.config/i3/config :mkdirp yes
+#+auto_tangle: t
 #+DATE:  [2022-04-28]
 #+STARTUP: show2levels
 

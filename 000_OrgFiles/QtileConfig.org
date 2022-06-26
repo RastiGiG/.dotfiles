@@ -1,5 +1,6 @@
 #+TITLE: Personal Qtile Configuration
 #+PROPERTY: header-args:python :tangle ../D10_WindowManagers/.config/qtile/config.py :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: show2levels
 
 * Header
@@ -8,7 +9,7 @@
 
 Just some copyright copied over from the ~baseconfig~
 
-#+begin_src python :tangle ../D10_WindowManagers/.config/qtile/config.py
+#+begin_src python
   # -*- coding: utf-8 -*-
   #----------------------------------------------------------------------------------------------------------------------
   #   ___ _____ ___ _     _____ 

@@ -1,5 +1,6 @@
 #+TITLE: Personal Qtile Configuration
 #+PROPERTY: header-args:python :tangle ../D10_WindowManagers/.config/qtile/config-back.py :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: show2levels
 
 * Header

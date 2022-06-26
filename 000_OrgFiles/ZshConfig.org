@@ -1,5 +1,6 @@
 #+Title: Zsh Config
 #+PROPERTY: header-args:bash :tangle ../.dotfiles/D02_Zsh/.zshrc :mkdirp yes
+#+auto_tangle: t
 
 * TOC
 

@@ -1,5 +1,6 @@
 #+TITLE: Personal Alacritty Configuration
 #+PROPERTY: header-args:sh :tangle ../D14_Terminals/.config/alacritty/alacritty.yml :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: overview
 
 This is a cleaned up version of the config with less comments to get a better Overview.
