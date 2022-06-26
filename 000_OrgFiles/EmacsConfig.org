@@ -1,5 +1,6 @@
 #+TITLE: Personal Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: hideblocks show2levels
 
 * Introduction
@@ -318,18 +319,21 @@ This section configures basic UI settings that remove unneeded elements to make 
   (column-number-mode)
   ;; Set Line Numbers Globally
   (global-display-line-numbers-mode t)
-  
+
   ;; Set Visual Line Mode for text modes only
   ;; Preferred over global-visual-line-mode
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
+  ;; Enable Highlight-Line
+  (hl-line-mode 1)
+
   ;; Disable line numbers for some modes
   (dolist (mode '(org-mode-hook
-		  term-mode-hook
-		  vterm-mode-hook
-		  shell-mode-hook
-		  eshell-mode-hook
-		  treemacs-mode))
+          term-mode-hook
+          vterm-mode-hook
+          shell-mode-hook
+          eshell-mode-hook
+          treemacs-mode))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
@@ -453,15 +457,16 @@ Setup a location for your bookmarks-file
 ** History and File Positions
 #+begin_src emacs-lisp
   ;; Remember recently accessed files
-  (recentf-mode t)
+  (recentf-mode 1)
 
   ;; Limit history file to 50 entries to speed up start
   (setq history-length 50)
   ;; Save command and file history
-  (savehist-mode t)
+  (savehist-mode 1)
 
   ;; Remember Cursor Positions on accessed files 
-  (save-place-mode t)
+  (save-place-mode 1)
+  
 #+end_src
 
 ** Customization File
@@ -471,6 +476,7 @@ Let's save this to another file as well as load that in *without errormessages a
   ;; Avoid Clutter by saving Customization Settings to a different file
   (setq custom-file (locate-user-emacs-file "customization_variables.el"))
   (load custom-file 'no-error 'no-message)
+  
 #+end_src
 ** Dialog Box
 Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] keyboard-driven
@@ -633,6 +639,7 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
      ;; Toggles - Modes
      "tm"   '(:ignore t :which-key "Modes")
      "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
+     "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
      "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
      "tmo"  '(org-mode :which-key "Org Mode")
      "tme"  '(emojify-mode :which-key "Emojify Mode")
@@ -1353,6 +1360,8 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       ;; (c . t)             ;; C 
       ;; (cpp . t)           ;; C++
 
+      (perl . t)          ;; Perl
+      ;; (php . t)           ;; PHP
       (R . t)             ;; R
       (shell . t)         ;; Command Line Programs 
       (latex . t)         ;; LaTeX  
@@ -1384,6 +1393,8 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
            '(("sh" . "src shell")
              ("se" . "src emacs-lisp")
              ("sp" . "src python")
+             ("sl" . "src perl")
+             ("sw" . "src php")
              ("sq" . "src sql")
              ("so" . "src octave")
              ;; ("si" . "src ipython :session :async :exports both :results raw drawer")
@@ -1696,7 +1707,22 @@ You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][sp
         (setq org-drill-learn-fraction 1.0))
       )
 #+end_src
+** Org Auto Tangle
 
+This safes the need for the ~Helper Functions~ below that I used previously
+:NOTE:
+You need to add =#+auto_tangle: t= to the files you want to use this feature
+:END:
+#+begin_src emacs-lisp
+  ;; Org AddOn Auto Tangle Org Files
+  ;; Add '#+auto_tangle: t' to files 
+  (use-package org-auto-tangle
+    :defer t
+    :hook (org-mode . org-auto-tangle-mode)
+    :config
+    (setq org-auto-tangle-default t))
+
+#+end_src
 * Developement Tools
 ** Rainbow Delimiters 
 
@@ -1720,10 +1746,118 @@ This Setting is meant to make that highlighting stand out more
   (set-face-attribute
    'show-paren-match-expression nil :background "#363e4a")
   (show-paren-mode 1))
+  
 #+end_src
 
-** Terminal Modes
+** Company Mode
+[[https://company-mode.github.io/][Company Mode]] is one of the *most useful* [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Modes]] that *enhances* [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Autocompletion Capabilities~
+#+begin_src emacs-lisp
+  ;; Helper Functions (for hooks mostly)
+  (defun pet/company-text-mode ()
+    "Sets 'company-mode' for 'text-mode'"
+    ;; Activate completion after 3 letters in text mode
+    (setq company-minimum-prefix-length 3))
 
+  ;; Load Company Mode for Auto Completion
+  (use-package company
+    :config
+    ;; activate global company mode
+    (global-company-mode 1)
+    ;; make company perform completions with tab
+    (company-tng-mode 1)
+
+    ;; Set hooks
+    (add-hook 'text-mode-hook 'pet/company-text-mode)
+
+    ;; Enable Cycling Options back to the Beginning
+    (setq company-selection-wrap-around t)
+
+    ;; Align Annotations (paramenters, arguments, etc..) right of tooltip
+    (setq company-tooltip-align-annotations t)
+
+    ;; Disable Company Mode in Strings or Comment
+    (setq company-idle-delay
+      (lambda () (if (company-in-string-or-comment) nil 0.3)))
+
+    ;; Allow Prefix Length to be change per buffer
+    (make-variable-buffer-local 'company-minimum-prefix-length)
+
+    ;; Add Company Mode to Leader Keys
+    (pet/leader-keys
+      "tmc"  '(global-company-mode :which-key "Global Company Mode")
+      )
+    )
+
+#+end_src
+
+*** Company Additions
+**** Shell/Bash
+***** Company Shell
+~Documentation~ can be found here: [[https://github.com/Alexander-Miller/company-shell][GitHub.com: Company Shell]]
+#+begin_src emacs-lisp
+  ;; Add Company Extension for Bash and Shell
+  (use-package company-shell
+    :config
+    (add-to-list 'company-backends '(company-shell company-shell-env))
+    )
+  
+#+end_src
+**** LaTeX
+***** Company Math
+This is an extension for [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]]. ~Documentation~ can be found here:
+#+begin_src emacs-lisp
+  ;; local configuration for TeX modes
+  (defun pet/company-latex-mode ()
+    "Sets 'company-mode' for 'text-mode'"
+    ;; Add Backands
+    (setq-local company-backends
+                (append '((company-math-symbols-latex company-latex-commands))
+                        company-backends)))
+
+  ;; Add Company Extension for LaTeX Math
+  (use-package company-math
+    :config
+
+    ;; Add hooks to Modes
+    ;; Tex Mode
+    (add-hook 'tex-mode-hook 'pet/company-latex-mode)
+    ;; Org Mode
+    (add-hook 'org-mode-hook 'pet/company-latex-mode)
+
+    ;; global activation of the unicode symbol completion 
+    ;;(add-to-list 'company-backends 'company-math-symbols-unicode))
+    )
+
+#+end_src
+**** C/C++/C#
+***** Company C-Headers
+This is an ~Extension~ for [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]] for ~Company Mode~. ~Documentation~ can be found here: [[https://github.com/randomphrase/company-c-headers][GitHub.com: Company-C-Headers]]
+#+begin_src emacs-lisp
+  ;; Add Company Extension for C/C++
+  ;; (use-package company-c-headers)
+
+#+end_src
+**** Python
+***** Company Jedi
+This is an ~Extension~ for [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] for ~Company Mode~. ~Documentation~ can be found here: [[https://github.com/emacsorphanage/company-jedi][GitHub.com: Company Jedi]]
+#+begin_src emacs-lisp
+  ;; local configuration for Python modes
+  (defun pet/company-python-mode ()
+    "Sets 'company-mode' for 'text-mode'"
+    ;; Activate completion after 1 letters in python mode
+    (setq company-minimum-prefix-length 1)
+    ;; Add Jedi to Company Backends
+    (add-to-list 'company-backends 'company-jedi))
+
+
+  ;; Add Company Extension for Python
+  (use-package company-jedi
+    :config
+    (add-hook 'python-mode-hook 'pet/company-python-mode)
+  )
+
+#+end_src
+** Terminal Modes
 *** Term Mode
 
 Setting up the integrated terminal emulator
@@ -1838,7 +1972,7 @@ The which-key integration adds helpful descriptions of the various keys so you s
             ) . lsp-deferred)
     :commands (lsp lsp-deferred)
     :bind (:map lsp-mode-map
-        ("SPC TAB" . completion-at-point))
+        ("M-TAB" . completion-at-point))
     :custom (lsp-headerline-breadcrumb-enable nil)
     :config (lsp-enable-which-key-integration t)
     ;; automatically set project root as determined by projectile
@@ -1879,11 +2013,11 @@ The which-key integration adds helpful descriptions of the various keys so you s
       "tl"  '(:ignore t :which-key "lsp")
       "tld" 'xref-find-definitions
       "tlr" 'xref-find-references
-      "tln" 'lsp-ui-find-next-reference
-      "tlp" 'lsp-ui-find-prev-reference
+      ;; "tln" 'lsp-ui-find-next-reference
+      ;; "tlp" 'lsp-ui-find-prev-reference
       "tls" 'counsel-imenu
-      "tle" 'lsp-ui-flycheck-list
-      "tlS" 'lsp-ui-sideline-mode
+      ;; "tle" 'lsp-ui-flycheck-list
+      ;; "tlS" 'lsp-ui-sideline-mode
       "tlX" 'lsp-execute-code-action)
     )
 #+end_src
@@ -1894,21 +2028,22 @@ The which-key integration adds helpful descriptions of the various keys so you s
 
 #+begin_src emacs-lisp
   ;; Add lsp ui for higher level ui options
-  (use-package lsp-ui
-    :commands lsp-ui-mode
-    ;; :hook (lsp-mode . lsp-ui-mode)
-    ;; Show lsp info on sideline
-    :config
-    (setq lsp-ui-doc-enable nil)
-    (setq lsp-ui-doc-header t)
-    (setq lsp-ui-doc-include-signature t)
-    (setq lsp-ui-doc-border (face-foreground 'default))
-    (setq lsp-ui-sideline-show-code-actions t)
-    (setq lsp-ui-sideline-delay 0.05)
-    ;; (setq lsp-ui-sideline-enable t)
-    ;; (setq lsp-ui-sideline-show-hover nil)
-    ;; (setq lsp-ui-doc-position 'bottom)
-    )
+  ;;(use-package lsp-ui
+  ;;  :commands lsp-ui-mode
+  ;;  ;; :hook (lsp-mode . lsp-ui-mode)
+  ;;  ;; Show lsp info on sideline
+  ;;  :config
+  ;;  (setq lsp-ui-doc-enable nil)
+  ;;  (setq lsp-ui-doc-header t)
+  ;;  (setq lsp-ui-doc-include-signature t)
+  ;;  (setq lsp-ui-doc-border (face-foreground 'default))
+  ;;  (setq lsp-ui-sideline-show-code-actions t)
+  ;;  (setq lsp-ui-sideline-delay 0.05)
+  ;;  ;; (setq lsp-ui-sideline-enable t)
+  ;;  ;; (setq lsp-ui-sideline-show-hover nil)
+  ;;  ;; (setq lsp-ui-doc-position 'bottom)
+  ;;  )
+  
 #+end_src
 *** lsp-treemacs
 
@@ -1994,7 +2129,6 @@ If you want to make commenting easier, the following package is very helpful. De
     "gr"  'magit-rebase)
 #+end_src
 ** Languages
-
 Language specific Settings can be found here
 *** Elisp
 
@@ -2114,11 +2248,21 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 
 #+end_src
 
+*** PHP
+#+begin_src emacs-lisp
+  ;; Load PHP Package
+  ;;(use-package ob-php)
+  
+#+end_src
+
 * Automatically Tangle Files
+:NOTE:
+This Section is ~deprecated~ since the ~Org Auto Tangle~ was added
+:END:
 ** Emacs
 *** Config File
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; Setup Automatic Tangling of Files
   
   ;; Automatically tangle config file
@@ -2140,387 +2284,3 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
                'after-save-hook
                #'pet/org-babel-tangle-emacs-config)))
 #+end_src
-
-*** Test Config File
-
-#+begin_src emacs-lisp
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-testconfig ()
-    (when (string-equal
-       (buffer-file-name)
-       (concat pet/dotfiles-dir
-           "000_OrgFiles/EmacsTestConfig.org"))
-      ;; Have user confirm tangle 
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-        (lambda ()
-          (add-hook
-           'after-save-hook
-           #'pet/org-babel-tangle-testconfig)))
-#+end_src
-
-*** Backup Config File
-
-#+begin_src emacs-lisp
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-backupconfig ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/EmacsBackupConfig.org"))
-      ;; Have user confirm tangle 
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-backupconfig)))
-#+end_src
-
-** RSS Feeds File
-
-#+begin_src emacs-lisp
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-feeds ()
-    (when (string-equal
-           (buffer-file-name)
-           (concat pet/dotfiles-dir
-                   "000_OrgFiles/EmacsRSSFeed.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook
-               'after-save-hook
-               #'pet/org-babel-tangle-feeds)))
-#+end_src
-
-** Qtile
-*** Config
-
-#+begin_src emacs-lisp  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-qtile ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/QtileConfig.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-qtile)))
-#+end_src
-*** Backup Config
-
-#+begin_src emacs-lisp
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-qtilebackup ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/QtileBackupConfig.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-qtilebackup)))
-#+end_src
-
-** I3 WM
-*** Config
-
-#+begin_src emacs-lisp  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-i3-config ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/I3Config.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-i3-config)))
-#+end_src
-*** Backup Config
-
-#+begin_src emacs-lisp
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-i3-backup ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/I3BackupConfig.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-i3-backup)))
-#+end_src
-
-*** Keyindings
-
-#+begin_src emacs-lisp  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-i3-bindings ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/I3Keybindings.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-i3-bindings)))
-#+end_src
-
-*** Program Rules
-
-#+begin_src emacs-lisp  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-i3-rules ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/I3ProgramRules.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-i3-rules)))
-#+end_src
-
-
-** Run Launchers
-*** Rofi
-**** Config
-
-#+begin_src emacs-lisp
-  ;; Setup Automatic Tangling of Run Launchers
-  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-rofi ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/RofiConfig.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-rofi)))
-#+end_src
-
-** Notification Daemon
-*** Dunst
-**** Config
-
-#+begin_src emacs-lisp
-  ;; Setup Automatic Tangling of Run Launchers
-  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-dunst ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/DunstConfig.org"))
-
-      ;; Dynamic scoping to the rescue
-      (let ((org-confirm-babel-evaluate nil))
-	(org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-dunst)))
-#+end_src
-
-** Bash
-*** Config File
-
-#+begin_src emacs-lisp
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-bash-config ()
-    (when (string-equal
-           (buffer-file-name)
-           (concat pet/dotfiles-dir
-                   "000_OrgFiles/BashConfig.org"))
-      ;; Have the user confirm tangle
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook
-               'after-save-hook
-               #'pet/org-babel-tangle-bash-config)))
-#+end_src
-
-*** Bashfunctions File
-
-#+begin_src emacs-lisp
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-bashfuncs ()
-    (when (string-equal
-       (buffer-file-name)
-       (concat pet/dotfiles-dir
-           "000_OrgFiles/BashFuncs.org"))
-      ;; Have user confirm tangle 
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-        (lambda ()
-          (add-hook
-           'after-save-hook
-           #'pet/org-babel-tangle-bashfuncs)))
-#+end_src
-
-*** Alias File
-
-#+begin_src emacs-lisp
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-shell-aliases ()
-    (when (string-equal
-	   (buffer-file-name)
-	   (concat pet/dotfiles-dir
-		   "000_OrgFiles/Aliases.org"))
-      ;; Have user confirm tangle 
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook
-	       'after-save-hook
-	       #'pet/org-babel-tangle-shell-aliases)))
-#+end_src
-** Alacritty
-*** Config File
-
-#+begin_src emacs-lisp
-  ;; Setup Automatic Tangling of Files
-  
-  ;; Automatically tangle config file
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-alacritty-config ()
-    (when (string-equal
-           (buffer-file-name)
-           (concat pet/dotfiles-dir
-                   "000_OrgFiles/AlacrittyConfig.org"))
-      ;; Have the user confirm tangle
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook
-               'after-save-hook
-               #'pet/org-babel-tangle-alacritty-config)))
-#+end_src
-
-*** Original Config File
-
-#+begin_src emacs-lisp
-  ;; Helper Function to that does the tangling
-  (defun pet/org-babel-tangle-alacritty-orig-config ()
-    (when (string-equal
-       (buffer-file-name)
-       (concat pet/dotfiles-dir
-           "000_OrgFiles/AlacrittyOrigConfig.org"))
-      ;; Have user confirm tangle 
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
-
-  ;; This hook automatically evaluates the helper
-  ;; function after saving the buffer
-  (add-hook 'org-mode-hook
-        (lambda ()
-          (add-hook
-           'after-save-hook
-           #'pet/org-babel-tangle-alacritty-orig-config)))
-#+end_src
-

@@ -2,7 +2,37 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("D 08-1-1 Finanzen Basketball"
+(("00-1 Calendar"
+ (filename . "~/Calendar/")
+ (front-context-string . "..\nC -rw-r--r-- ")
+ (rear-context-string . "K 25. Jun 17:33 ")
+ (position . 123))
+("PR 02-PL-04 PerlScripts"
+ (filename . "~/Projects/Programming/PL-04-PerlScripts/")
+ (front-context-string . "..\n  -rw-r--r-- ")
+ (rear-context-string . "K 15. Jun 19:14 ")
+ (position . 151))
+("PR 02-SH-03 ShellScripts"
+ (filename . "~/Projects/Programming/SH-03-ShellScripts/")
+ (front-context-string . "..\n  drwxr-xr-x ")
+ (rear-context-string . "K 15. Jun 19:14 ")
+ (position . 152))
+("PI 01 Screenshots"
+ (filename . "~/Pictures/Screenshots/")
+ (front-context-string . "OFOT-Seminar-02-")
+ (rear-context-string . "K 23. Nov 2021  ")
+ (position . 651))
+("P 02 Wallpaper"
+ (filename . "~/Pictures/Wallpaper/")
+ (front-context-string . "nasa-hubble-star")
+ (rear-context-string . "M 14. Feb 09:53 ")
+ (position . 1840))
+("PI 00 Pictures"
+ (filename . "~/Pictures/")
+ (front-context-string . "Screenshots\n  dr")
+ (rear-context-string . "K  2. Apr 12:08 ")
+ (position . 444))
+("D 08-1-1 Finanzen Basketball"
  (filename . "~/Documents/08_Ehrenamt_und_Hobbys/Sport/Basketball/Abteilung/Finanzen/")
  (front-context-string . "..\n  drwxr-xr-x ")
  (rear-context-string . "K  6. Jun 15:45 ")
@@ -77,7 +107,7 @@
  (front-context-string . "* Header\n\n#+begi")
  (rear-context-string . "ompatibility!)\n\n")
  (position . 419))
-("P 00-0 InfoFiles"
+("PR 00-0 InfoFiles"
  (filename . "~/Projects/InfoFiles/")
  (front-context-string . "Books\n  drwxr-xr")
  (rear-context-string . "K 15. Mär 22:56 ")
@@ -118,10 +148,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220531091700-people_albert_einstein.org")
- (front-context-string . "\n* People - Albe")
- (rear-context-string . "05-31 Di 09:17]\n")
- (position . 180))
+ (filename . "~/Org/20220625182057-remind_tipps_set_default_reminder_file.org")
+ (front-context-string . "\n* Remind - Tipp")
+ (rear-context-string . "06-25 Sa 18:20]\n")
+ (position . 212))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
@@ -182,22 +212,22 @@
  (front-context-string . "01_Arbeit\n  drwx")
  (rear-context-string . "K 23. Feb 2021  ")
  (position . 179))
-("P 01 Data"
+("PR 01 Data"
  (filename . "~/Projects/Data/")
  (front-context-string)
  (rear-context-string . "K  4. Dez 14:37 ")
  (position . 171))
-("P 02 Programming"
+("PR 02 Programming"
  (filename . "~/Projects/Programming/")
  (front-context-string . "JUP-01-JupyterEx")
  (rear-context-string . "K  8. Jan 22:18 ")
  (position . 181))
-("P 00 Projects"
+("PR 00 Projects"
  (filename . "~/Projects/")
  (front-context-string . "Data\n  drwxrwxrw")
  (rear-context-string . "K  4. Dez 14:37 ")
  (position . 169))
-("P 03 Writing"
+("PR 03 Writing"
  (filename . "~/Projects/Writing/")
  (front-context-string . "Concat_Arbeitsve")
  (rear-context-string . "4 12. Jan 23:47 ")
@@ -227,7 +257,7 @@
  (front-context-string . "1_SS_2019\n  drwx")
  (rear-context-string . "K 22. Apr 2021  ")
  (position . 207))
-("C 04 ZathuraConfig.org"
+("C 04 Zathura Config"
  (filename . "~/.dotfiles/000_OrgFiles/ZathuraConfig.org")
  (front-context-string . "\n* TOC\n\n1) [[*UI")
  (rear-context-string . "STARTUP: folded\n")

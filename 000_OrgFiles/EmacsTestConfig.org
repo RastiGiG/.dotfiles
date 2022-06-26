@@ -1,5 +1,6 @@
 #+TITLE: Personal Emacs Test Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs-test/init.el :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: hideblocks show2levels
 
 * Personal Emacs Configuration

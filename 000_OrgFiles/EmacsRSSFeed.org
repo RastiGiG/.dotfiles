@@ -1,9 +1,9 @@
 #+TITLE:  EmacsRSSFeed Settings
 #+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/EmacsRSSFeed.el :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: show2levels
 
 * List of Tags
-
 ** IT
 + python
 + lisp
@@ -134,6 +134,7 @@
       ("https://www.reddit.com/r/archlinux/.rss" reddit it linux)
       ("https://www.reddit.com/r/ManjaroLinux/.rss" reddit it linux)
       ("https://www.reddit.com/r/pop_os/.rss" reddit it linux)
+      ("https://www.reddit.com/r/unixporn/.rss" reddit it linux)
       ))
 
 #+end_src

@@ -101,7 +101,7 @@
 		   (match-end 0)
 	    'face (list :background bgstr :foreground fgstr)))
 	    ))
-       ("#[ABCDEFabcdef0-9]\\{6\\}"
+   ("#[ABCDEFabcdef0-9]\\{6\\}"
 	(0 (progn (let* ((bgstr (match-string-no-properties 0))
 			 (fgstr (pet/fg-from-bg bgstr))))
 	    (put-text-property
@@ -115,14 +115,14 @@
  (defvar bootstrap-version)
  (let ((bootstrap-file
 	(expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-       (bootstrap-version 5))
+   (bootstrap-version 5))
    (unless (file-exists-p bootstrap-file)
      (with-current-buffer
 	 (url-retrieve-synchronously
 	  "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
 	  'silent 'inhibit-cookies)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))
+   (goto-char (point-max))
+   (eval-print-last-sexp)))
    (load bootstrap-file nil 'nomessage))
 
  ;; Use straight.el for use-package expressions
@@ -134,7 +134,7 @@
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
 (setq package-archives
-       '(("melpa" . "https://melpa.org/packages/")
+   '(("melpa" . "https://melpa.org/packages/")
  	 ("melpa-stable" . "https://stable.melpa.org/packages/")
  	 ("org" . "https://orgmode.org/elpa/")
  	 ("elpa" . "https://elpa.gnu.org/packages/")))
@@ -193,7 +193,7 @@
 ;; Setting garbage collection threshold (default is 800)
 ;; Required for speed and also LSP
 (setq gc-cons-threshold (* 50 1000 1000)
-      gc-cons-percentage 0.6)
+  gc-cons-percentage 0.6)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
@@ -201,7 +201,7 @@
 	    (message "*** Emacs loaded in %s with %d garbage collections."
 		     (format "%.2f seconds"
 			     (float-time
-			      (time-subtract after-init-time before-init-time)))
+			  (time-subtract after-init-time before-init-time)))
 		     gcs-done)))
 
 ;; Silence compiler warnings as they can be pretty disruptive
@@ -241,14 +241,14 @@
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list
-      '(("Europe/Berlin" "Berlin")
+  '(("Europe/Berlin" "Berlin")
 	("Europe/Paris" "Paris")
 	("Europe/London" "London")
 	("America/New_York" "New York")
 	("America/Los_Angeles" "Seattle")
 	("Asia/Calcutta" "Bangalore")
 	("Asia/Tokyo" "Tokyo"))
-      )
+  )
 
 ;; Adjust how time is displayed
 (setq display-time-world-time-format "%a, %d %b %H:%M %p %Z")
@@ -326,7 +326,7 @@
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-			      (bookmarks . "book"))))
+			  (bookmarks . "book"))))
 
 ;; Make Emacsclient start up into dashboard
 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
@@ -549,7 +549,7 @@
   )
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
-	      "EmacsRSSFeed.el"))
+	  "EmacsRSSFeed.el"))
 
 ;; Load Elfeed Score
 (use-package elfeed-score
@@ -598,11 +598,11 @@
 ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
 ;; open .pdf in 'zahtura'
 (setq dired-open-extensions '(("gif" . "sxiv")
-			      ("jpg" . "sxiv")
-			      ("png" . "sxiv")
-			      ("mkv" . "mpv")
-			      ("mp4" . "mpv")
-			      ("pdf" . "zathura")))
+			  ("jpg" . "sxiv")
+			  ("png" . "sxiv")
+			  ("mkv" . "mpv")
+			  ("mp4" . "mpv")
+			  ("pdf" . "zathura")))
 
 ;; Add Filters by file extension to dired buffer
 (use-package dired-filter)
@@ -625,12 +625,12 @@
 		    (org-level-6 . 1.0)
 		    (org-level-7 . 1.0)
 		    (org-level-8 . 1.0)))
-      (set-face-attribute
-       (car face)
-       nil
-       :font "Cantarell"
-       :weight 'regular
-       :height (cdr face)))
+  (set-face-attribute
+   (car face)
+   nil
+   :font "Cantarell"
+   :weight 'regular
+   :height (cdr face)))
 
     ;; Ensure that anything that should be
     ;; fixed-pitch in Org files appears that way
@@ -1301,16 +1301,16 @@
 	  ("l" "programming language" plain
 	   "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
 	   :if-new (file+head "${slug}.org"
-			      "#+TITLE: ${title}\n")
+			  "#+TITLE: ${title}\n")
 	   :unnarrowed t)  
 	  ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
 	   :if-new (file+head "${slug}.org"
-			      "#+TITLE: ${title}\n")
+			  "#+TITLE: ${title}\n")
 	   :unnarrowed t)
 	  ("p" "project" plain
 	   "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
 	   :if-new (file+head "${slug}.org"
-			      "#+TITLE: ${title}\n#+filetags: Project")
+			  "#+TITLE: ${title}\n#+filetags: Project")
 	   :unnarrowed t)
 	  ))
 
@@ -1331,7 +1331,7 @@
 	(org-roam-capture-templates
 	 (list (append (car org-roam-capture-templates)
 
-		       '(:immediate-finish t)))))
+		   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
 ;;
@@ -1416,7 +1416,7 @@
 	  '("~/Projects/Programming")))
   (setq projectile-switch-project-action
 	#'projectile-dired)
-      ;; Add Projectile Functions to User Leader Keys
+  ;; Add Projectile Functions to User Leader Keys
   (pet/leader-keys
    "p"  '(:ignore t :which-key "projects")
    "pf"  'counsel-projectile-find-file
@@ -1437,7 +1437,7 @@
   :commands (lsp lsp-deferred)
   :hook ((typescript-mode js2-mode web-mode) . lsp)
   :bind (:map lsp-mode-map
-	      ("TAB" . completion-at-point))
+	  ("TAB" . completion-at-point))
   :custom (lsp-headerline-breadcrumb-enable nil)
   :config (lsp-enable-which-key-integration t))
 
@@ -1530,9 +1530,9 @@
 
 ;; Load Octave Mode automatically for specified files
 (setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+  (cons '("\\.m$" . octave-mode) auto-mode-alist))
 (setq auto-mode-alist
-      (cons '("\\.sci$" . octave-mode) auto-mode-alist))
+  (cons '("\\.sci$" . octave-mode) auto-mode-alist))
 
 ;; Setup Octave Mode
 (add-hook 'octave-mode-hook

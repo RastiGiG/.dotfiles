@@ -15,14 +15,14 @@
 
 ;; Save Home Dir for later use
 (setq pet/home-dir
-  (convert-standard-filename
-   (expand-file-name "~/")))
+      (convert-standard-filename
+       (expand-file-name "~/")))
 
 ;; Save Dotfiles Dirs for later use
 (setq pet/dotfiles-dir
-  (concat pet/home-dir
-	  (convert-standard-filename
-	   ".dotfiles/")))
+      (concat pet/home-dir
+	      (convert-standard-filename
+	       ".dotfiles/")))
 
 (setq pet/dotfiles-emacsconfig-dir
 	(concat pet/dotfiles-dir
@@ -97,7 +97,7 @@
   (font-lock-add-keywords
    nil
    '(("#[ABCDEFabcdef0-9]\\{3\\}[^ABCDEFabcdef0-9]"
-  (0 (put-text-property
+      (0 (put-text-property
 	  (match-beginning 0)
 	  (match-end 0)
 	  'face (list
@@ -109,11 +109,11 @@
 			     )
 		  (concat "#" r r g g b b))))))
      ("#[ABCDEFabcdef0-9]\\{6\\}"
-  (0 (put-text-property
+      (0 (put-text-property
 	  (match-beginning 0)
 	  (match-end 0)
 	  'face (list :background
-		  (match-string-no-properties 0)))))))
+		      (match-string-no-properties 0)))))))
   (font-lock-flush))
 
 ;; Function to Colorstring with their corresponding Colors
@@ -127,7 +127,7 @@
    nil
    '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *,
     *\\([0-9]\\{1,3\\}\\)% *)"
-  (0 (put-text-property
+      (0 (put-text-property
 	  (+ (match-beginning 0) 3)
 	  (match-end 0)
 	  'face
@@ -138,11 +138,11 @@
 	    (mapconcat
 	     'identity
 	     (mapcar
-	  (lambda (x) (format "%02x" (round (* x 255))))
-	  (color-hsl-to-rgb
-	   (/ (string-to-number (match-string-no-properties 1)) 360.0)
-	   (/ (string-to-number (match-string-no-properties 2)) 100.0)
-	   (/ (string-to-number (match-string-no-properties 3)) 100.0)))
+	      (lambda (x) (format "%02x" (round (* x 255))))
+	      (color-hsl-to-rgb
+	       (/ (string-to-number (match-string-no-properties 1)) 360.0)
+	       (/ (string-to-number (match-string-no-properties 2)) 100.0)
+	       (/ (string-to-number (match-string-no-properties 3)) 100.0)))
 	     "" )) ;  "#00aa00"
 	   ))))))
   (font-lock-flush))
@@ -158,15 +158,15 @@
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
-   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-  (bootstrap-version 5))
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
 	(url-retrieve-synchronously
 	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
 	 'silent 'inhibit-cookies)
-  (goto-char (point-max))
-  (eval-print-last-sexp)))
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 ;; Use straight.el for use-package expressions
@@ -178,7 +178,7 @@
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
 (setq package-archives
-  '(("melpa" . "https://melpa.org/packages/")
+      '(("melpa" . "https://melpa.org/packages/")
 	("melpa-stable" . "https://stable.melpa.org/packages/")
 	("org" . "https://orgmode.org/elpa/")
 	("elpa" . "https://elpa.gnu.org/packages/")))
@@ -217,13 +217,16 @@
 ;; Preferred over global-visual-line-mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
+;; Enable Highlight-Line
+(hl-line-mode 1)
+
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-		term-mode-hook
-		vterm-mode-hook
-		shell-mode-hook
-		eshell-mode-hook
-		treemacs-mode))
+        term-mode-hook
+        vterm-mode-hook
+        shell-mode-hook
+        eshell-mode-hook
+        treemacs-mode))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set default font face
@@ -251,15 +254,15 @@
 ;; Setting garbage collection threshold (default is 800)
 ;; Required for speed and also LSP
 (setq gc-cons-threshold (* 50 1000 1000)
- gc-cons-percentage 0.6)
+     gc-cons-percentage 0.6)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
 	  (lambda ()
 	    (message "*** Emacs loaded in %s with %d garbage collections."
-		 (format "%.2f seconds"
+		     (format "%.2f seconds"
 			    (float-time
-			 (time-subtract after-init-time before-init-time)))
+			     (time-subtract after-init-time before-init-time)))
 		    gcs-done)))
 
 ;; Silence compiler warnings as they can be pretty
@@ -305,15 +308,15 @@
 (setq save-abbrevs t)
 
 ;; Remember recently accessed files
-(recentf-mode t)
+(recentf-mode 1)
 
 ;; Limit history file to 50 entries to speed up start
 (setq history-length 50)
 ;; Save command and file history
-(savehist-mode t)
+(savehist-mode 1)
 
 ;; Remember Cursor Positions on accessed files 
-(save-place-mode t)
+(save-place-mode 1)
 
 ;; Avoid Clutter by saving Customization Settings to a different file
 (setq custom-file (locate-user-emacs-file "customization_variables.el"))
@@ -331,7 +334,7 @@
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list
-  '(("Etc/UTC" "UTC")
+      '(("Etc/UTC" "UTC")
 	("Europe/Berlin" "Berlin")
 	("Europe/Paris" "Paris")
 	("Europe/London" "London")
@@ -343,11 +346,11 @@
 	("Asia/Calcutta" "Bangalore")
 	("Asia/Tokyo" "Tokyo")
 	("Pacific/Auckland" "Auckland"))
-  )
+      )
 
 ;; Adjust how time is displayed
 (setq display-time-world-time-format
-  "%A, %d %B %Y %H:%M %p %Z")
+      "%A, %d %B %Y %H:%M %p %Z")
 
 (setq pet/yasnippet-dir
       (concat pet/dotfiles-emacsconfig-dir
@@ -441,6 +444,7 @@
    ;; Toggles - Modes
    "tm"   '(:ignore t :which-key "Modes")
    "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
+   "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
    "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
    "tmo"  '(org-mode :which-key "Org Mode")
    "tme"  '(emojify-mode :which-key "Emojify Mode")
@@ -647,7 +651,7 @@
 	 :map elfeed-search-mode-map
 	 ("n" . (lambda () (interactive)
 		  (next-line) (call-interactively
-			   'elfeed-search-show-entry)))
+			       'elfeed-search-show-entry)))
 	 ("p" . (lambda () (interactive)
 		  (previous-line) (call-interactively
 				   'elfeed-search-show-entry)))
@@ -665,12 +669,12 @@
 (setq elfeed-use-curl t)
 (setq elfeed-curl-max-connections 10)
 (setq elfeed-db-directory
-  (concat pet/dotfiles-emacsconfig-dir
-	  "elfeed/"))
+      (concat pet/dotfiles-emacsconfig-dir
+	      "elfeed/"))
 (setq elfeed-enclosure-default-dir
-  "~/Downloads/")
+      "~/Downloads/")
 (setq elfeed-search-filter
-  "@4-months-ago +unread")
+      "@4-months-ago +unread")
 (setq elfeed-sort-order 'descending)
 (setq elfeed-search-clipboard-type 'CLIPBOARD)
 (setq elfeed-search-title-max-width 150)
@@ -679,10 +683,10 @@
 (setq elfeed-show-truncate-long-urls t)
 (setq elfeed-show-unique-buffers t)
 (setq elfeed-search-date-format
-  '("%F %R" 16 :left)))
+      '("%F %R" 16 :left)))
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
-	  "EmacsRSSFeed.el"))
+	      "EmacsRSSFeed.el"))
 
 ;; Snippet for periodic update for feeds
 ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
@@ -735,11 +739,11 @@
 ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
 ;; open .pdf in 'zahtura'
 (setq dired-open-extensions '(("gif" . "sxiv")
-			  ("jpg" . "sxiv")
-			  ("png" . "sxiv")
-			  ("mkv" . "mpv")
-			  ("mp4" . "mpv")
-			  ("pdf" . "zathura")))
+			      ("jpg" . "sxiv")
+			      ("png" . "sxiv")
+			      ("mkv" . "mpv")
+			      ("mp4" . "mpv")
+			      ("pdf" . "zathura")))
 
 ;; Add Filters by file extension to dired buffer
 (use-package dired-filter)
@@ -782,29 +786,29 @@
   ;; Ensure that anything that should be
   ;; fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil
-		  :foreground nil
-		  :inherit 'fixed-pitch)
+		      :foreground nil
+		      :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil
-		  :inherit '(shadow fixed-pitch))
+		      :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-table nil
-		  :inherit '(shadow fixed-pitch))
+		      :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-verbatim nil
-		  :inherit '(shadow fixed-pitch))
+		      :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-special-keyword nil
-		  :inherit '(font-lock-comment-face
+		      :inherit '(font-lock-comment-face
 				 fixed-pitch))
   (set-face-attribute 'org-meta-line nil
-		  :inherit '(font-lock-comment-face fixed-pitch))
+		      :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil
-		  :inherit 'fixed-pitch))
+		      :inherit 'fixed-pitch))
 
 ;; Replace list hyphen with dot
 (defun pet/org-replace-hyphen ()
   (font-lock-add-keywords
    'org-mode '(("^ *\\([-]\\) "
 		(0 (prog1 () (compose-region
-			  (match-beginning 1)
-			  (match-end 1) "•"))))))
+			      (match-beginning 1)
+			      (match-end 1) "•"))))))
   )
 
 ;; Helper Function to quickly toggle Babel Confirm Evaluation
@@ -815,13 +819,13 @@
     (setq org-confirm-babel-evaluate nil)
   (setq org-confirm-babel-evaluate t))
 (print (concat "Org Babel Confirm State: "
-	   (format "%s" org-confirm-babel-evaluate))))
+	       (format "%s" org-confirm-babel-evaluate))))
 
 ;; Store Org Directory
 (setq pet/org-dir
-  (concat pet/home-dir
-	  (convert-standard-filename
-	   "Org/")))
+      (concat pet/home-dir
+	      (convert-standard-filename
+	       "Org/")))
 
 ;; Setting Up Org Mode
 (use-package org
@@ -998,6 +1002,8 @@
     ;; (c . t)             ;; C 
     ;; (cpp . t)           ;; C++
 
+    (perl . t)          ;; Perl
+    ;; (php . t)           ;; PHP
     (R . t)             ;; R
     (shell . t)         ;; Command Line Programs 
     (latex . t)         ;; LaTeX  
@@ -1021,6 +1027,8 @@
          '(("sh" . "src shell")
            ("se" . "src emacs-lisp")
            ("sp" . "src python")
+           ("sl" . "src perl")
+           ("sw" . "src php")
            ("sq" . "src sql")
            ("so" . "src octave")
            ;; ("si" . "src ipython :session :async :exports both :results raw drawer")
@@ -1037,8 +1045,8 @@
   "Create an org file in ~/Org/."
   (interactive)
   (let ((name (read-string "Filename: ")))
-(expand-file-name
- (format "%s.org" name))))
+    (expand-file-name
+     (format "%s.org" name))))
 
 ;; Org-Capture
 (use-package org-capture
@@ -1047,97 +1055,97 @@
    (setq org-capture-templates
 	 ;; Acronym captures
 	 `(("a" "Acronyms" table-line
-	(file+headline "~/Org/acronyms.org" "Inbox")
-	"| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+	    (file+headline "~/Org/acronyms.org" "Inbox")
+	    "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
 	   ;; Documents
 	   ("d" "Documents")
 	   ("dl" "Letter")
 	   ("dlf" "Letter Form" plain (file pet/create-documents-file)
-	"%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
-	:if-new (file "${slug}.org" "#+TITLE: ${title}\n")
-	:unnarrowed t
-	)
+	    "%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
+	    :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+	    :unnarrowed t
+	    )
 	   ("dlh" "Letter Home" plain (file pet/create-documents-file)
-	"%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
-	:if-new (file "${slug}.org" "#+TITLE: ${title}\n")
-	:unnarrowed t
-	)
+	    "%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
+	    :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+	    :unnarrowed t
+	    )
 
 	   ;; Email captures
 	   ("e" "Email")
 	   ("em" "Make email note" entry
-	(file+headline "~/Org/personal-tasks.org" "Mail correspondence")
-	,(concat "* TODO [#A] %:subject :mail:\n"
-		 "SCHEDULED: %t\n:"
-		 "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-		 "%i%?"))
+	    (file+headline "~/Org/personal-tasks.org" "Mail correspondence")
+	    ,(concat "* TODO [#A] %:subject :mail:\n"
+		     "SCHEDULED: %t\n:"
+		     "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+		     "%i%?"))
 	   ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
-	"* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+	    "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
 	   ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
-	"* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+	    "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
 
 
 	   ;; Journal captures
 	   ("j" "Journal Entries")
 	   ("jj" "Journal" entry
-	(file+olp+datetree "~/Org/journal/journal.org")
-	"\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-	;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
-	:clock-in :clock-resume
-	:empty-lines 1)
+	    (file+olp+datetree "~/Org/journal/journal.org")
+	    "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+	    ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+	    :clock-in :clock-resume
+	    :empty-lines 1)
 	   ("jm" "Meeting" entry
-	(file+olp+datetree "~/Org/journal/journal.org")
-	"* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-	:clock-in :clock-resume
-	:empty-lines 1)
+	    (file+olp+datetree "~/Org/journal/journal.org")
+	    "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+	    :clock-in :clock-resume
+	    :empty-lines 1)
 
 	   ;; Checklist captures
 	   ("l" "Lists")
 
 	   ("ls" "Shopping List" checkitem
-	(file+olp "~/Org/lists-shopping.org" "Inbox")
-	"[ ] %^{Itemname}")
+	    (file+olp "~/Org/lists-shopping.org" "Inbox")
+	    "[ ] %^{Itemname}")
 
 	   ("ll" "Literature" checkitem
-	(file+olp "~/Org/lists-literature.org" "Inbox")
-	"[ ] %^{Author} - %^{Titel}")
+	    (file+olp "~/Org/lists-literature.org" "Inbox")
+	    "[ ] %^{Author} - %^{Titel}")
 
 	   ("lm" "Music" checkitem
-	(file+olp "~/Org/lists-music.org" "Inbox")
-	"[ ] %^{Interpret} - %^{Title}")
+	    (file+olp "~/Org/lists-music.org" "Inbox")
+	    "[ ] %^{Interpret} - %^{Title}")
 
 	   ("q" "Quotes" entry
-	(file+olp "~/Org/quotes.org" "Inbox")
-	"* %^{Originator}\n\n#+begin_quote\n%?\n#+end_quote")
+	    (file+olp "~/Org/quotes.org" "Inbox")
+	    "* %^{Originator}\n\n#+begin_quote\n%?\n#+end_quote")
 
 	   ("t" "Tasks / Projects")
 	   ("tt" "TODO Task" entry (file+olp
-				"~/Org/personal-tasks.org" "Inbox")
-	"* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
+				    "~/Org/personal-tasks.org" "Inbox")
+	    "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
 	   ("tb" "Basic task for future review" entry
-	(file+headline "~/Org/personal-tasks.org" "Inbox")
-	,(concat "* %^{Title}\n"
-		 ":PROPERTIES:\n"
-		 ":CAPTURED: %U\n"
-		 ":END:\n\n"
-		 "%i%l"))
+	    (file+headline "~/Org/personal-tasks.org" "Inbox")
+	    ,(concat "* %^{Title}\n"
+		     ":PROPERTIES:\n"
+		     ":CAPTURED: %U\n"
+		     ":END:\n\n"
+		     "%i%l"))
 	   ("ts" "Task with a due date (scheduled)" entry
-	(file+headline "~/Org/personal-tasks.org" "Inbox")
-	,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-		 "SCHEDULED: %^t\n"
-		 ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-		 "%i%?"))
+	    (file+headline "~/Org/personal-tasks.org" "Inbox")
+	    ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+		     "SCHEDULED: %^t\n"
+		     ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+		     "%i%?"))
 	   ("td" "Task with a due date (deadline)" entry
-	(file+headline "~/Org/personal-tasks.org" "Inbox")
-	,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-		 "DEADLINE: %^t\n"
-		 ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-		 "%i%?"))
+	    (file+headline "~/Org/personal-tasks.org" "Inbox")
+	    ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+		     "DEADLINE: %^t\n"
+		     ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+		     "%i%?"))
 
 	   ("w" "Workflows")
 	   ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
-	"* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
+	    "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
 
   ;; Activate Context Templates for Email 
   (setq org-capture-templates-contexts
@@ -1197,18 +1205,18 @@
 	  ("wn" "wiki node" plain
 	   "\n* ${title}\n\n%?" 
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-			  "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
+			      "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
 	   :unnarrowed t)
 	  ("wi" "wiki index node" plain
-	   "\n* ${title} Kompendium Index\n\n%?" 
-	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+	       "\n* ${title} Kompendium Index\n\n%?" 
+	       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 				  "\n#+filetags: :index:%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-	   :unnarrowed t)
+	       :unnarrowed t)
 	  ("wr" "wiki references node" plain
-	   "\n* References\n%?\n** Websites\n\n** Literature" 
-	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+	       "\n* References\n%?\n** Websites\n\n** Literature" 
+	       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 				  "\n#+filetags: :%^{filetag}:references:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-	   :unnarrowed t)
+	       :unnarrowed t)
 	  ("l" "programming language" plain
 	   "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
 	   :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
@@ -1233,12 +1241,12 @@
   (org-roam-db-autosync-mode)
 
   (pet/leader-keys
-"or"  '(:ignore t :which-key "Org Roam")
-"ort" 'org-roam-tag-add
-"ora" 'org-roam-alias-add
-"ord" 'org-roam-diagnostics
-"oru" 'org-roam-ui-open
-)
+    "or"  '(:ignore t :which-key "Org Roam")
+    "ort" 'org-roam-tag-add
+    "ora" 'org-roam-alias-add
+    "ord" 'org-roam-diagnostics
+    "oru" 'org-roam-ui-open
+    )
   )
 
 ;; Helper Function to insert org note immediately
@@ -1247,7 +1255,7 @@
   (let ((args (push arg args))
 	(org-roam-capture-templates
 	 (list (append (car org-roam-capture-templates)
-		   '(:immediate-finish t)))))
+		       '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
 ;; A Visualization of your org roam node structure
@@ -1262,9 +1270,9 @@
   ;;  :hook (after-init . org-roam-ui-mode)
  :config
  (setq org-roam-ui-sync-theme t
-  org-roam-ui-follow t
-  org-roam-ui-update-on-save t
-  org-roam-ui-open-on-start t))
+      org-roam-ui-follow t
+      org-roam-ui-update-on-save t
+      org-roam-ui-open-on-start t))
 
 (use-package org-drill
   :config
@@ -1277,6 +1285,14 @@
     (setq org-drill-learn-fraction 1.0))
   )
 
+;; Org AddOn Auto Tangle Org Files
+;; Add '#+auto_tangle: t' to files 
+(use-package org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
+  :config
+  (setq org-auto-tangle-default t))
+
 ;; Add rainbow delimiters for better readability
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -1287,6 +1303,88 @@
 (set-face-attribute
  'show-paren-match-expression nil :background "#363e4a")
 (show-paren-mode 1))
+
+;; Helper Functions (for hooks mostly)
+(defun pet/company-text-mode ()
+  "Sets 'company-mode' for 'text-mode'"
+  ;; Activate completion after 3 letters in text mode
+  (setq company-minimum-prefix-length 3))
+
+;; Load Company Mode for Auto Completion
+(use-package company
+  :config
+  ;; activate global company mode
+  (global-company-mode 1)
+  ;; make company perform completions with tab
+  (company-tng-mode 1)
+
+  ;; Set hooks
+  (add-hook 'text-mode-hook 'pet/company-text-mode)
+
+  ;; Enable Cycling Options back to the Beginning
+  (setq company-selection-wrap-around t)
+
+  ;; Align Annotations (paramenters, arguments, etc..) right of tooltip
+  (setq company-tooltip-align-annotations t)
+
+  ;; Disable Company Mode in Strings or Comment
+  (setq company-idle-delay
+    (lambda () (if (company-in-string-or-comment) nil 0.3)))
+
+  ;; Allow Prefix Length to be change per buffer
+  (make-variable-buffer-local 'company-minimum-prefix-length)
+
+  ;; Add Company Mode to Leader Keys
+  (pet/leader-keys
+    "tmc"  '(global-company-mode :which-key "Global Company Mode")
+    )
+  )
+
+;; Add Company Extension for Bash and Shell
+(use-package company-shell
+  :config
+  (add-to-list 'company-backends '(company-shell company-shell-env))
+  )
+
+;; local configuration for TeX modes
+(defun pet/company-latex-mode ()
+  "Sets 'company-mode' for 'text-mode'"
+  ;; Add Backands
+  (setq-local company-backends
+              (append '((company-math-symbols-latex company-latex-commands))
+                      company-backends)))
+
+;; Add Company Extension for LaTeX Math
+(use-package company-math
+  :config
+
+  ;; Add hooks to Modes
+  ;; Tex Mode
+  (add-hook 'tex-mode-hook 'pet/company-latex-mode)
+  ;; Org Mode
+  (add-hook 'org-mode-hook 'pet/company-latex-mode)
+
+  ;; global activation of the unicode symbol completion 
+  ;;(add-to-list 'company-backends 'company-math-symbols-unicode))
+  )
+
+;; Add Company Extension for C/C++
+;; (use-package company-c-headers)
+
+;; local configuration for Python modes
+(defun pet/company-python-mode ()
+  "Sets 'company-mode' for 'text-mode'"
+  ;; Activate completion after 1 letters in python mode
+  (setq company-minimum-prefix-length 1)
+  ;; Add Jedi to Company Backends
+  (add-to-list 'company-backends 'company-jedi))
+
+
+;; Add Company Extension for Python
+(use-package company-jedi
+  :config
+  (add-hook 'python-mode-hook 'pet/company-python-mode)
+)
 
 (use-package term
   :config
@@ -1332,7 +1430,7 @@
 	  '("~/Projects/Programming")))
   (setq projectile-switch-project-action
 	#'projectile-dired)
-  ;; Add Projectile Functions to User Leader Keys
+      ;; Add Projectile Functions to User Leader Keys
   (pet/leader-keys
    "p"  '(:ignore t :which-key "projects")
    "pf"  'counsel-projectile-find-file
@@ -1360,7 +1458,7 @@
           ) . lsp-deferred)
   :commands (lsp lsp-deferred)
   :bind (:map lsp-mode-map
-      ("SPC TAB" . completion-at-point))
+      ("M-TAB" . completion-at-point))
   :custom (lsp-headerline-breadcrumb-enable nil)
   :config (lsp-enable-which-key-integration t)
   ;; automatically set project root as determined by projectile
@@ -1401,30 +1499,30 @@
     "tl"  '(:ignore t :which-key "lsp")
     "tld" 'xref-find-definitions
     "tlr" 'xref-find-references
-    "tln" 'lsp-ui-find-next-reference
-    "tlp" 'lsp-ui-find-prev-reference
+    ;; "tln" 'lsp-ui-find-next-reference
+    ;; "tlp" 'lsp-ui-find-prev-reference
     "tls" 'counsel-imenu
-    "tle" 'lsp-ui-flycheck-list
-    "tlS" 'lsp-ui-sideline-mode
+    ;; "tle" 'lsp-ui-flycheck-list
+    ;; "tlS" 'lsp-ui-sideline-mode
     "tlX" 'lsp-execute-code-action)
   )
 
 ;; Add lsp ui for higher level ui options
-(use-package lsp-ui
-  :commands lsp-ui-mode
-  ;; :hook (lsp-mode . lsp-ui-mode)
-  ;; Show lsp info on sideline
-  :config
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-header t)
-  (setq lsp-ui-doc-include-signature t)
-  (setq lsp-ui-doc-border (face-foreground 'default))
-  (setq lsp-ui-sideline-show-code-actions t)
-  (setq lsp-ui-sideline-delay 0.05)
-  ;; (setq lsp-ui-sideline-enable t)
-  ;; (setq lsp-ui-sideline-show-hover nil)
-  ;; (setq lsp-ui-doc-position 'bottom)
-  )
+;;(use-package lsp-ui
+;;  :commands lsp-ui-mode
+;;  ;; :hook (lsp-mode . lsp-ui-mode)
+;;  ;; Show lsp info on sideline
+;;  :config
+;;  (setq lsp-ui-doc-enable nil)
+;;  (setq lsp-ui-doc-header t)
+;;  (setq lsp-ui-doc-include-signature t)
+;;  (setq lsp-ui-doc-border (face-foreground 'default))
+;;  (setq lsp-ui-sideline-show-code-actions t)
+;;  (setq lsp-ui-sideline-delay 0.05)
+;;  ;; (setq lsp-ui-sideline-enable t)
+;;  ;; (setq lsp-ui-sideline-show-hover nil)
+;;  ;; (setq lsp-ui-doc-position 'bottom)
+;;  )
 
 ;; Extend lsp and treemacs integration
 (use-package lsp-treemacs
@@ -1489,9 +1587,9 @@
 
 ;; Load Octave Mode automatically for specified files
 (setq auto-mode-alist
-  (cons '("\\.m$" . octave-mode) auto-mode-alist))
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
 (setq auto-mode-alist
-  (cons '("\\.sci$" . octave-mode) auto-mode-alist))
+      (cons '("\\.sci$" . octave-mode) auto-mode-alist))
 
 ;; Setup Octave Mode
 (add-hook 'octave-mode-hook
@@ -1570,336 +1668,5 @@
   :config
   (pyvenv-mode 1))
 
-;; Setup Automatic Tangling of Files
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-emacs-config ()
-  (when (string-equal
-         (buffer-file-name)
-         (concat pet/dotfiles-dir
-                 "000_OrgFiles/EmacsConfig.org"))
-    ;; Have the user confirm tangle
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-hook
-             'after-save-hook
-             #'pet/org-babel-tangle-emacs-config)))
-
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-testconfig ()
-  (when (string-equal
-     (buffer-file-name)
-     (concat pet/dotfiles-dir
-         "000_OrgFiles/EmacsTestConfig.org"))
-    ;; Have user confirm tangle 
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-      (lambda ()
-        (add-hook
-         'after-save-hook
-         #'pet/org-babel-tangle-testconfig)))
-
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-backupconfig ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/EmacsBackupConfig.org"))
-    ;; Have user confirm tangle 
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-backupconfig)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-feeds ()
-  (when (string-equal
-         (buffer-file-name)
-         (concat pet/dotfiles-dir
-                 "000_OrgFiles/EmacsRSSFeed.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-hook
-             'after-save-hook
-             #'pet/org-babel-tangle-feeds)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-qtile ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/QtileConfig.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-qtile)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-qtilebackup ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/QtileBackupConfig.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-qtilebackup)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-i3-config ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/I3Config.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-i3-config)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-i3-backup ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/I3BackupConfig.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-i3-backup)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-i3-bindings ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/I3Keybindings.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-i3-bindings)))
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-i3-rules ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/I3ProgramRules.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-i3-rules)))
-
-;; Setup Automatic Tangling of Run Launchers
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-rofi ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/RofiConfig.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-rofi)))
-
-;; Setup Automatic Tangling of Run Launchers
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-dunst ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/DunstConfig.org"))
-
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-  (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-dunst)))
-
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-bash-config ()
-  (when (string-equal
-         (buffer-file-name)
-         (concat pet/dotfiles-dir
-                 "000_OrgFiles/BashConfig.org"))
-    ;; Have the user confirm tangle
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-hook
-             'after-save-hook
-             #'pet/org-babel-tangle-bash-config)))
-
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-bashfuncs ()
-  (when (string-equal
-     (buffer-file-name)
-     (concat pet/dotfiles-dir
-         "000_OrgFiles/BashFuncs.org"))
-    ;; Have user confirm tangle 
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-      (lambda ()
-        (add-hook
-         'after-save-hook
-         #'pet/org-babel-tangle-bashfuncs)))
-
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-shell-aliases ()
-  (when (string-equal
-	 (buffer-file-name)
-	 (concat pet/dotfiles-dir
-		 "000_OrgFiles/Aliases.org"))
-    ;; Have user confirm tangle 
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook
-	     'after-save-hook
-	     #'pet/org-babel-tangle-shell-aliases)))
-
-;; Setup Automatic Tangling of Files
-
-;; Automatically tangle config file
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-alacritty-config ()
-  (when (string-equal
-         (buffer-file-name)
-         (concat pet/dotfiles-dir
-                 "000_OrgFiles/AlacrittyConfig.org"))
-    ;; Have the user confirm tangle
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-          (lambda ()
-            (add-hook
-             'after-save-hook
-             #'pet/org-babel-tangle-alacritty-config)))
-
-;; Helper Function to that does the tangling
-(defun pet/org-babel-tangle-alacritty-orig-config ()
-  (when (string-equal
-     (buffer-file-name)
-     (concat pet/dotfiles-dir
-         "000_OrgFiles/AlacrittyOrigConfig.org"))
-    ;; Have user confirm tangle 
-    (let ((org-confirm-babel-evaluate t))
-      (org-babel-tangle))))
-
-;; This hook automatically evaluates the helper
-;; function after saving the buffer
-(add-hook 'org-mode-hook
-      (lambda ()
-        (add-hook
-         'after-save-hook
-         #'pet/org-babel-tangle-alacritty-orig-config)))
+;; Load PHP Package
+;;(use-package ob-php)
