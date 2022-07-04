@@ -213,6 +213,12 @@
 ;; Set Line Numbers Globally
 (global-display-line-numbers-mode t)
 
+;; Enable line numbers for some modes
+(dolist (mode '(text-mode-hook
+                prog-mode-hook
+                conf-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 'relative))))
+
 ;; Set Visual Line Mode for text modes only
 ;; Preferred over global-visual-line-mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
@@ -395,6 +401,10 @@
   ;; if you want to enable emojis globally:
   ;; :hook (after-init . global-emojify-mode)
   )
+
+;; Add Origami Mode for Folding
+(use-package origami
+  :hook (yaml-mode . origami-mode))
 
 ;; Setup general for easier key config
 (use-package general
@@ -1005,6 +1015,7 @@
     (perl . t)          ;; Perl
     ;; (php . t)           ;; PHP
     (R . t)             ;; R
+    (lua . t)           ;; Lua Programming Language
     (shell . t)         ;; Command Line Programs 
     (latex . t)         ;; LaTeX  
     (sql . t)           ;; SQL
@@ -1024,14 +1035,20 @@
 
 ;; Setup Source Block Templates
 (cl-loop for block in
-         '(("sh" . "src shell")
-           ("se" . "src emacs-lisp")
-           ("sp" . "src python")
-           ("sl" . "src perl")
-           ("sw" . "src php")
+         '(("el" . "src emacs-lisp")
+           ;; ("go" . "src go")
+           ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+           ("json" . "src json")
+           ("lua" . "src lua")
+           ("oc" . "src octave")
+           ("perl" . "src perl")
+           ("ph" . "src php")
+           ("py" . "src python")
+           ("sc" . "src scheme")
+           ("sh" . "src shell")
            ("sq" . "src sql")
-           ("so" . "src octave")
-           ;; ("si" . "src ipython :session :async :exports both :results raw drawer")
+           ("yaml" . "src yaml")
+           ;; ("ts" . "src typescript"))
            ;; This is an alternative Block
            ;; For IPython
            ;; ("si" . "src ipython :session :async :results output")
@@ -1386,6 +1403,28 @@
   (add-hook 'python-mode-hook 'pet/company-python-mode)
 )
 
+;; local configuration for Python modes
+(defun pet/company-lua-mode ()
+  "Sets 'company-mode' for 'text-mode'"
+  ;; Activate completion after 1 letters in python mode
+  (setq company-minimum-prefix-length 1)
+  ;; Add Lua to Company Backends
+  (setq-local company-backends '((company-lua
+                                  company-etags
+                                  company-dabbrev-code
+                                  company-yasnippet))))
+
+
+  ;; Add Company Extension for Lua
+  (use-package company-lua
+    :config
+    (add-hook 'lua-mode-hook 'pet/company-lua-mode)
+  )
+
+;; Add Alternative Frontend
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 (use-package term
   :config
   (setq explicit-shell-file-name "bash")
@@ -1641,18 +1680,18 @@
         (output-pdf "zathura")
         (output-html "xdg-open")))
 
-;; Customize Python Mode for emacs, add lsp
-(use-package python-mode
-  :straight nil
-  ;; don't hook lsp straight away
-  ;; :hook (python-mode . lsp-deferred)
-  :custom
-  (python-shell-interpreter "python")
-  (dab-python-executable "python")
-  (dab-python-debugger 'debugpy)
-  :config
-  (require 'dab-python)
-  )
+;;;; Customize Python Mode for emacs, add lsp
+;;(use-package python-mode
+;;  :straight nil
+;;  ;; don't hook lsp straight away
+;;  ;; :hook (python-mode . lsp-deferred)
+;;  :custom
+;;  (python-shell-interpreter "python")
+;;  (dab-python-executable "python")
+;;  (dab-python-debugger 'debugpy)
+;;  :config
+;;  (require 'dab-python)
+;;  )
 
 ;; Setup lsp-pyright Server
 (use-package lsp-pyright
@@ -1670,3 +1709,10 @@
 
 ;; Load PHP Package
 ;;(use-package ob-php)
+
+;; Add Mode for Lua
+(use-package lua-mode)
+
+;; Add support for YAML files
+(use-package yaml-mode
+  :mode "\\.ya?ml\\'")

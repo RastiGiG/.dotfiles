@@ -2,7 +2,6 @@
 # name: org_roam_note-lisp_tail
 # key: <ornlispt
 # --
-
 * Topic Overview
 
 ** [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
@@ -37,15 +36,21 @@
 
 * Read On
 
-[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
-** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
-** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
-*** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
-**** [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
-*** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
-** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
-*** [[id:f3a38690-14a7-400a-a15a-c54b919fb85d][Lisp Terminology]]
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:f59d964d-f0d5-45b1-be40-efa09bcd2439][Lisp]]
+**** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+**** [[id:f3a38690-14a7-400a-a15a-c54b919fb85d][Lisp Terminology]]
 
 * References
 
-[[id:822aa9c2-566b-4ae9-b8db-7a99f0ea5ae4][References]]
+[[id:822aa9c2-566b-4ae9-b8db-7a99f0ea5ae4][Lisp References]]
+
+** Websites
+
+** Literature
+
+1. [[id:05e48f5c-03e1-49f1-a6a4-f44af83ef5fd][David S. Touretzky - Common Lisp]]

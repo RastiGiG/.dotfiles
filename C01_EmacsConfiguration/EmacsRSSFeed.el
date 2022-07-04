@@ -87,6 +87,7 @@
     ("https://www.reddit.com/r/ManjaroLinux/.rss" reddit it linux)
     ("https://www.reddit.com/r/pop_os/.rss" reddit it linux)
     ("https://www.reddit.com/r/unixporn/.rss" reddit it linux)
+    ("https://www.reddit.com/r/linux4noobs/" reddit it linux)
     ))
 
 (defface python-elfeed-entry

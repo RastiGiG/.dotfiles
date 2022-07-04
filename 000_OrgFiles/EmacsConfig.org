@@ -320,6 +320,12 @@ This section configures basic UI settings that remove unneeded elements to make 
   ;; Set Line Numbers Globally
   (global-display-line-numbers-mode t)
 
+  ;; Enable line numbers for some modes
+  (dolist (mode '(text-mode-hook
+                  prog-mode-hook
+                  conf-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 'relative))))
+
   ;; Set Visual Line Mode for text modes only
   ;; Preferred over global-visual-line-mode
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
@@ -585,6 +591,13 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
     ;; if you want to enable emojis globally:
     ;; :hook (after-init . global-emojify-mode)
     )
+#+end_src
+** Origami Mode
+#+begin_src emacs-lisp
+  ;; Add Origami Mode for Folding
+  (use-package origami
+    :hook (yaml-mode . origami-mode))
+
 #+end_src
 * Keybinding Configuration
 
@@ -1363,6 +1376,7 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       (perl . t)          ;; Perl
       ;; (php . t)           ;; PHP
       (R . t)             ;; R
+      (lua . t)           ;; Lua Programming Language
       (shell . t)         ;; Command Line Programs 
       (latex . t)         ;; LaTeX  
       (sql . t)           ;; SQL
@@ -1390,14 +1404,20 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 
   ;; Setup Source Block Templates
   (cl-loop for block in
-           '(("sh" . "src shell")
-             ("se" . "src emacs-lisp")
-             ("sp" . "src python")
-             ("sl" . "src perl")
-             ("sw" . "src php")
+           '(("el" . "src emacs-lisp")
+             ;; ("go" . "src go")
+             ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+             ("json" . "src json")
+             ("lua" . "src lua")
+             ("oc" . "src octave")
+             ("perl" . "src perl")
+             ("ph" . "src php")
+             ("py" . "src python")
+             ("sc" . "src scheme")
+             ("sh" . "src shell")
              ("sq" . "src sql")
-             ("so" . "src octave")
-             ;; ("si" . "src ipython :session :async :exports both :results raw drawer")
+             ("yaml" . "src yaml")
+             ;; ("ts" . "src typescript"))
              ;; This is an alternative Block
              ;; For IPython
              ;; ("si" . "src ipython :session :async :results output")
@@ -1405,6 +1425,7 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
            do
            (add-to-list
             'org-structure-template-alist block))
+
 #+end_src
 
 ** Capture Templates
@@ -1791,8 +1812,9 @@ This Setting is meant to make that highlighting stand out more
 #+end_src
 
 *** Company Additions
-**** Shell/Bash
-***** Company Shell
+**** Backends
+***** Shell/Bash
+****** Company Shell
 ~Documentation~ can be found here: [[https://github.com/Alexander-Miller/company-shell][GitHub.com: Company Shell]]
 #+begin_src emacs-lisp
   ;; Add Company Extension for Bash and Shell
@@ -1802,8 +1824,8 @@ This Setting is meant to make that highlighting stand out more
     )
   
 #+end_src
-**** LaTeX
-***** Company Math
+***** LaTeX
+****** Company Math
 This is an extension for [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]]. ~Documentation~ can be found here:
 #+begin_src emacs-lisp
   ;; local configuration for TeX modes
@@ -1829,16 +1851,16 @@ This is an extension for [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]]. ~Do
     )
 
 #+end_src
-**** C/C++/C#
-***** Company C-Headers
+***** C/C++/C#
+****** Company C-Headers
 This is an ~Extension~ for [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]] for ~Company Mode~. ~Documentation~ can be found here: [[https://github.com/randomphrase/company-c-headers][GitHub.com: Company-C-Headers]]
 #+begin_src emacs-lisp
   ;; Add Company Extension for C/C++
   ;; (use-package company-c-headers)
 
 #+end_src
-**** Python
-***** Company Jedi
+***** Python
+****** Company Jedi
 This is an ~Extension~ for [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] for ~Company Mode~. ~Documentation~ can be found here: [[https://github.com/emacsorphanage/company-jedi][GitHub.com: Company Jedi]]
 #+begin_src emacs-lisp
   ;; local configuration for Python modes
@@ -1855,6 +1877,39 @@ This is an ~Extension~ for [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] f
     :config
     (add-hook 'python-mode-hook 'pet/company-python-mode)
   )
+
+#+end_src
+***** Lua
+This is an ~Extension~ for Lua for ~Company Mode~. ~Documentation~ can be found here: [[https://github.com/ptrv/company-lua][GitHub.com: Company-Lua]]
+#+begin_src emacs-lisp
+  ;; local configuration for Python modes
+  (defun pet/company-lua-mode ()
+    "Sets 'company-mode' for 'text-mode'"
+    ;; Activate completion after 1 letters in python mode
+    (setq company-minimum-prefix-length 1)
+    ;; Add Lua to Company Backends
+    (setq-local company-backends '((company-lua
+                                    company-etags
+                                    company-dabbrev-code
+                                    company-yasnippet))))
+
+
+    ;; Add Company Extension for Lua
+    (use-package company-lua
+      :config
+      (add-hook 'lua-mode-hook 'pet/company-lua-mode)
+    )
+
+#+end_src
+
+**** Frontends
+***** Company Box
+~Company Box~ is an *alternative* ~Frontend~ that enables options like *different colors* for *different backends* and more.
+Information can be found here: [[https://github.com/sebastiencs/company-box][GitHub.com: Company-Box]]
+#+begin_src emacs-lisp
+  ;; Add Alternative Frontend
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
 
 #+end_src
 ** Terminal Modes
@@ -2219,18 +2274,18 @@ The commented lines are for distributions like Ubuntu, where =python= referes to
 Pyrigth is a language server written in C# that is a lot faster then the normal pyls.
 Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alternative to "ptvsd>=4.2"), because it is recommended over the default ptsd
 #+begin_src emacs-lisp
-  ;; Customize Python Mode for emacs, add lsp
-  (use-package python-mode
-    :straight nil
-    ;; don't hook lsp straight away
-    ;; :hook (python-mode . lsp-deferred)
-    :custom
-    (python-shell-interpreter "python")
-    (dab-python-executable "python")
-    (dab-python-debugger 'debugpy)
-    :config
-    (require 'dab-python)
-    )
+  ;;;; Customize Python Mode for emacs, add lsp
+  ;;(use-package python-mode
+  ;;  :straight nil
+  ;;  ;; don't hook lsp straight away
+  ;;  ;; :hook (python-mode . lsp-deferred)
+  ;;  :custom
+  ;;  (python-shell-interpreter "python")
+  ;;  (dab-python-executable "python")
+  ;;  (dab-python-debugger 'debugpy)
+  ;;  :config
+  ;;  (require 'dab-python)
+  ;;  )
 
   ;; Setup lsp-pyright Server
   (use-package lsp-pyright
@@ -2255,6 +2310,21 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   
 #+end_src
 
+*** Lua
+#+begin_src emacs-lisp
+  ;; Add Mode for Lua
+  (use-package lua-mode)
+  
+#+end_src
+
+*** YAML
+Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
+#+begin_src emacs-lisp
+  ;; Add support for YAML files
+  (use-package yaml-mode
+    :mode "\\.ya?ml\\'")
+
+#+end_src
 * Automatically Tangle Files
 :NOTE:
 This Section is ~deprecated~ since the ~Org Auto Tangle~ was added

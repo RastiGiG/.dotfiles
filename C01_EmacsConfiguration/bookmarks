@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("00-1 Calendar"
+(("D 01-7 SS 2022"
+ (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/7_SS_2022/")
+ (front-context-string . "B_6_3_Grundlagen")
+ (rear-context-string . "5 10. Mai 18:39 ")
+ (position . 217))
+("C 05-3-1 Awesome Config"
+ (filename . "~/.dotfiles/000_OrgFiles/AwesomeConfig.org")
+ (front-context-string . "** Standard Libr")
+ (rear-context-string . "rc\n\n* Libraries\n")
+ (position . 416))
+("C 06-1 Polybar Config"
+ (filename . "~/.dotfiles/000_OrgFiles/PolybarConfig.org")
+ (front-context-string . "\n* Header\n#+begi")
+ (rear-context-string . "UP: show2levels\n")
+ (position . 173))
+("00-1 Calendar"
  (filename . "~/Calendar/")
  (front-context-string . "..\nC -rw-r--r-- ")
  (rear-context-string . "K 25. Jun 17:33 ")
@@ -13,7 +28,7 @@
  (rear-context-string . "K 15. Jun 19:14 ")
  (position . 151))
 ("PR 02-SH-03 ShellScripts"
- (filename . "~/Projects/Programming/SH-03-ShellScripts/")
+ (filename . "~/Projects/Programming/SH-04-ShellScripts/")
  (front-context-string . "..\n  drwxr-xr-x ")
  (rear-context-string . "K 15. Jun 19:14 ")
  (position . 152))
@@ -148,10 +163,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220625182057-remind_tipps_set_default_reminder_file.org")
- (front-context-string . "\n* Remind - Tipp")
- (rear-context-string . "06-25 Sa 18:20]\n")
- (position . 212))
+ (filename . "~/Org/20220629113836-people_david_de_jong.org")
+ (front-context-string . "\n* People - Davi")
+ (rear-context-string . "06-29 Mi 11:38]\n")
+ (position . 178))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
@@ -247,7 +262,7 @@
  (front-context-string . "\n;; ((\"title\"\n;;")
  (rear-context-string . " -*- lisp -*-\n()")
  (position . 74))
-("D01-6 WS 2021/22"
+("D 01-6 WS 2021/22"
  (filename . "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/6_WS_2021-2022/")
  (front-context-string . "B_6_8_2_Biotherm")
  (rear-context-string . "4  9. Jan 12:14 ")
