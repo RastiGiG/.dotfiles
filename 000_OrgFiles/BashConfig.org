@@ -296,7 +296,7 @@ The section concerning [[id:1f5328c3-41a1-429a-8ddf-669d4b949033][git directorie
   # Add Time String to History
   HISTTIMEFORMAT='%Y-%m-%d %T '
   # Ignore Commands
-  HISTIGNORE="exit:qpdf --encrypt*:history"
+  HISTIGNORE="exit *:qpdf --encrypt*:history"
 
 #+end_src
 

@@ -1,5 +1,6 @@
 #+Title: Shell Aliases
 #+PROPERTY: header-args:shell :tangle ../D00_Aliases/aliases :mkdirp yes
+#+auto_tangle: t
 #+STARTUP: show2levels
 
 * Header
