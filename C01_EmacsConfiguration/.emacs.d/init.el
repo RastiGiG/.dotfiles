@@ -15,19 +15,31 @@
 
 ;; Save Home Dir for later use
 (setq pet/home-dir
-      (convert-standard-filename
-       (expand-file-name "~/")))
+  (convert-standard-filename
+   (expand-file-name "~/")))
 
-;; Save Dotfiles Dirs for later use
+;; Save Dotfiles Dir for later use
 (setq pet/dotfiles-dir
-      (concat pet/home-dir
-	      (convert-standard-filename
-	       ".dotfiles/")))
+  (concat pet/home-dir
+      (convert-standard-filename
+       ".dotfiles/")))
+
+;; Save Template Dir for later use
+(setq pet/temp-dir
+  (concat pet/home-dir
+      (convert-standard-filename
+       "Templates/")))
+
+;; Save Emacs Template Dir for later use
+(setq pet/emacs-temp-dir
+  (concat pet/temp-dir
+      (convert-standard-filename
+       "X1_Emacs_Templates/")))
 
 (setq pet/dotfiles-emacsconfig-dir
-	(concat pet/dotfiles-dir
-		(convert-standard-filename
-		 "C01_EmacsConfiguration/")))
+    (concat pet/dotfiles-dir
+        (convert-standard-filename
+         "C01_EmacsConfiguration/")))
 
 ;; Adjust font size to match your system
 (defvar pet/default-font-size 140)
@@ -373,7 +385,7 @@
 ;;   (add-to-list 'exec-path-from-shell-variables var))
 
 ;; Article Skeleton
-(define-skeleton latex-article-skeleton
+(define-skeleton pet/latex-article-skeleton
   "Skeleton for article type latex documents"
   "Preamble:"
   "\\documentclass{article}\n"
@@ -391,13 +403,13 @@
   "\\end{document}\n")
 
 ;; Org LaTeX Summary Header 
-(define-skeleton org-latex-summary
+(define-skeleton pet/org-latex-summary-skeleton
   "Skeleton for summaries "
   "Preamble:"
   "#+LATEX_CLASS: article\n"
   "#+LATEX_CLASS_OPTIONS: [a5paper,landscape,fourcolumn]\n"
   "#+LATEX_COMPILER: lualatex\n"
-  "#+LATEX_HEADER: \\input{/home/trajanus/Documents/LaTeX/summaryheader.tex}\n"
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/emacs-temp-dir "summaryheader.tex}\n"))
   "#+STARTUP: showeverything\n"
   "#+OPTIONS: toc:nil\n"
   "\\begin{multicols*}{4}\n"
@@ -405,7 +417,7 @@
   "\\end{multicols*}\n")
 
 ;; Org LaTeX Article Header
-(define-skeleton org-latex-article
+(define-skeleton pet/org-latex-article-skeleton
   "Skeleton for articles "
   "Preamble:"
   "#+STARTUP: showeverything\n"
@@ -414,12 +426,12 @@
   "#+DATE: \\today\n"
   "#+LATEX_CLASS: article\n"
   "#+LATEX_CLASS_OPTIONS: [a4paper]\n"
-  "#+LATEX_HEADER: \\input{/home/trajanus/Documents/LaTeX/articleheader.tex}\n"
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/emacs-temp-dir "/articleheader.tex}\n"))
   "#+STARTUP: showeverything\n"
   "#+OPTIONS: toc:nil\n")
 
 ;; Org Wiki
-(define-skeleton org-wiki-entry
+(define-skeleton pet/org-wiki-entry-skeleton
   "Skeleton for articles "
   "Preamble:"
   "#+STARTUP: showeverything\n"
@@ -430,7 +442,7 @@
   "* Index")
 
 ;; Org Wiki Index
-(define-skeleton org-wiki-index
+(define-skeleton pet/org-wiki-index-skeleton
   "Skeleton for articles "
   "Preamble:"
   "#+STARTUP: showeverything\n"
