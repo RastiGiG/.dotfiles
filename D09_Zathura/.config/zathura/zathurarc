@@ -5,28 +5,13 @@ set selection-clipboard clipboard
 set abort-clear-search true
 
 ### Defines which auto adjustment mode should be used if a document is loaded. Possible options are "best-fit" and "width".
-# adjust-open width
+set adjust-open width
 
 ### Defines if the number of pages per row should be honored when advancing a page.
 # advance-pages-per-row false
 
-### Defines the used database backend. Possible options are 'plain' and 'sqlite'
-# database plain
-
-### Defines the color that is used for highlighting parts of the document (e.g.: show search results)
-# highlight-color #9FBC00
-
-### Defines the color that is used to show the current selected highlighted element (e.g: current search result)
-# highlight-active-color #00BC00
-
-### Defines the opacity of a highlighted element
-# highlight-transparency 0.5
-
-### Set Window height
-set window-height 3000
-
-### Set Window width
-set window-width 3000
+### Defines the used database backend (for history and bookmarks). Possible options are 'plain' and 'sqlite'
+set database sqlite
 
 ### The page padding defines the gap in pixels between each rendered page.
 # page-padding 1
@@ -39,18 +24,6 @@ set window-width 3000
 
 ### Defines the number of pages that are rendered next to each other in a row.
 # pages-per-row 1
-
-### En/Disables recoloring
-set recolor true
-
-### Defines the color value that is used to represent dark colors in recoloring mode
-set recolor-darkcolor #FFFFFF
-
-### Defines the color value that is used to represent light colors in recoloring mode
-set recolor-lightcolor #000000
-
-### Defines if the "Loading..." text should be displayed if a page is rendered.
-# render-loading true
 
 ### Defines the step size of scrolling by calling the scroll command once
 # scroll-step
@@ -67,8 +40,8 @@ set recolor-lightcolor #000000
 ### Defines the amount of percent that is zoomed in or out on each command.
 # zoom-step 10
 
-### Sets sandbox
-# set sandbox none
+### Sets sandbox (open hyperlinks, set to strict to for more security)
+set sandbox normal
 
 ### Defines horizontal padding
 # set statusbar-h-padding 0
@@ -78,6 +51,76 @@ set recolor-lightcolor #000000
 
 ### Defines page padding
 # set page-padding 1
+
+### Replace $HOME with '~'
+set statusbar-home-tilde true
+
+######################################### Notifications
+
+set notification-error-bg       "#ff5555" # Red
+set notification-error-fg       "#f8f8f2" # Foreground
+set notification-warning-bg     "#ffb86c" # Orange
+set notification-warning-fg     "#44475a" # Selection
+set notification-bg             "#282a36" # Background
+set notification-fg             "#f8f8f2" # Foreground
+
+######################################### Completion
+
+set completion-bg               "#282a36" # Background
+set completion-fg               "#6272a4" # Comment
+set completion-group-bg         "#282a36" # Background
+set completion-group-fg         "#6272a4" # Comment
+set completion-highlight-bg     "#44475a" # Selection
+set completion-highlight-fg     "#f8f8f2" # Foreground
+
+######################################### Index
+
+set index-bg                    "#282a36" # Background
+set index-fg                    "#f8f8f2" # Foreground
+set index-active-bg             "#44475a" # Current Line
+set index-active-fg             "#f8f8f2" # Foreground
+
+######################################### Input-/Statusbar
+
+set inputbar-bg                 "#282a36" # Background
+set inputbar-fg                 "#f8f8f2" # Foreground
+set statusbar-bg                "#282a36" # Background
+set statusbar-fg                "#f8f8f2" # Foreground
+
+######################################### Highlighting
+
+### Defines the color that is used for highlighting parts of the document (e.g.: show search results)
+set highlight-color             "#ffb86c" # Orange (Previous: #9FBC00)
+### Defines the color that is used to show the current selected highlighted element (e.g: current search result)
+set highlight-active-color      "#ff79c6" # Pink (Previous: #00BC00)
+
+### Defines the opacity of a highlighted element
+# highlight-transparency 0.5
+
+######################################### Foreground/Background
+
+### Set default Background Color
+set default-bg "#282a36"
+
+### Set default Foreground Color
+set default-fg "#f8f8f2"
+
+######################################### Render Loading
+
+set render-loading              true
+set render-loading-fg           "#282a36" # Background
+set render-loading-bg           "#f8f8f2" # Foreground
+
+######################################### Recoloring
+
+### En/Disables recoloring
+set recolor true
+
+### Defines the color value that is used to represent dark colors in recoloring mode
+set recolor-darkcolor    "#f8f8f2" #previous: FFFFFF
+
+### Defines the color value that is used to represent light colors in recoloring mode
+set recolor-lightcolor   "#050713" #previous: 000000
 
 map u scroll half-up
 map d scroll half-down
@@ -89,3 +132,7 @@ map J zoom out
 map i recolor
 map p print
 map g goto top
+map <C-Space> toggle_fullscreen
+
+map [fullscreen] <C-Space> toggle_fullscreen
+map [fullscreen] i recolor
