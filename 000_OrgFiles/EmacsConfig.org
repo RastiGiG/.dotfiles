@@ -20,13 +20,13 @@ To get the best out of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]], it's 
 If you want to *startup* the [[id:0e90f8b7-dd79-42fd-928f-c6b2ff4a63a2][Emacs Daemon]] automatically and your ~System~ makes use of [[id:c0a74747-b48a-49a4-ae88-a612f27a3b28][systemd]], simply create the file =emacs.service= under =~/.config/systemd/user/= with the following contents:
 #+begin_src shell
   [Unit]
-  Description=Emacs text editor
+  Description=Emacs - The extensibles, customizable, self-documenting Editor
   Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
   [Service]
   Type=forking
-  ExecStart=/usr/bin/emacs --daemon
-  ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+  ExecStart=/usr/local/bin/emacs --daemon
+  ExecStop=/usr/local/bin/emacsclient --eval "(kill-emacs)"
   Environment=SSH_AUTH_SOCK=%t/keyring/ssh
   Restart=on-failure
 
@@ -425,9 +425,7 @@ I Prefer ~Spaces~ over ~Tabs~, if you need to enable it for certain modes, add a
   (setq-default tab-width 4)
 #+end_src
 ** Calender
-
 #+begin_src emacs-lisp
-
   ;; Show Calendar on StartUp                      
   ;; (calendar)
 
@@ -435,7 +433,12 @@ I Prefer ~Spaces~ over ~Tabs~, if you need to enable it for certain modes, add a
   (setq european-calender-style 't)
 
 #+end_src
+** Battery Status
+#+begin_src emacs-lisp
+  ;; Display battery for when in full screen mode
+  (display-battery-mode t)
 
+#+end_src
 ** Macros
 
 #+begin_src emacs-lisp
@@ -560,14 +563,108 @@ Information can be found here: [[https://github.com/purcell/exec-path-from-shell
 
 #+RESULTS:
 
+** Skeletons
+
+~Skeletons~ are ~text constructs~ (like ~letter headers~ or ~programming templates~) that you can insert.
+:NOTE:
+Find more here:
+=C-h i autotype= > =Using Skeletons=
+:END:
+*** Latex Skeleton
+#+begin_src emacs-lisp
+  ;; Article Skeleton
+  (define-skeleton latex-article-skeleton
+    "Skeleton for article type latex documents"
+    "Preamble:"
+    "\\documentclass{article}\n"
+    "\\usepackage[utf8]{inputenc}\n"
+    "\\usepackage[margin=1 in]{geometry}\n"
+    "\\usepackage{graphicx}\n"
+    "\\setlength{\\parindent}{4em}\n"
+    "\\setlength{\\parskip}{1em}\n"
+    "\\renewcommand{\\baselinestretch}{1.5}\n\n"
+    "\\author{<AUTOR>}\n"
+    "\\title{"_"}\n"
+    "\\date{\\today}\n\n"
+    "\\begin{document}\n"
+    "\\maketitle\n\n"
+    "\\end{document}\n")
+
+#+end_src
+*** Org Mode
+**** LaTeX Summary
+#+begin_src emacs-lisp
+  ;; Org LaTeX Summary Header 
+  (define-skeleton org-latex-summary
+    "Skeleton for summaries "
+    "Preamble:"
+    "#+LATEX_CLASS: article\n"
+    "#+LATEX_CLASS_OPTIONS: [a5paper,landscape,fourcolumn]\n"
+    "#+LATEX_COMPILER: lualatex\n"
+    "#+LATEX_HEADER: \\input{/home/trajanus/Documents/LaTeX/summaryheader.tex}\n"
+    "#+STARTUP: showeverything\n"
+    "#+OPTIONS: toc:nil\n"
+    "\\begin{multicols*}{4}\n"
+    "* "_"\n"
+    "\\end{multicols*}\n")
+
+#+end_src
+**** LaTeX Article
+#+begin_src emacs-lisp
+  ;; Org LaTeX Article Header
+  (define-skeleton org-latex-article
+    "Skeleton for articles "
+    "Preamble:"
+    "#+STARTUP: showeverything\n"
+    "#+TITLE: TITLE\n"
+    "#+AUTHOR: AUTHOR\n"
+    "#+DATE: \\today\n"
+    "#+LATEX_CLASS: article\n"
+    "#+LATEX_CLASS_OPTIONS: [a4paper]\n"
+    "#+LATEX_HEADER: \\input{/home/trajanus/Documents/LaTeX/articleheader.tex}\n"
+    "#+STARTUP: showeverything\n"
+    "#+OPTIONS: toc:nil\n")
+
+#+end_src
+**** Wiki
+#+begin_src emacs-lisp
+  ;; Org Wiki
+  (define-skeleton org-wiki-entry
+    "Skeleton for articles "
+    "Preamble:"
+    "#+STARTUP: showeverything\n"
+    "#+TITLE: "_"\n"
+    "#+AUTHOR: AUTHOR\n"
+    "#+STARTUP: showeverything\n"
+    "\n"
+    "* Index")
+  
+#+end_src
+**** Wiki Index
+#+begin_src emacs-lisp
+  ;; Org Wiki Index
+  (define-skeleton org-wiki-index
+    "Skeleton for articles "
+    "Preamble:"
+    "#+STARTUP: showeverything\n"
+    "#+TITLE: "_"\n"
+    "#+AUTHOR: AUTHOR\n"
+    "#+STARTUP: showeverything\n"
+    "\n"
+    "* Index\n"
+    "\n"
+    "** Summaries\n"
+    "[[./summaries/summaries.org][Summaries]]"
+  )
+
+#+end_src
 ** YASnippets
 
-Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration)
-Set the folder for snippets to be saved
-Enable YASnippets globally
-Documentation can be found here: [[https://github.com/joaotavora/yasnippet]]
-
+Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration).
+[[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippets]] are an ~extension/improvement~ over the basic [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Skeletons~ 
+Documentation can be found here: [[https://github.com/joaotavora/yasnippet][GitHub.com: Yasnippet]]
 #+begin_src emacs-lisp
+  ;; save Yasnippet dir
   (setq pet/yasnippet-dir
         (concat pet/dotfiles-emacsconfig-dir
                 "snippets"))
@@ -612,6 +709,17 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
                            "<return>") nil))
 #+end_src
 
+** Beacon
+Documentation can be found here: https://github.com/Malabarba/beacon
+#+begin_src emacs-lisp
+  ;; applies beacon effect to the highlighted line on page scrolls
+  (use-package beacon
+     :config
+     (beacon-mode 1)
+     ;(setq beacon-color 0.4)
+     )
+
+#+end_src
 ** Visual Regular Expressions
 [[https://github.com/benma/visual-regexp.el][Visual-Regexp]] is a third party package that builds on emacs lisp [[id:26419d86-c777-4765-9dd1-9353f17a0716][regular expression]] functionality.
 It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d86-c777-4765-9dd1-9353f17a0716][expressions]] during ~build-up~
@@ -1053,7 +1161,6 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
 #+end_src
 
 * File Management
-
 ** Keeping Folders Clean
 *** Backup Files
 

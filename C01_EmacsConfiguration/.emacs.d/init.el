@@ -288,6 +288,9 @@
 ;; set date format to %DD-%MM-%YYYY
 (setq european-calender-style 't)
 
+;; Display battery for when in full screen mode
+(display-battery-mode t)
+
 ; Setup file containing global macros
 (load-file
  (concat pet/dotfiles-emacsconfig-dir
@@ -369,6 +372,79 @@
 ;; (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
 ;;   (add-to-list 'exec-path-from-shell-variables var))
 
+;; Article Skeleton
+(define-skeleton latex-article-skeleton
+  "Skeleton for article type latex documents"
+  "Preamble:"
+  "\\documentclass{article}\n"
+  "\\usepackage[utf8]{inputenc}\n"
+  "\\usepackage[margin=1 in]{geometry}\n"
+  "\\usepackage{graphicx}\n"
+  "\\setlength{\\parindent}{4em}\n"
+  "\\setlength{\\parskip}{1em}\n"
+  "\\renewcommand{\\baselinestretch}{1.5}\n\n"
+  "\\author{<AUTOR>}\n"
+  "\\title{"_"}\n"
+  "\\date{\\today}\n\n"
+  "\\begin{document}\n"
+  "\\maketitle\n\n"
+  "\\end{document}\n")
+
+;; Org LaTeX Summary Header 
+(define-skeleton org-latex-summary
+  "Skeleton for summaries "
+  "Preamble:"
+  "#+LATEX_CLASS: article\n"
+  "#+LATEX_CLASS_OPTIONS: [a5paper,landscape,fourcolumn]\n"
+  "#+LATEX_COMPILER: lualatex\n"
+  "#+LATEX_HEADER: \\input{/home/trajanus/Documents/LaTeX/summaryheader.tex}\n"
+  "#+STARTUP: showeverything\n"
+  "#+OPTIONS: toc:nil\n"
+  "\\begin{multicols*}{4}\n"
+  "* "_"\n"
+  "\\end{multicols*}\n")
+
+;; Org LaTeX Article Header
+(define-skeleton org-latex-article
+  "Skeleton for articles "
+  "Preamble:"
+  "#+STARTUP: showeverything\n"
+  "#+TITLE: TITLE\n"
+  "#+AUTHOR: AUTHOR\n"
+  "#+DATE: \\today\n"
+  "#+LATEX_CLASS: article\n"
+  "#+LATEX_CLASS_OPTIONS: [a4paper]\n"
+  "#+LATEX_HEADER: \\input{/home/trajanus/Documents/LaTeX/articleheader.tex}\n"
+  "#+STARTUP: showeverything\n"
+  "#+OPTIONS: toc:nil\n")
+
+;; Org Wiki
+(define-skeleton org-wiki-entry
+  "Skeleton for articles "
+  "Preamble:"
+  "#+STARTUP: showeverything\n"
+  "#+TITLE: "_"\n"
+  "#+AUTHOR: AUTHOR\n"
+  "#+STARTUP: showeverything\n"
+  "\n"
+  "* Index")
+
+;; Org Wiki Index
+(define-skeleton org-wiki-index
+  "Skeleton for articles "
+  "Preamble:"
+  "#+STARTUP: showeverything\n"
+  "#+TITLE: "_"\n"
+  "#+AUTHOR: AUTHOR\n"
+  "#+STARTUP: showeverything\n"
+  "\n"
+  "* Index\n"
+  "\n"
+  "** Summaries\n"
+  "[[./summaries/summaries.org][Summaries]]"
+)
+
+;; save Yasnippet dir
 (setq pet/yasnippet-dir
       (concat pet/dotfiles-emacsconfig-dir
               "snippets"))
@@ -404,6 +480,13 @@
                   'mc/mark-all-dwim)
   (define-key mc/keymap (kbd
                          "<return>") nil))
+
+;; applies beacon effect to the highlighted line on page scrolls
+(use-package beacon
+   :config
+   (beacon-mode 1)
+   ;(setq beacon-color 0.4)
+   )
 
 (use-package visual-regexp)
 
