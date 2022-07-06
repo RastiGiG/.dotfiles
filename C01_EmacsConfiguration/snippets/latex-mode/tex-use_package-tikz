@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: tex-use_package-tikz
+# key: <tikz
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+\usepackage{tikz}                       % pictures, graphs, plots and more (Very powerful)
+% tikZ libraries that add base functionality
+\usetikzlibrary{calc}                   % enables relative position calculations
+\usetikzlibrary{babel}                  % needed for quotes
+\usetikzlibrary{quotes}                 % enables quote syntax
+% tikZ libraries that add more geometric shapes and functions
+\usetikzlibrary{intersections}          % for calculating intersections
+\usetikzlibrary{graphs}                 % easy tool for connecting nodes and edges
+\usetikzlibrary{positioning}            % allows for relative positioning (below of,..)
+\usetikzlibrary{er}                     % entity relationship library (for trees, etc.)
+\usetikzlibrary{through}                % adds keys that make shapes go throught given points
+\usetikzlibrary{fit}                    % to compute relative object sizes
+\usetikzlibrary{arrows}                 % adds more arrows for edges
+\usetikzlibrary{shapes}                 % adds shapes like diamond
+\usetikzlibrary{backgrounds}            % for setting backgrounds
+% special libraries with predefined macros
+\usetikzlibrary{automata}               % enables easy drawing of automata
+\usetikzlibrary{angles}                 % preefined pic for angles
+\usetikzlibrary{calendar}               % if you want to include dates and more
+\usetikzlibrary{trees}                  % extends tree customization options
+$0

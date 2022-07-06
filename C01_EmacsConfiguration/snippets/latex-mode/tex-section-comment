@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: tex-section-comment
+# key: <tsc
+# --
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Teil ${1:NR}
+% ${2:Section Title}
