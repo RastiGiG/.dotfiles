@@ -45,8 +45,8 @@
   Inputs must be in 'rgbRGB' " 
   (setq color (s-lower-camel-case color))
   (cond ((equal color "r") '(1 3))
-	((equal color "g") '(3 5))
-	((equal color "b") '(5 7))))
+    ((equal color "g") '(3 5))
+    ((equal color "b") '(5 7))))
 
 ;; Return the substring for a specified
 (defun pet/colorsubstr-from-colorstr (colorstr colorchannel)
@@ -68,8 +68,8 @@
 (defun pet/avg-color (color)
   "Calculates the Color Average from COLOR"
   (/ (+ (pet/number-from-string-by-channel color "r")
-	(pet/number-from-string-by-channel color "g")
-	(pet/number-from-string-by-channel color "b"))
+    (pet/number-from-string-by-channel color "g")
+    (pet/number-from-string-by-channel color "b"))
      3))
 
 ;; Returns a Color that contrasts background
@@ -127,24 +127,24 @@
    nil
    '(("hsl( *\\([0-9]\\{1,3\\}\\) *, *\\([0-9]\\{1,3\\}\\)% *,
     *\\([0-9]\\{1,3\\}\\)% *)"
-      (0 (put-text-property
-	  (+ (match-beginning 0) 3)
-	  (match-end 0)
-	  'face
-	  (list
-	   :background
-	   (concat
-	    "#"
-	    (mapconcat
-	     'identity
-	     (mapcar
-	      (lambda (x) (format "%02x" (round (* x 255))))
-	      (color-hsl-to-rgb
-	       (/ (string-to-number (match-string-no-properties 1)) 360.0)
-	       (/ (string-to-number (match-string-no-properties 2)) 100.0)
-	       (/ (string-to-number (match-string-no-properties 3)) 100.0)))
-	     "" )) ;  "#00aa00"
-	   ))))))
+  (0 (put-text-property
+      (+ (match-beginning 0) 3)
+      (match-end 0)
+      'face
+      (list
+       :background
+       (concat
+        "#"
+        (mapconcat
+         'identity
+         (mapcar
+      (lambda (x) (format "%02x" (round (* x 255))))
+      (color-hsl-to-rgb
+       (/ (string-to-number (match-string-no-properties 1)) 360.0)
+       (/ (string-to-number (match-string-no-properties 2)) 100.0)
+       (/ (string-to-number (match-string-no-properties 3)) 100.0)))
+         "" )) ;  "#00aa00"
+       ))))))
   (font-lock-flush))
 
 ;; Function to insert a random color in HSL format
@@ -153,20 +153,20 @@
   Sample output: hsl(100,24%,82%);"
   (interactive)
   (insert (format "hsl(%d,%d%%,%d%%);"
-		  (random 360) (random 100) (random 100))))
+          (random 360) (random 100) (random 100))))
 
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+  (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
+    (url-retrieve-synchronously
+     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+     'silent 'inhibit-cookies)
+  (goto-char (point-max))
+  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 ;; Use straight.el for use-package expressions
@@ -178,10 +178,10 @@
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-	("melpa-stable" . "https://stable.melpa.org/packages/")
-	("org" . "https://orgmode.org/elpa/")
-	("elpa" . "https://elpa.gnu.org/packages/")))
+  '(("melpa" . "https://melpa.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
+    ("org" . "https://orgmode.org/elpa/")
+    ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;; A few basic settings
 
@@ -358,6 +358,17 @@
 (setq display-time-world-time-format
       "%A, %d %B %Y %H:%M %p %Z")
 
+;; Package to setup Path Variable (and more) in Emacs
+(use-package exec-path-from-shell)
+
+;; Read Path from Shell Setup when Emacs Server is launched through SystemD
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+
+;; Copy values of other Environment Variables
+;; (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
+;;   (add-to-list 'exec-path-from-shell-variables var))
+
 (setq pet/yasnippet-dir
       (concat pet/dotfiles-emacsconfig-dir
               "snippets"))
@@ -404,7 +415,16 @@
 
 ;; Add Origami Mode for Folding
 (use-package origami
-  :hook (yaml-mode . origami-mode))
+  :hook (yaml-mode . origami-mode)
+  :bind (
+         :map origami-mode-map
+              ("<tab>" . origami-recursively-toggle-node)
+              ("S-<tab>" . origami-toggle-all-nodes)
+              ("C-c C-n" . origami-next-fold)
+              ("C-c C-p" . origami-previous-fold)
+              ("C-c C-S-_" . origami-undo)
+              ("C-c C-S-M-_" . origami-redo))
+  )
 
 ;; Setup general for easier key config
 (use-package general
@@ -416,48 +436,49 @@
   (pet/leader-keys
 
     ;; Layouts
-   "l"    '(:ignore t :which-key "Layout")
+    "l"    '(:ignore t :which-key "Layout")
 
-   ;; Editing Tools
-   "e"     '(:ignore t :which-key "Editing Tools")
-   ;; Letters
-   "el"    '(:ignore t :which-key "Letters")
-   "elM-u" 'upcase-initials
-   "elC-uM-u" 'upcase-initials-region
-   ;; Tabs
-   "et"    '(untabify
-         :which-key "Untabify")
-   "er"    '(regexp-builder
-         :which-key "Regexp Builder")
+    ;; Editing Tools
+    "e"     '(:ignore t :which-key "Editing Tools")
+    ;; Letters
+    "el"    '(:ignore t :which-key "Letters")
+    "elM-u" 'upcase-initials
+    "elC-uM-u" 'upcase-initials-region
+    ;; Tabs
+    "et"    '(untabify
+              :which-key "Untabify")
+    "er"    '(regexp-builder
+              :which-key "Regexp Builder")
 
-   ;; Files
-   "f"   '(:ignore t :which-key "Files")
-   "fR"   'recentf-open-files
+    ;; Files
+    "f"   '(:ignore t :which-key "Files")
+    "fR"   'recentf-open-files
 
-   ;; Org Mode related
-   "o"    '(:ignore t :which-key "Org Mode")
+    ;; Org Mode related
+    "o"    '(:ignore t :which-key "Org Mode")
 
-   ;; Toggles
-   "t"    '(:ignore t :which-key "Toggles")
-   "tc"   'world-clock
-   "tt"   '(counsel-load-theme
-        :which-key "Choose Theme")
+    ;; Toggles
+    "t"    '(:ignore t :which-key "Toggles")
+    "tc"   'world-clock
+    "tt"   '(counsel-load-theme
+             :which-key "Choose Theme")
 
-   ;; Toggles - Highlighting
-   "th"   '(:ignore t :which-key "Highlighting")
-   ;; Toggles - Highlighting - Colors
-   "thc"  '(:ignore t :which-key "Colors")
-   "thcr" '(pet/syntax-color-rgb
-        :which-key "RGB")
-   "thch" '(pet/syntax-color-hsv
-        :which-key "HSV")
-   ;; Toggles - Modes
-   "tm"   '(:ignore t :which-key "Modes")
-   "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
-   "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
-   "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
-   "tmo"  '(org-mode :which-key "Org Mode")
-   "tme"  '(emojify-mode :which-key "Emojify Mode")
+    ;; Toggles - Highlighting
+    "th"   '(:ignore t :which-key "Highlighting")
+    ;; Toggles - Highlighting - Colors
+    "thc"  '(:ignore t :which-key "Colors")
+    "thcr" '(pet/syntax-color-rgb
+             :which-key "RGB")
+    "thch" '(pet/syntax-color-hsv
+             :which-key "HSV")
+    ;; Toggles - Modes
+    "tm"   '(:ignore t :which-key "Modes")
+    "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
+    "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
+    "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
+    "tmo"  '(org-mode :which-key "Org Mode")
+    "tmf"  '(origami-mode :which-key "Origami Mode")
+    "tme"  '(emojify-mode :which-key "Emojify Mode")
   ))
 
 ;; Add Dashboard to Emacs
@@ -937,6 +958,8 @@
     "ot" '(:ignore t :which-key "Toggle")
     "otb" '(pet/org-toggle-babel-confirm-evaluate
         :which-key "Babel Confirm Evaluation")
+    "otc" '(org-cdlatex-mode
+        :which-key "Org CDLaTeX Minor Mode")
     "oti" '(org-toggle-inline-images
         :which-key "Inline Images")
     "otp" '(org-toggle-pretty-entities
@@ -1643,13 +1666,42 @@
 
 ;; Integrated environment for TeX
 (use-package tex-site
-  :straight auctex)
+  :straight auctex
+  :config
+  ;; Add Reftex Support to AUCTeX
+  (setq reftex-plug-into-AUCTeX t)
+  ;; Set Default Bibliography
+  (setq pet/default-bib
+        (concat pet/home-dir "~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+  (setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+  )
 
-;; enable completion
-(setq-default TeX-master nil)
-(setq TeX-parse-self t)
+
 ;; enable auto saving tex files
 (setq TeX-auto-save t)
+;; enable completion and multifile structure (include/input)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+
+;; set $ to insert math environment
+;; ... for plain TeX
+(add-hook 'plain-TeX-mode-hook
+          (lambda () (set (make-local-variable 'TeX-electric-math)
+                          (cons "$" "$"))))
+;; ... for LaTeX
+(add-hook 'LaTeX-mode-hook
+          (lambda () (set (make-local-variable 'TeX-electric-math)
+                          (cons "\\(" "\\)"))))
+
+;; Load RefTeX...
+;; ... with AUCTeX LaTeX mode
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;; ... with with Emacs latex mode
+(add-hook 'latex-mode-hook 'turn-on-reftex)
+
+;; Enable auto completion of right braces (")}]\)\]\}")
+;; Use 'C-u 1' or 'C-q' before to disable 
+(setq LaTeX-electric-left-right-brace t)
 
 ;; LatexMK support for AUCTeX
 ;; (use-package auctex-latexmk)
@@ -1658,26 +1710,23 @@
 ;;(use-package latex-extra)
 
 ;; Fast input methods for LaTeX environments and math
-;; (use-package cdlatex
-;;   :bind (:map cdlatex-mode-map
-;;               (nil . cdlatex-math-symbol)
-;;               ("C-`" . cdlatex-math-symbol)
-;;          :map org-cdlatex-mode-map
-;;          (nil . cdlatex-math-symbol)
-;;          ("C-`" . cdlatex-math-symbol))
-;; )              
+(use-package cdlatex
+  :config
+  ;; Maybe add hook to autoload cdlatex
+  ;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
+  ;; (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
 
-;;   (require 'tex)
-;;   ; default compiled document: pdf
-;;   (TeX-global-PDF-mode t)            
-;;   (setq TeX-view-program-list
-;; 	'(("zathura" "zathura --page=%(outpage) %o")))
-;; 
+  ;; Added personal keybinding
+  (pet/leader-keys
+        "tmc" '(cdlatex-mode
+                :which-key "CDLaTeX Minor Mode"))
+  )
+
 (setq TeX-view-program-selection
       '(((output-dvi has-no-display-manager) "dvi2tty")
         ((output-dvi style-pstricks) "dvips and gv")
         (output-dvi "xdvi")
-        (output-pdf "zathura")
+        (output-pdf "Zathura")
         (output-html "xdg-open")))
 
 ;;;; Customize Python Mode for emacs, add lsp
