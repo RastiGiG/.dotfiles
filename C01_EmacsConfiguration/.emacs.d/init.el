@@ -660,19 +660,19 @@
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
-	 ("C-r" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
+     ("C-r" . swiper)
+     :map ivy-minibuffer-map
+     ("TAB" . ivy-alt-done)
+     ("C-l" . ivy-alt-done)
+     ("C-j" . ivy-next-line)
+     ("C-k" . ivy-previous-line)
+     :map ivy-switch-buffer-map
+     ("C-k" . ivy-previous-line)
+     ("C-l" . ivy-done)
+     ("C-d" . ivy-switch-buffer-kill)
+     :map ivy-reverse-i-search-map
+     ("C-k" . ivy-previous-line)
+     ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
 
@@ -680,8 +680,8 @@
 (use-package counsel
   :after ivy
   :bind (("C-M-j" . 'counsel-switch-buffer)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history))
+     :map minibuffer-local-map
+     ("C-r" . 'counsel-minibuffer-history))
   :config
   (counsel-mode 1)
 
@@ -694,7 +694,8 @@
     "fr"  '(counsel-recentf :which-key "recent files")
     "fR"  '(revert-buffer :which-key "revert file")
     "fj"  '(counsel-file-jump :which-key "jump to file"))
-  )  
+  )
+
 ;; Ivy-Rich: Add Descriptions alongside M-x commands
 (use-package ivy-rich
   :after ivy
@@ -772,6 +773,64 @@
    "ltw" 'treemacs-select-window)
   )
 
+;; Store Backups in a single directory
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+
+;; auto-save-mode doesn't create the path automatically!
+(make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
+
+;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
+;; this moves it to a more centralized location (tmp)
+(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+
+;; Configuring Dired
+(use-package dired
+  :straight nil
+  ;; Defer loading of dired config til one of the commands is used
+  :commands (dired dired-jump)
+  ;; The prefixes are arguments given to "ls" by dired
+  :custom ((dired-listing-switches
+            "-aghlv --group-directories-first"))
+  :bind (("C-x C-j" . dired-jump))
+    )
+
+;; Adds icons to files and directories in dired           
+(use-package all-the-icons-dired
+  :hook
+  (dired-mode . all-the-icons-dired-mode))
+
+;; Use dired-open to launch external apps 
+(use-package dired-open)
+;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
+;; open .pdf in 'zahtura'
+(setq dired-open-extensions '(("gif" . "sxiv")
+			      ("jpg" . "sxiv")
+			      ("png" . "sxiv")
+			      ("mkv" . "mpv")
+			      ("mp4" . "mpv")
+			      ("pdf" . "zathura")))
+
+;; Add Filters by file extension to dired buffer
+(use-package dired-filter)
+
+;; Add Ranger Directory Explorer
+(use-package ranger
+  :config
+  ;; I don't want ranger to be the default
+  (setq ranger-override-dired-mode nil)
+  ;; Enable Image preview
+  (setq ranger-show-literal nil)
+  ;; Set Max Preview Size to 50MB
+  ;; !!careful, this can really slow down your machine!!
+  (setq ranger-max-preview-size 50)
+  ;; Don't preview video/audio files
+  (setq ranger-excluded-extensions ' ("mkv" "iso" "mp4" "mp3"))
+  (pet/leader-keys
+    "tmr"  '(ranger-mode :which-key "Ranger Mode")
+    )
+  )
+
 (use-package elfeed
   :bind (("C-c f" . elfeed)
 	 :map elfeed-search-mode-map
@@ -834,62 +893,16 @@
         (concat pet/dotfiles-emacsconfig-dir
                 "elfeed.stats")))
 
-(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
-
-;; auto-save-mode doesn't create the path automatically!
-(make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
-
-;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
-;; this moves it to a more centralized location (tmp)
-(setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-      auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
-
-;; Configuring Dired
-(use-package dired
-  :straight nil
-  ;; Defer loading of dired config til one of the commands is used
-  :commands (dired dired-jump)
-  ;; The prefixes are arguments given to "ls" by dired
-  :custom ((dired-listing-switches
-            "-aghlv --group-directories-first"))
-  :bind (("C-x C-j" . dired-jump))
-    )
-
-;; Adds icons to files and directories in dired           
-(use-package all-the-icons-dired
-  :hook
-  (dired-mode . all-the-icons-dired-mode))
-
-;; Use dired-open to launch external apps 
-(use-package dired-open)
-;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
-;; open .pdf in 'zahtura'
-(setq dired-open-extensions '(("gif" . "sxiv")
-			      ("jpg" . "sxiv")
-			      ("png" . "sxiv")
-			      ("mkv" . "mpv")
-			      ("mp4" . "mpv")
-			      ("pdf" . "zathura")))
-
-;; Add Filters by file extension to dired buffer
-(use-package dired-filter)
-
-;; Add Ranger Directory Explorer
-(use-package ranger
+;; Add Ledger Mode from Melpa
+;; (Alternatively include the installation path of ledger to load-path)
+(use-package ledger-mode
   :config
-  ;; I don't want ranger to be the default
-  (setq ranger-override-dired-mode nil)
-  ;; Enable Image preview
-  (setq ranger-show-literal nil)
-  ;; Set Max Preview Size to 50MB
-  ;; !!careful, this can really slow down your machine!!
-  (setq ranger-max-preview-size 50)
-  ;; Don't preview video/audio files
-  (setq ranger-excluded-extensions ' ("mkv" "iso" "mp4" "mp3"))
+  ;; Add mode Toggle to Keyspace
   (pet/leader-keys
-    "tmr"  '(ranger-mode :which-key "Ranger Mode")
-    )
-  )
+    "tml"   '(ledger-mode :which-key "Ledger Mode"))
+
+  ;; Load mode on .dat files
+  :mode "\\.dat\\'")
 
 ;; Helper Functions for Org
 (defun pet/org-font-setup ()
@@ -1131,8 +1144,9 @@
     ;; (cpp . t)           ;; C++
 
     (perl . t)          ;; Perl
-    ;; (php . t)           ;; PHP
+    (php . t)           ;; PHP
     (R . t)             ;; R
+    (Ruby . t)          ;; Ruby
     (lua . t)           ;; Lua Programming Language
     (shell . t)         ;; Command Line Programs 
     (latex . t)         ;; LaTeX  
@@ -1143,6 +1157,8 @@
     (awk . t)           ;; awk
     (sed . t)           ;; GNUsed
     (css . t)           ;; CSS
+    (plantuml . t)      ;; PlantUML
+    (ledger . t)        ;; Ledger CLI
     ))         
 
 ;; Add conf-unix to be recognized
@@ -1852,11 +1868,24 @@
   (pyvenv-mode 1))
 
 ;; Load PHP Package
-;;(use-package ob-php)
+(use-package php-mode)
 
 ;; Add Mode for Lua
 (use-package lua-mode)
 
+;; Add alternative Mode for HTML Developement
+;; (use-package web-mode)
+
 ;; Add support for YAML files
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
+
+;; Add PlantUML Support
+(use-package plantuml-mode
+  :config
+  ;; Set Execution Mode to Render with Local Binary
+  (setq plantuml-executable-path "/usr/bin/plantuml")
+  (setq plantuml-default-exec-mode 'executable)
+  ;; Set load path condition
+  :mode "\\.pl?a?n?t?uml\\'"
+  )

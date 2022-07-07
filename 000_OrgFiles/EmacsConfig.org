@@ -823,7 +823,7 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
       "tmf"  '(origami-mode :which-key "Origami Mode")
       "tme"  '(emojify-mode :which-key "Emojify Mode")
     ))
-  
+
 #+end_src
 
 * Extended UI Configuration
@@ -964,19 +964,19 @@ First we want new tabs to always open with a *scratch* buffer
   (use-package ivy
     :diminish
     :bind (("C-s" . swiper)
-	   ("C-r" . swiper)
-	   :map ivy-minibuffer-map
-	   ("TAB" . ivy-alt-done)
-	   ("C-l" . ivy-alt-done)
-	   ("C-j" . ivy-next-line)
-	   ("C-k" . ivy-previous-line)
-	   :map ivy-switch-buffer-map
-	   ("C-k" . ivy-previous-line)
-	   ("C-l" . ivy-done)
-	   ("C-d" . ivy-switch-buffer-kill)
-	   :map ivy-reverse-i-search-map
-	   ("C-k" . ivy-previous-line)
-	   ("C-d" . ivy-reverse-i-search-kill))
+       ("C-r" . swiper)
+       :map ivy-minibuffer-map
+       ("TAB" . ivy-alt-done)
+       ("C-l" . ivy-alt-done)
+       ("C-j" . ivy-next-line)
+       ("C-k" . ivy-previous-line)
+       :map ivy-switch-buffer-map
+       ("C-k" . ivy-previous-line)
+       ("C-l" . ivy-done)
+       ("C-d" . ivy-switch-buffer-kill)
+       :map ivy-reverse-i-search-map
+       ("C-k" . ivy-previous-line)
+       ("C-d" . ivy-reverse-i-search-kill))
     :config
     (ivy-mode 1))
 
@@ -984,8 +984,8 @@ First we want new tabs to always open with a *scratch* buffer
   (use-package counsel
     :after ivy
     :bind (("C-M-j" . 'counsel-switch-buffer)
-	   :map minibuffer-local-map
-	   ("C-r" . 'counsel-minibuffer-history))
+       :map minibuffer-local-map
+       ("C-r" . 'counsel-minibuffer-history))
     :config
     (counsel-mode 1)
 
@@ -998,12 +998,14 @@ First we want new tabs to always open with a *scratch* buffer
       "fr"  '(counsel-recentf :which-key "recent files")
       "fR"  '(revert-buffer :which-key "revert file")
       "fj"  '(counsel-file-jump :which-key "jump to file"))
-    )  
+    )
+
   ;; Ivy-Rich: Add Descriptions alongside M-x commands
   (use-package ivy-rich
     :after ivy
     :init
     (ivy-rich-mode 1))
+  
 #+end_src
 *** Prescient
 
@@ -1096,6 +1098,99 @@ It's got good integration with =Projectile=
     )
 #+end_src
 
+* File Management
+** Keeping Folders Clean
+*** Backup Files
+
+:NOTE:
+Can't seem to get these settings to work, need to look into it further
+:END:
+
+~Backup Files~ are files with a ="\~"= at the end: =Emacs.org~=
+First we are gonna set the the directory for our backup files, to store them in a single place instead of all over the system
+More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html]]
+
+#+begin_src emacs-lisp
+  ;; Store Backups in a single directory
+  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+
+#+end_src
+*** Auto Save Files
+
+~Auto Save Files~ are files with ="#"= on both ends: like =#Emacs.org#=. Next we are gonna save auto save files to a centralized location
+#+begin_src emacs-lisp
+  ;; auto-save-mode doesn't create the path automatically!
+  (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
+
+  ;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
+  ;; this moves it to a more centralized location (tmp)
+  (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
+        auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
+
+#+end_src
+** Dired
+
+Add the keybinding =C-x C-j= to <dired-jump>. Also we setup up the *base view* of the directory to *first list* *subdirectories* and then files
+#+begin_src emacs-lisp
+  ;; Configuring Dired
+  (use-package dired
+    :straight nil
+    ;; Defer loading of dired config til one of the commands is used
+    :commands (dired dired-jump)
+    ;; The prefixes are arguments given to "ls" by dired
+    :custom ((dired-listing-switches
+              "-aghlv --group-directories-first"))
+    :bind (("C-x C-j" . dired-jump))
+      )
+
+  ;; Adds icons to files and directories in dired           
+  (use-package all-the-icons-dired
+    :hook
+    (dired-mode . all-the-icons-dired-mode))
+#+end_src
+** Dired Open
+
+=dired-open= is part of [[https://github.com/Fuco1/dired-hacks][Dired Hacks]]. Enables opening files with external apps directly.
+#+begin_src emacs-lisp
+  ;; Use dired-open to launch external apps 
+  (use-package dired-open)
+  ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
+  ;; open .pdf in 'zahtura'
+  (setq dired-open-extensions '(("gif" . "sxiv")
+				("jpg" . "sxiv")
+				("png" . "sxiv")
+				("mkv" . "mpv")
+				("mp4" . "mpv")
+				("pdf" . "zathura")))
+#+end_src
+** Dired Filter
+
+=dired-filter= is part of [[https://github.com/Fuco1/dired-hacks][Dired Hacks]]. Add Filters to [[id:459e7903-23b0-4716-a08c-6a4b8f80f2db][Dired]] Buffer.
+#+begin_src emacs-lisp
+  ;; Add Filters by file extension to dired buffer
+  (use-package dired-filter)
+#+end_src
+** Ranger
+
+[[https://github.com/ralesi/ranger.el][Ranger]] is a feature rich substitution for dired. It is inspired by the the VIM plugin ranger
+#+begin_src emacs-lisp
+  ;; Add Ranger Directory Explorer
+  (use-package ranger
+    :config
+    ;; I don't want ranger to be the default
+    (setq ranger-override-dired-mode nil)
+    ;; Enable Image preview
+    (setq ranger-show-literal nil)
+    ;; Set Max Preview Size to 50MB
+    ;; !!careful, this can really slow down your machine!!
+    (setq ranger-max-preview-size 50)
+    ;; Don't preview video/audio files
+    (setq ranger-excluded-extensions ' ("mkv" "iso" "mp4" "mp3"))
+    (pet/leader-keys
+      "tmr"  '(ranger-mode :which-key "Ranger Mode")
+      )
+    )
+#+end_src
 * Elfeed - Emacs RSS Feed
 
 ~Elfeed~ is a package, that enables you to see your ~RSS Feed~ in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]. We also set up ~elfeed-score~
@@ -1149,7 +1244,6 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
   ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
   ;; (run-with-timer 0 (* 60 60 4) 'elfeed-update)
 #+end_src
-
 ** Elfeed-Score
 
 ~Elfeed-Score~ is a ~package~ that applies [[https://www.gnu.org/software/emacs/manual/html_node/gnus/Scoring.html#Scoring][Gnu-Style Scoring]] to [[id:211d12c6-29db-4550-bd06-ef6f8b32640c][Elfeed]]
@@ -1171,102 +1265,20 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
           (concat pet/dotfiles-emacsconfig-dir
                   "elfeed.stats")))
 #+end_src
-
-* File Management
-** Keeping Folders Clean
-*** Backup Files
-
-:NOTE:
-Can't seem to get these settings to work, need to look into it further
-:END:
-
-~Backup Files~ are files with a ="\~"= at the end: =Emacs.org~=
-First we are gonna set the the directory for our backup files, to store them in a single place instead of all over the system
-More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Backup.html]]
-
+* Legder Mode
+~Ledger Mode~ is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Packages]] that builds on top of the [[id:dec94196-4859-4fe6-be58-4237c61d9fad][CLI Tool]] [[https://www.ledger-cli.org/][Ledger]] for ~Plaintext Accounting~
 #+begin_src emacs-lisp
-  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
-#+end_src
-
-*** Auto Save Files
-
-~Auto Save Files~ are files with ="#"= on both ends: like =#Emacs.org#=. Next we are gonna save auto save files to a centralized location
-#+begin_src emacs-lisp
-  ;; auto-save-mode doesn't create the path automatically!
-  (make-directory (expand-file-name "tmp/auto-saves" user-emacs-directory) t)
-  
-  ;; default for auto-save-list-file-prefix is "~/.emacs.d/auto-save-list/.saves~"
-  ;; this moves it to a more centralized location (tmp)
-  (setq auto-save-list-file-prefix (expand-file-name "tmp/auto-saves/sessions/" user-emacs-directory)
-        auto-save-file-name-transforms `((".*" ,(expand-file-name "tmp/auto-saves/" user-emacs-directory) t)))
-#+end_src
-
-** Dired
-
-Add the keybinding =C-x C-j= to <dired-jump>. Also we setup up the *base view* of the directory to *first list* *subdirectories* and then files
-#+begin_src emacs-lisp
-  ;; Configuring Dired
-  (use-package dired
-    :straight nil
-    ;; Defer loading of dired config til one of the commands is used
-    :commands (dired dired-jump)
-    ;; The prefixes are arguments given to "ls" by dired
-    :custom ((dired-listing-switches
-              "-aghlv --group-directories-first"))
-    :bind (("C-x C-j" . dired-jump))
-      )
-
-  ;; Adds icons to files and directories in dired           
-  (use-package all-the-icons-dired
-    :hook
-    (dired-mode . all-the-icons-dired-mode))
-#+end_src
-  
-** Dired Open
-
-=dired-open= is part of [[https://github.com/Fuco1/dired-hacks][Dired Hacks]]. Enables opening files with external apps directly.
-#+begin_src emacs-lisp
-  ;; Use dired-open to launch external apps 
-  (use-package dired-open)
-  ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
-  ;; open .pdf in 'zahtura'
-  (setq dired-open-extensions '(("gif" . "sxiv")
-				("jpg" . "sxiv")
-				("png" . "sxiv")
-				("mkv" . "mpv")
-				("mp4" . "mpv")
-				("pdf" . "zathura")))
-#+end_src
-
-** Dired Filter
-
-=dired-filter= is part of [[https://github.com/Fuco1/dired-hacks][Dired Hacks]]. Add Filters to [[id:459e7903-23b0-4716-a08c-6a4b8f80f2db][Dired]] Buffer.
-#+begin_src emacs-lisp
-  ;; Add Filters by file extension to dired buffer
-  (use-package dired-filter)
-#+end_src
-
-** Ranger
-
-[[https://github.com/ralesi/ranger.el][Ranger]] is a feature rich substitution for dired. It is inspired by the the VIM plugin ranger
-
-#+begin_src emacs-lisp
-  ;; Add Ranger Directory Explorer
-  (use-package ranger
+  ;; Add Ledger Mode from Melpa
+  ;; (Alternatively include the installation path of ledger to load-path)
+  (use-package ledger-mode
     :config
-    ;; I don't want ranger to be the default
-    (setq ranger-override-dired-mode nil)
-    ;; Enable Image preview
-    (setq ranger-show-literal nil)
-    ;; Set Max Preview Size to 50MB
-    ;; !!careful, this can really slow down your machine!!
-    (setq ranger-max-preview-size 50)
-    ;; Don't preview video/audio files
-    (setq ranger-excluded-extensions ' ("mkv" "iso" "mp4" "mp3"))
+    ;; Add mode Toggle to Keyspace
     (pet/leader-keys
-      "tmr"  '(ranger-mode :which-key "Ranger Mode")
-      )
-    )
+      "tml"   '(ledger-mode :which-key "Ledger Mode"))
+
+    ;; Load mode on .dat files
+    :mode "\\.dat\\'")
+
 #+end_src
 * Org Mode
 
@@ -1542,8 +1554,9 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       ;; (cpp . t)           ;; C++
 
       (perl . t)          ;; Perl
-      ;; (php . t)           ;; PHP
+      (php . t)           ;; PHP
       (R . t)             ;; R
+      (Ruby . t)          ;; Ruby
       (lua . t)           ;; Lua Programming Language
       (shell . t)         ;; Command Line Programs 
       (latex . t)         ;; LaTeX  
@@ -1554,12 +1567,14 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       (awk . t)           ;; awk
       (sed . t)           ;; GNUsed
       (css . t)           ;; CSS
+      (plantuml . t)      ;; PlantUML
+      (ledger . t)        ;; Ledger CLI
       ))         
 
   ;; Add conf-unix to be recognized
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
-#+end_src
 
+#+end_src
 ** Structure Templates
 
 [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]]’s =structure templates= feature enables you to quickly insert code blocks into your Org files in combination with =org-tempo= by typing =<= followed by the template name like el or py and then press TAB. For example, to insert an empty ~emacs-lisp~ block below, you can type =<se= and press TAB to expand into such a block.
@@ -2500,9 +2515,10 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 #+end_src
 
 *** PHP
+~Documentation~ can be found here: [[https://github.com/emacs-php/php-mode][GitHub.com: PHP Mode]]
 #+begin_src emacs-lisp
   ;; Load PHP Package
-  ;;(use-package ob-php)
+  (use-package php-mode)
   
 #+end_src
 
@@ -2513,6 +2529,14 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   
 #+end_src
 
+*** Web Mode
+~Web-Mode~ is an *alternative* [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Mode]] for editing [[id:df751d5b-04e3-4cb2-83de-76a6e39943d6][HTML]] Documents in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+~Documentation~ can be found here: [[https://web-mode.org/][Web-Mode.org]]
+#+begin_src emacs-lisp
+  ;; Add alternative Mode for HTML Developement
+  ;; (use-package web-mode)
+  
+#+end_src
 *** YAML
 Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
 #+begin_src emacs-lisp
@@ -2521,6 +2545,21 @@ Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
     :mode "\\.ya?ml\\'")
 
 #+end_src
+*** PlantUML
+You can find the ~Documentation~ here: [[https://github.com/skuro/plantuml-mode][GitHub.com: PlantUML-Mode]]
+#+begin_src emacs-lisp
+  ;; Add PlantUML Support
+  (use-package plantuml-mode
+    :config
+    ;; Set Execution Mode to Render with Local Binary
+    (setq plantuml-executable-path "/usr/bin/plantuml")
+    (setq plantuml-default-exec-mode 'executable)
+    ;; Set load path condition
+    :mode "\\.pl?a?n?t?uml\\'"
+    )
+
+#+end_src
+
 * Automatically Tangle Files
 :NOTE:
 This Section is ~deprecated~ since the ~Org Auto Tangle~ was added
