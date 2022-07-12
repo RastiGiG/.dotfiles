@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("D 07-0-1 Anleitungen"
+(("C 02-1 Mu4e Account Config"
+ (filename . "~/.config/emacs-config/MailAccounts.org")
+ (front-context-string . "\n* Settings\n\n#+b")
+ (rear-context-string . "    \n\n#+end_src\n")
+ (position . 1554))
+("D 07-0-1 Anleitungen"
  (filename . "~/Documents/07_Wissen_und_Bildung/00-Literatur/Anleitungen/")
  (front-context-string . "emacs-latex-pack")
  (rear-context-string . "K  5. Jul 10:00 ")
@@ -143,10 +148,10 @@
  (rear-context-string . "K 27. Feb 11:56 ")
  (position . 173))
 ("org-refile-last-stored"
- (filename . "~/Backup/Web-Bookmarks/1-bookmarks-import.org")
- (front-context-string . "** [[https://www")
- (rear-context-string . "ics:technology:\n")
- (position . 9036))
+ (filename . "~/Org/personal-archive.org")
+ (front-context-string . "** DONE Rock im ")
+ (rear-context-string . "Sa 23:21]\n:END:\n")
+ (position . 22967))
 ("C 02-4 Abbreviations"
  (filename . "~/.dotfiles/C01_EmacsConfiguration/abbrev_defs")
  (front-context-string . ";;-*-coding: utf")
@@ -168,10 +173,10 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220705121138-people_albert_camus.org")
- (front-context-string . "* People - Alber")
- (rear-context-string . "07-05 Di 12:11]\n")
- (position . 176))
+ (filename . "~/Org/20220710084510-r_packages.org")
+ (front-context-string . "\n* R - Packages\n")
+ (rear-context-string . "07-10 So 08:45]\n")
+ (position . 226))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
@@ -285,11 +290,6 @@
 ("C 03 MBSync Config"
  (filename . "~/.mbsyncrc")
  (front-context-string . "## T-Online ##\n\n")
- (rear-context-string)
- (position . 1))
-("C 02-1 Mu4e Account Config"
- (filename . "~/.config/emacs-configs/MailAccounts.el")
- (front-context-string . "(use-package mu4")
  (rear-context-string)
  (position . 1))
 ("D 02-1 CV1"

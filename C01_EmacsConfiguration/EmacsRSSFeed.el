@@ -28,11 +28,13 @@
     ("https://zettelkasten.de/feed.atom" blogs methodology zettelkasten)
     ("https://waitbutwhy.com/feed" blogs philosophy culture)
     ("https://www.cgpgrey.com/blog?format=rss" blogs culture politics)
-    ("https://blog.fefe.de/" böogs it culture politics security)
+    ("https://blog.fefe.de/" blogs it culture politics security)
     ;; Comments on 'Web3'
     ("https://web3isgoinggreat.com/feed.xml" blogs culture it)
     ;; Nachdenkseiten - Sozialkritik
     ("https://www.nachdenkseiten.de/?feed=rss2" blog culture politics society critical-thinking social-critique)
+    ;; R-Bloggers - News concerning R Programming Language
+    ("https://feeds.feedburner.com/RBloggers?format=xml" blog it r programming statistical-computation statistics data-science)
 
     ;;;; PODCASTS
 
