@@ -1131,6 +1131,474 @@ It's got good integration with =Projectile=
      "ltw" 'treemacs-select-window)
     )
 #+end_src
+** Hydra
+*** Description
+~Hydra~ is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]] that helps with ~keybindings~ by enabling you to create *virtual namespaces* for *repeated commands*.
+
+For example, imagine that you have bound =C-c j= and =C-c k= in your config and you want to call them in some (arbitrary) sequence. ~Hydra~ allows you to bind your functions in a way that pressing =C-c jjkk3j5k= is *equivalent to* pressing =C-c j C-c j C-c k C-c k M-3 C-c j M-5 C-c k=. *Any key other* than =j= or =k= *exits this state*.
+
++ ~Colors~ have a special meaning with ~hydras~ (=:color= ~option~). See the list below:
+  
+  | color    | toggle                     |
+  |----------+----------------------------|
+  | red      |                            |
+  | blue     | :exit t                    |
+  | amaranth | :foreign-keys warn         |
+  | teal     | :foreign-keys warn :exit t |
+  | pink     | :foreign-keys run          |
++ ~Hints~ are displayed next to the keys. If you add a ~Docstring~ you might want to disable that. Use =:hint nil= for that.
+  
+~Documentation~ can be found here: [[https://github.com/abo-abo/hydra][GitHub.com: Hydra]]
+*** Loading Hydra Package
+#+begin_src emacs-lisp
+  ;; Load Hydra Package
+  (use-package hydra)
+
+  ;; Add leader key Menu
+  (pet/leader-keys
+    "h" '(:ignore t :which-key "Hydras")
+   )
+
+#+end_src
+*** Text Scale Hydra
+#+begin_src emacs-lisp
+  ;; Define Text Scale Hydra 
+  (defhydra hydra-text-scale (:timeout 4)
+    "Scale text"
+    ("j" text-scale-increase "in")
+    ("k" text-scale-decrease "out")
+    ("q" nil "finished" :exit t))
+
+  (pet/leader-keys
+    "hs" '(hydra-text-scale/body :which-key "Scale text")
+   )
+
+#+end_src
+*** Buffer Menu Hydra
+#+begin_src emacs-lisp
+  ;; Hydra for Buffer Menu functions
+  (defhydra hydra-buffer-menu (
+                               :hint nil
+                               :timeout 10
+                               ;; :color pink
+                               )
+    "
+  ^Mark^             ^Unmark^           ^Actions^          ^Search
+  ^^^^^^^^-----------------------------------------------------------------
+  _m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch
+  _s_: save          _U_: unmark up     _b_: bury          _I_: isearch
+  _d_: delete        ^ ^                _g_: refresh       _O_: multi-occur
+  _D_: delete up     ^ ^                _T_: files only: % -28`Buffer-menu-files-only
+  _~_: modified
+  "
+    ("m" Buffer-menu-mark)
+    ("u" Buffer-menu-unmark)
+    ("U" Buffer-menu-backup-unmark)
+    ("d" Buffer-menu-delete)
+    ("D" Buffer-menu-delete-backwards)
+    ("s" Buffer-menu-save)
+    ("~" Buffer-menu-not-modified)
+    ("x" Buffer-menu-execute)
+    ("b" Buffer-menu-bury)
+    ("g" revert-buffer)
+    ("T" Buffer-menu-toggle-files-only)
+    ("O" Buffer-menu-multi-occur :color blue)
+    ("I" Buffer-menu-isearch-buffers :color blue)
+    ("R" Buffer-menu-isearch-buffers-regexp :color blue)
+    ("c" nil "cancel")
+    ("v" Buffer-menu-select "select" :color blue)
+    ("o" Buffer-menu-other-window "other-window" :color blue)
+    ("q" quit-window "quit" :color blue))
+
+  ;; Access Hydra in Buffer Menu with '.'
+  (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
+
+#+end_src
+*** Bookmark Menu Hydra
+#+begin_src emacs-lisp
+  ;; Bookmark Menu
+  (defhydra hydra-bookmark-menu (
+								 :color pink
+										:hint nil
+										:timeout 10)
+	"
+
+		 ^Mark^                ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
+		^^^^^^^^-----------------------------------------------------------------------------------------------------
+		_m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window 
+		_u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window    
+		_U_: unmark up    _R_: relocate bmk     _S_: show filenames      _e_: edit         _1_   on full window
+		_d_: delete       _w_: write bmk list   _T_: hide filenames      ^ ^               _2_   on split vertical
+		_D_: delete up    _i_: import bmk list  _t_: toggle filenames    ^ ^               _5_   on other frame
+		"
+	("m" bookmark-bmenu-mark)
+	("u" bookmark-bmenu-unmark)
+	("U" bookmark-bmenu-backup-unmark)
+	("d" bookmark-bmenu-delete)
+	("D" bookmark-bmenu-delete-backwards)
+	("x" bookmark-bmenu-execute-deletions)
+	("r" bookmark-bmenu-rename)
+	("R" bookmark-bmenu-relocate)  
+	("w" bookmark-bmenu-save)                   ;; 'writ' bookmark list
+	("i" bookmark-bmenu-load)                   ;; 'import' bookmark list
+	("/" bookmark-bmenu-search)
+	("l" bookmark-bmenu-locate)
+	("S" bookmark-bmenu-show-filenames)  
+	("T" bookmark-bmenu-hide-filenames)
+	("t" bookmark-bmenu-toggle-filenames)
+	("a" bookmark-bmenu-show-annotation)
+	("A" bookmark-bmenu-show-all-annotations)
+	("e" bookmark-bmenu-edit-annotation)
+	("c" nil "cancel" :exit t)
+	("s" bookmark-bmenu-select "select" :color blue)
+	("o" bookmark-bmenu-other-window :color blue)
+	("C-o" bookmark-bmenu-switch-window :color blue)
+	("1" bookmark-bmenu-1-window :color blue)
+	("2" bookmark-bmenu-2-window :color blue)
+	("5" bookmark-bmenu-other-frame :color blue)
+	("q" quit-window "quit bm list" :color blue))
+
+  ;; Access Menu through '.' in Bookmark List
+  (define-key bookmark-bmenu-mode-map
+			  "." 'hydra-bookmark-menu/body)
+
+#+end_src
+*** Apropos Hydra
+#+begin_src emacs-lisp
+  ;; Apropos Hydra
+  (defhydra hydra-apropos (
+                           ;; :color blue
+                           :hint nil
+                                 )
+    "
+  ^Apropos
+  ^^^^^^^^-----------------------
+  _a_propos        _c_ommand
+  _d_ocumentation  _l_ibrary
+  _v_ariable       _u_ser-option
+  ^ ^          valu_e_
+  "
+    ("a" apropos)
+    ("d" apropos-documentation)
+    ("v" apropos-variable)
+    ("c" apropos-command)
+    ("l" apropos-library)
+    ("u" apropos-user-option)
+    ("e" apropos-value))
+  ;; Recommended binding:
+  ;; (global-set-key (kbd "C-c h") 'hydra-apropos/body)
+
+  ;; Add to Leader keys
+  (pet/leader-keys
+    "ha" '(hydra-apropos/body :which-key "Apropos")
+   )
+
+#+end_src
+*** Window Management Hydra
+**** Helper Functions
+#+begin_src emacs-lisp
+  ;; Window Management Helpers
+  (require 'windmove)
+
+  ;; Move Splitter left
+  (defun pet/move-splitter-left (arg)
+	"Move window splitter left."
+	(interactive "p")
+	(if (let ((windmove-wrap-around))
+		  (windmove-find-other-window 'right))
+		(shrink-window-horizontally arg)
+	  (enlarge-window-horizontally arg)))
+
+  ;; Move Splitter left
+  (defun pet/move-splitter-right (arg)
+	  "Move window splitter right."
+	  (interactive "p")
+	  (if (let ((windmove-wrap-around))
+			(windmove-find-other-window 'right))
+		  (enlarge-window-horizontally arg)
+		(shrink-window-horizontally arg)))
+
+   ;; Move Splitter Up
+  (defun pet/move-splitter-up (arg)
+	"Move window splitter up."
+	(interactive "p")
+	(if (let ((windmove-wrap-around))
+		  (windmove-find-other-window 'up))
+		(enlarge-window arg)
+	  (shrink-window arg)))
+
+  ;; Move Splitter Down
+  (defun pet/move-splitter-down (arg)
+	"Move window splitter down."
+	(interactive "p")
+	(if (let ((windmove-wrap-around))
+		  (windmove-find-other-window 'up))
+		(shrink-window arg)
+	  (enlarge-window arg)))
+  
+#+end_src
+**** Hydra Definition
+#+begin_src emacs-lisp
+  ;; Define Window Management Hydra
+  (defhydra hydra-window (
+						  :hint nil
+								)
+	"
+	  Movement^^        ^Split^         ^Switch^		^Resize^
+	  ----------------------------------------------------------------
+	  _h_ ←        	_v_ertical    	_b_uffer		_q_ X←
+	  _j_ ↓        	_x_ horizontal	_f_ind files	_w_ X↓
+	  _k_ ↑        	_z_ undo      	_a_ce 1	        _e_ X↑
+	  _l_ →        	_Z_ reset      	_s_wap	        _r_ X→
+	  _F_ollow Mode    	_D_lt Other   	_S_ave	     max_i_mize
+	  _SPC_ cancel	    _o_nly this   	_d_elete	
+	  "
+	("h" windmove-left )
+	("j" windmove-down )
+	("k" windmove-up )
+	("l" windmove-right )
+	("q" pet/move-splitter-left)
+	("w" pet/move-splitter-down)
+	("e" pet/move-splitter-up)
+	("r" pet/move-splitter-right)
+	("b" list-buffers)
+	("f" find-files)
+	("F" follow-mode)
+	("a" (lambda ()
+		   (interactive)
+		   (ace-window 1)
+			   (add-hook 'ace-window-end-once-hook
+						 'hydra-window/body))
+	 )
+	("v" (lambda ()
+		   (interactive)
+		   (split-window-right)
+		   (windmove-right))
+	 )
+	("x" (lambda ()
+		   (interactive)
+		   (split-window-below)
+		   (windmove-down))
+	 )
+	("s" (lambda ()
+		   (interactive)
+		   (ace-window 4)
+		   (add-hook 'ace-window-end-once-hook
+					 'hydra-window/body)))
+	("S" save-buffer)
+	("d" delete-window)
+	("D" (lambda ()
+		   (interactive)
+		   (ace-window 16)
+		   (add-hook 'ace-window-end-once-hook
+					 'hydra-window/body))
+	 )
+	("o" delete-other-windows)
+	("i" ace-maximize-window)
+	("z" (progn
+		   (winner-undo)
+		   (setq this-command 'winner-undo))
+	 )
+	("Z" winner-redo)
+	("SPC" nil)
+	)
+
+  ;; Add to Leader keys
+  (pet/leader-keys
+	"hw" '(hydra-window/body :which-key "Window Management")
+	)
+
+#+end_src
+*** Multiple Cursors Hydra 
+#+begin_src emacs-lisp
+  ;; hydra multiple cursors
+  (defhydra hydra-multiple-cursors (:hint nil)
+    "
+       ^Up^            ^Down^             ^Other^
+  --------------------------------------------------------
+  [_p_]   Previous    [_n_]   Next    [_l_] Edit lines
+  [_P_]   Skip        [_N_]   Skip    [_a_] Mark all
+  [_M-p_] Unmark      [_M-n_] Unmark  [_r_] Mark by regexp
+  ^ ^                 ^ ^             [_d_] Mark all defun
+  ^ ^                 ^ ^             [_q_] Quit
+  "
+    ("l" mc/edit-lines :exit t)
+    ("a" mc/mark-all-like-this :exit t)
+    ("n" mc/mark-next-like-this)
+    ("N" mc/skip-to-next-like-this)
+    ("M-n" mc/unmark-next-like-this)
+    ("p" mc/mark-previous-like-this)
+    ("P" mc/skip-to-previous-like-this)
+    ("M-p" mc/unmark-previous-like-this)
+    ("r" mc/mark-all-in-region-regexp :exit t)
+    ("d" mc/mark-all-like-this-in-defun :exit t)
+    ("q" nil))
+
+  ;; Add to Leader keys
+  (pet/leader-keys
+    "hm" '(hydra-multiple-cursors/body :which-key "Multiple Cursors")
+   )
+
+#+end_src
+*** Editing Toggles Hydra
+#+begin_src emacs-lisp
+  ;; Editing Toggles
+  (defhydra hydra-editing-visuals (
+						  :color pink
+								 :hint nil
+								 )
+	"
+  ^Editing Visuals
+  ^^^^^^-------------------------------------------------------------------------
+  _a_ abbrev-mode:       %`abbrev-mode
+  _d_ debug-on-error:    %`debug-on-error
+  _f_ auto-fill-mode:    %`auto-fill-function
+  _t_ truncate-lines:    %`truncate-lines
+  _v_ visual-line-mode:  %`visual-line-mode
+  _w_ whitespace-mode:   %`whitespace-mode
+  "
+	("a" abbrev-mode)
+	("d" toggle-debug-on-error)
+	("f" auto-fill-mode)
+	("t" toggle-truncate-lines)
+	("v" visual-line-mode)
+	("w" whitespace-mode)
+	("q" nil "quit" :exit 1))
+
+  ;; (global-set-key (kbd "C-c C-v") 'hydra-editing-toggles/body)
+
+  ;; Add to Key Space
+  (pet/leader-keys
+	"eh" '(hydra-editing-visuals/body :which-key "Editing Visuals")
+	"ht" '(hydra-editing-visuals/body :which-key "Editing Visuals")
+	)
+
+#+end_src
+*** Global Org Mode Hydra
+#+begin_src emacs-lisp
+  ;; Global Org Mode Functionaliy via Hydra
+  (defhydra hydra-global-org-menu (
+								   :hint nil
+										 :color blue
+										 :timeout 10
+										 )
+	"
+		^Org Utilities
+
+		^Timer^                ^Clock^              ^Capture
+		^^^^^^-------------------------------------------------------------------------
+		 _t_: Start         _w_: Clock-In          _c_: Capture
+		 _s_: Stop          _o_: Clock-Out         _l_: Last Capture
+		 _r_: Set           _j_: Clock-Goto        ^ ^
+		 _p_: Print
+
+		 _q_: Quit
+		 "
+
+	  ("t" org-timer-start "Start Timer")
+	  ("s" org-timer-stop "Stop Timer")
+	  ;; This one requires you be in an orgmode doc, as it sets the timer for the header
+	  ("r" org-timer-set-timer "Set Timer")
+	  ;; output timer value to buffer
+	  ("p" org-timer "Print Timer")
+	  ;; used with (org-clock-persistence-insinuate) (setq org-clock-persist t)
+	  ("w" (org-clock-in '(4)) "Clock-In")
+	  ;; you might also want (setq org-log-note-clock-out t)
+	  ("o" org-clock-out "Clock-Out")
+	  ;; global visit the clocked task
+	  ("j" org-clock-goto "Clock Goto")
+	  ;; Don't forget to define the captures you want http://orgmode.org/manual/Capture.html
+	  ("c" org-capture "Capture")
+	  ("l" org-capture-goto-last-stored "Last Capture")
+	  ("q" :exit t)
+	  )
+
+  (pet/leader-keys
+	"ou" '(hydra-global-org-menu/body :which-key "Org Global Utilities")
+	"ho" '(hydra-global-org-menu/body :which-key "Org Global Hydra")
+	)
+
+#+end_src
+*** EBDB Mode Hydra
+#+begin_src emacs-lisp
+  ;; Hydra for Contact Management
+  (defhydra hydra-ebdb-menu (
+							 :hint nil
+								   :color pink
+								   )
+	"
+		^EBDB Utilities
+
+		^Records^                ^Fields^              ^Capture
+		^^^^^^-------------------------------------------------------------------------
+		_c_  Create           
+        _C_  Ext Create
+  "
+	("c" ebdb-create-record)
+	("C" ebdb-create-record-extended)
+	(";" ebdb-edit-foo "Notes")
+	("m" ebdb-mail "Mail")
+	("M" ebdb-mail-each "Mail Each")
+	("h" ebdb-info "Info Menu")
+	("?" ebdb-help "Help")
+	("e" ebdb-edit-field "Edit Field")
+	("TAB" ebdb-next-field "Next Field")
+	("^" ebdb-search-pop "Search Pop")
+	("P" ebdb-prev-field "Prev Field")
+	("s" ebdb-save-ebdb "Save Databases")
+	("+-t" ebdb-search-tags "Search Tags")
+	("+-m" ebdb-search-mail "Search Mail")
+	("p" ebdb-prev-record "Prev Record")
+	("n" ebdb-next-record "Next Record")
+	("+-p" ebdb-search-phone "Search Phone")
+	("d-c" ebdb-copy-records "Copy Records")
+	("o" ebdb-omit-records "Omit Records")
+	("d-m" ebdb-move-records "Move Records")
+	("A" ebdb-mail-aliases "Mail Aliases")
+	("b-c" ebdb-clone-buffer "Clone Buffer")
+	("i" ebdb-insert-field "Insert Field")
+	("RET" ebdb-record-action "Record Action")
+	("b-r" ebdb-rename-buffer "Rename Buffer")
+	("+-a" ebdb-search-address "Search Address")
+	("!" ebdb-search-invert "Search Invert")
+	("+-c" ebdb-search-modified "Search Modified")
+	("d-r" ebdb-reload-database "Reload Database")
+	("r" ebdb-reformat-records "Reformat Records")
+	("I" ebdb-cite-records-ebdb "Cite Records")
+	("d-d" ebdb-disable-database "Disable Database")
+	("+-d" ebdb-search-duplicates "Search Duplicates")
+	("w-m" ebdb-copy-mail-as-kill "Copy Mail as Kill")
+	("#" ebdb-record-mark "Mark Record")
+	("d-e" ebdb-customize-database "Customize Database")
+	("C-#" ebdb-unmark-all-records "Unmark all Records")
+	("+-x" ebdb-search-user-fields "Search User Fields")
+	("+-C" ebdb-search-record-class "Search Record Class")
+	("w-f" ebdb-copy-fields-as-kill "Copy Fields as Kill")
+	("C-x n w" ebdb-display-all-records "Display all Records")
+	("+ o" ebdb-search-organization "Search Organization")
+	("E" ebdb-edit-field-customize "Edit Field Customize")
+	("F" ebdb-format-these-records "Format These Records")
+	("f" ebdb-format-to-tmp-buff "Format to Tmp Buffer")
+	("/ 1" ebdb-search-single-record "Searc Single Record")
+	("w r" ebdb-copy-records-as-kill "Copy Records as Kill")
+	("t" ebdb-toggle-records-format "Toggle Records Format")
+	("R" ebdb-create-record-and-role "Create Record and Role")
+	("C-k" ebdb-delete-field-or-record "Delete Field or Record")
+	("C-x n d" ebdb-display-current-record "Display Current Record")
+	("M-#" ebdb-toggle-all-record-marks "Toggle all Record Marks")
+	("c" ebdb-toggle-all-records-format "Toggle All Records Format")
+	("q" "Quit Database")
+	("SPC" "Exit" :exit t)
+	)
+
+  ;; Access Menu through '.' in EBDB Buffer
+  (define-key ebdb-mode-map
+			  "." 'hydra-ebdb-menu/body)
+
+#+end_src
+
+#+RESULTS:
+: hydra-ebdb-menu/body
 
 * File Management
 ** Keeping Folders Clean
