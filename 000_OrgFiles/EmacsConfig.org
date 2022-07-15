@@ -2318,123 +2318,156 @@ The package =DOCT= tries to ease the setup. If you need more input, here's the [
 Other than that, the *documentation* for =capture templates= is [[https://orgmode.org/manual/Capture.html#Capture][here]]
 
 #+begin_src emacs-lisp
+  ;; Org-Capture
+  (use-package org-capture
+    :straight nil
+    :init
+
+    ;; Org Capture helper Variables
+
+    ;; Save default Org Capture Template Dir
+    (setq pet/org-cap-temp-dir
+          (concat pet/temp-dir
+                  (convert-standard-filename
+                   "X1_Emacs_Templates/Org_Capture_Templates/"
+                   )))
+
     ;; Org Capture helper Function
-    (defun pet/create-documents-file ()
-      "Create an org file in ~/Org/."
+
+    ;; Get filename and store at current directory
+    (defun pet/get-file-name-without-extension ()
+      "Ask user for filename"
       (interactive)
       (let ((name (read-string "Filename: ")))
-	(expand-file-name
-	 (format "%s.org" name))))
+        (expand-file-name name))
+      )
+    ;; Get filename with ".org" and store at current directory
+    (defun pet/get-org-file-name ()
+      "Ask user for filename"
+      (interactive)
+      (let ((name (read-string "Filename: ")))
+        (expand-file-name
+         (format "%s.org" name)))
+      )
 
-    ;; Org-Capture
-    (use-package org-capture
-      :straight nil
-      :config
-       (setq org-capture-templates
-	     ;; Acronym captures
-	     `(("a" "Acronyms" table-line
-		(file+headline "~/Org/acronyms.org" "Inbox")
-		"| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
+    :config
+    ;; Set default file for capture if not specified
+    (setq org-default-notes-file
+          (concat pet/home-dir "Projects/Notes/notes.org"))
 
-	       ;; Documents
-	       ("d" "Documents")
-	       ("dl" "Letter")
-	       ("dlf" "Letter Form" plain (file pet/create-documents-file)
-		"%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
-		:if-new (file "${slug}.org" "#+TITLE: ${title}\n")
-		:unnarrowed t
-		)
-	       ("dlh" "Letter Home" plain (file pet/create-documents-file)
-		"%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
-		:if-new (file "${slug}.org" "#+TITLE: ${title}\n")
-		:unnarrowed t
-		)
+    (setq org-capture-templates
+          ;; Acronym captures
+          `(("a" "Acronyms" table-line
+             (file+headline "~/Org/acronyms.org" "Inbox")
+             "| %^{ACRONYM} | %^{DEFINITION} | %^{DESCRIPTION}|")
 
-	       ;; Email captures
-	       ("e" "Email")
-	       ("em" "Make email note" entry
-		(file+headline "~/Org/personal-tasks.org" "Mail correspondence")
-		,(concat "* TODO [#A] %:subject :mail:\n"
-			 "SCHEDULED: %t\n:"
-			 "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
-			 "%i%?"))
-	       ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
-		"* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
-	       ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
-		"* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+            ;; Documents
+            ("d" "Documents")
+            ("dl" "Letter")
+            ("dlf" "Letter Form" plain (file pet/get-org-file-name)
+             "%[~/.dotfiles/00_OrgFiles/Templates/Capture-LetterTemp.org]"
+             :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+             :unnarrowed t
+             )
+            ("dlh" "Letter Home" plain (file pet/get-org-file-name)
+             "%[~/Templates/X1_Emacs_Templates/Capture-LetterTemp-Filled-Home-Real.org]"
+             :if-new (file "${slug}.org" "#+TITLE: ${title}\n")
+             :unnarrowed t
+             )
+            ("do" "Org File")
+            ("dod" "Default Org File"
+             plain
+             (file pet/get-org-writing-file-name)
+             "#+TITLE: ${title}\n%[~/Templates/X1_Emacs_Templates/Org_Capture_Templates/default-org-file.orgctemp]"
+             :unnarrowed t
+             )
 
 
-	       ;; Journal captures
-	       ("j" "Journal Entries")
-	       ("jj" "Journal" entry
-		(file+olp+datetree "~/Org/journal/journal.org")
-		"\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-		;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
-		:clock-in :clock-resume
-		:empty-lines 1)
-	       ("jm" "Meeting" entry
-		(file+olp+datetree "~/Org/journal/journal.org")
-		"* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-		:clock-in :clock-resume
-		:empty-lines 1)
+            ;; Email captures
+            ("e" "Email")
+            ("em" "Make email note" entry
+             (file+headline "~/Org/personal-tasks.org" "Mail correspondence")
+             ,(concat "* TODO [#A] %:subject :mail:\n"
+                      "SCHEDULED: %t\n:"
+                      "PROPERTIES:\n:CONTEXT: %a\n:END:\n\n"
+                      "%i%?"))
+            ("ef" "Follow Up" entry (file+olp "~/Org/personal-mail.org" "Follow Up")
+             "* TODO Follow up with %:fromname on %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
+            ("er" "Read Later" entry (file+olp "~/Org/personal-mail.org" "Read Later")
+             "* TODO Read %:subject %a\nSCHEDULED:%t\nDEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+2d\"))\n\n%i \n\n" :immediate-finish t)
 
-	       ;; Checklist captures
-	       ("l" "Lists")
 
-	       ("ls" "Shopping List" checkitem
-		(file+olp "~/Org/lists-shopping.org" "Inbox")
-		"[ ] %^{Itemname}")
+         ;; Journal captures
+            ("j" "Journal Entries")
+            ("jj" "Journal" entry
+             (file+olp+datetree "~/Org/journal/journal.org")
+             "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+             ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+             :clock-in :clock-resume
+             :empty-lines 1)
+            ("jm" "Meeting" entry
+             (file+olp+datetree "~/Org/journal/journal.org")
+             "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+             :clock-in :clock-resume
+             :empty-lines 1)
 
-	       ("ll" "Literature" checkitem
-		(file+olp "~/Org/lists-literature.org" "Inbox")
-		"[ ] %^{Author} - %^{Titel}")
+            ;; Checklist captures
+            ("l" "Lists")
 
-	       ("lm" "Music" checkitem
-		(file+olp "~/Org/lists-music.org" "Inbox")
-		"[ ] %^{Interpret} - %^{Title}")
+            ("ls" "Shopping List" checkitem
+             (file+olp "~/Org/lists-shopping.org" "Inbox")
+             "[ ] %^{Itemname}")
 
-	       ("q" "Quotes" entry
-		(file+olp "~/Org/quotes.org" "Inbox")
-		"* %^{Originator}\n\n#+begin_quote\n%?\n#+end_quote")
+            ("ll" "Literature" checkitem
+             (file+olp "~/Org/lists-literature.org" "Inbox")
+             "[ ] %^{Author} - %^{Titel}")
 
-	       ("t" "Tasks / Projects")
-	       ("tt" "TODO Task" entry (file+olp
-					"~/Org/personal-tasks.org" "Inbox")
-		"* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
-	       ("tb" "Basic task for future review" entry
-		(file+headline "~/Org/personal-tasks.org" "Inbox")
-		,(concat "* %^{Title}\n"
-			 ":PROPERTIES:\n"
-			 ":CAPTURED: %U\n"
-			 ":END:\n\n"
-			 "%i%l"))
-	       ("ts" "Task with a due date (scheduled)" entry
-		(file+headline "~/Org/personal-tasks.org" "Inbox")
-		,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-			 "SCHEDULED: %^t\n"
-			 ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-			 "%i%?"))
-	       ("td" "Task with a due date (deadline)" entry
-		(file+headline "~/Org/personal-tasks.org" "Inbox")
-		,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
-			 "DEADLINE: %^t\n"
-			 ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
-			 "%i%?"))
+            ("lm" "Music" checkitem
+             (file+olp "~/Org/lists-music.org" "Inbox")
+             "[ ] %^{Interpret} - %^{Title}")
 
-	       ("w" "Workflows")
-	       ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
-		"* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
+            ("q" "Quotes" entry
+             (file+olp "~/Org/quotes.org" "Inbox")
+             "* %^{Originator}\n\n#+begin_quote\n%?\n#+end_quote")
 
-      ;; Activate Context Templates for Email 
-      (setq org-capture-templates-contexts
-	    '(("e" ((in-mode . "notmuch-search-mode")
-		    (in-mode . "notmuch-show-mode")
-		    (in-mode . "notmuch-tree-mode")
-		    (in-mode . "mu4e-headers-mode")))))
-      :bind
-      ("C-c c" . org-capture))
+            ("t" "Tasks / Projects")
+            ("tt" "TODO Task" entry (file+olp
+                                     "~/Org/personal-tasks.org" "Inbox")
+             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
+            ("tb" "Basic task for future review" entry
+             (file+headline "~/Org/personal-tasks.org" "Inbox")
+             ,(concat "* %^{Title}\n"
+                      ":PROPERTIES:\n"
+                      ":CAPTURED: %U\n"
+                      ":END:\n\n"
+                      "%i%l"))
+            ("ts" "Task with a due date (scheduled)" entry
+             (file+headline "~/Org/personal-tasks.org" "Inbox")
+             ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                      "SCHEDULED: %^t\n"
+                      ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                      "%i%?"))
+            ("td" "Task with a due date (deadline)" entry
+             (file+headline "~/Org/personal-tasks.org" "Inbox")
+             ,(concat "* %^{Scope of task||TODO|STUDY|MEET} %^{Title} %^g\n"
+                      "DEADLINE: %^t\n"
+                      ":PROPERTIES:\n:CAPTURED: %U\n:END:\n\n"
+                      "%i%?"))
+
+            ("w" "Workflows")
+            ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
+             "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
+
+    ;; Activate Context Templates for Email 
+    (setq org-capture-templates-contexts
+      '(("e" ((in-mode . "notmuch-search-mode")
+              (in-mode . "notmuch-show-mode")
+              (in-mode . "notmuch-tree-mode")
+              (in-mode . "mu4e-headers-mode")))))
+    :bind
+    ("C-c c" . org-capture))
+
 #+end_src
-  
 ** Org Crypt
 
 ~Org Crypt~ *encrypts* the *text of an entry*, but *not* the ~headline~, or ~properties~.
@@ -2492,56 +2525,56 @@ To turn ~auto-save~ off *only locally*, you can insert this:
       (org-roam-completion-everywhere t)
 
       :bind (("C-c n l" . org-roam-buffer-toggle)
-	     ("C-c n f" . org-roam-node-find)
-	     ("C-c n i" . org-roam-node-insert)
-	     ("C-c n I" . org-roam-node-insert-immediate)
-	     :map org-mode-map
-	     ("C-M-i"    . completion-at-point)
-	     :map org-roam-dailies-map
-	     ("Y" . org-roam-dailies-capture-yesterday)
-	     ("T" . org-roam-dailies-capture-tomorrow))
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n I" . org-roam-node-insert-immediate)
+         :map org-mode-map
+         ("C-M-i"    . completion-at-point)
+         :map org-roam-dailies-map
+         ("Y" . org-roam-dailies-capture-yesterday)
+         ("T" . org-roam-dailies-capture-tomorrow))
       :bind-keymap
       ("C-c n d" . org-roam-dailies-map)
       :config
       ;; org roam capture templates
       (setq org-roam-capture-templates
-	    `(("d" "default" plain
-	       "%?"
-	       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
-	       :unnarrowed t)
-	      ("w" "wiki")
-	      ("wn" "wiki node" plain
-	       "\n* ${title}\n\n%?" 
-	       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				  "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-	       :unnarrowed t)
-	      ("wi" "wiki index node" plain
-		   "\n* ${title} Kompendium Index\n\n%?" 
-		   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				      "\n#+filetags: :index:%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-		   :unnarrowed t)
-	      ("wr" "wiki references node" plain
-		   "\n* References\n%?\n** Websites\n\n** Literature" 
-		   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				      "\n#+filetags: :%^{filetag}:references:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
-		   :unnarrowed t)
-	      ("l" "programming language" plain
-	       "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
-	       :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-	       :unnarrowed t)  
-	      ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
-	       :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-	       :unnarrowed t)
-	      ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-	       :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
-	       :unnarrowed t)
-	      ))
+        `(("d" "default" plain
+           "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+TITLE: ${title}\n#+DATE: %U\n")
+           :unnarrowed t)
+          ("w" "wiki")
+          ("wn" "wiki node" plain
+           "\n* ${title}\n\n%?" 
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                  "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
+           :unnarrowed t)
+          ("wi" "wiki index node" plain
+           "\n* ${title} Kompendium Index\n\n%?" 
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                      "\n#+filetags: :index:%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
+           :unnarrowed t)
+          ("wr" "wiki references node" plain
+           "\n* References\n%?\n** Websites\n\n** Literature" 
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                      "\n#+filetags: :%^{filetag}:references:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
+           :unnarrowed t)
+          ("l" "programming language" plain
+           "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
+           :unnarrowed t)  
+          ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
+           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
+           :unnarrowed t)
+          ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+           :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n#+filetags: Project")
+           :unnarrowed t)
+          ))
 
 
        ;; dailies capture template
       (setq org-roam-dailies-capture-templates
-	    `(("d" "default" entry "* %<%I:%M %p>: %?"
-	       :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
+        `(("d" "default" entry "* %<%I:%M %p>: %?"
+           :if-new (file+head "%<%Y-%m-%d>.org" "#+TITLE: %<%Y-%m-%d>\n"))))
 
       (org-roam-setup)
       ;; Ensure the keymap is available
@@ -2549,15 +2582,15 @@ To turn ~auto-save~ off *only locally*, you can insert this:
       (org-roam-db-autosync-mode)
 
       (pet/leader-keys
-	"or"  '(:ignore t :which-key "Org Roam")
-	"ort" 'org-roam-tag-add
-	"ora" 'org-roam-alias-add
-	"ord" 'org-roam-diagnostics
-	"oru" 'org-roam-ui-open
-	)
+        "or"  '(:ignore t :which-key "Org Roam")
+        "ort" 'org-roam-tag-add
+        "ora" 'org-roam-alias-add
+        "ord" 'org-roam-diagnostics
+        "oru" 'org-roam-ui-open
+        )
       )
-  #+end_src
 
+  #+end_src
 *** Org Roam Helper Functions
 
 #+begin_src emacs-lisp
@@ -3185,11 +3218,11 @@ The commented lines are for distributions like Ubuntu, where =python= referes to
 Pyrigth is a language server written in C# that is a lot faster then the normal pyls.
 Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alternative to "ptvsd>=4.2"), because it is recommended over the default ptsd
 #+begin_src emacs-lisp
-  ;;;; Customize Python Mode for emacs, add lsp
-  ;;(use-package python-mode
-  ;;  :straight nil
-  ;;  ;; don't hook lsp straight away
-  ;;  ;; :hook (python-mode . lsp-deferred)
+  ;; Set Default Indentation for Python 
+  (setq-default python-indent-offset 4)
+
+	;;;; Customize Python Mode for emacs, add lsp
+  ;;(add-hook 'python-mode-hook 'lsp-deferred)
   ;;  :custom
   ;;  (python-shell-interpreter "python")
   ;;  (dab-python-executable "python")
@@ -3200,17 +3233,17 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 
   ;; Setup lsp-pyright Server
   (use-package lsp-pyright
-    :hook (python-mode . (lambda () (require 'lsp-pyright)))
-    ;; Use Python 3 in case Python 2 is installed as well
-    :init (when (executable-find "python3")
-          (setq lsp-pyright-python-executable-cmd "python3"))
-    )
+	:hook (python-mode . (lambda () (require 'lsp-pyright)))
+	;; Use Python 3 in case Python 2 is installed as well
+	:init (when (executable-find "python3")
+		  (setq lsp-pyright-python-executable-cmd "python3"))
+	)
 
 
   ;; Enable Virtual Environment Support
   (use-package pyvenv
-    :config
-    (pyvenv-mode 1))
+	:config
+	(pyvenv-mode 1))
 
 #+end_src
 
@@ -3219,7 +3252,10 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 #+begin_src emacs-lisp
   ;; Load PHP Package
   (use-package php-mode)
-  
+
+  ;; Load Org PHP Support
+  ;; (use-package ob-php)
+
 #+end_src
 
 *** Lua
@@ -3236,6 +3272,51 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   ;; Add alternative Mode for HTML Developement
   ;; (use-package web-mode)
   
+#+end_src
+*** ESS Mode
+[[https://ess.r-project.org/][ESS Mode]] (~Emacs Speaks Statistics~) is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Mode]] meant for ~Programming~ with [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Languages]] meant for ~statistical Computation~ like [[id:c64bc74b-bc42-4208-bf36-3c6832392de9][R]], ~S~, ~SAS~, ~SPSS~
+#+begin_src emacs-lisp
+  ;; Load Support for statistical Computation
+  (use-package ess)
+  
+#+end_src
+**** ESS Smart Equals
+
+=ess-smart-equals= is a ~package extension~ for ~ESS Mode~ to make some ~Quality of Life adjustments~ like *automatic* ~closing braces~, inserting =<-= for ='='= and more.
+~Documentation~ can be found here: [[https://github.com/genovese/ess-smart-equals][GitHub.com: ess-smart-equals]]
+#+begin_src emacs-lisp
+  ;; Helper Package for assignment operators and more in ESS
+  (use-package ess-smart-equals
+    ;; Add additional support (automatic pared braces etc..)
+    :init   (setq ess-smart-equals-extra-ops '(brace paren percent))
+    ;; Load moade with ESS
+    :after  (:any ess-r-mode inferior-ess-r-mode ess-r-transcript-mode)
+    ;; Activate modoe
+    :config (ess-smart-equals-activate))
+
+#+end_src
+**** ESS R Insert Obj
+=ess-r-insert-obj= is a ~package extension~ for ~ESS Mode~ to improve the interaction with the ~completion framework~ provided by the [[id:c64bc74b-bc42-4208-bf36-3c6832392de9][R]] [[id:c7d7135a-3f11-4fea-8bcf-e3e83318f453][Package]] =tidyverse=
+~Documentation~ can be found here: [[https://github.com/ShuguangSun/ess-r-insert-obj][GitHub.com: ess-r-insert-obj]]
+#+begin_src emacs-lisp
+  ;; improve interaction between ESS and R Package 'tidyverse'
+  (use-package ess-r-insert-obj)
+  
+#+end_src
+**** ESS View Data
+=ess-view-data= is a ~package extension~ for ~ESS Mode~ to do data views and manipulation similar to the [[id:c64bc74b-bc42-4208-bf36-3c6832392de9][R]] [[id:c7d7135a-3f11-4fea-8bcf-e3e83318f453][Package]] =tidyverse=
+~Documentation~ can be found here: [[https://github.com/ShuguangSun/ess-view-data][GitHub.com: ess-view-data]]
+#+begin_src emacs-lisp
+  ;; Tidyverse-like data views and manipulations
+  (use-package ess-view-data)
+#+end_src
+*** CSV
+Add support for ~CSV-like~ files in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+~Repository~ can be found here: [[https://git.savannah.gnu.org/cgit/emacs/elpa.git/?h=externals/csv-mode][Git.Savannah.GNU.org: csv-mode]]
+#+begin_src emacs-lisp
+  ;; Major mode for editing comma/char separated values
+  (use-package csv-mode)
+
 #+end_src
 *** YAML
 Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
