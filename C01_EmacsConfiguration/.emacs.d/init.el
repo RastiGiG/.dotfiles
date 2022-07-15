@@ -1514,13 +1514,13 @@ _w_ whitespace-mode:   %`whitespace-mode
 (defun pet/org-font-setup ()
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
-		  (org-level-2 . 1.15)
-		  (org-level-3 . 1.1)
-		  (org-level-4 . 1.05)
-		  (org-level-5 . 1.02)
-		  (org-level-6 . 1.0)
-		  (org-level-7 . 1.0)
-		  (org-level-8 . 1.0)))
+          (org-level-2 . 1.15)
+          (org-level-3 . 1.1)
+          (org-level-4 . 1.05)
+          (org-level-5 . 1.02)
+          (org-level-6 . 1.0)
+          (org-level-7 . 1.0)
+          (org-level-8 . 1.0)))
     (set-face-attribute
      (car face)
      nil
@@ -1531,29 +1531,29 @@ _w_ whitespace-mode:   %`whitespace-mode
   ;; Ensure that anything that should be
   ;; fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil
-		      :foreground nil
-		      :inherit 'fixed-pitch)
+          :foreground nil
+          :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil
-		      :inherit '(shadow fixed-pitch))
+          :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-table nil
-		      :inherit '(shadow fixed-pitch))
+          :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-verbatim nil
-		      :inherit '(shadow fixed-pitch))
+          :inherit '(shadow fixed-pitch))
   (set-face-attribute 'org-special-keyword nil
-		      :inherit '(font-lock-comment-face
-				 fixed-pitch))
+          :inherit '(font-lock-comment-face
+                 fixed-pitch))
   (set-face-attribute 'org-meta-line nil
-		      :inherit '(font-lock-comment-face fixed-pitch))
+          :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil
-		      :inherit 'fixed-pitch))
+          :inherit 'fixed-pitch))
 
 ;; Replace list hyphen with dot
 (defun pet/org-replace-hyphen ()
   (font-lock-add-keywords
    'org-mode '(("^ *\\([-]\\) "
-		(0 (prog1 () (compose-region
-			      (match-beginning 1)
-			      (match-end 1) "•"))))))
+        (0 (prog1 () (compose-region
+              (match-beginning 1)
+              (match-end 1) "•"))))))
   )
 
 ;; Helper Function to quickly toggle Babel Confirm Evaluation
@@ -1564,18 +1564,26 @@ _w_ whitespace-mode:   %`whitespace-mode
     (setq org-confirm-babel-evaluate nil)
   (setq org-confirm-babel-evaluate t))
 (print (concat "Org Babel Confirm State: "
-	       (format "%s" org-confirm-babel-evaluate))))
+       (format "%s" org-confirm-babel-evaluate))))
 
 ;; Store Org Directory
 (setq pet/org-dir
-      (concat pet/home-dir
-	      (convert-standard-filename
-	       "Org/")))
+  (concat pet/home-dir
+      (convert-standard-filename
+       "Org/")))
 
 ;; Setting Up Org Mode
 (use-package org
+  :ensure org-plus-contrib
   :bind (("C-c l" . org-store-link))
   :config
+  ;; Add additional Export Options
+  (require 'ox-beamer)    ;; LaTeX beamer
+  (require 'ox-md)        ;; Markdown
+  (require 'ox-texinfo)   ;; Texinfo
+  (require 'ox-man)       ;; Man Page
+  (require 'ox-org)       ;; Org Format
+
   (setq org-ellipsis " ▾")
 
   (setq org-directory pet/org-dir)
@@ -1691,22 +1699,22 @@ _w_ whitespace-mode:   %`whitespace-mode
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
 (with-eval-after-load 'ox-latex
-(add-to-list 'org-latex-classes
-             '("org-plain-latex"
-               "\\documentclass{article}
+  (add-to-list 'org-latex-classes
+               '("org-plain-latex"
+                 "\\documentclass{article}
                 \\usepackage{hyperref}
                 \\usepackage{babel}
            [NO-DEFAULT-PACKAGES]
            [PACKAGES]
            [EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-(add-to-list 'org-latex-classes
-           '("org-plain-scrlttr2-german"
-             "\\documentclass[a4paper, 
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("org-plain-scrlttr2-german"
+                 "\\documentclass[a4paper, 
               parskip=half,%
               fromalign=right, 
               fromrule=false, 
@@ -1716,20 +1724,20 @@ _w_ whitespace-mode:   %`whitespace-mode
          [NO-DEFAULT-PACKAGES]
          [PACKAGES]
          [EXTRA]"
-             ("\\section{%s}" . "\\section*{%s}")
-             ("\\subsection{%s}" . "\\subsection*{%s}")
-             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-             ("\\paragraph{%s}" . "\\paragraph*{%s}")
-             ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-;; Bigger LaTeX Previews
-(plist-put org-format-latex-options :scale 1.5)
-;; Load language packages for pdflatex of lualatex / xelatex compilers
-;; (add-to-list 'org-latex-packages-alist
-;;              '("AUTO" "babel" t ("pdflatex")))
-;; (add-to-list 'org-latex-packages-alist
-;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
-)
+  ;; Bigger LaTeX Previews
+  (plist-put org-format-latex-options :scale 1.5)
+  ;; Load language packages for pdflatex of lualatex / xelatex compilers
+  ;; (add-to-list 'org-latex-packages-alist
+  ;;              '("AUTO" "babel" t ("pdflatex")))
+  ;; (add-to-list 'org-latex-packages-alist
+  ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+  )
 
 ;; (use-package ob-ipython)
 
@@ -1750,9 +1758,9 @@ _w_ whitespace-mode:   %`whitespace-mode
     ;; (cpp . t)           ;; C++
 
     (perl . t)          ;; Perl
-    (php . t)           ;; PHP
+    ;; (php . t)           ;; PHP
     (R . t)             ;; R
-    (Ruby . t)          ;; Ruby
+    ;; (Ruby . t)          ;; Ruby
     (lua . t)           ;; Lua Programming Language
     (shell . t)         ;; Command Line Programs 
     (latex . t)         ;; LaTeX  
@@ -1764,7 +1772,7 @@ _w_ whitespace-mode:   %`whitespace-mode
     (sed . t)           ;; GNUsed
     (css . t)           ;; CSS
     (plantuml . t)      ;; PlantUML
-    (ledger . t)        ;; Ledger CLI
+    ;; (ledger . t)        ;; Ledger CLI
     ))         
 
 ;; Add conf-unix to be recognized
@@ -1775,7 +1783,8 @@ _w_ whitespace-mode:   %`whitespace-mode
 
 ;; Setup Source Block Templates
 (cl-loop for block in
-         '(("el" . "src emacs-lisp")
+         '(("aw" . "src awk")
+           ("el" . "src emacs-lisp")
            ;; ("go" . "src go")
            ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
            ("json" . "src json")
@@ -1788,6 +1797,10 @@ _w_ whitespace-mode:   %`whitespace-mode
            ("sh" . "src shell")
            ("sq" . "src sql")
            ("yaml" . "src yaml")
+           ;; R
+           ("rp" . "src R")                                  ;; pure R             
+           ("rr" . "src R :results both output")             ;; R with output
+           ("rs" . "src R :session :results both output")    ;; R with output
            ;; ("ts" . "src typescript"))
            ;; This is an alternative Block
            ;; For IPython
