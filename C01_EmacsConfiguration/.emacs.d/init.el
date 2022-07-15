@@ -2429,15 +2429,24 @@ _w_ whitespace-mode:   %`whitespace-mode
 
 ;; Integrated environment for TeX
 (use-package tex-site
-  :straight auctex
-  :config
-  ;; Add Reftex Support to AUCTeX
-  (setq reftex-plug-into-AUCTeX t)
-  ;; Set Default Bibliography
-  (setq pet/default-bib
-        (concat pet/home-dir "~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
-  (setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
-  )
+      :straight auctex
+      :bind
+      (:map TeX-mode-map
+		("C-#" . cdlatex-mode))
+      :config
+      ;; Add Reftex Support to AUCTeX
+      (setq reftex-plug-into-AUCTeX t)
+      ;; Set Default Bibliography
+      (setq pet/default-bib
+		(concat pet/home-dir "~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+      (setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+      ;; Automatically insert math environment with '$'
+      (setq TeX-electric-math t)
+      ;; Autocomplete command on '\'
+      (setq TeX-electric-escape t)
+      ;; Autoinsert braces after '^' and '_' in math mode
+      (setq TeX-electric-sub-and-superscript t)
+      )
 
 
 ;; enable auto saving tex files
@@ -2449,12 +2458,12 @@ _w_ whitespace-mode:   %`whitespace-mode
 ;; set $ to insert math environment
 ;; ... for plain TeX
 (add-hook 'plain-TeX-mode-hook
-          (lambda () (set (make-local-variable 'TeX-electric-math)
-                          (cons "$" "$"))))
+		      (lambda () (set (make-local-variable 'TeX-electric-math)
+						      (cons "$" "$"))))
 ;; ... for LaTeX
 (add-hook 'LaTeX-mode-hook
-          (lambda () (set (make-local-variable 'TeX-electric-math)
-                          (cons "\\(" "\\)"))))
+		      (lambda () (set (make-local-variable 'TeX-electric-math)
+						      (cons "\\(" "\\)"))))
 
 ;; Load RefTeX...
 ;; ... with AUCTeX LaTeX mode
@@ -2474,29 +2483,29 @@ _w_ whitespace-mode:   %`whitespace-mode
 
 ;; Fast input methods for LaTeX environments and math
 (use-package cdlatex
-  :config
-  ;; Maybe add hook to autoload cdlatex
-  ;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
-  ;; (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+      :config
+      ;; Maybe add hook to autoload cdlatex
+      ;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
+      ;; (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
 
-  ;; Added personal keybinding
-  (pet/leader-keys
-        "tmc" '(cdlatex-mode
-                :which-key "CDLaTeX Minor Mode"))
-  )
+      ;; Added personal keybinding
+      (pet/leader-keys
+		"tmc" '(cdlatex-mode
+				:which-key "CDLaTeX Minor Mode"))
+      )
 
 (setq TeX-view-program-selection
-      '(((output-dvi has-no-display-manager) "dvi2tty")
-        ((output-dvi style-pstricks) "dvips and gv")
-        (output-dvi "xdvi")
-        (output-pdf "Zathura")
-        (output-html "xdg-open")))
+	      '(((output-dvi has-no-display-manager) "dvi2tty")
+		((output-dvi style-pstricks) "dvips and gv")
+		(output-dvi "xdvi")
+		(output-pdf "Zathura")
+		(output-html "xdg-open")))
 
-;;;; Customize Python Mode for emacs, add lsp
-;;(use-package python-mode
-;;  :straight nil
-;;  ;; don't hook lsp straight away
-;;  ;; :hook (python-mode . lsp-deferred)
+;; Set Default Indentation for Python 
+(setq-default python-indent-offset 4)
+
+      ;;;; Customize Python Mode for emacs, add lsp
+;;(add-hook 'python-mode-hook 'lsp-deferred)
 ;;  :custom
 ;;  (python-shell-interpreter "python")
 ;;  (dab-python-executable "python")
