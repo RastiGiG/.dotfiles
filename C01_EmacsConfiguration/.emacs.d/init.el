@@ -810,12 +810,14 @@
   )
 
 ;; Load Hydra Package
-(use-package hydra)
+(use-package hydra
+      :config
 
-;; Add leader key Menu
-(pet/leader-keys
-  "h" '(:ignore t :which-key "Hydras")
- )
+      ;; Add leader key Menu
+      (pet/leader-keys
+	"h" '(:ignore t :which-key "Hydras")
+	)
+      )
 
 ;; Define Text Scale Hydra 
 (defhydra hydra-text-scale (:timeout 4)
@@ -872,7 +874,7 @@ _~_: modified
 									      :timeout 10)
       "
 
-	       ^Mark^                ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
+	      ^^^Mark^             ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
 	      ^^^^^^^^-----------------------------------------------------------------------------------------------------
 	      _m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window 
 	      _u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window    
@@ -888,7 +890,7 @@ _~_: modified
       ("x" bookmark-bmenu-execute-deletions)
       ("r" bookmark-bmenu-rename)
       ("R" bookmark-bmenu-relocate)  
-      ("w" bookmark-bmenu-save)                   ;; 'writ' bookmark list
+      ("w" bookmark-bmenu-save)                   ;; 'write' bookmark list
       ("i" bookmark-bmenu-load)                   ;; 'import' bookmark list
       ("/" bookmark-bmenu-search)
       ("l" bookmark-bmenu-locate)
@@ -908,8 +910,9 @@ _~_: modified
       ("q" quit-window "quit bm list" :color blue))
 
 ;; Access Menu through '.' in Bookmark List
-(define-key bookmark-bmenu-mode-map
-			"." 'hydra-bookmark-menu/body)
+(with-eval-after-load "bookmark"
+      (define-key bookmark-bmenu-mode-map
+			      "." 'hydra-bookmark-menu/body))
 
 ;; Apropos Hydra
 (defhydra hydra-apropos (
@@ -985,21 +988,25 @@ _v_ariable       _u_ser-option
       "
 	Movement^^        ^Split^         ^Switch^		^Resize^
 	----------------------------------------------------------------
-	_h_ ←        	_v_ertical    	_b_uffer		_q_ X←
-	_j_ ↓        	_x_ horizontal	_f_ind files	_w_ X↓
-	_k_ ↑        	_z_ undo      	_a_ce 1	        _e_ X↑
-	_l_ →        	_Z_ reset      	_s_wap	        _r_ X→
+	_M-<left>_  ←	_v_ertical    	_b_uffer		_<left>_  X←
+	_M-<down>_  ↓   	_x_ horizontal	_f_ind files	_<down>_  X↓
+	_M-<up>_    ↑   	_z_ undo      	_a_ce 1	    	_<up>_    X↑
+	_M-<right>_ →   	_Z_ reset      	_s_wap	     	_<right>_ X→
 	_F_ollow Mode    	_D_lt Other   	_S_ave	     max_i_mize
 	_SPC_ cancel	    _o_nly this   	_d_elete	
 	"
-      ("h" windmove-left )
-      ("j" windmove-down )
-      ("k" windmove-up )
-      ("l" windmove-right )
-      ("q" pet/move-splitter-left)
-      ("w" pet/move-splitter-down)
-      ("e" pet/move-splitter-up)
-      ("r" pet/move-splitter-right)
+      ;; Movement
+      ("M-<left>"  windmove-left)
+      ("M-<down>"  windmove-down)
+      ("M-<up>"    windmove-up)
+      ("M-<right>" windmove-right)
+
+      ;; Resize
+      ("<left>"  pet/move-splitter-left)
+      ("<down>"  pet/move-splitter-down)
+      ("<right>" pet/move-splitter-right)
+      ("<up>"    pet/move-splitter-up)
+
       ("b" list-buffers)
       ("f" find-files)
       ("F" follow-mode)
@@ -1083,19 +1090,33 @@ _v_ariable       _u_ser-option
       "
 ^Editing Visuals
 ^^^^^^-------------------------------------------------------------------------
-_a_ abbrev-mode:       %`abbrev-mode
-_d_ debug-on-error:    %`debug-on-error
-_f_ auto-fill-mode:    %`auto-fill-function
-_t_ truncate-lines:    %`truncate-lines
-_v_ visual-line-mode:  %`visual-line-mode
-_w_ whitespace-mode:   %`whitespace-mode
+_a_ abbrev-mode:                         %`abbrev-mode
+_C_ display-fill-column-indicator-mode:  %`display-fill-column-indicator-mode
+_d_ debug-on-error:                      %`debug-on-error
+_f_ auto-fill-mode:                      %`auto-fill-function
+_F_ variable-pitch-mode                 
+_i_ toggle-input-method                 
+_n_ display-line-numbers-mode:           %`display-line-numbers-mode
+_M_ doom-modeline-mode:                  %`doom-modeline-mode
+_R_ read-only-mode                      
+_t_ truncate-lines:                      %`truncate-lines
+_T_ counsel-load-theme                  
+_v_ visual-line-mode:                    %`visual-line-mode
+_w_ whitespace-mode:                     %`whitespace-mode
 "
       ("a" abbrev-mode)
+      ("C" display-fill-column-indicator-mode)
       ("d" toggle-debug-on-error)
       ("f" auto-fill-mode)
+      ("F" variable-pitch-mode)
+      ("i" toggle-input-method)
       ("t" toggle-truncate-lines)
+      ("T" counsel-load-theme)
       ("v" visual-line-mode)
+      ("n" display-line-numbers-mode)
+      ("M" doom-modeline-mode)
       ("w" whitespace-mode)
+      ("R" read-only-mode)
       ("q" nil "quit" :exit 1))
 
 ;; (global-set-key (kbd "C-c C-v") 'hydra-editing-toggles/body)
@@ -1103,124 +1124,90 @@ _w_ whitespace-mode:   %`whitespace-mode
 ;; Add to Key Space
 (pet/leader-keys
       "eh" '(hydra-editing-visuals/body :which-key "Editing Visuals")
+      "T"  '(hydra-editing-visuals/body :which-key "Toggle Hydra")
       "ht" '(hydra-editing-visuals/body :which-key "Editing Visuals")
       )
 
-;; Global Org Mode Functionaliy via Hydra
-(defhydra hydra-global-org-menu (
-								 :hint nil
-									       :color blue
-									       :timeout 10
-									       )
+;; Mu4e Hydra
+(defhydra hydra-mu4e-headers (
+							      :color blue
+									 :hint nil
+									 )
       "
-	      ^Org Utilities
+ ^General^   | ^Search^           | _!_: read    | _#_: deferred  | ^Switches^
+-^^----------+-^^-----------------| _?_: unread  | _%_: pattern   |-^^------------------
+_n_: next    | _s_: search        | _r_: refile  | _&_: custom    | _O_: sorting
+_p_: prev    | _S_: edit prev qry | _u_: unmk    | _+_: flag      | _P_: threading
+_]_: n unred | _/_: narrow search | _U_: unmk *  | _-_: unflag    | _Q_: full-search
+_[_: p unred | _b_: search bkmk   | _d_: trash   | _T_: thr       | _V_: skip dups 
+_y_: sw view | _B_: edit bkmk     | _D_: delete  | _t_: subthr    | _W_: include-related
+_R_: reply   | _{_: previous qry  | _m_: move    |-^^-------------+-^^------------------ 
+_C_: compose | _}_: next query    | _a_: action  | _|_: to shell  | _´_: update, reindex
+_F_: forward | _C-+_: show more   | _A_: mk4actn | _H_: help      | _;_: context-switch
+_h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2maildir "
 
-	      ^Timer^                ^Clock^              ^Capture
-	      ^^^^^^-------------------------------------------------------------------------
-	       _t_: Start         _w_: Clock-In          _c_: Capture
-	       _s_: Stop          _o_: Clock-Out         _l_: Last Capture
-	       _r_: Set           _j_: Clock-Goto        ^ ^
-	       _p_: Print
+      ;; general
+      ("n" mu4e-headers-next)
+      ("p" mu4e-headers-previous)
+      ("[" mu4e-select-next-unread)
+      ("]" mu4e-select-previous-unread)
+      ("y" mu4e-select-other-view)
+      ("R" mu4e-compose-reply)
+      ("C" mu4e-compose-new)
+      ("F" mu4e-compose-forward)
 
-	       _q_: Quit
-	       "
+      ;; search
+      ("s" mu4e-headers-search)
+      ("S" mu4e-headers-search-edit)
+      ("/" mu4e-headers-search-narrow)
+      ("b" mu4e-headers-search-bookmark)
+      ("B" mu4e-headers-search-bookmark-edit)
+      ("{" mu4e-headers-search-prev :color pink)      ; differs from built-in - make sure to add them later
+      ("}" mu4e-headers-search-next :color pink)      ; differs from built-in - make sure to add them later
+      ("C-+" mu4e-headers-split-view-grow)
+      ("C--" mu4e-headers-split-view-shrink)
 
-	("t" org-timer-start "Start Timer")
-	("s" org-timer-stop "Stop Timer")
-	;; This one requires you be in an orgmode doc, as it sets the timer for the header
-	("r" org-timer-set-timer "Set Timer")
-	;; output timer value to buffer
-	("p" org-timer "Print Timer")
-	;; used with (org-clock-persistence-insinuate) (setq org-clock-persist t)
-	("w" (org-clock-in '(4)) "Clock-In")
-	;; you might also want (setq org-log-note-clock-out t)
-	("o" org-clock-out "Clock-Out")
-	;; global visit the clocked task
-	("j" org-clock-goto "Clock Goto")
-	;; Don't forget to define the captures you want http://orgmode.org/manual/Capture.html
-	("c" org-capture "Capture")
-	("l" org-capture-goto-last-stored "Last Capture")
-	("q" :exit t)
-	)
+      ;; mark stuff 
+      ("!" mu4e-headers-mark-for-read)
+      ("?" mu4e-headers-mark-for-unread)
+      ("r" mu4e-headers-mark-for-refile)
+      ("u" mu4e-headers-mark-for-unmark)
+      ("U" mu4e-mark-unmark-all)
+      ("d" mu4e-headers-mark-for-trash)
+      ("D" mu4e-headers-mark-for-delete)
+      ("m" mu4e-headers-mark-for-move)
+      ("a" mu4e-headers-action)                  ; not really a mark per-se
+      ("A" mu4e-headers-mark-for-action)
+      ("*" mu4e-headers-mark-for-something)
 
-(pet/leader-keys
-      "ou" '(hydra-global-org-menu/body :which-key "Org Global Utilities")
-      "ho" '(hydra-global-org-menu/body :which-key "Org Global Hydra")
-      )
 
-;; Hydra for Contact Management
-(defhydra hydra-ebdb-menu (
-						       :hint nil
-								 :color pink
-								 )
-      "
-	      ^EBDB Utilities
+      ("#" mu4e-mark-resolve-deferred-marks)
+      ("%" mu4e-headers-mark-pattern)
+      ("&" mu4e-headers-mark-custom)
+      ("+" mu4e-headers-mark-for-flag)
+      ("-" mu4e-headers-mark-for-unflag)
+      ("t" mu4e-headers-mark-subthread)
+      ("T" mu4e-headers-mark-thread)
 
-	      ^Records^                ^Fields^              ^Capture
-	      ^^^^^^-------------------------------------------------------------------------
-	      _c_  Create           
-      _C_  Ext Create
-"
-      ("c" ebdb-create-record)
-      ("C" ebdb-create-record-extended)
-      (";" ebdb-edit-foo "Notes")
-      ("m" ebdb-mail "Mail")
-      ("M" ebdb-mail-each "Mail Each")
-      ("h" ebdb-info "Info Menu")
-      ("?" ebdb-help "Help")
-      ("e" ebdb-edit-field "Edit Field")
-      ("TAB" ebdb-next-field "Next Field")
-      ("^" ebdb-search-pop "Search Pop")
-      ("P" ebdb-prev-field "Prev Field")
-      ("s" ebdb-save-ebdb "Save Databases")
-      ("+-t" ebdb-search-tags "Search Tags")
-      ("+-m" ebdb-search-mail "Search Mail")
-      ("p" ebdb-prev-record "Prev Record")
-      ("n" ebdb-next-record "Next Record")
-      ("+-p" ebdb-search-phone "Search Phone")
-      ("d-c" ebdb-copy-records "Copy Records")
-      ("o" ebdb-omit-records "Omit Records")
-      ("d-m" ebdb-move-records "Move Records")
-      ("A" ebdb-mail-aliases "Mail Aliases")
-      ("b-c" ebdb-clone-buffer "Clone Buffer")
-      ("i" ebdb-insert-field "Insert Field")
-      ("RET" ebdb-record-action "Record Action")
-      ("b-r" ebdb-rename-buffer "Rename Buffer")
-      ("+-a" ebdb-search-address "Search Address")
-      ("!" ebdb-search-invert "Search Invert")
-      ("+-c" ebdb-search-modified "Search Modified")
-      ("d-r" ebdb-reload-database "Reload Database")
-      ("r" ebdb-reformat-records "Reformat Records")
-      ("I" ebdb-cite-records-ebdb "Cite Records")
-      ("d-d" ebdb-disable-database "Disable Database")
-      ("+-d" ebdb-search-duplicates "Search Duplicates")
-      ("w-m" ebdb-copy-mail-as-kill "Copy Mail as Kill")
-      ("#" ebdb-record-mark "Mark Record")
-      ("d-e" ebdb-customize-database "Customize Database")
-      ("C-#" ebdb-unmark-all-records "Unmark all Records")
-      ("+-x" ebdb-search-user-fields "Search User Fields")
-      ("+-C" ebdb-search-record-class "Search Record Class")
-      ("w-f" ebdb-copy-fields-as-kill "Copy Fields as Kill")
-      ("C-x n w" ebdb-display-all-records "Display all Records")
-      ("+ o" ebdb-search-organization "Search Organization")
-      ("E" ebdb-edit-field-customize "Edit Field Customize")
-      ("F" ebdb-format-these-records "Format These Records")
-      ("f" ebdb-format-to-tmp-buff "Format to Tmp Buffer")
-      ("/ 1" ebdb-search-single-record "Searc Single Record")
-      ("w r" ebdb-copy-records-as-kill "Copy Records as Kill")
-      ("t" ebdb-toggle-records-format "Toggle Records Format")
-      ("R" ebdb-create-record-and-role "Create Record and Role")
-      ("C-k" ebdb-delete-field-or-record "Delete Field or Record")
-      ("C-x n d" ebdb-display-current-record "Display Current Record")
-      ("M-#" ebdb-toggle-all-record-marks "Toggle all Record Marks")
-      ("c" ebdb-toggle-all-records-format "Toggle All Records Format")
-      ("q" "Quit Database")
-      ("SPC" "Exit" :exit t)
-      )
+      ;; miscellany
+      ("q" mu4e~headers-quit-buffer)
+      ("H" mu4e-display-manual)
+      ("h" describe-mode)
+      ("|" mu4e-view-pipe)                       ; does not seem built-in any longer
 
-;; Access Menu through '.' in EBDB Buffer
-(define-key ebdb-mode-map
-			"." 'hydra-ebdb-menu/body)
+      ;; switches
+      ("O" mu4e-headers-change-sorting)
+      ("P" mu4e-headers-toggle-threading)
+      ("Q" mu4e-headers-toggle-full-search)
+      ("V" mu4e-headers-toggle-skip-duplicates)
+      ("W" mu4e-headers-toggle-include-related)
+
+      ;; more miscellany
+      ("´" mu4e-update-mail-and-index)           ; differs from built-in
+      (";" mu4e-context-switch)  
+      ("j" mu4e~headers-jump-to-maildir)
+
+      ("." nil))
 
 ;; Store Backups in a single directory
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
@@ -1282,142 +1269,154 @@ _w_ whitespace-mode:   %`whitespace-mode
 
 ;; Use EBDB for contact management
 (use-package ebdb
-  :config
-  ;; Set the source files for Contact DBs
-  (setq ebdb-sources (list                        
-                      (concat pet/home-dir "Contacts/default-contacts.db")
-                      (concat pet/home-dir "Contacts/family.db")
-                      (concat pet/home-dir "Contacts/work.db")
-                      (concat pet/home-dir "Contacts/organizations.db")
-                      (concat pet/home-dir "Contacts/mailing-lists.db")
-                      )
-        )
+      :config
+      ;; Set the source files for Contact DBs
+      (setq ebdb-sources (list                        
+					      (concat pet/home-dir "Contacts/default-contacts.db")
+					      (concat pet/home-dir "Contacts/family.db")
+					      (concat pet/home-dir "Contacts/work.db")
+					      (concat pet/home-dir "Contacts/organizations.db")
+					      (concat pet/home-dir "Contacts/mailing-lists.db")
+					      ))
 
-  ;; Specify the Display Format for Month and Day on Anniversaries
-  ;; (setq ebdb-anniversary-md-format "%B %d")
+      ;; Access Menu through '.' in EBDB Buffer
+      ;; (define-key ebdb-mode-map
+      ;;		  "." 'hydra-ebdb-menu/body)		  
+
+      ;; Specify the Display Format for Month and Day on Anniversaries
+      ;; (setq ebdb-anniversary-md-format "%B %d")
       ;; Specify the Display Format for Year, Month and Day on Anniversaries
-  ;; (setq ebdb-anniversary-ymd-format "%B %d, %Y")
+      ;; (setq ebdb-anniversary-ymd-format "%B %d, %Y")
 
-  ;; Set Keybindings
-  (pet/leader-keys
-    "c"  '(:ignore t :which-key "Contacts")
-    "co" '(ebdb-open :which-key "Open Contact Database")
+      ;; Set Keybindings
+      (pet/leader-keys
+	"c"  '(:ignore t :which-key "Contacts")
+	"co" '(ebdb-open :which-key "Open Contact Database")
 
-    )
-  )
+	)
+      )
 
 ;; Store Location of Account Settings
 (setq pet/mail-accounts-config
-      (concat pet/home-dir
-              (convert-standard-filename
-               ".config/emacs-config/MailAccounts.el")))
+	      (concat pet/home-dir
+			      (convert-standard-filename
+			       ".config/emacs-config/MailAccounts.el")))
 
 ;; Add mu4e directory to load path
 (if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
-    (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-  (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
-      (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-    nil)
-  )
+	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+      (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
+	      (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+	nil)
+      )
 
 ;; Load mu4e as a Mail Interface for mu
 (use-package mu4e
-  :defer 20 ; Wait until 20 seconds after startup
-  :config
+      :defer 20 ; Wait until 20 seconds after startup
+      :config
 
-  ;; Load org-mode integration
-  (require 'mu4e-org)
+      ;; Load org-mode integration
+      (require 'mu4e-org)
 
-  ;; Refresh mail using isync/mbsync every 10 minutes
-  (setq mu4e-update-interval (* 10 60))
-  (setq mu4e-get-mail-command "mbsync -a")
-  (setq mu4e-maildir (concat pet/home-dir "Mail"))
+      ;; Refresh mail using isync/mbsync every 10 minutes
+      (setq mu4e-update-interval (* 10 60))
+      (setq mu4e-get-mail-command "mbsync -a")
+      (setq mu4e-maildir (concat pet/home-dir "Mail"))
 
-  ;; Sets the standard download directory for attachments
-  ;; (default: '~/')
-  (setq mu4e-attachment-dir (concat pet/home-dir "Downloads"))
+      ;; Sets the standard download directory for attachments
+      ;; (default: '~/')
+      (setq mu4e-attachment-dir (concat pet/home-dir "Downloads"))
 
-  ;; Use Ivy for mu4e completions (maildir folders, etc)
-  (setq mu4e-completing-read-function #'ivy-completing-read)
+      ;; Use Ivy for mu4e completions (maildir folders, etc)
+      (setq mu4e-completing-read-function #'ivy-completing-read)
 
-  ;; Make sure that moving a message (like to Trash) causes the
-  ;; message to get a new file name.  This helps to avoid the
-  ;; dreaded "UID is N beyond highest assigned" error.
-  ;; See this link for more info: https://stackoverflow.com/a/43461973
-  (setq mu4e-change-filenames-when-moving t)
+      ;; Make sure that moving a message (like to Trash) causes the
+      ;; message to get a new file name.  This helps to avoid the
+      ;; dreaded "UID is N beyond highest assigned" error.
+      ;; See this link for more info: https://stackoverflow.com/a/43461973
+      (setq mu4e-change-filenames-when-moving t)
 
-  ;; don't keep message buffers around
-  (setq message-kill-buffer-on-exit t)
+      ;; don't keep message buffers around
+      (setq message-kill-buffer-on-exit t)
 
-  ;; Load external file with Account information
-  (when
-     (file-exists-p pet/mail-accounts-config)
-   (load pet/mail-accounts-config)
-   )
+      ;; Load external file with Account information
+      (when
+	 (file-exists-p pet/mail-accounts-config)
+       (load pet/mail-accounts-config)
+       )
 
-  ;; Sets the first context (specified in file above)
-  ;; to be loaded by default
-  ;; (Options: pick-first, ask, ask-if-none, always-ask)
-  (setq mu4e-context-policy 'pick-first)
+      ;; Sets the first context (specified in file above)
+      ;; to be loaded by default
+      ;; (Options: pick-first, ask, ask-if-none, always-ask)
+      (setq mu4e-context-policy 'pick-first)
 
-  ;; Don't ask to quit
-  (setq mu4e-confirm-quit nil)
+      ;; Don't ask to quit
+      (setq mu4e-confirm-quit nil)
 
-  ;; COMPOSING MAIL
+      ;; COMPOSING MAIL
 
-  ;; Don't include oneself in reply by default 
-  (setq mu4e-compose-dont-reply-to-self t)
+      ;; Don't include oneself in reply by default 
+      (setq mu4e-compose-dont-reply-to-self t)
 
-  ;; ISO(ish) format date-time stamps in the header list
-  ;; default is "%x" (locale appropriate)
-  (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
+      ;; ISO(ish) format date-time stamps in the header list
+      ;; default is "%x" (locale appropriate)
+      (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
 
-  ;; customize the reply-quote-string
-  (setq message-citation-line-format
-        "On %Y-%m-%d %H:%M %Z %N wrote:\n")
-  ;; Replace 'message-insert-citation-line' with
-  ;; 'message-insert-formatted-citation-line'
-  (setq message-citation-line-function
-        'message-insert-formatted-citation-line)
+      ;; customize the reply-quote-string
+      (setq message-citation-line-format
+		"On %Y-%m-%d %H:%M %Z %N wrote:\n")
+      ;; Replace 'message-insert-citation-line' with
+      ;; 'message-insert-formatted-citation-line'
+      (setq message-citation-line-function
+		'message-insert-formatted-citation-line)
 
-  ;; HELPER FUNCTIONS
+      ;; HELPER FUNCTIONS
 
-  ;; Function to store header queries to reuse them later
-  (defun pet/store-link-to-mu4e-query()
-    (interactive)
-    (let ((mu4e-org-link-query-in-headers-mode t))
-      (call-interactively 'org-store-link)))
+      ;; Function to store header queries to reuse them later
+      (defun pet/store-link-to-mu4e-query()
+	(interactive)
+	(let ((mu4e-org-link-query-in-headers-mode t))
+	      (call-interactively 'org-store-link)))
 
-  ;; Functions to automatically call Org Capture Templates on certain actions
-  ;; Follow up messages
-  (defun pet/capture-mail-follow-up (msg)
-    (interactive)
-    (call-interactively 'org-store-link)
-    (org-capture nil "ef"))
-  ;; Read later messages
-  (defun pet/capture-mail-read-later (msg)
-    (interactive)
-    (call-interactively 'org-store-link)
-    (org-capture nil "er"))
+      ;; Functions to automatically call Org Capture Templates on certain actions
+      ;; Follow up messages
+      (defun pet/capture-mail-follow-up (msg)
+	(interactive)
+	(call-interactively 'org-store-link)
+	(org-capture nil "ef"))
+      ;; Read later messages
+      (defun pet/capture-mail-read-later (msg)
+	(interactive)
+	(call-interactively 'org-store-link)
+	(org-capture nil "er"))
 
-  ;; Add custom actions for our capture templates
-  (add-to-list 'mu4e-headers-actions
-               '("follow up" . pet/capture-mail-follow-up) t)
-  (add-to-list 'mu4e-view-actions
-               '("follow up" . pet/capture-mail-follow-up) t)
-  (add-to-list 'mu4e-headers-actions
-               '("read later" . pet/capture-mail-read-later) t)
-  (add-to-list 'mu4e-view-actions
-               '("read later" . pet/capture-mail-read-later) t)
+      ;; Add custom actions for our capture templates
+      (add-to-list 'mu4e-headers-actions
+			       '("follow up" . pet/capture-mail-follow-up) t)
+      (add-to-list 'mu4e-view-actions
+			       '("follow up" . pet/capture-mail-follow-up) t)
+      (add-to-list 'mu4e-headers-actions
+			       '("read later" . pet/capture-mail-read-later) t)
+      (add-to-list 'mu4e-view-actions
+			       '("read later" . pet/capture-mail-read-later) t)
 
+      (bind-keys
+       :map mu4e-headers-mode-map
 
-  ;; Expand personal Keyspace
-  (pet/leader-keys
-    "m"  '(:ignore t :which-key "Mail")
-    "mm" 'mu4e
-    "mc" 'mu4e-compose-new
-    "ms" 'mu4e-update-mail-and-index)
-  )
+       ("{" . mu4e-headers-query-prev)             ; differs from built-in
+       ("}" . mu4e-headers-query-next)             ; differs from built-in
+
+       ("´" . mu4e-update-mail-and-index)          ; differs from built-in
+       ("|" . mu4e-view-pipe)               	     ; does not seem to be built in any longer
+       ("." . hydra-mu4e-headers/body))
+
+      ;; Expand personal Keyspace
+      (pet/leader-keys
+	"m"  '(:ignore t :which-key "Mail")
+	"mm" 'mu4e
+	"mc" 'mu4e-compose-new
+	"ms" 'mu4e-update-mail-and-index)
+      )
 
 ;; Sent alerts for received 
 (use-package mu4e-alert
@@ -2430,9 +2429,6 @@ _w_ whitespace-mode:   %`whitespace-mode
 ;; Integrated environment for TeX
 (use-package tex-site
       :straight auctex
-      :bind
-      (:map TeX-mode-map
-		("C-#" . cdlatex-mode))
       :config
       ;; Add Reftex Support to AUCTeX
       (setq reftex-plug-into-AUCTeX t)
@@ -2483,6 +2479,9 @@ _w_ whitespace-mode:   %`whitespace-mode
 
 ;; Fast input methods for LaTeX environments and math
 (use-package cdlatex
+      :bind
+      (:map LaTeX-mode-map
+		("C-#" . cdlatex-mode))
       :config
       ;; Maybe add hook to autoload cdlatex
       ;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
