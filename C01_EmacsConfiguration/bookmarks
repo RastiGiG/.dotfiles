@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("C 02-1 Mu4e Account Config"
+(("00-2 Contacts"
+ (filename . "~/Contacts/")
+ (front-context-string)
+ (rear-context-string . "9 11. Jul 20:02 ")
+ (position . 357))
+("C 02-1 Mu4e Account Config"
  (filename . "~/.config/emacs-config/MailAccounts.org")
  (front-context-string . "\n* Settings\n\n#+b")
  (rear-context-string . "    \n\n#+end_src\n")

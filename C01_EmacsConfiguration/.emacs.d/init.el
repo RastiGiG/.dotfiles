@@ -31,10 +31,10 @@
        "Templates/")))
 
 ;; Save Emacs Template Dir for later use
-(setq pet/emacs-temp-dir
+(setq pet/latex-header-temp-dir
   (concat pet/temp-dir
       (convert-standard-filename
-       "X1_Emacs_Templates/")))
+       "X2_LaTeX_Templates/00-Headers/")))
 
 (setq pet/dotfiles-emacsconfig-dir
     (concat pet/dotfiles-dir
@@ -249,16 +249,16 @@
 
 ;; Set default font face
 (set-face-attribute 'default nil :font "Iosevka"
-            :height pet/default-font-size)
+			:height pet/default-font-size)
 
 ;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil :font "Iosevka"
-            :height pet/default-font-size)
+			:height pet/default-font-size)
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "Cantarell"
-            :height pet/default-font-size
-            :weight 'regular)
+			:height pet/default-font-size
+			:weight 'regular)
 
 ;; Use specific Fontsets for Symbols
 (setq use-default-font-for-symbols nil)
@@ -272,23 +272,24 @@
 ;; Setting garbage collection threshold (default is 800)
 ;; Required for speed and also LSP
 (setq gc-cons-threshold (* 50 1000 1000)
-     gc-cons-percentage 0.6)
+ gc-cons-percentage 0.6)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
-	  (lambda ()
-	    (message "*** Emacs loaded in %s with %d garbage collections."
-		     (format "%.2f seconds"
-			    (float-time
-			     (time-subtract after-init-time before-init-time)))
-		    gcs-done)))
+      (lambda ()
+        (message "*** Emacs loaded in %s with %d garbage collections."
+         (format "%.2f seconds"
+                (float-time
+             (time-subtract after-init-time before-init-time)))
+            gcs-done)))
 
 ;; Silence compiler warnings as they can be pretty
 ;; disruptive
 ;;(setq comp-async-report-warnings-errors nil)
 
-;; Set tabs to be 4 spaces
-(setq-default indent-tabs-mode nil)
+;; Tabs as tab-char by default.
+;; 'nil' replaces tabs with spaces
+(setq-default indent-tabs-mode t)
 ;; Set the default, fallback tabstop to be 4 spaces
 (setq-default tab-stop-list (number-sequence 4 120 4))
 ;; Set Number of Spaces displayed for a tab stop
@@ -300,13 +301,10 @@
 ;; set date format to %DD-%MM-%YYYY
 (setq european-calender-style 't)
 
-;; Display battery for when in full screen mode
-(display-battery-mode t)
-
 ; Setup file containing global macros
 (load-file
  (concat pet/dotfiles-emacsconfig-dir
-         "macros/global.macs")) 
+		 "macros/global.macs")) 
 
 ;; Set of keybindings for defined macros
 ;; Make sure to have a definition of the macro in your /macros folder
@@ -343,9 +341,6 @@
 (setq custom-file (locate-user-emacs-file "customization_variables.el"))
 (load custom-file 'no-error 'no-message)
 
-;; Don't show windowed Dialog Box on Prompts
-(setq use-dialog-box nil)
-
 ;; Revert Buffers when Files changed on disk
 (global-auto-revert-mode t)
 
@@ -355,23 +350,23 @@
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list
-      '(("Etc/UTC" "UTC")
-	("Europe/Berlin" "Berlin")
-	("Europe/Paris" "Paris")
-	("Europe/London" "London")
-	("Europe/Athens" "Athens")
-	("America/New_York" "New York")
-	("America/Los_Angeles" "Seattle")
-	("America/Mexico_City" "Mexico City")
-	("Asia/Shanghai" "Shanghai")
-	("Asia/Calcutta" "Bangalore")
-	("Asia/Tokyo" "Tokyo")
-	("Pacific/Auckland" "Auckland"))
-      )
+  '(("Etc/UTC" "UTC")
+    ("Europe/Berlin" "Berlin")
+    ("Europe/Paris" "Paris")
+    ("Europe/London" "London")
+    ("Europe/Athens" "Athens")
+    ("America/New_York" "New York")
+    ("America/Los_Angeles" "Seattle")
+    ("America/Mexico_City" "Mexico City")
+    ("Asia/Shanghai" "Shanghai")
+    ("Asia/Calcutta" "Bangalore")
+    ("Asia/Tokyo" "Tokyo")
+    ("Pacific/Auckland" "Auckland"))
+  )
 
 ;; Adjust how time is displayed
 (setq display-time-world-time-format
-      "%A, %d %B %Y %H:%M %p %Z")
+  "%A, %d %B %Y %H:%M %p %Z")
 
 ;; Package to setup Path Variable (and more) in Emacs
 (use-package exec-path-from-shell)
@@ -409,7 +404,7 @@
   "#+LATEX_CLASS: article\n"
   "#+LATEX_CLASS_OPTIONS: [a5paper,landscape,fourcolumn]\n"
   "#+LATEX_COMPILER: lualatex\n"
-  (concat "#+LATEX_HEADER: \\input{" (concat pet/emacs-temp-dir "summaryheader.tex}\n"))
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "summaryheader.tex}\n"))
   "#+STARTUP: showeverything\n"
   "#+OPTIONS: toc:nil\n"
   "\\begin{multicols*}{4}\n"
@@ -426,7 +421,20 @@
   "#+DATE: \\today\n"
   "#+LATEX_CLASS: article\n"
   "#+LATEX_CLASS_OPTIONS: [a4paper]\n"
-  (concat "#+LATEX_HEADER: \\input{" (concat pet/emacs-temp-dir "/articleheader.tex}\n"))
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "articleheader.tex}\n"))
+  "#+OPTIONS: toc:nil\n")
+
+;; Org LaTeX Beamer Header
+(define-skeleton pet/org-latex-beamer-skeleton
+  "Skeleton for articles "
+  "Preamble:"
+  "#+STARTUP: beamer\n"
+  "#+TITLE: TITLE\n"
+  "#+AUTHOR: AUTHOR\n"
+  "#+DATE: \\today\n"
+  "#+LaTeX_CLASS: beamer\n"
+  "#+LaTeX_CLASS_OPTIONS: [final]\n"
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "beamerheader.tex}\n"))
   "#+STARTUP: showeverything\n"
   "#+OPTIONS: toc:nil\n")
 
@@ -456,19 +464,26 @@
   "[[./summaries/summaries.org][Summaries]]"
 )
 
-;; save Yasnippet dir
-(setq pet/yasnippet-dir
-      (concat pet/dotfiles-emacsconfig-dir
-              "snippets"))
+;; Bind Ace Window Control
+(global-set-key (kbd "M-o") 'ace-window)
 
 ;; Yasnippets
 (use-package yasnippet
+  :init
+  ;; save Yasnippet dir
+  (setq pet/yasnippet-dir
+        (concat pet/dotfiles-emacsconfig-dir
+                "snippets"))
+
   :config
   ;; Set Yasnippet dir
   (setq yas-snippet-dirs '(pet/yasnippet-dir))
 
   ;; Activate Yasnippets globally
   (yas-global-mode 1)
+
+  ;; Allow Stacked Expansion (Expansion within Expansion)
+  ;; (setq yas-triggers-in-field t)
 
   ;; Enable snippets being shared between modes
   (add-hook 'yas-minor-mode-hook
@@ -493,6 +508,72 @@
   (define-key mc/keymap (kbd
                          "<return>") nil))
 
+;; Setup general for easier key config
+(use-package general
+      :config
+      (general-create-definer pet/leader-keys
+      :prefix "C-."
+      :global-prefix "C-.")
+
+      (pet/leader-keys
+
+	;; Layouts
+	"l"    '(:ignore t :which-key "Layout")
+
+
+	;; Bookmarks
+	"b"  '(:ignore t :which-key "Bookmarks")
+	"bs" '(bookmark-set :which-key "Set Bookmark")
+	"bl" '(bookmark-bmenu-list :which-key "bookmark list")
+
+
+	;; Editing Tools
+	"e"     '(:ignore t :which-key "Editing Tools")
+	;; Letters
+	"el"    '(:ignore t :which-key "Letters")
+	"elM-u" 'upcase-initials
+	"elC-uM-u" 'upcase-initials-region
+	;; Tabs
+	"et"    '(untabify
+			      :which-key "Untabify")
+	"er"    '(regexp-builder
+			      :which-key "Regexp Builder")
+
+
+	;; Files
+	"f"   '(:ignore t :which-key "Files")
+	"fR"   'recentf-open-files
+
+
+	;; Org Mode related
+	"o"    '(:ignore t :which-key "Org Mode")
+
+
+	;; Toggles
+	"t"    '(:ignore t :which-key "Toggles")
+	"tc"   'world-clock
+	"tt"   '(counsel-load-theme
+			 :which-key "Choose Theme")
+	;; Toggles - Highlighting
+	"th"   '(:ignore t :which-key "Highlighting")
+	;; Toggles - Highlighting - Colors
+	"thc"  '(:ignore t :which-key "Colors")
+	"thcr" '(pet/syntax-color-rgb
+			 :which-key "RGB")
+	"thch" '(pet/syntax-color-hsv
+			 :which-key "HSV")
+	;; Toggles - Modes
+	"tm"   '(:ignore t :which-key "Modes")
+	"tmv"  '(visual-line-mode :which-key "Visual Line Mode")
+	"tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
+	"tmw"  '(whitespace-mode :which-key "Whitspace Mode")
+	"tmo"  '(org-mode :which-key "Org Mode")
+	"tmf"  '(origami-mode :which-key "Origami Mode")
+	"tmf"  '(follow-mode :which-key "Follow Mode")
+	"tme"  '(emojify-mode :which-key "Emojify Mode")
+	"tms"  '(scroll-all-mode :which-key "Scroll All Mode")
+      ))
+
 ;; applies beacon effect to the highlighted line on page scrolls
 (use-package beacon
    :config
@@ -500,6 +581,96 @@
    ;(setq beacon-color 0.4)
    )
 
+;; Display battery for when in full screen mode
+(display-battery-mode t)
+
+;; Don't show windowed Dialog Box on Prompts
+(setq use-dialog-box nil)
+
+;; Add Dashboard to Emacs
+(use-package dashboard
+      :init      ;; tweak dashboard config before loading it
+      (setq dashboard-set-heading-icons t)
+      (setq dashboard-set-file-icons t)
+      (setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
+      ;; use standard emacs logo as banner
+      (setq dashboard-startup-banner 'logo)
+      ;; Set custom banner
+      ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
+      (setq dashboard-center-content nil) ;; set to 't' for centered content
+      (setq dashboard-items '((recents . 5)
+			      (agenda . 5 )
+			      (bookmarks . 3)
+			      (projects . 3)
+			      (registers . 3)))
+      :config
+      (dashboard-setup-startup-hook)
+      (dashboard-modify-heading-icons '((recents . "file-text")
+					(bookmarks . "book"))))
+
+;; Make Emacsclient start up into dashboard
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+
+;; Enable Command Log Mode
+(use-package command-log-mode)
+
+;; Load Doom Themes
+(use-package doom-themes
+      :init (load-theme 'doom-dracula t)
+      )
+
+;; Use all-the-icons
+;;required for doom modeling
+(use-package all-the-icons)
+
+;; Load doom modeline
+(use-package doom-modeline
+      ;; Activate Doom Modeline
+      :init (doom-modeline-mode 1)
+      :custom ((doom-modeline-height 20)))
+
+;; Enable Winner Mode
+(winner-mode 1)
+
+;; Load which-key
+;; Loads a more helpful UI Completion buffer 
+(use-package which-key
+      :init (which-key-mode)
+      :diminish which-key-mode
+      :config
+      (setq which-key-idle-delay 1))
+
+;; Tab Bar Mode Setting
+
+;; Set new tab to scratch buffer
+(setq tab-bar-new-tab-choice "*scratch*")
+;; right is default -
+;; change if you dont like that
+;; (tab-bar-new-tab-to right)                
+
+;; Set the name of the tab to
+;; match the current buffer
+;; (setq tab-bar-tab-name-function
+;;       tab-bar-current-tab-name)
+
+      ;; Keyboard Rules
+      ;; Remove Tab Bar Buttons
+      (setq tab-bar-close-button-show nil
+		tab-bar-new-button-show nil
+		;; tab-bar-button-relief               ;; controls outline of buttons
+		;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
+		)
+
+      ;; tab bar is not automatically shown
+      ;; (set 1 to enable)
+      (setq tab-bar-show nil)                      
+
+      ;; Helper function to get only the name
+      ;; of current tab
+      (defun pet/current-tab-name ()
+	(alist-get 'name (tab-bar--current-tab)))
+
+;; Visually Mark Regexp
 (use-package visual-regexp)
 
 ;; Extend Emacs Emoji capability (apart from Unicode)
@@ -520,141 +691,6 @@
               ("C-c C-S-_" . origami-undo)
               ("C-c C-S-M-_" . origami-redo))
   )
-
-;; Setup general for easier key config
-(use-package general
-  :config
-  (general-create-definer pet/leader-keys
-  :prefix "C-."
-  :global-prefix "C-.")
-
-  (pet/leader-keys
-
-    ;; Layouts
-    "l"    '(:ignore t :which-key "Layout")
-
-    ;; Editing Tools
-    "e"     '(:ignore t :which-key "Editing Tools")
-    ;; Letters
-    "el"    '(:ignore t :which-key "Letters")
-    "elM-u" 'upcase-initials
-    "elC-uM-u" 'upcase-initials-region
-    ;; Tabs
-    "et"    '(untabify
-              :which-key "Untabify")
-    "er"    '(regexp-builder
-              :which-key "Regexp Builder")
-
-    ;; Files
-    "f"   '(:ignore t :which-key "Files")
-    "fR"   'recentf-open-files
-
-    ;; Org Mode related
-    "o"    '(:ignore t :which-key "Org Mode")
-
-    ;; Toggles
-    "t"    '(:ignore t :which-key "Toggles")
-    "tc"   'world-clock
-    "tt"   '(counsel-load-theme
-             :which-key "Choose Theme")
-
-    ;; Toggles - Highlighting
-    "th"   '(:ignore t :which-key "Highlighting")
-    ;; Toggles - Highlighting - Colors
-    "thc"  '(:ignore t :which-key "Colors")
-    "thcr" '(pet/syntax-color-rgb
-             :which-key "RGB")
-    "thch" '(pet/syntax-color-hsv
-             :which-key "HSV")
-    ;; Toggles - Modes
-    "tm"   '(:ignore t :which-key "Modes")
-    "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
-    "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
-    "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
-    "tmo"  '(org-mode :which-key "Org Mode")
-    "tmf"  '(origami-mode :which-key "Origami Mode")
-    "tme"  '(emojify-mode :which-key "Emojify Mode")
-  ))
-
-;; Add Dashboard to Emacs
-(use-package dashboard
-  :init      ;; tweak dashboard config before loading it
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
-  ;; use standard emacs logo as banner
-  (setq dashboard-startup-banner 'logo)
-  ;; Set custom banner
-  ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
-  (setq dashboard-center-content nil) ;; set to 't' for centered content
-  (setq dashboard-items '((recents . 5)
-			  (agenda . 5 )
-			  (bookmarks . 3)
-			  (projects . 3)
-			  (registers . 3)))
-  :config
-  (dashboard-setup-startup-hook)
-  (dashboard-modify-heading-icons '((recents . "file-text")
-				    (bookmarks . "book"))))
-
-;; Make Emacsclient start up into dashboard
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-
-;; Enable Command Log Mode
-(use-package command-log-mode)
-
-;; Load Doom Themes
-(use-package doom-themes
-  :init (load-theme 'doom-dracula t)
-  )
-
-;; Use all-the-icons
-;;required for doom modeling
-(use-package all-the-icons)
-
-;; Load doom modeline
-(use-package doom-modeline
-  ;; Activate Doom Modeline
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 20)))
-
-;; Load which-key
-;; Loads a more helpful UI Completion buffer 
-(use-package which-key
-  :init (which-key-mode)
-  :diminish which-key-mode
-  :config
-  (setq which-key-idle-delay 1))
-
-;; Tab Bar Mode Setting
-
-;; Set new tab to scratch buffer
-(setq tab-bar-new-tab-choice "*scratch*")
-;; right is default -
-;; change if you dont like that
-;; (tab-bar-new-tab-to right)                
-
-;; Set the name of the tab to
-;; match the current buffer
-;; (setq tab-bar-tab-name-function
-;;       tab-bar-current-tab-name)
-
-  ;; Keyboard Rules
-  ;; Remove Tab Bar Buttons
-  (setq tab-bar-close-button-show nil
-        tab-bar-new-button-show nil
-        ;; tab-bar-button-relief               ;; controls outline of buttons
-        ;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
-        )
-
-  ;; tab bar is not automatically shown
-  ;; (set 1 to enable)
-  (setq tab-bar-show nil)                      
-
-  ;; Helper function to get only the name
-  ;; of current tab
-  (defun pet/current-tab-name ()
-    (alist-get 'name (tab-bar--current-tab)))
 
 ;; Load Ivy Completion Framework
 (use-package ivy
@@ -704,15 +740,15 @@
 
 ;; Add Prescient for spooky Emacs Memory (history)
 (use-package prescient
-  :after counsel
-  :config
-  (prescient-persist-mode 1))
+      :after counsel
+      :config
+      (prescient-persist-mode 1))
 
 ;; Enable Prescient in Ivy
 (use-package ivy-prescient
-  :after prescient
-  :config
-  (ivy-prescient-mode 1))
+      :after prescient
+      :config
+      (ivy-prescient-mode 1))
 
 ;; Use Helpful to get a better help buffer
 (use-package helpful

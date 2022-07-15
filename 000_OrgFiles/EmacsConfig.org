@@ -66,7 +66,6 @@ To run Emacs service right now, use
 #+end_src
 
 ** Setting Up Needed Variables
-
 #+begin_src emacs-lisp
   ;; Setting Variables
   ;; for better customization and readability
@@ -90,10 +89,10 @@ To run Emacs service right now, use
          "Templates/")))
 
   ;; Save Emacs Template Dir for later use
-  (setq pet/emacs-temp-dir
+  (setq pet/latex-header-temp-dir
     (concat pet/temp-dir
         (convert-standard-filename
-         "X1_Emacs_Templates/")))
+         "X2_LaTeX_Templates/00-Headers/")))
 
   (setq pet/dotfiles-emacsconfig-dir
       (concat pet/dotfiles-dir
@@ -105,7 +104,6 @@ To run Emacs service right now, use
   (defvar pet/default-variable-font-size 120)
 
 #+end_src
-
 *** Setting Up the Environment Variables
 
 This section is normally not needed
@@ -314,11 +312,11 @@ If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-packag
 #+end_src
 
 * Basic UI Configuration
-
+** Description
 The following variables are used to tweak some of the configuration pieces like font and fontsize so you might need to adjust them for your local machine if you try to use this configuration directly.
 
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
-
+** Basic UI Settings
 #+begin_src emacs-lisp
   ;; A few basic settings
 
@@ -373,7 +371,6 @@ This section configures basic UI settings that remove unneeded elements to make 
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
-
 ** Font Configuration
 
 These ~Fonts~ are using the =pet/default-font-size= variable defined earlier
@@ -381,16 +378,16 @@ These ~Fonts~ are using the =pet/default-font-size= variable defined earlier
 
   ;; Set default font face
   (set-face-attribute 'default nil :font "Iosevka"
-              :height pet/default-font-size)
+			  :height pet/default-font-size)
 
   ;; Set the fixed pitch face
   (set-face-attribute 'fixed-pitch nil :font "Iosevka"
-              :height pet/default-font-size)
+			  :height pet/default-font-size)
 
   ;; Set the variable pitch face
   (set-face-attribute 'variable-pitch nil :font "Cantarell"
-              :height pet/default-font-size
-              :weight 'regular)
+			  :height pet/default-font-size
+			  :weight 'regular)
 
   ;; Use specific Fontsets for Symbols
   (setq use-default-font-for-symbols nil)
@@ -400,85 +397,77 @@ These ~Fonts~ are using the =pet/default-font-size= variable defined earlier
   (set-fontset-font t '(#xF500 . #xF8FF) "Symbols Nerd Font")
   (set-fontset-font t 'unicode "Symbola" nil 'append)
   (set-fontset-font t 'unicode (font-spec :script 'unicode) nil 'append)
+  
 #+end_src
-
 * Quality of Live Adjustments
 ** Startup
 
-Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time.
- 
+Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time. 
  #+begin_src emacs-lisp
    ;; Setting garbage collection threshold (default is 800)
    ;; Required for speed and also LSP
    (setq gc-cons-threshold (* 50 1000 1000)
-	gc-cons-percentage 0.6)
+    gc-cons-percentage 0.6)
 
    ;; Profile emacs startup
    (add-hook 'emacs-startup-hook
-	     (lambda ()
-	       (message "*** Emacs loaded in %s with %d garbage collections."
-			(format "%.2f seconds"
-			       (float-time
-				(time-subtract after-init-time before-init-time)))
-		       gcs-done)))
+         (lambda ()
+           (message "*** Emacs loaded in %s with %d garbage collections."
+            (format "%.2f seconds"
+                   (float-time
+                (time-subtract after-init-time before-init-time)))
+               gcs-done)))
 
    ;; Silence compiler warnings as they can be pretty
    ;; disruptive
    ;;(setq comp-async-report-warnings-errors nil)
+   
  #+end_src
 ** Tabs As Spaces
 I Prefer ~Spaces~ over ~Tabs~, if you need to enable it for certain modes, add a hook to it.
 #+begin_src emacs-lisp
-  ;; Set tabs to be 4 spaces
-  (setq-default indent-tabs-mode nil)
+  ;; Tabs as tab-char by default.
+  ;; 'nil' replaces tabs with spaces
+  (setq-default indent-tabs-mode t)
   ;; Set the default, fallback tabstop to be 4 spaces
   (setq-default tab-stop-list (number-sequence 4 120 4))
   ;; Set Number of Spaces displayed for a tab stop
   (setq-default tab-width 4)
+
 #+end_src
 ** Calender
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp  
   ;; Show Calendar on StartUp                      
   ;; (calendar)
 
   ;; set date format to %DD-%MM-%YYYY
   (setq european-calender-style 't)
-
-#+end_src
-** Battery Status
-#+begin_src emacs-lisp
-  ;; Display battery for when in full screen mode
-  (display-battery-mode t)
-
+  
 #+end_src
 ** Macros
-
 #+begin_src emacs-lisp
+  ; Setup file containing global macros
+  (load-file
+   (concat pet/dotfiles-emacsconfig-dir
+		   "macros/global.macs")) 
 
-    ; Setup file containing global macros
-    (load-file
-     (concat pet/dotfiles-emacsconfig-dir
-             "macros/global.macs")) 
-
-    ;; Set of keybindings for defined macros
-    ;; Make sure to have a definition of the macro in your /macros folder
-    (global-set-key "\C-x\C-kT" 'transpose-names)
-
+  ;; Set of keybindings for defined macros
+  ;; Make sure to have a definition of the macro in your /macros folder
+  (global-set-key "\C-x\C-kT" 'transpose-names)
+  
 #+end_src
 ** Booksmarks
 
-Setup a location for your bookmarks-file
-
+Setup a ~location~ for your =bookmarks-file=
 #+begin_src emacs-lisp
   ;; Set Location for bookmarks file/s
   (setq bookmark-default-file
         (concat pet/dotfiles-emacsconfig-dir
                 "bookmarks"))
+  
 #+end_src
-
 ** Abbreviations
 #+begin_src emacs-lisp
-
   ;; Activate Abbrev Mode by default
   (setq-default abbrev-mode t)
 
@@ -491,7 +480,6 @@ Setup a location for your bookmarks-file
   (setq save-abbrevs t)
 
 #+end_src
-
 ** History and File Positions
 #+begin_src emacs-lisp
   ;; Remember recently accessed files
@@ -506,7 +494,6 @@ Setup a location for your bookmarks-file
   (save-place-mode 1)
   
 #+end_src
-
 ** Customization File
 Even if you don't use the [[id:cfb0e412-7d18-4c22-9a71-6d57d4dde7d4][Customization Mode]], some commands might access it and therefore clutter your =init.el=.
 Let's save this to another file as well as load that in *without errormessages and normal messages* (like non-existing etc...)
@@ -515,12 +502,6 @@ Let's save this to another file as well as load that in *without errormessages a
   (setq custom-file (locate-user-emacs-file "customization_variables.el"))
   (load custom-file 'no-error 'no-message)
   
-#+end_src
-** Dialog Box
-Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] keyboard-driven
-#+begin_src emacs-lisp
-  ;; Don't show windowed Dialog Box on Prompts
-  (setq use-dialog-box nil)
 #+end_src
 ** Auto-Revert Buffer
 [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] doesn't automatically *revert buffers* that *change on disk*.
@@ -531,6 +512,7 @@ Changing this behaviour will still ask for confirmation, but you don't need to m
 
   ;; Automatically revert Dired (and similar) Buffers without confirmation
   (setq global-auto-revert-non-file-buffers t)
+  
 #+end_src
 ** World Clocks
 [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] can display the curren clocktime for various places around the world with the command =world-clock=
@@ -538,23 +520,24 @@ Changing this behaviour will still ask for confirmation, but you don't need to m
   ;; Setup World Clock list
   ;; If not set, zoneinfo-style-world-list is used
   (setq world-clock-list
-	'(("Etc/UTC" "UTC")
-	  ("Europe/Berlin" "Berlin")
-	  ("Europe/Paris" "Paris")
-	  ("Europe/London" "London")
-	  ("Europe/Athens" "Athens")
-	  ("America/New_York" "New York")
-	  ("America/Los_Angeles" "Seattle")
-	  ("America/Mexico_City" "Mexico City")
-	  ("Asia/Shanghai" "Shanghai")
-	  ("Asia/Calcutta" "Bangalore")
-	  ("Asia/Tokyo" "Tokyo")
-	  ("Pacific/Auckland" "Auckland"))
-	)
+    '(("Etc/UTC" "UTC")
+      ("Europe/Berlin" "Berlin")
+      ("Europe/Paris" "Paris")
+      ("Europe/London" "London")
+      ("Europe/Athens" "Athens")
+      ("America/New_York" "New York")
+      ("America/Los_Angeles" "Seattle")
+      ("America/Mexico_City" "Mexico City")
+      ("Asia/Shanghai" "Shanghai")
+      ("Asia/Calcutta" "Bangalore")
+      ("Asia/Tokyo" "Tokyo")
+      ("Pacific/Auckland" "Auckland"))
+    )
 
   ;; Adjust how time is displayed
   (setq display-time-world-time-format
-	"%A, %d %B %Y %H:%M %p %Z")
+    "%A, %d %B %Y %H:%M %p %Z")
+  
 #+end_src
 ** Executable Path Setup
 ~Exec Path from Shell~ is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]] that reads [[id:eb3164fe-2397-446a-8953-22356f3408db][Environment Variables]] from ~Bash~ or ~ZSH~.
@@ -572,9 +555,6 @@ Information can be found here: [[https://github.com/purcell/exec-path-from-shell
   ;;   (add-to-list 'exec-path-from-shell-variables var))
 
 #+end_src
-
-#+RESULTS:
-
 ** Skeletons
 
 ~Skeletons~ are ~text constructs~ (like ~letter headers~ or ~programming templates~) that you can insert.
@@ -603,7 +583,7 @@ Find more here:
     "\\end{document}\n")
 
 #+end_src
-*** Org Mode
+*** Org Mode Skeletons
 **** LaTeX Summary
 #+begin_src emacs-lisp
   ;; Org LaTeX Summary Header 
@@ -613,7 +593,7 @@ Find more here:
     "#+LATEX_CLASS: article\n"
     "#+LATEX_CLASS_OPTIONS: [a5paper,landscape,fourcolumn]\n"
     "#+LATEX_COMPILER: lualatex\n"
-    (concat "#+LATEX_HEADER: \\input{" (concat pet/emacs-temp-dir "summaryheader.tex}\n"))
+    (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "summaryheader.tex}\n"))
     "#+STARTUP: showeverything\n"
     "#+OPTIONS: toc:nil\n"
     "\\begin{multicols*}{4}\n"
@@ -633,11 +613,28 @@ Find more here:
     "#+DATE: \\today\n"
     "#+LATEX_CLASS: article\n"
     "#+LATEX_CLASS_OPTIONS: [a4paper]\n"
-    (concat "#+LATEX_HEADER: \\input{" (concat pet/emacs-temp-dir "/articleheader.tex}\n"))
+    (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "articleheader.tex}\n"))
+    "#+OPTIONS: toc:nil\n")
+
+#+end_src
+**** LaTeX Beamer
+#+begin_src emacs-lisp
+  ;; Org LaTeX Beamer Header
+  (define-skeleton pet/org-latex-beamer-skeleton
+    "Skeleton for articles "
+    "Preamble:"
+    "#+STARTUP: beamer\n"
+    "#+TITLE: TITLE\n"
+    "#+AUTHOR: AUTHOR\n"
+    "#+DATE: \\today\n"
+    "#+LaTeX_CLASS: beamer\n"
+    "#+LaTeX_CLASS_OPTIONS: [final]\n"
+    (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "beamerheader.tex}\n"))
     "#+STARTUP: showeverything\n"
     "#+OPTIONS: toc:nil\n")
 
 #+end_src
+
 **** Wiki
 #+begin_src emacs-lisp
   ;; Org Wiki
@@ -670,25 +667,35 @@ Find more here:
   )
 
 #+end_src
+** Ace Window
+#+begin_src emacs-lisp
+  ;; Bind Ace Window Control
+  (global-set-key (kbd "M-o") 'ace-window)
+  
+#+end_src
 ** YASnippets
 
 Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration).
 [[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippets]] are an ~extension/improvement~ over the basic [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Skeletons~ 
 Documentation can be found here: [[https://github.com/joaotavora/yasnippet][GitHub.com: Yasnippet]]
 #+begin_src emacs-lisp
-  ;; save Yasnippet dir
-  (setq pet/yasnippet-dir
-        (concat pet/dotfiles-emacsconfig-dir
-                "snippets"))
-
   ;; Yasnippets
   (use-package yasnippet
+    :init
+    ;; save Yasnippet dir
+    (setq pet/yasnippet-dir
+          (concat pet/dotfiles-emacsconfig-dir
+                  "snippets"))
+
     :config
     ;; Set Yasnippet dir
     (setq yas-snippet-dirs '(pet/yasnippet-dir))
 
     ;; Activate Yasnippets globally
     (yas-global-mode 1)
+
+    ;; Allow Stacked Expansion (Expansion within Expansion)
+    ;; (setq yas-triggers-in-field t)
 
     ;; Enable snippets being shared between modes
     (add-hook 'yas-minor-mode-hook
@@ -697,7 +704,6 @@ Documentation can be found here: [[https://github.com/joaotavora/yasnippet][GitH
                  'fundamental-mode))))
 
 #+end_src
-
 ** Multiple Cursors
 
 ~Multiple Cursors~ are a must for *modern editors*.
@@ -719,10 +725,82 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
                     'mc/mark-all-dwim)
     (define-key mc/keymap (kbd
                            "<return>") nil))
+  
 #+end_src
+* Keybinding Configuration
 
+[[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
+#+begin_src emacs-lisp
+  ;; Setup general for easier key config
+  (use-package general
+	:config
+	(general-create-definer pet/leader-keys
+	:prefix "C-."
+	:global-prefix "C-.")
+
+	(pet/leader-keys
+
+	  ;; Layouts
+	  "l"    '(:ignore t :which-key "Layout")
+
+
+	  ;; Bookmarks
+	  "b"  '(:ignore t :which-key "Bookmarks")
+	  "bs" '(bookmark-set :which-key "Set Bookmark")
+	  "bl" '(bookmark-bmenu-list :which-key "bookmark list")
+
+
+	  ;; Editing Tools
+	  "e"     '(:ignore t :which-key "Editing Tools")
+	  ;; Letters
+	  "el"    '(:ignore t :which-key "Letters")
+	  "elM-u" 'upcase-initials
+	  "elC-uM-u" 'upcase-initials-region
+	  ;; Tabs
+	  "et"    '(untabify
+				:which-key "Untabify")
+	  "er"    '(regexp-builder
+				:which-key "Regexp Builder")
+
+
+	  ;; Files
+	  "f"   '(:ignore t :which-key "Files")
+	  "fR"   'recentf-open-files
+
+
+	  ;; Org Mode related
+	  "o"    '(:ignore t :which-key "Org Mode")
+
+
+	  ;; Toggles
+	  "t"    '(:ignore t :which-key "Toggles")
+	  "tc"   'world-clock
+	  "tt"   '(counsel-load-theme
+			   :which-key "Choose Theme")
+	  ;; Toggles - Highlighting
+	  "th"   '(:ignore t :which-key "Highlighting")
+	  ;; Toggles - Highlighting - Colors
+	  "thc"  '(:ignore t :which-key "Colors")
+	  "thcr" '(pet/syntax-color-rgb
+			   :which-key "RGB")
+	  "thch" '(pet/syntax-color-hsv
+			   :which-key "HSV")
+	  ;; Toggles - Modes
+	  "tm"   '(:ignore t :which-key "Modes")
+	  "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
+	  "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
+	  "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
+	  "tmo"  '(org-mode :which-key "Org Mode")
+	  "tmf"  '(origami-mode :which-key "Origami Mode")
+	  "tmf"  '(follow-mode :which-key "Follow Mode")
+	  "tme"  '(emojify-mode :which-key "Emojify Mode")
+	  "tms"  '(scroll-all-mode :which-key "Scroll All Mode")
+	))
+
+#+end_src
+* Extended UI Configuration
 ** Beacon
-Documentation can be found here: https://github.com/Malabarba/beacon
+Documentation can be found here: [[https://github.com/Malabarba/beacon][GitHub.com: beacon]]
 #+begin_src emacs-lisp
   ;; applies beacon effect to the highlighted line on page scrolls
   (use-package beacon
@@ -732,124 +810,43 @@ Documentation can be found here: https://github.com/Malabarba/beacon
      )
 
 #+end_src
-** Visual Regular Expressions
-[[https://github.com/benma/visual-regexp.el][Visual-Regexp]] is a third party package that builds on emacs lisp [[id:26419d86-c777-4765-9dd1-9353f17a0716][regular expression]] functionality.
-It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d86-c777-4765-9dd1-9353f17a0716][expressions]] during ~build-up~
-#+begin_src emacs-lisp
-  (use-package visual-regexp)
+** Battery Status
+#+begin_src emacs-lisp 
+  ;; Display battery for when in full screen mode
+  (display-battery-mode t)
+  
 #+end_src
-** Display Emojis
-[[https://github.com/iqbalansari/emacs-emojify][Emojify]] is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] extension to display ~emojis. It can display github style emojis like :smile: or plain ascii ones like :).
-[[id:40f3f142-cf2a-44f0-a9fb-da5f5bf448cc][Unicode Emojis]] können auch ohne dieses Paket schon angezeigt werden
+** Dialog Box
+Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] keyboard-driven
 #+begin_src emacs-lisp
-  ;; Extend Emacs Emoji capability (apart from Unicode)
-  (use-package emojify
-    ;; if you want to enable emojis globally:
-    ;; :hook (after-init . global-emojify-mode)
-    )
+  ;; Don't show windowed Dialog Box on Prompts
+  (setq use-dialog-box nil)
+  
 #+end_src
-** Origami Mode
-#+begin_src emacs-lisp
-  ;; Add Origami Mode for Folding
-  (use-package origami
-    :hook (yaml-mode . origami-mode)
-    :bind (
-           :map origami-mode-map
-                ("<tab>" . origami-recursively-toggle-node)
-                ("S-<tab>" . origami-toggle-all-nodes)
-                ("C-c C-n" . origami-next-fold)
-                ("C-c C-p" . origami-previous-fold)
-                ("C-c C-S-_" . origami-undo)
-                ("C-c C-S-M-_" . origami-redo))
-    )
-
-#+end_src
-* Keybinding Configuration
-
- [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
-
-#+begin_src emacs-lisp
-  ;; Setup general for easier key config
-  (use-package general
-    :config
-    (general-create-definer pet/leader-keys
-    :prefix "C-."
-    :global-prefix "C-.")
-
-    (pet/leader-keys
-
-      ;; Layouts
-      "l"    '(:ignore t :which-key "Layout")
-
-      ;; Editing Tools
-      "e"     '(:ignore t :which-key "Editing Tools")
-      ;; Letters
-      "el"    '(:ignore t :which-key "Letters")
-      "elM-u" 'upcase-initials
-      "elC-uM-u" 'upcase-initials-region
-      ;; Tabs
-      "et"    '(untabify
-                :which-key "Untabify")
-      "er"    '(regexp-builder
-                :which-key "Regexp Builder")
-
-      ;; Files
-      "f"   '(:ignore t :which-key "Files")
-      "fR"   'recentf-open-files
-
-      ;; Org Mode related
-      "o"    '(:ignore t :which-key "Org Mode")
-
-      ;; Toggles
-      "t"    '(:ignore t :which-key "Toggles")
-      "tc"   'world-clock
-      "tt"   '(counsel-load-theme
-               :which-key "Choose Theme")
-
-      ;; Toggles - Highlighting
-      "th"   '(:ignore t :which-key "Highlighting")
-      ;; Toggles - Highlighting - Colors
-      "thc"  '(:ignore t :which-key "Colors")
-      "thcr" '(pet/syntax-color-rgb
-               :which-key "RGB")
-      "thch" '(pet/syntax-color-hsv
-               :which-key "HSV")
-      ;; Toggles - Modes
-      "tm"   '(:ignore t :which-key "Modes")
-      "tmv"  '(visual-line-mode :which-key "Visual Line Mode")
-      "tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
-      "tmw"  '(whitespace-mode :which-key "Whitspace Mode")
-      "tmo"  '(org-mode :which-key "Org Mode")
-      "tmf"  '(origami-mode :which-key "Origami Mode")
-      "tme"  '(emojify-mode :which-key "Emojify Mode")
-    ))
-
-#+end_src
-
-* Extended UI Configuration
 ** Dashboard
 [[https://github.com/emacs-dashboard/emacs-dashboard][Emacs Dashboard]] ads a start up screen to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Index Emacs]]
 #+begin_src emacs-lisp
   ;; Add Dashboard to Emacs
   (use-package dashboard
-    :init      ;; tweak dashboard config before loading it
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
-    ;; use standard emacs logo as banner
-    (setq dashboard-startup-banner 'logo)
-    ;; Set custom banner
-    ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
-    (setq dashboard-center-content nil) ;; set to 't' for centered content
-    (setq dashboard-items '((recents . 5)
-			    (agenda . 5 )
-			    (bookmarks . 3)
-			    (projects . 3)
-			    (registers . 3)))
-    :config
-    (dashboard-setup-startup-hook)
-    (dashboard-modify-heading-icons '((recents . "file-text")
-				      (bookmarks . "book"))))
+	:init      ;; tweak dashboard config before loading it
+	(setq dashboard-set-heading-icons t)
+	(setq dashboard-set-file-icons t)
+	(setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
+	;; use standard emacs logo as banner
+	(setq dashboard-startup-banner 'logo)
+	;; Set custom banner
+	;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
+	(setq dashboard-center-content nil) ;; set to 't' for centered content
+	(setq dashboard-items '((recents . 5)
+				(agenda . 5 )
+				(bookmarks . 3)
+				(projects . 3)
+				(registers . 3)))
+	:config
+	(dashboard-setup-startup-hook)
+	(dashboard-modify-heading-icons '((recents . "file-text")
+					  (bookmarks . "book"))))
+
 #+end_src
 *** Dashboard as Client Startup
 
@@ -860,23 +857,21 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
 ** Command Log Mode
 
 [[https://github.com/lewang/command-log-mode][command-log-mode]] is useful for displaying a panel showing each key binding you use in a panel on the right side of the frame.  Great for live streams and screencasts!
-
 #+begin_src emacs-lisp
   ;; Enable Command Log Mode
   (use-package command-log-mode)
+  
 #+end_src
-
 ** Doom Themes
 
 [[https://github.com/hlissner/emacs-doom-themes][doom-themes]] is a great set of themes with a lot of variety and support for many different Emacs modes.  Taking a look at the [[https://github.com/hlissner/emacs-doom-themes/tree/screenshots][screenshots]] might help you decide which one you like best.  You can also run =M-x counsel-load-theme= to choose between them easily.
-
 #+begin_src emacs-lisp
   ;; Load Doom Themes
   (use-package doom-themes
-    :init (load-theme 'doom-dracula t)
-    )
+	:init (load-theme 'doom-dracula t)
+	)
+  
 #+end_src
-
 ** Doom Modeline
 
 [[https://github.com/seagle0128/doom-modeline][doom-modeline]] is a very attractive and rich (yet still minimal) mode line configuration for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].  The default configuration is quite good but you can check out the [[https://github.com/seagle0128/doom-modeline#customize][configuration options]] for more things you can enable or disable.
@@ -884,7 +879,6 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
 :NOTE:
 The *first time* you load your configuration on a *new machine*, you'll need to run =M-x all-the-icons-install-font= so that mode line icons display correctly.
 :END:
-
 #+begin_src emacs-lisp
   ;; Use all-the-icons
   ;;required for doom modeling
@@ -892,30 +886,34 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 
   ;; Load doom modeline
   (use-package doom-modeline
-    ;; Activate Doom Modeline
-    :init (doom-modeline-mode 1)
-    :custom ((doom-modeline-height 20)))
+	;; Activate Doom Modeline
+	:init (doom-modeline-mode 1)
+	:custom ((doom-modeline-height 20)))
+  
 #+end_src
+** Winner Mode
+#+begin_src emacs-lisp
+  ;; Enable Winner Mode
+  (winner-mode 1)
 
+#+end_src
 ** Which Key
 
 [[https://github.com/justbur/emacs-which-key][which-key]] is a useful UI panel that appears when you start pressing any key binding in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] to offer you all possible completions for the prefix.  For example, if you press =C-c= (hold control and press the letter =c=), a panel will appear at the bottom of the frame displaying all of the bindings under that prefix and which command they run.  This is very useful for learning the possible key bindings in the mode of your current buffer.
-
 #+begin_src emacs-lisp
   ;; Load which-key
   ;; Loads a more helpful UI Completion buffer 
   (use-package which-key
-    :init (which-key-mode)
-    :diminish which-key-mode
-    :config
-    (setq which-key-idle-delay 1))
+	:init (which-key-mode)
+	:diminish which-key-mode
+	:config
+	(setq which-key-idle-delay 1))
+  
 #+end_src
-
 ** Tab Bar Mode
 
 Here we configure =Tab Bar Mode= to work in a specific way.
 First we want new tabs to always open with a *scratch* buffer
-
 :NOTE:
 =Tab Bar Mode= was added in ~Emacs 27~
 :END:
@@ -933,32 +931,67 @@ First we want new tabs to always open with a *scratch* buffer
   ;; (setq tab-bar-tab-name-function
   ;;       tab-bar-current-tab-name)
 
-    ;; Keyboard Rules
-    ;; Remove Tab Bar Buttons
-    (setq tab-bar-close-button-show nil
-          tab-bar-new-button-show nil
-          ;; tab-bar-button-relief               ;; controls outline of buttons
-          ;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
-          )
+	;; Keyboard Rules
+	;; Remove Tab Bar Buttons
+	(setq tab-bar-close-button-show nil
+		  tab-bar-new-button-show nil
+		  ;; tab-bar-button-relief               ;; controls outline of buttons
+		  ;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
+		  )
 
-    ;; tab bar is not automatically shown
-    ;; (set 1 to enable)
-    (setq tab-bar-show nil)                      
+	;; tab bar is not automatically shown
+	;; (set 1 to enable)
+	(setq tab-bar-show nil)                      
 
-    ;; Helper function to get only the name
-    ;; of current tab
-    (defun pet/current-tab-name ()
-      (alist-get 'name (tab-bar--current-tab)))
+	;; Helper function to get only the name
+	;; of current tab
+	(defun pet/current-tab-name ()
+	  (alist-get 'name (tab-bar--current-tab)))
+  
 #+end_src
+** Visual Regular Expressions
+[[https://github.com/benma/visual-regexp.el][Visual-Regexp]] is a third party package that builds on emacs lisp [[id:26419d86-c777-4765-9dd1-9353f17a0716][regular expression]] functionality.
+It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d86-c777-4765-9dd1-9353f17a0716][expressions]] during ~build-up~
+#+begin_src emacs-lisp
+  ;; Visually Mark Regexp
+  (use-package visual-regexp)
+  
+#+end_src
+** Display Emojis
+[[https://github.com/iqbalansari/emacs-emojify][Emojify]] is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] extension to display ~emojis. It can display github style emojis like :smile: or plain ascii ones like :).
+[[id:40f3f142-cf2a-44f0-a9fb-da5f5bf448cc][Unicode Emojis]] können auch ohne dieses Paket schon angezeigt werden
+#+begin_src emacs-lisp
+  ;; Extend Emacs Emoji capability (apart from Unicode)
+  (use-package emojify
+    ;; if you want to enable emojis globally:
+    ;; :hook (after-init . global-emojify-mode)
+    )
+  
+#+end_src
+** Origami Mode
+#+begin_src emacs-lisp
+  ;; Add Origami Mode for Folding
+  (use-package origami
+    :hook (yaml-mode . origami-mode)
+    :bind (
+           :map origami-mode-map
+                ("<tab>" . origami-recursively-toggle-node)
+                ("S-<tab>" . origami-toggle-all-nodes)
+                ("C-c C-n" . origami-next-fold)
+                ("C-c C-p" . origami-previous-fold)
+                ("C-c C-S-_" . origami-undo)
+                ("C-c C-S-M-_" . origami-redo))
+    )
 
+#+end_src
 ** Ivy and Counsel
-
+*** Description
 [[https://oremacs.com/swiper/][Ivy]] is an excellent completion framework for Emacs.  It provides a minimal yet powerful selection menu that appears when you open files, switch buffers, and for many other tasks in Emacs.
 
 ~Counsel~ is a customized set of commands to replace =find-file= with =counsel-find-file=, etc which provide useful commands for each of the default completion commands.
 
 [[https://github.com/Yevgnen/ivy-rich][ivy-rich]] adds extra columns to a few of the Counsel commands to provide more information about each item.
-
+*** Loading Ivy and related Packages
 #+begin_src emacs-lisp
   ;; Load Ivy Completion Framework
   (use-package ivy
@@ -1013,15 +1046,16 @@ First we want new tabs to always open with a *scratch* buffer
 #+begin_src emacs-lisp
   ;; Add Prescient for spooky Emacs Memory (history)
   (use-package prescient
-    :after counsel
-    :config
-    (prescient-persist-mode 1))
+	:after counsel
+	:config
+	(prescient-persist-mode 1))
 
   ;; Enable Prescient in Ivy
   (use-package ivy-prescient
-    :after prescient
-    :config
-    (ivy-prescient-mode 1))
+	:after prescient
+	:config
+	(ivy-prescient-mode 1))
+  
 #+end_src
 ** Helpful Help Commands
 
