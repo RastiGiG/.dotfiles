@@ -34,11 +34,12 @@ primary = #F0C674
 secondary = #8ABEB7
 alert = #A54242
 disabled = #707880
+
 #+end_src
 
 * Bars
 #+begin_src sh
-[bar/example]
+[bar/minimalbar]
 width = 100%
 height = 24pt
 radius = 6
