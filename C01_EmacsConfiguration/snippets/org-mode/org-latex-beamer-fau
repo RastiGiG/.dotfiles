@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: org-latex-beamer-fau
+# key: <bfau
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+#+TITLE:    ${1:Title}
+#+SUBTITLE: ${2:Subtitle}
+#+AUTHOR:   ${3:Author}
+#+DATE:     \today
+
+#+STARTUP: beamer
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t email:nil f:t inline:t num:t
+#+OPTIONS: stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:nil toc:nil todo:t
+#+OPTIONS: H:${4:Headline-Level-for-Frame-Separation$$(yas-choose-value '("1" "2" "3" "4" "5"))}
+#+STARTUP: showeverything
+
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [final]
+
+#+LATEX_HEADER: \usepackage[institute=${5:$$(yas-choose-value '("FAU" "Tech" "Med" "Nat" "Phil" "RW"))},
+#+LATEX_HEADER: ${6:% ExtraLogo = template-art/${7:Filename}},
+#+LATEX_HEADER: ${8:$$(yas-choose-value '("%" "WordMark=None"))},
+#+LATEX_HEADER: aspectratio=169,
+#+LATEX_HEADER: size=18
+#+LATEX_HEADER: ]{styles/beamerthemefau}
+#+LATEX_HEADER: \usepackage{styles/symbols}
+#+LATEX_HEADER: \institute[${9:Instituts-Kürzel}]{${10:Institution/Department}}
+
+\begin{trueplainframe}{}
+\titlepage%
+\end{trueplainframe}

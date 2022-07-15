@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org_src_block-properties-name
+# key: <sbpn
+# --
+#+NAME: ${1:Name}

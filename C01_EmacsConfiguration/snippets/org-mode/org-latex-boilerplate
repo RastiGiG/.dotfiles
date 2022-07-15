@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: org-latex-boilerplate
+# expand-env: ((triggers-in-field #t))
+# key: <olb
+# --
+<au
+test
+$0
