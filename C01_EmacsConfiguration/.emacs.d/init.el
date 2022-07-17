@@ -1869,32 +1869,33 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Setup Source Block Templates
 (cl-loop for block in
-         '(("aw" . "src awk")
-           ("el" . "src emacs-lisp")
-           ;; ("go" . "src go")
-           ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
-           ("json" . "src json")
-           ("lua" . "src lua")
-           ("oc" . "src octave")
-           ("perl" . "src perl")
-           ("ph" . "src php")
-           ("py" . "src python")
-           ("sc" . "src scheme")
-           ("sh" . "src shell")
-           ("sq" . "src sql")
-           ("yaml" . "src yaml")
-           ;; R
-           ("rp" . "src R")                                  ;; pure R             
-           ("rr" . "src R :results both output")             ;; R with output
-           ("rs" . "src R :session :results both output")    ;; R with output
-           ;; ("ts" . "src typescript"))
-           ;; This is an alternative Block
-           ;; For IPython
-           ;; ("si" . "src ipython :session :async :results output")
-           )
-         do
-         (add-to-list
-          'org-structure-template-alist block))
+		 '(("aw" . "src awk")
+		       ("el" . "src emacs-lisp")
+		       ;; ("go" . "src go")
+		       ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+		       ("json" . "src json")
+		       ("lua" . "src lua")
+		       ("ldg" . "src ledger :no")
+		       ("oc" . "src octave")
+		       ("perl" . "src perl")
+		       ("ph" . "src php")
+		       ("py" . "src python")
+		       ("sc" . "src scheme")
+		       ("sh" . "src shell")
+		       ("sq" . "src sql")
+		       ("yaml" . "src yaml")
+		       ;; R
+		       ("rp" . "src R")                                  ;; pure R             
+		       ("rr" . "src R :results both output")             ;; R with output
+		       ("rs" . "src R :session :results both output")    ;; R with output
+		       ;; ("ts" . "src typescript"))
+		       ;; This is an alternative Block
+		       ;; For IPython
+		       ;; ("si" . "src ipython :session :async :results output")
+		       )
+		 do
+		 (add-to-list
+		      'org-structure-template-alist block))
 
 ;; Org-Capture
 (use-package org-capture
