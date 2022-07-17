@@ -518,13 +518,17 @@
       (pet/leader-keys
 
 	;; Layouts
-	"l"    '(:ignore t :which-key "Layout")
+	"l"     '(:ignore t :which-key "Layout")
+
+
+	;; Authentication
+	"a"     '(:ignore t :which-key "Authentification")
 
 
 	;; Bookmarks
-	"b"  '(:ignore t :which-key "Bookmarks")
-	"bs" '(bookmark-set :which-key "Set Bookmark")
-	"bl" '(bookmark-bmenu-list :which-key "bookmark list")
+	"b"     '(:ignore t :which-key "Bookmarks")
+	"bs"    '(bookmark-set :which-key "Set Bookmark")
+	"bl"    '(bookmark-bmenu-list :which-key "bookmark list")
 
 
 	;; Editing Tools
@@ -541,38 +545,38 @@
 
 
 	;; Files
-	"f"   '(:ignore t :which-key "Files")
-	"fR"   'recentf-open-files
+	"f"     '(:ignore t :which-key "Files")
+	"fR"    'recentf-open-files
 
 
 	;; Org Mode related
-	"o"    '(:ignore t :which-key "Org Mode")
+	"o"     '(:ignore t :which-key "Org Mode")
 
 
 	;; Toggles
-	"t"    '(:ignore t :which-key "Toggles")
-	"tc"   'world-clock
-	"tt"   '(counsel-load-theme
-			 :which-key "Choose Theme")
+	"t"     '(:ignore t :which-key "Toggles")
+	"tc"    'world-clock
+	"tt"    '(counsel-load-theme
+			      :which-key "Choose Theme")
 	;; Toggles - Highlighting
-	"th"   '(:ignore t :which-key "Highlighting")
+	"th"    '(:ignore t :which-key "Highlighting")
 	;; Toggles - Highlighting - Colors
-	"thc"  '(:ignore t :which-key "Colors")
-	"thcr" '(pet/syntax-color-rgb
-			 :which-key "RGB")
-	"thch" '(pet/syntax-color-hsv
-			 :which-key "HSV")
+	"thc"   '(:ignore t :which-key "Colors")
+	"thcr"  '(pet/syntax-color-rgb
+			      :which-key "RGB")
+	"thch"  '(pet/syntax-color-hsv
+			      :which-key "HSV")
 	;; Toggles - Modes
-	"tm"   '(:ignore t :which-key "Modes")
-	"tmv"  '(visual-line-mode :which-key "Visual Line Mode")
-	"tmh"  '(hl-line-mode :which-key "Highlight Line Mode")
-	"tmw"  '(whitespace-mode :which-key "Whitspace Mode")
-	"tmo"  '(org-mode :which-key "Org Mode")
-	"tmf"  '(origami-mode :which-key "Origami Mode")
-	"tmf"  '(follow-mode :which-key "Follow Mode")
-	"tme"  '(emojify-mode :which-key "Emojify Mode")
-	"tms"  '(scroll-all-mode :which-key "Scroll All Mode")
-      ))
+	"tm"    '(:ignore t :which-key "Modes")
+	"tmv"   '(visual-line-mode :which-key "Visual Line Mode")
+	"tmh"   '(hl-line-mode :which-key "Highlight Line Mode")
+	"tmw"   '(whitespace-mode :which-key "Whitspace Mode")
+	"tmo"   '(org-mode :which-key "Org Mode")
+	"tmf"   '(origami-mode :which-key "Origami Mode")
+	"tmf"   '(follow-mode :which-key "Follow Mode")
+	"tme"   '(emojify-mode :which-key "Emojify Mode")
+	"tms"   '(scroll-all-mode :which-key "Scroll All Mode")
+	))
 
 ;; applies beacon effect to the highlighted line on page scrolls
 (use-package beacon
