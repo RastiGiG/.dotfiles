@@ -3,9 +3,9 @@
 # key: <oshtemp
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
-#+TITLE: ${1:FileTitle}
+#+TITLE:  ${1:FileTitle}
 #+AUTHOR: ${2:Author}
-#+DATE:  ${3: `(format-time-string "[%Y-%m-%d]")`}
+#+DATE:   ${3: `(format-time-string "[%Y-%m-%d]")`}
 #+PROPERTY: header-args :tangle ${4:PathToFile/FileName}
 #+auto_tangle: t
 

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Org_Options-Name	
+# key: <na
+# --
+#+NAME: ${1:Name}

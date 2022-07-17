@@ -1,5 +1,5 @@
 # key: <ocs
-# name: org-contact_standard
+# name: org-contacts-standard_contact
 # expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 ** ${1:Fullname}
