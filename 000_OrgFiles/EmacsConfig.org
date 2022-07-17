@@ -1919,6 +1919,10 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 	;; Don't ask to quit
 	(setq mu4e-confirm-quit nil)
 
+	;; Set Contacts file for Org Contacts interaction
+	(setq mu4e-org-contacts-file
+		  (concat pet/org-dir "personal-contacts.org"))
+
 	;; COMPOSING MAIL
 
 	;; Don't include oneself in reply by default 
@@ -1985,7 +1989,6 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 	)
 
 #+end_src
-
 *** mu4e-alert
 
 [[https://github.com/iqbalansari/mu4e-alert][mu4e-alert]] sends ~Notifications~ to your ~notifications daemon/window manager~
@@ -2172,7 +2175,6 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
 ** Org Font Faces
 
 The =pet/org-font-setup= function configures various text faces to tweak the sizes of headings and use variable width fonts in most cases so that it looks more like we're editing a document in =org-mode=.  We switch back to fixed width (monospace) fonts for code blocks and tables so that they display correctly.
-
 #+begin_src emacs-lisp
   ;; Helper Functions for Org
   (defun pet/org-font-setup ()
@@ -2420,7 +2422,7 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
   (use-package org-contacts
     :after org
     ;; Set Contacts File
-    :custom (org-contacts-files (concat pet/home-dir "Org/personal-contacts.org")))
+    :custom (org-contacts-files (concat pet/org-dir "personal-contacts.org")))
   
 #+end_src
 ** Use Ipython with Org

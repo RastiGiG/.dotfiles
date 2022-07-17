@@ -1374,6 +1374,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       ;; Don't ask to quit
       (setq mu4e-confirm-quit nil)
 
+      ;; Set Contacts file for Org Contacts interaction
+      (setq mu4e-org-contacts-file
+		(concat pet/org-dir "personal-contacts.org"))
+
       ;; COMPOSING MAIL
 
       ;; Don't include oneself in reply by default 
