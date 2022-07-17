@@ -1794,6 +1794,27 @@ Add the keybinding =C-x C-j= to <dired-jump>. Also we setup up the *base view* o
       )
     )
 #+end_src
+* Password Management
+** Password Store
+#+begin_src emacs-lisp
+  ;; Add wrapper for the command line tool 'pass'
+  (use-package password-store
+	:config
+	;; If you want to adjust the default password length
+	;; (setq password-store-password-length 12)
+
+	;; Use Password Store as Source for Auth-Sources
+	(setq auth-sources '(password-store))
+	)
+
+  ;; Add Functions to Leader Keys
+  (pet/leader-keys
+	"ap"  '(:ignore t :which-key "Password Store")
+	"app" 'password-store-copy
+	"api" 'password-store-insert
+	"apg" 'password-store-generate)
+
+#+end_src
 * Contact Management
 
 [[https://github.com/girzel/ebdb/blob/master/ebdb.org][EBDB]] is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]] meant to replace ~BBDB~ (~"Big Brother Data Base"~) as a tool for Contact Management.
