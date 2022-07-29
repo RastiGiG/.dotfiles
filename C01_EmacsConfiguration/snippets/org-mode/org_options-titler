@@ -1,12 +1,11 @@
 # -*- mode: snippet -*-
-# name: OrgTitler
+# name: Org_Options-Titler
 # key: <ott
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 
-#+TITLE: ${1: title}
-#+AUTHOR: ${2: author}
-#+DATE: ${3: `(format-time-string "[%Y-%m-%d]")`}
-
-:PROPERTIES:
+#+TITLE:   ${1: title}
+#+AUTHOR:  ${2: author}
+#+DATE:    ${3: `(format-time-string "[%Y-%m-%d]")`}
 
 $0

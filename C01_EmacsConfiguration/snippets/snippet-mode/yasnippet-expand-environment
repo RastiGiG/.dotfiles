@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: yasnippet-expand-environment
-# key: <ysnipexpenv
+# key: <ysexpenv
 # --
 \# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
