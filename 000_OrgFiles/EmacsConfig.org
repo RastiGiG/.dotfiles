@@ -2362,6 +2362,7 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
 	  "oa"  '(org-agenda :which-key "Org Agenda")
 	  )
 	)
+  
   #+end_src
 ** Prettier Org Heading Stars
  
@@ -2389,7 +2390,16 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
 				   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 				   ("\\paragraph{%s}" . "\\paragraph*{%s}")
 				   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-				 ))
+				 )
+	
+	;; Bigger LaTeX Previews
+	(plist-put org-format-latex-options :scale 1.5)
+	;; Load language packages for pdflatex of lualatex / xelatex compilers
+	;; (add-to-list 'org-latex-packages-alist
+	;;              '("AUTO" "babel" t ("pdflatex")))
+	;; (add-to-list 'org-latex-packages-alist
+	;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+	)
 
   (with-eval-after-load 'ox-koma-letter
 	'(progn
@@ -2418,14 +2428,6 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
 					  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 	   ))
 
-  ;; Bigger LaTeX Previews
-  (plist-put org-format-latex-options :scale 1.5)
-  ;; Load language packages for pdflatex of lualatex / xelatex compilers
-  ;; (add-to-list 'org-latex-packages-alist
-  ;;              '("AUTO" "babel" t ("pdflatex")))
-  ;; (add-to-list 'org-latex-packages-alist
-  ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
-  
 #+end_src
 ** Org Contacts
 #+begin_src emacs-lisp :tangle no
@@ -2506,6 +2508,7 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 			 ("json" . "src json")
 			 ("lua" . "src lua")
 			 ("ldg" . "src ledger :no")
+			 ("ll" . "src latex")
 			 ("oc" . "src octave")
 			 ("perl" . "src perl")
 			 ("ph" . "src php")
@@ -3462,7 +3465,7 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 	:hook (python-mode . (lambda () (require 'lsp-pyright)))
 	;; Use Python 3 in case Python 2 is installed as well
 	:init (when (executable-find "python3")
-		  (setq lsp-pyright-python-executable-cmd "python3"))
+			(setq lsp-pyright-python-executable-cmd "python3"))
 	)
 
 
@@ -3551,6 +3554,23 @@ Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
   (use-package yaml-mode
     :mode "\\.ya?ml\\'")
 
+#+end_src
+*** Gnuplot Mode
+
+~Gnuplot Mode~ adds support for ~Gnuplot~ to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+~Documentation~ can be found here: [[https://github.com/mkmcc/gnuplot-mode][GitHub.com: Gnuplot-Mode]]
+#+begin_src emacs-lisp
+  ;; Add Gnuplot Support
+  (use-package gnuplot-mode
+	:config
+	;; Use this if gnuplot is not /usr/bin/gnuplot
+	(setq gnuplot-program "/usr/bin/gnuplot")
+
+	;; automatically enter gnuplot mode
+	(setq auto-mode-alist 
+		  (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
+	)
+  
 #+end_src
 *** PlantUML
 You can find the ~Documentation~ here: [[https://github.com/skuro/plantuml-mode][GitHub.com: PlantUML-Mode]]

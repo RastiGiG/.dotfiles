@@ -1799,7 +1799,16 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 				 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 				 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 				 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-			       ))
+			       )
+
+      ;; Bigger LaTeX Previews
+      (plist-put org-format-latex-options :scale 1.5)
+      ;; Load language packages for pdflatex of lualatex / xelatex compilers
+      ;; (add-to-list 'org-latex-packages-alist
+      ;;              '("AUTO" "babel" t ("pdflatex")))
+      ;; (add-to-list 'org-latex-packages-alist
+      ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+      )
 
 (with-eval-after-load 'ox-koma-letter
       '(progn
@@ -1827,14 +1836,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 	 ))
-
-;; Bigger LaTeX Previews
-(plist-put org-format-latex-options :scale 1.5)
-;; Load language packages for pdflatex of lualatex / xelatex compilers
-;; (add-to-list 'org-latex-packages-alist
-;;              '("AUTO" "babel" t ("pdflatex")))
-;; (add-to-list 'org-latex-packages-alist
-;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
 
 ;; (use-package ob-ipython)
 
@@ -1887,6 +1888,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		       ("json" . "src json")
 		       ("lua" . "src lua")
 		       ("ldg" . "src ledger :no")
+		       ("ll" . "src latex")
 		       ("oc" . "src octave")
 		       ("perl" . "src perl")
 		       ("ph" . "src php")
@@ -2617,7 +2619,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       :hook (python-mode . (lambda () (require 'lsp-pyright)))
       ;; Use Python 3 in case Python 2 is installed as well
       :init (when (executable-find "python3")
-		(setq lsp-pyright-python-executable-cmd "python3"))
+		      (setq lsp-pyright-python-executable-cmd "python3"))
       )
 
 
@@ -2662,6 +2664,17 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; Add support for YAML files
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
+
+;; Add Gnuplot Support
+(use-package gnuplot-mode
+      :config
+      ;; Use this if gnuplot is not /usr/bin/gnuplot
+      (setq gnuplot-program "/usr/bin/gnuplot")
+
+      ;; automatically enter gnuplot mode
+      (setq auto-mode-alist 
+		(append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
+      )
 
 ;; Add PlantUML Support
 (use-package plantuml-mode
