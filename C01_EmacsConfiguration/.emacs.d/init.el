@@ -1887,7 +1887,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		       ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
 		       ("json" . "src json")
 		       ("lua" . "src lua")
-		       ("ldg" . "src ledger :no")
+		       ("ldg" . "src ledger :noweb")
 		       ("ll" . "src latex")
 		       ("oc" . "src octave")
 		       ("perl" . "src perl")

@@ -2507,7 +2507,7 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 			 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
 			 ("json" . "src json")
 			 ("lua" . "src lua")
-			 ("ldg" . "src ledger :no")
+			 ("ldg" . "src ledger :noweb")
 			 ("ll" . "src latex")
 			 ("oc" . "src octave")
 			 ("perl" . "src perl")
