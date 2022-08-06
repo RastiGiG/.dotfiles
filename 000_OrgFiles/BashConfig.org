@@ -377,7 +377,7 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
 
 #+begin_src bash
   #----------------------------MANPAGES
-  
+
   # Pretty-print man(1) pages. See Termcap / Terminfo
 
   # Start blinking
@@ -407,15 +407,13 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
   # End bold, blinking, standout, underline
   # export LESS_TERMCAP_me=$'\E[0m'
   export LESS_TERMCAP_me=$(tput sgr0)
+  
 #+end_src
-
 * Load External Files
-
 #+begin_src bash
   #----------------------------EXTERNAL FILES
   
 #+end_src
-
 ** Functions
 #+begin_src bash
   # Load Bash Functions
@@ -456,11 +454,13 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
   bind 'set show-all-if-ambiguous on'
   # Set up tab to cycle completion options and show options first
   bind 'TAB:menu-complete'
+  
 #+end_src
 ** Release Temporary Variables
 
 #+begin_src bash
   unset SHAlias BSHFuncs UsrBashComp
+  
 #+end_src
 * Load External Programs
 
@@ -470,7 +470,6 @@ In this section you could add Programs like ~Neofetch~ or ~Colorscripts~
   #----------------------------EXTERNAL PROGRAMS AND SCRIPTS
 
 #+end_src
-
 ** Colorscripts
 #+begin_src bash
   # RANDOM COLOR SCRIPT

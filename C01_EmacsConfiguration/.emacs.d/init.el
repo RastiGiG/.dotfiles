@@ -1321,7 +1321,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (setq pet/mail-accounts-config
 	      (concat pet/home-dir
 			      (convert-standard-filename
-			       ".config/emacs-config/MailAccounts.el")))
+			       ".dotfiles-private/MailAccounts.el")))
 
 ;; Add mu4e directory to load path
 (if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
