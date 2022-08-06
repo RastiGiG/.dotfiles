@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: GitIgnoreJupyterFiles
+# key: <gijup
+# --
+###########################
+###	Jupyter Files
+share/*
+etc/*

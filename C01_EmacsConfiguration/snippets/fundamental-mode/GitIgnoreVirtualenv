@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: GitIgnoreVirtualenv
+# key: <give
+# --
+###########################
+### Ignore Virtualenv Files
+bin/*
+lib/*
+pyvenv.cfg

@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-ledger_tail
+# key: <ornledgert
+# --
+* Topic Overview
+
+** [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger]]
+*** [[id:0d38de6c-3e5f-48bf-a990-89cd89a9f8c1][Extensions]]
+*** [[id:6ce5ba9c-d3d7-4279-9b62-0c4ba40468f6][Tipps]]
+**** [[id:8a45cee2-15f3-4bf0-9f6e-ae5d95c94861][Cheatsheet]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:397d76b6-ef1f-4232-8af1-3006e61f05c3][Linux]]
+**** Software
+***** [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]] 
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:8223ee7b-dbcd-45d3-847f-a80f9d2bae9a][Ledger References]]
+
+** Websites
+
+1. [[https://www.ledger-cli.org/][Ledger-CLI.org]]
+   1) [[https://www.ledger-cli.org/3.0/doc/ledger3.html][Ledger-CLI.org: Docs]]
+2. [[https://plaintextaccounting.org/][PlainTextAccounting.org]]
+
+** Literature
