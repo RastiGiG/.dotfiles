@@ -262,7 +262,7 @@ HISTCONTROL='ignoreboth'
 # Add Time String to History
 HISTTIMEFORMAT='%Y-%m-%d %T '
 # Ignore Commands
-HISTIGNORE="exit *:qpdf --encrypt*:history"
+HISTIGNORE="exit *:clear *:qpdf --encrypt*:history"
 
 #--------------ENVIRONMENT VARIABLES
 
