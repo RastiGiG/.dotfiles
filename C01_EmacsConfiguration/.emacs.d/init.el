@@ -426,7 +426,7 @@
 
 ;; Org LaTeX Beamer Header
 (define-skeleton pet/org-latex-beamer-skeleton
-  "Skeleton for articles "
+  "Skeleton for Beamer Presentations"
   "Preamble:"
   "#+STARTUP: beamer\n"
   "#+TITLE: TITLE\n"
@@ -437,6 +437,60 @@
   (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "beamerheader.tex}\n"))
   "#+STARTUP: showeverything\n"
   "#+OPTIONS: toc:nil\n")
+
+;; Org LaTeX ModernCV Header
+(define-skeleton pet/org-latex-moderncv-skeleton
+  "Skeleton for CVs "
+  "Preamble:"
+  "#+LaTeX_CLASS: moderncv\n"
+  "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, sans]\n"
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "moderncvheader.tex}\n"))
+  "#+STARTUP: showeverything\n"
+  "#+OPTIONS: toc:nil\n")
+
+;; Org LaTeX Letter Header
+(define-skeleton pet/org-latex-koma-letter-skeleton
+      "Skeleton for Letters using KOMA-Script"
+      "Preamble:"
+      "#+LaTeX_CLASS: scrlttr2\n"
+      "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
+      "#+STARTUP: showeverything\n"
+      "#+OPTIONS: toc:nil"
+      "#+OPTIONS: num:nil"
+      "#+OPTIONS: author:nil"
+      "#+OPTIONS: title:nil"
+      )
+
+;; Org LaTeX Letter Header German
+(define-skeleton pet/org-latex-koma-letter-german-skeleton
+      "Skeleton for Letters using KOMA-Script - German Version"
+      "Preamble:"
+      "#+LaTeX_CLASS: scrlttr2-german\n"
+      "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
+      "#+STARTUP: showeverything\n"
+      "#+OPTIONS: toc:nil"
+      "#+OPTIONS: num:nil"
+      "#+OPTIONS: author:nil"
+      "#+OPTIONS: title:nil"
+      )
+
+;; Org LaTeX Letter Header German Extended
+(define-skeleton pet/org-latex-koma-letter-skeleton
+      "Skeleton for Letters using KOMA-Script - German Extended"
+      "Preamble:"
+      "#+LaTeX_CLASS: scrlttr2\n"
+      "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
+      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfoextended.tex}\n"))
+      "#+STARTUP: showeverything\n"
+      "#+OPTIONS: toc:nil num:nil\n"
+      "#+OPTIONS: author:nil title:nil"
+      )
 
 ;; Org Wiki
 (define-skeleton pet/org-wiki-entry-skeleton
@@ -1800,6 +1854,22 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 				 ("\\paragraph{%s}" . "\\paragraph*{%s}")
 				 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
 			       )
+      (add-to-list 'org-latex-classes
+			       '("moderncv"
+				 "\\documentclass[11pt,
+			      a4paper,
+			      sans, 
+			      ]{moderncv}
+			      \\usepackage[ngerman]{babel}
+			      \\usepackage{hyperref}
+		 [NO-DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+				 ("\\section{%s}" . "\\section*{%s}")
+				 ("\\subsection{%s}" . "\\subsection*{%s}")
+				 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+				 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+				 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
       ;; Bigger LaTeX Previews
       (plist-put org-format-latex-options :scale 1.5)
@@ -1819,12 +1889,13 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
        \[PACKAGES]
        \[EXTRA]"))
 	 (add-to-list 'org-latex-classes
-				      '("org-plain-scrlttr2-german"
+				      '("scrlttr2-german"
 					"\\documentclass[a4paper, 
 			      parskip=half,%
 			      fromalign=right, 
 			      fromrule=false, 
-			      11pt, ngerman]{scrlttr2}
+			      11pt, 
+			      ngerman]{scrlttr2}
 			      \\usepackage{hyperref}
 			      \\usepackage{babel}
 		 [NO-DEFAULT-PACKAGES]
