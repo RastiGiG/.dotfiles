@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: org-latex-letter-basic
+# key: <lttr
+# --
+`(pet/org-latex-koma-letter-skeleton)`
+\firstfoot{
+\centering
+\scshape
+{
+\renewcommand{\\}{\ {\large\textperiodcentered}\ }
+\usekomavar{fromaddress}
+}\\
+% If you want your fax number or website URL showing, add it here
+{\Large\Letter} \usekomavar{fromemail} \ {\Large\Telefon} \usekomavar{fromphone} 
+}

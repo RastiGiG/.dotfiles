@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: org-latex-letter_german
+# key: <lttrger
+# --
+`(pet/org-latex-koma-letter-german-skeleton)`
+#+LATEX_CLASS_OPTIONS: [${1:a4paper}, ${2:parskip=yes}, ${3:11pt}, ${4:$$(yas-choose-value '("ngerman" "english"))}, pagenumber=${5:$$(yas-choose-value '("true" "false"))}, ${6:BCOR=0mm}, ${7:DIV=13}, firsthead=${8:$$(yas-choose-value '("true" "false"))}, ${9:enlargefirstpage=on}]
+
+#+LATEX_HEADER: ${10:\parskip3mm}
+#+LATEX_HEADER: ${11:\parindent0mm}
+
+#+begin_src latex
+  \firstfoot{
+  \centering
+  \scshape
+  {
+  \renewcommand{\}{\ {\large\textperiodcentered}\ }
+  \usekomavar{fromaddress}
+  }\
+  % If you want your fax number or website URL showing, add it here
+  {\Large\Letter} \usekomavar{fromemail} \ {\Large\Telefon} \usekomavar{fromphone} 
+  }
+#+end_src

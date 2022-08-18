@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: org-latex-modern_cv
+# key: <cv
+# --
+#+TITLE:   Curriculum Vitae
+#+AUTHOR:  ${1:Author}
+#+DATE:    \today
+
+#+OPTIONS: p:nil pri:nil prop:nil stat:nil tags:nil tasks:nil tex:t
+#+OPTIONS: timestamp:nil title:nil toc:nil todo:nil |:nil num:t
+#+OPTIONS: auto:nil
+#+LANGUAGE: ${2:ngerman|german|english}
+#+auto_tangle: nil
+
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+
+#+LATEX_HEADER:  \moderncvstyle{${3:casual (default)|classic|banking|oldstyle|fancy}}
+#+LATEX_HEADER: \moderncvcolor{${4:black|blue(default)|burgundy|green|grey|orange|purple|red}}
+#+LATEX_HEADER: %\renewcommand{\familydefault}{${5:\sfdefault for sans serif|\rmdefault for roman|or other valid latex fonts}}
+#+LATEX_HEADER: %\nopagenumbers{} % uncomment to suppress automatic page numbering
+
+\makecvtitle
+
+\flushright{\includegraphics[width=4cm]{Pictures/Profile-pic.jpg}}
+
+* Zur Person
+
+$0
+
+* Ausbildung
+
+* Erfahrungen
+
+* Sprachen - Menschlich
+
+* Sprachen - Maschinen
+
+* Computer und EDV Kenntnisse
+
+** Dokumentation und Textbearbeitung
+** Betriebssysteme
+** Design und Web
+** Sonstige Kenntnisse
+
+* Ehrenamt
+
+* Referenzen

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: gitignore-org
+# key: <giorg
+# --
+###########################
+### Exclude Org Temp Files
+auto/*
