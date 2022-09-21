@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: remind-general_entry_with_place_time_and_forecast
+# key: <remgeptf
+# --
+REM ${1:Day$$(yas-choose-value '("1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30" "31"))} ${2:Month$$(yas-choose-value '("Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"))} 20${3:Year$$(yas-choose-value '("19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30" "31" "32" "33"))} +${4:Forecasttime$$(yas-choose-value '("1" "2" "3" "4" "5" "6" "7" "8" "9" "10"))} MSG %b ${5:EventName} im ${6:Place} at ${7:Time}
