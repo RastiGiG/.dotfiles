@@ -1,0 +1,56 @@
+# -*- mode: snippet -*-
+# name: org-latex-letter_german
+# key: <lttrger
+# --
+`(pet/org-latex-koma-letter-german-skeleton)`
+
+#+LATEX_CLASS_OPTIONS: [${1:a4paper}, ${2:parskip=yes}, ${3:11pt}, ${4:$$(yas-choose-value '("ngerman" "english"))}, pagenumber=${5:$$(yas-choose-value '("true" "false"))}, ${6:BCOR=0mm}, ${7:DIV=13}, firsthead=${8:$$(yas-choose-value '("true" "false"))}, ${9:enlargefirstpage=on}]
+
+#+LATEX_HEADER: ${10:\parskip3mm}
+#+LATEX_HEADER: ${11:\parindent0mm}
+
+* Preamble                                                         :noexport:
+
+#+TITLE:    ${12:Title}
+#+SUBJECT:  ${13:Subject}
+#+DATE:     ${14:\today}
+#+AUTHOR:   ${15:Author}
+#+PLACE:    ${16:Place}
+
+#+LCO:      DINmtext
+
+#+OPTIONS: after-closing-order:(my_after_signature ps cc encl)
+#+OPTIONS: ':t backaddress:t subject:centered
+
+
+* To                                        :to:
+${17:To Address Line 1}
+${18:To Address Line 2}
+${19:To Address Line 3}
+
+* From                                                                 :from:
+${20:From Place}
+${21:From Place}
+
+# * Location                                                         :location: ${22:Location}
+
+* ${23:Greetings}
+
+* ${24:Best Regards}                                                      :closing:
+${25:Author}
+
+* After Signature                              :my_after_signature:
+#+BEGIN_EXPORT LATEX
+#+END_EXPORT
+* PS                                                                     :ps:
+
+
+@@latex:\noindent@@ PPS: 
+* CC                                                                     :cc:
+
+* ENCL                                                                 :encl:
+
+* Additional LaTeX Code                               :after_letter:
+#+BEGIN_EXPORT latex
+% here you can place random LaTeX code, e.g. including PDFs via the pdfpages package.
+#+END_EXPORT
