@@ -470,53 +470,11 @@
       "#+LaTeX_CLASS: scrlttr2-german\n"
       "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
       (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
       "#+STARTUP: showeverything\n"
       "#+OPTIONS: toc:nil"
       "#+OPTIONS: num:nil"
-      "#+OPTIONS: author:nil"
-      "#+OPTIONS: title:nil"
+      "#+OPTIONS: ':t backaddress:t"
       )
-
-;; Org LaTeX Letter Header German Extended
-(define-skeleton pet/org-latex-koma-letter-skeleton
-      "Skeleton for Letters using KOMA-Script - German Extended"
-      "Preamble:"
-      "#+LaTeX_CLASS: scrlttr2\n"
-      "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfoextended.tex}\n"))
-      "#+STARTUP: showeverything\n"
-      "#+OPTIONS: toc:nil num:nil\n"
-      "#+OPTIONS: author:nil title:nil"
-      )
-
-;; Org Wiki
-(define-skeleton pet/org-wiki-entry-skeleton
-  "Skeleton for articles "
-  "Preamble:"
-  "#+STARTUP: showeverything\n"
-  "#+TITLE: "_"\n"
-  "#+AUTHOR: AUTHOR\n"
-  "#+STARTUP: showeverything\n"
-  "\n"
-  "* Index")
-
-;; Org Wiki Index
-(define-skeleton pet/org-wiki-index-skeleton
-  "Skeleton for articles "
-  "Preamble:"
-  "#+STARTUP: showeverything\n"
-  "#+TITLE: "_"\n"
-  "#+AUTHOR: AUTHOR\n"
-  "#+STARTUP: showeverything\n"
-  "\n"
-  "* Index\n"
-  "\n"
-  "** Summaries\n"
-  "[[./summaries/summaries.org][Summaries]]"
-)
 
 ;; Bind Ace Window Control
 (global-set-key (kbd "M-o") 'ace-window)
@@ -1712,6 +1670,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       (convert-standard-filename
        "Org/")))
 
+;; Add Org Contrib Packages
+(use-package org-plus-contrib)
+
 ;; Setting Up Org Mode
 (use-package org
       :ensure org-plus-contrib
@@ -1839,52 +1800,55 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   :after org)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
-(with-eval-after-load 'ox-latex
-      (add-to-list 'org-latex-classes
-			       '("org-plain-latex"
-				 "\\documentclass{article}
-				\\usepackage{hyperref}
-				\\usepackage{babel}
-		       [NO-DEFAULT-PACKAGES]
-		       [PACKAGES]
-		       [EXTRA]"
-				 ("\\section{%s}" . "\\section*{%s}")
-				 ("\\subsection{%s}" . "\\subsection*{%s}")
-				 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-				 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-				 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-			       )
-      (add-to-list 'org-latex-classes
-			       '("moderncv"
-				 "\\documentclass[11pt,
-			      a4paper,
-			      sans, 
-			      ]{moderncv}
-			      \\usepackage[ngerman]{babel}
-			      \\usepackage{hyperref}
-		 [NO-DEFAULT-PACKAGES]
-		 [PACKAGES]
-		 [EXTRA]"
-				 ("\\section{%s}" . "\\section*{%s}")
-				 ("\\subsection{%s}" . "\\subsection*{%s}")
-				 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-				 ("\\paragraph{%s}" . "\\paragraph*{%s}")
-				 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+(eval-after-load 'ox-latex
+      '(progn
+	 (add-to-list 'org-latex-classes
+				      '("org-plain-latex"
+					"\\documentclass{article}
+					 \\usepackage{hyperref}
+					 \\usepackage{babel}
+			      [NO-DEFAULT-PACKAGES]
+			      [PACKAGES]
+			      [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+				      )
+	 (add-to-list 'org-latex-classes
+				      '("moderncv"
+					"\\documentclass[11pt,
+					a4paper,
+					sans, 
+					]{moderncv}
+					\\usepackage[ngerman]{babel}
+					\\usepackage{hyperref}
+			 [NO-DEFAULT-PACKAGES]
+			 [PACKAGES]
+			 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-      ;; Bigger LaTeX Previews
-      (plist-put org-format-latex-options :scale 1.5)
-      ;; Load language packages for pdflatex of lualatex / xelatex compilers
-      ;; (add-to-list 'org-latex-packages-alist
-      ;;              '("AUTO" "babel" t ("pdflatex")))
-      ;; (add-to-list 'org-latex-packages-alist
-      ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+	 ;; Bigger LaTeX Previews
+	 (plist-put org-format-latex-options :scale 1.5)
+	 ;; Load language packages for pdflatex of lualatex / xelatex compilers
+	 ;; (add-to-list 'org-latex-packages-alist
+	 ;;              '("AUTO" "babel" t ("pdflatex")))
+	 ;; (add-to-list 'org-latex-packages-alist
+	 ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+	 )
       )
 
-(with-eval-after-load 'ox-koma-letter
+(eval-after-load 'ox-koma-letter
       '(progn
 	 (add-to-list 'org-latex-classes
 				      '("scrlttr2"
 					"\\documentclass\{scrlttr2\}
+       \\usepackage[english]{babel}
        \[DEFAULT-PACKAGES]
        \[PACKAGES]
        \[EXTRA]"))
@@ -1906,43 +1870,49 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-	 ))
+	 ;; Set Default Letter Class
+	 (setq org-koma-letter-default-class "scrlttr2")
+	 ;; Use Backaddress by default
+	 (setq org-koma-letter-use-backaddress t)
+	 )
+      )
 
 ;; (use-package ob-ipython)
 
+;; (require 'ob-ledger)
 ;; (require-package 'ob-ipython)
 
 ;; enable/disable languages for org-babel
 (org-babel-do-load-languages
-  'org-babel-load-languages
-  '((emacs-lisp . t)    ;; Elisp
-    (lisp . t)          ;; Lisp
-    (clojure . t)       ;; Clojure     
-    (scheme . t)        ;; Scheme
-    (python . t)        ;; Python
-    ;; (ipython . t)       ;; IPython
+      'org-babel-load-languages
+      '((emacs-lisp . t)    ;; Elisp
+	(lisp . t)          ;; Lisp
+	(clojure . t)       ;; Clojure     
+	(scheme . t)        ;; Scheme
+	(python . t)        ;; Python
+	;; (ipython . t)       ;; IPython
 
-    ;;  the following two require ob-c
-    ;; (c . t)             ;; C 
-    ;; (cpp . t)           ;; C++
+	;;  the following two require ob-c
+	;; (c . t)             ;; C 
+	;; (cpp . t)           ;; C++
 
-    (perl . t)          ;; Perl
-    ;; (php . t)           ;; PHP
-    (R . t)             ;; R
-    ;; (Ruby . t)          ;; Ruby
-    (lua . t)           ;; Lua Programming Language
-    (shell . t)         ;; Command Line Programs 
-    (latex . t)         ;; LaTeX  
-    (sql . t)           ;; SQL
-    (sqlite . t)        ;; SQLite
-    (octave . t)        ;; Octave
-    (gnuplot . t)       ;; Gnuplot
-    (awk . t)           ;; awk
-    (sed . t)           ;; GNUsed
-    (css . t)           ;; CSS
-    (plantuml . t)      ;; PlantUML
-    ;; (ledger . t)        ;; Ledger CLI
-    ))         
+	(perl . t)          ;; Perl
+	;; (php . t)           ;; PHP
+	(R . t)             ;; R
+	;; (Ruby . t)          ;; Ruby
+	(lua . t)           ;; Lua Programming Language
+	(shell . t)         ;; Command Line Programs 
+	(latex . t)         ;; LaTeX  
+	(sql . t)           ;; SQL
+	(sqlite . t)        ;; SQLite
+	(octave . t)        ;; Octave
+	(gnuplot . t)       ;; Gnuplot
+	(awk . t)           ;; awk
+	(sed . t)           ;; GNUsed
+	(css . t)           ;; CSS
+	(plantuml . t)      ;; PlantUML
+	;; (ledger . t)        ;; Ledger CLI
+	))         
 
 ;; Add conf-unix to be recognized
 (push '("conf-unix" . conf-unix) org-src-lang-modes)
@@ -2265,7 +2235,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :config
-  (setq org-auto-tangle-default t))
+  (setq org-auto-tangle-default nil))
 
 ;; Add rainbow delimiters for better readability
 (use-package rainbow-delimiters
