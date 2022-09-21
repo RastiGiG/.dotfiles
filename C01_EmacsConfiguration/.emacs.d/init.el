@@ -109,7 +109,7 @@
   (font-lock-add-keywords
    nil
    '(("#[ABCDEFabcdef0-9]\\{3\\}[^ABCDEFabcdef0-9]"
-      (0 (put-text-property
+  (0 (put-text-property
 	  (match-beginning 0)
 	  (match-end 0)
 	  'face (list
@@ -121,11 +121,11 @@
 			     )
 		  (concat "#" r r g g b b))))))
      ("#[ABCDEFabcdef0-9]\\{6\\}"
-      (0 (put-text-property
+  (0 (put-text-property
 	  (match-beginning 0)
 	  (match-end 0)
 	  'face (list :background
-		      (match-string-no-properties 0)))))))
+		  (match-string-no-properties 0)))))))
   (font-lock-flush))
 
 ;; Function to Colorstring with their corresponding Colors
@@ -450,31 +450,31 @@
 
 ;; Org LaTeX Letter Header
 (define-skeleton pet/org-latex-koma-letter-skeleton
-      "Skeleton for Letters using KOMA-Script"
-      "Preamble:"
-      "#+LaTeX_CLASS: scrlttr2\n"
-      "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
-      "#+STARTUP: showeverything\n"
-      "#+OPTIONS: toc:nil"
-      "#+OPTIONS: num:nil"
-      "#+OPTIONS: author:nil"
-      "#+OPTIONS: title:nil"
-      )
+  "Skeleton for Letters using KOMA-Script"
+  "Preamble:"
+  "#+LaTeX_CLASS: scrlttr2\n"
+  "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterinfobasic.tex}\n"))
+  "#+STARTUP: showeverything\n"
+  "#+OPTIONS: toc:nil"
+  "#+OPTIONS: num:nil"
+  "#+OPTIONS: author:nil"
+  "#+OPTIONS: title:nil"
+  )
 
 ;; Org LaTeX Letter Header German
 (define-skeleton pet/org-latex-koma-letter-german-skeleton
-      "Skeleton for Letters using KOMA-Script - German Version"
-      "Preamble:"
-      "#+LaTeX_CLASS: scrlttr2-german\n"
-      "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
-      (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
-      "#+STARTUP: showeverything\n"
-      "#+OPTIONS: toc:nil"
-      "#+OPTIONS: num:nil"
-      "#+OPTIONS: ':t backaddress:t"
-      )
+  "Skeleton for Letters using KOMA-Script - German Version"
+  "Preamble:"
+  "#+LaTeX_CLASS: scrlttr2-german\n"
+  "#+LaTeX_CLASS_OPTIONS: [11pt, a4paper, parskip=yes]\n"
+  (concat "#+LATEX_HEADER: \\input{" (concat pet/latex-header-temp-dir "letterheaderdefault.tex}\n"))
+  "#+STARTUP: showeverything\n"
+  "#+OPTIONS: toc:nil"
+  "#+OPTIONS: num:nil"
+  "#+OPTIONS: ':t backaddress:t"
+  )
 
 ;; Bind Ace Window Control
 (global-set-key (kbd "M-o") 'ace-window)
@@ -522,12 +522,12 @@
 
 ;; Setup general for easier key config
 (use-package general
-      :config
-      (general-create-definer pet/leader-keys
-      :prefix "C-."
-      :global-prefix "C-.")
+  :config
+  (general-create-definer pet/leader-keys
+  :prefix "C-."
+  :global-prefix "C-.")
 
-      (pet/leader-keys
+  (pet/leader-keys
 
 	;; Layouts
 	"l"     '(:ignore t :which-key "Layout")
@@ -551,9 +551,9 @@
 	"elC-uM-u" 'upcase-initials-region
 	;; Tabs
 	"et"    '(untabify
-			      :which-key "Untabify")
+			  :which-key "Untabify")
 	"er"    '(regexp-builder
-			      :which-key "Regexp Builder")
+			  :which-key "Regexp Builder")
 
 
 	;; Files
@@ -569,15 +569,15 @@
 	"t"     '(:ignore t :which-key "Toggles")
 	"tc"    'world-clock
 	"tt"    '(counsel-load-theme
-			      :which-key "Choose Theme")
+			  :which-key "Choose Theme")
 	;; Toggles - Highlighting
 	"th"    '(:ignore t :which-key "Highlighting")
 	;; Toggles - Highlighting - Colors
 	"thc"   '(:ignore t :which-key "Colors")
 	"thcr"  '(pet/syntax-color-rgb
-			      :which-key "RGB")
+			  :which-key "RGB")
 	"thch"  '(pet/syntax-color-hsv
-			      :which-key "HSV")
+			  :which-key "HSV")
 	;; Toggles - Modes
 	"tm"    '(:ignore t :which-key "Modes")
 	"tmv"   '(visual-line-mode :which-key "Visual Line Mode")
@@ -605,23 +605,23 @@
 
 ;; Add Dashboard to Emacs
 (use-package dashboard
-      :init      ;; tweak dashboard config before loading it
-      (setq dashboard-set-heading-icons t)
-      (setq dashboard-set-file-icons t)
-      (setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
-      ;; use standard emacs logo as banner
-      (setq dashboard-startup-banner 'logo)
-      ;; Set custom banner
-      ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
-      (setq dashboard-center-content nil) ;; set to 't' for centered content
-      (setq dashboard-items '((recents . 5)
-			      (agenda . 5 )
-			      (bookmarks . 3)
-			      (projects . 3)
-			      (registers . 3)))
-      :config
-      (dashboard-setup-startup-hook)
-      (dashboard-modify-heading-icons '((recents . "file-text")
+  :init      ;; tweak dashboard config before loading it
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-banner-logo-title "Surveillance creates a prison in the mind")
+  ;; use standard emacs logo as banner
+  (setq dashboard-startup-banner 'logo)
+  ;; Set custom banner
+  ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
+  (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-items '((recents . 5)
+			  (agenda . 5 )
+			  (bookmarks . 3)
+			  (projects . 3)
+			  (registers . 3)))
+  :config
+  (dashboard-setup-startup-hook)
+  (dashboard-modify-heading-icons '((recents . "file-text")
 					(bookmarks . "book"))))
 
 ;; Make Emacsclient start up into dashboard
@@ -632,8 +632,8 @@
 
 ;; Load Doom Themes
 (use-package doom-themes
-      :init (load-theme 'doom-dracula t)
-      )
+  :init (load-theme 'doom-dracula t)
+  )
 
 ;; Use all-the-icons
 ;;required for doom modeling
@@ -641,9 +641,9 @@
 
 ;; Load doom modeline
 (use-package doom-modeline
-      ;; Activate Doom Modeline
-      :init (doom-modeline-mode 1)
-      :custom ((doom-modeline-height 20)))
+  ;; Activate Doom Modeline
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 20)))
 
 ;; Enable Winner Mode
 (winner-mode 1)
@@ -651,10 +651,10 @@
 ;; Load which-key
 ;; Loads a more helpful UI Completion buffer 
 (use-package which-key
-      :init (which-key-mode)
-      :diminish which-key-mode
-      :config
-      (setq which-key-idle-delay 1))
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 1))
 
 ;; Tab Bar Mode Setting
 
@@ -669,21 +669,21 @@
 ;; (setq tab-bar-tab-name-function
 ;;       tab-bar-current-tab-name)
 
-      ;; Keyboard Rules
-      ;; Remove Tab Bar Buttons
-      (setq tab-bar-close-button-show nil
+  ;; Keyboard Rules
+  ;; Remove Tab Bar Buttons
+  (setq tab-bar-close-button-show nil
 		tab-bar-new-button-show nil
 		;; tab-bar-button-relief               ;; controls outline of buttons
 		;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
 		)
 
-      ;; tab bar is not automatically shown
-      ;; (set 1 to enable)
-      (setq tab-bar-show nil)                      
+  ;; tab bar is not automatically shown
+  ;; (set 1 to enable)
+  (setq tab-bar-show nil)                      
 
-      ;; Helper function to get only the name
-      ;; of current tab
-      (defun pet/current-tab-name ()
+  ;; Helper function to get only the name
+  ;; of current tab
+  (defun pet/current-tab-name ()
 	(alist-get 'name (tab-bar--current-tab)))
 
 ;; Visually Mark Regexp
@@ -756,15 +756,15 @@
 
 ;; Add Prescient for spooky Emacs Memory (history)
 (use-package prescient
-      :after counsel
-      :config
-      (prescient-persist-mode 1))
+  :after counsel
+  :config
+  (prescient-persist-mode 1))
 
 ;; Enable Prescient in Ivy
 (use-package ivy-prescient
-      :after prescient
-      :config
-      (ivy-prescient-mode 1))
+  :after prescient
+  :config
+  (ivy-prescient-mode 1))
 
 ;; Use Helpful to get a better help buffer
 (use-package helpful
@@ -827,13 +827,13 @@
 
 ;; Load Hydra Package
 (use-package hydra
-      :config
+  :config
 
-      ;; Add leader key Menu
-      (pet/leader-keys
+  ;; Add leader key Menu
+  (pet/leader-keys
 	"h" '(:ignore t :which-key "Hydras")
 	)
-      )
+  )
 
 ;; Define Text Scale Hydra 
 (defhydra hydra-text-scale (:timeout 4)
@@ -885,50 +885,50 @@ _~_: modified
 
 ;; Bookmark Menu
 (defhydra hydra-bookmark-menu (
-							       :color pink
-									      :hint nil
-									      :timeout 10)
-      "
+							   :color pink
+									  :hint nil
+									  :timeout 10)
+  "
 
-	      ^^^Mark^             ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
-	      ^^^^^^^^-----------------------------------------------------------------------------------------------------
-	      _m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window 
-	      _u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window    
-	      _U_: unmark up    _R_: relocate bmk     _S_: show filenames      _e_: edit         _1_   on full window
-	      _d_: delete       _w_: write bmk list   _T_: hide filenames      ^ ^               _2_   on split vertical
-	      _D_: delete up    _i_: import bmk list  _t_: toggle filenames    ^ ^               _5_   on other frame
-	      "
-      ("m" bookmark-bmenu-mark)
-      ("u" bookmark-bmenu-unmark)
-      ("U" bookmark-bmenu-backup-unmark)
-      ("d" bookmark-bmenu-delete)
-      ("D" bookmark-bmenu-delete-backwards)
-      ("x" bookmark-bmenu-execute-deletions)
-      ("r" bookmark-bmenu-rename)
-      ("R" bookmark-bmenu-relocate)  
-      ("w" bookmark-bmenu-save)                   ;; 'write' bookmark list
-      ("i" bookmark-bmenu-load)                   ;; 'import' bookmark list
-      ("/" bookmark-bmenu-search)
-      ("l" bookmark-bmenu-locate)
-      ("S" bookmark-bmenu-show-filenames)  
-      ("T" bookmark-bmenu-hide-filenames)
-      ("t" bookmark-bmenu-toggle-filenames)
-      ("a" bookmark-bmenu-show-annotation)
-      ("A" bookmark-bmenu-show-all-annotations)
-      ("e" bookmark-bmenu-edit-annotation)
-      ("c" nil "cancel" :exit t)
-      ("s" bookmark-bmenu-select "select" :color blue)
-      ("o" bookmark-bmenu-other-window :color blue)
-      ("C-o" bookmark-bmenu-switch-window :color blue)
-      ("1" bookmark-bmenu-1-window :color blue)
-      ("2" bookmark-bmenu-2-window :color blue)
-      ("5" bookmark-bmenu-other-frame :color blue)
-      ("q" quit-window "quit bm list" :color blue))
+	  ^^^Mark^             ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
+	  ^^^^^^^^-----------------------------------------------------------------------------------------------------
+	  _m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window 
+	  _u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window    
+	  _U_: unmark up    _R_: relocate bmk     _S_: show filenames      _e_: edit         _1_   on full window
+	  _d_: delete       _w_: write bmk list   _T_: hide filenames      ^ ^               _2_   on split vertical
+	  _D_: delete up    _i_: import bmk list  _t_: toggle filenames    ^ ^               _5_   on other frame
+	  "
+  ("m" bookmark-bmenu-mark)
+  ("u" bookmark-bmenu-unmark)
+  ("U" bookmark-bmenu-backup-unmark)
+  ("d" bookmark-bmenu-delete)
+  ("D" bookmark-bmenu-delete-backwards)
+  ("x" bookmark-bmenu-execute-deletions)
+  ("r" bookmark-bmenu-rename)
+  ("R" bookmark-bmenu-relocate)  
+  ("w" bookmark-bmenu-save)                   ;; 'write' bookmark list
+  ("i" bookmark-bmenu-load)                   ;; 'import' bookmark list
+  ("/" bookmark-bmenu-search)
+  ("l" bookmark-bmenu-locate)
+  ("S" bookmark-bmenu-show-filenames)  
+  ("T" bookmark-bmenu-hide-filenames)
+  ("t" bookmark-bmenu-toggle-filenames)
+  ("a" bookmark-bmenu-show-annotation)
+  ("A" bookmark-bmenu-show-all-annotations)
+  ("e" bookmark-bmenu-edit-annotation)
+  ("c" nil "cancel" :exit t)
+  ("s" bookmark-bmenu-select "select" :color blue)
+  ("o" bookmark-bmenu-other-window :color blue)
+  ("C-o" bookmark-bmenu-switch-window :color blue)
+  ("1" bookmark-bmenu-1-window :color blue)
+  ("2" bookmark-bmenu-2-window :color blue)
+  ("5" bookmark-bmenu-other-frame :color blue)
+  ("q" quit-window "quit bm list" :color blue))
 
 ;; Access Menu through '.' in Bookmark List
 (with-eval-after-load "bookmark"
-      (define-key bookmark-bmenu-mode-map
-			      "." 'hydra-bookmark-menu/body))
+  (define-key bookmark-bmenu-mode-map
+			  "." 'hydra-bookmark-menu/body))
 
 ;; Apropos Hydra
 (defhydra hydra-apropos (
@@ -963,11 +963,11 @@ _v_ariable       _u_ser-option
 
 ;; Move Splitter left
 (defun pet/move-splitter-left (arg)
-      "Move window splitter left."
-      (interactive "p")
-      (if (let ((windmove-wrap-around))
+  "Move window splitter left."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
 		(windmove-find-other-window 'right))
-	      (shrink-window-horizontally arg)
+	  (shrink-window-horizontally arg)
 	(enlarge-window-horizontally arg)))
 
 ;; Move Splitter left
@@ -975,33 +975,33 @@ _v_ariable       _u_ser-option
 	"Move window splitter right."
 	(interactive "p")
 	(if (let ((windmove-wrap-around))
-		      (windmove-find-other-window 'right))
+		  (windmove-find-other-window 'right))
 		(enlarge-window-horizontally arg)
-	      (shrink-window-horizontally arg)))
+	  (shrink-window-horizontally arg)))
 
  ;; Move Splitter Up
 (defun pet/move-splitter-up (arg)
-      "Move window splitter up."
-      (interactive "p")
-      (if (let ((windmove-wrap-around))
+  "Move window splitter up."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
 		(windmove-find-other-window 'up))
-	      (enlarge-window arg)
+	  (enlarge-window arg)
 	(shrink-window arg)))
 
 ;; Move Splitter Down
 (defun pet/move-splitter-down (arg)
-      "Move window splitter down."
-      (interactive "p")
-      (if (let ((windmove-wrap-around))
+  "Move window splitter down."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
 		(windmove-find-other-window 'up))
-	      (shrink-window arg)
+	  (shrink-window arg)
 	(enlarge-window arg)))
 
 ;; Define Window Management Hydra
 (defhydra hydra-window (
 						:hint nil
-							      )
-      "
+							  )
+  "
 	Movement^^        ^Split^         ^Switch^		^Resize^
 	----------------------------------------------------------------
 	_M-<left>_  ←	_v_ertical    	_b_uffer		_<left>_  X←
@@ -1011,64 +1011,64 @@ _v_ariable       _u_ser-option
 	_F_ollow Mode    	_D_lt Other   	_S_ave	     max_i_mize
 	_SPC_ cancel	    _o_nly this   	_d_elete	
 	"
-      ;; Movement
-      ("M-<left>"  windmove-left)
-      ("M-<down>"  windmove-down)
-      ("M-<up>"    windmove-up)
-      ("M-<right>" windmove-right)
+  ;; Movement
+  ("M-<left>"  windmove-left)
+  ("M-<down>"  windmove-down)
+  ("M-<up>"    windmove-up)
+  ("M-<right>" windmove-right)
 
-      ;; Resize
-      ("<left>"  pet/move-splitter-left)
-      ("<down>"  pet/move-splitter-down)
-      ("<right>" pet/move-splitter-right)
-      ("<up>"    pet/move-splitter-up)
+  ;; Resize
+  ("<left>"  pet/move-splitter-left)
+  ("<down>"  pet/move-splitter-down)
+  ("<right>" pet/move-splitter-right)
+  ("<up>"    pet/move-splitter-up)
 
-      ("b" list-buffers)
-      ("f" find-files)
-      ("F" follow-mode)
-      ("a" (lambda ()
+  ("b" list-buffers)
+  ("f" find-files)
+  ("F" follow-mode)
+  ("a" (lambda ()
 		 (interactive)
 		 (ace-window 1)
 			 (add-hook 'ace-window-end-once-hook
-					       'hydra-window/body))
-       )
-      ("v" (lambda ()
+					   'hydra-window/body))
+   )
+  ("v" (lambda ()
 		 (interactive)
 		 (split-window-right)
 		 (windmove-right))
-       )
-      ("x" (lambda ()
+   )
+  ("x" (lambda ()
 		 (interactive)
 		 (split-window-below)
 		 (windmove-down))
-       )
-      ("s" (lambda ()
+   )
+  ("s" (lambda ()
 		 (interactive)
 		 (ace-window 4)
 		 (add-hook 'ace-window-end-once-hook
-				       'hydra-window/body)))
-      ("S" save-buffer)
-      ("d" delete-window)
-      ("D" (lambda ()
+				   'hydra-window/body)))
+  ("S" save-buffer)
+  ("d" delete-window)
+  ("D" (lambda ()
 		 (interactive)
 		 (ace-window 16)
 		 (add-hook 'ace-window-end-once-hook
-				       'hydra-window/body))
-       )
-      ("o" delete-other-windows)
-      ("i" ace-maximize-window)
-      ("z" (progn
+				   'hydra-window/body))
+   )
+  ("o" delete-other-windows)
+  ("i" ace-maximize-window)
+  ("z" (progn
 		 (winner-undo)
 		 (setq this-command 'winner-undo))
-       )
-      ("Z" winner-redo)
-      ("SPC" nil)
-      )
+   )
+  ("Z" winner-redo)
+  ("SPC" nil)
+  )
 
 ;; Add to Leader keys
 (pet/leader-keys
-      "hw" '(hydra-window/body :which-key "Window Management")
-      )
+  "hw" '(hydra-window/body :which-key "Window Management")
+  )
 
 ;; hydra multiple cursors
 (defhydra hydra-multiple-cursors (:hint nil)
@@ -1101,9 +1101,9 @@ _v_ariable       _u_ser-option
 ;; Editing Toggles
 (defhydra hydra-editing-visuals (
 						:color pink
-							       :hint nil
-							       )
-      "
+							   :hint nil
+							   )
+  "
 ^Editing Visuals
 ^^^^^^-------------------------------------------------------------------------
 _a_ abbrev-mode:                         %`abbrev-mode
@@ -1120,36 +1120,36 @@ _T_ counsel-load-theme
 _v_ visual-line-mode:                    %`visual-line-mode
 _w_ whitespace-mode:                     %`whitespace-mode
 "
-      ("a" abbrev-mode)
-      ("C" display-fill-column-indicator-mode)
-      ("d" toggle-debug-on-error)
-      ("f" auto-fill-mode)
-      ("F" variable-pitch-mode)
-      ("i" toggle-input-method)
-      ("t" toggle-truncate-lines)
-      ("T" counsel-load-theme)
-      ("v" visual-line-mode)
-      ("n" display-line-numbers-mode)
-      ("M" doom-modeline-mode)
-      ("w" whitespace-mode)
-      ("R" read-only-mode)
-      ("q" nil "quit" :exit 1))
+  ("a" abbrev-mode)
+  ("C" display-fill-column-indicator-mode)
+  ("d" toggle-debug-on-error)
+  ("f" auto-fill-mode)
+  ("F" variable-pitch-mode)
+  ("i" toggle-input-method)
+  ("t" toggle-truncate-lines)
+  ("T" counsel-load-theme)
+  ("v" visual-line-mode)
+  ("n" display-line-numbers-mode)
+  ("M" doom-modeline-mode)
+  ("w" whitespace-mode)
+  ("R" read-only-mode)
+  ("q" nil "quit" :exit 1))
 
 ;; (global-set-key (kbd "C-c C-v") 'hydra-editing-toggles/body)
 
 ;; Add to Key Space
 (pet/leader-keys
-      "eh" '(hydra-editing-visuals/body :which-key "Editing Visuals")
-      "T"  '(hydra-editing-visuals/body :which-key "Toggle Hydra")
-      "ht" '(hydra-editing-visuals/body :which-key "Editing Visuals")
-      )
+  "eh" '(hydra-editing-visuals/body :which-key "Editing Visuals")
+  "T"  '(hydra-editing-visuals/body :which-key "Toggle Hydra")
+  "ht" '(hydra-editing-visuals/body :which-key "Editing Visuals")
+  )
 
 ;; Mu4e Hydra
 (defhydra hydra-mu4e-headers (
-							      :color blue
+							  :color blue
 									 :hint nil
 									 )
-      "
+  "
  ^General^   | ^Search^           | _!_: read    | _#_: deferred  | ^Switches^
 -^^----------+-^^-----------------| _?_: unread  | _%_: pattern   |-^^------------------
 _n_: next    | _s_: search        | _r_: refile  | _&_: custom    | _O_: sorting
@@ -1162,68 +1162,68 @@ _C_: compose | _}_: next query    | _a_: action  | _|_: to shell  | _´_: update
 _F_: forward | _C-+_: show more   | _A_: mk4actn | _H_: help      | _;_: context-switch
 _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2maildir "
 
-      ;; general
-      ("n" mu4e-headers-next)
-      ("p" mu4e-headers-previous)
-      ("[" mu4e-select-next-unread)
-      ("]" mu4e-select-previous-unread)
-      ("y" mu4e-select-other-view)
-      ("R" mu4e-compose-reply)
-      ("C" mu4e-compose-new)
-      ("F" mu4e-compose-forward)
+  ;; general
+  ("n" mu4e-headers-next)
+  ("p" mu4e-headers-previous)
+  ("[" mu4e-select-next-unread)
+  ("]" mu4e-select-previous-unread)
+  ("y" mu4e-select-other-view)
+  ("R" mu4e-compose-reply)
+  ("C" mu4e-compose-new)
+  ("F" mu4e-compose-forward)
 
-      ;; search
-      ("s" mu4e-headers-search)
-      ("S" mu4e-headers-search-edit)
-      ("/" mu4e-headers-search-narrow)
-      ("b" mu4e-headers-search-bookmark)
-      ("B" mu4e-headers-search-bookmark-edit)
-      ("{" mu4e-headers-search-prev :color pink)      ; differs from built-in - make sure to add them later
-      ("}" mu4e-headers-search-next :color pink)      ; differs from built-in - make sure to add them later
-      ("C-+" mu4e-headers-split-view-grow)
-      ("C--" mu4e-headers-split-view-shrink)
+  ;; search
+  ("s" mu4e-headers-search)
+  ("S" mu4e-headers-search-edit)
+  ("/" mu4e-headers-search-narrow)
+  ("b" mu4e-headers-search-bookmark)
+  ("B" mu4e-headers-search-bookmark-edit)
+  ("{" mu4e-headers-search-prev :color pink)      ; differs from built-in - make sure to add them later
+  ("}" mu4e-headers-search-next :color pink)      ; differs from built-in - make sure to add them later
+  ("C-+" mu4e-headers-split-view-grow)
+  ("C--" mu4e-headers-split-view-shrink)
 
-      ;; mark stuff 
-      ("!" mu4e-headers-mark-for-read)
-      ("?" mu4e-headers-mark-for-unread)
-      ("r" mu4e-headers-mark-for-refile)
-      ("u" mu4e-headers-mark-for-unmark)
-      ("U" mu4e-mark-unmark-all)
-      ("d" mu4e-headers-mark-for-trash)
-      ("D" mu4e-headers-mark-for-delete)
-      ("m" mu4e-headers-mark-for-move)
-      ("a" mu4e-headers-action)                  ; not really a mark per-se
-      ("A" mu4e-headers-mark-for-action)
-      ("*" mu4e-headers-mark-for-something)
+  ;; mark stuff 
+  ("!" mu4e-headers-mark-for-read)
+  ("?" mu4e-headers-mark-for-unread)
+  ("r" mu4e-headers-mark-for-refile)
+  ("u" mu4e-headers-mark-for-unmark)
+  ("U" mu4e-mark-unmark-all)
+  ("d" mu4e-headers-mark-for-trash)
+  ("D" mu4e-headers-mark-for-delete)
+  ("m" mu4e-headers-mark-for-move)
+  ("a" mu4e-headers-action)                  ; not really a mark per-se
+  ("A" mu4e-headers-mark-for-action)
+  ("*" mu4e-headers-mark-for-something)
 
 
-      ("#" mu4e-mark-resolve-deferred-marks)
-      ("%" mu4e-headers-mark-pattern)
-      ("&" mu4e-headers-mark-custom)
-      ("+" mu4e-headers-mark-for-flag)
-      ("-" mu4e-headers-mark-for-unflag)
-      ("t" mu4e-headers-mark-subthread)
-      ("T" mu4e-headers-mark-thread)
+  ("#" mu4e-mark-resolve-deferred-marks)
+  ("%" mu4e-headers-mark-pattern)
+  ("&" mu4e-headers-mark-custom)
+  ("+" mu4e-headers-mark-for-flag)
+  ("-" mu4e-headers-mark-for-unflag)
+  ("t" mu4e-headers-mark-subthread)
+  ("T" mu4e-headers-mark-thread)
 
-      ;; miscellany
-      ("q" mu4e~headers-quit-buffer)
-      ("H" mu4e-display-manual)
-      ("h" describe-mode)
-      ("|" mu4e-view-pipe)                       ; does not seem built-in any longer
+  ;; miscellany
+  ("q" mu4e~headers-quit-buffer)
+  ("H" mu4e-display-manual)
+  ("h" describe-mode)
+  ("|" mu4e-view-pipe)                       ; does not seem built-in any longer
 
-      ;; switches
-      ("O" mu4e-headers-change-sorting)
-      ("P" mu4e-headers-toggle-threading)
-      ("Q" mu4e-headers-toggle-full-search)
-      ("V" mu4e-headers-toggle-skip-duplicates)
-      ("W" mu4e-headers-toggle-include-related)
+  ;; switches
+  ("O" mu4e-headers-change-sorting)
+  ("P" mu4e-headers-toggle-threading)
+  ("Q" mu4e-headers-toggle-full-search)
+  ("V" mu4e-headers-toggle-skip-duplicates)
+  ("W" mu4e-headers-toggle-include-related)
 
-      ;; more miscellany
-      ("´" mu4e-update-mail-and-index)           ; differs from built-in
-      (";" mu4e-context-switch)  
-      ("j" mu4e~headers-jump-to-maildir)
+  ;; more miscellany
+  ("´" mu4e-update-mail-and-index)           ; differs from built-in
+  (";" mu4e-context-switch)  
+  ("j" mu4e~headers-jump-to-maildir)
 
-      ("." nil))
+  ("." nil))
 
 ;; Store Backups in a single directory
 (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
@@ -1257,11 +1257,11 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
 ;; open .pdf in 'zahtura'
 (setq dired-open-extensions '(("gif" . "sxiv")
-			      ("jpg" . "sxiv")
-			      ("png" . "sxiv")
-			      ("mkv" . "mpv")
-			      ("mp4" . "mpv")
-			      ("pdf" . "zathura")))
+			  ("jpg" . "sxiv")
+			  ("png" . "sxiv")
+			  ("mkv" . "mpv")
+			  ("mp4" . "mpv")
+			  ("pdf" . "zathura")))
 
 ;; Add Filters by file extension to dired buffer
 (use-package dired-filter)
@@ -1285,175 +1285,175 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add wrapper for the command line tool 'pass'
 (use-package password-store
-      :config
-      ;; If you want to adjust the default password length
-      ;; (setq password-store-password-length 12)
+  :config
+  ;; If you want to adjust the default password length
+  ;; (setq password-store-password-length 12)
 
-      ;; Use Password Store as Source for Auth-Sources
-      (setq auth-sources '(password-store))
-      )
+  ;; Use Password Store as Source for Auth-Sources
+  (setq auth-sources '(password-store))
+  )
 
 ;; Add Functions to Leader Keys
 (pet/leader-keys
-      "ap"  '(:ignore t :which-key "Password Store")
-      "app" 'password-store-copy
-      "api" 'password-store-insert
-      "apg" 'password-store-generate)
+  "ap"  '(:ignore t :which-key "Password Store")
+  "app" 'password-store-copy
+  "api" 'password-store-insert
+  "apg" 'password-store-generate)
 
 ;; Use EBDB for contact management
 (use-package ebdb
-      :config
-      ;; Set the source files for Contact DBs
-      (setq ebdb-sources (list                        
-					      (concat pet/home-dir "Contacts/default-contacts.db")
-					      (concat pet/home-dir "Contacts/family.db")
-					      (concat pet/home-dir "Contacts/work.db")
-					      (concat pet/home-dir "Contacts/organizations.db")
-					      (concat pet/home-dir "Contacts/mailing-lists.db")
-					      ))
+  :config
+  ;; Set the source files for Contact DBs
+  (setq ebdb-sources (list                        
+					  (concat pet/home-dir "Contacts/default-contacts.db")
+					  (concat pet/home-dir "Contacts/family.db")
+					  (concat pet/home-dir "Contacts/work.db")
+					  (concat pet/home-dir "Contacts/organizations.db")
+					  (concat pet/home-dir "Contacts/mailing-lists.db")
+					  ))
 
-      ;; Access Menu through '.' in EBDB Buffer
-      ;; (define-key ebdb-mode-map
-      ;;		  "." 'hydra-ebdb-menu/body)		  
+  ;; Access Menu through '.' in EBDB Buffer
+  ;; (define-key ebdb-mode-map
+  ;;		  "." 'hydra-ebdb-menu/body)		  
 
-      ;; Specify the Display Format for Month and Day on Anniversaries
-      ;; (setq ebdb-anniversary-md-format "%B %d")
-      ;; Specify the Display Format for Year, Month and Day on Anniversaries
-      ;; (setq ebdb-anniversary-ymd-format "%B %d, %Y")
+  ;; Specify the Display Format for Month and Day on Anniversaries
+  ;; (setq ebdb-anniversary-md-format "%B %d")
+  ;; Specify the Display Format for Year, Month and Day on Anniversaries
+  ;; (setq ebdb-anniversary-ymd-format "%B %d, %Y")
 
-      ;; Set Keybindings
-      (pet/leader-keys
+  ;; Set Keybindings
+  (pet/leader-keys
 	"c"  '(:ignore t :which-key "Contacts")
 	"co" '(ebdb-open :which-key "Open Contact Database")
 
 	)
-      )
+  )
 
 ;; Store Location of Account Settings
 (setq pet/mail-accounts-config
-	      (concat pet/home-dir
-			      (convert-standard-filename
-			       ".dotfiles-private/MailAccounts.el")))
+	  (concat pet/home-dir
+			  (convert-standard-filename
+			   ".dotfiles-private/MailAccounts.el")))
 
 ;; Add mu4e directory to load path
 (if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
 	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-      (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
-	      (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+  (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
+	  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
 	nil)
-      )
+  )
 
 ;; Load mu4e as a Mail Interface for mu
 (use-package mu4e
-      :defer 20 ; Wait until 20 seconds after startup
-      :config
+  :defer 20 ; Wait until 20 seconds after startup
+  :config
 
-      ;; Load org-mode integration
-      (require 'mu4e-org)
+  ;; Load org-mode integration
+  (require 'mu4e-org)
 
-      ;; Refresh mail using isync/mbsync every 10 minutes
-      (setq mu4e-update-interval (* 10 60))
-      (setq mu4e-get-mail-command "mbsync -a")
-      (setq mu4e-maildir (concat pet/home-dir "Mail"))
+  ;; Refresh mail using isync/mbsync every 10 minutes
+  (setq mu4e-update-interval (* 10 60))
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir (concat pet/home-dir "Mail"))
 
-      ;; Sets the standard download directory for attachments
-      ;; (default: '~/')
-      (setq mu4e-attachment-dir (concat pet/home-dir "Downloads"))
+  ;; Sets the standard download directory for attachments
+  ;; (default: '~/')
+  (setq mu4e-attachment-dir (concat pet/home-dir "Downloads"))
 
-      ;; Use Ivy for mu4e completions (maildir folders, etc)
-      (setq mu4e-completing-read-function #'ivy-completing-read)
+  ;; Use Ivy for mu4e completions (maildir folders, etc)
+  (setq mu4e-completing-read-function #'ivy-completing-read)
 
-      ;; Make sure that moving a message (like to Trash) causes the
-      ;; message to get a new file name.  This helps to avoid the
-      ;; dreaded "UID is N beyond highest assigned" error.
-      ;; See this link for more info: https://stackoverflow.com/a/43461973
-      (setq mu4e-change-filenames-when-moving t)
+  ;; Make sure that moving a message (like to Trash) causes the
+  ;; message to get a new file name.  This helps to avoid the
+  ;; dreaded "UID is N beyond highest assigned" error.
+  ;; See this link for more info: https://stackoverflow.com/a/43461973
+  (setq mu4e-change-filenames-when-moving t)
 
-      ;; don't keep message buffers around
-      (setq message-kill-buffer-on-exit t)
+  ;; don't keep message buffers around
+  (setq message-kill-buffer-on-exit t)
 
-      ;; Load external file with Account information
-      (when
+  ;; Load external file with Account information
+  (when
 	 (file-exists-p pet/mail-accounts-config)
-       (load pet/mail-accounts-config)
-       )
+   (load pet/mail-accounts-config)
+   )
 
-      ;; Sets the first context (specified in file above)
-      ;; to be loaded by default
-      ;; (Options: pick-first, ask, ask-if-none, always-ask)
-      (setq mu4e-context-policy 'pick-first)
+  ;; Sets the first context (specified in file above)
+  ;; to be loaded by default
+  ;; (Options: pick-first, ask, ask-if-none, always-ask)
+  (setq mu4e-context-policy 'pick-first)
 
-      ;; Don't ask to quit
-      (setq mu4e-confirm-quit nil)
+  ;; Don't ask to quit
+  (setq mu4e-confirm-quit nil)
 
-      ;; Set Contacts file for Org Contacts interaction
-      (setq mu4e-org-contacts-file
+  ;; Set Contacts file for Org Contacts interaction
+  (setq mu4e-org-contacts-file
 		(concat pet/org-dir "personal-contacts.org"))
 
-      ;; COMPOSING MAIL
+  ;; COMPOSING MAIL
 
-      ;; Don't include oneself in reply by default 
-      (setq mu4e-compose-dont-reply-to-self t)
+  ;; Don't include oneself in reply by default 
+  (setq mu4e-compose-dont-reply-to-self t)
 
-      ;; ISO(ish) format date-time stamps in the header list
-      ;; default is "%x" (locale appropriate)
-      (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
+  ;; ISO(ish) format date-time stamps in the header list
+  ;; default is "%x" (locale appropriate)
+  (setq  mu4e-headers-date-format "%Y-%m-%d %H:%M")
 
-      ;; customize the reply-quote-string
-      (setq message-citation-line-format
+  ;; customize the reply-quote-string
+  (setq message-citation-line-format
 		"On %Y-%m-%d %H:%M %Z %N wrote:\n")
-      ;; Replace 'message-insert-citation-line' with
-      ;; 'message-insert-formatted-citation-line'
-      (setq message-citation-line-function
+  ;; Replace 'message-insert-citation-line' with
+  ;; 'message-insert-formatted-citation-line'
+  (setq message-citation-line-function
 		'message-insert-formatted-citation-line)
 
-      ;; HELPER FUNCTIONS
+  ;; HELPER FUNCTIONS
 
-      ;; Function to store header queries to reuse them later
-      (defun pet/store-link-to-mu4e-query()
+  ;; Function to store header queries to reuse them later
+  (defun pet/store-link-to-mu4e-query()
 	(interactive)
 	(let ((mu4e-org-link-query-in-headers-mode t))
-	      (call-interactively 'org-store-link)))
+	  (call-interactively 'org-store-link)))
 
-      ;; Functions to automatically call Org Capture Templates on certain actions
-      ;; Follow up messages
-      (defun pet/capture-mail-follow-up (msg)
+  ;; Functions to automatically call Org Capture Templates on certain actions
+  ;; Follow up messages
+  (defun pet/capture-mail-follow-up (msg)
 	(interactive)
 	(call-interactively 'org-store-link)
 	(org-capture nil "ef"))
-      ;; Read later messages
-      (defun pet/capture-mail-read-later (msg)
+  ;; Read later messages
+  (defun pet/capture-mail-read-later (msg)
 	(interactive)
 	(call-interactively 'org-store-link)
 	(org-capture nil "er"))
 
-      ;; Add custom actions for our capture templates
-      (add-to-list 'mu4e-headers-actions
-			       '("follow up" . pet/capture-mail-follow-up) t)
-      (add-to-list 'mu4e-view-actions
-			       '("follow up" . pet/capture-mail-follow-up) t)
-      (add-to-list 'mu4e-headers-actions
-			       '("read later" . pet/capture-mail-read-later) t)
-      (add-to-list 'mu4e-view-actions
-			       '("read later" . pet/capture-mail-read-later) t)
+  ;; Add custom actions for our capture templates
+  (add-to-list 'mu4e-headers-actions
+			   '("follow up" . pet/capture-mail-follow-up) t)
+  (add-to-list 'mu4e-view-actions
+			   '("follow up" . pet/capture-mail-follow-up) t)
+  (add-to-list 'mu4e-headers-actions
+			   '("read later" . pet/capture-mail-read-later) t)
+  (add-to-list 'mu4e-view-actions
+			   '("read later" . pet/capture-mail-read-later) t)
 
-      (bind-keys
-       :map mu4e-headers-mode-map
+  (bind-keys
+   :map mu4e-headers-mode-map
 
-       ("{" . mu4e-headers-query-prev)             ; differs from built-in
-       ("}" . mu4e-headers-query-next)             ; differs from built-in
+   ("{" . mu4e-headers-query-prev)             ; differs from built-in
+   ("}" . mu4e-headers-query-next)             ; differs from built-in
 
-       ("´" . mu4e-update-mail-and-index)          ; differs from built-in
-       ("|" . mu4e-view-pipe)               	     ; does not seem to be built in any longer
-       ("." . hydra-mu4e-headers/body))
+   ("´" . mu4e-update-mail-and-index)          ; differs from built-in
+   ("|" . mu4e-view-pipe)               	     ; does not seem to be built in any longer
+   ("." . hydra-mu4e-headers/body))
 
-      ;; Expand personal Keyspace
-      (pet/leader-keys
+  ;; Expand personal Keyspace
+  (pet/leader-keys
 	"m"  '(:ignore t :which-key "Mail")
 	"mm" 'mu4e
 	"mc" 'mu4e-compose-new
 	"ms" 'mu4e-update-mail-and-index)
-      )
+  )
 
 ;; Sent alerts for received 
 (use-package mu4e-alert
@@ -1476,71 +1476,71 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; Define Servers
 (defun pet/irc-libera-server
 	(interactive)
-      (erc-tls :server "irc.libera.chat"
-		       :port   "6697")
-      )
+  (erc-tls :server "irc.libera.chat"
+		   :port   "6697")
+  )
 (defun pet/irc-hackint-server
 	(interactive)
-      (erc-tls :server "irc.hackint.org"
-		       :port   "6697")
-      )
+  (erc-tls :server "irc.hackint.org"
+		   :port   "6697")
+  )
 (defun pet/irc-hackint-de-server
 	(interactive)
-      (erc-tls :server "irc.hackint.org"
-		       :port   "6697")
-      )
+  (erc-tls :server "irc.hackint.org"
+		   :port   "6697")
+  )
 (defun pet/irc-oftc-server
 	(interactive)
-      (erc-tls :server "irc.oftc.net"
-		       :port   "6697")
-      )
+  (erc-tls :server "irc.oftc.net"
+		   :port   "6697")
+  )
 
 ;; Setup ERC Chat Client
 ;; Set the Prompt to represent the the buffer-name 
 (setq erc-prompt (lambda () (concat "[" (buffer-name) "]"))
 
-	      ;; Basic Account Config
-	      ;; Default Server
-	      erc-server "irc.libera.chat"
-	      erc-nick "sailti"
+	  ;; Basic Account Config
+	  ;; Default Server
+	  erc-server "irc.libera.chat"
+	  erc-nick "sailti"
 
-	      ;; More info on the modeline
-	      erc-track-shorten-start 8
+	  ;; More info on the modeline
+	  erc-track-shorten-start 8
 
-	      ;; cleanup buffers
-	      erc-kill-buffer-on-part t
+	  ;; cleanup buffers
+	  erc-kill-buffer-on-part t
 
-	      ;; channel list
-	      erc-autojoin-channel-alist
-	      '(("irc.libera.chat"
+	  ;; channel list
+	  erc-autojoin-channel-alist
+	  '(("irc.libera.chat"
 		 "#systemcrafters"
 		 "#emacs"))
 
-	      ;; bury private messages in buffer list
-	      erc-auto-query 'bury
+	  ;; bury private messages in buffer list
+	  erc-auto-query 'bury
 
-	      ;; Autofill nickname column to 20 chars for better formatting 
-	      erc-fill-function 'erc-fill-static
-	      erc-fill-static-center 30
-	      )
+	  ;; Autofill nickname column to 20 chars for better formatting 
+	  erc-fill-function 'erc-fill-static
+	  erc-fill-static-center 30
+	  )
 
 ;; Set Keyboard to be accessable by 'C-c i' 
 (global-set-key (kbd "C-c i") 'erc-tls)
 
 (pet/leader-keys
-      "i"  '(:ignore t :which-key "IRC")
-      "mi" 'erc-tls
-      "ml" '(pet/irc-libera-server :which-key "Libera Chat")
-      "mh" '(pet/irc-hackint-server :which-key "Hack Int")
-      "mo" '(pet/irc-oftc-server :which-key "Open and Free Technology Community")
-      )
+  "i"  '(:ignore t :which-key "IRC")
+  "mi" 'erc-tls
+  "ml" '(pet/irc-libera-server :which-key "Libera Chat")
+  "mh" '(pet/irc-hackint-server :which-key "Hack Int")
+  "mo" '(pet/irc-oftc-server :which-key "Open and Free Technology Community")
+  )
 
 (use-package elfeed
   :bind (("C-c f" . elfeed)
 	 :map elfeed-search-mode-map
 	 ("n" . (lambda () (interactive)
 		  (next-line) (call-interactively
-			       'elfeed-search-show-entry)))
+			   'elfeed-search-show-entry)))
 	 ("p" . (lambda () (interactive)
 		  (previous-line) (call-interactively
 				   'elfeed-search-show-entry)))
@@ -1558,12 +1558,12 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (setq elfeed-use-curl t)
 (setq elfeed-curl-max-connections 10)
 (setq elfeed-db-directory
-      (concat pet/dotfiles-emacsconfig-dir
-	      "elfeed/"))
+  (concat pet/dotfiles-emacsconfig-dir
+	  "elfeed/"))
 (setq elfeed-enclosure-default-dir
-      "~/Downloads/")
+  "~/Downloads/")
 (setq elfeed-search-filter
-      "@4-months-ago +unread")
+  "@4-months-ago +unread")
 (setq elfeed-sort-order 'descending)
 (setq elfeed-search-clipboard-type 'CLIPBOARD)
 (setq elfeed-search-title-max-width 150)
@@ -1572,10 +1572,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (setq elfeed-show-truncate-long-urls t)
 (setq elfeed-show-unique-buffers t)
 (setq elfeed-search-date-format
-      '("%F %R" 16 :left)))
+  '("%F %R" 16 :left)))
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
-	      "EmacsRSSFeed.el"))
+	  "EmacsRSSFeed.el"))
 
 ;; Snippet for periodic update for feeds
 ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
@@ -1671,114 +1671,117 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
        "Org/")))
 
 ;; Add Org Contrib Packages
-(use-package org-plus-contrib)
+(use-package org-contrib)
 
 ;; Setting Up Org Mode
 (use-package org
-      :ensure org-plus-contrib
-      :bind (("C-c l" . org-store-link))
-      :config
-      ;; Add additional Export Options
-      (require 'ox-beamer)       ;; LaTeX beamer
-      (require 'ox-koma-letter)  ;; LaTeX KOMA Script
-      (require 'ox-md)           ;; Markdown
-      (require 'ox-texinfo)      ;; Texinfo
-      (require 'ox-man)          ;; Man Page
-      (require 'ox-org)          ;; Org Format
+  :ensure org-plus-contrib
+  :bind (("C-c l" . org-store-link))
+  :config
+  ;; Add additional Export Options
+  (require 'ox-beamer)       ;; LaTeX beamer
+  (require 'ox-koma-letter)  ;; LaTeX KOMA Script
+  (require 'ox-md)           ;; Markdown
+  (require 'ox-texinfo)      ;; Texinfo
+  (require 'ox-man)          ;; Man Page
+  (require 'ox-org)          ;; Org Format
 
-      (setq org-ellipsis " ▾")
+  ;; Add additional Babel Support
+  (require 'ob-ledger)       ;; Ledger
 
-      (setq org-directory pet/org-dir)
-      (setq org-agenda-start-with-log-mode t)
-      (setq org-log-done 'time)
-      (setq org-log-into-drawer t)
+  (setq org-ellipsis " ▾")
 
-      ;; Setup inline previewing of latex fragments
-      (setq org-latex-create-formula-image-program
+  (setq org-directory pet/org-dir)
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  ;; Setup inline previewing of latex fragments
+  (setq org-latex-create-formula-image-program
 	'imagemagick)
 
-      ;; Specify Agenda Files
-      (setq org-agenda-files
+  ;; Specify Agenda Files
+  (setq org-agenda-files
 	(cons (concat pet/org-dir "journal")
-	      ;; Add Files a starting with "personal-"
-	      (directory-files pet/org-dir t
-			       "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
-	      ))
+	  ;; Add Files a starting with "personal-"
+	  (directory-files pet/org-dir t
+			   "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
+	  ))
 
-      ;; Set Org Clock Sound File
-      (setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
-
-
-      ;; Startup with inline images displayed
-      (setq org-startup-with-inline-images t)
+  ;; Set Org Clock Sound File
+  (setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
 
 
-      ;; Enable helper function replacing hyphen
-      (pet/org-replace-hyphen)
+  ;; Startup with inline images displayed
+  (setq org-startup-with-inline-images t)
 
 
-      ;; Customize Apps for Filelinks
-      (cl-loop for type in
-	       ;; Open PDFs with Zathura
+  ;; Enable helper function replacing hyphen
+  (pet/org-replace-hyphen)
+
+
+  ;; Customize Apps for Filelinks
+  (cl-loop for type in
+	   ;; Open PDFs with Zathura
 	 '(("\\.pdf\\'" . "zathura %s")
-	       ;; Open Pictures with sxiv 
-	       ("\\.png\\'" . "sxiv %s")
-	       ("\\.jpg\\'" . "sxiv %s")
-	       ("\\.jpeg\\'" . "sxiv %s")
-	       ;; Open Youtube links with freetube
-	       ("\\.\\*youtu\\.\\*" . "freetube %s")
-	       )
+	   ;; Open Pictures with sxiv 
+	   ("\\.png\\'" . "sxiv %s")
+	   ("\\.jpg\\'" . "sxiv %s")
+	   ("\\.jpeg\\'" . "sxiv %s")
+	   ;; Open Youtube links with freetube
+	   ("\\.\\*youtu\\.\\*" . "freetube %s")
+	   )
 	 do
 	 (add-to-list 'org-file-apps type))
 
-      ;; Add Custom TODO Keywords - in 2 seperate Sequences
-      (setq org-todo-keywords
+  ;; Add Custom TODO Keywords - in 2 seperate Sequences
+  (setq org-todo-keywords
 	;; Sequence 1 
 	'((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-	      ;; Sequence 2
-	      (sequence "MEET(m)")
-	      ;; Sequence 3
-	      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
+	  ;; Sequence 2
+	  (sequence "MEET(m)")
+	  ;; Sequence 3
+	  (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
 			"ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)"
 			"HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
-      ;; Set Keywords with shortcuts
-      (setq org-tag-alist
+  ;; Set Keywords with shortcuts
+  (setq org-tag-alist
 	'((:startgroup)
-	      ;; Put mutually exclusive tags here
-	      (:endgroup)
-	      ("@errand" . ?E)
-	      ("@home" . ?H)
-	      ("@work" . ?W)
-	      ("@study" . ?S)
-	      ("agenda" . ?a)
-	      ("planning" . ?p)
-	      ("publish" . ?P)
-	      ("batch" . ?b)
-	      ("note" . ?n)
-	      ("idea" . ?i)))
+	  ;; Put mutually exclusive tags here
+	  (:endgroup)
+	  ("@errand" . ?E)
+	  ("@home" . ?H)
+	  ("@work" . ?W)
+	  ("@study" . ?S)
+	  ("agenda" . ?a)
+	  ("planning" . ?p)
+	  ("publish" . ?P)
+	  ("batch" . ?b)
+	  ("note" . ?n)
+	  ("idea" . ?i)))
 
-      ;; Set Refile Targets to be considered, Emphasis on Archive 
-      (setq org-refile-targets
+  ;; Set Refile Targets to be considered, Emphasis on Archive 
+  (setq org-refile-targets
 	'(
-	      (nil :maxlevel . 9)
-	      ("~/Org/personal-archive.org" :maxlevel . 1)
-	      ("~/Org/personal-tasks.org" :maxlevel . 1)
-	      ("~/Org/personal-sources.org" :maxlevel . 1)
-	      ("~/Backup/Web-Bookmarks/1-bookmarks-import.org" :maxlevel . 9)
-	      ("~/Backup/Web-Bookmarks/2-bookmarks-export.org" :maxlevel . 9)
-	      ))
+	  (nil :maxlevel . 9)
+	  ("~/Org/personal-archive.org" :maxlevel . 1)
+	  ("~/Org/personal-tasks.org" :maxlevel . 1)
+	  ("~/Org/personal-sources.org" :maxlevel . 1)
+	  ("~/Backup/Web-Bookmarks/1-bookmarks-import.org" :maxlevel . 9)
+	  ("~/Backup/Web-Bookmarks/2-bookmarks-export.org" :maxlevel . 9)
+	  ))
 
-      ;; Allow Creation of Parent nodes but ask for confirmation
-      (setq org-refile-allow-creating-parent-nodes 'confirm)
+  ;; Allow Creation of Parent nodes but ask for confirmation
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-      ;; The default here is 999, which is a little to constricting for SQL and such
-      (setq org-table-convert-region-max-lines 9999)
+  ;; The default here is 999, which is a little to constricting for SQL and such
+  (setq org-table-convert-region-max-lines 9999)
 
-      ;; Save Org buffers after refiling!
-      (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
 
-      (pet/leader-keys
+  (pet/leader-keys
 	"ot" '(:ignore t :which-key "Toggle")
 	"otb" '(pet/org-toggle-babel-confirm-evaluate
 		:which-key "Babel Confirm Evaluation")
@@ -1793,7 +1796,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		:which-key "Table")
 	"oa"  '(org-agenda :which-key "Org Agenda")
 	)
-      )
+  )
 
 ;; Setup Org Superstar
 (use-package org-superstar
@@ -1801,23 +1804,23 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
 (eval-after-load 'ox-latex
-      '(progn
+  '(progn
 	 (add-to-list 'org-latex-classes
-				      '("org-plain-latex"
+				  '("org-plain-latex"
 					"\\documentclass{article}
 					 \\usepackage{hyperref}
 					 \\usepackage{babel}
-			      [NO-DEFAULT-PACKAGES]
-			      [PACKAGES]
-			      [EXTRA]"
+			  [NO-DEFAULT-PACKAGES]
+			  [PACKAGES]
+			  [EXTRA]"
 					("\\section{%s}" . "\\section*{%s}")
 					("\\subsection{%s}" . "\\subsection*{%s}")
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-				      )
+				  )
 	 (add-to-list 'org-latex-classes
-				      '("moderncv"
+				  '("moderncv"
 					"\\documentclass[11pt,
 					a4paper,
 					sans, 
@@ -1841,27 +1844,27 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	 ;; (add-to-list 'org-latex-packages-alist
 	 ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
 	 )
-      )
+  )
 
 (eval-after-load 'ox-koma-letter
-      '(progn
+  '(progn
 	 (add-to-list 'org-latex-classes
-				      '("scrlttr2"
+				  '("scrlttr2"
 					"\\documentclass\{scrlttr2\}
-       \\usepackage[english]{babel}
-       \[DEFAULT-PACKAGES]
-       \[PACKAGES]
-       \[EXTRA]"))
+   \\usepackage[english]{babel}
+   \[DEFAULT-PACKAGES]
+   \[PACKAGES]
+   \[EXTRA]"))
 	 (add-to-list 'org-latex-classes
-				      '("scrlttr2-german"
+				  '("scrlttr2-german"
 					"\\documentclass[a4paper, 
-			      parskip=half,%
-			      fromalign=right, 
-			      fromrule=false, 
-			      11pt, 
-			      ngerman]{scrlttr2}
-			      \\usepackage{hyperref}
-			      \\usepackage{babel}
+			  parskip=half,%
+			  fromalign=right, 
+			  fromrule=false, 
+			  11pt, 
+			  ngerman]{scrlttr2}
+			  \\usepackage{hyperref}
+			  \\usepackage{babel}
 		 [NO-DEFAULT-PACKAGES]
 		 [PACKAGES]
 		 [EXTRA]"
@@ -1875,7 +1878,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	 ;; Use Backaddress by default
 	 (setq org-koma-letter-use-backaddress t)
 	 )
-      )
+  )
 
 ;; (use-package ob-ipython)
 
@@ -1884,8 +1887,8 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; enable/disable languages for org-babel
 (org-babel-do-load-languages
-      'org-babel-load-languages
-      '((emacs-lisp . t)    ;; Elisp
+  'org-babel-load-languages
+  '((emacs-lisp . t)    ;; Elisp
 	(lisp . t)          ;; Lisp
 	(clojure . t)       ;; Clojure     
 	(scheme . t)        ;; Scheme
@@ -1911,7 +1914,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	(sed . t)           ;; GNUsed
 	(css . t)           ;; CSS
 	(plantuml . t)      ;; PlantUML
-	;; (ledger . t)        ;; Ledger CLI
+	(ledger . t)        ;; Ledger CLI
 	))         
 
 ;; Add conf-unix to be recognized
@@ -1923,33 +1926,33 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; Setup Source Block Templates
 (cl-loop for block in
 		 '(("aw" . "src awk")
-		       ("el" . "src emacs-lisp")
-		       ;; ("go" . "src go")
-		       ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
-		       ("json" . "src json")
-		       ("lua" . "src lua")
-		       ("ldg" . "src ledger :noweb")
-		       ("ll" . "src latex")
-		       ("oc" . "src octave")
-		       ("perl" . "src perl")
-		       ("ph" . "src php")
-		       ("py" . "src python")
-		       ("sc" . "src scheme")
-		       ("sh" . "src shell")
-		       ("sq" . "src sql")
-		       ("yaml" . "src yaml")
-		       ;; R
-		       ("rp" . "src R")                                  ;; pure R             
-		       ("rr" . "src R :results both output")             ;; R with output
-		       ("rs" . "src R :session :results both output")    ;; R with output
-		       ;; ("ts" . "src typescript"))
-		       ;; This is an alternative Block
-		       ;; For IPython
-		       ;; ("si" . "src ipython :session :async :results output")
-		       )
+		   ("el" . "src emacs-lisp")
+		   ;; ("go" . "src go")
+		   ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+		   ("json" . "src json")
+		   ("lua" . "src lua")
+		   ("ldg" . "src ledger :noweb")
+		   ("ll" . "src latex")
+		   ("oc" . "src octave")
+		   ("perl" . "src perl")
+		   ("ph" . "src php")
+		   ("py" . "src python")
+		   ("sc" . "src scheme")
+		   ("sh" . "src shell")
+		   ("sq" . "src sql")
+		   ("yaml" . "src yaml")
+		   ;; R
+		   ("rp" . "src R")                                  ;; pure R             
+		   ("rr" . "src R :results both output")             ;; R with output
+		   ("rs" . "src R :session :results both output")    ;; R with output
+		   ;; ("ts" . "src typescript"))
+		   ;; This is an alternative Block
+		   ;; For IPython
+		   ;; ("si" . "src ipython :session :async :results output")
+		   )
 		 do
 		 (add-to-list
-		      'org-structure-template-alist block))
+		  'org-structure-template-alist block))
 
 ;; Org-Capture
 (use-package org-capture
@@ -2199,7 +2202,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   (let ((args (push arg args))
 	(org-roam-capture-templates
 	 (list (append (car org-roam-capture-templates)
-		       '(:immediate-finish t)))))
+		   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
 ;; A Visualization of your org roam node structure
@@ -2214,9 +2217,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   ;;  :hook (after-init . org-roam-ui-mode)
  :config
  (setq org-roam-ui-sync-theme t
-      org-roam-ui-follow t
-      org-roam-ui-update-on-save t
-      org-roam-ui-open-on-start t))
+  org-roam-ui-follow t
+  org-roam-ui-update-on-save t
+  org-roam-ui-open-on-start t))
 
 (use-package org-drill
   :config
@@ -2396,7 +2399,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	  '("~/Projects/Programming")))
   (setq projectile-switch-project-action
 	#'projectile-dired)
-      ;; Add Projectile Functions to User Leader Keys
+  ;; Add Projectile Functions to User Leader Keys
   (pet/leader-keys
    "p"  '(:ignore t :which-key "projects")
    "pf"  'counsel-projectile-find-file
@@ -2553,9 +2556,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Load Octave Mode automatically for specified files
 (setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+  (cons '("\\.m$" . octave-mode) auto-mode-alist))
 (setq auto-mode-alist
-      (cons '("\\.sci$" . octave-mode) auto-mode-alist))
+  (cons '("\\.sci$" . octave-mode) auto-mode-alist))
 
 ;; Setup Octave Mode
 (add-hook 'octave-mode-hook
@@ -2570,21 +2573,21 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Integrated environment for TeX
 (use-package tex-site
-      :straight auctex
-      :config
-      ;; Add Reftex Support to AUCTeX
-      (setq reftex-plug-into-AUCTeX t)
-      ;; Set Default Bibliography
-      (setq pet/default-bib
+  :straight auctex
+  :config
+  ;; Add Reftex Support to AUCTeX
+  (setq reftex-plug-into-AUCTeX t)
+  ;; Set Default Bibliography
+  (setq pet/default-bib
 		(concat pet/home-dir "~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
-      (setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
-      ;; Automatically insert math environment with '$'
-      (setq TeX-electric-math t)
-      ;; Autocomplete command on '\'
-      (setq TeX-electric-escape t)
-      ;; Autoinsert braces after '^' and '_' in math mode
-      (setq TeX-electric-sub-and-superscript t)
-      )
+  (setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+  ;; Automatically insert math environment with '$'
+  (setq TeX-electric-math t)
+  ;; Autocomplete command on '\'
+  (setq TeX-electric-escape t)
+  ;; Autoinsert braces after '^' and '_' in math mode
+  (setq TeX-electric-sub-and-superscript t)
+  )
 
 
 ;; enable auto saving tex files
@@ -2596,12 +2599,12 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; set $ to insert math environment
 ;; ... for plain TeX
 (add-hook 'plain-TeX-mode-hook
-		      (lambda () (set (make-local-variable 'TeX-electric-math)
-						      (cons "$" "$"))))
+		  (lambda () (set (make-local-variable 'TeX-electric-math)
+						  (cons "$" "$"))))
 ;; ... for LaTeX
 (add-hook 'LaTeX-mode-hook
-		      (lambda () (set (make-local-variable 'TeX-electric-math)
-						      (cons "\\(" "\\)"))))
+		  (lambda () (set (make-local-variable 'TeX-electric-math)
+						  (cons "\\(" "\\)"))))
 
 ;; Load RefTeX...
 ;; ... with AUCTeX LaTeX mode
@@ -2621,22 +2624,22 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Fast input methods for LaTeX environments and math
 (use-package cdlatex
-      :bind
-      (:map LaTeX-mode-map
+  :bind
+  (:map LaTeX-mode-map
 		("C-#" . cdlatex-mode))
-      :config
-      ;; Maybe add hook to autoload cdlatex
-      ;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
-      ;; (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+  :config
+  ;; Maybe add hook to autoload cdlatex
+  ;; (add-hook 'LaTeX-mode-hook #'turn-on-cdlatex)
+  ;; (add-hook 'org-mode-hook #'turn-on-org-cdlatex)
 
-      ;; Added personal keybinding
-      (pet/leader-keys
+  ;; Added personal keybinding
+  (pet/leader-keys
 		"tmc" '(cdlatex-mode
 				:which-key "CDLaTeX Minor Mode"))
-      )
+  )
 
 (setq TeX-view-program-selection
-	      '(((output-dvi has-no-display-manager) "dvi2tty")
+	  '(((output-dvi has-no-display-manager) "dvi2tty")
 		((output-dvi style-pstricks) "dvips and gv")
 		(output-dvi "xdvi")
 		(output-pdf "Zathura")
@@ -2645,7 +2648,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; Set Default Indentation for Python 
 (setq-default python-indent-offset 4)
 
-      ;;;; Customize Python Mode for emacs, add lsp
+  ;;;; Customize Python Mode for emacs, add lsp
 ;;(add-hook 'python-mode-hook 'lsp-deferred)
 ;;  :custom
 ;;  (python-shell-interpreter "python")
@@ -2657,17 +2660,17 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Setup lsp-pyright Server
 (use-package lsp-pyright
-      :hook (python-mode . (lambda () (require 'lsp-pyright)))
-      ;; Use Python 3 in case Python 2 is installed as well
-      :init (when (executable-find "python3")
-		      (setq lsp-pyright-python-executable-cmd "python3"))
-      )
+  :hook (python-mode . (lambda () (require 'lsp-pyright)))
+  ;; Use Python 3 in case Python 2 is installed as well
+  :init (when (executable-find "python3")
+		  (setq lsp-pyright-python-executable-cmd "python3"))
+  )
 
 
 ;; Enable Virtual Environment Support
 (use-package pyvenv
-      :config
-      (pyvenv-mode 1))
+  :config
+  (pyvenv-mode 1))
 
 ;; Load PHP Package
 (use-package php-mode)
@@ -2708,14 +2711,14 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add Gnuplot Support
 (use-package gnuplot-mode
-      :config
-      ;; Use this if gnuplot is not /usr/bin/gnuplot
-      (setq gnuplot-program "/usr/bin/gnuplot")
+  :config
+  ;; Use this if gnuplot is not /usr/bin/gnuplot
+  (setq gnuplot-program "/usr/bin/gnuplot")
 
-      ;; automatically enter gnuplot mode
-      (setq auto-mode-alist 
+  ;; automatically enter gnuplot mode
+  (setq auto-mode-alist 
 		(append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
-      )
+  )
 
 ;; Add PlantUML Support
 (use-package plantuml-mode

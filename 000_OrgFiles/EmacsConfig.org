@@ -2255,9 +2255,12 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
   
 #+end_src
 ** Org Plus Contrib
+:NOTE:
+The ~Package~ is listed as =org-plus-contrib=
+:END:
 #+begin_src emacs-lisp
   ;; Add Org Contrib Packages
-  (use-package org-plus-contrib)
+  (use-package org-contrib)
   
 #+end_src
 ** Basic Org Config
@@ -2274,6 +2277,9 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
 	(require 'ox-texinfo)      ;; Texinfo
 	(require 'ox-man)          ;; Man Page
 	(require 'ox-org)          ;; Org Format
+
+	;; Add additional Babel Support
+	(require 'ob-ledger)       ;; Ledger
 
 	(setq org-ellipsis " ▾")
 
@@ -2392,8 +2398,9 @@ The =pet/org-font-setup= function configures various text faces to tweak the siz
 #+begin_src emacs-lisp
   ;; Setup Org Superstar
   (use-package org-superstar
-    :after org)
+	:after org)
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  
 #+end_src
 ** Org Mode LaTeX Setup
 #+begin_src emacs-lisp
@@ -2529,7 +2536,7 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 	  (sed . t)           ;; GNUsed
 	  (css . t)           ;; CSS
 	  (plantuml . t)      ;; PlantUML
-	  ;; (ledger . t)        ;; Ledger CLI
+	  (ledger . t)        ;; Ledger CLI
 	  ))         
 
   ;; Add conf-unix to be recognized
