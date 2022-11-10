@@ -269,6 +269,10 @@ HISTIGNORE="exit *:clear *:qpdf --encrypt*:history"
 # Set the Default File for Remind
 export DOTREMINDERS="$HOME/Calendar/00_reminders.rem"
 
+# Set GPG Teletype to match $tty
+GPG_TTY=$(tty)
+export GPG_TTY
+
 #----------------------------COLORFUL TERMINAL
 # Change the window title of X terminals
 # case ${TERM} in
