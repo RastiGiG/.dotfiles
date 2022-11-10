@@ -170,7 +170,7 @@ You can look at the [[file:AlacrittyOrigConfig.org][original]] for more detail a
       focused_match:
         foreground: '#44475a'
         background: '#ffb86c'
-      bar:
+      footer_bar:
         background: '#282a36'
         foreground: '#f8f8f2'
 
