@@ -31,6 +31,8 @@
 	;;;; BLOGS
 
 	("https://irreal.org/blog/?feed=rss2" it emacs blogs)
+	("https://blog.binchen.org/categories/emacs.xml" it emacs blogs)
+	("https://fanpengkong.com/index.xml" it emacs blogs)
 	("https://www.kuketz-blog.de/feed/" it blogs security privacy)
 	("https://komascript.de/node/feed" it blogs tex) ("https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" it blogs security data-science)
 	("https://latex-ninja.com/feed/" it blogs tex)
