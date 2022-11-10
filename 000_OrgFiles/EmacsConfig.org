@@ -1101,30 +1101,33 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
 #+begin_src emacs-lisp
   ;; Add Perspective to use sets of 
   (use-package perspective
-    :demand t
-    ;; Setup Keybindings
-    ;; :bind (("C-M-k" . persp-switch)
-    ;; 	   ("C-M-n" . persp-next)
-    ;; 	   ("C-x k" . persp-kill-buffer*))
-    :custom
-    (persp-initial-frame-name "Main")
-    ;; Set default file for states
-    (persp-state-default-file
-     (concat pet/dotfiles-emacsconfig-dir
-	     "perspective/default-state"))
-    :config
-    ;; Running `persp-mode' multiple times resets the perspective list...
-    (unless (equal persp-mode t)
-      (persp-mode))
+	:demand t
+	;; Setup Keybindings
+	;; :bind (("C-M-k" . persp-switch)
+	;; 	   ("C-M-n" . persp-next)
+	;; 	   ("C-x k" . persp-kill-buffer*))
+	:custom
+	;; Start Perspective Mode
+	(persp-mode-prefix-key (kbd "C-c M-p"))
+	(persp-initial-frame-name "Main")
+	;; Set default file for states
+	(persp-state-default-file
+	 (concat pet/dotfiles-emacsconfig-dir
+			 "perspective/default-state"))
+	:config
+	;; Running `persp-mode' multiple times resets the perspective list...
+	(unless (equal persp-mode t)
+	  (persp-mode))
 
-    ;; Add Perspective Functions to User Leader Keys
-    (pet/leader-keys
-     "P"  '(:ignore t :which-key "Perspectives")
-     "Pn"  'persp-next  
-     "Ps"  'persp-switch-to-buffer*
-     "Pk"  'persp-kill-buffer*
-    )
-    )
+	;; Add Perspective Functions to User Leader Keys
+	(pet/leader-keys
+	  "P"  '(:ignore t :which-key "Perspectives")
+	  "Pn"  'persp-next  
+	  "Ps"  'persp-switch-to-buffer*
+	  "Pk"  'persp-kill-buffer*
+	  )
+	)
+
 #+end_src
 ** Treemacs Mode
 
@@ -2518,8 +2521,7 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 	  ;; (ipython . t)       ;; IPython
 
 	  ;;  the following two require ob-c
-	  ;; (c . t)             ;; C 
-	  ;; (cpp . t)           ;; C++
+	  (C . t)             ;; C 
 
 	  (perl . t)          ;; Perl
 	  ;; (php . t)           ;; PHP
@@ -2555,26 +2557,28 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 
   ;; Setup Source Block Templates
   (cl-loop for block in
-		   '(("aw" . "src awk")
-			 ("el" . "src emacs-lisp")
+		   '(("aw"   . "src awk")
+			 ("cs"   . "src C")
+			 ("cp"   . "src C++")
+			 ("el"   . "src emacs-lisp")
 			 ;; ("go" . "src go")
 			 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
 			 ("json" . "src json")
-			 ("lua" . "src lua")
-			 ("ldg" . "src ledger :noweb")
-			 ("ll" . "src latex")
-			 ("oc" . "src octave")
+			 ("lua"  . "src lua")
+			 ("ldg"  . "src ledger :noweb")
+			 ("ll"   . "src latex")
+			 ("oc"   . "src octave")
 			 ("perl" . "src perl")
-			 ("ph" . "src php")
-			 ("py" . "src python")
-			 ("sc" . "src scheme")
-			 ("sh" . "src shell")
-			 ("sq" . "src sql")
+			 ("ph"   . "src php")
+			 ("py"   . "src python")
+			 ("sc"   . "src scheme")
+			 ("sh"   . "src shell")
+			 ("sq"   . "src sql")
 			 ("yaml" . "src yaml")
 			 ;; R
-			 ("rp" . "src R")                                  ;; pure R             
-			 ("rr" . "src R :results both output")             ;; R with output
-			 ("rs" . "src R :session :results both output")    ;; R with output
+			 ("rp"   . "src R")                                  ;; pure R             
+			 ("rr"   . "src R :results both output")             ;; R with output
+			 ("rs"   . "src R :session :results both output")    ;; R with output
 			 ;; ("ts" . "src typescript"))
 			 ;; This is an alternative Block
 			 ;; For IPython
