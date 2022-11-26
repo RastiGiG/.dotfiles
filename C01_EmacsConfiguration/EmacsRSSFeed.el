@@ -46,6 +46,7 @@
 	("https://www.nachdenkseiten.de/?feed=rss2" blog culture politics society critical-thinking social-critique)
 	;; R-Bloggers - News concerning R Programming Language
 	("https://feeds.feedburner.com/RBloggers?format=xml" blog it r programming statistical-computation statistics data-science)
+	("https://feeds.feedburner.com/Bildblog" blog politics culture society)
 
 	;;;; PODCASTS
 
