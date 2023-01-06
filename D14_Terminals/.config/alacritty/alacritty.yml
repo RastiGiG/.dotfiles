@@ -68,11 +68,11 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: JetBrains Mono
+    family: Iosevka
     style: Medium
 
   bold:
-    family: JetBrains Mono
+    family: Iosevka
     style: Bold
 
   italic:
