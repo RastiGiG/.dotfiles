@@ -40,12 +40,17 @@
   # Return himBHs -> see man bash -> SHELL BUILTIN COMMANDS -> set subsection for the meaning
   [[ $- != *i* ]] && return
 
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+  	. /etc/bashrc
+  fi
+
   # Control Access to Local XServer
   xhost +local:root > /dev/null 2>&1
 
   # Adjust completions for sudo
   complete -cf sudo
-  
+
   # export QT_SELECT=4
 
 #+end_src
@@ -418,6 +423,14 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
   #----------------------------EXTERNAL FILES
   
 #+end_src
+** Environmental Variables
+#+begin_src bash
+  # Load Environmental Variables
+  SHEnvVar="$HOME/.dotfiles/D01_Bash/.envvar"
+  [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
+  
+#+end_src
+
 ** Functions
 #+begin_src bash
   # Load Bash Functions
@@ -425,7 +438,6 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
   [[ -f $BSHFuncs && -r $BSHFuncs ]] && . "$BSHFuncs"
   
 #+end_src
-
 ** Aliases
 
 #+begin_src bash
@@ -463,7 +475,7 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
 ** Release Temporary Variables
 
 #+begin_src bash
-  unset SHAlias BSHFuncs UsrBashComp
+  unset SHEnvVar SHAlias BSHFuncs UsrBashComp
   
 #+end_src
 * Load External Programs

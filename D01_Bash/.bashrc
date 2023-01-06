@@ -21,6 +21,11 @@
 # Return himBHs -> see man bash -> SHELL BUILTIN COMMANDS -> set subsection for the meaning
 [[ $- != *i* ]] && return
 
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
 # Control Access to Local XServer
 xhost +local:root > /dev/null 2>&1
 
@@ -366,6 +371,10 @@ export LESS_TERMCAP_me=$(tput sgr0)
 
 #----------------------------EXTERNAL FILES
 
+# Load Environmental Variables
+SHEnvVar="$HOME/.dotfiles/D01_Bash/.envvar"
+[[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
+
 # Load Bash Functions
 BSHFuncs="$HOME/.dotfiles/D01_Bash/.bash_functions"
 [[ -f $BSHFuncs && -r $BSHFuncs ]] && . "$BSHFuncs"
@@ -383,7 +392,7 @@ bind 'set show-all-if-ambiguous on'
 # Set up tab to cycle completion options and show options first
 bind 'TAB:menu-complete'
 
-unset SHAlias BSHFuncs UsrBashComp
+unset SHEnvVar SHAlias BSHFuncs UsrBashComp
 
 #----------------------------EXTERNAL PROGRAMS AND SCRIPTS
 
