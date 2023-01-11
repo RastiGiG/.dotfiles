@@ -4,19 +4,33 @@
 # --
 * Topic Overview
 
+** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+*** [[id:e9c31c11-8808-4002-918c-be893374a3b7][Algorithms]]
+**** Important Algorithms
+***** [[id:c1023e10-219b-4f27-8bf2-ceee4eb29a1a][Hashtables]]
+***** [[id:bbc75ff8-1038-449e-a179-b954eb498068][Hash Functions]]
+**** Educational/Other Algorithms
+***** [[id:90166afa-c100-4cda-a9fe-5916fceeb464][Bad/Malicious Programs]]
+*** [[id:660a3536-a02b-48dc-a01e-6e83c3938a2c][The Algorithm Archive]]
+
 * Read On
 
-[[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
-** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
-*** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
-**** [[id:e9c31c11-8808-4002-918c-be893374a3b7][Algorithms]]
-***** [[id:bbc75ff8-1038-449e-a179-b954eb498068][Hash Functions]]
-**** [[id:660a3536-a02b-48dc-a01e-6e83c3938a2c][The Algorithm Archive]]
-*** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
+*** [[id:8cf54725-a619-43b8-ad9b-0956ecf1a1f1][Maths]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
 
 * References
 
-[[id:ff4a308e-b827-4702-a575-48a84271639b][References]]
+[[id:ff4a308e-b827-4702-a575-48a84271639b][Algorithmic References]]
+
+** Websites
+
 1. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
    1) [[https://github.com/algorithm-archivists/algorithm-archive][GitHub.com: Algorithm-Archive]]
 2. [[https://www.algorithm-archive.org/][Algorithm-Archive.org]]
+
+** Literature

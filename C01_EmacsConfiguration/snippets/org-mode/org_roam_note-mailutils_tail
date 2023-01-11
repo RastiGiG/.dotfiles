@@ -4,17 +4,33 @@
 # --
 * Topic Overview
 
+** [[id:f592b6ee-2545-432b-8591-b46bf3e9ce4a][E-Mail]]
+*** [[id:4ec7317c-4655-4397-b1b5-69831ec1e375][Command Line Mail Clients]]
+**** [[id:6a87bb42-485b-4230-991f-7b8f566a318a][isync/mbsync]]
+**** [[id:43c5ff9c-3392-4b4a-ace7-f2a0af5f13b1][mu/mu4e]]
+
 * Read On
 
 ** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
-** [[id:9e4f766d-37a6-4901-b5a4-d6041335ec67][GNU Software]]
-1. [[id:1585e6e7-3f1f-41ca-a266-1297a6c6a590][GNU Coreutils]]
-2. [[id:5dc04892-9105-45aa-845a-01b89448d753][GnuPG - GNU Privacy Guard]]
+*** [[id:f592b6ee-2545-432b-8591-b46bf3e9ce4a][E-Mail]]
+*** [[id:9e4f766d-37a6-4901-b5a4-d6041335ec67][GNU Software]]
+**** [[id:1585e6e7-3f1f-41ca-a266-1297a6c6a590][GNU Coreutils]]
+**** [[id:5dc04892-9105-45aa-845a-01b89448d753][GnuPG - GNU Privacy Guard]]
+**** [[id:42a721a2-1e18-4345-9a65-23b942a457fe][Mailutils]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
 
 * References
 
-[[id:0c81782d-7b55-4902-b9de-5a7500674784][References]]
+** Websites
+
 1. [[https://www.fsf.org/][FSF.org: The Free Software Foundation]]
 2. [[http://www.gnu.org/][GNU.org: The GNU Project]]
 3. [[https://mailutils.org][Mailutils.org]]
    1) [[https://mailutils.org/manual/mailutils.html][Mailutils.org: Manual]]
+4. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
+   1) [[https://github.com/djcb/mu][GitHub.com: djcb - mu]]
+5. [[https://www.djcbsoftware.nl/][DJCBSoftware.nl]]
+   1) [[https://www.djcbsoftware.nl/code/mu/][DJCBSoftware.nl: Code - mu]]
+
+** Literature
