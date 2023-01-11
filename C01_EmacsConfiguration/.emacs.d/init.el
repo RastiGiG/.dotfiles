@@ -247,18 +247,21 @@
         treemacs-mode))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Set default font face
-(set-face-attribute 'default nil :font "Iosevka"
-			:height pet/default-font-size)
+;; Set default font face of present
+(when member "Iosevka" (font-family-list)
+	      (set-face-attribute 'default nil :font "Iosevka"
+						      :height pet/default-font-size))
 
 ;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Iosevka"
-			:height pet/default-font-size)
+(when member "Iosevka" (font-family-list)
+	      (set-face-attribute 'fixed-pitch nil :font "Iosevka"
+						      :height pet/default-font-size))
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Cantarell"
-			:height pet/default-font-size
-			:weight 'regular)
+(when member "Cantarell" (font-family-list)
+	      (set-face-attribute 'variable-pitch nil :font "Cantarell"
+						      :height pet/default-font-size
+						      :weight 'regular))
 
 ;; Use specific Fontsets for Symbols
 (setq use-default-font-for-symbols nil)
@@ -1339,11 +1342,11 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add mu4e directory to load path
 (if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
-	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-      (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
-	      (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-	nil)
-      )
+      (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+  (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
+  	(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+      nil)
+  )
 
 ;; Load mu4e as a Mail Interface for mu
 (use-package mu4e
@@ -1355,7 +1358,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
       ;; Refresh mail using isync/mbsync every 10 minutes
       (setq mu4e-update-interval (* 10 60))
-      (setq mu4e-get-mail-command "mbsync -a")
+      (setq mu4e-get-mail-command "mbsync --all")
       (setq mu4e-maildir (concat pet/home-dir "Mail"))
 
       ;; Sets the standard download directory for attachments
