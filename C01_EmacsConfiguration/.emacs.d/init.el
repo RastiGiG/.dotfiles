@@ -248,17 +248,17 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set default font face of present
-(when member "Iosevka" (font-family-list)
+(when (member "Iosevka" (font-family-list))
 	      (set-face-attribute 'default nil :font "Iosevka"
 						      :height pet/default-font-size))
 
 ;; Set the fixed pitch face
-(when member "Iosevka" (font-family-list)
+(when (member "Iosevka" (font-family-list))
 	      (set-face-attribute 'fixed-pitch nil :font "Iosevka"
 						      :height pet/default-font-size))
 
 ;; Set the variable pitch face
-(when member "Cantarell" (font-family-list)
+(when (member "Cantarell" (font-family-list))
 	      (set-face-attribute 'variable-pitch nil :font "Cantarell"
 						      :height pet/default-font-size
 						      :weight 'regular))
