@@ -830,6 +830,21 @@
    "ltw" 'treemacs-select-window)
   )
 
+;; Add Minimap to Emacs
+(use-package minimap
+ :config
+ ;; Set minimap to show on the right
+ (setq minimap-window-location 'right)
+
+ ;; Make Minimap available in most text modes
+ (add-to-list 'minimap-major-modes 'text-mode)
+
+ ;; Add Minimap to Keyspace for Toggles - Modes
+ (pet/leader-keys
+       "tmm"   '(minimap-mode :which-key "Minimap Mode")
+       )
+ )
+
 ;; Load Hydra Package
 (use-package hydra
       :config
@@ -2524,7 +2539,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add Apheleia Code Formatter
 (use-package apheleia
-      :custom (apheleia-global-mode 1))
+      :config (apheleia-global-mode 1))
 
 ;; Easier Commenting, not just for evil-mode
 (use-package evil-nerd-commenter

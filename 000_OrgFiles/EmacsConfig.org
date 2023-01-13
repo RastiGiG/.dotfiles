@@ -1132,7 +1132,6 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
 
 #+end_src
 ** Treemacs Mode
-
 =Treemacs= is a handy tree-style *file directory viewer* that's very similar to what you are used from commercial IDEs.
 It's got good integration with =Projectile=
 
@@ -1154,6 +1153,27 @@ It's got good integration with =Projectile=
      "ltt" 'treemacs
      "ltw" 'treemacs-select-window)
     )
+#+end_src
+** Minimap Mode
+[[https://github.com/dengste/minimap][Minimap]] adds a minimap sidebar to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+#+begin_src emacs-lisp
+  ;; Add Minimap to Emacs
+  (use-package minimap
+   :config
+   ;; Set minimap to show on the right
+   (setq minimap-window-location 'right)
+
+   ;; Make Minimap available in most text modes
+   (add-to-list 'minimap-major-modes 'text-mode)
+
+   ;; Add Minimap to Keyspace for Toggles - Modes
+   (pet/leader-keys
+	 "tmm"   '(minimap-mode :which-key "Minimap Mode")
+	 )
+   )
+
+
+
 #+end_src
 ** Hydra
 *** Description
@@ -3341,11 +3361,15 @@ Dap stands for Debug Adapter
     :hook (lsp-mode . flycheck-mode))
 #+end_src
 ** Apheleia
-[[https://github.com/radian-software/apheleia][Apheleia]] formats code automatically according to rules set by [[https://github.com/psf/black][Black]], [[https://prettier.io/][Prettier]] or [[https://pkg.go.dev/cmd/gofmt][GoFMT]]
+[[https://github.com/radian-software/apheleia][Apheleia]] formats code automatically according to rules set by [[https://github.com/psf/black][Black]], [[https://prettier.io/][Prettier]] or [[https://pkg.go.dev/cmd/gofmt][GoFMT]] and so on.
+
+:NOTE:
+You need to have the underlying ~Code Formatters~ like [[https://github.com/psf/black][Black]], [[https://prettier.io/][Prettier]] or [[https://pkg.go.dev/cmd/gofmt][GoFMT]] installed, to use them with this [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]]
+:END:
 #+begin_src emacs-lisp
   ;; Add Apheleia Code Formatter
   (use-package apheleia
-	:custom (apheleia-global-mode 1))
+	:config (apheleia-global-mode 1))
   
 #+end_src
 ** Easier Commenting
