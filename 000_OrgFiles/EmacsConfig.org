@@ -3167,7 +3167,6 @@ Looking at current developement, it might also be a lot more relevant in the fut
 For documentation on *eshell-git-prompt* look here: [[https://github.com/xuchunyang/eshell-git-prompt]]
 
 ** Projectile
-
 [[https://projectile.mx/][Projectile]] is a project management library for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] which makes it a lot easier to navigate around code projects for various languages.  Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
 
 #+begin_src emacs-lisp
@@ -3341,9 +3340,15 @@ Dap stands for Debug Adapter
     :defer t
     :hook (lsp-mode . flycheck-mode))
 #+end_src
-
+** Apheleia
+[[https://github.com/radian-software/apheleia][Apheleia]] formats code automatically according to rules set by [[https://github.com/psf/black][Black]], [[https://prettier.io/][Prettier]] or [[https://pkg.go.dev/cmd/gofmt][GoFMT]]
+#+begin_src emacs-lisp
+  ;; Add Apheleia Code Formatter
+  (use-package apheleia
+	:custom (apheleia-global-mode 1))
+  
+#+end_src
 ** Easier Commenting
-
 If you want to make commenting easier, the following package is very helpful. Despite the name, it is not only restricted to =evil-mode=
 #+begin_src emacs-lisp
   ;; Easier Commenting, not just for evil-mode
@@ -3353,7 +3358,6 @@ If you want to make commenting easier, the following package is very helpful. De
 #+end_src
 
 ** Magit
-
 [[https://magit.vc/][Magit]] is one of the best Git interfaces. Common Git operations are easy to execute quickly using Magit's command panel system.
 
 #+begin_src emacs-lisp

@@ -2522,6 +2522,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   :defer t
   :hook (lsp-mode . flycheck-mode))
 
+;; Add Apheleia Code Formatter
+(use-package apheleia
+      :custom (apheleia-global-mode 1))
+
 ;; Easier Commenting, not just for evil-mode
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
