@@ -523,6 +523,9 @@
   (define-key mc/keymap (kbd
                          "<return>") nil))
 
+;; Rebind 'M-x' to 'C-C C-m'
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+
 ;; Setup general for easier key config
 (use-package general
       :config
@@ -548,6 +551,7 @@
 
 	;; Editing Tools
 	"e"     '(:ignore t :which-key "Editing Tools")
+	"ea"    'add-file-local-variable-prop-line
 	;; Letters
 	"el"    '(:ignore t :which-key "Letters")
 	"elM-u" 'upcase-initials

@@ -64,7 +64,6 @@ To run Emacs service right now, use
   ;; using Emacs and init.el will be generated automatically!
 
 #+end_src
-
 ** Setting Up Needed Variables
 #+begin_src emacs-lisp
   ;; Setting Variables
@@ -745,7 +744,13 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
   
 #+end_src
 * Keybinding Configuration
-
+** Rebinding Keys
+#+begin_src emacs-lisp
+  ;; Rebind 'M-x' to 'C-C C-m'
+  (global-set-key "\C-c\C-m" 'execute-extended-command)
+  
+#+end_src
+** General
 [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
 #+begin_src emacs-lisp
   ;; Setup general for easier key config
@@ -773,6 +778,7 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
 
 	  ;; Editing Tools
 	  "e"     '(:ignore t :which-key "Editing Tools")
+	  "ea"    'add-file-local-variable-prop-line
 	  ;; Letters
 	  "el"    '(:ignore t :which-key "Letters")
 	  "elM-u" 'upcase-initials
