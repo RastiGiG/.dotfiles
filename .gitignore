@@ -49,6 +49,7 @@ Thumbs.db
 /.emacs.desktop.lock
 /*/.emacs.d/.cache/
 /*/.emacs.d/.dap-breakpoints
+/*/.emacs.d/customization_variables.el
 /*/.emacs.d/workspace/
 /*/.emacs.d/session*
 *.elc
