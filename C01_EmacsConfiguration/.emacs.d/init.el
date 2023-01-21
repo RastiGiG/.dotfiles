@@ -233,7 +233,7 @@
 
 ;; Set Visual Line Mode for text modes only
 ;; Preferred over global-visual-line-mode
-(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+;; (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
 ;; Enable Highlight-Line
 (hl-line-mode 1)
@@ -1724,6 +1724,19 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       (setq org-latex-create-formula-image-program
 	'imagemagick)
 
+      ;; Set Latex PDF Export Process
+      (setq org-latex-pdf-process
+		(list
+		 "latexmk -shell-escape -bibtex -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
+		 "latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
+		 ))
+
+      ;; Add global Bibliography Source
+      (setq org-cite-global-bibliography
+		(list
+		 (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		 ))
+
       ;; Specify Agenda Files
       (setq org-agenda-files
 	(cons (concat pet/org-dir "journal")
@@ -1827,6 +1840,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       :after org)
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
+;; Org LaTeX Setup
 (eval-after-load 'ox-latex
       '(progn
 	 (add-to-list 'org-latex-classes
@@ -1902,6 +1916,13 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	 ;; Use Backaddress by default
 	 (setq org-koma-letter-use-backaddress t)
 	 )
+      )
+
+;; Load Org Ref
+(use-package org-ref
+      :config
+      ;; Bibtex Hydra
+      ;; (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
       )
 
 ;; (use-package ob-ipython)

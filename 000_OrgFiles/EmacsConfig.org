@@ -355,7 +355,7 @@ This section configures basic UI settings that remove unneeded elements to make 
 
   ;; Set Visual Line Mode for text modes only
   ;; Preferred over global-visual-line-mode
-  (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+  ;; (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
   ;; Enable Highlight-Line
   (hl-line-mode 1)
@@ -2323,6 +2323,19 @@ The ~Package~ is listed as =org-plus-contrib=
 	(setq org-latex-create-formula-image-program
 	  'imagemagick)
 
+	;; Set Latex PDF Export Process
+	(setq org-latex-pdf-process
+		  (list
+		   "latexmk -shell-escape -bibtex -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
+		   "latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
+		   ))
+
+	;; Add global Bibliography Source
+	(setq org-cite-global-bibliography
+		  (list
+		   (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		   ))
+
 	;; Specify Agenda Files
 	(setq org-agenda-files
 	  (cons (concat pet/org-dir "journal")
@@ -2435,6 +2448,7 @@ The ~Package~ is listed as =org-plus-contrib=
 #+end_src
 ** Org Mode LaTeX Setup
 #+begin_src emacs-lisp
+  ;; Org LaTeX Setup
   (eval-after-load 'ox-latex
 	'(progn
 	   (add-to-list 'org-latex-classes
@@ -2510,6 +2524,17 @@ The ~Package~ is listed as =org-plus-contrib=
 	   ;; Use Backaddress by default
 	   (setq org-koma-letter-use-backaddress t)
 	   )
+	)
+
+#+end_src
+** Org Ref
+Add [[https://github.com/jkitchin/org-ref][Org Ref]] for easier and more streamlined ~Citations~ and ~Cross-References~
+#+begin_src emacs-lisp
+  ;; Load Org Ref
+  (use-package org-ref
+	:config
+	;; Bibtex Hydra
+	;; (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
 	)
 
 #+end_src
@@ -3687,7 +3712,6 @@ This Section is ~deprecated~ since the ~Org Auto Tangle~ was added
 :END:
 ** Emacs
 *** Config File
-
 #+begin_src emacs-lisp :tangle no
   ;; Setup Automatic Tangling of Files
   
