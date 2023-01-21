@@ -717,49 +717,50 @@
 
 ;; Load Ivy Completion Framework
 (use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-     ("C-r" . swiper)
-     :map ivy-minibuffer-map
-     ("TAB" . ivy-alt-done)
-     ("C-l" . ivy-alt-done)
-     ("C-j" . ivy-next-line)
-     ("C-k" . ivy-previous-line)
-     :map ivy-switch-buffer-map
-     ("C-k" . ivy-previous-line)
-     ("C-l" . ivy-done)
-     ("C-d" . ivy-switch-buffer-kill)
-     :map ivy-reverse-i-search-map
-     ("C-k" . ivy-previous-line)
-     ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
+      :diminish
+      :bind (("C-s" . swiper)
+	 ("C-r" . swiper)
+	 :map ivy-minibuffer-map
+	 ("TAB" . ivy-alt-done)
+	 ("C-l" . ivy-alt-done)
+	 ("C-j" . ivy-next-line)
+	 ("C-k" . ivy-previous-line)
+	 ("C-RET" . ivy-immediate-done)
+	 :map ivy-switch-buffer-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-l" . ivy-done)
+	 ("C-d" . ivy-switch-buffer-kill)
+	 :map ivy-reverse-i-search-map
+	 ("C-k" . ivy-previous-line)
+	 ("C-d" . ivy-reverse-i-search-kill))
+      :config
+      (ivy-mode 1))
 
 ;; Add Counsel for customized find files etc..
 (use-package counsel
-  :after ivy
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-     :map minibuffer-local-map
-     ("C-r" . 'counsel-minibuffer-history))
-  :config
-  (counsel-mode 1)
+      :after ivy
+      :bind (("C-M-j" . 'counsel-switch-buffer)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
+      :config
+      (counsel-mode 1)
 
-  ;; Add Counsel function to leader key space
-  (pet/leader-keys
-    "r"   '(ivy-resume :which-key "ivy resume")
+      ;; Add Counsel function to leader key space
+      (pet/leader-keys
+	"r"   '(ivy-resume :which-key "ivy resume")
 
-    "ff"  '(counsel-find-file :which-key "open file")
-    "C-f" 'counsel-find-file
-    "fr"  '(counsel-recentf :which-key "recent files")
-    "fR"  '(revert-buffer :which-key "revert file")
-    "fj"  '(counsel-file-jump :which-key "jump to file"))
-  )
+	"ff"  '(counsel-find-file :which-key "open file")
+	"C-f" 'counsel-find-file
+	"fr"  '(counsel-recentf :which-key "recent files")
+	"fR"  '(revert-buffer :which-key "revert file")
+	"fj"  '(counsel-file-jump :which-key "jump to file"))
+      )
 
 ;; Ivy-Rich: Add Descriptions alongside M-x commands
 (use-package ivy-rich
-  :after ivy
-  :init
-  (ivy-rich-mode 1))
+      :after ivy
+      :init
+      (ivy-rich-mode 1))
 
 ;; Add Prescient for spooky Emacs Memory (history)
 (use-package prescient
