@@ -774,6 +774,55 @@
       :config
       (ivy-prescient-mode 1))
 
+;; Add BibTex completion support to Ivy
+(use-package ivy-bibtex
+      :config
+      ;; Set Bibtex Bibliography Files
+      (setq bibtex-completion-bibliography
+		(list
+		 (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		 ))
+
+      ;; Set Bibtex Completion Library Path
+      (setq bibtex-completion-library-path
+		(list
+		 (concat pet/home-dir "Projects/Writing/00_Bibliographies")
+		 ))
+
+      ;; Set Bibtex Completion Notes Path
+      (setq bibtex-completion-notes-path
+		"Projects/bibliography/notes/")
+
+      ;; Add Keywords Field to Completion Serach
+      (setq bibtex-completion-additional-search-fields '(keywords))
+
+      ;; ;; Bibtex Notes Completion Template
+      ;; (setq bibtex-completion-notes-template-multiple-files
+      ;; "* ${author-or-editor}, ${title}, ${journal}, (${year})  :${=type=}:  \n\nSee   [[cite\:${=key=}]]  \n")
+
+      ;; Display Format for Completions
+      ;; (setq bibtex-completion-display-formats
+      ;;	  '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+      ;;		(inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+      ;;		(incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+      ;;		(inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+      ;;		(t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}")))
+
+      ;;; Adjust automatic generation of bibtex key
+      ;;(setq bibtex-autokey-year-length 4
+      ;;	  bibtex-autokey-name-year-separator "-"
+      ;;	  bibtex-autokey-year-title-separator "-"
+      ;;	  bibtex-autokey-titleword-separator "-"
+      ;;	  bibtex-autokey-titlewords 2
+      ;;	  bibtex-autokey-titlewords-stretch 1
+      ;;	  bibtex-autokey-titleword-length 5)
+
+      ;; (setq bibtex-completion-pdf-open-function
+      ;; 	  (lambda (fpath)
+      ;; 		(call-process "open" nil 0 nil fpath))))
+
+      )
+
 ;; Use Helpful to get a better help buffer
 (use-package helpful
   :custom
