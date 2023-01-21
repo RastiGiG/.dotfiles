@@ -1,0 +1,4 @@
+# key: <oprbib
+# name: org-bibtex-print_bibliography
+# --
+#+PRINT_BIBLIOGRAPHY:  ${1::key <value(,value2...)> see 'biblatex' for options}

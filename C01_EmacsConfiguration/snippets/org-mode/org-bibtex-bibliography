@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org-bibtex-bibliography
+# key: <obib
+# --
+
+#+BIBLIOGRAPHY: ~/Projects/Writing/00_Bibliographies/Main_Bib.bib
