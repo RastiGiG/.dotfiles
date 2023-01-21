@@ -1360,13 +1360,22 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 			      (convert-standard-filename
 			       ".dotfiles-private/MailAccounts.el")))
 
-;; Add mu4e directory to load path
-(if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
-      (add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-  (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
-  	(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-      nil)
-  )
+;; ;; Add mu4e directory to load path
+;; (if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
+;; 	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+;;       nil)
+;; (if (file-directory-p "/usr/share/emacs/site-lisp/mu/mu4e")
+;; 	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu/mu4e")
+;;       nil)
+;; (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
+;; 	(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+;;       nil)
+;; (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
+;; 	(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+;;       nil)
+;; (if (file-directory-p (concat pet/home-dir "/Projects/Programs/github-gitlab/mu/build/mu4e"))
+;; 	(add-to-list 'load-path "/Projects/Programs/github-gitlab/mu/build/mu4e")
+;;	   nil)
 
 ;; Load mu4e as a Mail Interface for mu
 (use-package mu4e
