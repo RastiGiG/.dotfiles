@@ -310,6 +310,67 @@ If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-packag
   
 #+end_src
 
+** Early Load Org Mode
+This is done to mitigate the ~Version Mismatch Error~, see ~NOTE~ below
+#+begin_src emacs-lisp
+  ;; Early load Org Mode
+  (use-package org)
+
+#+end_src
+:NOTE:
+Version mismatch is commonly encountered in the following situations:
+
+1. Emacs is loaded using literate Org config and more recent Org
+   version is loaded inside the file loaded by ‘org-babel-load-file’.
+   ‘org-babel-load-file’ triggers the built-in Org version clashing
+   the newer Org version attempt to be loaded later.
+
+   It is recommended to move the Org loading code before the
+   ‘org-babel-load-file’ call.
+
+2. New Org version is loaded manually by setting ‘load-path’, but some
+   other package depending on Org is loaded before the ‘load-path’ is
+   configured.
+   This "other package" is triggering built-in Org version, again
+   causing the version mismatch.
+
+   It is recommended to set ‘load-path’ as early in the config as
+   possible.
+
+3. New Org version is loaded using straight.el package manager and
+   other package depending on Org is loaded before straight triggers
+   loading of the newer Org version.
+
+   It is recommended to put
+
+    (straight-use-package 'org)
+
+   early in the config.  Ideally, right after the straight.el
+   bootstrap.  Moving ‘use-package’ :straight declaration may not be
+   sufficient if the corresponding ‘use-package’ statement is
+   deferring the loading.
+:END:
+** Set Load Path Early
+#+begin_src emacs-lisp
+  ;; Set mu4e directory path
+  (if (file-directory-p (concat pet/home-dir "/Projects/Programs/github-gitlab/mu/build/mu4e"))
+	  (setq pet/mu4e-load-path "/usr/share/emacs/site-lisp/mu4e")
+	(if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
+	(setq pet/mu4e-load-path "/usr/share/emacs/site-lisp/mu4e")
+	  (if (file-directory-p "/usr/share/emacs/site-lisp/mu/mu4e")
+	  (setq pet/mu4e-load-path "/usr/share/emacs/site-lisp/mu/mu4e")
+	(if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
+		(setq pet/mu4e-load-path "/usr/local/share/emacs/site-lisp/mu4e")
+	  (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
+		  (setq pet/mu4e-load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+		nil)))))
+
+  ;; Add mu4e load path
+  (if (boundp 'pet/mu4e-load-path)
+	  (add-to-list 'load-path pet/mu4e-load-path)
+	nil)
+
+#+end_src
 * Basic UI Configuration
 ** Description
 The following variables are used to tweak some of the configuration pieces like font and fontsize so you might need to adjust them for your local machine if you try to use this configuration directly.
@@ -1968,25 +2029,9 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 				(convert-standard-filename
 				 ".dotfiles-private/MailAccounts.el")))
 
-  ;; ;; Add mu4e directory to load path
-  ;; (if (file-directory-p "/usr/share/emacs/site-lisp/mu4e")
-  ;; 	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-  ;;       nil)
-  ;; (if (file-directory-p "/usr/share/emacs/site-lisp/mu/mu4e")
-  ;; 	(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu/mu4e")
-  ;;       nil)
-  ;; (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
-  ;; 	(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
-  ;;       nil)
-  ;; (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu/mu4e")
-  ;; 	(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-  ;;       nil)
-  ;; (if (file-directory-p (concat pet/home-dir "/Projects/Programs/github-gitlab/mu/build/mu4e"))
-  ;; 	(add-to-list 'load-path "/Projects/Programs/github-gitlab/mu/build/mu4e")
-  ;;	   nil)
-
   ;; Load mu4e as a Mail Interface for mu
   (use-package mu4e
+	:straight nil
 	:defer 20 ; Wait until 20 seconds after startup
 	:config
 
@@ -2681,7 +2726,7 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 			 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
 			 ("json" . "src json")
 			 ("lua"  . "src lua")
-			 ("ldg"  . "src ledger :noweb")
+			 ("ldg"  . "src ledger :noweb yes")
 			 ("ll"   . "src latex")
 			 ("oc"   . "src octave")
 			 ("perl" . "src perl")
