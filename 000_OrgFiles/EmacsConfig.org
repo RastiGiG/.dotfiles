@@ -1927,9 +1927,12 @@ Add the keybinding =C-x C-j= to <dired-jump>. Also we setup up the *base view* o
   (setq dired-open-extensions '(("gif" . "sxiv")
 				("jpg" . "sxiv")
 				("png" . "sxiv")
+				("svg" . "sxiv")
 				("mkv" . "mpv")
 				("mp4" . "mpv")
-				("pdf" . "zathura")))
+				;; ("pdf" . "zathura") not needed with pdf-tools
+				))
+
 #+end_src
 ** Dired Filter
 
@@ -1958,6 +1961,14 @@ Add the keybinding =C-x C-j= to <dired-jump>. Also we setup up the *base view* o
       "tmr"  '(ranger-mode :which-key "Ranger Mode")
       )
     )
+#+end_src
+** PDF Tools
+Added [[https://github.com/vedang/pdf-tools][PDF Tools]] to replace ~DocView~.
+There's also a [[https://pdftools.wiki/][wiki]] for it.
+#+begin_src emacs-lisp
+  ;; Load PDF Tools to replace DocView
+  (use-package pdf-tools)
+  
 #+end_src
 * Password Management
 ** Password Store
@@ -2466,17 +2477,19 @@ The ~Package~ is listed as =org-plus-contrib=
 
 	;; Customize Apps for Filelinks
 	(cl-loop for type in
-		 ;; Open PDFs with Zathura
-	   '(("\\.pdf\\'" . "zathura %s")
-		 ;; Open Pictures with sxiv 
-		 ("\\.png\\'" . "sxiv %s")
-		 ("\\.jpg\\'" . "sxiv %s")
-		 ("\\.jpeg\\'" . "sxiv %s")
-		 ;; Open Youtube links with freetube
-		 ("\\.\\*youtu\\.\\*" . "freetube %s")
-		 )
-	   do
-	   (add-to-list 'org-file-apps type))
+			 '(
+			   ;; Open PDFs with Zathura
+			   ("\\.pdf\\'" . "zathura %s")
+			   ;; Open Pictures with sxiv 
+			   ("\\.png\\'" . "sxiv %s")
+			   ("\\.jpg\\'" . "sxiv %s")
+			   ("\\.jpeg\\'" . "sxiv %s")
+			   ("\\.svg\\'" . "sxiv %s")
+			   ;; Open Youtube links with freetube
+			   ("\\.\\*youtu\\.\\*" . "freetube %s")
+			   )
+			 do
+			 (add-to-list 'org-file-apps type))
 
 	;; Add Custom TODO Keywords - in 2 seperate Sequences
 	(setq org-todo-keywords

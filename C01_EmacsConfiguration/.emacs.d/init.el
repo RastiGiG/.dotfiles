@@ -1354,9 +1354,11 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (setq dired-open-extensions '(("gif" . "sxiv")
 			      ("jpg" . "sxiv")
 			      ("png" . "sxiv")
+			      ("svg" . "sxiv")
 			      ("mkv" . "mpv")
 			      ("mp4" . "mpv")
-			      ("pdf" . "zathura")))
+			      ;; ("pdf" . "zathura") not needed with pdf-tools
+			      ))
 
 ;; Add Filters by file extension to dired buffer
 (use-package dired-filter)
@@ -1377,6 +1379,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
     "tmr"  '(ranger-mode :which-key "Ranger Mode")
     )
   )
+
+;; Load PDF Tools to replace DocView
+(use-package pdf-tools)
 
 ;; Add wrapper for the command line tool 'pass'
 (use-package password-store
@@ -1823,17 +1828,19 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
       ;; Customize Apps for Filelinks
       (cl-loop for type in
-	       ;; Open PDFs with Zathura
-	 '(("\\.pdf\\'" . "zathura %s")
-	       ;; Open Pictures with sxiv 
-	       ("\\.png\\'" . "sxiv %s")
-	       ("\\.jpg\\'" . "sxiv %s")
-	       ("\\.jpeg\\'" . "sxiv %s")
-	       ;; Open Youtube links with freetube
-	       ("\\.\\*youtu\\.\\*" . "freetube %s")
-	       )
-	 do
-	 (add-to-list 'org-file-apps type))
+		       '(
+			 ;; Open PDFs with Zathura
+			 ("\\.pdf\\'" . "zathura %s")
+			 ;; Open Pictures with sxiv 
+			 ("\\.png\\'" . "sxiv %s")
+			 ("\\.jpg\\'" . "sxiv %s")
+			 ("\\.jpeg\\'" . "sxiv %s")
+			 ("\\.svg\\'" . "sxiv %s")
+			 ;; Open Youtube links with freetube
+			 ("\\.\\*youtu\\.\\*" . "freetube %s")
+			 )
+		       do
+		       (add-to-list 'org-file-apps type))
 
       ;; Add Custom TODO Keywords - in 2 seperate Sequences
       (setq org-todo-keywords
