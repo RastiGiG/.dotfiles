@@ -1987,8 +1987,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	 (add-to-list 'org-latex-classes
 				      '("org-plain-latex"
 					"\\documentclass{article}
-					 \\usepackage{hyperref}
-					 \\usepackage{babel}
 			      [NO-DEFAULT-PACKAGES]
 			      [PACKAGES]
 			      [EXTRA]"
@@ -2004,8 +2002,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					a4paper,
 					sans, 
 					]{moderncv}
-					\\usepackage[ngerman]{babel}
-					\\usepackage{hyperref}
 			 [NO-DEFAULT-PACKAGES]
 			 [PACKAGES]
 			 [EXTRA]"
@@ -2030,7 +2026,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	 (add-to-list 'org-latex-classes
 				      '("scrlttr2"
 					"\\documentclass\{scrlttr2\}
-       \\usepackage[english]{babel}
        \[DEFAULT-PACKAGES]
        \[PACKAGES]
        \[EXTRA]"))
@@ -2042,8 +2037,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 			      fromrule=false, 
 			      11pt, 
 			      ngerman]{scrlttr2}
-			      \\usepackage{hyperref}
-			      \\usepackage{babel}
 		 [NO-DEFAULT-PACKAGES]
 		 [PACKAGES]
 		 [EXTRA]"
@@ -2052,6 +2045,120 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	 (add-to-list 'org-latex-classes
+				      '("koma-letter"
+					"\\documentclass\{scrlttr2\}
+       \[DEFAULT-PACKAGES]
+       \[PACKAGES]
+       \[EXTRA]"))
+
+
+	 ;; Add Koma Article
+	 (add-to-list 'org-latex-classes
+				      '("scrartcl"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrartcl}
+		 [DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	 ;; Alternative Koma Article Name
+	 (add-to-list 'org-latex-classes
+				      '("koma-article"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrartcl}
+		 [DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+	 ;; Add Koma Report
+	 (add-to-list 'org-latex-classes
+				      '("scrreprt"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrreprt}
+		 [DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	 ;; Alternative Koma Report name
+	 (add-to-list 'org-latex-classes
+				      '("koma-report"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrreprt}
+		 [DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+	 ;; Add Koma Book
+	 (add-to-list 'org-latex-classes
+				      '("scrbook"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrbook}
+		 [DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	 ;; Alternative Koma Book name
+	 (add-to-list 'org-latex-classes
+				      '("koma-book"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrbook}
+		 [DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+
 	 ;; Set Default Letter Class
 	 (setq org-koma-letter-default-class "scrlttr2")
 	 ;; Use Backaddress by default
