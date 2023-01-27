@@ -2073,6 +2073,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	;; (php . t)           ;; PHP
 	(R . t)             ;; R
 	;; (Ruby . t)          ;; Ruby
+	(julia . t)         ;; Julia Programmin Language
 	(lua . t)           ;; Lua Programming Language
 	(shell . t)         ;; Command Line Programs 
 	(latex . t)         ;; LaTeX  
@@ -2860,6 +2861,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add Mode for Lua
 (use-package lua-mode)
+
+;; Add Support for the Julia Programming Language
+(use-package julia-mode)
 
 ;; Add alternative Mode for HTML Developement
 ;; (use-package web-mode)

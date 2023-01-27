@@ -2762,6 +2762,7 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 	  ;; (php . t)           ;; PHP
 	  (R . t)             ;; R
 	  ;; (Ruby . t)          ;; Ruby
+	  (julia . t)         ;; Julia Programmin Language
 	  (lua . t)           ;; Lua Programming Language
 	  (shell . t)         ;; Command Line Programs 
 	  (latex . t)         ;; LaTeX  
@@ -3802,6 +3803,13 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   
 #+end_src
 
+*** Julia
+Add [[https://github.com/JuliaEditorSupport/julia-emacs][Julia Mode]] to support the [[id:156ecd0f-2d32-48e4-8e8e-132831dae624][Julia Programming Language]]
+#+begin_src emacs-lisp
+  ;; Add Support for the Julia Programming Language
+  (use-package julia-mode)
+  
+#+end_src
 *** Web Mode
 ~Web-Mode~ is an *alternative* [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Mode]] for editing [[id:df751d5b-04e3-4cb2-83de-76a6e39943d6][HTML]] Documents in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
 ~Documentation~ can be found here: [[https://web-mode.org/][Web-Mode.org]]
