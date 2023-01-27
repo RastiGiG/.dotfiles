@@ -1210,9 +1210,54 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 	)
 
 #+end_src
-** Helpful Help Commands
+** Citar
+[[https://github.com/emacs-citar/citar][Citar]] provides a completing-read front-end to browse and act on ~BibTeX~, ~BibLaTeX~, and ~CSL~ [[id:460f9462-9a7b-4172-af3b-fb424b6e85b6][JSON]] ~bibliographic data~, and [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]], markdown, and =org-cite= editing support.
 
-[[https://github.com/Wilfred/helpful][Helpful]] adds a lot of very helpful (get it?) information to Emacs' =describe-= command buffers.  For example, if you use =describe-function=, you will not only get the documentation about the function, you will also see the source code of the function and where it gets used in other places in the Emacs configuration.  It is very useful for figuring out how things work in Emacs.
+:NOTE:
+This section is partially inspired by: [[https://kristofferbalintona.me/posts/202206141852][KristofferBalintona.me: Org-Cite]]
+:END:
+#+begin_src emacs-lisp
+	;; Add Citar completion buffer for citations
+	(use-package citar
+	  ;; The `:straight' keyword is not necessary. However, I do this to set a value
+	  ;; for the `:includes' keyword. This keyword tells use-package that those
+	  ;; package(s) are provided by this package, and not to search for them on
+	  ;; Melpa for download. Alternatively, you can set the `:straight' keyword to
+	  ;; nil in those package(s) use-package declaration.
+	  :straight (citar :type git :host github :repo "emacs-citar/citar" :includes (citar-org))
+	  :custom
+	  ;; A list of bib files. A good idea would be having its value be identical to
+	  ;; that of `org-cite-global-bibliography'. For me, I have all my bib file(s)
+	  ;; as a list of strings in `kb/bib-files'.
+	  (citar-bibliography (concat pet/bibliographies "/Main_Bib.bib"))
+
+	  ;; List of directories for reference nodes
+	  (citar-notes-paths (list pet/org-dir))
+	  
+	  (citar-open-note-function 'orb-citar-edit-note) ; Open notes in `org-roam'
+	  ;; (citar-at-point-function 'embark-act)           ; If use `embark'
+
+	  ;; Add Keybindings
+	  :general
+	  (:keymaps 'org-mode-map
+				:prefix "C-c b"
+				"b" '(citar-insert-citation :wk "Insert citation")
+				"r" '(citar-insert-reference :wk "Insert reference")
+				"o" '(citar-open-notes :wk "Open note"))
+	  )
+
+  ;; Use `citar' with `org-cite'
+  (use-package citar-org
+	:after oc
+	:custom
+	(org-cite-insert-processor 'citar)
+	(org-cite-follow-processor 'citar)
+	(org-cite-activate-processor 'citar)
+	)
+
+#+end_src
+** Helpful Help Commands
+[[https://github.com/Wilfred/helpful][Helpful]] adds a lot of very helpful (get it?) information to Emacs' =describe-= command buffers.  For example, if you use =describe-function=, you will not only get the documentation about the function, you will also see the source code of the function and where it gets used in other places in the [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] configuration. It is very useful for figuring out how things work in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].
 
 #+begin_src emacs-lisp
   ;; Use Helpful to get a better help buffer
