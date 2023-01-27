@@ -2013,11 +2013,51 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 	 ;; Bigger LaTeX Previews
 	 (plist-put org-format-latex-options :scale 1.5)
+
 	 ;; Load language packages for pdflatex of lualatex / xelatex compilers
-	 ;; (add-to-list 'org-latex-packages-alist
-	 ;;              '("AUTO" "babel" t ("pdflatex")))
-	 ;; (add-to-list 'org-latex-packages-alist
-	 ;;              '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Language Support
+				      '("AUTO" "babel" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Language Support
+				      '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; For Modern Fonts, Vektorschrift
+				      '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Tabellen mit variabler Breite
+				      '("" "tabularx" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Source Code Lists
+				      '("" "listings" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Support for more file names for graphics package
+				      '("" "grffile" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Mathematical Enhancer
+				      '("" "amsthm" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Allows adjusting of counter in enumerate environment
+				      '("" "enumerate" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; For Modern Fonts, Vektorschrift
+				      '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Fix typessetting in amsmath, extend amsmath 
+				      '("fixamsmath, dissallowspace" "mathtools" t
+					("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; More Symbols
+				      '("" "marvosym" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Even More Math Symbols
+				      '("" "esint" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Color Support and Adjustment functionality
+				      '("" "color" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Adds more color variations, more options for color specification
+				      '("svgnames, dvipsnames" "xcolor" t ("pdflatex" "xelatex" "lualatex")))
 	 )
       )
 
