@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-julia_language_tail
+# key: <ornjult
+# --
+* Topic Overview
+
+** [[id:156ecd0f-2d32-48e4-8e8e-132831dae624][Julia Programming Language]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:156ecd0f-2d32-48e4-8e8e-132831dae624][Julia Programming Language]]
+**** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+**** [[id:f3a38690-14a7-400a-a15a-c54b919fb85d][Lisp Terminology]]
+
+* References
+
+[[id:a190188f-3c20-40bc-b129-4065afa78917][Julia References]]
+
+** Websites
+
+1. [[https://julialang.org/][JuliaLang.org - The Julia Programming Language]]
+   1) [[https://docs.julialang.org/en/v1/][Docs.JuliaLang.org]]
+2. [[https://juliahub.com/ui/Packages][JuliaHub.com]]
+
+** Literature

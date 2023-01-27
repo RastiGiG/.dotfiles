@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-cite_export
+# key: <oc
+# --
+#+CITE_EXPORT: ${1:$$(yas-choose-value '("biblatex" "csl" "basic" "natbib"))} ${2:apalike} ${3:$$(yas-choose-value '("author" "noauthor" "locators" "nocite" "text"))}

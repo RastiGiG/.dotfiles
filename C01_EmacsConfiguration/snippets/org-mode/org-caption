@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-caption
+# key: <ocap
+# --
+#+CAPTION[${2:shortCaption}]: ${1:longCaption}
