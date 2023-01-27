@@ -69,34 +69,45 @@ To run Emacs service right now, use
   ;; Setting Variables
   ;; for better customization and readability
 
-
   ;; Save Home Dir for later use
   (setq pet/home-dir
-    (convert-standard-filename
-     (expand-file-name "~/")))
+		(convert-standard-filename
+		 (expand-file-name "~/")))
 
   ;; Save Dotfiles Dir for later use
   (setq pet/dotfiles-dir
-    (concat pet/home-dir
-        (convert-standard-filename
-         ".dotfiles/")))
+		(concat pet/home-dir
+				(convert-standard-filename
+				 ".dotfiles/")))
 
   ;; Save Template Dir for later use
   (setq pet/temp-dir
-    (concat pet/home-dir
-        (convert-standard-filename
-         "Templates/")))
+		(concat pet/home-dir
+				(convert-standard-filename
+				 "Templates/")))
+
+  ;; Store Org Directory
+  (setq pet/org-dir
+		(concat pet/home-dir
+				(convert-standard-filename
+				 "Org/")))
 
   ;; Save Emacs Template Dir for later use
   (setq pet/latex-header-temp-dir
-    (concat pet/temp-dir
-        (convert-standard-filename
-         "X2_LaTeX_Templates/00-Headers/")))
+		(concat pet/temp-dir
+				(convert-standard-filename
+				 "X2_LaTeX_Templates/00-Headers/")))
 
+  ;; Save Path to main Bibliography File
+  (setq pet/bibliographies
+		(concat pet/home-dir
+				"Projects/Writing/00_Bibliographies"))
+
+  ;; Save path to Emacs Configuration
   (setq pet/dotfiles-emacsconfig-dir
-      (concat pet/dotfiles-dir
-          (convert-standard-filename
-           "C01_EmacsConfiguration/")))
+	  (concat pet/dotfiles-dir
+		  (convert-standard-filename
+		   "C01_EmacsConfiguration/")))
 
   ;; Adjust font size to match your system
   (defvar pet/default-font-size 140)
@@ -1155,13 +1166,13 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 	;; Set Bibtex Bibliography Files
 	(setq bibtex-completion-bibliography
 		  (list
-		   (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		   (concat pet/bibliographies "/Main_Bib.bib")
 		   ))
 
 	;; Set Bibtex Completion Library Path
 	(setq bibtex-completion-library-path
 		  (list
-		   (concat pet/home-dir "Projects/Writing/00_Bibliographies")
+		   pet/bibliographies
 		   ))
 
 	;; Set Bibtex Completion Notes Path
@@ -1967,8 +1978,14 @@ Added [[https://github.com/vedang/pdf-tools][PDF Tools]] to replace ~DocView~.
 There's also a [[https://pdftools.wiki/][wiki]] for it.
 #+begin_src emacs-lisp
   ;; Load PDF Tools to replace DocView
-  (use-package pdf-tools)
-  
+  (use-package pdf-tools
+	:config
+
+	(pet/leader-keys
+	  ;; Toggles - Modes
+	  "tmp"   '(pdf-view-mode :which-key "PDF View Mode")
+	))
+
 #+end_src
 * Password Management
 ** Password Store
@@ -2335,7 +2352,6 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
 
 #+end_src
 * Org Mode
-
 [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] is one of THE killer-features of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
 ** Org Font Faces
 
@@ -2452,7 +2468,7 @@ The ~Package~ is listed as =org-plus-contrib=
 	;; Add global Bibliography Source
 	(setq org-cite-global-bibliography
 		  (list
-		   (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		   (concat pet/bibliographies "/Main_Bib.bib")
 		   ))
 
 	;; Specify Agenda Files
@@ -2565,7 +2581,7 @@ The ~Package~ is listed as =org-plus-contrib=
   (use-package org-superstar
 	:after org)
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-  
+
 #+end_src
 ** Org Mode LaTeX Setup
 #+begin_src emacs-lisp
@@ -2971,7 +2987,7 @@ To turn ~auto-save~ off *only locally*, you can insert this:
       :init
       (setq org-roam-v2-ack t)
       :custom
-      (org-roam-directory "~/Org")
+      (org-roam-directory pet/org-dir)
       (org-roam-dailies-directory "journal/")
 
       (org-roam-completion-everywhere t)
@@ -3076,7 +3092,6 @@ To turn ~auto-save~ off *only locally*, you can insert this:
 	org-roam-ui-open-on-start t))
 #+end_src
 ** Org Drill
-
 ~Org Drill~ is a ~spaced repetition program~ (like ~Anki~)  built to work with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
 
 The ~Hint-Separator~ is set to =||= from =|=
@@ -3085,19 +3100,20 @@ This is done to better fit in with the [[id:62eadd2d-023b-4d03-8eb0-527528f6e224
 You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][spanish.org]]
 
 #+begin_src emacs-lisp
-    (use-package org-drill
-      :config
-      (progn
-        (add-to-list 'org-modules 'org-drill)
-        (setq org-drill-add-random-noise-to-intervals-p t)
-        (setq org-drill-hint-separator "||")
-        (setq org-drill-left-cloze-delimiter "<[")
-        (setq org-drill-right-cloze-delimiter "]>")
-        (setq org-drill-learn-fraction 1.0))
-      )
+  ;; Add Org Drill to use Org as a Anki Backup
+  (use-package org-drill
+	:config
+	(progn
+	  (add-to-list 'org-modules 'org-drill)
+	  (setq org-drill-add-random-noise-to-intervals-p t)
+	  (setq org-drill-hint-separator "||")
+	  (setq org-drill-left-cloze-delimiter "<[")
+	  (setq org-drill-right-cloze-delimiter "]>")
+	  (setq org-drill-learn-fraction 1.0))
+	)
+  
 #+end_src
 ** Org Auto Tangle
-
 This safes the need for the ~Helper Functions~ below that I used previously
 :NOTE:
 You need to add =#+auto_tangle: t= to the files you want to use this feature
@@ -3111,6 +3127,13 @@ You need to add =#+auto_tangle: t= to the files you want to use this feature
     :config
     (setq org-auto-tangle-default nil))
 
+#+end_src
+** Citeproc
+[[https://github.com/andras-simonyi/citeproc-el][Citeproc]] is needed for [[https://citationstyles.org/][CSL]] ~Citation styles~
+#+begin_src emacs-lisp
+  ;; Add Citeproc for CSL style Citations
+  (use-package citeproc)
+  
 #+end_src
 * Developement Tools
 ** Rainbow Delimiters 
@@ -3609,10 +3632,10 @@ Lsp for latex should not be needed since its part of [[https://www.gnu.org/softw
 	:config
 	;; Add Reftex Support to AUCTeX
 	(setq reftex-plug-into-AUCTeX t)
-	;; Set Default Bibliography
-	(setq pet/default-bib
-		  (concat pet/home-dir "~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
-	(setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+	(setq reftex-default-bibliography
+		  (list
+		   (concat pet/bibliographies "/Main_Bib.bib"))
+		  )
 	;; Automatically insert math environment with '$'
 	(setq TeX-electric-math t)
 	;; Autocomplete command on '\'

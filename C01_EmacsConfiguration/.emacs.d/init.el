@@ -12,34 +12,45 @@
 ;; Setting Variables
 ;; for better customization and readability
 
-
 ;; Save Home Dir for later use
 (setq pet/home-dir
-  (convert-standard-filename
-   (expand-file-name "~/")))
+	      (convert-standard-filename
+	       (expand-file-name "~/")))
 
 ;; Save Dotfiles Dir for later use
 (setq pet/dotfiles-dir
-  (concat pet/home-dir
-      (convert-standard-filename
-       ".dotfiles/")))
+	      (concat pet/home-dir
+			      (convert-standard-filename
+			       ".dotfiles/")))
 
 ;; Save Template Dir for later use
 (setq pet/temp-dir
-  (concat pet/home-dir
-      (convert-standard-filename
-       "Templates/")))
+	      (concat pet/home-dir
+			      (convert-standard-filename
+			       "Templates/")))
+
+;; Store Org Directory
+(setq pet/org-dir
+	      (concat pet/home-dir
+			      (convert-standard-filename
+			       "Org/")))
 
 ;; Save Emacs Template Dir for later use
 (setq pet/latex-header-temp-dir
-  (concat pet/temp-dir
-      (convert-standard-filename
-       "X2_LaTeX_Templates/00-Headers/")))
+	      (concat pet/temp-dir
+			      (convert-standard-filename
+			       "X2_LaTeX_Templates/00-Headers/")))
 
+;; Save Path to main Bibliography File
+(setq pet/bibliographies
+	      (concat pet/home-dir
+			      "Projects/Writing/00_Bibliographies"))
+
+;; Save path to Emacs Configuration
 (setq pet/dotfiles-emacsconfig-dir
-    (concat pet/dotfiles-dir
-        (convert-standard-filename
-         "C01_EmacsConfiguration/")))
+	(concat pet/dotfiles-dir
+		(convert-standard-filename
+		 "C01_EmacsConfiguration/")))
 
 ;; Adjust font size to match your system
 (defvar pet/default-font-size 140)
@@ -801,13 +812,13 @@
       ;; Set Bibtex Bibliography Files
       (setq bibtex-completion-bibliography
 		(list
-		 (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		 (concat pet/bibliographies "/Main_Bib.bib")
 		 ))
 
       ;; Set Bibtex Completion Library Path
       (setq bibtex-completion-library-path
 		(list
-		 (concat pet/home-dir "Projects/Writing/00_Bibliographies")
+		 pet/bibliographies
 		 ))
 
       ;; Set Bibtex Completion Notes Path
@@ -1381,7 +1392,13 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   )
 
 ;; Load PDF Tools to replace DocView
-(use-package pdf-tools)
+(use-package pdf-tools
+      :config
+
+      (pet/leader-keys
+	;; Toggles - Modes
+	"tmp"   '(pdf-view-mode :which-key "PDF View Mode")
+      ))
 
 ;; Add wrapper for the command line tool 'pass'
 (use-package password-store
@@ -1803,7 +1820,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       ;; Add global Bibliography Source
       (setq org-cite-global-bibliography
 		(list
-		 (concat pet/home-dir "Projects/Writing/00_Bibliographies/Main_Bib.bib")
+		 (concat pet/bibliographies "/Main_Bib.bib")
 		 ))
 
       ;; Specify Agenda Files
@@ -2242,7 +2259,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/Org")
+  (org-roam-directory pet/org-dir)
   (org-roam-dailies-directory "journal/")
 
   (org-roam-completion-everywhere t)
@@ -2338,16 +2355,17 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       org-roam-ui-update-on-save t
       org-roam-ui-open-on-start t))
 
+;; Add Org Drill to use Org as a Anki Backup
 (use-package org-drill
-  :config
-  (progn
-    (add-to-list 'org-modules 'org-drill)
-    (setq org-drill-add-random-noise-to-intervals-p t)
-    (setq org-drill-hint-separator "||")
-    (setq org-drill-left-cloze-delimiter "<[")
-    (setq org-drill-right-cloze-delimiter "]>")
-    (setq org-drill-learn-fraction 1.0))
-  )
+      :config
+      (progn
+	(add-to-list 'org-modules 'org-drill)
+	(setq org-drill-add-random-noise-to-intervals-p t)
+	(setq org-drill-hint-separator "||")
+	(setq org-drill-left-cloze-delimiter "<[")
+	(setq org-drill-right-cloze-delimiter "]>")
+	(setq org-drill-learn-fraction 1.0))
+      )
 
 ;; Org AddOn Auto Tangle Org Files
 ;; Add '#+auto_tangle: t' to files 
@@ -2356,6 +2374,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default nil))
+
+;; Add Citeproc for CSL style Citations
+(use-package citeproc)
 
 ;; Add rainbow delimiters for better readability
 (use-package rainbow-delimiters
@@ -2698,10 +2719,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       :config
       ;; Add Reftex Support to AUCTeX
       (setq reftex-plug-into-AUCTeX t)
-      ;; Set Default Bibliography
-      (setq pet/default-bib
-		(concat pet/home-dir "~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
-      (setq reftex-default-bibliography '("~/Projects/Writing/00_Bibliographies/Main_Bib.bib"))
+      (setq reftex-default-bibliography
+		(list
+		 (concat pet/bibliographies "/Main_Bib.bib"))
+		)
       ;; Automatically insert math environment with '$'
       (setq TeX-electric-math t)
       ;; Autocomplete command on '\'
