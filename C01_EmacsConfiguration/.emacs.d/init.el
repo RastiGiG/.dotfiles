@@ -1758,65 +1758,59 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Helper Functions for Org
 (defun pet/org-font-setup ()
-  ;; Set faces for heading levels
-  (dolist (face '((org-level-1 . 1.2)
-          (org-level-2 . 1.15)
-          (org-level-3 . 1.1)
-          (org-level-4 . 1.05)
-          (org-level-5 . 1.02)
-          (org-level-6 . 1.0)
-          (org-level-7 . 1.0)
-          (org-level-8 . 1.0)))
-    (set-face-attribute
-     (car face)
-     nil
-     :font "Cantarell"
-     :weight 'regular
-     :height (cdr face)))
+      ;; Set faces for heading levels
+      (dolist (face '((org-level-1 . 1.2)
+		      (org-level-2 . 1.15)
+		      (org-level-3 . 1.1)
+		      (org-level-4 . 1.05)
+		      (org-level-5 . 1.02)
+		      (org-level-6 . 1.0)
+		      (org-level-7 . 1.0)
+		      (org-level-8 . 1.0)))
+	(set-face-attribute
+	 (car face)
+	 nil
+	 :font "Cantarell"
+	 :weight 'regular
+	 :height (cdr face)))
 
-  ;; Ensure that anything that should be
-  ;; fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil
-          :foreground nil
-          :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil
-          :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil
-          :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil
-          :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil
-          :inherit '(font-lock-comment-face
-                 fixed-pitch))
-  (set-face-attribute 'org-meta-line nil
-          :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil
-          :inherit 'fixed-pitch))
+      ;; Ensure that anything that should be
+      ;; fixed-pitch in Org files appears that way
+      (set-face-attribute 'org-block nil
+		      :foreground nil
+		      :inherit 'fixed-pitch)
+      (set-face-attribute 'org-code nil
+		      :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-table nil
+		      :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-verbatim nil
+		      :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-special-keyword nil
+		      :inherit '(font-lock-comment-face
+				 fixed-pitch))
+      (set-face-attribute 'org-meta-line nil
+		      :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-checkbox nil
+		      :inherit 'fixed-pitch))
 
 ;; Replace list hyphen with dot
 (defun pet/org-replace-hyphen ()
-  (font-lock-add-keywords
-   'org-mode '(("^ *\\([-]\\) "
-        (0 (prog1 () (compose-region
-              (match-beginning 1)
-              (match-end 1) "•"))))))
-  )
+      (font-lock-add-keywords
+       'org-mode '(("^ *\\([-]\\) "
+		(0 (prog1 () (compose-region
+			      (match-beginning 1)
+			      (match-end 1) "•"))))))
+      )
 
 ;; Helper Function to quickly toggle Babel Confirm Evaluation
 (defun pet/org-toggle-babel-confirm-evaluate ()
 (interactive)
 "Toogle org-babel-confirm-evaluate on/ff"
 (if org-confirm-babel-evaluate
-    (setq org-confirm-babel-evaluate nil)
-  (setq org-confirm-babel-evaluate t))
+	(setq org-confirm-babel-evaluate nil)
+      (setq org-confirm-babel-evaluate t))
 (print (concat "Org Babel Confirm State: "
-       (format "%s" org-confirm-babel-evaluate))))
-
-;; Store Org Directory
-(setq pet/org-dir
-  (concat pet/home-dir
-      (convert-standard-filename
-       "Org/")))
+	       (format "%s" org-confirm-babel-evaluate))))
 
 ;; Add Org Contrib Packages
 (use-package org-contrib)
@@ -1825,6 +1819,20 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (use-package org
       :ensure org-plus-contrib
       :bind (("C-c l" . org-store-link))
+      :custom
+      (org-cite-export-processors
+       '((md . (csl "chicago-fullnote-bibliography.csl"))   ; Footnote reliant
+	 (latex . biblatex)                                 ; For humanities
+	 (odt . (csl "chicago-fullnote-bibliography.csl"))  ; Footnote reliant
+	 (t . (csl "modern-language-association.csl"))      ; Fallback
+	 ))
+      ;; Add Citation Directory
+      (org-cite-csl-styles-dir
+       (concat pet/temp-dir "X6_Citation_Styles/"))
+      :custom-face
+      ;; Have citation link faces look closer to as they were for `org-ref'
+      (org-cite ((t (:foreground "DarkSeaGreen4"))))
+      (org-cite-key ((t (:foreground "forest green" :slant italic))))
       :config
       ;; Add additional Export Options
       (require 'ox-beamer)       ;; LaTeX beamer
@@ -1836,6 +1844,13 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
       ;; Add additional Babel Support
       (require 'ob-ledger)       ;; Ledger
+
+      ;; Add additional Citation Support
+      (require 'oc-basic)        ;; Basic
+      (require 'oc-bibtex)       ;; Bibtex
+      (require 'oc-biblatex)     ;; Biblatex
+      (require 'oc-csl)          ;; CSL
+
 
       (setq org-ellipsis " ▾")
 
