@@ -2528,7 +2528,7 @@ The ~Package~ is listed as =org-plus-contrib=
 	;; Add global Bibliography Source
 	(setq org-cite-global-bibliography
 		  (list
-		   (concat pet/bibliographies "/Main_Bib.bib")
+		   citar-bibliography
 		   ))
 
 	;; Specify Agenda Files
@@ -2804,6 +2804,8 @@ The ~Package~ is listed as =org-plus-contrib=
 		   [DEFAULT-PACKAGES]
 		   [PACKAGES]
 		   [EXTRA]"
+					  ("\\part{%s}" . "\\part*{%s}")
+					  ("\\chapter{%s}" . "\\chapter*{%s}")
 					  ("\\section{%s}" . "\\section*{%s}")
 					  ("\\subsection{%s}" . "\\subsection*{%s}")
 					  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -2821,6 +2823,8 @@ The ~Package~ is listed as =org-plus-contrib=
 		   [DEFAULT-PACKAGES]
 		   [PACKAGES]
 		   [EXTRA]"
+					  ("\\part{%s}" . "\\part*{%s}")
+					  ("\\chapter{%s}" . "\\chapter*{%s}")
 					  ("\\section{%s}" . "\\section*{%s}")
 					  ("\\subsection{%s}" . "\\subsection*{%s}")
 					  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -2839,6 +2843,8 @@ The ~Package~ is listed as =org-plus-contrib=
 		   [DEFAULT-PACKAGES]
 		   [PACKAGES]
 		   [EXTRA]"
+					  ("\\part{%s}" . "\\part*{%s}")
+					  ("\\chapter{%s}" . "\\chapter*{%s}")
 					  ("\\section{%s}" . "\\section*{%s}")
 					  ("\\subsection{%s}" . "\\subsection*{%s}")
 					  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -2856,6 +2862,8 @@ The ~Package~ is listed as =org-plus-contrib=
 		   [DEFAULT-PACKAGES]
 		   [PACKAGES]
 		   [EXTRA]"
+					  ("\\part{%s}" . "\\part*{%s}")
+					  ("\\chapter{%s}" . "\\chapter*{%s}")
 					  ("\\section{%s}" . "\\section*{%s}")
 					  ("\\subsection{%s}" . "\\subsection*{%s}")
 					  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")

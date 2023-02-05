@@ -1873,7 +1873,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       ;; Add global Bibliography Source
       (setq org-cite-global-bibliography
 		(list
-		 (concat pet/bibliographies "/Main_Bib.bib")
+		 citar-bibliography
 		 ))
 
       ;; Specify Agenda Files
@@ -2140,6 +2140,8 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		 [DEFAULT-PACKAGES]
 		 [PACKAGES]
 		 [EXTRA]"
+					("\\part{%s}" . "\\part*{%s}")
+					("\\chapter{%s}" . "\\chapter*{%s}")
 					("\\section{%s}" . "\\section*{%s}")
 					("\\subsection{%s}" . "\\subsection*{%s}")
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -2157,6 +2159,8 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		 [DEFAULT-PACKAGES]
 		 [PACKAGES]
 		 [EXTRA]"
+					("\\part{%s}" . "\\part*{%s}")
+					("\\chapter{%s}" . "\\chapter*{%s}")
 					("\\section{%s}" . "\\section*{%s}")
 					("\\subsection{%s}" . "\\subsection*{%s}")
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -2175,6 +2179,8 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		 [DEFAULT-PACKAGES]
 		 [PACKAGES]
 		 [EXTRA]"
+					("\\part{%s}" . "\\part*{%s}")
+					("\\chapter{%s}" . "\\chapter*{%s}")
 					("\\section{%s}" . "\\section*{%s}")
 					("\\subsection{%s}" . "\\subsection*{%s}")
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -2192,6 +2198,8 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		 [DEFAULT-PACKAGES]
 		 [PACKAGES]
 		 [EXTRA]"
+					("\\part{%s}" . "\\part*{%s}")
+					("\\chapter{%s}" . "\\chapter*{%s}")
 					("\\section{%s}" . "\\section*{%s}")
 					("\\subsection{%s}" . "\\subsection*{%s}")
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
