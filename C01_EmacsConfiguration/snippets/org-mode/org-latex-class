@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: org-latex-class
+# key: <lc
+# --
+#+LATEX_CLASS: ${1:$$(yas-choose-value '("koma-article" "koma-report" "koma-book" "koma-letter" "moderncv" ))}
+#+LATEX_CLASS_OPTIONS: [${2:a4paper, 10pt, ngerman, twocolumn, pagenumber=false}]

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-latex
+# key: <la
+# --
+#+LATEX: ${1:latex-code}
