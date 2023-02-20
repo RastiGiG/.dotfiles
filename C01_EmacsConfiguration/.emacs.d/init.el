@@ -2035,7 +2035,13 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 				      '("" "grffile" t ("pdflatex" "xelatex" "lualatex")))
 	 (add-to-list 'org-latex-packages-alist
 				      ;; Mathematical Enhancer
+				      '("" "amsmath" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Mathematical Enhancer
 				      '("" "amsthm" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Mathematical Enhancer
+				      '("" "amssymb" t ("pdflatex" "xelatex" "lualatex")))
 	 (add-to-list 'org-latex-packages-alist
 				      ;; Allows adjusting of counter in enumerate environment
 				      '("" "enumerate" t ("pdflatex" "xelatex" "lualatex")))
@@ -2120,7 +2126,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 			      11pt
 			      ]{scrartcl}
 		 [DEFAULT-PACKAGES]
-		 [PACKAGES]
+		 [NO-PACKAGES]
 		 [EXTRA]"
 					("\\section{%s}" . "\\section*{%s}")
 					("\\subsection{%s}" . "\\subsection*{%s}")
@@ -2157,7 +2163,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 			      11pt
 			      ]{scrreprt}
 		 [DEFAULT-PACKAGES]
-		 [PACKAGES]
+		 [NO-PACKAGES]
 		 [EXTRA]"
 					("\\part{%s}" . "\\part*{%s}")
 					("\\chapter{%s}" . "\\chapter*{%s}")
@@ -2196,7 +2202,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 			      11pt
 			      ]{scrbook}
 		 [DEFAULT-PACKAGES]
-		 [PACKAGES]
+		 [NO-PACKAGES]
 		 [EXTRA]"
 					("\\part{%s}" . "\\part*{%s}")
 					("\\chapter{%s}" . "\\chapter*{%s}")
