@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
-# name: org-cite_export
-# key: <ce
+# name: org-cite_bibliography
+# key: <cbib
 # --
 #+CITE_EXPORT: ${1:export processor$$(yas-choose-value '("biblatex" "csl" "basic" "natbib"))} ${2:citation style$$(yas-choose-value '("numeric" "numeric-comp" "numeric-verb" "alphabetic" "alphabetic-verb" "authoryear" "authoryear-comp" "authoryear-ibid" "authoryear-icomp" "authortitle" "authortitle-comp" "authortitle-ibid" "authortitle-icomp" "authortitle-terse" "authortitle-tcomp" "authortitle-ticomp" "verbose" "reading" "ieee" "apa" "chem-acs" "nature" "science" "chicago-authordate" "mla" "phys"))} ${3:reference style$$(yas-choose-value '("author" "noauthor" "locators" "nocite" "text"))}
+#+BIBLIOGRAPHY: /home/rastibasti/Projects/Writing/00_Bibliographies/Main_Bib.bib
