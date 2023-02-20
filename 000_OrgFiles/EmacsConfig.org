@@ -1066,6 +1066,17 @@ Add [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column M
 	)
 
 #+end_src
+** Writeroom
+[[https://github.com/joostkremers/writeroom-mode][Writeroom]] adds a special mode for 'distraction-free writing'. It is built on top of the [[*Visual Fill Column][Visual Fill Colum Mode]] above.
+#+begin_src emacs-lisp :tangle no
+  ;; Add Writeroom Mode
+  (use-package writeroom-mode
+	:config
+		(pet/leader-keys
+	  "tmW"   '(writeroom :which-key "Writeroom Mode"))
+	)
+
+#+end_src
 ** Visual Regular Expressions
 [[https://github.com/benma/visual-regexp.el][Visual-Regexp]] is a third party package that builds on emacs lisp [[id:26419d86-c777-4765-9dd1-9353f17a0716][regular expression]] functionality.
 It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d86-c777-4765-9dd1-9353f17a0716][expressions]] during ~build-up~
