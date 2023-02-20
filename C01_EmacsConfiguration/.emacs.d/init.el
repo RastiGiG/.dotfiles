@@ -725,6 +725,20 @@
       (defun pet/current-tab-name ()
 	(alist-get 'name (tab-bar--current-tab)))
 
+;; Visual Fill Column to center text
+(use-package visual-fill-column
+      :config
+      ;; Load fill column when visual line mode
+      (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+
+      ;; Automatically center text in visual fill column
+      (setq-default visual-fill-column-center-text t)
+
+      ;; Add functionality to leader keys
+      (pet/leader-keys
+	"tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column"))
+      )
+
 ;; Visually Mark Regexp
 (use-package visual-regexp)
 
@@ -1984,8 +1998,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; Org LaTeX Setup
 (eval-after-load 'ox-latex
       '(progn
+	 ;; Plain Article Class
 	 (add-to-list 'org-latex-classes
-				      '("org-plain-latex"
+				      '("plain-article"
 					"\\documentclass{article}
 			      [NO-DEFAULT-PACKAGES]
 			      [PACKAGES]
@@ -1994,8 +2009,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\subsection{%s}" . "\\subsection*{%s}")
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
-					("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
-				      )
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+	 ;; CV Class
 	 (add-to-list 'org-latex-classes
 				      '("moderncv"
 					"\\documentclass[11pt,
@@ -2010,94 +2026,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-	 ;; Bigger LaTeX Previews
-	 (plist-put org-format-latex-options :scale 1.5)
-
-	 ;; Load language packages for pdflatex of lualatex / xelatex compilers
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Language Support
-				      '("AUTO" "babel" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Language Support
-				      '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; For Modern Fonts, Vektorschrift
-				      '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Tabellen mit variabler Breite
-				      '("" "tabularx" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Source Code Lists
-				      '("" "listings" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Support for more file names for graphics package
-				      '("" "grffile" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Mathematical Enhancer
-				      '("" "amsmath" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Mathematical Enhancer
-				      '("" "amsthm" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Mathematical Enhancer
-				      '("" "amssymb" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Allows adjusting of counter in enumerate environment
-				      '("" "enumerate" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; For Modern Fonts, Vektorschrift
-				      '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Fix typessetting in amsmath, extend amsmath 
-				      '("fixamsmath, dissallowspace" "mathtools" t
-					("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; More Symbols
-				      '("" "marvosym" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Even More Math Symbols
-				      '("" "esint" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Color Support and Adjustment functionality
-				      '("" "color" t ("pdflatex" "xelatex" "lualatex")))
-	 (add-to-list 'org-latex-packages-alist
-				      ;; Adds more color variations, more options for color specification
-				      '("svgnames, dvipsnames" "xcolor" t ("pdflatex" "xelatex" "lualatex")))
-	 )
-      )
-
-(eval-after-load 'ox-koma-letter
-      '(progn
-	 (add-to-list 'org-latex-classes
-				      '("scrlttr2"
-					"\\documentclass\{scrlttr2\}
-       \[DEFAULT-PACKAGES]
-       \[PACKAGES]
-       \[EXTRA]"))
-	 (add-to-list 'org-latex-classes
-				      '("scrlttr2-german"
-					"\\documentclass[a4paper, 
-			      parskip=half,%
-			      fromalign=right, 
-			      fromrule=false, 
-			      11pt, 
-			      ngerman]{scrlttr2}
-		 [NO-DEFAULT-PACKAGES]
-		 [PACKAGES]
-		 [EXTRA]"
-					("\\section{%s}" . "\\section*{%s}")
-					("\\subsection{%s}" . "\\subsection*{%s}")
-					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-					("\\paragraph{%s}" . "\\paragraph*{%s}")
-					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-	 (add-to-list 'org-latex-classes
-				      '("koma-letter"
-					"\\documentclass\{scrlttr2\}
-       \[DEFAULT-PACKAGES]
-       \[PACKAGES]
-       \[EXTRA]"))
-
 
 	 ;; Add Koma Article
 	 (add-to-list 'org-latex-classes
@@ -2213,12 +2141,108 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 
+	 ;; Bigger LaTeX Previews
+	 (plist-put org-format-latex-options :scale 1.5)
+
+	 ;; Load language packages for pdflatex of lualatex / xelatex compilers
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Language Support
+				      '("AUTO" "babel" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Language Support
+				      '("AUTO" "polyglossia" t ("xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; For Modern Fonts, Vektorschrift
+				      '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Tabellen mit variabler Breite
+				      '("" "tabularx" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Source Code Lists
+				      '("" "listings" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Support for more file names for graphics package
+				      '("" "grffile" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Mathematical Enhancer
+				      '("" "amsmath" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Mathematical Enhancer
+				      '("" "amsthm" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Mathematical Enhancer
+				      '("" "amssymb" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Allows adjusting of counter in enumerate environment
+				      '("" "enumerate" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; For Modern Fonts, Vektorschrift
+				      '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Fix typessetting in amsmath, extend amsmath 
+				      '("fixamsmath, dissallowspace" "mathtools" t
+					("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; More Symbols
+				      '("" "marvosym" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Even More Math Symbols
+				      '("" "esint" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Color Support and Adjustment functionality
+				      '("" "color" t ("pdflatex" "xelatex" "lualatex")))
+	 (add-to-list 'org-latex-packages-alist
+				      ;; Adds more color variations, more options for color specification
+				      '("svgnames, dvipsnames" "xcolor" t ("pdflatex" "xelatex" "lualatex")))
+	 ))
+
+(eval-after-load 'ox-koma-letter
+      '(progn
+	 (add-to-list 'org-latex-classes
+				      '("scrlttr2"
+					"\\documentclass\{scrlttr2\}
+       \[DEFAULT-PACKAGES]
+       \[PACKAGES]
+       \[EXTRA]"))
+	 (add-to-list 'org-latex-classes
+				      '("scrlttr2-german"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt, 
+			      ngerman]{scrlttr2}
+		 [NO-DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	 (add-to-list 'org-latex-classes
+				      '("koma-letter"
+					"\\documentclass[a4paper,
+			      parskip=half,
+			      fromalign=right,
+			      fromrule=true,
+			      11pt,
+			      ngerman
+			      ]{scrlttr2}
+		 [NO-DEFAULT-PACKAGES]
+		 [PACKAGES]
+		 [EXTRA]"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 	 ;; Set Default Letter Class
 	 (setq org-koma-letter-default-class "scrlttr2")
 	 ;; Use Backaddress by default
 	 (setq org-koma-letter-use-backaddress t)
-	 )
-      )
+	 ))
 
 ;; Load Org Ref
 (use-package org-ref
@@ -2962,6 +2986,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (add-hook 'LaTeX-mode-hook
 		      (lambda () (set (make-local-variable 'TeX-electric-math)
 						      (cons "\\(" "\\)"))))
+
+;; Activate source correlate mode
+(add-hook 'plain-TeX-mode-hook
+		      (lambda () (setq TeX-source-correlate-mode t)))
 
 ;; Load RefTeX...
 ;; ... with AUCTeX LaTeX mode
