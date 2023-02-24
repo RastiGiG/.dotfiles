@@ -1,6 +1,7 @@
 #+title: Shell Environmental Variables
 #+PROPERTY: header-args:shell :tangle ../D01_Bash/.envvar :mkdirp yes
 #+STARTUP: show2levels
+#+auto_tangle: t
 
 * Introduction
 
@@ -27,7 +28,7 @@ This ~File~ is meant to *outsource* Environmental Variables in order to load the
 
 #+end_src
 
-* Environmental Variables
+* Environment Variables
 ** PATH
 These ~Functions~ are included into [[file:Aliases.org][Aliases]] since they fulfill a similar purpose: ~sane(r) defaults~
 The idea is taken from [[https://github.com/terminalforlife/BashConfig/blob/master/source/.profile][TerminalForLife]] 
@@ -71,6 +72,18 @@ Default is the =shell= version.
 
   export INFOPATH
 
+#+end_src
+** BIB
+This is meant to be the path to the Main Bibliography file
+#+begin_src shell
+  #-------------------------------BIB
+  # Add Main Bibliography Variable
+  if ! [[ "$BIB" =~ "$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib" ]]
+  then
+	  BIB="$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib"
+  fi
+
+  export BIB
   
 #+end_src
 ** Perl related

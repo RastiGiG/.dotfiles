@@ -44,6 +44,15 @@ fi
 
 export INFOPATH
 
+#-------------------------------BIB
+# Add Main Bibliography Variable
+if ! [[ "$BIB" =~ "$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib" ]]
+then
+	BIB="$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib"
+fi
+
+export BIB
+
 #------------------------------PERL
 # Add perl binary path
 if ! [[ "$PATH" =~ "/home/rastibasti/perl5/bin" ]]
@@ -76,6 +85,6 @@ export PERL_MB_OPT
 # Create mm opt variable
 if ! [[ "$PERL_MM_OPT" =~ "INSTALL_BASE=/home/rastibasti/perl5" ]]
 then
-	  PERL_MM_OPT="INSTALL_BASE=/home/rastibasti/perl5"
+	      PERL_MM_OPT="INSTALL_BASE=/home/rastibasti/perl5"
 fi  
 export PERL_MM_OPT
