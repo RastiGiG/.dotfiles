@@ -2053,7 +2053,12 @@ There's also a [[https://pdftools.wiki/][wiki]] for it.
 #+begin_src emacs-lisp
   ;; Load PDF Tools to replace DocView
   (use-package pdf-tools
+	:pin manual
 	:config
+	;; Install PDF Tools in all buffers
+	(pdf-tools-install)
+	;; Disable linum mode in PDF Tools
+	(add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1)))
 
 	(pet/leader-keys
 	  ;; Toggles - Modes
@@ -2584,7 +2589,9 @@ The ~Package~ is listed as =org-plus-contrib=
 	(cl-loop for type in
 			 '(
 			   ;; Open PDFs with Zathura
-			   ("\\.pdf\\'" . "zathura %s")
+			   ;; ("\\.pdf\\'" . "zathura %s") ;
+			   ;; Open PDFs with Zathura
+			   ("\\.pdf\\'" . "pdf-tools %s")			   
 			   ;; Open Pictures with sxiv 
 			   ("\\.png\\'" . "sxiv %s")
 			   ("\\.jpg\\'" . "sxiv %s")
@@ -3958,12 +3965,23 @@ Lsp for latex should not be needed since its part of [[https://www.gnu.org/softw
 				  :which-key "CDLaTeX Minor Mode"))
 	)
 
+  ;; Specify viewer programs
   (setq TeX-view-program-selection
 		'(((output-dvi has-no-display-manager) "dvi2tty")
 		  ((output-dvi style-pstricks) "dvips and gv")
 		  (output-dvi "xdvi")
-		  (output-pdf "Zathura")
+		  (output-pdf "PDF Tools")
 		  (output-html "xdg-open")))
+
+  ;; Specify Viewer Calls
+  (setq TeX-view-program-list '(("PDF Tools") TeX-pdf-tools-sync-view))
+
+  ;; Starts server for inverse search
+  (setq TeX-source-correlate-start-server t)
+
+  ;; Hook to automatically refresh output buffer
+  (add-hook 'TeX-after-compilation-finished-functions
+			#'TeX-revert-document-buffer)
 
 #+end_src
 
