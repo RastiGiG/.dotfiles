@@ -44,11 +44,20 @@ fi
 
 export INFOPATH
 
+#-------------------------BIBINPUTS
+# Add Bibliography Input Path Variable
+if ! [[ "$BIBINPUTS" =~ "$HOME/Projects/Writing/00_Bibliographies/" ]]
+then
+	BIBINPUTS="$HOME/Projects/Writing/00_Bibliographies/"  
+fi
+
+export BIBINPUTS
+
 #-------------------------------BIB
 # Add Main Bibliography Variable
-if ! [[ "$BIB" =~ "$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib" ]]
+if ! [[ "$BIB" =~ "${BIBINPUTS}Main_Bib.bib" ]]
 then
-	BIB="$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib"
+	BIB="${BIBINPUTS}Main_Bib.bib"
 fi
 
 export BIB

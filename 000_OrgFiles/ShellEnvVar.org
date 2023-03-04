@@ -73,18 +73,27 @@ Default is the =shell= version.
   export INFOPATH
 
 #+end_src
-** BIB
+** BIBINPUTS
 This is meant to be the path to the Main Bibliography file
 #+begin_src shell
+  #-------------------------BIBINPUTS
+  # Add Bibliography Input Path Variable
+  if ! [[ "$BIBINPUTS" =~ "$HOME/Projects/Writing/00_Bibliographies/" ]]
+  then
+	  BIBINPUTS="$HOME/Projects/Writing/00_Bibliographies/"  
+  fi
+
+  export BIBINPUTS
+
   #-------------------------------BIB
   # Add Main Bibliography Variable
-  if ! [[ "$BIB" =~ "$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib" ]]
+  if ! [[ "$BIB" =~ "${BIBINPUTS}Main_Bib.bib" ]]
   then
-	  BIB="$HOME/Projects/Writing/00_Bibliographies/Main_Bib.bib"
+	  BIB="${BIBINPUTS}Main_Bib.bib"
   fi
 
   export BIB
-  
+
 #+end_src
 ** Perl related
 #+begin_src shell
@@ -124,5 +133,4 @@ This is meant to be the path to the Main Bibliography file
   fi  
   export PERL_MM_OPT
 
-  
 #+end_src
