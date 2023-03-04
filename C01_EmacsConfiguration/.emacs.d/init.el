@@ -1445,7 +1445,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Load PDF Tools to replace DocView
 (use-package pdf-tools
-      :pin manual
       :config
       ;; Install PDF Tools in all buffers
       (pdf-tools-install)
@@ -2977,6 +2976,28 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       (setq TeX-electric-sub-and-superscript t)
       )
 
+;; Specify viewer programs
+(setq TeX-view-program-selection
+	      '(((output-dvi has-no-display-manager) "dvi2tty")
+		((output-dvi style-pstricks) "dvips and gv")
+		(output-dvi "xdvi")
+		(output-pdf "Okular")
+		(output-pdf "PDF Tools")
+		;; (output-pdf "Evince")
+		(output-html "xdg-open")))
+
+
+;; Specify Viewer Calls
+(setq TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
+
+;; Activate TeX source correlate Mode
+(setq TeX-source-correlate-mode t)
+;; Starts server for inverse search
+(setq TeX-source-correlate-start-server t)
+
+;; Hook to automatically refresh output buffer
+(add-hook 'TeX-after-compilation-finished-functions
+		      #'TeX-revert-document-buffer)
 
 ;; enable auto saving tex files
 (setq TeX-auto-save t)
@@ -3029,24 +3050,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 		"tmc" '(cdlatex-mode
 				:which-key "CDLaTeX Minor Mode"))
       )
-
-;; Specify viewer programs
-(setq TeX-view-program-selection
-	      '(((output-dvi has-no-display-manager) "dvi2tty")
-		((output-dvi style-pstricks) "dvips and gv")
-		(output-dvi "xdvi")
-		(output-pdf "PDF Tools")
-		(output-html "xdg-open")))
-
-;; Specify Viewer Calls
-(setq TeX-view-program-list '(("PDF Tools") TeX-pdf-tools-sync-view))
-
-;; Starts server for inverse search
-(setq TeX-source-correlate-start-server t)
-
-;; Hook to automatically refresh output buffer
-(add-hook 'TeX-after-compilation-finished-functions
-		      #'TeX-revert-document-buffer)
 
 ;; Set Default Indentation for Python 
 (setq-default python-indent-offset 4)
