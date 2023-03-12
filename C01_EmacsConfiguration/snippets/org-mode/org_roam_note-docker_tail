@@ -7,6 +7,7 @@
 ** [[id:e1713fff-9911-4e8c-89fb-788f97a98588][Containerization]]
 *** [[id:ffd0c139-dd90-4394-ba29-491b54911c21][Docker]]
 **** [[id:a56bf3e8-f20e-42a0-aff7-e314f03dcd38][Extensions]]
+**** [[id:e09569d8-b01e-401f-9e18-5a28315d41a4][Tipps]]
 
 * Read On
 
@@ -22,9 +23,11 @@
 
 ** Websites
 
-1. [[https://www.docker.com/][Docker.com]]
-   1) [[https://www.docker.com/resources/what-container][Docker.com: What is a Container?]]
-2. [[https://hub.docker.com/][hub.Docker.com - Dockerhub]]
-3. [[https://docs.docker.com/][Docs.Docker.com | Docker Documentation]]
+1. [[https://docspell.org/][Docspell.org]]
+   1) [[https://docspell.org/docs/][Docspell.org: Documentation]]
+2. [[https://docs.paperless-ngx.com/][Paperless-NGX.com]]
+3. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
+   1) [[https://github.com/eikek/docspell][GitHub.com: eikek - Docspell]]
+   2) [[https://github.com/docspell][GitHub.com: Docspell]]
 
 ** Literature
