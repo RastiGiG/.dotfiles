@@ -2106,6 +2106,25 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
 					("\\paragraph{%s}" . "\\paragraph*{%s}")
 					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+	 ;; Alternative Koma Report Structure
+	 (add-to-list 'org-latex-classes
+				      '("koma-report-shortened"
+					"\\documentclass[a4paper, 
+			      parskip=half,%
+			      fromalign=right, 
+			      fromrule=false, 
+			      11pt
+			      ]{scrreprt}
+		 [DEFAULT-PACKAGES]
+		 [NO-PACKAGES]
+		 [EXTRA]"
+					("\\chapter{%s}" . "\\chapter*{%s}")
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
 
 	 ;; Add Koma Book
 	 (add-to-list 'org-latex-classes
