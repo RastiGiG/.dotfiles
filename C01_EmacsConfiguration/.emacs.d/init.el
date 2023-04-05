@@ -259,9 +259,9 @@
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
-                prog-mode-hook
-                conf-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 'relative))))
+				prog-mode-hook
+				conf-mode-hook))
+      (add-hook mode (lambda () (display-line-numbers-mode 'relative))))
 
 ;; Set Visual Line Mode for text modes only
 ;; Preferred over global-visual-line-mode
@@ -272,12 +272,13 @@
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-        term-mode-hook
-        vterm-mode-hook
-        shell-mode-hook
-        eshell-mode-hook
-        treemacs-mode))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+		term-mode-hook
+		vterm-mode-hook
+		shell-mode-hook
+		eshell-mode-hook
+		pdf-view-mode-hook
+		treemacs-mode))
+      (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set default font face of present
 (when (member "Iosevka" (font-family-list))
