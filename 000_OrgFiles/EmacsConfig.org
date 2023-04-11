@@ -4045,6 +4045,13 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
 
 #+end_src
 
+*** Rust
+Add [[https://github.com/rust-lang/rust-mode][Rust Mode]] to support the [[id:a3286d40-db6c-4757-a586-bcfbedd7afa2][Rust Programming Language]]
+#+begin_src emacs-lisp
+  ;; Add Support for Rust
+  (use-package rust-mode)
+  
+#+end_src
 *** PHP
 ~Documentation~ can be found here: [[https://github.com/emacs-php/php-mode][GitHub.com: PHP Mode]]
 #+begin_src emacs-lisp
@@ -4075,8 +4082,20 @@ Add https://github.com/NixOS/nix-mode to support the [[https://nixos.org/][Nix L
 #+begin_src emacs-lisp
   ;; Add Support for Nix Language and Nix Configurations
   (use-package nix-mode
-	:mode "\\.nix\\'")
-  
+	:mode ("\\.nix\\'" "\\.nix.in\\'"))
+  ;; Viewing Nix .drv Files
+  (use-package nix-drv-mode
+	:ensure nix-mode
+	:mode "\\.drv\\'")#
+  ;; Provides Interactive Shell to call nix functions
+  (use-package nix-shell
+	:ensure nix-mode
+	:commands (nix-shell-unpack nix-shell-configure nix-shell-build))
+  ;; Adds a REPL for Nix (plus interface for company)
+  (use-package nix-repl
+	:ensure nix-mode
+	:commands (nix-repl))
+
 #+end_src
 *** Web Mode
 ~Web-Mode~ is an *alternative* [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Mode]] for editing [[id:df751d5b-04e3-4cb2-83de-76a6e39943d6][HTML]] Documents in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]

@@ -3098,6 +3098,9 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       :config
       (pyvenv-mode 1))
 
+;; Add Support for Rust
+(use-package rust-mode)
+
 ;; Load PHP Package
 (use-package php-mode)
 
@@ -3112,7 +3115,19 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add Support for Nix Language and Nix Configurations
 (use-package nix-mode
-      :mode "\\.nix\\'")
+      :mode ("\\.nix\\'" "\\.nix.in\\'"))
+;; Viewing Nix .drv Files
+(use-package nix-drv-mode
+      :ensure nix-mode
+      :mode "\\.drv\\'")#
+;; Provides Interactive Shell to call nix functions
+(use-package nix-shell
+      :ensure nix-mode
+      :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
+;; Adds a REPL for Nix (plus interface for company)
+(use-package nix-repl
+      :ensure nix-mode
+      :commands (nix-repl))
 
 ;; Add alternative Mode for HTML Developement
 ;; (use-package web-mode)
