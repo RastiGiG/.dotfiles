@@ -53,10 +53,11 @@
  (rear-context-string . "K 23. Nov 2021  ")
  (position . 651))
 ("P 02 Wallpaper"
- (filename . "~/Pictures/Wallpaper/")
+ (filename . "~/Pictures/Wallpapers/")
  (front-context-string . "nasa-hubble-star")
  (rear-context-string . "M 14. Feb 09:53 ")
- (position . 1840))
+ (position . 1840)
+ (last-modified 25548 22666 264837 512000))
 ("PI 00 Pictures"
  (filename . "~/Pictures/")
  (front-context-string . "Screenshots\n  dr")
@@ -88,10 +89,11 @@
  (rear-context-string)
  (position . 1))
 ("D XX LaTeX Science Kompendiums"
- (filename . "~/Documents/06_Studium/XX_LaTeX/")
+ (filename . "~/Projects/Writing/X3-Wissenssammlungen/")
  (front-context-string . "Mathematik.pdf\n ")
  (rear-context-string . "K 16. Apr 2021  ")
- (position . 710))
+ (position . 710)
+ (last-modified 25586 9358 400691 345000))
 ("B 01 Web-Bookmarks"
  (filename . "~/Backup/Web-Bookmarks/")
  (front-context-string . "1-bookmarks-impo")
@@ -154,9 +156,10 @@
  (position . 173))
 ("org-refile-last-stored"
  (filename . "~/Org/personal-archive.org")
- (front-context-string . "** DONE Rock im ")
- (rear-context-string . "Sa 23:21]\n:END:\n")
- (position . 22967))
+ (front-context-string . "** DONE WG Geld ")
+ (rear-context-string . "details\n* 2023\n\n")
+ (position . 25059)
+ (last-modified 25632 2367 427936 1000))
 ("C 02-4 Abbreviations"
  (filename . "~/.dotfiles/C01_EmacsConfiguration/abbrev_defs")
  (front-context-string . ";;-*-coding: utf")
@@ -178,10 +181,11 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20220710084510-r_packages.org")
- (front-context-string . "\n* R - Packages\n")
- (rear-context-string . "07-10 So 08:45]\n")
- (position . 226))
+ (filename . "~/Org/20230407174321-linux_nixos_installing_and_using_zfs_on_nixos.org")
+ (front-context-string . "\n* Linux - NixOS")
+ (rear-context-string . "4-07 Fri 17:43]\n")
+ (position . 254)
+ (last-modified 25648 14903 121411 786000))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
@@ -303,10 +307,11 @@
  (rear-context-string . "begin{document}\n")
  (position . 4451))
 ("D 02-2 CV2"
- (filename . "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/Version-2-Org/CurriculumVitae-2.org")
+ (filename . "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/Version-2/")
  (front-context-string . "#+LaTeX_CLASS: s")
  (rear-context-string)
- (position . 1))
+ (position . 1)
+ (last-modified 25528 788 839451 211000))
 ("C 01-1 Shell Aliases"
  (filename . "~/.dotfiles/000_OrgFiles/Aliases.org")
  (front-context-string . "\n+ [[*Basics][Ba")
