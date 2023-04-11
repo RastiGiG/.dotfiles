@@ -3110,6 +3110,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;; Add Support for the Julia Programming Language
 (use-package julia-mode)
 
+;; Add Support for Nix Language and Nix Configurations
+(use-package nix-mode
+      :mode "\\.nix\\'")
+
 ;; Add alternative Mode for HTML Developement
 ;; (use-package web-mode)
 
