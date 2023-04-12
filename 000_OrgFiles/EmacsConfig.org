@@ -2986,6 +2986,13 @@ Add [[https://github.com/jkitchin/org-ref][Org Ref]] for easier and more streaml
 *** Additional Org Babel Language Support
 **** Org Babel Rust
 Load [[https://github.com/micanzhang/ob-rust/tree/be059d231fafeb24a658db212a55ccdc55c0c500][GitHub.com: MicanzHang - ob-rust]]
+:NOTE:
+This Package currently requires =rust-script= to be installed.
+To add it run (asuming =rust= or =rustup= are installed):
+#+begin_src shell
+  cargo install rust-script
+#+end_src
+:END:
 #+begin_src emacs-lisp
   ;; Load Rust Support for Org Mode
   (use-package ob-rust)
@@ -3062,28 +3069,48 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 
   ;; Setup Source Block Templates
   (cl-loop for block in
-		   '(("aw"   . "src awk")
+		   '(;; AWK
+			 ("aw"   . "src awk")
+			 ;; C and Cpp
 			 ("cs"   . "src C")
 			 ("cp"   . "src C++")
+			 ;; Emacs-Lisp
 			 ("el"   . "src emacs-lisp")
-			 ;; ("go" . "src go")
-			 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+			 ;; JSON
 			 ("json" . "src json")
+			 ;; Lua
 			 ("lua"  . "src lua")
+			 ;; Ledger
 			 ("ldg"  . "src ledger :noweb yes")
-			 ("ll"   . "src latex")
+			 ;; LaTeX
+			 ("ltx"   . "src latex")
+			 ;; Nix
+			 ("nix"   . "src nix ")    ;; pure rust
+			 ;; Octave
 			 ("oc"   . "src octave")
+			 ;; Perl
 			 ("perl" . "src perl")
+			 ;; PHP
 			 ("ph"   . "src php")
+			 ;; Python
 			 ("py"   . "src python")
+			 ;; Scheme
 			 ("sc"   . "src scheme")
+			 ;; Shell
 			 ("sh"   . "src shell")
-			 ("sq"   . "src sql")
+			 ;; SQL
+			 ("sql"   . "src sql")
+			 ;; YAML
 			 ("yaml" . "src yaml")
 			 ;; R
 			 ("rp"   . "src R")                                  ;; pure R             
 			 ("rr"   . "src R :results both output")             ;; R with output
 			 ("rs"   . "src R :session :results both output")    ;; R with output
+			 ;; Rust
+			 ("ru"   . "src rust ")    ;; pure rust
+
+			 ;; ("go" . "src go")
+			 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
 			 ;; ("ts" . "src typescript"))
 			 ;; This is an alternative Block
 			 ;; For IPython

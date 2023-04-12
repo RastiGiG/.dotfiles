@@ -2339,28 +2339,48 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Setup Source Block Templates
 (cl-loop for block in
-		 '(("aw"   . "src awk")
+		 '(;; AWK
+		       ("aw"   . "src awk")
+		       ;; C and Cpp
 		       ("cs"   . "src C")
 		       ("cp"   . "src C++")
+		       ;; Emacs-Lisp
 		       ("el"   . "src emacs-lisp")
-		       ;; ("go" . "src go")
-		       ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+		       ;; JSON
 		       ("json" . "src json")
+		       ;; Lua
 		       ("lua"  . "src lua")
+		       ;; Ledger
 		       ("ldg"  . "src ledger :noweb yes")
-		       ("ll"   . "src latex")
+		       ;; LaTeX
+		       ("ltx"   . "src latex")
+		       ;; Nix
+		       ("nix"   . "src nix ")    ;; pure rust
+		       ;; Octave
 		       ("oc"   . "src octave")
+		       ;; Perl
 		       ("perl" . "src perl")
+		       ;; PHP
 		       ("ph"   . "src php")
+		       ;; Python
 		       ("py"   . "src python")
+		       ;; Scheme
 		       ("sc"   . "src scheme")
+		       ;; Shell
 		       ("sh"   . "src shell")
-		       ("sq"   . "src sql")
+		       ;; SQL
+		       ("sql"   . "src sql")
+		       ;; YAML
 		       ("yaml" . "src yaml")
 		       ;; R
 		       ("rp"   . "src R")                                  ;; pure R             
 		       ("rr"   . "src R :results both output")             ;; R with output
 		       ("rs"   . "src R :session :results both output")    ;; R with output
+		       ;; Rust
+		       ("ru"   . "src rust ")    ;; pure rust
+
+		       ;; ("go" . "src go")
+		       ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
 		       ;; ("ts" . "src typescript"))
 		       ;; This is an alternative Block
 		       ;; For IPython
