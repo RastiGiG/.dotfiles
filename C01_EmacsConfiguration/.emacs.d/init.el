@@ -2286,6 +2286,12 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       ;; (define-key bibtex-mode-map (kbd "H-b") 'org-ref-bibtex-hydra/body)
       )
 
+;; Load Rust Support for Org Mode
+(use-package ob-rust)
+
+;; Load Nix Support for Org Mode
+(use-package ob-nix)
+
 ;; (use-package ob-ipython)
 
 ;; (require 'ob-ledger)
@@ -2308,10 +2314,12 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	;; (php . t)           ;; PHP
 	(R . t)             ;; R
 	;; (Ruby . t)          ;; Ruby
+	(rust . t)          ;; Rust
 	(julia . t)         ;; Julia Programmin Language
 	(lua . t)           ;; Lua Programming Language
 	(shell . t)         ;; Command Line Programs 
 	(latex . t)         ;; LaTeX  
+	(nix . t)           ;; Nix
 	(sql . t)           ;; SQL
 	(sqlite . t)        ;; SQLite
 	(octave . t)        ;; Octave
@@ -3127,14 +3135,21 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       :mode ("\\.nix\\'" "\\.nix.in\\'"))
 ;; Viewing Nix .drv Files
 (use-package nix-drv-mode
+      :straight nil ;; already loaded with nix-mode
       :ensure nix-mode
-      :mode "\\.drv\\'")#
+      :mode "\\.drv\\'")
+;; Viewing Nix .drv Files
+(use-package nix-flake
+      :straight nil ;; already loaded with nix-mode
+      :ensure nix-mode)
 ;; Provides Interactive Shell to call nix functions
 (use-package nix-shell
+      :straight nil ;; already loaded with nix-mode
       :ensure nix-mode
       :commands (nix-shell-unpack nix-shell-configure nix-shell-build))
 ;; Adds a REPL for Nix (plus interface for company)
 (use-package nix-repl
+      :straight nil ;; already loaded with nix-mode
       :ensure nix-mode
       :commands (nix-repl))
 

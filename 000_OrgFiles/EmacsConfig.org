@@ -2982,16 +2982,30 @@ Add [[https://github.com/jkitchin/org-ref][Org Ref]] for easier and more streaml
     :custom (org-contacts-files (concat pet/org-dir "personal-contacts.org")))
   
 #+end_src
-** Use Ipython with Org
-
+** Org Babel Languages
+*** Additional Org Babel Language Support
+**** Org Babel Rust
+Load [[https://github.com/micanzhang/ob-rust/tree/be059d231fafeb24a658db212a55ccdc55c0c500][GitHub.com: MicanzHang - ob-rust]]
+#+begin_src emacs-lisp
+  ;; Load Rust Support for Org Mode
+  (use-package ob-rust)
+  
+#+end_src
+**** Org Babel Nix
+Load [[https://codeberg.org/theesm/ob-nix][CodeBerg.org: Theesm - ob-nix]]
+#+begin_src emacs-lisp
+  ;; Load Nix Support for Org Mode
+  (use-package ob-nix)
+  
+#+end_src
+**** Use Ipython with Org
 The package [[https://github.com/gregsexton/ob-ipython][ob-ipython]] is require get [[id:5fe7783f-d441-40a9-983c-7f671966c6e1][ipython]]-like functionality in [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] WIP
 
 #+begin_src emacs-lisp
   ;; (use-package ob-ipython)
-#+end_src
   
-** Configure Babel Languages
-
+#+end_src
+*** Org Babel Language Configuration
 To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use. [[file:~/Projects/InfoFiles/Emacs/Worg/org-contrib/babel/languages/index.org][Org Babel Supported Languages]] documents all of the languages that you can use with =org-babel=.
 
 #+begin_src emacs-lisp
@@ -3015,10 +3029,12 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 	  ;; (php . t)           ;; PHP
 	  (R . t)             ;; R
 	  ;; (Ruby . t)          ;; Ruby
+	  (rust . t)          ;; Rust
 	  (julia . t)         ;; Julia Programmin Language
 	  (lua . t)           ;; Lua Programming Language
 	  (shell . t)         ;; Command Line Programs 
 	  (latex . t)         ;; LaTeX  
+	  (nix . t)           ;; Nix
 	  (sql . t)           ;; SQL
 	  (sqlite . t)        ;; SQLite
 	  (octave . t)        ;; Octave
@@ -4097,14 +4113,21 @@ Add https://github.com/NixOS/nix-mode to support the [[https://nixos.org/][Nix L
 	:mode ("\\.nix\\'" "\\.nix.in\\'"))
   ;; Viewing Nix .drv Files
   (use-package nix-drv-mode
+	:straight nil ;; already loaded with nix-mode
 	:ensure nix-mode
-	:mode "\\.drv\\'")#
+	:mode "\\.drv\\'")
+  ;; Viewing Nix .drv Files
+  (use-package nix-flake
+	:straight nil ;; already loaded with nix-mode
+	:ensure nix-mode)
   ;; Provides Interactive Shell to call nix functions
   (use-package nix-shell
+	:straight nil ;; already loaded with nix-mode
 	:ensure nix-mode
 	:commands (nix-shell-unpack nix-shell-configure nix-shell-build))
   ;; Adds a REPL for Nix (plus interface for company)
   (use-package nix-repl
+	:straight nil ;; already loaded with nix-mode
 	:ensure nix-mode
 	:commands (nix-repl))
 
