@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-rust_language_tail
+# key: <ornrustt
+# --
+* Topic Overview
+
+** [[id:a3286d40-db6c-4757-a586-bcfbedd7afa2][Rust]]
+*** [[id:403e6da2-1399-426e-bef0-af8d936ef336][Tipps]]
+*** [[id:97a8d8d6-7b33-4594-bb14-1e34fadc2ba5][Examples]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+****** [[id:a3286d40-db6c-4757-a586-bcfbedd7afa2][Rust]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:cae6b24a-cd1c-4845-804a-f4782354d06f][Rust References]]
+
+** Websites
+
+1. [[https://www.rust-lang.org/][Rust-Lang.org - The Rust Programming Language]]
+   1) [[https://www.rust-lang.org/learn][Rust-Lang.org: Learn Rust]]
+   2) [[https://doc.rust-lang.org/book/][Doc.Rust-Lang.org: The Rust Book]]
+3. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
+   1) [[https://github.com/rust-lang/rustlings][GitHub.com: Rustlings]]
+
+** Literature
