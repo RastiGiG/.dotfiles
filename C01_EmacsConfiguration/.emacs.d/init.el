@@ -178,6 +178,10 @@
   (insert (format "hsl(%d,%d%%,%d%%);"
           (random 360) (random 100) (random 100))))
 
+;; Function to check for font availability
+(defun font-available-p (font-name)
+      (find-font (font-spec :name font-name)))
+
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -281,20 +285,25 @@
       (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set default font face of present
-(when (member "Iosevka" (font-family-list))
+(when (font-available-p "Iosevka")
 	      (set-face-attribute 'default nil :font "Iosevka"
 						      :height pet/default-font-size))
 
 ;; Set the fixed pitch face
-(when (member "Iosevka" (font-family-list))
+(when (font-available-p "Iosevka")
 	      (set-face-attribute 'fixed-pitch nil :font "Iosevka"
 						      :height pet/default-font-size))
 
 ;; Set the variable pitch face
-(when (member "Cantarell" (font-family-list))
+(when (font-available-p "Cantarell")
 	      (set-face-attribute 'variable-pitch nil :font "Cantarell"
 						      :height pet/default-font-size
 						      :weight 'regular))
+
+;; (when (member "Cantarell" (font-family-list))
+;; 	  (set-face-attribute 'variable-pitch nil :font "Cantarell"
+;; 						  :height pet/default-font-size
+						      ;; :weight 'regular))
 
 ;; Use specific Fontsets for Symbols
 (setq use-default-font-for-symbols nil)
