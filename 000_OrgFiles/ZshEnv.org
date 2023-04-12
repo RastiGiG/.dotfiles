@@ -1,5 +1,5 @@
 #+Title: Zsh Environment Setup
-#+PROPERTY: header-args:bash :tangle ~/.dotfiles/D02_Zsh/.zshenv :mkdirp yes
+#+PROPERTY: header-args:sh :tangle ~/.dotfiles/D02_Zsh/.zshenv :mkdirp yes
 
 * TOC
 
@@ -8,7 +8,7 @@
 
 * Default Apps
 
-#+begin_src bash
+#+begin_src sh
 
   #  _________  _   _ _____ _   ___     __
   # |__  / ___|| | | | ____| \ | \ \   / /
@@ -36,7 +36,7 @@
 
 * LESS and Man Setup
 
-#+begin_src bash
+#+begin_src sh
 
 # Start blinking
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
@@ -52,5 +52,11 @@ export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1) # red
 export LESS_TERMCAP_ue=$(tput sgr0)
 # End bold, blinking, standout, underline
 export LESS_TERMCAP_me=$(tput sgr0)
+
+#+end_src
+
+* Add Nix Environment
+#+begin_src sh
+  if [ -e /home/rastibasti/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rastibasti/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 #+end_src
