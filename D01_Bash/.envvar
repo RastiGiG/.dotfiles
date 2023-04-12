@@ -21,6 +21,12 @@ then
 	PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
+# Add Rust Packages to Path
+if ! [[ "$PATH" =~ "$HOME/.cargo/bin" ]]
+then
+	PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # Add texlive to path
 if ! [[ "$PATH" =~ "/usr/local/texlive/current/bin/x86_64-linux:" ]]
 then
