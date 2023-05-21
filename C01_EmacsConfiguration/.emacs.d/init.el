@@ -590,6 +590,8 @@
 	"bs"    '(bookmark-set :which-key "Set Bookmark")
 	"bl"    '(bookmark-bmenu-list :which-key "bookmark list")
 
+	;; Calculator
+	"c"   '(calc :which-key "Calculator")
 
 	;; Editing Tools
 	"e"     '(:ignore t :which-key "Editing Tools")
@@ -1913,8 +1915,8 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 	      ))
 
       ;; Set Org Clock Sound File
-      (setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
-
+      (setq org-clock-sound (concat pet/org-dir "sounds/Erfolg.wav"))
+      ;; (setq org-clock-sound t)
 
       ;; Startup with inline images displayed
       (setq org-startup-with-inline-images t)

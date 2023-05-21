@@ -860,6 +860,8 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
 	  "bs"    '(bookmark-set :which-key "Set Bookmark")
 	  "bl"    '(bookmark-bmenu-list :which-key "bookmark list")
 
+	  ;; Calculator
+	  "c"   '(calc :which-key "Calculator")
 
 	  ;; Editing Tools
 	  "e"     '(:ignore t :which-key "Editing Tools")
@@ -2586,8 +2588,8 @@ The ~Package~ is listed as =org-plus-contrib=
 		))
 
 	;; Set Org Clock Sound File
-	(setq org-clock-sound (concat pet/org-dir "sounds/Rush.wav"))
-
+	(setq org-clock-sound (concat pet/org-dir "sounds/Erfolg.wav"))
+	;; (setq org-clock-sound t)
 
 	;; Startup with inline images displayed
 	(setq org-startup-with-inline-images t)
