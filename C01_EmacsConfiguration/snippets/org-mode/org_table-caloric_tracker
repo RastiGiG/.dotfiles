@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: org_table-caloric_tracker
+# key: <otct
+# --
+#+NAME: ${1: `(format-time-string "%Y-%m-%d")`}
+|---------------------+-----------+----------|
+| Nahrugsmittle       | Menge (g) | Kalorien |
+|---------------------+-----------+----------|
+| $0                  |           |          |
+|---------------------+-----------+----------|
+| GESAMT              |           |          |
+#+TBLFM: @3$\3=vsum(@II..@III)

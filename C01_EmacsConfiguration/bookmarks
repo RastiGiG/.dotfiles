@@ -205,11 +205,11 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20230506183922-spanish_grammar_numbers.org")
- (front-context-string . "\n* Spanish - Gra")
- (rear-context-string . "5-06 Sat 18:39]\n")
- (position . 201)
- (last-modified 25686 35881 357280 883000))
+ (filename . "~/Org/20230521155331-linux_btrfs_subvolumes.org")
+ (front-context-string . "\n* Linux - Btrfs")
+ (rear-context-string . "5-21 Sun 15:53]\n")
+ (position . 200)
+ (last-modified 25706 8812 2054 477000))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
