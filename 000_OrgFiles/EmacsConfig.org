@@ -1294,6 +1294,8 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 	)
 
 #+end_src
+** Consult
+[[https://github.com/minad/consult][Consult]] is a Completion Engine that's fully compatible with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] Buitlin Completion Engine
 ** Citar
 [[https://github.com/emacs-citar/citar][Citar]] provides a completing-read front-end to browse and act on ~BibTeX~, ~BibLaTeX~, and ~CSL~ [[id:460f9462-9a7b-4172-af3b-fb424b6e85b6][JSON]] ~bibliographic data~, and [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]], markdown, and =org-cite= editing support.
 
@@ -3852,6 +3854,8 @@ The which-key integration adds helpful descriptions of the various keys so you s
       "tlX" 'lsp-execute-code-action)
     )
 #+end_src
+**** Consult LSP
+[[https://github.com/gagbo/consult-lsp][Consult-LSP]] adds ~LSP Mode~ support to ~Consult~
 **** lsp-ui
 
 =lsp-ui= is a set of UI enhancements built on top of lsp-mode which make Emacs feel even more like an IDE. Check out the screenshots on the [[https://emacs-lsp.github.io/lsp-ui/][lsp-ui homepage]] to see examples of what it can do.
@@ -3937,8 +3941,10 @@ Dap stands for Debug Adapter
 #+end_src
 *** Eglot
 **** Setup
-~Eglot~ comes preconfigured with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] since Version 29
-**** Languages
+[[https://github.com/joaotavora/eglot][Eglot]] comes preconfigured with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] since Version 29
+**** Consult Eglot
+[[https://github.com/gagbo/consult-lsp][Consult-Eglot]] adds ~Eglot~ support to ~Consult~
+**** Eglot Languages
 ** Flycheck
 [[https://www.flycheck.org/en/latest/user/quickstart.html][Flycheck]] adds syntax checking capagilities. We set it up to be loaded together with =lsp-mode=. You could also load it globally.
 #+begin_src emacs-lisp
