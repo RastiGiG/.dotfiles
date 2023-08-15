@@ -2982,6 +2982,18 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;;  (require 'dap-node)
 ;;  (dap-node-setup))
 
+;; Setup lsp-pyright Server
+(use-package lsp-pyright
+      :hook (python-mode . (lambda () (require 'lsp-pyright)))
+      ;; Use Python 3 in case Python 2 is installed as well
+      :init (when (executable-find "python3")
+		      (setq lsp-pyright-python-executable-cmd "python3"))
+      )
+
+;; Lsp-Mode Settings for LaTeX 
+(setq lsp-tex-server 'digestif) ;; Use Digestif
+;; (setq lsp-tex-server 'texlab) ;; Use texlab instead
+
 ;; Enable Flycheck for syntax checking.
 ;; Defer loading until used with lsp-mode
 (use-package flycheck
@@ -3023,12 +3035,12 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
 (pet/leader-keys
-  "E"   '(:ignore t :which-key "eval")
-  "Eb"  '(eval-buffer :which-key "eval buffer"))
+      "E"   '(:ignore t :which-key "eval")
+      "Eb"  '(eval-buffer :which-key "eval buffer"))
 
 (pet/leader-keys
-  :keymaps '(visual)
-  "Er" '(eval-region :which-key "eval region"))
+      :keymaps '(visual)
+      "Er" '(eval-region :which-key "eval region"))
 
 ;; Load Octave Mode automatically for specified files
 (setq auto-mode-alist
@@ -3038,10 +3050,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Setup Octave Mode
 (add-hook 'octave-mode-hook
-	  (lambda ()
-	    (abbrev-mode 1)
-	    (auto-fill-mode 1)
-	    (if (eq window-system 'x)
+	      (lambda ()
+		(abbrev-mode 1)
+		(auto-fill-mode 1)
+		(if (eq window-system 'x)
 		(font-lock-mode 1))))
 
 ;; Use Infodocs within Emacs
@@ -3152,15 +3164,6 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 ;;  :config
 ;;  (require 'dab-python)
 ;;  )
-
-;; Setup lsp-pyright Server
-(use-package lsp-pyright
-      :hook (python-mode . (lambda () (require 'lsp-pyright)))
-      ;; Use Python 3 in case Python 2 is installed as well
-      :init (when (executable-find "python3")
-		      (setq lsp-pyright-python-executable-cmd "python3"))
-      )
-
 
 ;; Enable Virtual Environment Support
 (use-package pyvenv

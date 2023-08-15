@@ -3781,8 +3781,10 @@ For documentation on *eshell-git-prompt* look here: [[https://github.com/xuchuny
     :config (counsel-projectile-mode))
 #+end_src
 ** Language Servers
-
-We use the excellent [[ https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] to enable ~IDE-like functionality~ for many different programming languages via “language servers” that speak the *Language Server Protocol*. Before trying to set up =lsp-mode= for a particular language, check out the documentation for your language so that you can learn which [[https://emacs-lsp.github.io/lsp-mode/page/languages/][language servers are available]] and how to install them.
+*** LSP Mode
+**** Setup
+We use the [[ https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] to enable ~IDE-like functionality~ for many different programming languages via “language servers” that speak the *Language Server Protocol*.
+Before trying to set up =lsp-mode= for a particular language, check out the documentation for your language so that you can learn which [[https://emacs-lsp.github.io/lsp-mode/page/languages/][language servers are available]] and how to install them.
 
 The lsp-keymap-prefix setting enables you to define a prefix for where lsp-mode’s default keybindings will be added. I highly recommend using the prefix to find out what you can do with lsp-mode in a buffer.
 
@@ -3850,8 +3852,7 @@ The which-key integration adds helpful descriptions of the various keys so you s
       "tlX" 'lsp-execute-code-action)
     )
 #+end_src
-
-*** lsp-ui
+**** lsp-ui
 
 =lsp-ui= is a set of UI enhancements built on top of lsp-mode which make Emacs feel even more like an IDE. Check out the screenshots on the [[https://emacs-lsp.github.io/lsp-ui/][lsp-ui homepage]] to see examples of what it can do.
 
@@ -3874,7 +3875,7 @@ The which-key integration adds helpful descriptions of the various keys so you s
   ;;  )
   
 #+end_src
-*** lsp-treemacs
+**** lsp-treemacs
 
 + =lsp-treemacs= provides nice tree views for different aspects of your code like symbols in a file, references of a symbol, or diagnostic messages (errors and warnings) that are found in your code.
 
@@ -3892,7 +3893,7 @@ This package is built on the =treemacs= ~package~ which might be of some interes
     :after lsp)
 #+end_src
 
-*** Debugging
+**** Debugging
 
 There's a companion mode for =lps-mode= specifically for debugging
 Dap stands for Debug Adapter
@@ -3910,6 +3911,34 @@ Dap stands for Debug Adapter
   ;;  (require 'dap-node)
   ;;  (dap-node-setup))
 #+end_src
+**** LSP-Mode Languages
+***** Python
+#+begin_src emacs-lisp
+  ;; Setup lsp-pyright Server
+  (use-package lsp-pyright
+	:hook (python-mode . (lambda () (require 'lsp-pyright)))
+	;; Use Python 3 in case Python 2 is installed as well
+	:init (when (executable-find "python3")
+			(setq lsp-pyright-python-executable-cmd "python3"))
+	)
+
+
+
+#+end_src
+***** LaTeX
+~LSP Options~ for [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]]:
++ [[https://github.com/latex-lsp/texlab][GitHub: LaTeX-LSP - texlab]]
++ [[https://github.com/astoff/digestif][GitHub.com: Astoff - digestif]]
+#+begin_src emacs-lisp
+  ;; Lsp-Mode Settings for LaTeX 
+  (setq lsp-tex-server 'digestif) ;; Use Digestif
+  ;; (setq lsp-tex-server 'texlab) ;; Use texlab instead
+  
+#+end_src
+*** Eglot
+**** Setup
+~Eglot~ comes preconfigured with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] since Version 29
+**** Languages
 ** Flycheck
 [[https://www.flycheck.org/en/latest/user/quickstart.html][Flycheck]] adds syntax checking capagilities. We set it up to be loaded together with =lsp-mode=. You could also load it globally.
 #+begin_src emacs-lisp
@@ -3976,12 +4005,13 @@ Language specific Settings can be found here
   (add-hook 'emacs-lisp-mode-hook #'flycheck-mode)
 
   (pet/leader-keys
-    "E"   '(:ignore t :which-key "eval")
-    "Eb"  '(eval-buffer :which-key "eval buffer"))
+	"E"   '(:ignore t :which-key "eval")
+	"Eb"  '(eval-buffer :which-key "eval buffer"))
 
   (pet/leader-keys
-    :keymaps '(visual)
-    "Er" '(eval-region :which-key "eval region"))
+	:keymaps '(visual)
+	"Er" '(eval-region :which-key "eval region"))
+  
 #+end_src
 *** Octave/Matlab
 
@@ -3995,14 +4025,15 @@ Just a short config adjusting the =auto-mode-alist=
 
   ;; Setup Octave Mode
   (add-hook 'octave-mode-hook
-	    (lambda ()
-	      (abbrev-mode 1)
-	      (auto-fill-mode 1)
-	      (if (eq window-system 'x)
+		(lambda ()
+		  (abbrev-mode 1)
+		  (auto-fill-mode 1)
+		  (if (eq window-system 'x)
 		  (font-lock-mode 1))))
 
   ;; Use Infodocs within Emacs
   (autoload 'octave-help "octave-hlp" nil t)
+
 #+end_src
 
 *** LaTeX
@@ -4126,15 +4157,6 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   ;;  (require 'dab-python)
   ;;  )
 
-  ;; Setup lsp-pyright Server
-  (use-package lsp-pyright
-	:hook (python-mode . (lambda () (require 'lsp-pyright)))
-	;; Use Python 3 in case Python 2 is installed as well
-	:init (when (executable-find "python3")
-			(setq lsp-pyright-python-executable-cmd "python3"))
-	)
-
-
   ;; Enable Virtual Environment Support
   (use-package pyvenv
 	:config
@@ -4240,13 +4262,16 @@ Add https://github.com/NixOS/nix-mode to support the [[https://nixos.org/][Nix L
   
 #+end_src
 **** ESS View Data
+
 =ess-view-data= is a ~package extension~ for ~ESS Mode~ to do data views and manipulation similar to the [[id:c64bc74b-bc42-4208-bf36-3c6832392de9][R]] [[id:c7d7135a-3f11-4fea-8bcf-e3e83318f453][Package]] =tidyverse=
 ~Documentation~ can be found here: [[https://github.com/ShuguangSun/ess-view-data][GitHub.com: ess-view-data]]
 #+begin_src emacs-lisp
   ;; Tidyverse-like data views and manipulations
   (use-package ess-view-data)
+  
 #+end_src
 *** CSV
+
 Add support for ~CSV-like~ files in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
 ~Repository~ can be found here: [[https://git.savannah.gnu.org/cgit/emacs/elpa.git/?h=externals/csv-mode][Git.Savannah.GNU.org: csv-mode]]
 #+begin_src emacs-lisp
@@ -4255,6 +4280,7 @@ Add support for ~CSV-like~ files in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][E
 
 #+end_src
 *** YAML
+
 Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
 #+begin_src emacs-lisp
   ;; Add support for YAML files
@@ -4280,6 +4306,7 @@ Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
   
 #+end_src
 *** PlantUML
+
 You can find the ~Documentation~ here: [[https://github.com/skuro/plantuml-mode][GitHub.com: PlantUML-Mode]]
 #+begin_src emacs-lisp
   ;; Add PlantUML Support
@@ -4302,23 +4329,24 @@ This Section is ~deprecated~ since the ~Org Auto Tangle~ was added
 *** Config File
 #+begin_src emacs-lisp :tangle no
   ;; Setup Automatic Tangling of Files
-  
+
   ;; Automatically tangle config file
   ;; Helper Function to that does the tangling
   (defun pet/org-babel-tangle-emacs-config ()
-    (when (string-equal
-           (buffer-file-name)
-           (concat pet/dotfiles-dir
-                   "000_OrgFiles/EmacsConfig.org"))
-      ;; Have the user confirm tangle
-      (let ((org-confirm-babel-evaluate t))
-        (org-babel-tangle))))
+	(when (string-equal
+		   (buffer-file-name)
+		   (concat pet/dotfiles-dir
+				   "000_OrgFiles/EmacsConfig.org"))
+	  ;; Have the user confirm tangle
+	  (let ((org-confirm-babel-evaluate t))
+		(org-babel-tangle))))
 
   ;; This hook automatically evaluates the helper
   ;; function after saving the buffer
   (add-hook 'org-mode-hook
-            (lambda ()
-              (add-hook
-               'after-save-hook
-               #'pet/org-babel-tangle-emacs-config)))
+			(lambda ()
+			  (add-hook
+			   'after-save-hook
+			   #'pet/org-babel-tangle-emacs-config)))
+  
 #+end_src
