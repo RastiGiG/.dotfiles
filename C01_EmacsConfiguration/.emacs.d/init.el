@@ -182,6 +182,36 @@
 (defun font-available-p (font-name)
       (find-font (font-spec :name font-name)))
 
+;; Join a line by separator
+(defun pet/join-lines (specify-separator)
+      "Join lines in the active region by a separator, by default a comma.
+Specify the separator by typing C-u before executing this command.
+
+Note: it depends on s.el."
+      (interactive "P")
+      (require 's)
+      (unless (region-active-p)
+	(message "select a region of lines first."))
+      (let* ((separator (if (not specify-separator)
+						","
+					      (read-string "Separator: ")))
+		 (text (buffer-substring-no-properties
+			       (region-beginning)
+			       (region-end)))
+		 (lines (split-string text "\n"))
+		 (result (s-join separator lines)))
+	(delete-region (region-beginning) (region-end))
+	(insert result)))
+
+;; Highlight text in org mode with mouse
+(define-advice mouse-set-region (:after (click) org-highlight ())
+      (when (and (derived-mode-p 'org-mode)
+			 (use-region-p))
+      (let ((origin (buffer-substring (region-beginning) (region-end)))
+		(emphasis-char "*"))
+	(delete-region (region-beginning) (region-end))
+	(insert emphasis-char origin emphasis-char))))
+
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file

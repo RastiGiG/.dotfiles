@@ -285,7 +285,47 @@ These are some helpful [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]] to
 	(find-font (font-spec :name font-name)))
   
 #+end_src
+*** Join Lines with specified Separator
+This code Snippet is based on [[https://whatacold.io/blog/2023-06-12-emacs-join-lines/][Whatacold: Join lines by separator]]
+It depends on [[https://github.com/magnars/s.el][GitHub.com: Magnars - s.el]]
+#+begin_src emacs-lisp
+  ;; Join a line by separator
+  (defun pet/join-lines (specify-separator)
+	"Join lines in the active region by a separator, by default a comma.
+  Specify the separator by typing C-u before executing this command.
 
+  Note: it depends on s.el."
+	(interactive "P")
+	(require 's)
+	(unless (region-active-p)
+	  (message "select a region of lines first."))
+	(let* ((separator (if (not specify-separator)
+						  ","
+						(read-string "Separator: ")))
+		   (text (buffer-substring-no-properties
+				 (region-beginning)
+				 (region-end)))
+		   (lines (split-string text "\n"))
+		   (result (s-join separator lines)))
+	  (delete-region (region-beginning) (region-end))
+	  (insert result)))
+
+
+#+end_src
+*** Highlight text in Org Mode with Mouse
+This snippet is based on [[https://whatacold.io/blog/2023-08-14-org-emphasis-dragging-mouse/][Whatacold: Org Emphasis Dragging Mouse]]
+#+begin_src emacs-lisp
+  ;; Highlight text in org mode with mouse
+  (define-advice mouse-set-region (:after (click) org-highlight ())
+	(when (and (derived-mode-p 'org-mode)
+			   (use-region-p))
+	(let ((origin (buffer-substring (region-beginning) (region-end)))
+		  (emphasis-char "*"))
+	  (delete-region (region-beginning) (region-end))
+	  (insert emphasis-char origin emphasis-char))))
+
+
+#+end_src
 * Package System Setup
 
 Emacs has a built in package manager but it doesn't make it easy to automatically install packages on a new system the first time you pull down your configuration.  [[https://github.com/jwiegley/use-package][use-package]] is a really helpful package used in this configuration to make it a lot easier to automate the installation and configuration of everything else we use.
