@@ -140,3 +140,14 @@ This is meant to be the path to the Main Bibliography file
   export PERL_MM_OPT
 
 #+end_src
+** Vagrant
+#+begin_src shell
+  #---------------------------VAGRANT
+  # Add libvirt provider to vagrant
+  if ! [[ "$VAGRANT_DEFAULT_PROVIDER" =~ "libvirt" ]]
+  then
+      VAGRANT_DEFAULT_PROVIDER=libvirt
+  fi
+  export VAGRANT_DEFAULT_PROVIDER
+
+#+end_src

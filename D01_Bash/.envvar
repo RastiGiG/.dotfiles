@@ -103,3 +103,11 @@ then
 	      PERL_MM_OPT="INSTALL_BASE=/home/rastibasti/perl5"
 fi  
 export PERL_MM_OPT
+
+#---------------------------VAGRANT
+# Add libvirt provider to vagrant
+if ! [[ "$VAGRANT_DEFAULT_PROVIDER" =~ "libvirt" ]]
+then
+    VAGRANT_DEFAULT_PROVIDER=libvirt
+fi
+export VAGRANT_DEFAULT_PROVIDER
