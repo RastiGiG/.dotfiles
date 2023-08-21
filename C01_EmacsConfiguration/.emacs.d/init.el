@@ -364,11 +364,15 @@ Note: it depends on s.el."
 
 ;; Tabs as tab-char by default.
 ;; 'nil' replaces tabs with spaces
-(setq-default indent-tabs-mode t)
+(setq-default indent-tabs-mode nil)
 ;; Set the default, fallback tabstop to be 4 spaces
 (setq-default tab-stop-list (number-sequence 4 120 4))
 ;; Set Number of Spaces displayed for a tab stop
 (setq-default tab-width 4)
+;; ;; Enable Tabs for certain modes
+;; (dolist (mode '(text-mode-hook				 
+;; 				yaml-mode-hook))
+;;   (add-hook mode (lambda () (indent-tabs-mode t))))
 
 ;; Show Calendar on StartUp                      
 ;; (calendar)
@@ -792,16 +796,34 @@ Note: it depends on s.el."
 
 ;; Add Origami Mode for Folding
 (use-package origami
-  :hook (yaml-mode . origami-mode)
-  :bind (
-         :map origami-mode-map
-              ("<tab>" . origami-recursively-toggle-node)
-              ("S-<tab>" . origami-toggle-all-nodes)
-              ("C-c C-n" . origami-next-fold)
-              ("C-c C-p" . origami-previous-fold)
-              ("C-c C-S-_" . origami-undo)
-              ("C-c C-S-M-_" . origami-redo))
-  )
+      :hook (yaml-mode . origami-mode)
+	    (yaml-mode . highlight-indentation-mode)
+      :bind (
+		 :map origami-mode-map
+			      ("<tab>" . origami-recursively-toggle-node)
+			      ("S-<tab>" . origami-toggle-all-nodes)
+			      ("C-c C-n" . origami-next-fold)
+			      ("C-c C-p" . origami-previous-fold)
+			      ("C-c C-S-_" . origami-undo)
+			      ("C-c C-S-M-_" . origami-redo))
+      )
+
+;; Add Indent Tools for languages with identation based structures
+(use-package indent-tools
+      :hook
+      (python-mode .  (lambda () (define-key python-mode-map (kbd "C-c >") 'indent-tools-hydra/body)))
+      (yaml-mode .  (lambda () (define-key yaml-mode-map (kbd "C-c >") 'indent-tools-hydra/body)))
+      )
+
+;; Add Indentation Guideline - usefull for languages like python or yaml
+(use-package highlight-indentation
+      :hook
+      ;; Activate Guideline for programming modes
+      (prog-mode . highlight-indentation-mode)
+      ;; :config
+      ;; (set-face-background 'highlight-indentation-face "#e3e3d3")
+      ;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
+      )
 
 ;; Load Ivy Completion Framework
 (use-package ivy

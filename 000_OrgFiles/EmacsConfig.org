@@ -554,11 +554,15 @@ I Prefer ~Spaces~ over ~Tabs~, if you need to enable it for certain modes, add a
 #+begin_src emacs-lisp
   ;; Tabs as tab-char by default.
   ;; 'nil' replaces tabs with spaces
-  (setq-default indent-tabs-mode t)
+  (setq-default indent-tabs-mode nil)
   ;; Set the default, fallback tabstop to be 4 spaces
   (setq-default tab-stop-list (number-sequence 4 120 4))
   ;; Set Number of Spaces displayed for a tab stop
   (setq-default tab-width 4)
+  ;; ;; Enable Tabs for certain modes
+  ;; (dolist (mode '(text-mode-hook				 
+  ;; 				yaml-mode-hook))
+  ;;   (add-hook mode (lambda () (indent-tabs-mode t))))
 
 #+end_src
 ** Calender
@@ -1155,16 +1159,42 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
 #+begin_src emacs-lisp
   ;; Add Origami Mode for Folding
   (use-package origami
-    :hook (yaml-mode . origami-mode)
-    :bind (
-           :map origami-mode-map
-                ("<tab>" . origami-recursively-toggle-node)
-                ("S-<tab>" . origami-toggle-all-nodes)
-                ("C-c C-n" . origami-next-fold)
-                ("C-c C-p" . origami-previous-fold)
-                ("C-c C-S-_" . origami-undo)
-                ("C-c C-S-M-_" . origami-redo))
-    )
+	:hook (yaml-mode . origami-mode)
+	      (yaml-mode . highlight-indentation-mode)
+	:bind (
+		   :map origami-mode-map
+				("<tab>" . origami-recursively-toggle-node)
+				("S-<tab>" . origami-toggle-all-nodes)
+				("C-c C-n" . origami-next-fold)
+				("C-c C-p" . origami-previous-fold)
+				("C-c C-S-_" . origami-undo)
+				("C-c C-S-M-_" . origami-redo))
+	)
+
+#+end_src
+** Ident Tools
+[[https://gitlab.com/emacs-stuff/indent-tools/][Ident-Tools]] adds a [[*Hydra][hydra]] to manage indentations - helpful for [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][languages]] like [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] or [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]].
+#+begin_src emacs-lisp
+  ;; Add Indent Tools for languages with identation based structures
+  (use-package indent-tools
+	:hook
+	(python-mode .  (lambda () (define-key python-mode-map (kbd "C-c >") 'indent-tools-hydra/body)))
+	(yaml-mode .  (lambda () (define-key yaml-mode-map (kbd "C-c >") 'indent-tools-hydra/body)))
+	)
+
+#+end_src
+** Highlight Indentation
+[[https://github.com/antonj/Highlight-Indentation-for-Emacs][Highlight-Indentation]] adds a useful visual hint to show indentations in source code - helpful for [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][languages]] like [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] or [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]].
+#+begin_src emacs-lisp
+  ;; Add Indentation Guideline - usefull for languages like python or yaml
+  (use-package highlight-indentation
+	:hook
+	;; Activate Guideline for programming modes
+	(prog-mode . highlight-indentation-mode)
+	;; :config
+	;; (set-face-background 'highlight-indentation-face "#e3e3d3")
+	;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
+	)
 
 #+end_src
 ** Ivy and Counsel
