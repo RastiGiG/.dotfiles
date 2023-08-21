@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-ansible_tail
+# key: <ornanst
+# --
+* Topic Overview
+
+** [[id:a9debd28-e720-4e09-8975-68c9b0da4b37][Ansible]]
+*** [[id:b241b5dc-df81-4f7e-bfd1-0b49adea5e63][Project Configuration File]]
+*** [[id:ffc8b215-560b-474f-ab5e-d373a51f917a][Inventory File]]
+*** [[id:ced7bd0b-52fd-4d78-b340-c835ccbc1a34][Playbooks]]
+*** [[id:95168d1d-5206-40c7-9370-3d59631e5d72][Commands]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:501c57a2-3a18-4d24-9726-d068aba18a8e][IT]]
+**** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+***** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+**** Administration
+***** [[id:a9debd28-e720-4e09-8975-68c9b0da4b37][Ansible]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:6b206bd6-b8cf-4605-aaa9-9af1b2afb6f3][Ansible References]]
+
+** Websites
+
+1. [[https://www.ansible.com/][Ansible.com]]
+   1) [[https://docs.ansible.com/][Docs.Ansible.com]]
+
+** Literature
+
+1. [[id:05e48f5c-03e1-49f1-a6a4-f44af83ef5fd][Jeff Geerling - Ansible for DevOps]]
