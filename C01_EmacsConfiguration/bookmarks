@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("DR 01 Spanish Drills"
+(("SE 01 Homelab"
+ (filename . "~/Projects/Servers/Homelab/")
+ (front-context-string . ".git\n  drwxr-xr-")
+ (rear-context-string . "K 26. Aug 17:32 ")
+ (position . 205)
+ (last-modified 25834 11627 707217 730000))
+("SE 00 Servers"
+ (filename . "~/Projects/Servers/")
+ (front-context-string)
+ (rear-context-string . "K 26. Aug 17:33 ")
+ (position . 200)
+ (last-modified 25834 11608 545718 189000))
+("DR 01 Spanish Drills"
  (filename . "~/Org/drill/spanish.org")
  (front-context-string . "\n*** abandonado,")
  (rear-context-string . "\n** Alphabetical")
@@ -205,11 +217,11 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20230521155331-linux_btrfs_subvolumes.org")
- (front-context-string . "\n* Linux - Btrfs")
- (rear-context-string . "5-21 Sun 15:53]\n")
- (position . 200)
- (last-modified 25706 8812 2054 477000))
+ (filename . "~/Org/20230822175510-docker_tipps_installing_docker_on_debian_ubuntu.org")
+ (front-context-string . "* Docker - Tipps")
+ (rear-context-string . "8-22 Tue 17:55]\n")
+ (position . 229)
+ (last-modified 25828 55939 156720 815000))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
