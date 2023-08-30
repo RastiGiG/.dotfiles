@@ -3,3 +3,5 @@
 	name = RastiGiG
 [credential]
 	helper = cache
+[init]
+	defaultBranch = main
