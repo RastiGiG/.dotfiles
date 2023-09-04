@@ -1767,20 +1767,20 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 (use-package elfeed
   :bind (("C-c f" . elfeed)
-	 :map elfeed-search-mode-map
-	 ("n" . (lambda () (interactive)
-		  (next-line) (call-interactively
-			       'elfeed-search-show-entry)))
-	 ("p" . (lambda () (interactive)
-		  (previous-line) (call-interactively
-				   'elfeed-search-show-entry)))
-	 ("m" . (lambda () (interactive)
-		  (apply 'elfeed-search-toggle-all '(star))))
-	 ("g" . elfeed-update)
-	 ("G" . elfeed-search-update--force)
-	 ;;:map elfeed-show-mode-map
-	 ;;("w" . elfeed-show-yank))
-	 )
+     :map elfeed-search-mode-map
+     ("n" . (lambda () (interactive)
+          (next-line) (call-interactively
+               'elfeed-search-show-entry)))
+     ("p" . (lambda () (interactive)
+          (previous-line) (call-interactively
+                   'elfeed-search-show-entry)))
+     ("m" . (lambda () (interactive)
+          (apply 'elfeed-search-toggle-all '(star))))
+     ("g" . elfeed-update)
+     ("G" . elfeed-search-update--force)
+     ;;:map elfeed-show-mode-map
+     ;;("w" . elfeed-show-yank))
+     )
 :config
 (setq elfeed-show-entry-switch 'display-buffer)
 (setq elfeed-search-remain-on-entry t)
@@ -1788,12 +1788,12 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (setq elfeed-use-curl t)
 (setq elfeed-curl-max-connections 10)
 (setq elfeed-db-directory
-      (concat pet/dotfiles-emacsconfig-dir
-	      "elfeed/"))
+  (concat pet/dotfiles-emacsconfig-dir
+      "elfeed/"))
 (setq elfeed-enclosure-default-dir
-      "~/Downloads/")
+  "~/Downloads/")
 (setq elfeed-search-filter
-      "@4-months-ago +unread")
+  "@4-months-ago +unread")
 (setq elfeed-sort-order 'descending)
 (setq elfeed-search-clipboard-type 'CLIPBOARD)
 (setq elfeed-search-title-max-width 150)
@@ -1802,10 +1802,10 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 (setq elfeed-show-truncate-long-urls t)
 (setq elfeed-show-unique-buffers t)
 (setq elfeed-search-date-format
-      '("%F %R" 16 :left)))
+  '("%F %R" 16 :left)))
 ;; Load Feeds and Feed Settings  
 (load (concat pet/dotfiles-emacsconfig-dir
-	      "EmacsRSSFeed.el"))
+      "EmacsRSSFeed.el"))
 
 ;; Snippet for periodic update for feeds
 ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
@@ -1826,6 +1826,29 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
   (setq elfeed-score-rule-stats-file
         (concat pet/dotfiles-emacsconfig-dir
                 "elfeed.stats")))
+
+;; Configure Elfeed with Org Mode
+(use-package elfeed-org
+  :config
+  ;; Default Elfeed config can be found under "~/.emacs.d/elfeed.org"
+  (setq rmh-elfeed-org-files (list "~/Org/elfeed.org"))
+  ;; Automatically set ignore tag for feeds with errors
+  (setq rmh-elfeed-org-auto-ignore-invalid-feeds t)
+  ;; Hook elfeed-org up to elfeed
+  (elfeed-org)
+  )
+
+;; Add Dashboard to Elfeed
+(straight-use-package
+  '(elfeed-dashboard
+    :type git
+    :host github
+    :repo "Manoj321/elfeed-dashboard"))
+
+;; Configure Dashboard
+(setq elfeed-dashboard-file "~/Org/elfeed-dashboard.org")
+(advice-add 'elfeed-search-quit-window
+            :after #'elfeed-dashboard-update-links)
 
 ;; Add Ledger Mode from Melpa
 ;; (Alternatively include the installation path of ledger to load-path)
