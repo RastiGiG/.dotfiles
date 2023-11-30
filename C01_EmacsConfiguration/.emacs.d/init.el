@@ -215,15 +215,18 @@ Note: it depends on s.el."
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
-   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-  (bootstrap-version 5))
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-    (url-retrieve-synchronously
-     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-     'silent 'inhibit-cookies)
-  (goto-char (point-max))
-  (eval-print-last-sexp)))
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 ;; Use straight.el for use-package expressions
@@ -235,10 +238,10 @@ Note: it depends on s.el."
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
 (setq package-archives
-  '(("melpa" . "https://melpa.org/packages/")
-    ("melpa-stable" . "https://stable.melpa.org/packages/")
-    ("org" . "https://orgmode.org/elpa/")
-    ("elpa" . "https://elpa.gnu.org/packages/")))
+      '(("melpa" . "https://melpa.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("org" . "https://orgmode.org/elpa/")
+        ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;; Early load Org Mode
 (use-package org)
@@ -604,76 +607,85 @@ Note: it depends on s.el."
 
 ;; Setup general for easier key config
 (use-package general
-      :config
-      (general-create-definer pet/leader-keys
-      :prefix "C-."
-      :global-prefix "C-.")
+  :config
+  (general-create-definer pet/leader-keys
+  :prefix "C-."
+  :global-prefix "C-.")
 
-      (pet/leader-keys
+  (pet/leader-keys
 
-	;; Layouts
-	"l"     '(:ignore t :which-key "Layout")
-
-
-	;; Authentication
-	"a"     '(:ignore t :which-key "Authentification")
+    ;; Layouts
+    "l"     '(:ignore t :which-key "Layout")
 
 
-	;; Bookmarks
-	"b"     '(:ignore t :which-key "Bookmarks")
-	"bs"    '(bookmark-set :which-key "Set Bookmark")
-	"bl"    '(bookmark-bmenu-list :which-key "bookmark list")
-
-	;; Calculator
-	"c"   '(calc :which-key "Calculator")
-
-	;; Editing Tools
-	"e"     '(:ignore t :which-key "Editing Tools")
-	"ea"    'add-file-local-variable-prop-line
-	;; Letters
-	"el"    '(:ignore t :which-key "Letters")
-	"elM-u" 'upcase-initials
-	"elC-uM-u" 'upcase-initials-region
-	;; Tabs
-	"et"    '(untabify
-			      :which-key "Untabify")
-	"er"    '(regexp-builder
-			      :which-key "Regexp Builder")
+    ;; Authentication
+    "a"     '(:ignore t :which-key "Authentification")
 
 
-	;; Files
-	"f"     '(:ignore t :which-key "Files")
-	"fR"    'recentf-open-files
+    ;; Bookmarks
+    "b"     '(:ignore t :which-key "Bookmarks")
+    "bs"    '(bookmark-set :which-key "Set Bookmark")
+    "bl"    '(bookmark-bmenu-list :which-key "bookmark list")
+
+    ;; Calculator
+    "c"   '(calc :which-key "Calculator")
+
+    ;; Editing Tools
+    "e"     '(:ignore t :which-key "Editing Tools")
+    "ea"    'add-file-local-variable-prop-line
+    ;; Letters
+    "el"    '(:ignore t :which-key "Letters")
+    "elM-u" 'upcase-initials
+    "elC-uM-u" 'upcase-initials-region
+    ;; Tabs
+    "et"    '(untabify
+    		      :which-key "Untabify")
+    "er"    '(regexp-builder
+    		      :which-key "Regexp Builder")
 
 
-	;; Org Mode related
-	"o"     '(:ignore t :which-key "Org Mode")
+    ;; Files
+    "f"     '(:ignore t :which-key "Files")
+    "fR"    'recentf-open-files
 
 
-	;; Toggles
-	"t"     '(:ignore t :which-key "Toggles")
-	"tc"    'world-clock
-	"tt"    '(counsel-load-theme
-			      :which-key "Choose Theme")
-	;; Toggles - Highlighting
-	"th"    '(:ignore t :which-key "Highlighting")
-	;; Toggles - Highlighting - Colors
-	"thc"   '(:ignore t :which-key "Colors")
-	"thcr"  '(pet/syntax-color-rgb
-			      :which-key "RGB")
-	"thch"  '(pet/syntax-color-hsv
-			      :which-key "HSV")
-	;; Toggles - Modes
-	"tm"    '(:ignore t :which-key "Modes")
-	"tmv"   '(visual-line-mode :which-key "Visual Line Mode")
-	"tmh"   '(hl-line-mode :which-key "Highlight Line Mode")
-	"tmw"   '(whitespace-mode :which-key "Whitspace Mode")
-	"tmo"   '(org-mode :which-key "Org Mode")
-	"tmf"   '(origami-mode :which-key "Origami Mode")
-	"tmf"   '(follow-mode :which-key "Follow Mode")
-	"tme"   '(emojify-mode :which-key "Emojify Mode")
-	"tms"   '(scroll-all-mode :which-key "Scroll All Mode")
-	))
+    ;; Org Mode related
+    "o"     '(:ignore t :which-key "Org Mode")
+
+
+    ;; Toggles
+    "t"     '(:ignore t :which-key "Toggles")
+    "tc"    'world-clock
+    "tt"    '(counsel-load-theme
+    		      :which-key "Choose Theme")
+    ;; Toggles - Highlighting
+    "th"    '(:ignore t :which-key "Highlighting")
+    ;; Toggles - Highlighting - Colors
+    "thc"   '(:ignore t :which-key "Colors")
+    "thcr"  '(pet/syntax-color-rgb
+    		      :which-key "RGB")
+    "thch"  '(pet/syntax-color-hsv
+    		      :which-key "HSV")
+    ;; Toggles - Modes
+    "tm"    '(:ignore t :which-key "Modes")
+    "tmv"   '(:ignore t :which-key "Modes with v..")
+    "tmvl"  '(visual-line-mode :which-key "Visual Line Mode")
+    "tmh"   '(hl-line-mode :which-key "Highlight Line Mode")
+    "tmw"   '(whitespace-mode :which-key "Whitspace Mode")
+    "tmo"   '(org-mode :which-key "Org Mode")
+    "tmf"   '(origami-mode :which-key "Origami Mode")
+    "tmf"   '(follow-mode :which-key "Follow Mode")
+    "tme"   '(emojify-mode :which-key "Emojify Mode")
+    "tms"   '(scroll-all-mode :which-key "Scroll All Mode")
+    ))
+
+;; Bring Vi to Emacs
+(use-package evil
+  :config
+  (pet/leader-keys
+    ;; Toggles - Modes
+    "tmvi"   '(evil-mode :which-key "Evil Mode")
+    ))
 
 ;; applies beacon effect to the highlighted line on page scrolls
 (use-package beacon
