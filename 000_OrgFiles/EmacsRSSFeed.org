@@ -57,116 +57,117 @@
 * List of Subscriptions
 
 #+begin_src emacs-lisp
-  ;;; configuration for elfeed
+    ;;; configuration for elfeed
 
-  (require 'elfeed)
+    (require 'elfeed)
 
-  (setq elfeed-feeds
-	'(
-	  ("https://www.archlinux.org/feeds/news/" it linux distro)
-	  ("https://planet.emacslife.com/atom.xml" it emacs community)
-	  ("https://www.ecb.europa.eu/rss/press.html" it economics eu)
-	  ("http://planetpython.org/rss20.xml" it python)
-	  ("http://planet.scipy.org/rss20.xml" it python)
-	  ("http://planet.emacsen.org/atom.xml" it emacs)
-	  ("https://ctan.org/ctan-ann/atom" it tex)
+    (setq elfeed-feeds
+      '(
+        ("https://www.archlinux.org/feeds/news/" it linux distro)
+        ("https://planet.emacslife.com/atom.xml" it emacs community)
+        ("https://www.ecb.europa.eu/rss/press.html" it economics eu)
+        ("http://planetpython.org/rss20.xml" it python)
+        ("http://planet.scipy.org/rss20.xml" it python)
+        ("http://planet.emacsen.org/atom.xml" it emacs)
+        ("https://ctan.org/ctan-ann/atom" it tex)
 
-	  ;;;;;;; IT Security
+        ;;;;;;; IT Security
 
-	  ;; CVE Vulnerabilities (via US NVD) - New Vulnerabilities last 8 Days
-	  ("https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss.xml" it security vulnerabilities)
-	  ;; CVE Vulnerabilities (via US NVD) - Analyzed Vulnerabilities last 8 Days
-	  ("https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss-analyzed.xml" it security vulnerabilities)
+        ;; CVE Vulnerabilities (via US NVD) - New Vulnerabilities last 8 Days
+        ("https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss.xml" it security vulnerabilities)
+        ;; CVE Vulnerabilities (via US NVD) - Analyzed Vulnerabilities last 8 Days
+        ("https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss-analyzed.xml" it security vulnerabilities)
 
 
-	  ;;;; MAILING LISTS
-	  ;; TexHax
-	  ("https://kill-the-newsletter.com/feeds/b47i1y3i1ccl8s7c.xml" it tex mailinglists)
-	  ;; TexLive
-	  ("https://kill-the-newsletter.com/feeds/s7eyb1q3eyx63ie1.xml" it tex mailinglists)
-	  ;; Emacs Org Mode
-	  ("ews.gmane.io/gmane.emacs.orgmode" it emacs org-mode mailinglists)
+        ;;;; MAILING LISTS
+        ;; TexHax
+        ("https://kill-the-newsletter.com/feeds/b47i1y3i1ccl8s7c.xml" it tex mailinglists)
+        ;; TexLive
+        ("https://kill-the-newsletter.com/feeds/s7eyb1q3eyx63ie1.xml" it tex mailinglists)
+        ;; Emacs Org Mode
+        ("ews.gmane.io/gmane.emacs.orgmode" it emacs org-mode mailinglists)
 
-	  ;;;; BLOGS
+        ;;;; BLOGS
 
-	  ("https://irreal.org/blog/?feed=rss2" it emacs blogs)
-	  ("https://blog.binchen.org/categories/emacs.xml" it emacs blogs)
-	  ("https://fanpengkong.com/index.xml" it emacs blogs)
-	  ("https://www.kuketz-blog.de/feed/" it blogs security privacy)
-	  ("https://komascript.de/node/feed" it blogs tex) ("https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" it blogs security data-science)
-	  ("https://latex-ninja.com/feed/" it blogs tex)
-	  ("https://zettelkasten.de/feed.atom" blogs methodology zettelkasten)
-	  ("https://waitbutwhy.com/feed" blogs philosophy culture)
-	  ("https://www.cgpgrey.com/blog?format=rss" blogs culture politics)
-	  ("https://blog.fefe.de/" blogs it culture politics security)
-	  ;; Comments on 'Web3'
-	  ("https://web3isgoinggreat.com/feed.xml" blogs culture it)
-	  ;; Nachdenkseiten - Sozialkritik
-	  ("https://www.nachdenkseiten.de/?feed=rss2" blog culture politics society critical-thinking social-critique)
-	  ;; R-Bloggers - News concerning R Programming Language
-	  ("https://feeds.feedburner.com/RBloggers?format=xml" blog it r programming statistical-computation statistics data-science)
-	  ("https://feeds.feedburner.com/Bildblog" blog politics culture society)
+        ("https://irreal.org/blog/?feed=rss2" it emacs blogs)
+        ("https://blog.binchen.org/categories/emacs.xml" it emacs blogs)
+        ("https://fanpengkong.com/index.xml" it emacs blogs)
+        ("https://www.kuketz-blog.de/feed/" it blogs security privacy)
+        ("https://komascript.de/node/feed" it blogs tex) ("https://www.dkriesel.com/feed.php?linkto=current&content=html&mode=blogtng&blog=blog-de" it blogs security data-science)
+        ("https://latex-ninja.com/feed/" it blogs tex)
+        ("https://zettelkasten.de/feed.atom" blogs methodology zettelkasten)
+        ("https://waitbutwhy.com/feed" blogs philosophy culture)
+        ("https://www.cgpgrey.com/blog?format=rss" blogs culture politics)
+        ("https://blog.fefe.de/" blogs it culture politics security)
+        ;; Comments on 'Web3'
+        ("https://web3isgoinggreat.com/feed.xml" blogs culture it)
+        ;; Nachdenkseiten - Sozialkritik
+        ("https://www.nachdenkseiten.de/?feed=rss2" blog culture politics society critical-thinking social-critique)
+        ;; R-Bloggers - News concerning R Programming Language
+        ("https://feeds.feedburner.com/RBloggers?format=xml" blog it r programming statistical-computation statistics data-science)
+        ("https://feeds.feedburner.com/Bildblog" blog politics culture society)
 
-	  ;;;; PODCASTS
+        ;;;; PODCASTS
 
-	  ("http://feed.pippa.io/public/shows/teamhuman" podcasts culture)
-	  ("https://feeds.buzzsprout.com/1875696.rss" podcasts culture politics)
-	  ("https://wakingup.libsyn.com/rss" podcasts culture politics)
-	  ("https://feeds.lagedernation.org/feeds/ldn-aac.xml" podcasts culture politics)
-	  ;; Die Neuen Zwanziger - Wolfgang M. Schmitt, Stefan Schulz
-	  ("https://neuezwanziger.de/feed/mp3/" podcasts culture politics)
-	  ;; Alias Fernsehpodcast - Stefan Schulz
-	  ("https://alias-podcast.de/feed/mp3/" podcasts culture politics)
-	  ("https://feeds.transistor.fm/the-drug-science-podcast" podcasts science medicine)
-	  ("https://logbuch-netzpolitik.de/feed/m4a" podcasts it culture politics)
-	  ("https://www.netzpolitik.org/category/netzpolitik-podcast/feed/itunes" podcasts it culture politics)
-	  ("https://dasisteinegutefrage.podigee.io/feed/mp3" podcasts klimate energy technology)
-	  ;; Alternativlos Podcast mit Fefe
-	  ("https://alternativlos.org/alternativlos.rss" podcasts technology it culture politics)
-	  ;; Terra X Podcast
-	  ("https://terrax.podigee.io/feed/mp3" podcasts technology science culture)
-	  ;; NDR Corona Podcast
-	  ("https://www.ndr.de/nachrichten/info/podcast4684.xml" podcasts corona medicine science)
-	  ;; Kekules Corona Kompass
-	  ("https://www.mdr.de/nachrichten/podcast/kekule-corona/kompass-104-podcast.xml" podcasts science medicine corona)
-	  ;; Schroeder und Somuncu
-	  ("https://www.radioeins.de/archiv/podcast/schroeder-%20somuncu.xml/feed=podcast.xml" podcasts culture politics comedy)
+        ("http://feed.pippa.io/public/shows/teamhuman" podcasts culture)
+        ("https://feeds.buzzsprout.com/1875696.rss" podcasts culture politics)
+        ("https://wakingup.libsyn.com/rss" podcasts culture politics)
+        ("https://feeds.lagedernation.org/feeds/ldn-aac.xml" podcasts culture politics)
+        ;; Die Neuen Zwanziger - Wolfgang M. Schmitt, Stefan Schulz
+        ("https://neuezwanziger.de/feed/mp3/" podcasts culture politics)
+        ;; Alias Fernsehpodcast - Stefan Schulz
+        ("https://alias-podcast.de/feed/mp3/" podcasts culture politics)
+        ("https://feeds.transistor.fm/the-drug-science-podcast" podcasts science medicine)
+        ("https://logbuch-netzpolitik.de/feed/m4a" podcasts it culture politics)
+        ("https://www.netzpolitik.org/category/netzpolitik-podcast/feed/itunes" podcasts it culture politics)
+        ("https://dasisteinegutefrage.podigee.io/feed/mp3" podcasts klimate energy technology)
+        ;; Alternativlos Podcast mit Fefe
+        ("https://alternativlos.org/alternativlos.rss" podcasts technology it culture politics)
+        ;; Terra X Podcast
+        ("https://terrax.podigee.io/feed/mp3" podcasts technology science culture)
+        ;; NDR Corona Podcast
+        ("https://www.ndr.de/nachrichten/info/podcast4684.xml" podcasts corona medicine science)
+        ;; Kekules Corona Kompass
+        ("https://www.mdr.de/nachrichten/podcast/kekule-corona/kompass-104-podcast.xml" podcasts science medicine corona)
+        ;; Schroeder und Somuncu
+        ("https://www.radioeins.de/archiv/podcast/schroeder-%20somuncu.xml/feed=podcast.xml" podcasts culture politics comedy)
 
-	  ;;;; NEWS
+        ;;;; NEWS
 
-	  ;; Feed that shows availability of Raspberry Pi Computers
-	  ("https://rpilocator.com/feed/" computers hardware single-board-computer raspberry-pi news)
+        ;; Feed that shows availability of Raspberry Pi Computers
+        ("https://rpilocator.com/feed/" computers hardware single-board-computer raspberry-pi news)
 
-	  ;;;; ENTERTAINMENT ;;;;
+        ;;;; ENTERTAINMENT ;;;;
 
-	  ;;;; WEBCOMICS
-	  ("http://nedroid.com/feed/" webcomic)
-	  ("https://xkcd.com/atom.xml" webcomic)
+        ;;;; WEBCOMICS
+        ("http://nedroid.com/feed/" webcomic)
+        ("https://xkcd.com/atom.xml" webcomic)
+        ("https://www.commitstrip.com/en/feed/" webcomic)
+  
+        ;;;; VIDEOS
+        ;; System Crafters YouTube
+        ("https://youtu.be/NlP3EDS6WGE" videos it emacs)
+        ;; YouTube Podcast WfA - Ole Nymoen, Wolfgang M. Schmitt
+        ("https://youtu.be/XAO14MeVns0" videos podcast economics politics culture)
+        ;; ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" personal video)
 
-	  ;;;; VIDEOS
-	  ;; System Crafters YouTube
-	  ("https://youtu.be/NlP3EDS6WGE" videos it emacs)
-	  ;; YouTube Podcast WfA - Ole Nymoen, Wolfgang M. Schmitt
-	  ("https://youtu.be/XAO14MeVns0" videos podcast economics politics culture)
-	  ;; ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" personal video)
-
-	  ;;;; REDDIT
-	  ;; Add .rss to the URL
-	  ("https://www.reddit.com/r/lisp/.rss" reddit it lisp)
-	  ("https://www.reddit.com/r/emacs/.rss" reddit it emacs)
-	  ("https://www.reddit.com/r/orgmode/.rss" reddit it emacs org-mode)
-	  ("https://www.reddit.com/r/vim/.rss" reddit it vim)
-	  ("https://www.reddit.com/r/suckless/.rss" reddit it)
-	  ("https://www.reddit.com/r/commandline/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/linux/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/linuxadmin/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/linuxquestions/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/archlinux/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/ManjaroLinux/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/pop_os/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/unixporn/.rss" reddit it linux)
-	  ("https://www.reddit.com/r/linux4noobs/" reddit it linux)
-	  ))
+        ;;;; REDDIT
+        ;; Add .rss to the URL
+        ("https://www.reddit.com/r/lisp/.rss" reddit it lisp)
+        ("https://www.reddit.com/r/emacs/.rss" reddit it emacs)
+        ("https://www.reddit.com/r/orgmode/.rss" reddit it emacs org-mode)
+        ("https://www.reddit.com/r/vim/.rss" reddit it vim)
+        ("https://www.reddit.com/r/suckless/.rss" reddit it)
+        ("https://www.reddit.com/r/commandline/.rss" reddit it linux)
+        ("https://www.reddit.com/r/linux/.rss" reddit it linux)
+        ("https://www.reddit.com/r/linuxadmin/.rss" reddit it linux)
+        ("https://www.reddit.com/r/linuxquestions/.rss" reddit it linux)
+        ("https://www.reddit.com/r/archlinux/.rss" reddit it linux)
+        ("https://www.reddit.com/r/ManjaroLinux/.rss" reddit it linux)
+        ("https://www.reddit.com/r/pop_os/.rss" reddit it linux)
+        ("https://www.reddit.com/r/unixporn/.rss" reddit it linux)
+        ("https://www.reddit.com/r/linux4noobs/" reddit it linux)
+        ))
 
 #+end_src
 
