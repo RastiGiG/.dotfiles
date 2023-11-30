@@ -281,7 +281,7 @@ These are some helpful [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]] to
 *** Check Font Availability
 #+begin_src emacs-lisp
   ;; Function to check for font availability
-  (defun font-available-p (font-name)
+  (defun pet/font-available-p (font-name)
 	(find-font (font-spec :name font-name)))
   
 #+end_src
@@ -313,6 +313,7 @@ It depends on [[https://github.com/magnars/s.el][GitHub.com: Magnars - s.el]]
 
 #+end_src
 *** Highlight text in Org Mode with Mouse
+
 This snippet is based on [[https://whatacold.io/blog/2023-08-14-org-emphasis-dragging-mouse/][Whatacold: Org Emphasis Dragging Mouse]]
 #+begin_src emacs-lisp
   ;; Highlight text in org mode with mouse
@@ -324,6 +325,27 @@ This snippet is based on [[https://whatacold.io/blog/2023-08-14-org-emphasis-dra
 	  (delete-region (region-beginning) (region-end))
 	  (insert emphasis-char origin emphasis-char))))
 
+
+#+end_src
+*** Test Native Compilation
+
+This function is taken from [[https://www.masteringemacs.org/article/speed-up-emacs-libjansson-native-elisp-compilation][MasteringEmacs.org: Speed up Emacs with libjansson and native elisp compilation]]
+#+begin_src emacs-lisp
+  (defun pet/check-native-compilation-p ()
+      (if (and (fboundp 'native-comp-available-p)
+               (native-comp-available-p))
+          (message "Native compilation is available")
+        (message "Native complation is *not* available")))
+  
+#+end_src
+*** Test Native JSON
+
+This function is taken from [[https://www.masteringemacs.org/article/speed-up-emacs-libjansson-native-elisp-compilation][MasteringEmacs.org: Speed up Emacs with libjansson and native elisp compilation]]
+#+begin_src emacs-lisp
+  (defun pet/check-native-json-p ()
+      (if (functionp 'json-serialize)
+          (message "Native JSON is available")
+        (message "Native JSON is *not* available")))
 
 #+end_src
 * Package System Setup
@@ -873,6 +895,17 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
     (define-key mc/keymap (kbd
                            "<return>") nil))
   
+#+end_src
+** Undo-Tree
+
+[[https://gitlab.com/tsc25/undo-tree][Undo-Tree]] is a minor mode that massively enhances the handling of undo/redo in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+#+begin_src emacs-lisp
+  ;; Level up Emacs Undo/Redo
+  (use-package undo-tree
+    :config
+
+    )
+
 #+end_src
 * Keybinding Configuration
 ** Rebinding Keys

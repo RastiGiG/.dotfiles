@@ -179,7 +179,7 @@
           (random 360) (random 100) (random 100))))
 
 ;; Function to check for font availability
-(defun font-available-p (font-name)
+(defun pet/font-available-p (font-name)
       (find-font (font-spec :name font-name)))
 
 ;; Join a line by separator
@@ -211,6 +211,17 @@ Note: it depends on s.el."
 		(emphasis-char "*"))
 	(delete-region (region-beginning) (region-end))
 	(insert emphasis-char origin emphasis-char))))
+
+(defun pet/check-native-compilation-p ()
+    (if (and (fboundp 'native-comp-available-p)
+             (native-comp-available-p))
+        (message "Native compilation is available")
+      (message "Native complation is *not* available")))
+
+(defun pet/check-native-json-p ()
+    (if (functionp 'json-serialize)
+        (message "Native JSON is available")
+      (message "Native JSON is *not* available")))
 
 ;; bootstrap script to install straight.el
 (defvar bootstrap-version)
@@ -601,6 +612,12 @@ Note: it depends on s.el."
                   'mc/mark-all-dwim)
   (define-key mc/keymap (kbd
                          "<return>") nil))
+
+;; Level up Emacs Undo/Redo
+(use-package undo-tree
+  :config
+
+  )
 
 ;; Rebind 'M-x' to 'C-C C-m'
 (global-set-key "\C-c\C-m" 'execute-extended-command)
