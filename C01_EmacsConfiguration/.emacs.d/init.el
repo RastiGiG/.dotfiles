@@ -2965,14 +2965,14 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
 ;; Add Language Server Support
 (use-package lsp-mode
-  :hook ((c-mode          ;; clangd
-          c++-mode        ;; clangd
-          c-or-c++-mode   ;; clangd
-          python-mode     ;; pyright
-          typescript-mode ;; ts-ls (tsserver wrapper)
-          js-mode         ;; ts-ls (tsserver wrapper)
-          web-mode        ;; ts-ls/HTML/CSS
-          ) . lsp-deferred)
+  ;; :hook ((c-mode          ;; clangd
+  ;;         c++-mode        ;; clangd
+  ;;         c-or-c++-mode   ;; clangd
+  ;;         python-mode     ;; pyright
+  ;;         typescript-mode ;; ts-ls (tsserver wrapper)
+  ;;         js-mode         ;; ts-ls (tsserver wrapper)
+  ;;         web-mode        ;; ts-ls/HTML/CSS
+  ;;         ) . lsp-deferred)
   :commands (lsp lsp-deferred)
   :bind (:map lsp-mode-map
       ("M-TAB" . completion-at-point))

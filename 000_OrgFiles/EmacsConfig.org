@@ -3912,14 +3912,14 @@ The which-key integration adds helpful descriptions of the various keys so you s
 #+begin_src emacs-lisp 
   ;; Add Language Server Support
   (use-package lsp-mode
-    :hook ((c-mode          ;; clangd
-            c++-mode        ;; clangd
-            c-or-c++-mode   ;; clangd
-            python-mode     ;; pyright
-            typescript-mode ;; ts-ls (tsserver wrapper)
-            js-mode         ;; ts-ls (tsserver wrapper)
-            web-mode        ;; ts-ls/HTML/CSS
-            ) . lsp-deferred)
+    ;; :hook ((c-mode          ;; clangd
+    ;;         c++-mode        ;; clangd
+    ;;         c-or-c++-mode   ;; clangd
+    ;;         python-mode     ;; pyright
+    ;;         typescript-mode ;; ts-ls (tsserver wrapper)
+    ;;         js-mode         ;; ts-ls (tsserver wrapper)
+    ;;         web-mode        ;; ts-ls/HTML/CSS
+    ;;         ) . lsp-deferred)
     :commands (lsp lsp-deferred)
     :bind (:map lsp-mode-map
         ("M-TAB" . completion-at-point))
