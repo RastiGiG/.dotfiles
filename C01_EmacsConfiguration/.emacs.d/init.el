@@ -329,17 +329,17 @@ Note: it depends on s.el."
       (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set default font face of present
-(when (font-available-p "Iosevka")
+(when (pet/font-available-p "Iosevka")
 	      (set-face-attribute 'default nil :font "Iosevka"
 						      :height pet/default-font-size))
 
 ;; Set the fixed pitch face
-(when (font-available-p "Iosevka")
+(when (pet/font-available-p "Iosevka")
 	      (set-face-attribute 'fixed-pitch nil :font "Iosevka"
 						      :height pet/default-font-size))
 
 ;; Set the variable pitch face
-(when (font-available-p "Cantarell")
+(when (pet/font-available-p "Cantarell")
 	      (set-face-attribute 'variable-pitch nil :font "Cantarell"
 						      :height pet/default-font-size
 						      :weight 'regular))
@@ -616,7 +616,8 @@ Note: it depends on s.el."
 ;; Level up Emacs Undo/Redo
 (use-package undo-tree
   :config
-
+  (global-undo-tree-mode)
+  (setq undo-tree-history-directory-alist `(("." . ,(concat pet/dotfiles-emacsconfig-dir "undo-tree/"))))
   )
 
 ;; Rebind 'M-x' to 'C-C C-m'
@@ -689,6 +690,7 @@ Note: it depends on s.el."
     "tmvl"  '(visual-line-mode :which-key "Visual Line Mode")
     "tmh"   '(hl-line-mode :which-key "Highlight Line Mode")
     "tmw"   '(whitespace-mode :which-key "Whitspace Mode")
+    "tmu"   '(undo-tree-mode :which-key "Undo-Tree Mode")
     "tmo"   '(org-mode :which-key "Org Mode")
     "tmf"   '(origami-mode :which-key "Origami Mode")
     "tmf"   '(follow-mode :which-key "Follow Mode")
