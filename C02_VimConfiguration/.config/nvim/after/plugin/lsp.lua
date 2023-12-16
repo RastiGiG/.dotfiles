@@ -103,6 +103,19 @@ local servers = {
   -- LaTeX Servers
   -- ltex-ls = {},
   texlab = {},
+
+  -- Ansible Servers
+  ansible-language-server = {},
+  ansible-lint = {},
+
+  -- JSON
+  json-lsp = {},
+  jsonlint = {},
+
+  -- YAML
+  yaml-language-server = {},
+  yamlfmt = {},
+  yamllint = {},
 }
 
 -- Setup neovim lua configuration
