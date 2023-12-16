@@ -99,6 +99,10 @@ local servers = {
       -- diagnostics = { disable = { 'missing-fields' } },
     },
   },
+
+  -- LaTeX Servers
+  -- ltex-ls = {},
+  texlab = {},
 }
 
 -- Setup neovim lua configuration
