@@ -1,6 +1,7 @@
-#+title: MaBest Emacs Configuration
+#+title: Emacs Backup Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs-old/init.el :mkdirp yes
 #+STARTUP: hideblocks show2levels
+#+auto_tangle: t
 
 * TOC
 
