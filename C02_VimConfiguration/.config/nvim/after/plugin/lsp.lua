@@ -84,12 +84,21 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
+  -- C Server
+  clangd = {},
+
+  -- Go Server
+  gopls = {},
+
+
+  -- Julia Server
+  julials = {},
+
   -- pyright = {},
-  -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+
+  -- SQL Server
+  -- sqls = {},
 
   lua_ls = {
     Lua = {
@@ -104,18 +113,11 @@ local servers = {
   -- ltex-ls = {},
   texlab = {},
 
-  -- Ansible Servers
-  ansible-language-server = {},
-  ansible-lint = {},
+  -- Rust Server
+  rust_analyzer = {},
 
-  -- JSON
-  json-lsp = {},
-  jsonlint = {},
-
-  -- YAML
-  yaml-language-server = {},
-  yamlfmt = {},
-  yamllint = {},
+  -- File Types
+  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 }
 
 -- Setup neovim lua configuration
