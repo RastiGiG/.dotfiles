@@ -47,7 +47,6 @@
   require('gigus')
 
 #+end_src
-
 * Personal Configuration
 ** Lua - General Setup
 *** Init
@@ -171,7 +170,7 @@
 
 #+end_src
 *** Lazy Package Manager
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/keybindings.lua
+#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/lazy.lua
   --[[
 
   =====================================================================
