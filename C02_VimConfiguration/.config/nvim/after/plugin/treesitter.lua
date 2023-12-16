@@ -55,6 +55,7 @@ vim.defer_fn(function()
        'toml',
        'gitignore',
        'ssh_config',
+       'org',
        'make',
        'cmake',
        'meson',
@@ -67,7 +68,11 @@ vim.defer_fn(function()
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
 
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = { 'org' },
+    },
+
     indent = { enable = true },
     incremental_selection = {
       enable = true,

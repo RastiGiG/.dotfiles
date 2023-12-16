@@ -320,9 +320,19 @@
 
     -- NVim LaTeX support
     { "lervag/vimtex", },
- 
+
     -- Learn vim-keybindings in a gamified way, provided by yours-truly
     { "ThePrimeagen/vim-be-good", },
+
+    -- Add Support for Emacs Org Mode
+    {
+      'nvim-orgmode/orgmode',
+      dependencies = {
+        { 'nvim-treesitter/nvim-treesitter', lazy = true },
+      },
+      event = 'VeryLazy',
+        
+    }
     
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --       These are some example plugins that I've included in the kickstart repository.
@@ -457,6 +467,28 @@
     end,
   }
   
+#+end_src
+*** Org Mode Support
+#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/orgmode.lua
+  --[[
+
+  =====================================================================
+  ====================== GITSIGNS CONFIGURATION =======================
+  =====================================================================
+
+  --]]
+
+  require('orgmode').setup_ts_grammar()
+
+  -- Setup orgmode
+  require('orgmode').setup({
+    org_agenda_files = {
+       '~/Org/journal',
+       '~/Org/personal-(tasks|mail|chores|contracts)-?[A-Za-z]*.org'
+    },
+    org_default_notes_file = '~/Projects/Notes/notes.org',
+  })
+
 #+end_src
 *** LSP Server Setup
 #+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/lsp.lua
@@ -844,6 +876,7 @@
          'toml',
          'gitignore',
          'ssh_config',
+         'org',
          'make',
          'cmake',
          'meson',
@@ -856,7 +889,11 @@
       -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
       auto_install = true,
 
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'org' },
+      },
+
       indent = { enable = true },
       incremental_selection = {
         enable = true,

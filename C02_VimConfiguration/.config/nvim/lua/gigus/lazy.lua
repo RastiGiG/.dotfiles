@@ -151,6 +151,16 @@ require('lazy').setup({
   -- Learn vim-keybindings in a gamified way, provided by yours-truly
   { "ThePrimeagen/vim-be-good", },
 
+  -- Add Support for Emacs Org Mode
+  {
+    'nvim-orgmode/orgmode',
+    dependencies = {
+      { 'nvim-treesitter/nvim-treesitter', lazy = true },
+    },
+    event = 'VeryLazy',
+
+  }
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
