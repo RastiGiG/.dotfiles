@@ -58,6 +58,9 @@ vim.keymap.set('n', '<C-u>', "<C-u>zz")
 vim.keymap.set('n', 'n', "nzzzv")
 vim.keymap.set('n', 'N', "Nzzzv")
 
+-- Add easier way to exit insert
+vim.keymap.set('i', 'jk', "<ESC>")
+
 -- Quickfix improvements: ThePrimeagen
 vim.keymap.set('n', '<C-j>', "<cmd>cprev<CR>zz")
 vim.keymap.set('n', '<C-k>', "<cmd>cnext<CR>zz")
@@ -70,7 +73,6 @@ vim.keymap.set('x', '<leader>vp', "\"_dP")
 -- Some more void register stuff: The Primeagen
 vim.keymap.set('n', '<leader>vd', "\"_d")
 vim.keymap.set('v', '<leader>vd', "\"_d")
-
 
 -- Separate system clipboard: asbjornHaland
 vim.keymap.set('n', '<leader>y', "\"+y")
