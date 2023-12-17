@@ -318,8 +318,14 @@
       build = ':TSUpdate',
     },
 
+    -- See the AST for your code based on Tree-Sitter
+    { 'nvim-treesitter/playgound', },
+
     -- NVim LaTeX support
     { "lervag/vimtex", },
+
+    -- Quick access file list
+    { "ThePrimeagen/harpoon", },
 
     -- Learn vim-keybindings in a gamified way, provided by yours-truly
     { "ThePrimeagen/vim-be-good", },
@@ -550,6 +556,7 @@
     ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
     ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
     ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+    ['<leader>f'] = { name = '[F]iles', _ = 'which_key_ignore' },
     ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
     ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
     ['<leader>p'] = { name = '[P]roject', _ = 'which_key_ignore' },
@@ -652,6 +659,28 @@
   
   -- The line beneath this is called `modeline`. See `:help modeline`
   -- vim: ts=2 sts=2 sw=2 et
+
+#+end_src
+*** Harpoon
+#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/harpoon.lua
+  --[[
+
+  =====================================================================
+  ============================= HARPOON ===============================
+  =====================================================================
+
+  --]]
+
+  local mark = require("harpoon.mark")
+  local ui = require("harpoon.ui")
+
+  vim.keymap.set("n", "<leader>fa", mark.add_file, { desc = 'Harpoon [A]dd File' })
+  vim.keymap.set("n", "<leader>fm", ui.toggle_quick_menu, { desc = 'Harpoon [M]enu' })
+
+  vim.keymap.set("n", "<leader>f1", function() ui.nav_file(1) end, { desc = 'Harpoon Goto File [1]' })
+  vim.keymap.set("n", "<leader>f2", function() ui.nav_file(2) end, { desc = 'Harpoon Goto File [2]' })
+  vim.keymap.set("n", "<leader>f3", function() ui.nav_file(3) end, { desc = 'Harpoon Goto File [3]' })
+  vim.keymap.set("n", "<leader>f4", function() ui.nav_file(4) end, { desc = 'Harpoon Goto File [4]' })
 
 #+end_src
 *** NeoVim Autocompletion
@@ -813,7 +842,7 @@
   vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp Tags' })
   vim.keymap.set('n', '<leader>fs', function()
                     builtin.grep_string({ search = vim.fn.input("Grep > ") });
-  end)
+  end, {desc = '[F]ind [S]earch string' })
   vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Search [G]it [F]iles' })
 
 #+end_src

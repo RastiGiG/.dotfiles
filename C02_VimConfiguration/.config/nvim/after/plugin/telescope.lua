@@ -93,5 +93,5 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind [B]uffers' }
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp Tags' })
 vim.keymap.set('n', '<leader>fs', function()
                   builtin.grep_string({ search = vim.fn.input("Grep > ") });
-end)
+end, {desc = '[F]ind [S]earch string' })
 vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Search [G]it [F]iles' })

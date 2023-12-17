@@ -145,8 +145,14 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- See the AST for your code based on Tree-Sitter
+  { 'nvim-treesitter/playgound', },
+
   -- NVim LaTeX support
   { "lervag/vimtex", },
+
+  -- Quick access file list
+  { "ThePrimeagen/harpoon", },
 
   -- Learn vim-keybindings in a gamified way, provided by yours-truly
   { "ThePrimeagen/vim-be-good", },
