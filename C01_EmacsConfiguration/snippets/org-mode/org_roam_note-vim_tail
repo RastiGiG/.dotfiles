@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-vim_tail
+# key: <ornvimt
+# --
+* Topic Overview
+
+** [[id:8212a283-520d-495c-86ee-fc47d1a00363][VIM]]
+*** [[id:0b0a9dc4-2751-4edf-8e13-9356d0030ee3][Plugins]]
+*** [[id:3e07a8fa-7cd5-4588-bd9a-3840d26d5309][Tipps]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:387fe10d-6d4b-4eb8-b3ed-cf5bffe506de][Editors]]
+****** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+****** [[id:8212a283-520d-495c-86ee-fc47d1a00363][VIM]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+*** [[id:f8b44e6c-d53c-4784-a016-3a2b2e3fc7b4][Acronyms]]
+
+* References
+
+[[id:5c16089f-c385-4496-b1e0-978b80870fec][Vim References]]
+
+** Websites
+
+** Literature
