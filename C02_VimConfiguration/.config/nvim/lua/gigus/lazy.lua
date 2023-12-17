@@ -145,8 +145,8 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- See the AST for your code based on Tree-Sitter
-  { 'nvim-treesitter/playgound', },
+  -- See the AST for your code based on Tree-Sitter -- DEPRECATED
+  --{ 'nvim-treesitter/playgound', },
 
   -- NVim LaTeX support
   { "lervag/vimtex", },
@@ -165,7 +165,10 @@ require('lazy').setup({
     },
     event = 'VeryLazy',
 
-  }
+  },
+
+  -- Make Undos better
+  { "mbbill/undotree", },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.

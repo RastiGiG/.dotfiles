@@ -318,8 +318,8 @@
       build = ':TSUpdate',
     },
 
-    -- See the AST for your code based on Tree-Sitter
-    { 'nvim-treesitter/playgound', },
+    -- See the AST for your code based on Tree-Sitter -- DEPRECATED
+    --{ 'nvim-treesitter/playgound', },
 
     -- NVim LaTeX support
     { "lervag/vimtex", },
@@ -338,7 +338,10 @@
       },
       event = 'VeryLazy',
         
-    }
+    },
+
+    -- Make Undos better
+    { "mbbill/undotree", },
     
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
     --       These are some example plugins that I've included in the kickstart repository.
@@ -681,6 +684,19 @@
   vim.keymap.set("n", "<leader>f2", function() ui.nav_file(2) end, { desc = 'Harpoon Goto File [2]' })
   vim.keymap.set("n", "<leader>f3", function() ui.nav_file(3) end, { desc = 'Harpoon Goto File [3]' })
   vim.keymap.set("n", "<leader>f4", function() ui.nav_file(4) end, { desc = 'Harpoon Goto File [4]' })
+
+#+end_src
+*** Undotree
+#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/undotree.lua
+  --[[
+
+  =====================================================================
+  ============================= UNDOTREE ==============================
+  =====================================================================
+
+  --]]
+
+  vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = '[U]ndotree' })
 
 #+end_src
 *** NeoVim Autocompletion
