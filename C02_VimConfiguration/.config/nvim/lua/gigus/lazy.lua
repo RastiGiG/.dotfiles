@@ -163,7 +163,7 @@ require('lazy').setup({
   { "lervag/vimtex", },
 
   -- Quick access file list
-  { "ThePrimeagen/harpoon", },
+  -- { "ThePrimeagen/harpoon", },
 
   -- Learn vim-keybindings in a gamified way, provided by yours-truly
   { "ThePrimeagen/vim-be-good", },
