@@ -146,3 +146,20 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+--[[
+   Helper function to toggle lsp server on/off when needed
+   This can significantly speed up nvim
+   See: https://github.com/neovim/nvim-lspconfig/wiki/Toggle-LSP-for-current-buffer
+--]]
+local toggle_lsp_client = function()
+   local buf = vim.api.nvim_get_current_buf()
+   local clients = vim.lsp.get_active_clients({ bufnr = buf })
+   if not vim.tbl_isempty(clients) then
+      vim.cmd("LspStop")
+   else
+      vim.cmd("LspStart")
+   end
+end
+
+vim.keymap.set("n", "<leader>tl", toggle_lsp_client, { desc = '[T]oggle [L]SP' })
