@@ -52,16 +52,17 @@
 *** Init
 #+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/init.lua
   --[[
-  
+
   =====================================================================
   =================== PERSONAL NEOVIM CONFIGURATION ===================
   =====================================================================
-  
+
   --]]
-  
+
   require('gigus.keybindings')
   require('gigus.settings')
   require('gigus.lazy')
+  require('gigus.colorscheme')
 
 #+end_src
 *** Keybindings
@@ -230,6 +231,25 @@
   vim.o.termguicolors = true
 
 #+end_src
+*** Colorscheme
+#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/colorscheme.lua
+  --[[
+
+  =====================================================================
+  =========================== COLORSCHEME =============================
+  =====================================================================
+
+  --]]
+  
+  local sel_colorscheme = "onedark"
+
+  local status_ok, _ = pcall(vim.cmd.colorscheme, sel_colorscheme)
+  if not status_ok then
+     vim.notify("colorscheme " .. sel_colorscheme .. " not found!")
+     return
+  end
+
+#+end_src
 *** Lazy Package Manager
 #+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/lazy.lua
   --[[
@@ -329,11 +349,27 @@
       -- Theme inspired by Atom
       'navarasu/onedark.nvim',
       priority = 1000,
-      config = function()
-        vim.cmd.colorscheme 'onedark'
-      end,
+    --   config = function()
+    --     vim.cmd.colorscheme 'onedark'
+    --   end,
     },
 
+
+    -- Selection of colorschems to choose
+    { 'lunarvim/colorschemes', },
+    {
+       'folke/tokyonight.nvim',
+       as = 'tokyonight',
+    },
+    {
+       'rose-pine/neovim',
+       as = 'rose-pine',
+    },
+    {
+       'Mofiqul/dracula.nvim',
+       as = 'dracula',
+    },
+    
     {
       -- Set lualine as statusline
       'nvim-lualine/lualine.nvim',

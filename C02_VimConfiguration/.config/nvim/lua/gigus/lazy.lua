@@ -95,9 +95,25 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+  --   config = function()
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  },
+
+
+  -- Selection of colorschems to choose
+  { 'lunarvim/colorschemes', },
+  {
+     'folke/tokyonight.nvim',
+     as = 'tokyonight',
+  },
+  {
+     'rose-pine/neovim',
+     as = 'rose-pine',
+  },
+  {
+     'Mofiqul/dracula.nvim',
+     as = 'dracula',
   },
 
   {
