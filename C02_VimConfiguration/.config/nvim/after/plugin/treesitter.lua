@@ -73,6 +73,10 @@ vim.defer_fn(function()
       additional_vim_regex_highlighting = { 'org' },
     },
 
+    autopais = {
+       enable = true,
+    },
+
     indent = { enable = true },
     incremental_selection = {
       enable = true,

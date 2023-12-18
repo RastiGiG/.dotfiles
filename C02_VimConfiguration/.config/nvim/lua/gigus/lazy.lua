@@ -123,7 +123,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'dracula',
         component_separators = '|',
         section_separators = '',
       },
@@ -196,6 +196,9 @@ require('lazy').setup({
 
   -- Make Undos better
   { "mbbill/undotree", },
+
+  -- Autocomplete brackets and quotes etc., integrates with cmp
+  { "windwp/nvim-autopairs", },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
