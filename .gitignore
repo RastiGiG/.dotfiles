@@ -164,6 +164,10 @@ flycheck_*.el
 lazy-lock.json
 
 #########################
+# Temporary NeoVim files
+C02_VimConfiguration/undodir/*
+
+#########################
 # Python Files
 
 /**/__pycache__
