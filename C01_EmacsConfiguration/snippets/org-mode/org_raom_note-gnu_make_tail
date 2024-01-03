@@ -1,30 +1,21 @@
 # -*- mode: snippet -*-
-# name: org_roam_note-computer_programming_tail
-# key: <orncpt
+# name: org_raom_note-gnu_make_tail
+# key: <ornmkt
 # --
 * Topic Overview
 
-** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
-*** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
-*** [[id:ee3f33e3-ce0f-4581-896f-64647c8063ee][Datatypes]]
-*** [[id:1721fd9e-f58f-47e5-85e6-9f23fd728ecc][Standards and Guidelines]]
-*** [[id:a1c6af3a-a201-4c5a-ae6a-68d4eb36ebfc][Build Systems]]
-*** Terminology
-**** [[id:5cc60664-1c46-4e4d-a308-b3d214725b28][Compiler]]
-**** [[id:ee3f33e3-ce0f-4581-896f-64647c8063ee][Datatypes]]
-**** [[id:10348dca-7a59-4cfb-b63d-55005f0f2612][Dynamic Typing]]
-**** [[id:6fc72f5c-8006-4d06-a45f-1ffb1b4f3e8a][Interpreter]]
-**** [[id:719b6486-8d81-4cee-a42c-c47f14b83a73][Operators]]
-**** [[id:bb2e21dd-c478-4c5c-99df-e9d490ee202d][Static Typing]]
-*** Tools
-**** [[id:387fe10d-6d4b-4eb8-b3ed-cf5bffe506de][Editors]]
-**** [[id:1bc1da2d-f3ce-4008-83dc-ea10a17e0c1e][Planning]]
+** [[id:3b00a849-12ff-47bf-a13d-4463b6adccb5][GNU Make]]
 
 * Read On
 
 ** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
 *** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
 **** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Programming]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+***** [[id:ee3f33e3-ce0f-4581-896f-64647c8063ee][Datatypes]]
+***** [[id:1721fd9e-f58f-47e5-85e6-9f23fd728ecc][Standards and Guidelines]]
+***** [[id:a1c6af3a-a201-4c5a-ae6a-68d4eb36ebfc][Build Systems]]
+****** [[id:3b00a849-12ff-47bf-a13d-4463b6adccb5][GNU Make]]
 **** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
 **** [[id:e946a409-5efb-467a-a459-2d5841a22438][Data Science]]
 **** [[id:8efaf08d-1d5d-428f-80cf-90da3bb92684][Machine Learing]]
@@ -50,9 +41,12 @@
 
 * References
 
-[[id:4819a8c4-77b6-4807-826f-a134fcfdbdad][Computer Science References]]
-[[id:1d2c9e02-a012-4786-8552-f56afa0b20a7][Computer Programming References]]
+[[id:4819a8c4-77b6-4807-826f-a134fcfdbdad][GNU Make References]]
 
 ** Websites
+
+1. [[https://www.gnu.org][GNU.org - The GNU Project]]
+   1) [[https://www.gnu.org/software][GNU.org: Software]]
+      + [[https://www.gnu.org/software/make/][GNU.org: Software - Make]]
 
 ** Literature
