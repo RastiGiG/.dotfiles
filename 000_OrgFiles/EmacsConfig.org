@@ -3186,37 +3186,38 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
 
   ;; enable/disable languages for org-babel
   (org-babel-do-load-languages
-	'org-babel-load-languages
-	'((emacs-lisp . t)    ;; Elisp
-	  (lisp . t)          ;; Lisp
-	  (clojure . t)       ;; Clojure     
-	  (scheme . t)        ;; Scheme
-	  (python . t)        ;; Python
-	  ;; (ipython . t)       ;; IPython
+    'org-babel-load-languages
+    '((emacs-lisp . t)    ;; Elisp
+      (lisp . t)          ;; Lisp
+      (clojure . t)       ;; Clojure     
+      (scheme . t)        ;; Scheme
+      (python . t)        ;; Python
+      ;; (ipython . t)       ;; IPython
 
-	  ;;  the following two require ob-c
-	  (C . t)             ;; C 
+      ;;  the following two require ob-c
+      (C . t)             ;; C 
 
-	  (perl . t)          ;; Perl
-	  ;; (php . t)           ;; PHP
-	  (R . t)             ;; R
-	  ;; (Ruby . t)          ;; Ruby
-	  (rust . t)          ;; Rust
-	  (julia . t)         ;; Julia Programmin Language
-	  (lua . t)           ;; Lua Programming Language
-	  (shell . t)         ;; Command Line Programs 
-	  (latex . t)         ;; LaTeX  
-	  (nix . t)           ;; Nix
-	  (sql . t)           ;; SQL
-	  (sqlite . t)        ;; SQLite
-	  (octave . t)        ;; Octave
-	  (gnuplot . t)       ;; Gnuplot
-	  (awk . t)           ;; awk
-	  (sed . t)           ;; GNUsed
-	  (css . t)           ;; CSS
-	  (plantuml . t)      ;; PlantUML
-	  (ledger . t)        ;; Ledger CLI
-	  ))         
+      (perl . t)          ;; Perl
+      ;; (php . t)           ;; PHP
+      (R . t)             ;; R
+      ;; (Ruby . t)          ;; Ruby
+      (rust . t)          ;; Rust
+      (julia . t)         ;; Julia Programmin Language
+      (lua . t)           ;; Lua Programming Language
+      (shell . t)         ;; Command Line Programs 
+      (latex . t)         ;; LaTeX  
+      (nix . t)           ;; Nix
+      (sql . t)           ;; SQL
+      (sqlite . t)        ;; SQLite
+      (octave . t)        ;; Octave
+      (makefile . t)          ;; GNU Make
+      (gnuplot . t)       ;; Gnuplot
+      (awk . t)           ;; awk
+      (sed . t)           ;; GNUsed
+      (css . t)           ;; CSS
+      (plantuml . t)      ;; PlantUML
+      (ledger . t)        ;; Ledger CLI
+      ))
 
   ;; Add conf-unix to be recognized
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
