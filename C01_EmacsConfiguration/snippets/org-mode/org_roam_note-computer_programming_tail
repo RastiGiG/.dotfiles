@@ -8,7 +8,6 @@
 *** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
 *** [[id:ee3f33e3-ce0f-4581-896f-64647c8063ee][Datatypes]]
 *** [[id:1721fd9e-f58f-47e5-85e6-9f23fd728ecc][Standards and Guidelines]]
-*** [[id:a1c6af3a-a201-4c5a-ae6a-68d4eb36ebfc][Build Systems]]
 *** Terminology
 **** [[id:5cc60664-1c46-4e4d-a308-b3d214725b28][Compiler]]
 **** [[id:ee3f33e3-ce0f-4581-896f-64647c8063ee][Datatypes]]
@@ -17,8 +16,11 @@
 **** [[id:719b6486-8d81-4cee-a42c-c47f14b83a73][Operators]]
 **** [[id:bb2e21dd-c478-4c5c-99df-e9d490ee202d][Static Typing]]
 *** Tools
+**** [[id:a1c6af3a-a201-4c5a-ae6a-68d4eb36ebfc][Build Systems]]
 **** [[id:387fe10d-6d4b-4eb8-b3ed-cf5bffe506de][Editors]]
 **** [[id:1bc1da2d-f3ce-4008-83dc-ea10a17e0c1e][Planning]]
+*** Other
+**** [[id:74237bce-1ef3-4440-bfde-1c1dc2ab4445][Software Licenses]]
 
 * Read On
 

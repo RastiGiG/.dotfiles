@@ -5,6 +5,10 @@
 * Topic Overview
 
 ** [[id:3b00a849-12ff-47bf-a13d-4463b6adccb5][GNU Make]]
+*** [[id:a16200e3-7287-4fd8-9cad-5f426b54cb1f][Basic Makefile]]
+*** [[id:d46dbd0c-2f8f-4e77-9c43-a32c0679d7c3][Automatic Variables]]
+*** [[id:e88189ab-3be4-4363-8184-3ae8a6bf558f][Project Structure and Subdirectories]]
+*** [[id:4150d7ef-81bb-4b27-93f3-f311624e9ef0][Using Make to manage an Archive]]
 
 * Read On
 
