@@ -2683,166 +2683,167 @@ The ~Package~ is listed as =org-plus-contrib=
 #+begin_src emacs-lisp
   ;; Setting Up Org Mode
   (use-package org
-	:ensure org-plus-contrib
-	:bind (("C-c l" . org-store-link))
-	:custom
-	(org-cite-export-processors
-	 '((md . (csl "chicago-fullnote-bibliography.csl"))   ; Footnote reliant
-	   (latex . biblatex)                                 ; For humanities
-	   (odt . (csl "chicago-fullnote-bibliography.csl"))  ; Footnote reliant
-	   (t . (csl "modern-language-association.csl"))      ; Fallback
-	   ))
-	;; Add Citation Directory
-	(org-cite-csl-styles-dir
-	 (concat pet/temp-dir "X6_Citation_Styles/"))
-	:custom-face
-	;; Have citation link faces look closer to as they were for `org-ref'
-	(org-cite ((t (:foreground "DarkSeaGreen4"))))
-	(org-cite-key ((t (:foreground "forest green" :slant italic))))
-	:config
-	;; Add additional Export Options
-	(require 'ox-beamer)       ;; LaTeX beamer
-	(require 'ox-koma-letter)  ;; LaTeX KOMA Script
-	(require 'ox-md)           ;; Markdown
-	(require 'ox-texinfo)      ;; Texinfo
-	(require 'ox-man)          ;; Man Page
-	(require 'ox-org)          ;; Org Format
+  :ensure org-plus-contrib
+  :bind (("C-c l" . org-store-link))
+  :custom
+  (org-cite-export-processors
+   '((md . (csl "chicago-fullnote-bibliography.csl"))   ; Footnote reliant
+     (latex . biblatex)                                 ; For humanities
+     (odt . (csl "chicago-fullnote-bibliography.csl"))  ; Footnote reliant
+     (t . (csl "modern-language-association.csl"))      ; Fallback
+     ))
+  ;; Add Citation Directory
+  (org-cite-csl-styles-dir
+   (concat pet/temp-dir "X6_Citation_Styles/"))
+  :custom-face
+  ;; Have citation link faces look closer to as they were for `org-ref'
+  (org-cite ((t (:foreground "DarkSeaGreen4"))))
+  (org-cite-key ((t (:foreground "forest green" :slant italic))))
+  :config
+  ;; Add additional Export Options
+  (require 'ox-beamer)       ;; LaTeX beamer
+  (require 'ox-koma-letter)  ;; LaTeX KOMA Script
+  (require 'ox-md)           ;; Markdown
+  (require 'ox-texinfo)      ;; Texinfo
+  (require 'ox-man)          ;; Man Page
+  (require 'ox-org)          ;; Org Format
 
-	;; Add additional Babel Support
-	(require 'ob-ledger)       ;; Ledger
+  ;; Add additional Babel Support
+  (require 'ob-ledger)       ;; Ledger
 
-	;; Add additional Citation Support
-	(require 'oc-basic)        ;; Basic
-	(require 'oc-bibtex)       ;; Bibtex
-	(require 'oc-biblatex)     ;; Biblatex
-	(require 'oc-csl)          ;; CSL
-
-
-	(setq org-ellipsis " ▾")
-
-	(setq org-directory pet/org-dir)
-	(setq org-agenda-start-with-log-mode t)
-	(setq org-log-done 'time)
-	(setq org-log-into-drawer t)
-
-	;; Setup inline previewing of latex fragments
-	(setq org-latex-create-formula-image-program
-	  'imagemagick)
-
-	;; Set Latex PDF Export Process
-	(setq org-latex-pdf-process
-		  (list
-		   "latexmk -shell-escape -bibtex -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
-		   "latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
-		   ))
-
-	;; Add global Bibliography Source
-	(setq org-cite-global-bibliography
-		  (list
-		   citar-bibliography
-		   ))
-
-	;; Specify Agenda Files
-	(setq org-agenda-files
-	  (cons (concat pet/org-dir "journal")
-		;; Add Files a starting with "personal-"
-		(directory-files pet/org-dir t
-				 "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
-		))
-
-	;; Set Org Clock Sound File
-	(setq org-clock-sound (concat pet/org-dir "sounds/Erfolg.wav"))
-	;; (setq org-clock-sound t)
-
-	;; Startup with inline images displayed
-	(setq org-startup-with-inline-images t)
+  ;; Add additional Citation Support
+  (require 'oc-basic)        ;; Basic
+  (require 'oc-bibtex)       ;; Bibtex
+  (require 'oc-biblatex)     ;; Biblatex
+  (require 'oc-csl)          ;; CSL
 
 
-	;; Enable helper function replacing hyphen
-	(pet/org-replace-hyphen)
+  (setq org-ellipsis " ▾")
+
+  (setq org-directory pet/org-dir)
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  ;; Setup inline previewing of latex fragments
+  (setq org-latex-create-formula-image-program
+    'imagemagick)
+
+  ;; Set Latex PDF Export Process
+  (setq org-latex-pdf-process
+  	  (list
+  	   "latexmk -shell-escape -bibtex -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
+  	   "latexmk -f -pdf -%latex -interaction=nonstopmode -output-directory=%o %f"
+  	   ))
+
+  ;; Add global Bibliography Source
+  (setq org-cite-global-bibliography
+  	  (list
+  	   citar-bibliography
+  	   ))
+
+  ;; Specify Agenda Files
+  (setq org-agenda-files
+    ;;(cons (concat pet/org-dir "journal")
+  	;; Add Files a starting with "personal-"
+  	(directory-files pet/org-dir t
+  			 "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
+  	;;)
+  )
+    
+  ;; Set Org Clock Sound File
+  (setq org-clock-sound (concat pet/org-dir "sounds/Erfolg.wav"))
+  ;; (setq org-clock-sound t)
+
+  ;; Startup with inline images displayed
+  (setq org-startup-with-inline-images t)
 
 
-	;; Customize Apps for Filelinks
-	(cl-loop for type in
-			 '(
-			   ;; Open PDFs with Zathura
-			   ;; ("\\.pdf\\'" . "zathura %s") ;
-			   ;; Open PDFs with Zathura
-			   ("\\.pdf\\'" . "pdf-tools %s")			   
-			   ;; Open Pictures with sxiv 
-			   ("\\.png\\'" . "sxiv %s")
-			   ("\\.jpg\\'" . "sxiv %s")
-			   ("\\.jpeg\\'" . "sxiv %s")
-			   ("\\.svg\\'" . "sxiv %s")
-			   ;; Open Youtube links with freetube
-			   ("\\.\\*youtu\\.\\*" . "freetube %s")
-			   )
-			 do
-			 (add-to-list 'org-file-apps type))
+  ;; Enable helper function replacing hyphen
+  (pet/org-replace-hyphen)
 
-	;; Add Custom TODO Keywords - in 2 seperate Sequences
-	(setq org-todo-keywords
-	  ;; Sequence 1 
-	  '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-		;; Sequence 2
-		(sequence "MEET(m)")
-		;; Sequence 3
-		(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
-			  "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)"
-			  "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
-	;; Set Keywords with shortcuts
-	(setq org-tag-alist
-	  '((:startgroup)
-		;; Put mutually exclusive tags here
-		(:endgroup)
-		("@errand" . ?E)
-		("@home" . ?H)
-		("@work" . ?W)
-		("@study" . ?S)
-		("agenda" . ?a)
-		("planning" . ?p)
-		("publish" . ?P)
-		("batch" . ?b)
-		("note" . ?n)
-		("idea" . ?i)))
+  ;; Customize Apps for Filelinks
+  (cl-loop for type in
+  		 '(
+  		   ;; Open PDFs with Zathura
+  		   ;; ("\\.pdf\\'" . "zathura %s") ;
+  		   ;; Open PDFs with Zathura
+  		   ("\\.pdf\\'" . "pdf-tools %s")			   
+  		   ;; Open Pictures with sxiv 
+  		   ("\\.png\\'" . "sxiv %s")
+  		   ("\\.jpg\\'" . "sxiv %s")
+  		   ("\\.jpeg\\'" . "sxiv %s")
+  		   ("\\.svg\\'" . "sxiv %s")
+  		   ;; Open Youtube links with freetube
+  		   ("\\.\\*youtu\\.\\*" . "freetube %s")
+  		   )
+  		 do
+  		 (add-to-list 'org-file-apps type))
 
-	;; Set Refile Targets to be considered, Emphasis on Archive 
-	(setq org-refile-targets
-	  '(
-		(nil :maxlevel . 9)
-		("~/Org/personal-archive.org" :maxlevel . 1)
-		("~/Org/personal-tasks.org" :maxlevel . 1)
-		("~/Org/personal-sources.org" :maxlevel . 1)
-		("~/Backup/Web-Bookmarks/1-bookmarks-import.org" :maxlevel . 9)
-		("~/Backup/Web-Bookmarks/2-bookmarks-export.org" :maxlevel . 9)
-		))
+  ;; Add Custom TODO Keywords - in 2 seperate Sequences
+  (setq org-todo-keywords
+    ;; Sequence 1 
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+  	;; Sequence 2
+  	(sequence "MEET(m)")
+  	;; Sequence 3
+  	(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)"
+  		  "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)"
+  		  "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
-	;; Allow Creation of Parent nodes but ask for confirmation
-	(setq org-refile-allow-creating-parent-nodes 'confirm)
+  ;; Set Keywords with shortcuts
+  (setq org-tag-alist
+    '((:startgroup)
+  	;; Put mutually exclusive tags here
+  	(:endgroup)
+  	("@errand" . ?E)
+  	("@home" . ?H)
+  	("@work" . ?W)
+  	("@study" . ?S)
+  	("agenda" . ?a)
+  	("planning" . ?p)
+  	("publish" . ?P)
+  	("batch" . ?b)
+  	("note" . ?n)
+  	("idea" . ?i)))
 
-	;; The default here is 999, which is a little to constricting for SQL and such
-	(setq org-table-convert-region-max-lines 9999)
+  ;; Set Refile Targets to be considered, Emphasis on Archive 
+  (setq org-refile-targets
+    '(
+  	(nil :maxlevel . 9)
+  	("~/Org/personal-archive.org" :maxlevel . 1)
+  	("~/Org/personal-tasks.org" :maxlevel . 1)
+  	("~/Org/personal-sources.org" :maxlevel . 1)
+  	("~/Backup/Web-Bookmarks/1-bookmarks-import.org" :maxlevel . 9)
+  	("~/Backup/Web-Bookmarks/2-bookmarks-export.org" :maxlevel . 9)
+  	))
 
-	;; Save Org buffers after refiling!
-	(advice-add 'org-refile :after 'org-save-all-org-buffers)
+  ;; Allow Creation of Parent nodes but ask for confirmation
+  (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-	(pet/leader-keys
-	  "ot" '(:ignore t :which-key "Toggle")
-	  "otb" '(pet/org-toggle-babel-confirm-evaluate
-		  :which-key "Babel Confirm Evaluation")
-	  "otc" '(org-cdlatex-mode
-		  :which-key "Org CDLaTeX Minor Mode")
-	  "oti" '(org-toggle-inline-images
-		  :which-key "Inline Images")
-	  "otp" '(org-toggle-pretty-entities
-		  :which-key "Pretty entities")
-	  "oi" '(:ignore t :which-key "Import")
-	  "oit" '(org-table-import
-		  :which-key "Table")
-	  "oa"  '(org-agenda :which-key "Org Agenda")
-	  )
-	)
+  ;; The default here is 999, which is a little to constricting for SQL and such
+  (setq org-table-convert-region-max-lines 9999)
+
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (pet/leader-keys
+    "ot" '(:ignore t :which-key "Toggle")
+    "otb" '(pet/org-toggle-babel-confirm-evaluate
+  	  :which-key "Babel Confirm Evaluation")
+    "otc" '(org-cdlatex-mode
+  	  :which-key "Org CDLaTeX Minor Mode")
+    "oti" '(org-toggle-inline-images
+  	  :which-key "Inline Images")
+    "otp" '(org-toggle-pretty-entities
+  	  :which-key "Pretty entities")
+    "oi" '(:ignore t :which-key "Import")
+    "oit" '(org-table-import
+  	  :which-key "Table")
+    "oa"  '(org-agenda :which-key "Org Agenda")
+    )
+  )
 
   #+end_src
 ** Prettier Org Heading Stars
