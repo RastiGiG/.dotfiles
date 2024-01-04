@@ -1,0 +1,132 @@
+#+TITLE:    Emacs Configuration Variables
+#+DATE:     [2024-01-04]
+#+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/lisp/variables.el :mkdirp yes
+#+STARTUP:  show2levels hideblocks
+#+auto_tangle: t
+
+* Header
+#+begin_src emacs-lisp
+  ;; __     ___    ____  ___    _    ____  _     _____ ____  
+  ;; \ \   / / \  |  _ \|_ _|  / \  | __ )| |   | ____/ ___| 
+  ;;  \ \ / / _ \ | |_) || |  / _ \ |  _ \| |   |  _| \___ \ 
+  ;;   \ V / ___ \|  _ < | | / ___ \| |_) | |___| |___ ___) |
+  ;;    \_/_/   \_\_| \_\___/_/   \_\____/|_____|_____|____/ 
+  ;;                                                         
+
+#+end_src
+* Variables
+** Directories
+#+begin_src emacs-lisp
+  ;; Setting Variables
+  ;; for better customization and readability
+
+  ;; Save Home Dir for later use
+  (setq pet/home-dir
+		(convert-standard-filename
+		 (expand-file-name "~/")))
+
+  ;; Save Dotfiles Dir for later use
+  (setq pet/dotfiles-dir
+		(concat pet/home-dir
+				(convert-standard-filename
+				 ".dotfiles/")))
+
+  ;; Save Template Dir for later use
+  (setq pet/temp-dir
+		(concat pet/home-dir
+				(convert-standard-filename
+				 "Templates/")))
+
+  ;; Store Org Directory
+  (setq pet/org-dir
+		(concat pet/home-dir
+				(convert-standard-filename
+				 "Org/")))
+
+  ;; Save Emacs Template Dir for later use
+  (setq pet/latex-header-temp-dir
+		(concat pet/temp-dir
+				(convert-standard-filename
+				 "X2_LaTeX_Templates/00-Headers/")))
+
+  ;; Save Path to main Bibliography File
+  (setq pet/bibliographies
+		(concat pet/home-dir
+				"Projects/Writing/00_Bibliographies"))
+
+  ;; Save path to Emacs Configuration
+  (setq pet/dotfiles-emacsconfig-dir
+	  (concat pet/dotfiles-dir
+		  (convert-standard-filename
+		   "C01_EmacsConfiguration/")))
+
+#+end_src
+** Fonts
+#+begin_src emacs-lisp
+  ;; Adjust font size to match your system
+  (defvar pet/default-font-size 140)
+  (defvar pet/default-variable-font-size 120)
+  
+#+end_src
+** Setting Up the Environment Variables
+
+This section is normally not needed
+#+begin_src emacs-lisp :tangle no
+  ;; Add sbin to PATH as well
+  (setenv "PATH" (concat (getenv "PATH") "/usr/local/sbin"))
+  (setq exec-path (append exec-path '("/usr/local/sbin")))
+
+  ;; Add Texlive binaries
+  ;; Path of texlive binaries
+  (setq pet/texlive-dir "/usr/local/texlive/current/bin/x86_64-linux")
+  ;; Add texlive binaries if installed (should be in front)
+  (when (file-directory-p pet/texlive-dir)
+      (setenv "PATH" (concat pet/texlive-dir (getenv "PATH")))
+      (setq exec-path (append (list pet/texlive-dir) exec-path)))
+
+  ;; Add user local binaries
+  (setq pet/user-bin-dir
+        (concat pet/home-dir
+                (convert-standard-filename ".local/bin")))
+  ;; Add user local binaries if installed (should be in front)
+  (when (file-directory-p pet/user-bin-dir)
+    (setenv "PATH" (concat pet/user-bin-dir (getenv "PATH")))
+    (setq exec-path (append (list pet/user-bin-dir) exec-path)))
+
+#+end_src
+** Macros
+#+begin_src emacs-lisp
+  ; Setup file containing global macros
+  (load-file
+   (concat pet/dotfiles-emacsconfig-dir
+		   "macros/global.macs")) 
+
+  ;; Set of keybindings for defined macros
+  ;; Make sure to have a definition of the macro in your /macros folder
+  (global-set-key "\C-x\C-kT" 'transpose-names)
+  
+#+end_src
+** Booksmarks
+
+Setup a ~location~ for your =bookmarks-file=
+#+begin_src emacs-lisp
+  ;; Set Location for bookmarks file/s
+  (setq bookmark-default-file
+        (concat pet/dotfiles-emacsconfig-dir
+                "bookmarks"))
+  
+#+end_src
+** Abbreviations
+#+begin_src emacs-lisp
+  ;; Activate Abbrev Mode by default
+  (setq-default abbrev-mode t)
+
+  ;; Set Location and Name of Abbrev file
+  (setq abbrev-file-name
+        (concat pet/dotfiles-emacsconfig-dir
+                "abbrev_defs"))
+
+  ;; Save Abbrevs when saving Files
+  (setq save-abbrevs t)
+
+#+end_src
