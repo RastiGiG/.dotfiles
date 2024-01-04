@@ -123,6 +123,10 @@ C01_EmacsConfiguration/**/projectile-bookmarks.eld
 ## Perspective
 C01_EmacsConfiguration/**/*fin*
 
+#############
+## Games
+/C01_EmacsConfiguration/**/games/
+
 ############
 # ELPA packages
 /elpa/
