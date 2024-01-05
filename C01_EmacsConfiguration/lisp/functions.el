@@ -1,3 +1,10 @@
+;;  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
+;; |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
+;; | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+;; |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
+;; |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
+;;
+
 ;; Returns the color substring from given range
 (defun pet/substring-from-range (str range)
   "Return substring from a given STR by specified RANGE"
@@ -119,6 +126,11 @@
   (interactive)
   (insert (format "hsl(%d,%d%%,%d%%);"
           (random 360) (random 100) (random 100))))
+
+;; Function to check for file existence before loading
+(defun pet/load-file (file)
+  (when (file-exists-p file)
+    (load file)))
 
 ;; Function to check for font availability
 (defun pet/font-available-p (font-name)

@@ -151,6 +151,14 @@ These are some helpful [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]] to
             (random 360) (random 100) (random 100))))
   
 #+end_src
+** Load Files if they exist
+#+begin_src emacs-lisp
+  ;; Function to check for file existence before loading
+  (defun pet/load-file (file)
+    (when (file-exists-p file)
+      (load file)))
+
+#+end_src
 ** Check Font Availability
 #+begin_src emacs-lisp
   ;; Function to check for font availability
