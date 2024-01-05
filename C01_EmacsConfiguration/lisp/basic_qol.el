@@ -70,6 +70,27 @@
 ;; Automatically revert Dired (and similar) Buffers without confirmation
 (setq global-auto-revert-non-file-buffers t)
 
+;; Make Selections behave as expected
+(delete-selection-mode 1)    ;; You can select text and delete it by typing.
+
+;; Turns on automatic parens pairing
+(electric-pair-mode 1)
+
+;; Replace Quotation Characters in Comments and Textblocks
+(electric-quote-mode 1)
+(setq electric-quote-comment t)
+(setq electric-quote-string t)
+(setq electric-quote-paragraph t)
+
+;; Places newline characters automatically
+(electric-layout-mode 1)
+
+(setq explicit-shell-file-name "bash")
+;;(setq explicit-zsh-args '())
+;; Regexp to use when searching for last prompt
+(setq term-prompt-regexp
+      "^[^#$%>\\n]*[#$%>] *")
+
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list

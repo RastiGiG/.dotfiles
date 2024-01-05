@@ -106,6 +106,51 @@ Changing this behaviour will still ask for confirmation, but you don't need to m
   (setq global-auto-revert-non-file-buffers t)
   
 #+end_src
+** Selection Overwrite
+#+begin_src emacs-lisp
+  ;; Make Selections behave as expected
+  (delete-selection-mode 1)    ;; You can select text and delete it by typing.
+
+#+end_src
+** Automatic Parens Pairing
+#+begin_src emacs-lisp
+  ;; Turns on automatic parens pairing
+  (electric-pair-mode 1)
+
+#+end_src
+** Automatic Quotation Character Replacement
+#+begin_src emacs-lisp
+  ;; Replace Quotation Characters in Comments and Textblocks
+  (electric-quote-mode 1)
+  (setq electric-quote-comment t)
+  (setq electric-quote-string t)
+  (setq electric-quote-paragraph t)
+
+#+end_src
+** Automatic Insert Newlines
+#+begin_src emacs-lisp
+  ;; Places newline characters automatically
+  (electric-layout-mode 1)
+
+#+end_src
+** Indentation
+#+begin_src emacs-lisp :tangle no
+  ;; Turn off the weird indenting that Emacs does by default.
+  (electric-indent-mode -1)
+  
+#+end_src
+** Terminal
+
+Setting up the *integrated* ~terminal emulator~
+
+#+begin_src emacs-lisp
+  (setq explicit-shell-file-name "bash")
+  ;;(setq explicit-zsh-args '())
+  ;; Regexp to use when searching for last prompt
+  (setq term-prompt-regexp
+        "^[^#$%>\\n]*[#$%>] *")
+  
+#+end_src
 ** World Clocks
 [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] can display the curren clocktime for various places around the world with the command =world-clock=
 #+begin_src emacs-lisp
