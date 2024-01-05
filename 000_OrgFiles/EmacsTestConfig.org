@@ -1967,9 +1967,8 @@ Documentation can be found here: [[https://github.com/Malabarba/beacon][GitHub.c
   ;; applies beacon effect to the highlighted line on page scrolls
   (use-package beacon
      :config
-     (beacon-mode 1)
      ;(setq beacon-color 0.4)
-     )
+     (beacon-mode 1))
 
 #+end_src
 ** GUI Extensions
