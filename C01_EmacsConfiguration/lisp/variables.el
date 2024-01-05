@@ -85,11 +85,7 @@
 
 ; Setup file containing global macros
 (pet/load-file
- (concat pet/dotfiles-emacsconfig-dir "macros/global.macs")) 
-
-;; Set of keybindings for defined macros
-;; Make sure to have a definition of the macro in your /macros folder
-(global-set-key "\C-x\C-kT" 'transpose-names)
+ (concat pet/dotfiles-emacsconfig-dir "macros/global.macs"))
 
 ;; Article Skeleton
 (define-skeleton pet/latex-article-skeleton
@@ -187,3 +183,10 @@
       "#+OPTIONS: num:nil"
       "#+OPTIONS: ':t backaddress:t"
       )
+
+;; Rebind 'M-x' to 'C-C C-m'
+(global-set-key (kbd "C-C C-m") 'execute-extended-command)
+
+;; Set of keybindings for defined macros
+;; Make sure to have a definition of the macro in your /macros folder
+(global-set-key "\C-x\C-kT" 'transpose-names)

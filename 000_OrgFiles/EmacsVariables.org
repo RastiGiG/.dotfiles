@@ -153,10 +153,6 @@ More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Back
   (pet/load-file
    (concat pet/dotfiles-emacsconfig-dir "macros/global.macs")) 
 
-  ;; Set of keybindings for defined macros
-  ;; Make sure to have a definition of the macro in your /macros folder
-  (global-set-key "\C-x\C-kT" 'transpose-names)
-
 #+end_src
 ** Skeletons
 
@@ -283,5 +279,15 @@ Find more infos here:
 	"#+OPTIONS: num:nil"
 	"#+OPTIONS: ':t backaddress:t"
 	)
+
+#+end_src
+** Keybindings
+#+begin_src emacs-lisp
+  ;; Rebind 'M-x' to 'C-C C-m'
+  (global-set-key (kbd "C-C C-m") 'execute-extended-command)
+
+  ;; Set of keybindings for defined macros
+  ;; Make sure to have a definition of the macro in your /macros folder
+  (global-set-key "\C-x\C-kT" 'transpose-names)
 
 #+end_src
