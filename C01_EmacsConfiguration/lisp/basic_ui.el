@@ -25,6 +25,8 @@
 (column-number-mode)
 ;; Set Line Numbers Globally
 (global-display-line-numbers-mode t)
+;; Adjust Line Numbers Width
+(setq display-line-numbers-width t)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
@@ -67,6 +69,9 @@
 
 ;; No popup windows
 (setq pop-up-windows nil)
+
+;; Enable Winner Mode
+(winner-mode 1)
 
 ;; Set default font face of present
 (when (pet/font-available-p "Iosevka")
