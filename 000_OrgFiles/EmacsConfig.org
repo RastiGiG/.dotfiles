@@ -392,7 +392,7 @@ Version mismatch is commonly encountered in the following situations:
 * Keybinding Configuration
 ** Evil Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/evil_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/evil_config.el :mkdirp yes
 :END:
 
 Let's bring [[id:8212a283-520d-495c-86ee-fc47d1a00363][Vi]] to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
@@ -440,7 +440,7 @@ Look at the GitHub Source Repo for more info.
 [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
 *** Standard Emacs Version
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/general_standard_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/general_standard_config.el :mkdirp yes
 :END:
 This version specifies =C-.= as ~leader key~
 #+begin_src emacs-lisp
@@ -456,7 +456,7 @@ This version specifies =C-.= as ~leader key~
 #+end_src
 *** Evil Version
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/general_evil_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/general_evil_config.el :mkdirp yes
 :END:
 
 This version specifies =SPC= instead of =C-.= as ~leader key~
@@ -479,7 +479,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 #+end_src
 *** Leader Keys
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/general_leader_keys.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/general_leader_keys.el :mkdirp yes
 :END:
 
 #+begin_src emacs-lisp
@@ -567,7 +567,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 #+end_src
 ** Which Key
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/which_key_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/which_key_config.el :mkdirp yes
 :END:
 
 [[https://github.com/justbur/emacs-which-key][which-key]] is a useful UI panel that appears when you start pressing any key binding in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] to offer you all possible completions for the prefix.  For example, if you press =C-c= (hold control and press the letter =c=), a panel will appear at the bottom of the frame displaying all of the bindings under that prefix and which command they run.  This is very useful for learning the possible key bindings in the mode of your current buffer.
@@ -595,7 +595,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 * File Management
 ** Dired Extensions
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/dired_extensions_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/dired_extensions_config.el :mkdirp yes
 :END:
 *** Dired Open
 
@@ -649,7 +649,7 @@ It overs the same functionality as [[https://github.com/asok/peep-dired][Peep-Di
 #+end_src
 ** Ranger
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/ranger_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/ranger_config.el :mkdirp yes
 :END:
 
 [[https://github.com/ralesi/ranger.el][Ranger]] is a feature rich substitution for dired.
@@ -673,7 +673,7 @@ It is inspired by the the VIM plugin ranger.
 #+end_src
 ** PDF Tools
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/pdf_tools_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/pdf_tools_config.el :mkdirp yes
 :END:
 
 Added [[https://github.com/vedang/pdf-tools][PDF Tools]] to replace ~DocView~.
@@ -696,7 +696,7 @@ There's also a [[https://pdftools.wiki/][wiki]] for it.
 * Quality of Live Extensions
 ** Collection of QoL Extensions
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/qol_collection_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/qol_collection_config.el :mkdirp yes
 :END:
 *** Executable Path Setup
 ~Exec Path from Shell~ is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]] that reads [[id:eb3164fe-2397-446a-8953-22356f3408db][Environment Variables]] from ~Bash~ or ~ZSH~.
@@ -762,7 +762,7 @@ The [[https://github.com/tldr-pages/tldr][tldr-pages]] project is a collection o
 #+end_src
 ** Multiple Cursors
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/multiple_cursors_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/multiple_cursors_config.el :mkdirp yes
 :END:
 
 ~Multiple Cursors~ are a part of most *modern editors*.
@@ -788,7 +788,7 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
 #+end_src
 ** Undo-Tree
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/undo_tree_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/undo_tree_config.el :mkdirp yes
 :END:
 
 [[https://gitlab.com/tsc25/undo-tree][Undo-Tree]] is a minor mode that massively enhances the handling of undo/redo in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
@@ -804,7 +804,7 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
 
 ** Projectile
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/projectile_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/projectile_config.el :mkdirp yes
 :END:
 [[https://projectile.mx/][Projectile]] is a project management library for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] which makes it a lot easier to navigate around code projects for various languages.
 Many packages integrate with Projectile so it's a good idea to have it installed even if you don't use its commands directly.
@@ -836,7 +836,7 @@ It should be noted that many projectile commands seem to not work if you have se
 #+end_src
 ** YASnippets
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/yasnippets_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/yasnippets_config.el :mkdirp yes
 :END:
 
 Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration).
@@ -872,7 +872,7 @@ Documentation can be found here: [[https://github.com/joaotavora/yasnippet][GitH
 * Graphical User Interface Tweaks and Extensions
 ** All The Icons
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/all_the_icons_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/all_the_icons_config.el :mkdirp yes
 :END:
 
 [[https://github.com/domtronn/all-the-icons.el][All-The-Icons]]
@@ -893,7 +893,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+end_src
 ** Doom Modeline
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/doom_modeline_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/doom_modeline_config.el :mkdirp yes
 :END:
 
 [[https://github.com/seagle0128/doom-modeline][doom-modeline]] is a very attractive and rich (yet still minimal) mode line configuration for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].  The default configuration is quite good but you can check out the [[https://github.com/seagle0128/doom-modeline#customize][configuration options]] for more things you can enable or disable.
@@ -912,7 +912,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+end_src
 ** Themes
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/themes_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/themes_config.el :mkdirp yes
 :END:
 *** Doom Themes
 
@@ -932,7 +932,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+end_src
 ** Perspective
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/perspective_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/perspective_config.el :mkdirp yes
 :END:
 
 [[https://github.com/nex3/perspective-el][Perspective]] allows you to safe a specific window layout even across sessions
@@ -969,7 +969,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 
 ** Dashboard
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/dashboard_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/dashboard_config.el :mkdirp yes
 :END:
 [[https://github.com/emacs-dashboard/emacs-dashboard][Emacs Dashboard]] ads a start up screen to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Index Emacs]]
 #+begin_src emacs-lisp
@@ -1004,7 +1004,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+end_src
 ** Ivy with Counsel and Prescient
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/ivy_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/ivy_config.el :mkdirp yes
 :END:
 *** Description
 [[https://oremacs.com/swiper/][Ivy]] is an excellent completion framework for Emacs.  It provides a minimal yet powerful selection menu that appears when you open files, switch buffers, and for many other tasks in Emacs.
@@ -1154,7 +1154,7 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 
 ** Hydra
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/hydra_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/hydra_config.el :mkdirp yes
 :END:
 *** Description
 
@@ -1739,7 +1739,7 @@ DISABLED FOR NOW
 #+end_src
 ** Treemacs Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/treemacs_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/treemacs_config.el :mkdirp yes
 :END:
 *** Load Treemacs
 
@@ -1909,7 +1909,7 @@ It's got good integration with =Projectile=
 #+end_src
 ** Neotree
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/neotree_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/neotree_config.el :mkdirp yes
 :END:
 
 [[https://github.com/jaypei/emacs-neotree][Neotree]] is a file tree viewer.
@@ -1960,7 +1960,7 @@ Theme can be configured by setting “two” themes for =neo-theme=: one for the
 #+end_src
 ** Beacon
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/beacon_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/beacon_config.el :mkdirp yes
 :END:
 Documentation can be found here: [[https://github.com/Malabarba/beacon][GitHub.com: beacon]]
 #+begin_src emacs-lisp
@@ -1973,7 +1973,7 @@ Documentation can be found here: [[https://github.com/Malabarba/beacon][GitHub.c
 #+end_src
 ** GUI Extensions
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/gui_extensions_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/gui_extensions_config.el :mkdirp yes
 :END:
 *** Command Log Mode
 
@@ -2108,7 +2108,7 @@ This Setting is meant to make that highlighting stand out more
 * Developement Tools
 ** Magit
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/magit_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/magit_config.el :mkdirp yes
 :END:
 
 [[https://magit.vc/][Magit]] is one of the best Git interfaces. Common Git operations are easy to execute quickly using Magit's command panel system.
@@ -2139,12 +2139,12 @@ This Setting is meant to make that highlighting stand out more
 #+end_src
 ** Consult
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/consult_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/consult_config.el :mkdirp yes
 :END:
 [[https://github.com/minad/consult][Consult]] is a Completion Engine that's fully compatible with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] Buitlin Completion Engine
 ** Company Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/company_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/company_config.el :mkdirp yes
 :END:
 *** Load Company Mode
 
@@ -2291,7 +2291,7 @@ Information can be found here: [[https://github.com/sebastiencs/company-box][Git
 #+end_src
 ** Dev Tool Collection
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/dev_tools_collection_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/dev_tools_collection_config.el :mkdirp yes
 :END:
 *** Flycheck
 
@@ -2426,7 +2426,7 @@ You need to have the underlying ~Code Formatters~ like [[https://github.com/psf/
 *** Highlighting and Formatting
 **** Traditional Language Modes
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/language_modes_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/language_modes_config.el :mkdirp yes
 :END:
 ***** Octave/Matlab
 
@@ -2729,12 +2729,12 @@ You can find the ~Documentation~ here: [[https://github.com/skuro/plantuml-mode]
 #+end_src
 **** Treesitter Language Modes
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/language_ts_modes_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/language_ts_modes_config.el :mkdirp yes
 :END:
 *** Language Servers
 **** LSP Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/lsp_mode_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/lsp_mode_config.el :mkdirp yes
 :END:
 ***** Setup
 We use the [[ https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] to enable ~IDE-like functionality~ for many different programming languages via “language servers” that speak the *Language Server Protocol*.
@@ -2892,7 +2892,7 @@ Dap stands for Debug Adapter
 #+end_src
 **** Eglot
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/eglot_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/eglot_config.el :mkdirp yes
 :END:
 ***** Setup
 [[https://github.com/joaotavora/eglot][Eglot]] comes preconfigured with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] since Version 29
@@ -2902,7 +2902,7 @@ Dap stands for Debug Adapter
 * Terminal Modes
 ** Vterm
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/vterm_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/vterm_config.el :mkdirp yes
 :END:
 
 ~vterm~ is a terminal emulater that is written in C and handles the shell, meaning that Emacs is just a wrapper handling formatting of its output. It's normally a lot faster than the normal term mode
@@ -2922,7 +2922,7 @@ You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]
 
 ** Eshell
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/eshell_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/eshell_config.el :mkdirp yes
 :END:
 
 ~Eshell~ is a variation of the normal "shell" mode and is a lot more customizable.
@@ -2944,7 +2944,7 @@ For documentation on *eshell-git-prompt* look here: [[https://github.com/xuchuny
 
 * Org Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/org_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/org_config.el :mkdirp yes
 :END:
 [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] is one of *THE* killer-features of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].  It is a rich document editor, project planner, task and time tracker, blogging engine, and literate coding utility all wrapped up in one package.
 ** Org Font Faces
@@ -4068,7 +4068,7 @@ To turn ~auto-save~ off *only locally*, you can insert this:
 #+end_src
 * Legder Mode
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/ledger_mode_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/ledger_mode_config.el :mkdirp yes
 :END:
 ~Ledger Mode~ is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Packages]] that builds on top of the [[id:dec94196-4859-4fe6-be58-4237c61d9fad][CLI Tool]] [[https://www.ledger-cli.org/][Ledger]] for ~Plaintext Accounting~
 #+begin_src emacs-lisp
@@ -4086,7 +4086,7 @@ To turn ~auto-save~ off *only locally*, you can insert this:
 #+end_src
 * Citeproc
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/citeproc_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/citeproc_config.el :mkdirp yes
 :END:
 [[https://github.com/andras-simonyi/citeproc-el][Citeproc]] is needed for [[https://citationstyles.org/][CSL]] ~Citation styles~
 #+begin_src emacs-lisp
@@ -4097,7 +4097,7 @@ To turn ~auto-save~ off *only locally*, you can insert this:
 * Mail
 ** mu4e
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/mu4e_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/mu4e_config.el :mkdirp yes
 :END:
 
 [[id:6cdf0fb1-747c-44b6-9135-41c191bfcf34][mu4e]] (~mu-for-emacs~) is an e-mail client for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][GNU Emacs]] built on top of the =mu= ~e-mail search engine~ for the [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][Command Line]].
@@ -4244,7 +4244,7 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 * Password Management
 ** Password Store
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/password_store_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/password_store_config.el :mkdirp yes
 :END:
 #+begin_src emacs-lisp
   ;; Add wrapper for the command line tool 'pass'
@@ -4267,7 +4267,7 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 * Contact Management
 ** EBDB
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/ebdb_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/ebdb_config.el :mkdirp yes
 :END:
 
 [[https://github.com/girzel/ebdb/blob/master/ebdb.org][EBDB]] is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]] meant to replace ~BBDB~ (~"Big Brother Data Base"~) as a tool for Contact Management.
@@ -4306,7 +4306,7 @@ DISABLED FOR NOW
 #+end_src
 * ERC
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/erc_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/erc_config.el :mkdirp yes
 :END:
 
 ~IRC Server~ lists:
@@ -4374,7 +4374,7 @@ DISABLED FOR NOW
 #+end_src
 * Elfeed - Emacs RSS Feed
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs-test.d/package_configs/elfeed_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/elfeed_config.el :mkdirp yes
 :END:
 ** Load Elfeed
 
