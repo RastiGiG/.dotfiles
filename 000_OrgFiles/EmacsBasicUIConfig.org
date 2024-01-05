@@ -106,6 +106,18 @@ Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94
   (setq use-dialog-box nil)
   
 #+end_src
+*** File Dialog
+#+begin_src emacs-lisp
+  ;; No file dialog
+  (setq use-file-dialog nil)
+
+#+end_src
+*** Popup Windows
+#+begin_src emacs-lisp
+  ;; No popup windows
+  (setq pop-up-windows nil)
+  
+#+end_src
 *** Visual Line Mode
 
 Might add that back later

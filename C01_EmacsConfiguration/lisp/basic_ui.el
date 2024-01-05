@@ -62,6 +62,12 @@
 ;; Don't show windowed Dialog Box on Prompts
 (setq use-dialog-box nil)
 
+;; No file dialog
+(setq use-file-dialog nil)
+
+;; No popup windows
+(setq pop-up-windows nil)
+
 ;; Set default font face of present
 (when (pet/font-available-p "Iosevka")
 	      (set-face-attribute 'default nil :font "Iosevka"
