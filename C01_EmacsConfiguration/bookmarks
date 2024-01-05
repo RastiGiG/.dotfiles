@@ -53,7 +53,7 @@
  (last-modified 25706 2580 528146 722000))
 ("SP 01 Spanish"
  (filename .
-		   "~/Documents/07_Wissen_und_Bildung/A1_Sprachkurse/Spanisch/EK-II-FAU-Sprachzentrum-Elementarkurs-II-Niveau-A1/")
+           "~/Documents/07_Wissen_und_Bildung/A1_Sprachkurse/Spanisch/EK-II-FAU-Sprachzentrum-Elementarkurs-II-Niveau-A1/")
  (front-context-string . "..\n  -rw-r--r--.")
  (rear-context-string . "K  6. May 21:32 ") (position . 239)
  (last-modified 25686 44141 245362 643000))
@@ -64,17 +64,18 @@
 ("00-2 Contacts" (filename . "~/Contacts/") (front-context-string)
  (rear-context-string . "9 11. Jul 20:02 ") (position . 357))
 ("C 02-1 Mu4e Account Config"
- (filename . "~/.dotfiles-private/MailAccounts.org")
+ (filename . "~/.dotfiles-private/000_OrgFiles/MailAccounts.org")
  (front-context-string . "\n* Settings\n\n#+b")
- (rear-context-string . "    \n\n#+end_src\n") (position . 1554))
+ (rear-context-string . "    \n\n#+end_src\n") (position . 1554)
+ (last-modified 26007 14751 4611 781000))
 ("D 07-0-1 Anleitungen"
  (filename .
-		   "~/Documents/07_Wissen_und_Bildung/00-Literatur/Anleitungen/")
+           "~/Documents/07_Wissen_und_Bildung/00-Literatur/Anleitungen/")
  (front-context-string . "emacs-latex-pack")
  (rear-context-string . "K  5. Jul 10:00 ") (position . 1214))
 ("D 01-7 SS 2022"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/7_SS_2022/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/7_SS_2022/")
  (front-context-string . "B_6_3_Grundlagen")
  (rear-context-string . "5 10. Mai 18:39 ") (position . 217))
 ("C 05-3-1 Awesome Config"
@@ -108,7 +109,7 @@
  (rear-context-string . "K  2. Apr 12:08 ") (position . 444))
 ("D 08-1-1 Finanzen Basketball"
  (filename .
-		   "~/Documents/08_Ehrenamt_und_Hobbys/Sport/Basketball/Abteilung/Finanzen/")
+           "~/Documents/08_Ehrenamt_und_Hobbys/Sport/Basketball/Abteilung/Finanzen/")
  (front-context-string . "..\n  drwxr-xr-x ")
  (rear-context-string . "K  6. Jun 15:45 ") (position . 179))
 ("D 08-1 Basketball"
@@ -209,7 +210,7 @@
  (position . 1))
 ("I 01-1 Org Latex Preview"
  (filename .
-		   "~/Projects/InfoFiles/Emacs/Worg/org-tutorials/org-latex-preview.org")
+           "~/Projects/InfoFiles/Emacs/Worg/org-tutorials/org-latex-preview.org")
  (front-context-string . "# This file is r") (rear-context-string)
  (position . 1))
 ("I 01 Worg Index"
@@ -218,27 +219,27 @@
  (rear-context-string . "e/elisp/worg.el\n") (position . 654))
 ("D 01-5 SS 2021"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/5_SS_2021/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/5_SS_2021/")
  (front-context-string) (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 172))
 ("D 01-4 WS 2020/2021"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/4_WS_2020-2021/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/4_WS_2020-2021/")
  (front-context-string) (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 177))
 ("D 01-3 SS 2020"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/3_SS_2020/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/3_SS_2020/")
  (front-context-string) (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 172))
 ("D 01-2 WS 2019/2020"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/2_WS_2019-2020/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/2_WS_2019-2020/")
  (front-context-string) (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 177))
 ("D 01-1 SS 2019"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/1_SS_2019/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/1_SS_2019/")
  (front-context-string) (rear-context-string . "0. Dez 21:41 ..\n")
  (position . 172))
 ("D 04 Downloads" (filename . "~/Downloads/")
@@ -274,7 +275,7 @@
  (rear-context-string . " -*- lisp -*-\n()") (position . 74))
 ("D 01-6 WS 2021/22"
  (filename .
-		   "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/6_WS_2021-2022/")
+           "~/Documents/06_Studium/01_FAU_Erlangen_Nuernberg/6_WS_2021-2022/")
  (front-context-string . "B_6_8_2_Biotherm")
  (rear-context-string . "4  9. Jan 12:14 ") (position . 222))
 ("D 01 FAU"
@@ -290,12 +291,12 @@
  (position . 1))
 ("D 02-1 CV1"
  (filename .
-		   "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
+           "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/CurriculumVitae-1.tex")
  (front-context-string . "\n%-----       re")
  (rear-context-string . "begin{document}\n") (position . 4451))
 ("D 02-2 CV2"
  (filename .
-		   "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/Version-2/")
+           "~/Documents/01_Private_Dokumente/01_Personalien/CurriculumVitae/Version-2/")
  (front-context-string . "#+LaTeX_CLASS: s") (rear-context-string)
  (position . 1) (last-modified 25528 788 839451 211000))
 ("C 01-1 Shell Aliases"
