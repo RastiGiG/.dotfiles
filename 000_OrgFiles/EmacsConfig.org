@@ -71,6 +71,7 @@
 - [[#contact-management][Contact Management]]
   - [[#ebdb][EBDB]]
 - [[#erc][ERC]]
+- [[#eradio][ERadio]]
 - [[#elfeed---emacs-rss-feed][Elfeed - Emacs RSS Feed]]
   - [[#load-elfeed][Load Elfeed]]
   - [[#elfeed-score][Elfeed-Score]]
@@ -389,6 +390,9 @@ Version mismatch is commonly encountered in the following situations:
 
   ;; ;; Load ERC Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
+
+  ;; Load ERadio Configuration
+  (pet/load-file (concat user-emacs-directory "package_configs/eradio_config.el"))
 
 #+end_src
 * Keybinding Configuration
@@ -4393,6 +4397,41 @@ DISABLED FOR NOW
   	"ml" '(pet/irc-libera-server :which-key "Libera Chat")
   	"mh" '(pet/irc-hackint-server :which-key "Hack Int")
   	"mo" '(pet/irc-oftc-server :which-key "Open and Free Technology Community"))
+
+#+end_src
+* ERadio
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/eradio_config.el :mkdirp yes
+:END:
+
+[[https://github.com/olavfosse/eradio][eradio]] is a simple ~Internet radio player~ for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].
+It uses =‘vlc’= as its backend by default, but you can change the =eradio-player= ~variable~ to use another ~multimedia player~.
+This config sets ~eradio~ to use =‘mpv’= instead of =‘vlc’= because it supports more types of ~Internet radio streams~.
+#+begin_src emacs-lisp
+  ;; Add Radio to Emacs and load Internet Radio Streams
+  (use-package eradio
+    :init
+    (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
+    :config
+    (setq eradio-channels '(("Totally 80s FM" . "https://zeno.fm/radio/totally-80s-fm/")
+                            ("Oldies Radio 50s-60s" . "https://zeno.fm/radio/oldies-radio-50s-60s/")
+                            ("Oldies Radio 70s" . "https://zeno.fm/radio/oldies-radio-70s/")
+                            ("Unlimited 80s" . "https://zeno.fm/radio/unlimited80s/")
+                            ("80s Hits" . "https://zeno.fm/radio/80shits/")
+                            ("90s Hits" . "https://zeno.fm/radio/90s_HITS/")
+                            ("2000s Pop" . "https://zeno.fm/radio/2000s-pop/")
+                            ("The 2000s" . "https://zeno.fm/radio/the-2000s/")
+                            ("Hits 2010s" . "https://zeno.fm/radio/helia-hits-2010/")
+                            ("Classical Radio" . "https://zeno.fm/radio/classical-radio/")
+                            ("Classical Relaxation" . "https://zeno.fm/radio/radio-christmas-non-stop-classical/")
+                            ("Classic Rock" . "https://zeno.fm/radio/classic-rockdnb2sav8qs8uv/")
+                            ("Gangsta49" . "https://zeno.fm/radio/gangsta49/")
+                            ("HipHop49" . "https://zeno.fm/radio/hiphop49/")
+                            ("Madhouse Country Radio" . "https://zeno.fm/radio/madhouse-country-radio/")
+                            ("PopMusic" . "https://zeno.fm/radio/popmusic74vyurvmug0uv/")
+                            ("PopStars" . "https://zeno.fm/radio/popstars/")
+                            ("RadioMetal" . "https://zeno.fm/radio/radio-metal/")
+                            ("RocknRoll Radio" . "https://zeno.fm/radio/rocknroll-radio994c7517qs8uv/"))))
 
 #+end_src
 * Elfeed - Emacs RSS Feed
