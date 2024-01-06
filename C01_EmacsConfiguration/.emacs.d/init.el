@@ -177,14 +177,14 @@
 ;; ;; Load LSP Mode Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/lsp_mode_config.el"))
 
-;; ;; Load ERC Configuration
+;; ;; Load Eglo Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/eglot_config.el"))
 
 ;; ;; Load Citeproc Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
 
-;; ;; Load mu4e Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
+;; Load mu4e Configuration
+(pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
 
 ;; ;; Load Password Store Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/password_store_config.el"))
@@ -192,11 +192,11 @@
 ;; ;; Load EBDB Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/ebdb_config.el"))
 
-;; ;; Load Elfeed Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/elfeed_config.el"))
+;; Load Elfeed Configuration
+(pet/load-file (concat user-emacs-directory "package_configs/elfeed_config.el"))
 
-;; ;; Load ERC Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
+;; Load ERC Configuration
+(pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
 
 ;; Load ERadio Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/eradio_config.el"))

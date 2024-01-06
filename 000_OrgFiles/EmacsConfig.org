@@ -370,14 +370,14 @@ Version mismatch is commonly encountered in the following situations:
   ;; ;; Load LSP Mode Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/lsp_mode_config.el"))
 
-  ;; ;; Load ERC Configuration
+  ;; ;; Load Eglo Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/eglot_config.el"))
 
   ;; ;; Load Citeproc Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
 
-  ;; ;; Load mu4e Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
+  ;; Load mu4e Configuration
+  (pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
 
   ;; ;; Load Password Store Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/password_store_config.el"))
@@ -385,11 +385,11 @@ Version mismatch is commonly encountered in the following situations:
   ;; ;; Load EBDB Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/ebdb_config.el"))
 
-  ;; ;; Load Elfeed Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/elfeed_config.el"))
+  ;; Load Elfeed Configuration
+  (pet/load-file (concat user-emacs-directory "package_configs/elfeed_config.el"))
 
-  ;; ;; Load ERC Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
+  ;; Load ERC Configuration
+  (pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
 
   ;; Load ERadio Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/eradio_config.el"))
@@ -798,6 +798,14 @@ The [[https://github.com/tldr-pages/tldr][tldr-pages]] project is a collection o
     (evil-define-key 'visual drag-stuff-mode-map (kbd "J") 'drag-stuff-down)
     (evil-define-key 'visual drag-stuff-mode-map (kbd "H") 'drag-stuff-left)
     (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right))
+
+#+end_src
+*** Sudo-Edit
+
+[[https://github.com/nflath/sudo-edit][sudo-edit]] gives us the ability to open files with sudo privileges or switch over to editing with sudo privileges if we initially opened the file without such privileges.
+#+begin_src emacs-lisp :tangle no
+  ;; Easily go into sudo mode
+  (use-package sudo-edit)
 
 #+end_src
 ** Multiple Cursors
@@ -2948,7 +2956,7 @@ Dap stands for Debug Adapter
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/vterm_config.el :mkdirp yes
 :END:
-
+*** Load Vterm
 ~vterm~ is a terminal emulater that is written in C and handles the shell, meaning that Emacs is just a wrapper handling formatting of its output. It's normally a lot faster than the normal term mode
 
 You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]]
@@ -2963,7 +2971,33 @@ You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]
     (setq vterm-max-scrollback 10000))
 
 #+end_src
+*** Vterm-Toggle
 
+[[https://github.com/jixiuf/vterm-toggle][vterm-toggle]] toggles between the ~vterm buffer~ and whatever buffer you are editing.
+#+begin_src emacs-lisp
+  (use-package vterm-toggle
+    :after vterm
+    :config
+    ;; When running programs in Vterm and in 'normal' mode, make sure that ESC
+    ;; kills the program as it would in most standard terminal programs.
+    (evil-define-key 'normal vterm-mode-map (kbd "<escape>") 'vterm--self-insert)
+    (setq vterm-toggle-fullscreen-p nil)
+    (setq vterm-toggle-scope 'project)
+    (add-to-list 'display-buffer-alist
+                 '((lambda (buffer-or-name _)
+                     (let ((buffer (get-buffer buffer-or-name)))
+                       (with-current-buffer buffer
+                         (or (equal major-mode 'vterm-mode)
+                             (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+                   (display-buffer-reuse-window display-buffer-at-bottom)
+                   ;;(display-buffer-reuse-window display-buffer-in-direction)
+                   ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                   ;;(direction . bottom)
+                   ;;(dedicated . t) ;dedicated is supported in emacs27
+                   (reusable-frames . visible)
+                   (window-height . 0.4))))
+  
+#+end_src
 ** Eshell
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/eshell_config.el :mkdirp yes
