@@ -370,7 +370,7 @@ Version mismatch is commonly encountered in the following situations:
   ;; ;; Load Traditional Language Modes
   ;; (pet/load-file (concat user-emacs-directory "package_configs/language_modes_config.el"))
 
-  ;; Load Tressitter Language Modes
+  ;; Load Tree-Sitter Language Modes
   (pet/load-file (concat user-emacs-directory "package_configs/language_ts_modes_config.el"))
 
   ;; ;; Load LSP Mode Configuration
@@ -2922,6 +2922,28 @@ You can probably find a more up-to-date list of language modules here:
         (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
         (yaml "https://github.com/ikatyang/tree-sitter-yaml")
   	(zig "https://github.com/maxxnino/tree-sitter-zig")))
+
+#+end_src
+
+***** Remap Major Modes
+
+Remaps old ~regexp-based~ [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Major Modes]] to their =-ts-= counterpart.
+This is a little hacky, but does the trick for now.
+Once these modes work sufficiently enough, the old modes will be swapped over.
+#+begin_src emacs-lisp
+  ;; Remap Major modes to TS Counterpars
+  (setq major-mode-remap-alist
+      '((yaml-mode . yaml-ts-mode)
+        (c-mode . c-ts-mode)
+        (go-mode . go-ts-mode)
+        (bash-mode . bash-ts-mode)
+        (js2-mode . js-ts-mode)
+        (html-mode . html-ts-mode)
+        (typescript-mode . typescript-ts-mode)
+        (json-mode . json-ts-mode)
+        (css-mode . css-ts-mode)
+        (rust-mode . rust-ts-mode)
+        (python-mode . python-ts-mode)))
 
 #+end_src
 *** Language Servers

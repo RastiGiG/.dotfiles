@@ -47,3 +47,17 @@
       (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
       (yaml "https://github.com/ikatyang/tree-sitter-yaml")
       (zig "https://github.com/maxxnino/tree-sitter-zig")))
+
+;; Remap Major modes to TS Counterpars
+(setq major-mode-remap-alist
+    '((yaml-mode . yaml-ts-mode)
+      (c-mode . c-ts-mode)
+      (go-mode . go-ts-mode)
+      (bash-mode . bash-ts-mode)
+      (js2-mode . js-ts-mode)
+      (html-mode . html-ts-mode)
+      (typescript-mode . typescript-ts-mode)
+      (json-mode . json-ts-mode)
+      (css-mode . css-ts-mode)
+      (rust-mode . rust-ts-mode)
+      (python-mode . python-ts-mode)))

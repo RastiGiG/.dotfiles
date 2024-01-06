@@ -174,7 +174,7 @@
 ;; ;; Load Traditional Language Modes
 ;; (pet/load-file (concat user-emacs-directory "package_configs/language_modes_config.el"))
 
-;; Load Tressitter Language Modes
+;; Load Tree-Sitter Language Modes
 (pet/load-file (concat user-emacs-directory "package_configs/language_ts_modes_config.el"))
 
 ;; ;; Load LSP Mode Configuration
