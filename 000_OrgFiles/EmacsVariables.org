@@ -63,6 +63,10 @@
     			  (convert-standard-filename
     			   "C01_EmacsConfiguration/")))
 
+  ;; Set Path for Treesitter Language Grammars
+  (setq treesit-extra-load-path
+  	  (concat pet/dotfiles-emacsconfig-dir "tree-sitter"))
+
 #+end_src
 ** Fonts
 #+begin_src emacs-lisp
