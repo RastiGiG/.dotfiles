@@ -442,6 +442,19 @@ Look at the GitHub Source Repo for more info.
   (use-package evil-tutor)
   
 #+end_src
+*** Evil Escape
+
+[[https://github.com/syl20bnr/evil-escape][Evil-Escape]]
+#+begin_src emacs-lisp :tangle no
+  (use-package evil-escape
+    :config
+    (setq evil-escape-unordered-key-sequence t)
+    (setq-default evil-escape-key-sequence "jk")
+    ;; (add-to-list evil-escape-enable-only-for-major-mode 'prog-mode)
+    ;; (add-to list evil-escape-excluded-major-modes 'erc-mode)
+    (setq-default evil-escape-delay 0.2))
+
+#+end_src
 ** General
 [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
 *** Standard Emacs Version
@@ -780,8 +793,12 @@ The [[https://github.com/tldr-pages/tldr][tldr-pages]] project is a collection o
   (use-package drag-stuff
     :init
     (drag-stuff-global-mode 1)
-    (drag-stuff-define-keys))
-  
+    (drag-stuff-define-keys)
+    (evil-define-key 'visual drag-stuff-mode-map (kbd "K") 'drag-stuff-up)
+    (evil-define-key 'visual drag-stuff-mode-map (kbd "J") 'drag-stuff-down)
+    (evil-define-key 'visual drag-stuff-mode-map (kbd "H") 'drag-stuff-left)
+    (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right))
+
 #+end_src
 ** Multiple Cursors
 :PROPERTIES:

@@ -33,4 +33,8 @@
 (use-package drag-stuff
   :init
   (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
+  (drag-stuff-define-keys)
+  (evil-define-key 'visual drag-stuff-mode-map (kbd "K") 'drag-stuff-up)
+  (evil-define-key 'visual drag-stuff-mode-map (kbd "J") 'drag-stuff-down)
+  (evil-define-key 'visual drag-stuff-mode-map (kbd "H") 'drag-stuff-left)
+  (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right))
