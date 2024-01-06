@@ -89,7 +89,9 @@ Feel free to adopt parts that you find useful.
 A big chunk of the Configuration was inspired by the ~Emacs From Scratch Youtube-Series~ from [[https://systemcrafters.net/emacs-from-scratch/][SystemCrafters.net]], which i highly recommend as a starting point to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Configuring Emacs]]. I added and changed alot however since starting out.
 
 Another good source is [[https://protesilaos.com/emacs/dotemacs][Protesilaos.com: Dotemacs]], which i took inspiration from for the [[*Capture Templates][Org Capture Templates]].
- 
+
+I also added parts of [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/emacs/config.org][DT’s Emacs Config]], especially those that deal with [[*Evil Mode][Evil-Mode]].
+
 ** Starting Emacs Daemon
 
 To get the best out of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]], it's recommended to use the ~Daemon Capabilities~ it offers. This *might slow down your system Startup* time, but it definitely *significantly increases* [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Startup Time~ if you connect to the server with the =emacsclient= [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][command]].
@@ -414,6 +416,15 @@ Let's bring [[id:8212a283-520d-495c-86ee-fc47d1a00363][Vi]] to [[id:3cf0fa83-18b
     (setq evil-undo-system 'undo-redo)  ;; Adds vim-like C-r redo functionality
     (evil-mode))
 
+  ;; Using RETURN to follow links in Org/Evil 
+  ;; Unmap keys in 'evil-maps if not done, (setq org-return-follows-link t) will not work
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil))
+  ;; Setting RETURN key in org-mode to follow links
+  (setq org-return-follows-link  t)
+
 #+end_src
 *** Evil Collection
 
@@ -434,14 +445,6 @@ Look at the GitHub Source Repo for more info.
     (evil-collection-init))
 
 #+end_src
-*** Evil Tutor
-
-[[https://github.com/syl20bnr/evil-tutor][Evil-Tutor]] brings the famous ~VimTutor~ to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] and adapts it for ~Evil~
-#+begin_src emacs-lisp
-  ;; Bring the classic vimtutor to Emacs
-  (use-package evil-tutor)
-  
-#+end_src
 *** Evil Escape
 
 [[https://github.com/syl20bnr/evil-escape][Evil-Escape]]
@@ -454,6 +457,14 @@ Look at the GitHub Source Repo for more info.
     ;; (add-to list evil-escape-excluded-major-modes 'erc-mode)
     (setq-default evil-escape-delay 0.2))
 
+#+end_src
+*** Evil Tutor
+
+[[https://github.com/syl20bnr/evil-tutor][Evil-Tutor]] brings the famous ~VimTutor~ to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] and adapts it for ~Evil~
+#+begin_src emacs-lisp
+  ;; Bring the classic vimtutor to Emacs
+  (use-package evil-tutor)
+  
 #+end_src
 ** General
 [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
