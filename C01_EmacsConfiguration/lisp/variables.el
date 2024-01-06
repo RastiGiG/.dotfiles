@@ -10,37 +10,37 @@
 
 ;; Save Home Dir for later use
 (setq pet/home-dir
-    	(convert-standard-filename
-    	 (expand-file-name "~/")))
+      (convert-standard-filename
+       (expand-file-name "~/")))
 
 ;; Save Dotfiles Dir for later use
 (setq pet/dotfiles-dir
-    	(concat pet/home-dir
-    			(convert-standard-filename
-    			 ".dotfiles/")))
+      (concat pet/home-dir
+      		      (convert-standard-filename
+      		       ".dotfiles/")))
 
 ;; Save Template Dir for later use
 (setq pet/temp-dir
-    	(concat pet/home-dir
-    			(convert-standard-filename
-    			 "Templates/")))
+      (concat pet/home-dir
+      		      (convert-standard-filename
+      		       "Templates/")))
 
 ;; Store Org Directory
 (setq pet/org-dir
-    	(concat pet/home-dir
-    			(convert-standard-filename
-    			 "Org/")))
+      (concat pet/home-dir
+      		      (convert-standard-filename
+      		       "Org/")))
 
 ;; Save Emacs Template Dir for later use
 (setq pet/latex-header-temp-dir
-    	(concat pet/temp-dir
-    			(convert-standard-filename
-    			 "X2_LaTeX_Templates/00-Headers/")))
+      (concat pet/temp-dir
+      		      (convert-standard-filename
+      		       "X2_LaTeX_Templates/00-Headers/")))
 
 ;; Save Path to main Bibliography File
 (setq pet/bibliography-dir
-    	(concat pet/home-dir
-    			"Projects/Writing/00_Bibliographies"))
+      (concat pet/home-dir
+      		      "Projects/Writing/00_Bibliographies"))
 ;; Set main bibliography
 (setq pet/main-bib
       (concat pet/bibliography-dir "/Main_Bib.bib"))
@@ -48,13 +48,14 @@
 ;; Save path to Emacs Configuration
 (setq pet/dotfiles-emacsconfig-dir
       (concat pet/dotfiles-dir
-    			(convert-standard-filename
-    			 "C01_EmacsConfiguration/")))
+      		      (convert-standard-filename
+      		       "C01_EmacsConfiguration/")))
 
 ;; Set Path for Treesitter Language Grammars
 (setq treesit-extra-load-path
-      (list 
-       (concat pet/dotfiles-emacsconfig-dir "tree-sitter")))
+    (list 
+     (concat pet/dotfiles-dir
+  		     "C00_GeneralEditorConfiguration/tree-sitter")))
 
 ;; Adjust font size to match your system
 (defvar pet/default-font-size 140)
