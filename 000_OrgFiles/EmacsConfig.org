@@ -1079,51 +1079,57 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+begin_src emacs-lisp
   ;; Load Ivy Completion Framework
   (use-package ivy
-  	:diminish
-  	:bind (("C-s" . swiper)
-  	   ("C-r" . swiper)
-  	   :map ivy-minibuffer-map
-  	   ("TAB" . ivy-alt-done)
-  	   ("C-l" . ivy-alt-done)
-  	   ("C-j" . ivy-next-line)
-  	   ("C-k" . ivy-previous-line)
-  	   ("C-RET" . ivy-immediate-done)
-  	   :map ivy-switch-buffer-map
-  	   ("C-k" . ivy-previous-line)
-  	   ("C-l" . ivy-done)
-  	   ("C-d" . ivy-switch-buffer-kill)
-  	   :map ivy-reverse-i-search-map
-  	   ("C-k" . ivy-previous-line)
-  	   ("C-d" . ivy-reverse-i-search-kill))
-  	:config
-  	(ivy-mode 1))
+    :diminish
+    :custom
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    (setq enable-recursive-minibuffers t)
+    :bind (("C-s" . swiper)
+             ("C-r" . swiper)
+             :map ivy-minibuffer-map
+             ("TAB" . ivy-alt-done)
+             ("C-l" . ivy-alt-done)
+             ("C-j" . ivy-next-line)
+             ("C-k" . ivy-previous-line)
+             ("C-RET" . ivy-immediate-done)
+             :map ivy-switch-buffer-map
+             ("C-k" . ivy-previous-line)
+             ("C-l" . ivy-done)
+             ("C-d" . ivy-switch-buffer-kill)
+             :map ivy-reverse-i-search-map
+             ("C-k" . ivy-previous-line)
+             ("C-d" . ivy-reverse-i-search-kill))
+    :config
+    (ivy-mode 1))
 
 #+end_src
 *** Counsel
 #+begin_src emacs-lisp
   ;; Add Counsel for customized find files etc..
   (use-package counsel
-  	:after ivy
-  	:bind (("C-M-j" . 'counsel-switch-buffer)
-  	   :map minibuffer-local-map
-  	   ("C-r" . 'counsel-minibuffer-history))
-  	:config
-  	(counsel-mode 1)
+    :after ivy
+    :diminish
+    :bind (("C-M-j" . 'counsel-switch-buffer)
+             :map minibuffer-local-map
+             ("C-r" . 'counsel-minibuffer-history))
+    :config
+    (counsel-mode 1)
+    (setq ivy-initial-inputs-alist nil) ;; removes starting ^ regex in M-x
 
-  	;; Add Counsel function to leader key space
-  	(pet/leader-keys
-  	  "r"   '(ivy-resume :which-key "ivy resume")
+    ;; Add Counsel function to leader key space
+    (pet/leader-keys
+    	"r"   '(ivy-resume :which-key "ivy resume")
 
-  	  "ff"  '(counsel-find-file :which-key "open file")
-  	  "C-f" 'counsel-find-file
-  	  "fr"  '(counsel-recentf :which-key "recent files")
-  	  "fR"  '(revert-buffer :which-key "revert file")
-  	  "fj"  '(counsel-file-jump :which-key "jump to file")
-  	  "pf"  'counsel-projectile-find-file
-  	  "ps"  'counsel-projectile-switch-project
-  	  "pF"  'counsel-projectile-rg
-  	  "pp"  'counsel-projectile
-  	  "pd"  'projectile-dired))
+    	"ff"  '(counsel-find-file :which-key "open file")
+    	"C-f" 'counsel-find-file
+    	"fr"  '(counsel-recentf :which-key "recent files")
+    	"fR"  '(revert-buffer :which-key "revert file")
+    	"fj"  '(counsel-file-jump :which-key "jump to file")
+    	"pf"  'counsel-projectile-find-file
+    	"ps"  'counsel-projectile-switch-project
+    	"pF"  'counsel-projectile-rg
+    	"pp"  'counsel-projectile
+    	"pd"  'projectile-dired))
 
 #+end_src
 *** Prescient
@@ -1148,9 +1154,23 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+begin_src emacs-lisp
   ;; Ivy-Rich: Add Descriptions alongside M-x commands
   (use-package ivy-rich
-  	:after ivy
-  	:init
-  	(ivy-rich-mode 1))
+    :after ivy
+    :init
+    (ivy-rich-mode 1)
+    :custom
+    (ivy-virtual-abbreviate 'full
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer))
+  
+#+end_src
+**** All-The-Icons-Ivy-Rich
+#+begin_src emacs-lisp
+  ;; Add All-The-Icons to Ivy-Rich
+  (use-package all-the-icons-ivy-rich
+    :init (all-the-icons-ivy-rich-mode 1))
 
 #+end_src
 **** Counsel-Projectile
