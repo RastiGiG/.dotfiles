@@ -34,7 +34,7 @@
   - [[#yasnippets][YASnippets]]
 - [[#graphical-user-interface-tweaks-and-extensions][Graphical User Interface Tweaks and Extensions]]
   - [[#all-the-icons][All The Icons]]
-  - [[#doom-modeline][Doom Modeline]]
+  - [[#modelines][Modelines]]
   - [[#themes][Themes]]
   - [[#perspective][Perspective]]
   - [[#dashboard][Dashboard]]
@@ -298,7 +298,7 @@ Version mismatch is commonly encountered in the following situations:
   (pet/load-file (concat user-emacs-directory "package_configs/all_the_icons_config.el"))
 
   ;; Load Doom Modeline Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/doom_modeline_config.el"))
+  (pet/load-file (concat user-emacs-directory "package_configs/modeline_config.el"))
 
   ;; Load Themes Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/themes_config.el"))
@@ -950,10 +950,11 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
     (dired-mode . all-the-icons-dired-mode))
 
 #+end_src
-** Doom Modeline
+** Modelines
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/doom_modeline_config.el :mkdirp yes
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/modeline_config.el :mkdirp yes
 :END:
+*** Doom Modeline
 
 [[https://github.com/seagle0128/doom-modeline][doom-modeline]] is a very attractive and rich (yet still minimal) mode line configuration for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].  The default configuration is quite good but you can check out the [[https://github.com/seagle0128/doom-modeline#customize][configuration options]] for more things you can enable or disable.
 
@@ -968,6 +969,15 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
           doom-modeline-bar-width 5    ;; sets right bar width
           doom-modeline-persp-name t   ;; adds perspective name to modeline
           doom-modeline-persp-icon t)) ;; adds folder icon next to persp name    
+
+#+end_src
+*** Telephone-Line
+
+[[https://github.com/dbordak/telephone-line][Telephone-Line]] is an alternative Modeline inspired by ~Powerline~
+#+begin_src emacs-lisp :tangle no
+  ;; Load Telephone-Line
+  (use-package telephone-line
+    :init (telephone-line-mode 1))
 
 #+end_src
 ** Themes

@@ -103,7 +103,7 @@
 (pet/load-file (concat user-emacs-directory "package_configs/all_the_icons_config.el"))
 
 ;; Load Doom Modeline Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/doom_modeline_config.el"))
+(pet/load-file (concat user-emacs-directory "package_configs/modeline_config.el"))
 
 ;; Load Themes Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/themes_config.el"))
