@@ -53,7 +53,8 @@
 
 ;; Set Path for Treesitter Language Grammars
 (setq treesit-extra-load-path
-  	(concat pet/dotfiles-emacsconfig-dir "tree-sitter"))
+      (list 
+       (concat pet/dotfiles-emacsconfig-dir "tree-sitter")))
 
 ;; Adjust font size to match your system
 (defvar pet/default-font-size 140)

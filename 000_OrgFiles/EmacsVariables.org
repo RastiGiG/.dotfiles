@@ -65,7 +65,8 @@
 
   ;; Set Path for Treesitter Language Grammars
   (setq treesit-extra-load-path
-  	  (concat pet/dotfiles-emacsconfig-dir "tree-sitter"))
+  	(list 
+  	 (concat pet/dotfiles-emacsconfig-dir "tree-sitter")))
 
 #+end_src
 ** Fonts
