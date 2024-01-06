@@ -1,5 +1,6 @@
 ;; Load doom modeline
 (use-package doom-modeline
+  :after (all-the-icons)
   ;; Activate Doom Modeline
   :init (doom-modeline-mode 1)
   :config
