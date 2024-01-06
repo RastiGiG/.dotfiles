@@ -2864,6 +2864,9 @@ If you are on an older version, look into using [[https://emacs-tree-sitter.gith
 The list below specifies a ~source repositories~ for various languages.
 You can add them by typing =M-x treesit-install-language-grammar=
 
+Alternatively you can download a precompiled list of language grammars here:
++ [[https://github.com/emacs-tree-sitter/tree-sitter-langs][GitHub.com: Emacs-Tree-Sitter - Tree-Sitter Language Grammars]]
+
 :NOTE:
 This is not a complete list of languages, nor does it aim to be.
 You can probably find a more up-to-date list of language modules here:
