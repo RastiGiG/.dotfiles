@@ -1,6 +1,6 @@
 ;; Add Dashboard to Emacs
 (use-package dashboard
-  :after (all-the-icons or projectile)
+  :after (all-the-icons)
   :init      ;; tweak dashboard config before loading it
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-navigator t)
@@ -21,7 +21,6 @@
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
-                                    (bookmarks . "book"))))
-
-;; Make Emacsclient start up into dashboard
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+                                    (bookmarks . "book")))
+  ;; Make Emacsclient start up into dashboard
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))

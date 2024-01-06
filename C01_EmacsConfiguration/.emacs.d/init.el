@@ -93,8 +93,8 @@
 ;; Load Dired Extensions Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/dired_extensions_config.el"))
 
-;; Load Ranger Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/ranger_config.el"))
+;; ;; Load Ranger Configuration
+;; (pet/load-file (concat user-emacs-directory "package_configs/ranger_config.el"))
 
 ;; Load PDF-Tools Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/pdf_tools_config.el"))
@@ -105,17 +105,17 @@
 ;; Load Doom Modeline Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/doom_modeline_config.el"))
 
-;; Load Doom Themes Configuration
+;; Load Themes Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/themes_config.el"))
 
 ;; Load QoL Extensions Collection Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/qol_collection_config.el"))
 
-;; Load Undo-Tree Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/undo_tree_config.el"))
+;; ;; Load Undo-Tree Configuration
+;; (pet/load-file (concat user-emacs-directory "package_configs/undo_tree_config.el"))
 
-;; Load Multiple Cursors Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/multiple_cursors_config.el"))
+;; ;; Load Multiple Cursors Configuration
+;; (pet/load-file (concat user-emacs-directory "package_configs/multiple_cursors_config.el"))
 
 ;; Load Yasnippets Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/yasnippets_config.el"))
@@ -180,8 +180,8 @@
 ;; ;; Load ERC Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/eglot_config.el"))
 
-;; Load Citeproc Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
+;; ;; Load Citeproc Configuration
+;; (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
 
 ;; ;; Load mu4e Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
@@ -197,6 +197,9 @@
 
 ;; ;; Load ERC Configuration
 ;; (pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
+
+;; Load ERadio Configuration
+(pet/load-file (concat user-emacs-directory "package_configs/eradio_config.el"))
 
 (pet/leader-keys
       "E"   '(:ignore t :which-key "eval")

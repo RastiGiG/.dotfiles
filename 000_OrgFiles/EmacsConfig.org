@@ -285,8 +285,8 @@ Version mismatch is commonly encountered in the following situations:
   ;; Load Dired Extensions Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/dired_extensions_config.el"))
 
-  ;; Load Ranger Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/ranger_config.el"))
+  ;; ;; Load Ranger Configuration
+  ;; (pet/load-file (concat user-emacs-directory "package_configs/ranger_config.el"))
 
   ;; Load PDF-Tools Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/pdf_tools_config.el"))
@@ -297,17 +297,17 @@ Version mismatch is commonly encountered in the following situations:
   ;; Load Doom Modeline Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/doom_modeline_config.el"))
 
-  ;; Load Doom Themes Configuration
+  ;; Load Themes Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/themes_config.el"))
 
   ;; Load QoL Extensions Collection Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/qol_collection_config.el"))
 
-  ;; Load Undo-Tree Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/undo_tree_config.el"))
+  ;; ;; Load Undo-Tree Configuration
+  ;; (pet/load-file (concat user-emacs-directory "package_configs/undo_tree_config.el"))
 
-  ;; Load Multiple Cursors Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/multiple_cursors_config.el"))
+  ;; ;; Load Multiple Cursors Configuration
+  ;; (pet/load-file (concat user-emacs-directory "package_configs/multiple_cursors_config.el"))
 
   ;; Load Yasnippets Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/yasnippets_config.el"))
@@ -372,8 +372,8 @@ Version mismatch is commonly encountered in the following situations:
   ;; ;; Load ERC Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/eglot_config.el"))
 
-  ;; Load Citeproc Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
+  ;; ;; Load Citeproc Configuration
+  ;; (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
 
   ;; ;; Load mu4e Configuration
   ;; (pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
@@ -470,14 +470,25 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
     (general-evil-setup)
     
     (general-create-definer pet/leader-keys
-     :states '(normal insert visual emacs) 
-     :prefix "SPC" ;; leader key
-     :global-prefix "M-SPC") ;; access leader in insert mode
+      :states '(normal insert visual emacs) 
+      :prefix "SPC" ;; leader key
+      :global-prefix "M-SPC") ;; access leader in insert mode
 
+    ;; `kj` to get to normal mode
+    (general-imap "k"
+      (general-key-dispatch 'self-insert-command
+        :timeout 0.25
+        "j" 'evil-normal-state))
+    ;; `jk` to get to normal mode
+    (general-imap "j"
+      (general-key-dispatch 'self-insert-command
+        :timeout 0.25
+        "k" 'evil-normal-state))
+    
     (pet/leader-keys
       ;; Toggles - Modes
       "tmvi"   '(evil-mode :which-key "Evil Mode")))
-    
+
 #+end_src
 *** Leader Keys
 :PROPERTIES:
@@ -683,16 +694,22 @@ There's also a [[https://pdftools.wiki/][wiki]] for it.
 #+begin_src emacs-lisp
   ;; Load PDF Tools to replace DocView
   (use-package pdf-tools
-	:config
-	;; Install PDF Tools in all buffers
-	(pdf-tools-install)
-	;; Disable linum mode in PDF Tools
-	;; (add-hook 'pdf-view-mode-hook (lambda () (linum-mode -1)))
+    :defer t
+    :commands (pdf-loader-install)
+    :mode "\\.pdf\\'"
+    :bind (:map pdf-view-mode-map
+                ("j" . pdf-view-next-line-or-next-page)
+                ("k" . pdf-view-previous-line-or-previous-page))
+    :init
+    ;; Install PDF Tools in all buffers
+    (pdf-loader-install)
+    :config (add-to-list 'revert-without-query ".pdf")
 
-	(pet/leader-keys
-	  ;; Toggles - Modes
-	  "tmp"   '(pdf-view-mode :which-key "PDF View Mode")
-	))
+    ;; Disable linum mode in PDF Tools
+    (add-hook 'pdf-view-mode-hook #'(lambda () (interactive) (display-line-numbers-mode -1)))
+    (pet/leader-keys
+      ;; Toggles - Modes
+      "tmp"   '(pdf-view-mode :which-key "PDF View Mode")))
 
 #+end_src
 * Quality of Live Extensions
@@ -978,7 +995,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 #+begin_src emacs-lisp
   ;; Add Dashboard to Emacs
   (use-package dashboard
-    :after (all-the-icons or projectile)
+    :after (all-the-icons)
     :init      ;; tweak dashboard config before loading it
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-navigator t)
@@ -999,15 +1016,10 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
     :config
     (dashboard-setup-startup-hook)
     (dashboard-modify-heading-icons '((recents . "file-text")
-                                      (bookmarks . "book"))))
+                                      (bookmarks . "book")))
+    ;; Make Emacsclient start up into dashboard
+    (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*"))))
 
-#+end_src
-*** Dashboard as Client Startup
-
-#+begin_src emacs-lisp
-  ;; Make Emacsclient start up into dashboard
-  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-  
 #+end_src
 ** Ivy with Counsel and Prescient
 :PROPERTIES:
