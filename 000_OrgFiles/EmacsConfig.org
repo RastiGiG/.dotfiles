@@ -39,6 +39,7 @@
   - [[#perspective][Perspective]]
   - [[#dashboard][Dashboard]]
   - [[#ivy-with-counsel-and-prescient][Ivy with Counsel and Prescient]]
+  - [[#helm][Helm]]
   - [[#hydra][Hydra]]
   - [[#treemacs-mode][Treemacs Mode]]
   - [[#neotree][Neotree]]
@@ -326,6 +327,9 @@ Version mismatch is commonly encountered in the following situations:
 
   ;; Load Ivy (and Counsel) Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/ivy_config.el"))
+
+  ;; ;; Load Helm Configuration
+  ;; (pet/load-file (concat user-emacs-directory "package_configs/helm_config.el"))
 
   ;; Load Perspective Configuration
   (pet/load-file (concat user-emacs-directory "package_configs/perspective_config.el"))
@@ -1244,7 +1248,27 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
   	)
 
 #+end_src
+** Helm
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/helm_config.el :mkdirp yes
+:END:
+*** Load Helm
 
+[[https://github.com/emacs-helm/helm/wiki][Helm]] is an alternative completion framework that is very modular and offers a bunch of extensions
+#+begin_src emacs-lisp
+  ;; Load Helm Completion
+  (use-package helm)
+  
+#+end_src
+*** Helm Extensions
+**** Helm-mu
+
+[[https://github.com/emacs-helm/helm-mu][Helm-Mu]] adds a ~Helm~ Frontend to ~Mu4e~
+#+begin_src emacs-lisp
+  ;; Add mu4e support to helm
+  (use-package helm-mu)
+  
+#+end_src
 ** Hydra
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/hydra_config.el :mkdirp yes

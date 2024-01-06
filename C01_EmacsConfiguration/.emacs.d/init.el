@@ -132,6 +132,9 @@
 ;; Load Ivy (and Counsel) Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/ivy_config.el"))
 
+;; ;; Load Helm Configuration
+;; (pet/load-file (concat user-emacs-directory "package_configs/helm_config.el"))
+
 ;; Load Perspective Configuration
 (pet/load-file (concat user-emacs-directory "package_configs/perspective_config.el"))
 
