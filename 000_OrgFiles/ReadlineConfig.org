@@ -1,0 +1,53 @@
+#+TITLE:    Configuration for GNU Readline
+#+DESCRIPTION: GNU Readline is a Library that is used by many command line tools with prompts like Bash, the Python-Shell and SQL Interpreters (psql, sqlite)
+#+DATE:     [2024-01-07]
+#+PROPERTY: header-args:shell :tangle ../D14_Terminals/.config/inputrc :mkdirp yes
+#+STARTUP: hideblocks show2levels
+#+OPTIONS:  toc:2
+#+auto_tangle: t
+
+* Introduction
+
+~GNU Readline~ is a very basic line editor and as a library part of many common [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][command line]] tools.
+As such, settings for ~Readline~ will also propagate into these tools.
+
+There’s a good guide on this tool from ~MasteringEmacs~:
+- [[https://www.masteringemacs.org/article/keyboard-shortcuts-every-command-line-hacker-should-know-about-gnu-readline][MasteringEmcas.org: Every Command Line Hacker should know about GNU Readline]]
+
+* Header
+#+begin_src shell
+    #----------------------------------------------------------------------------------------------------------------------
+    # ___ _   _ ____  _   _ _____ ____   ____ 
+    # _ _| \ | |  _ \| | | |_   _|  _ \ / ___|
+    # | ||  \| | |_) | | | | | | | |_) | |    
+    # | || |\  |  __/| |_| | | | |  _ <| |___ 
+    # ___|_| \_|_|    \___/  |_| |_| \_\\____|
+    #                                         
+    # - Configuration for GNU Readline -
+    # Source:         - .dotfiles/000_OrgFiles/ReadlineConfig.org
+    # Target:         - .dotfiles/D14_Terminals/.config/inputrc
+    # Author Email:   - randomly.ventilates@simplelogin.co
+    # Author GitHub:  - https://github.com/RastiGiG/
+    #
+    #----------------------------------------------------------------------------------------------------------------------    
+
+#+end_src
+* Configuration
+** Color
+
+Activate ~colors~ (for completions and more)
+#+begin_src shell
+  #----------------------------COLORS
+  set colored-stats on
+  set colored-completion-prefix on
+  
+#+end_src
+** Easier Keychord Inputs
+
+Increasing the ~timeout~ makes it easier to input [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]-style ~Key Chords~.
+The default of =500ms= is far too ambitious.
+#+begin_src shell
+  #--------------------KEYSEQ-TIMEOUT
+  set keyseq-timeout 1200
+  
+#+end_src

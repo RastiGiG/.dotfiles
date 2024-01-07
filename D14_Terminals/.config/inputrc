@@ -1,0 +1,21 @@
+#----------------------------------------------------------------------------------------------------------------------
+# ___ _   _ ____  _   _ _____ ____   ____ 
+# _ _| \ | |  _ \| | | |_   _|  _ \ / ___|
+# | ||  \| | |_) | | | | | | | |_) | |    
+# | || |\  |  __/| |_| | | | |  _ <| |___ 
+# ___|_| \_|_|    \___/  |_| |_| \_\\____|
+#                                         
+# - Configuration for GNU Readline -
+# Source:         - .dotfiles/000_OrgFiles/ReadlineConfig.org
+# Target:         - .dotfiles/D14_Terminals/.config/inputrc
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#
+#----------------------------------------------------------------------------------------------------------------------
+
+#----------------------------COLORS
+set colored-stats on
+set colored-completion-prefix on
+
+#--------------------KEYSEQ-TIMEOUT
+set keyseq-timeout 1200
