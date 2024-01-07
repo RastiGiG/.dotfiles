@@ -423,14 +423,6 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
   #----------------------------EXTERNAL FILES
   
 #+end_src
-** Environmental Variables
-#+begin_src bash
-  # Load Environmental Variables
-  SHEnvVar="$HOME/.dotfiles/D01_Bash/.envvar"
-  [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
-  
-#+end_src
-
 ** Functions
 #+begin_src bash
   # Load Bash Functions
@@ -438,15 +430,6 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
   [[ -f $BSHFuncs && -r $BSHFuncs ]] && . "$BSHFuncs"
   
 #+end_src
-** Aliases
-
-#+begin_src bash
-  # Load Shell Aliases
-  SHAlias="$HOME/.dotfiles/D00_Aliases/aliases"
-  [[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
-  
-#+end_src
-
 ** Bash Completion
 
 :NOTE:
@@ -460,7 +443,6 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
   [ -f $UsrBashComp ] && [ -r $UsrBashComp ] && . "$UsrBashComp"
 #+end_src
 :END:
-
 #+begin_src bash
   # Load Bash Completion
   UsrBashComp='/usr/share/bash-completion/bash_completion'
@@ -472,10 +454,16 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
   bind 'TAB:menu-complete'
   
 #+end_src
-** Release Temporary Variables
-
+** Profile
 #+begin_src bash
-  unset SHEnvVar SHAlias BSHFuncs UsrBashComp
+  # Load Profile
+  SHProf="$HOME/.dotfiles/D00_GeneralShellConfiguration/.profile"
+  [[ -f $SHProf && -r $SHProf ]] && . "$SHProf"
+  
+#+end_src
+** Release Temporary Variables
+#+begin_src bash
+  unset BSHFuncs UsrBashComp
   
 #+end_src
 * Load External Programs

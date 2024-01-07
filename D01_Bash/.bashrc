@@ -23,7 +23,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
+      . /etc/bashrc
 fi
 
 # Control Access to Local XServer
@@ -371,17 +371,9 @@ export LESS_TERMCAP_me=$(tput sgr0)
 
 #----------------------------EXTERNAL FILES
 
-# Load Environmental Variables
-SHEnvVar="$HOME/.dotfiles/D01_Bash/.envvar"
-[[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
-
 # Load Bash Functions
 BSHFuncs="$HOME/.dotfiles/D01_Bash/.bash_functions"
 [[ -f $BSHFuncs && -r $BSHFuncs ]] && . "$BSHFuncs"
-
-# Load Shell Aliases
-SHAlias="$HOME/.dotfiles/D00_Aliases/aliases"
-[[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
 
 # Load Bash Completion
 UsrBashComp='/usr/share/bash-completion/bash_completion'
@@ -392,7 +384,11 @@ bind 'set show-all-if-ambiguous on'
 # Set up tab to cycle completion options and show options first
 bind 'TAB:menu-complete'
 
-unset SHEnvVar SHAlias BSHFuncs UsrBashComp
+# Load Profile
+SHProf="$HOME/.dotfiles/D00_GeneralShellConfiguration/.profile"
+[[ -f $SHProf && -r $SHProf ]] && . "$SHProf"
+
+unset BSHFuncs UsrBashComp
 
 #----------------------------EXTERNAL PROGRAMS AND SCRIPTS
 
