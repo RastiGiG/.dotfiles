@@ -1,0 +1,50 @@
+#+title: Common Shell Profile Settins
+#+PROPERTY: header-args:sh :tangle ../D00_GeneralShellConfiguration/.profile :mkdirp yes
+#+DESCRIPTION: This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
+#+STARTUP: hideblocks show2levels
+#+OPTIONS:  toc:2
+#+auto_tangle: t
+
+* Header
+#+begin_src sh
+  #----------------------------------------------------------------------------------------------------------------------
+  #  ____  _   _ _____ _     _       ____  ____   ___  _____ ___ _     _____ 
+  # / ___|| | | | ____| |   | |     |  _ \|  _ \ / _ \|  ___|_ _| |   | ____|
+  # \___ \| |_| |  _| | |   | |     | |_) | |_) | | | | |_   | || |   |  _|  
+  #  ___) |  _  | |___| |___| |___  |  __/|  _ <| |_| |  _|  | || |___| |___ 
+  # |____/|_| |_|_____|_____|_____| |_|   |_| \_\\___/|_|   |___|_____|_____|
+  #                                                                          
+  # - Common Profile settings for login shells
+  # Source:         - .dotfiles/00_OrgFiles/ShellProfile.org
+  # Target:         - .dotfiles/D00_GeneralShellConfiguration/.profile
+  # Author Email:   - randomly.ventilates@simplelogin.co
+  # Author GitHub:  - https://github.com/RastiGiG/
+  #
+  #
+  #----------------------------------------------------------------------------------------------------------------------    
+
+#+end_src
+* Load External Files
+#+begin_src sh
+  #----------------------------EXTERNAL FILES
+  
+#+end_src
+** Environmental Variables
+#+begin_src sh
+  # Load Environmental Variables
+  SHEnvVar="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+  [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
+  
+#+end_src
+** Aliases
+#+begin_src bash
+  # Load Shell Aliases
+  SHAlias="$HOME/.dotfiles/D00_GeneralShellConfiguration/aliases"
+  [[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
+  
+#+end_src
+** Release Temporary Variables
+#+begin_src sh
+  unset SHEnvVar SHAlias
+  
+#+end_src

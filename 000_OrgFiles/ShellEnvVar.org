@@ -67,17 +67,29 @@ Default is the =shell= version.
   # Add texlive to infopath
   if ! [[ "$INFOPATH" =~ "/usr/local/share/info:/usr/share/info" ]]
   then
-	  INFOPATH="/usr/local/share/info:/usr/share/info:$INFOPATH"
+	  INFOPATH="/usr/local/share/info:/usr/share/info"
   fi
 
   # Add texlive to infopath
-  if ! [[ "$INFOPATH" =~ "/usr/local/texlive/current/texmf-dist/doc/info:" ]]
+  if ! [[ "$INFOPATH" =~ "/usr/local/texlive/current/texmf-dist/doc/info" ]]
   then
 	  INFOPATH="/usr/local/texlive/current/texmf-dist/doc/info:$INFOPATH"
   fi
 
   export INFOPATH
 
+#+end_src
+** INPUTRC
+#+begin_src shell
+  #---------------------------INPUTRC
+  # Add inputrc config path (GNU Readline) 
+  if ! [[ "$INPUTRC" = "~/.config/inputrc" ]]
+  then
+  	  INPUTRC="~/.config/inputrc"
+  fi
+
+  export INPUTRC
+  
 #+end_src
 ** BIBINPUTS
 This is meant to be the path to the Main Bibliography file
@@ -151,3 +163,4 @@ This is meant to be the path to the Main Bibliography file
   export VAGRANT_DEFAULT_PROVIDER
 
 #+end_src
+
