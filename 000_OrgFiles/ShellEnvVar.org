@@ -1,5 +1,5 @@
 #+title: Shell Environmental Variables
-#+PROPERTY: header-args:shell :tangle ../D01_Bash/.envvar :mkdirp yes
+#+PROPERTY: header-args:shell :tangle ../D00_GeneralShellConfiguration/.envvar :mkdirp yes
 #+STARTUP: show2levels
 #+auto_tangle: t
 

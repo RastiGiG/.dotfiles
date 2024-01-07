@@ -39,16 +39,25 @@ export PATH
 # Add texlive to infopath
 if ! [[ "$INFOPATH" =~ "/usr/local/share/info:/usr/share/info" ]]
 then
-	INFOPATH="/usr/local/share/info:/usr/share/info:$INFOPATH"
+	INFOPATH="/usr/local/share/info:/usr/share/info"
 fi
 
 # Add texlive to infopath
-if ! [[ "$INFOPATH" =~ "/usr/local/texlive/current/texmf-dist/doc/info:" ]]
+if ! [[ "$INFOPATH" =~ "/usr/local/texlive/current/texmf-dist/doc/info" ]]
 then
 	INFOPATH="/usr/local/texlive/current/texmf-dist/doc/info:$INFOPATH"
 fi
 
 export INFOPATH
+
+#---------------------------INPUTRC
+# Add inputrc config path (GNU Readline) 
+if ! [[ "$INPUTRC" = "~/.config/inputrc" ]]
+then
+  	INPUTRC="~/.config/inputrc"
+fi
+
+export INPUTRC
 
 #-------------------------BIBINPUTS
 # Add Bibliography Input Path Variable
