@@ -20,4 +20,8 @@
 SHEnvVar="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
 [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
 
-unset SHEnvVar SHAlias
+# Load Shell Functions
+SHFuncs="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+[[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
+
+unset SHEnvVar SHFuncs SHAlias

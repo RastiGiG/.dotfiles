@@ -36,6 +36,13 @@
   [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
   
 #+end_src
+** Shell Functions
+#+begin_src sh
+  # Load Shell Functions
+  SHFuncs="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+  [[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
+  
+#+end_src
 ** Aliases
 #+begin_src bash
   # Load Shell Aliases
@@ -45,6 +52,6 @@
 #+end_src
 ** Release Temporary Variables
 #+begin_src sh
-  unset SHEnvVar SHAlias
+  unset SHEnvVar SHFuncs SHAlias
   
 #+end_src
