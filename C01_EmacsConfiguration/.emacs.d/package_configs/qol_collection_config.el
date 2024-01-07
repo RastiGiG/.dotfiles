@@ -1,9 +1,13 @@
 ;; Package to setup Path Variable (and more) in Emacs
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :config
+  ;; Load binary directories like =.cargo/bin/= and =.local/bin= on Linux and OS X
+  (when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize)))
 
-;; Read Path from Shell Setup when Emacs Server is launched through SystemD
-(when (daemonp)
-  (exec-path-from-shell-initialize))
+;; ;; Read Path from Shell Setup when Emacs Server is launched through SystemD
+;; (when (daemonp)
+;;   (exec-path-from-shell-initialize))
 
 ;; Copy values of other Environment Variables
 ;; (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))

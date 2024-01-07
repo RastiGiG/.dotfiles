@@ -48,7 +48,6 @@
 
   ;; Add Lsp Functions to Leader Keys
   (pet/leader-keys
-    "tl"  '(:ignore t :which-key "lsp")
     "tld" 'xref-find-definitions
     "tlr" 'xref-find-references
     ;; "tln" 'lsp-ui-find-next-reference

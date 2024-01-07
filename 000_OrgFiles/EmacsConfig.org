@@ -534,7 +534,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
   ;; Layouts
   "l"     '(:ignore t :which-key "Layout")
   "lw"    '(winner-undo :which-key "Winner Undo")
-  
+
 
   ;; Authentication
   "a"     '(:ignore t :which-key "Authentification")
@@ -585,6 +585,9 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
   			:which-key "RGB")
   "thch"  '(pet/syntax-color-hsv
   			:which-key "HSV")
+  ;; Toggles - Language Server
+  "tl"    '(:ignore t :which-key "LSP") 
+  "tls"   '(eglot :which-key "Start LSP with Eglot")
   ;; Toggles - Modes
   "tm"    '(:ignore t :which-key "Modes")
   "tmv"   '(:ignore t :which-key "Modes with v..")
@@ -754,11 +757,15 @@ There's also a [[https://pdftools.wiki/][wiki]] for it.
 Information can be found here: [[https://github.com/purcell/exec-path-from-shell][GitHub.com: Purcell - Exec Path from Shell]]
 #+begin_src emacs-lisp
   ;; Package to setup Path Variable (and more) in Emacs
-  (use-package exec-path-from-shell)
+  (use-package exec-path-from-shell
+    :config
+    ;; Load binary directories like =.cargo/bin/= and =.local/bin= on Linux and OS X
+    (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
-  ;; Read Path from Shell Setup when Emacs Server is launched through SystemD
-  (when (daemonp)
-    (exec-path-from-shell-initialize))
+  ;; ;; Read Path from Shell Setup when Emacs Server is launched through SystemD
+  ;; (when (daemonp)
+  ;;   (exec-path-from-shell-initialize))
 
   ;; Copy values of other Environment Variables
   ;; (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
@@ -3010,7 +3017,6 @@ The which-key integration adds helpful descriptions of the various keys so you s
 
     ;; Add Lsp Functions to Leader Keys
     (pet/leader-keys
-      "tl"  '(:ignore t :which-key "lsp")
       "tld" 'xref-find-definitions
       "tlr" 'xref-find-references
       ;; "tln" 'lsp-ui-find-next-reference

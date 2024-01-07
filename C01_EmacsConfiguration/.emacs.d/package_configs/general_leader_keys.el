@@ -55,6 +55,9 @@
   		      :which-key "RGB")
 "thch"  '(pet/syntax-color-hsv
   		      :which-key "HSV")
+;; Toggles - Language Server
+"tl"    '(:ignore t :which-key "LSP") 
+"tls"   '(eglot :which-key "Start LSP with Eglot")
 ;; Toggles - Modes
 "tm"    '(:ignore t :which-key "Modes")
 "tmv"   '(:ignore t :which-key "Modes with v..")
