@@ -91,6 +91,20 @@
 (setq term-prompt-regexp
       "^[^#$%>\\n]*[#$%>] *")
 
+;; Don’t spawn buffers left and right
+(setq dictionary-use-single-buffer t);
+
+;; Display dictionary as a sidebar left
+;; mandatory, as the dictionary misbehaves!
+(setq switch-to-buffer-obey-display-actions t)
+(add-to-list 'display-buffer-alist
+   '("^\\*Dictionary\\*" display-buffer-in-side-window
+     (side . left)
+     (window-width . 50)))
+
+;; Make Emacs use the local server
+(setq dictionary-server "localhost")
+
 ;; Setup World Clock list
 ;; If not set, zoneinfo-style-world-list is used
 (setq world-clock-list

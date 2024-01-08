@@ -151,6 +151,26 @@ Setting up the *integrated* ~terminal emulator~
         "^[^#$%>\\n]*[#$%>] *")
   
 #+end_src
+** Dictionary
+
+This section was copied from:
+- [[https://www.masteringemacs.org/article/wordsmithing-in-emacs][MasteringEmacs.org: Wordsmithing in Emacs]]
+#+begin_src emacs-lisp
+  ;; Don’t spawn buffers left and right
+  (setq dictionary-use-single-buffer t);
+
+  ;; Display dictionary as a sidebar left
+  ;; mandatory, as the dictionary misbehaves!
+  (setq switch-to-buffer-obey-display-actions t)
+  (add-to-list 'display-buffer-alist
+     '("^\\*Dictionary\\*" display-buffer-in-side-window
+       (side . left)
+       (window-width . 50)))
+
+  ;; Make Emacs use the local server
+  (setq dictionary-server "localhost")
+
+#+end_src
 ** World Clocks
 [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] can display the curren clocktime for various places around the world with the command =world-clock=
 #+begin_src emacs-lisp
