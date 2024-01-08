@@ -834,6 +834,7 @@ The [[https://github.com/tldr-pages/tldr][tldr-pages]] project is a collection o
 
 [[https://github.com/rejeep/drag-stuff.el][Drag Stuff]] is a ~minor mode~ for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] that makes it possible to drag stuff (words, region, lines) around in Emacs.  When ‘drag-stuff-define-keys’ is enabled, then the following keybindings are set: =M-up=, =M-down=, =M-left=, and =M-right=.
 #+begin_src emacs-lisp
+  ;; Add Drag Stuff Mode
   (use-package drag-stuff
     :init
     (drag-stuff-global-mode 1)
@@ -841,7 +842,10 @@ The [[https://github.com/tldr-pages/tldr][tldr-pages]] project is a collection o
     (evil-define-key 'visual drag-stuff-mode-map (kbd "K") 'drag-stuff-up)
     (evil-define-key 'visual drag-stuff-mode-map (kbd "J") 'drag-stuff-down)
     (evil-define-key 'visual drag-stuff-mode-map (kbd "H") 'drag-stuff-left)
-    (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right))
+    (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right)
+
+    (pet/leader-keys
+  	"tmd" '(drag-stuff-mode :wk "Drag Stuff Mode")))
 
 #+end_src
 *** Sudo-Edit

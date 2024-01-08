@@ -34,6 +34,7 @@
   ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key))
 
+;; Add Drag Stuff Mode
 (use-package drag-stuff
   :init
   (drag-stuff-global-mode 1)
@@ -41,4 +42,7 @@
   (evil-define-key 'visual drag-stuff-mode-map (kbd "K") 'drag-stuff-up)
   (evil-define-key 'visual drag-stuff-mode-map (kbd "J") 'drag-stuff-down)
   (evil-define-key 'visual drag-stuff-mode-map (kbd "H") 'drag-stuff-left)
-  (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right))
+  (evil-define-key 'visual drag-stuff-mode-map (kbd "L") 'drag-stuff-right)
+
+  (pet/leader-keys
+      "tmd" '(drag-stuff-mode :wk "Drag Stuff Mode")))
