@@ -172,8 +172,8 @@
   		 ;; ;; Load Company Configuration
   		 ;; "package_configs/company_config.el"
 
-  		 ;; Load Consult Configuration
-  		 "package_configs/consult_config.el"
+  		 ;; ;; Load Consult Configuration
+  		 ;; "package_configs/consult_config.el"
 
   		 ;; ;; Load Traditional Language Modes
   		 ;; "package_configs/language_modes_config.el"

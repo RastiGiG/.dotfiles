@@ -1,12 +1,3 @@
-;; Enable Flycheck for syntax checking.
-;; Defer loading until used with lsp-mode
-(use-package flycheck
-  :defer t
-  :diminish
-  :init (global-flycheck-mode))
-  ;; :hook (lsp-mode . flycheck-mode)
-  ;; (emacs-lisp-mode . flycheck-mode)
-
 ;;  Add Git Timemachine
 (use-package git-timemachine
   :after (git-timemachine evil)

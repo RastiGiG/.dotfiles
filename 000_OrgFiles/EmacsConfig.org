@@ -369,8 +369,8 @@ Version mismatch is commonly encountered in the following situations:
   		   ;; ;; Load Company Configuration
   		   ;; "package_configs/company_config.el"
 
-  		   ;; Load Consult Configuration
-  		   "package_configs/consult_config.el"
+  		   ;; ;; Load Consult Configuration
+  		   ;; "package_configs/consult_config.el"
 
   		   ;; ;; Load Traditional Language Modes
   		   ;; "package_configs/language_modes_config.el"
@@ -392,6 +392,9 @@ Version mismatch is commonly encountered in the following situations:
 
   		   ;; ;; Load Password Store Configuration
   		   ;; "package_configs/password_store_config.el"
+
+  		   ;; Load TOTP Configuration
+  		   "package_configs/totp_config.el"
 
   		   ;; ;; Load EBDB Configuration
   		   ;; "package_configs/ebdb_config.el"
@@ -2277,6 +2280,11 @@ This Setting is meant to make that highlighting stand out more
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/consult_config.el :mkdirp yes
 :END:
 [[https://github.com/minad/consult][Consult]] is a Completion Engine that's fully compatible with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] Buitlin Completion Engine
+#+begin_src emacs-lisp
+  ;; Load Consult
+  (use-package consult)
+  
+#+end_src
 ** Company Mode
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/company_config.el :mkdirp yes
@@ -2430,8 +2438,10 @@ Information can be found here: [[https://github.com/sebastiencs/company-box][Git
 :END:
 *** Flycheck
 
-[[https://www.flycheck.org/en/latest/user/quickstart.html][Flycheck]] adds syntax checking capagilities. We set it up to be loaded together with =lsp-mode=. You could also load it globally.
-#+begin_src emacs-lisp
+[[https://www.flycheck.org/en/latest/user/quickstart.html][Flycheck]] adds syntax checking capagilities.
+It needs should be loaded together with =lsp-mode= or =eglot=.
+You could also load it globally.
+#+begin_src emacs-lisp :tangle no
   ;; Enable Flycheck for syntax checking.
   ;; Defer loading until used with lsp-mode
   (use-package flycheck
@@ -2439,7 +2449,7 @@ Information can be found here: [[https://github.com/sebastiencs/company-box][Git
     :diminish
     :init (global-flycheck-mode))
     ;; :hook (lsp-mode . flycheck-mode)
-    ;; (emacs-lisp-mode . flycheck-mode)
+    ;; (emacs-lisp-mode . flycheck-mode))
 
 #+end_src
 *** Git Time Machine
