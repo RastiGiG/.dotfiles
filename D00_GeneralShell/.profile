@@ -21,7 +21,11 @@ SHEnvVar="$HOME/.dotfiles/D00_GeneralShell/.envvar"
 [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
 
 # Load Shell Functions
-SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_function"
+SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_functions"
 [[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
+
+# Load Shell Aliases
+SHAlias="$HOME/.dotfiles/D00_GeneralShell/aliases"
+[[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
 
 unset SHEnvVar SHFuncs SHAlias

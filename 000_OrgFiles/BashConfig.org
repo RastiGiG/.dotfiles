@@ -463,7 +463,7 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
 #+end_src
 ** Release Temporary Variables
 #+begin_src bash
-  unset BSHFuncs UsrBashComp
+  unset SHProf BSHFuncs UsrBashComp
   
 #+end_src
 * Load External Programs

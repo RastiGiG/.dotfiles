@@ -39,12 +39,12 @@
 ** Shell Functions
 #+begin_src sh
   # Load Shell Functions
-  SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_function"
+  SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_functions"
   [[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
   
 #+end_src
 ** Aliases
-#+begin_src bash
+#+begin_src sh
   # Load Shell Aliases
   SHAlias="$HOME/.dotfiles/D00_GeneralShell/aliases"
   [[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"

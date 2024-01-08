@@ -388,7 +388,7 @@ bind 'TAB:menu-complete'
 SHProf="$HOME/.dotfiles/D00_GeneralShell/.profile"
 [[ -f $SHProf && -r $SHProf ]] && . "$SHProf"
 
-unset BSHFuncs UsrBashComp
+unset SHProf BSHFuncs UsrBashComp
 
 #----------------------------EXTERNAL PROGRAMS AND SCRIPTS
 
