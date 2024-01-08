@@ -1,5 +1,5 @@
 #+title: Common Shell Profile Settins
-#+PROPERTY: header-args:sh :tangle ../D00_GeneralShellConfiguration/.profile :mkdirp yes
+#+PROPERTY: header-args:sh :tangle ../D00_GeneralShell/.profile :mkdirp yes
 #+DESCRIPTION: This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
 #+STARTUP: hideblocks show2levels
 #+OPTIONS:  toc:2
@@ -16,7 +16,7 @@
   #                                                                          
   # - Common Profile settings for login shells
   # Source:         - .dotfiles/00_OrgFiles/ShellProfile.org
-  # Target:         - .dotfiles/D00_GeneralShellConfiguration/.profile
+  # Target:         - .dotfiles/D00_GeneralShell/.profile
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #
@@ -32,21 +32,21 @@
 ** Environmental Variables
 #+begin_src sh
   # Load Environmental Variables
-  SHEnvVar="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+  SHEnvVar="$HOME/.dotfiles/D00_GeneralShell/.envvar"
   [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
   
 #+end_src
 ** Shell Functions
 #+begin_src sh
   # Load Shell Functions
-  SHFuncs="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+  SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_function"
   [[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
   
 #+end_src
 ** Aliases
 #+begin_src bash
   # Load Shell Aliases
-  SHAlias="$HOME/.dotfiles/D00_GeneralShellConfiguration/aliases"
+  SHAlias="$HOME/.dotfiles/D00_GeneralShell/aliases"
   [[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
   
 #+end_src

@@ -1,5 +1,5 @@
 #+title: Shell Environmental Variables
-#+PROPERTY: header-args:shell :tangle ../D00_GeneralShellConfiguration/.envvar :mkdirp yes
+#+PROPERTY: header-args:shell :tangle ../D00_GeneralShell/.envvar :mkdirp yes
 #+STARTUP: show2levels
 #+auto_tangle: t
 
@@ -19,7 +19,7 @@ This ~File~ is meant to *outsource* Environmental Variables in order to load the
   #                                          
   # - Collection of Environmental Variables for Shells -
   # Source:         - .dotfiles/000_OrgFiles/ShellEnvVar.org
-  # Target:         - .dotfiles/D01_Bash/.envvar
+  # Target:         - .dotfiles/D00_GeneralShell/.envvar
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #

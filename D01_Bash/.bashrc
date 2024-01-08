@@ -385,7 +385,7 @@ bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 
 # Load Profile
-SHProf="$HOME/.dotfiles/D00_GeneralShellConfiguration/.profile"
+SHProf="$HOME/.dotfiles/D00_GeneralShell/.profile"
 [[ -f $SHProf && -r $SHProf ]] && . "$SHProf"
 
 unset BSHFuncs UsrBashComp

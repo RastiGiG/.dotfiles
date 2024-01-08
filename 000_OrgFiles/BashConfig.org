@@ -457,7 +457,7 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
 ** Profile
 #+begin_src bash
   # Load Profile
-  SHProf="$HOME/.dotfiles/D00_GeneralShellConfiguration/.profile"
+  SHProf="$HOME/.dotfiles/D00_GeneralShell/.profile"
   [[ -f $SHProf && -r $SHProf ]] && . "$SHProf"
   
 #+end_src

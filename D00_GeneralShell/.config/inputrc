@@ -7,7 +7,7 @@
 #                                         
 # - Configuration for GNU Readline -
 # Source:         - .dotfiles/000_OrgFiles/ReadlineConfig.org
-# Target:         - .dotfiles/D14_Terminals/.config/inputrc
+# Target:         - .dotfiles/D00_GeneralShell/.config/inputrc
 # Author Email:   - randomly.ventilates@simplelogin.co
 # Author GitHub:  - https://github.com/RastiGiG/
 #

@@ -7,7 +7,7 @@
 #                                                                          
 # - Common Profile settings for login shells
 # Source:         - .dotfiles/00_OrgFiles/ShellProfile.org
-# Target:         - .dotfiles/D00_GeneralShellConfiguration/.profile
+# Target:         - .dotfiles/D00_GeneralShell/.profile
 # Author Email:   - randomly.ventilates@simplelogin.co
 # Author GitHub:  - https://github.com/RastiGiG/
 #
@@ -17,11 +17,11 @@
 #----------------------------EXTERNAL FILES
 
 # Load Environmental Variables
-SHEnvVar="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+SHEnvVar="$HOME/.dotfiles/D00_GeneralShell/.envvar"
 [[ -f $SHEnvVar && -r $SHEnvVar ]] && . "$SHEnvVar"
 
 # Load Shell Functions
-SHFuncs="$HOME/.dotfiles/D00_GeneralShellConfiguration/.envvar"
+SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_function"
 [[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
 
 unset SHEnvVar SHFuncs SHAlias

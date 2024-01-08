@@ -1,7 +1,7 @@
 #+TITLE:    Configuration for GNU Readline
 #+DESCRIPTION: GNU Readline is a Library that is used by many command line tools with prompts like Bash, the Python-Shell and SQL Interpreters (psql, sqlite)
 #+DATE:     [2024-01-07]
-#+PROPERTY: header-args:shell :tangle ../D00_GeneralShellConfiguration/.config/inputrc :mkdirp yes
+#+PROPERTY: header-args:shell :tangle ../D00_GeneralShell/.config/inputrc :mkdirp yes
 #+STARTUP: hideblocks show2levels
 #+OPTIONS:  toc:2
 #+auto_tangle: t
@@ -25,7 +25,7 @@ There’s a good guide on this tool from ~MasteringEmacs~:
     #                                         
     # - Configuration for GNU Readline -
     # Source:         - .dotfiles/000_OrgFiles/ReadlineConfig.org
-    # Target:         - .dotfiles/D14_Terminals/.config/inputrc
+    # Target:         - .dotfiles/D00_GeneralShell/.config/inputrc
     # Author Email:   - randomly.ventilates@simplelogin.co
     # Author GitHub:  - https://github.com/RastiGiG/
     #

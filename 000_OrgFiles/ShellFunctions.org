@@ -1,5 +1,5 @@
 #+title: Common Shell Functions
-#+PROPERTY: header-args:sh :tangle ../D00_GeneralShellConfiguration/shell_function :mkdirp yes
+#+PROPERTY: header-args:sh :tangle ../D00_GeneralShell/shell_functions :mkdirp yes
 #+DESCRIPTION: This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
 #+STARTUP: hideblocks show2levels
 #+OPTIONS:  toc:2
@@ -22,7 +22,7 @@
   #                                                     
   # - List of Common Shell Functions
   # Source:         - .dotfiles/00_OrgFiles/ShellFunctions.org
-  # Target:         - .dotfiles/D00_GeneralShellConfiguration/shell_function
+  # Target:         - .dotfiles/D00_GeneralShell/shell_functions
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #

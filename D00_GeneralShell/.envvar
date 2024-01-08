@@ -7,7 +7,7 @@
 #                                          
 # - Collection of Environmental Variables for Shells -
 # Source:         - .dotfiles/000_OrgFiles/ShellEnvVar.org
-# Target:         - .dotfiles/D01_Bash/.envvar
+# Target:         - .dotfiles/D00_GeneralShell/.envvar
 # Author Email:   - randomly.ventilates@simplelogin.co
 # Author GitHub:  - https://github.com/RastiGiG/
 #
