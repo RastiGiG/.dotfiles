@@ -1283,8 +1283,10 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 [[https://github.com/emacs-helm/helm/wiki][Helm]] is an alternative completion framework that is very modular and offers a bunch of extensions
 #+begin_src emacs-lisp
   ;; Load Helm Completion
-  (use-package helm)
-  
+  (use-package helm
+    :init
+    (helm-mode 1))
+
 #+end_src
 *** Helm Extensions
 **** Helm-mu
