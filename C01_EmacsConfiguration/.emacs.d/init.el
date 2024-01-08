@@ -74,135 +74,141 @@
 ;; Load Basic QoL Adjustments
 (pet/load-file (concat pet/dotfiles-emacsconfig-dir "lisp/basic_qol.el"))
 
-;; Load Evil Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/evil_config.el"))
+(cl-loop for config in
+  	       ;; Load Evil Configuration
+         '("package_configs/evil_config.el"
 
-;; Load General Configuration adjusted for Evil
-(pet/load-file (concat user-emacs-directory "package_configs/general_evil_config.el"))
-;; Load General Leader Keys after General init
-(pet/load-file (concat user-emacs-directory "package_configs/general_leader_keys.el"))
+  		 ;; Load General Configuration adjusted for Evil
+  		 "package_configs/general_evil_config.el"
+  		 ;; Load General Leader Keys after General init
+  		 "package_configs/general_leader_keys.el"
 
-;; ;; Load General Configuration for standard Emacs
-;; (pet/load-file (concat user-emacs-directory "package_configs/general_standard_config.el"))
-;; ;; Load General Leader Keys after General init
-;; (pet/load-file (concat user-emacs-directory "package_configs/general_leader_keys.el"))
+  		 ;; ;; Load General Configuration for standard Emacs
+  		 ;; "package_configs/general_standard_config.el"
+  		 ;; ;; Load General Leader Keys after General init
+  		 ;; "package_configs/general_leader_keys.el"
 
-;; Load Which Key Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/which_key_config.el"))
+  		 ;; Load Which Key Configuration
+  		 "package_configs/which_key_config.el"
 
-;; Load Dired Extensions Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/dired_extensions_config.el"))
+  		 ;; Load Dired Extensions Configuration
+  		 "package_configs/dired_extensions_config.el"
 
-;; ;; Load Ranger Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/ranger_config.el"))
+  		 ;; ;; Load Ranger Configuration
+  		 ;; "package_configs/ranger_config.el"
 
-;; Load PDF-Tools Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/pdf_tools_config.el"))
+  		 ;; Load PDF-Tools Configuration
+  		 "package_configs/pdf_tools_config.el"
 
-;; Load All The Icons Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/all_the_icons_config.el"))
+  		 ;; Load All The Icons Configuration
+  		 "package_configs/all_the_icons_config.el"
 
-;; Load Doom Modeline Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/modeline_config.el"))
+  		 ;; Load Doom Modeline Configuration
+  		 "package_configs/modeline_config.el"
 
-;; Load Themes Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/themes_config.el"))
+  		 ;; Load Themes Configuration
+  		 "package_configs/themes_config.el"
 
-;; Load QoL Extensions Collection Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/qol_collection_config.el"))
+  		 ;; Load QoL Extensions Collection Configuration
+  		 "package_configs/qol_collection_config.el"
 
-;; ;; Load Undo-Tree Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/undo_tree_config.el"))
+  		 ;; Load Projectile Configuration
+  		 "package_configs/projectile_config.el"
 
-;; ;; Load Multiple Cursors Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/multiple_cursors_config.el"))
+  		 ;; ;; Load Undo-Tree Configuration
+  		 ;; "package_configs/undo_tree_config.el"
 
-;; Load Yasnippets Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/yasnippets_config.el"))
+  		 ;; ;; Load Multiple Cursors Configuration
+  		 ;; "package_configs/multiple_cursors_config.el"
 
-;; Load Dashboard Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/dashboard_config.el"))
+  		 ;; Load Yasnippets Configuration
+  		 "package_configs/yasnippets_config.el"
 
-;; ;; Load Beacon Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/beacon_config.el"))
+  		 ;; Load Dashboard Configuration
+  		 "package_configs/dashboard_config.el"
 
-;; Load GUI Extensions Collection
-(pet/load-file (concat user-emacs-directory "package_configs/gui_extensions_config.el"))
+  		 ;; ;; Load Beacon Configuration
+  		 ;; "package_configs/beacon_config.el"
 
-;; Load Ivy (and Counsel) Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/ivy_config.el"))
+  		 ;; Load GUI Extensions Collection
+  		 "package_configs/gui_extensions_config.el"
 
-;; ;; Load Helm Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/helm_config.el"))
+  		 ;; Load Ivy (and Counsel) Configuration
+  		 "package_configs/ivy_config.el"
 
-;; Load Perspective Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/perspective_config.el"))
+  		 ;; ;; Load Helm Configuration
+  		 ;; "package_configs/helm_config.el"
 
-;; Load Treemacs Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/treemacs_config.el"))
+  		 ;; Load Perspective Configuration
+  		 "package_configs/perspective_config.el"
 
-;; ;; Load Neotree Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/neotree_config.el"))
+  		 ;; Load Treemacs Configuration
+  		 "package_configs/treemacs_config.el"
 
-;; ;; Load Hydra Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/hydra_config.el"))
+  		 ;; ;; Load Neotree Configuration
+  		 ;; "package_configs/neotree_config.el"
 
-;; Load Org Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/org_config.el"))
+  		 ;; ;; Load Hydra Configuration
+  		 ;; "package_configs/hydra_config.el"
 
-;; Load Ledger Mode Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/ledger_mode_config.el"))
+  		 ;; Load Org Configuration
+  		 "package_configs/org_config.el"
 
-;; Load Vterm Mode Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/vterm_config.el"))
+  		 ;; Load Ledger Mode Configuration
+  		 "package_configs/ledger_mode_config.el"
 
-;; Load EShell Mode Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/eshell_config.el"))
+  		 ;; Load Vterm Mode Configuration
+  		 "package_configs/vterm_config.el"
 
-;; Load Magit Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/magit_config.el"))
+  		 ;; Load EShell Mode Configuration
+  		 "package_configs/eshell_config.el"
 
-;; Load Developement Tools Collection Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/dev_tools_collection_config.el"))
+  		 ;; Load Magit Configuration
+  		 "package_configs/magit_config.el"
 
-;; ;; Load Company Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/company_config.el"))
+  		 ;; Load Developement Tools Collection Configuration
+  		 "package_configs/dev_tools_collection_config.el"
 
-;; Load Consult Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/consult_config.el"))
+  		 ;; ;; Load Company Configuration
+  		 ;; "package_configs/company_config.el"
 
-;; ;; Load Traditional Language Modes
-;; (pet/load-file (concat user-emacs-directory "package_configs/language_modes_config.el"))
+  		 ;; Load Consult Configuration
+  		 "package_configs/consult_config.el"
 
-;; Load Tree-Sitter Language Modes
-(pet/load-file (concat user-emacs-directory "package_configs/language_ts_modes_config.el"))
+  		 ;; ;; Load Traditional Language Modes
+  		 ;; "package_configs/language_modes_config.el"
 
-;; ;; Load LSP Mode Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/lsp_mode_config.el"))
+  		 ;; Load Tree-Sitter Language Modes
+  		 "package_configs/language_ts_modes_config.el"
 
-;; ;; Load Eglo Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/eglot_config.el"))
+  		 ;; ;; Load LSP Mode Configuration
+  		 ;; "package_configs/lsp_mode_config.el"
 
-;; ;; Load Citeproc Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
+  		 ;; ;; Load Eglo Configuration
+  		 ;; "package_configs/eglot_config.el"
 
-;; Load mu4e Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
+  		 ;; ;; Load Citeproc Configuration
+  		 ;; "package_configs/citeproc_config.el"
 
-;; ;; Load Password Store Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/password_store_config.el"))
+  		 ;; Load mu4e Configuration
+  		 "package_configs/mu4e_config.el"
 
-;; ;; Load EBDB Configuration
-;; (pet/load-file (concat user-emacs-directory "package_configs/ebdb_config.el"))
+  		 ;; ;; Load Password Store Configuration
+  		 ;; "package_configs/password_store_config.el"
 
-;; Load Elfeed Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/elfeed_config.el"))
+  		 ;; ;; Load EBDB Configuration
+  		 ;; "package_configs/ebdb_config.el"
 
-;; Load ERC Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
+  		 ;; Load Elfeed Configuration
+  		 "package_configs/elfeed_config.el"
 
-;; Load ERadio Configuration
-(pet/load-file (concat user-emacs-directory "package_configs/eradio_config.el"))
+  		 ;; Load ERC Configuration
+  		 "package_configs/erc_config.el"
+
+  		 ;; Load ERadio Configuration
+           "package_configs/eradio_config.el")
+         do
+         (pet/load-file (concat user-emacs-directory config)))
 
 (pet/leader-keys
       "E"   '(:ignore t :which-key "eval")

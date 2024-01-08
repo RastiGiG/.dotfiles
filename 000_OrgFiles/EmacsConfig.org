@@ -270,135 +270,141 @@ Version mismatch is commonly encountered in the following situations:
 #+end_src
 * Load Package Configurations
 #+begin_src emacs-lisp
-  ;; Load Evil Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/evil_config.el"))
+  (cl-loop for config in
+  		 ;; Load Evil Configuration
+           '("package_configs/evil_config.el"
 
-  ;; Load General Configuration adjusted for Evil
-  (pet/load-file (concat user-emacs-directory "package_configs/general_evil_config.el"))
-  ;; Load General Leader Keys after General init
-  (pet/load-file (concat user-emacs-directory "package_configs/general_leader_keys.el"))
+  		   ;; Load General Configuration adjusted for Evil
+  		   "package_configs/general_evil_config.el"
+  		   ;; Load General Leader Keys after General init
+  		   "package_configs/general_leader_keys.el"
 
-  ;; ;; Load General Configuration for standard Emacs
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/general_standard_config.el"))
-  ;; ;; Load General Leader Keys after General init
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/general_leader_keys.el"))
+  		   ;; ;; Load General Configuration for standard Emacs
+  		   ;; "package_configs/general_standard_config.el"
+  		   ;; ;; Load General Leader Keys after General init
+  		   ;; "package_configs/general_leader_keys.el"
 
-  ;; Load Which Key Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/which_key_config.el"))
+  		   ;; Load Which Key Configuration
+  		   "package_configs/which_key_config.el"
 
-  ;; Load Dired Extensions Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/dired_extensions_config.el"))
+  		   ;; Load Dired Extensions Configuration
+  		   "package_configs/dired_extensions_config.el"
 
-  ;; ;; Load Ranger Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/ranger_config.el"))
+  		   ;; ;; Load Ranger Configuration
+  		   ;; "package_configs/ranger_config.el"
 
-  ;; Load PDF-Tools Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/pdf_tools_config.el"))
+  		   ;; Load PDF-Tools Configuration
+  		   "package_configs/pdf_tools_config.el"
 
-  ;; Load All The Icons Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/all_the_icons_config.el"))
+  		   ;; Load All The Icons Configuration
+  		   "package_configs/all_the_icons_config.el"
 
-  ;; Load Doom Modeline Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/modeline_config.el"))
+  		   ;; Load Doom Modeline Configuration
+  		   "package_configs/modeline_config.el"
 
-  ;; Load Themes Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/themes_config.el"))
+  		   ;; Load Themes Configuration
+  		   "package_configs/themes_config.el"
 
-  ;; Load QoL Extensions Collection Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/qol_collection_config.el"))
+  		   ;; Load QoL Extensions Collection Configuration
+  		   "package_configs/qol_collection_config.el"
 
-  ;; ;; Load Undo-Tree Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/undo_tree_config.el"))
+  		   ;; Load Projectile Configuration
+  		   "package_configs/projectile_config.el"
 
-  ;; ;; Load Multiple Cursors Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/multiple_cursors_config.el"))
+  		   ;; ;; Load Undo-Tree Configuration
+  		   ;; "package_configs/undo_tree_config.el"
 
-  ;; Load Yasnippets Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/yasnippets_config.el"))
+  		   ;; ;; Load Multiple Cursors Configuration
+  		   ;; "package_configs/multiple_cursors_config.el"
 
-  ;; Load Dashboard Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/dashboard_config.el"))
+  		   ;; Load Yasnippets Configuration
+  		   "package_configs/yasnippets_config.el"
 
-  ;; ;; Load Beacon Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/beacon_config.el"))
+  		   ;; Load Dashboard Configuration
+  		   "package_configs/dashboard_config.el"
 
-  ;; Load GUI Extensions Collection
-  (pet/load-file (concat user-emacs-directory "package_configs/gui_extensions_config.el"))
+  		   ;; ;; Load Beacon Configuration
+  		   ;; "package_configs/beacon_config.el"
 
-  ;; Load Ivy (and Counsel) Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/ivy_config.el"))
+  		   ;; Load GUI Extensions Collection
+  		   "package_configs/gui_extensions_config.el"
 
-  ;; ;; Load Helm Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/helm_config.el"))
+  		   ;; Load Ivy (and Counsel) Configuration
+  		   "package_configs/ivy_config.el"
 
-  ;; Load Perspective Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/perspective_config.el"))
+  		   ;; ;; Load Helm Configuration
+  		   ;; "package_configs/helm_config.el"
 
-  ;; Load Treemacs Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/treemacs_config.el"))
+  		   ;; Load Perspective Configuration
+  		   "package_configs/perspective_config.el"
 
-  ;; ;; Load Neotree Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/neotree_config.el"))
+  		   ;; Load Treemacs Configuration
+  		   "package_configs/treemacs_config.el"
 
-  ;; ;; Load Hydra Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/hydra_config.el"))
+  		   ;; ;; Load Neotree Configuration
+  		   ;; "package_configs/neotree_config.el"
 
-  ;; Load Org Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/org_config.el"))
+  		   ;; ;; Load Hydra Configuration
+  		   ;; "package_configs/hydra_config.el"
 
-  ;; Load Ledger Mode Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/ledger_mode_config.el"))
+  		   ;; Load Org Configuration
+  		   "package_configs/org_config.el"
 
-  ;; Load Vterm Mode Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/vterm_config.el"))
+  		   ;; Load Ledger Mode Configuration
+  		   "package_configs/ledger_mode_config.el"
 
-  ;; Load EShell Mode Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/eshell_config.el"))
+  		   ;; Load Vterm Mode Configuration
+  		   "package_configs/vterm_config.el"
 
-  ;; Load Magit Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/magit_config.el"))
+  		   ;; Load EShell Mode Configuration
+  		   "package_configs/eshell_config.el"
 
-  ;; Load Developement Tools Collection Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/dev_tools_collection_config.el"))
+  		   ;; Load Magit Configuration
+  		   "package_configs/magit_config.el"
 
-  ;; ;; Load Company Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/company_config.el"))
+  		   ;; Load Developement Tools Collection Configuration
+  		   "package_configs/dev_tools_collection_config.el"
 
-  ;; Load Consult Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/consult_config.el"))
+  		   ;; ;; Load Company Configuration
+  		   ;; "package_configs/company_config.el"
 
-  ;; ;; Load Traditional Language Modes
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/language_modes_config.el"))
+  		   ;; Load Consult Configuration
+  		   "package_configs/consult_config.el"
 
-  ;; Load Tree-Sitter Language Modes
-  (pet/load-file (concat user-emacs-directory "package_configs/language_ts_modes_config.el"))
+  		   ;; ;; Load Traditional Language Modes
+  		   ;; "package_configs/language_modes_config.el"
 
-  ;; ;; Load LSP Mode Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/lsp_mode_config.el"))
+  		   ;; Load Tree-Sitter Language Modes
+  		   "package_configs/language_ts_modes_config.el"
 
-  ;; ;; Load Eglo Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/eglot_config.el"))
+  		   ;; ;; Load LSP Mode Configuration
+  		   ;; "package_configs/lsp_mode_config.el"
 
-  ;; ;; Load Citeproc Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/citeproc_config.el"))
+  		   ;; ;; Load Eglo Configuration
+  		   ;; "package_configs/eglot_config.el"
 
-  ;; Load mu4e Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/mu4e_config.el"))
+  		   ;; ;; Load Citeproc Configuration
+  		   ;; "package_configs/citeproc_config.el"
 
-  ;; ;; Load Password Store Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/password_store_config.el"))
+  		   ;; Load mu4e Configuration
+  		   "package_configs/mu4e_config.el"
 
-  ;; ;; Load EBDB Configuration
-  ;; (pet/load-file (concat user-emacs-directory "package_configs/ebdb_config.el"))
+  		   ;; ;; Load Password Store Configuration
+  		   ;; "package_configs/password_store_config.el"
 
-  ;; Load Elfeed Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/elfeed_config.el"))
+  		   ;; ;; Load EBDB Configuration
+  		   ;; "package_configs/ebdb_config.el"
 
-  ;; Load ERC Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/erc_config.el"))
+  		   ;; Load Elfeed Configuration
+  		   "package_configs/elfeed_config.el"
 
-  ;; Load ERadio Configuration
-  (pet/load-file (concat user-emacs-directory "package_configs/eradio_config.el"))
+  		   ;; Load ERC Configuration
+  		   "package_configs/erc_config.el"
+
+  		   ;; Load ERadio Configuration
+             "package_configs/eradio_config.el")
+           do
+           (pet/load-file (concat user-emacs-directory config)))
 
 #+end_src
 * Keybinding Configuration
@@ -773,7 +779,8 @@ Information can be found here: [[https://github.com/purcell/exec-path-from-shell
 
 #+end_src
 *** Easier Commenting
-If you want to make commenting easier, the following package is very helpful. Despite the name, it is not only restricted to =evil-mode=
+
+If you want to make ~commenting~ easier, the following package is very helpful. Despite the name, it is not only restricted to =evil-mode=
 #+begin_src emacs-lisp
   ;; Easier Commenting, not just for evil-mode
   (use-package evil-nerd-commenter
@@ -867,11 +874,9 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
   (use-package undo-tree
     :config
     (global-undo-tree-mode)
-    (setq undo-tree-history-directory-alist `(("." . ,(concat pet/dotfiles-emacsconfig-dir "undo-tree/"))))
-    )
+    (setq undo-tree-history-directory-alist `(("." . ,(concat pet/dotfiles-emacsconfig-dir "undo-tree/")))))
 
 #+end_src
-
 ** Projectile
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/projectile_config.el :mkdirp yes
@@ -1286,7 +1291,7 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 
 For example, imagine that you have bound =C-c j= and =C-c k= in your config and you want to call them in some (arbitrary) sequence. ~Hydra~ allows you to bind your functions in a way that pressing =C-c jjkk3j5k= is *equivalent to* pressing =C-c j C-c j C-c k C-c k M-3 C-c j M-5 C-c k=. *Any key other* than =j= or =k= *exits this state*.
 
-+ ~Colors~ have a special meaning with ~hydras~ (=:color= ~option~). See the list below:
+- ~Colors~ have a special meaning with ~hydras~ (=:color= ~option~). See the list below:
   
   |----------+----------------------------|
   | Color    | Toggle                     |
@@ -1298,7 +1303,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
   | pink     | :foreign-keys run          |
   |----------+----------------------------|
 
-+ ~Hints~ are displayed next to the keys. If you add a ~Docstring~ you might want to disable that. Use =:hint nil= for that.
+- ~Hints~ are displayed next to the keys. If you add a ~Docstring~ you might want to disable that. Use =:hint nil= for that.
   
 ~Documentation~ can be found here: [[https://github.com/abo-abo/hydra][GitHub.com: Hydra]]
 *** Loading Hydra Package
@@ -1322,8 +1327,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
     ("q" nil "finished" :exit t))
 
   (pet/leader-keys
-    "hs" '(hydra-text-scale/body :which-key "Scale text")
-   )
+    "hs" '(hydra-text-scale/body :which-key "Scale text"))
 
 #+end_src
 **** Buffer Menu Hydra
@@ -1421,8 +1425,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
   ;; Apropos Hydra
   (defhydra hydra-apropos (
                            ;; :color blue
-                           :hint nil
-                                 )
+                           :hint nil)
     "
   ^Apropos
   ^^^^^^^^-----------------------
@@ -1443,8 +1446,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 
   ;; Add to Leader keys
   (pet/leader-keys
-    "ha" '(hydra-apropos/body :which-key "Apropos")
-   )
+    "ha" '(hydra-apropos/body :which-key "Apropos"))
 
 #+end_src
 **** Window Management Hydra
@@ -1593,8 +1595,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 
   ;; Add to Leader keys
   (pet/leader-keys
-    "hm" '(hydra-multiple-cursors/body :which-key "Multiple Cursors")
-   )
+    "hm" '(hydra-multiple-cursors/body :which-key "Multiple Cursors"))
 
 #+end_src
 **** Editing Toggles Hydra
@@ -1642,8 +1643,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
   (pet/leader-keys
 	"eh" '(hydra-editing-visuals/body :which-key "Editing Visuals")
 	"T"  '(hydra-editing-visuals/body :which-key "Toggle Hydra")
-	"ht" '(hydra-editing-visuals/body :which-key "Editing Visuals")
-	)
+	"ht" '(hydra-editing-visuals/body :which-key "Editing Visuals"))
 
 #+end_src
 **** Global Org Mode Hydra
@@ -1687,8 +1687,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 
   (pet/leader-keys
 	"ou" '(hydra-global-org-menu/body :which-key "Org Global Utilities")
-	"ho" '(hydra-global-org-menu/body :which-key "Org Global Hydra")
-	)
+	"ho" '(hydra-global-org-menu/body :which-key "Org Global Hydra"))
 
 #+end_src
 **** EBDB Mode Hydra
@@ -1762,8 +1761,7 @@ DISABLED FOR NOW
 	("M-#" ebdb-toggle-all-record-marks "Toggle all Record Marks")
 	("c" ebdb-toggle-all-records-format "Toggle All Records Format")
 	("q" "Quit Database")
-	("SPC" "Exit" :exit t)
-	)
+	("SPC" "Exit" :exit t))
 
 #+end_src
 **** Mu4e Hydra
@@ -2121,8 +2119,7 @@ Add [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column M
 
 	;; Add functionality to leader keys
 	(pet/leader-keys
-	  "tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column"))
-	)
+	  "tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column")))
 
 #+end_src
 *** Writeroom
@@ -2133,11 +2130,11 @@ It is built on top of the [[*Visual Fill Column][Visual Fill Colum Mode]] above.
   (use-package writeroom-mode
 	:config
 		(pet/leader-keys
-	  "tmW"   '(writeroom :which-key "Writeroom Mode"))
-	)
+	  "tmW"   '(writeroom :which-key "Writeroom Mode")))
 
 #+end_src
 *** Visual Regular Expressions
+
 [[https://github.com/benma/visual-regexp.el][Visual-Regexp]] is a third party package that builds on emacs lisp [[id:26419d86-c777-4765-9dd1-9353f17a0716][regular expression]] functionality.
 It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d86-c777-4765-9dd1-9353f17a0716][expressions]] during ~build-up~
 #+begin_src emacs-lisp
@@ -2152,11 +2149,10 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
   (use-package highlight-indentation
 	:hook
 	;; Activate Guideline for programming modes
-	(prog-mode . highlight-indentation-mode)
+	(prog-mode . highlight-indentation-mode))
 	;; :config
 	;; (set-face-background 'highlight-indentation-face "#e3e3d3")
-	;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-	)
+	;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3"))
 
 #+end_src
 *** Rainbow Mode
@@ -2173,7 +2169,6 @@ The code block enables ~rainbow-mode~ in all ~programming modes~ (~prog-mode~) a
 *** Rainbow Delimiters 
 
 [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is useful in programming modes because it colorizes nested parentheses and brackets according to their nesting depth.  This makes it a lot easier to visually match parentheses in Emacs Lisp code without having to count them yourself.
-
 #+begin_src emacs-lisp
   ;; Add rainbow delimiters for better readability
   (use-package rainbow-delimiters
@@ -2187,11 +2182,11 @@ This Setting is meant to make that highlighting stand out more
 #+begin_src emacs-lisp :tangle no
   ;; Customize highlighting of matching parenthesis
   (use-package paren
-  :config
-  (set-face-attribute
-   'show-paren-match-expression nil :background "#363e4a")
-  (show-paren-mode 1))
-  
+    :config
+    (set-face-attribute
+     'show-paren-match-expression nil :background "#363e4a")
+    (show-paren-mode 1))
+
 #+end_src
 *** Terminal 256Color Support
 #+begin_src emacs-lisp
@@ -2216,17 +2211,16 @@ This Setting is meant to make that highlighting stand out more
 #+begin_src emacs-lisp
   ;; Add Minimap to Emacs
   (use-package minimap
-   :config
-   ;; Set minimap to show on the right
-   (setq minimap-window-location 'right)
+    :config
+    ;; Set minimap to show on the right
+    (setq minimap-window-location 'right)
 
-   ;; Make Minimap available in most text modes
-   (add-to-list 'minimap-major-modes 'text-mode)
+    ;; Make Minimap available in most text modes
+    (add-to-list 'minimap-major-modes 'text-mode)
 
-   ;; Add Minimap to Keyspace for Toggles - Modes
-   (pet/leader-keys
-	 "tmm"   '(minimap-mode :which-key "Minimap Mode")
-	 ))
+    ;; Add Minimap to Keyspace for Toggles - Modes
+    (pet/leader-keys
+  	"tmm"   '(minimap-mode :which-key "Minimap Mode")))
 
 #+end_src
 * Developement Tools
@@ -3554,9 +3548,7 @@ The ~Package~ is listed as =org-plus-contrib=
   				  ("\\subsection{%s}" . "\\subsection*{%s}")
   				  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   				  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-  				  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-     ))
+  				  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 #+end_src
 **** Koma Classes
@@ -3694,8 +3686,7 @@ The ~Package~ is listed as =org-plus-contrib=
   				  ("\\subsection{%s}" . "\\subsection*{%s}")
   				  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   				  ("\\paragraph{%s}" . "\\paragraph*{%s}")
-  				  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-     ))
+  				  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 #+end_src
 **** Koma Letter
@@ -4243,8 +4234,7 @@ You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][sp
 	  (setq org-drill-hint-separator "||")
 	  (setq org-drill-left-cloze-delimiter "<[")
 	  (setq org-drill-right-cloze-delimiter "]>")
-	  (setq org-drill-learn-fraction 1.0))
-	)
+	  (setq org-drill-learn-fraction 1.0)))
   
 #+end_src
 *** Org Auto Tangle

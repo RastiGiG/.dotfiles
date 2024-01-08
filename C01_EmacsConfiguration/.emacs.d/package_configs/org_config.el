@@ -312,9 +312,7 @@
   				("\\subsection{%s}" . "\\subsection*{%s}")
   				("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   				("\\paragraph{%s}" . "\\paragraph*{%s}")
-  				("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-   ))
+  				("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 ;; Org LaTeX Setup
 (eval-after-load 'ox-latex
@@ -449,8 +447,7 @@
   				("\\subsection{%s}" . "\\subsection*{%s}")
   				("\\subsubsection{%s}" . "\\subsubsection*{%s}")
   				("\\paragraph{%s}" . "\\paragraph*{%s}")
-  				("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-   ))
+  				("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
 
 ;; Koma Letter Export Classes
 (eval-after-load 'ox-koma-letter
@@ -881,8 +878,7 @@
 	(setq org-drill-hint-separator "||")
 	(setq org-drill-left-cloze-delimiter "<[")
 	(setq org-drill-right-cloze-delimiter "]>")
-	(setq org-drill-learn-fraction 1.0))
-      )
+	(setq org-drill-learn-fraction 1.0)))
 
 ;; Org AddOn Auto Tangle Org Files
 ;; Add '#+auto_tangle: t' to files 

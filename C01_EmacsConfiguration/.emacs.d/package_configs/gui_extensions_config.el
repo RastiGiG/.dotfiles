@@ -12,15 +12,13 @@
 
       ;; Add functionality to leader keys
       (pet/leader-keys
-	"tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column"))
-      )
+	"tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column")))
 
 ;; Add Writeroom Mode
 (use-package writeroom-mode
       :config
 	      (pet/leader-keys
-	"tmW"   '(writeroom :which-key "Writeroom Mode"))
-      )
+	"tmW"   '(writeroom :which-key "Writeroom Mode")))
 
 ;; Visually Mark Regexp
 (use-package visual-regexp)
@@ -29,11 +27,10 @@
 (use-package highlight-indentation
       :hook
       ;; Activate Guideline for programming modes
-      (prog-mode . highlight-indentation-mode)
+      (prog-mode . highlight-indentation-mode))
       ;; :config
       ;; (set-face-background 'highlight-indentation-face "#e3e3d3")
-      ;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3")
-      )
+      ;; (set-face-background 'highlight-indentation-current-column-face "#c3b3b3"))
 
 ;; Highlight Hex Strings with matching Colors
 (use-package rainbow-mode
@@ -55,14 +52,13 @@
 
 ;; Add Minimap to Emacs
 (use-package minimap
- :config
- ;; Set minimap to show on the right
- (setq minimap-window-location 'right)
+  :config
+  ;; Set minimap to show on the right
+  (setq minimap-window-location 'right)
 
- ;; Make Minimap available in most text modes
- (add-to-list 'minimap-major-modes 'text-mode)
+  ;; Make Minimap available in most text modes
+  (add-to-list 'minimap-major-modes 'text-mode)
 
- ;; Add Minimap to Keyspace for Toggles - Modes
- (pet/leader-keys
-       "tmm"   '(minimap-mode :which-key "Minimap Mode")
-       ))
+  ;; Add Minimap to Keyspace for Toggles - Modes
+  (pet/leader-keys
+      "tmm"   '(minimap-mode :which-key "Minimap Mode")))

@@ -13,8 +13,7 @@
   ("q" nil "finished" :exit t))
 
 (pet/leader-keys
-  "hs" '(hydra-text-scale/body :which-key "Scale text")
- )
+  "hs" '(hydra-text-scale/body :which-key "Scale text"))
 
 ;; Hydra for Buffer Menu functions
 (defhydra hydra-buffer-menu (
@@ -103,8 +102,7 @@ _~_: modified
 ;; Apropos Hydra
 (defhydra hydra-apropos (
                          ;; :color blue
-                         :hint nil
-                               )
+                         :hint nil)
   "
 ^Apropos
 ^^^^^^^^-----------------------
@@ -125,8 +123,7 @@ _v_ariable       _u_ser-option
 
 ;; Add to Leader keys
 (pet/leader-keys
-  "ha" '(hydra-apropos/body :which-key "Apropos")
- )
+  "ha" '(hydra-apropos/body :which-key "Apropos"))
 
 ;; Window Management Helpers
 (require 'windmove)
@@ -265,8 +262,7 @@ _v_ariable       _u_ser-option
 
 ;; Add to Leader keys
 (pet/leader-keys
-  "hm" '(hydra-multiple-cursors/body :which-key "Multiple Cursors")
- )
+  "hm" '(hydra-multiple-cursors/body :which-key "Multiple Cursors"))
 
 ;; Editing Toggles
 (defhydra hydra-editing-visuals (
@@ -311,8 +307,7 @@ _w_ whitespace-mode:                     %`whitespace-mode
 (pet/leader-keys
       "eh" '(hydra-editing-visuals/body :which-key "Editing Visuals")
       "T"  '(hydra-editing-visuals/body :which-key "Toggle Hydra")
-      "ht" '(hydra-editing-visuals/body :which-key "Editing Visuals")
-      )
+      "ht" '(hydra-editing-visuals/body :which-key "Editing Visuals"))
 
 ;; Mu4e Hydra
 (defhydra hydra-mu4e-headers (
