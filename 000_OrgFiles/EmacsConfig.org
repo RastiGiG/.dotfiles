@@ -69,6 +69,7 @@
   - [[#mu4e][mu4e]]
 - [[#password-management][Password Management]]
   - [[#password-store][Password Store]]
+  - [[#emacs-totp][Emacs TOTP]]
 - [[#contact-management][Contact Management]]
   - [[#ebdb][EBDB]]
 - [[#erc][ERC]]
@@ -4515,6 +4516,20 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
   	  "app" 'password-store-copy
   	  "api" 'password-store-insert
   	  "apg" 'password-store-generate))
+
+#+end_src
+** Emacs TOTP
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/totp_config.el :mkdirp yes
+:END:
+
+[[https://codeberg.org/RastiGiG/emacs-totp][Emacs-totp]] is my personal version of [[https://github.com/juergenhoetzel/emacs-totp][GitHub.com: JuergenHoetzel - emacs-totp]]
+#+begin_src emacs-lisp
+  ;; Load TOTP Functionality
+  (straight-use-package
+   '(emacs-totp :type git :host codeberg :repo "RastiGiG/emacs-totp"))
+
+  (pet/load-file "emacs-totp.el")
 
 #+end_src
 * Contact Management

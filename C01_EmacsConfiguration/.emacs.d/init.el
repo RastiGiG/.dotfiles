@@ -196,6 +196,9 @@
   		 ;; ;; Load Password Store Configuration
   		 ;; "package_configs/password_store_config.el"
 
+  		 ;; Load TOTP Configuration
+  		 "package_configs/totp_config.el"
+
   		 ;; ;; Load EBDB Configuration
   		 ;; "package_configs/ebdb_config.el"
 
