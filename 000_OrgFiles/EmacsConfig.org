@@ -3153,6 +3153,13 @@ Dap stands for Debug Adapter
 :END:
 ***** Setup
 [[https://github.com/joaotavora/eglot][Eglot]] comes preconfigured with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] since Version 29
+#+begin_src emacs-lisp
+  ;; add language-servers
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '((rust-mode rust-ts-mode) . ("rust-analyzer" ))))
+
+#+end_src
 ***** Consult Eglot
 [[https://github.com/gagbo/consult-lsp][Consult-Eglot]] adds ~Eglot~ support to ~Consult~
 ***** Eglot Languages
