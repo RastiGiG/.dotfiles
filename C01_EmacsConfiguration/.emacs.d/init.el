@@ -184,8 +184,8 @@
   		 ;; ;; Load LSP Mode Configuration
   		 ;; "package_configs/lsp_mode_config.el"
 
-  		 ;; ;; Load Eglo Configuration
-  		 ;; "package_configs/eglot_config.el"
+  		 ;; Load Eglo Configuration
+  		 "package_configs/eglot_config.el"
 
   		 ;; ;; Load Citeproc Configuration
   		 ;; "package_configs/citeproc_config.el"

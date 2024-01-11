@@ -382,8 +382,8 @@ Version mismatch is commonly encountered in the following situations:
   		   ;; ;; Load LSP Mode Configuration
   		   ;; "package_configs/lsp_mode_config.el"
 
-  		   ;; ;; Load Eglo Configuration
-  		   ;; "package_configs/eglot_config.el"
+  		   ;; Load Eglo Configuration
+  		   "package_configs/eglot_config.el"
 
   		   ;; ;; Load Citeproc Configuration
   		   ;; "package_configs/citeproc_config.el"
@@ -3163,6 +3163,49 @@ Dap stands for Debug Adapter
 ***** Consult Eglot
 [[https://github.com/gagbo/consult-lsp][Consult-Eglot]] adds ~Eglot~ support to ~Consult~
 ***** Eglot Languages
+#+begin_src emacs-lisp
+  ;; Automatically start eglot for listed languages
+  (cl-loop for lang in
+           '(;; Python
+             python-mode-hook
+             python-ts-mode-hook
+
+  		   ;; C Lang
+  		   c-mode-hook
+  		   c-ts-mode-hook
+  		   
+  		   ;; C++ Lang
+  		   c++-mode-hook
+  		   c++-ts-mode-hook
+  		   c-or-c++-mode-hook
+  		   c-or-c++-ts-mode-hook
+
+  		   ;; Rust
+  		   rust-ts-mode
+
+  		   ;; Go
+  		   go-ts-mode
+
+  		   ;; Lua 
+  		   lua-ts-mode
+
+  		   ;; HTML
+  		   html-mode
+  		   html-ts-mode
+
+  		   ;; CSS
+  		   css-mode
+  		   css-ts-mode
+  		   
+  		   ;; JSON
+  		   json-ts-mode
+  		   
+  		   ;; YAML
+             yaml-ts-mode)
+           do
+           (add-hook lang 'eglot-ensure))
+
+#+end_src
 * Terminal Modes
 ** Vterm
 :PROPERTIES:
