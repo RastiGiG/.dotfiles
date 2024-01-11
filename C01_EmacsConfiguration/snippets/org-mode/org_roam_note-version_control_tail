@@ -6,7 +6,19 @@
 
 ** [[id:755da73e-ff37-4103-986d-6dc62a9fc7f8][Version Control]]
 *** [[id:1f5328c3-41a1-429a-8ddf-669d4b949033][Git and Github]]
+**** Basics
+***** [[id:8d553ade-67dc-4b22-9622-d8c004d3ceaa][Basics]]
+***** [[id:594eceed-cc14-4e03-bcb8-7775893778b7][Branches]]
+***** [[id:caf4e343-e17e-4ec6-955d-a5067a0a0528][GitIgnore]]
+***** [[id:cf7331a2-a2d6-4ecb-94cc-890998f2c478][Server Setup]]
+***** [[id:c3791a8e-7a33-4bec-9d35-e3452f3a4b3e][Git and Github Command List]]
+**** Advanced
+***** [[id:9d63f296-7827-4d36-92d4-705406a0f52d][Hooks]]
+**** Remote Repositories
+***** [[id:7c5d967d-ff02-44d7-ab52-6c0759f2b23d][Setting up a Remote Repository]]
+***** [[id:e8e29eb5-aeec-47cb-9f64-7295f7dee882][Cloning a Repository]]
 *** [[id:51dfb2be-8d64-4d33-852e-6d1e62f92f00][Tipps]]
+**** [[id:3dd99f30-eb09-4211-aaf3-2d064fd7c25b][Git and Github Related]]
 
 * Read On
 
