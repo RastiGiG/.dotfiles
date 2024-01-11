@@ -62,3 +62,15 @@
   ;; Add Minimap to Keyspace for Toggles - Modes
   (pet/leader-keys
       "tmm"   '(minimap-mode :which-key "Minimap Mode")))
+
+;; Load Solaire - Distinguish file buffers with background
+(use-package solaire-mode
+  :hook (after-init . solaire-global-mode)
+  :config
+  (push '(treemacs-window-background-face . solaire-default-face) solaire-mode-remap-alist)
+  (push '(treemacs-hl-line-face . solair-hl-line-face) solaire-mode-remap-alist))
+
+;; Add Padding to make the GUI pop
+(use-package spacious-padding
+  :hook
+  (after-init . spacious-padding-mode))

@@ -2258,6 +2258,26 @@ This Setting is meant to make that highlighting stand out more
   	"tmm"   '(minimap-mode :which-key "Minimap Mode")))
 
 #+end_src
+*** Solaire Mode
+#+begin_src emacs-lisp
+    ;; Load Solaire - Distinguish file buffers with background
+    (use-package solaire-mode
+      :hook (after-init . solaire-global-mode)
+      :config
+      (push '(treemacs-window-background-face . solaire-default-face) solaire-mode-remap-alist)
+      (push '(treemacs-hl-line-face . solair-hl-line-face) solaire-mode-remap-alist))
+
+#+end_src
+*** Padding
+
+[[https://github.com/protesilaos/spacious-padding][Spacious-Padding]] adds padding to Emacs Windows and Frames. Makes it look a lot nicer.
+#+begin_src emacs-lisp
+  ;; Add Padding to make the GUI pop
+  (use-package spacious-padding
+    :hook
+    (after-init . spacious-padding-mode))
+
+#+end_src
 * Developement Tools
 ** Magit
 :PROPERTIES:
@@ -3122,6 +3142,7 @@ Dap stands for Debug Adapter
   ;;  (dap-tooltip-mode 1)
   ;;  (require 'dap-node)
   ;;  (dap-node-setup))
+  
 #+end_src
 ***** LSP-Mode Languages
 ****** Python
