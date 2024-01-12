@@ -49,7 +49,17 @@
 (setq visible-bell t)
 
 ;; Enable Highlight-Line
-(hl-line-mode 1)
+(global-hl-line-mode 1)
+
+;; Disable Highlight-line for some modes
+(dolist (mode
+         '(;;org-mode-hook
+  	     term-mode-hook
+  	     vterm-mode-hook
+  	     shell-mode-hook
+  	     eshell-mode-hook
+  	     pdf-view-mode-hook))
+  (add-hook mode (lambda () (hl-line-mode nil))))
 
 ;; Add a little space when displaying buffers
 (setq-default line-spacing 0.12)

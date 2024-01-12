@@ -79,8 +79,18 @@ This section configures basic UI settings that remove unneeded elements to make 
   (setq visible-bell t)
 
   ;; Enable Highlight-Line
-  (hl-line-mode 1)
+  (global-hl-line-mode 1)
 
+  ;; Disable Highlight-line for some modes
+  (dolist (mode
+           '(;;org-mode-hook
+  	       term-mode-hook
+  	       vterm-mode-hook
+  	       shell-mode-hook
+  	       eshell-mode-hook
+  	       pdf-view-mode-hook))
+    (add-hook mode (lambda () (hl-line-mode nil))))
+  
 #+end_src
 *** Line Spacing
 #+begin_src emacs-lisp
