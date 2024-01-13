@@ -1123,6 +1123,51 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/dashboard_config.el :mkdirp yes
 :END:
+*** Helper Functions
+
+These functions were taken from:
+[[https://github.com/gopar/.emacs.d][GitHub.com: Gopar - Emacs.d]] 
+The [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger Catgories]] are specified [[file:~/.dotfiles-private/000_OrgFiles/EmacsPrivateVariables.org::*Ledger Variables][here]].
+#+begin_src emacs-lisp
+  ;; Function to insert vocabulary
+  (defun pet/dashboard-insert-vocabulary (list-size)
+    (dashboard-insert-heading "Word of the Day:"
+  							nil
+  							(all-the-icons-faicon "newspaper-o"
+  												  :height 1.2
+  												  :v-adjust 0.0
+  												  :face 'dashboard-heading))
+    (insert "\n")
+    (let ((random-line nil)
+  		(lines nil))
+  	(with-temp-buffer
+  	  (insert-file-contents (concat user-emacs-directory "words"))
+  	  (goto-char (point-min))
+  	  (setq lines (split-string (buffer-string) "\n" t))
+  	  (setq random-line (nth (random (length lines)) lines))
+  	  (setq random-line (string-join (split-string random-line) " ")))
+  	(insert "    " random-line)))
+
+  ;; Function to insert ledger bal
+  (defun pet/dashboard-ledger-monthly-balances (list-size) 
+    "Return the monthly balance by using ledger"
+    (interactive)
+    (dashboard-insert-heading "Monthly Balance:"
+  							nil
+  							(all-the-icons-faicon "money"
+  												  :height 1.2
+  												  :v-adjust 0.0
+  												  :face 'dashboard-heading))
+    (insert "\n")
+    (let* ((current-month (format-time-string "%Y/%m"))
+  		 (cmd (format "ledger bal --flat --monthly --period %s %s "
+  					  current-month
+  					  (mapconcat 'identity pet/ledger-categories " "))))
+  	(insert (shell-command-to-string cmd))))
+
+#+end_src
+*** Load Dashboard
+
 [[https://github.com/emacs-dashboard/emacs-dashboard][Emacs Dashboard]] adds a start up screen to [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Index Emacs]]
 #+begin_src emacs-lisp
   ;; Add Dashboard to Emacs
@@ -1139,12 +1184,24 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
     (setq dashboard-startup-banner 'logo)
     ;; Set custom banner
     ;; (setq dashboard-startup-banner "~/.emacs.d/emacs-dash.png")
-    (setq dashboard-center-content nil) ;; set to 't' for centered content
+    (setq dashboard-center-content t) ;; set to 'nil' for uncentered content
+    (setq dashboard-show-shortcuts t)  ;; show shortcuts
+    (setq dashboard-projects-backend 'projectile)  ;; default ’projectile’
+    ;; (dashboard-agenda-sort-strategy '(priority-down))
     (setq dashboard-items '((recents . 5)
                             (agenda . 5 )
                             (bookmarks . 3)
                             (projects . 3)
-                            (registers . 3)))
+  						  (registers . 3)
+  						  ;; (vocabulary)  ;; Needs vocabulary file
+  						  (monthly-balance)))
+    (setq dashboard-item-generators '((monthly-balance . pet/dashboard-ledger-monthly-balances)
+  									(vocabulary . pet/dashboard-insert-vocabulary)
+  									(recents . dashboard-insert-recents)
+  									(bookmarks . dashboard-insert-bookmarks)
+  									(projects . dashboard-insert-projects)
+  									(agenda . dashboard-insert-agenda)
+  									(registers . dashboard-insert-registers)))
     :config
     (dashboard-setup-startup-hook)
     (dashboard-modify-heading-icons '((recents . "file-text")
