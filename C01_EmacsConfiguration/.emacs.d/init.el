@@ -74,6 +74,10 @@
 ;; Load Basic QoL Adjustments
 (pet/load-file (concat pet/dotfiles-emacsconfig-dir "lisp/basic_qol.el"))
 
+;; Load Basic QoL Adjustments
+(setq pet/ledger-categories '())  ;; incase the file can’t be loaded
+(pet/load-file "~/.dotfiles-private/Configurations/EmacsPrivateVariables.el")
+
 (cl-loop for config in
   	       ;; Load Evil Configuration
          '("package_configs/evil_config.el"
