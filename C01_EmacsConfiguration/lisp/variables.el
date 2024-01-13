@@ -19,6 +19,11 @@
       		      (convert-standard-filename
       		       ".dotfiles/")))
 
+;; Save Documents Dir for later use
+(setq pet/docs-dir
+      (concat pet/home-dir
+      		       "Documents/"))
+
 ;; Save Template Dir for later use
 (setq pet/temp-dir
       (concat pet/home-dir
