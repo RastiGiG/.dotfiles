@@ -98,6 +98,10 @@ tramp
 /C01_EmacsConfiguration/**/elfeed/
 
 #############
+## DevDocs
+/C01_EmacsConfiguration/**/devdocs/
+
+#############
 ## Emojis
 /C01_EmacsConfiguration/**/emojis/
 
