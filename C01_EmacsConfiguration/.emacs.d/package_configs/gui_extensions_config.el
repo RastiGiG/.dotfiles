@@ -6,13 +6,14 @@
       :config
       ;; Load fill column when visual line mode
       (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
-
+      ;; Give more space to content, default uses value of fill-column variable
+      (visual-fill-column-width 140)
       ;; Automatically center text in visual fill column
       (setq-default visual-fill-column-center-text t)
 
       ;; Add functionality to leader keys
       (pet/leader-keys
-	"tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column")))
+  	"tmV"   '(visual-fill-column-mode :which-key "Visual Fill Column")))
 
 ;; Add Writeroom Mode
 (use-package writeroom-mode
