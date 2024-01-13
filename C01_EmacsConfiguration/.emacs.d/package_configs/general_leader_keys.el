@@ -15,6 +15,7 @@
   "bs"    '(bookmark-set :which-key "Set Bookmark")
   "bl"    '(bookmark-bmenu-list :which-key "Bookmark List")
   "bt"    '(pet/current-tab-name :which-key "Current Tab Name")
+  "bw"    '(webjump :which-key "Webjump to bookmark")
 
   ;; Calculator
   "c"   '(calc :which-key "Calculator")

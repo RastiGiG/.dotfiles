@@ -96,6 +96,8 @@ Another good source is [[https://protesilaos.com/emacs/dotemacs][Protesilaos.com
 
 I also added parts of [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/emacs/config.org][DT’s Emacs Config]], especially those that deal with [[*Evil Mode][Evil-Mode]].
 
+For some of the developement tools like [[*DevDocs][DevDocs]] I took inspiration from [[https://github.com/gopar/.emacs.d][GitHub.com: Gopar - Emacs.d]] 
+
 ** Starting Emacs Daemon
 
 To get the best out of [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]], it's recommended to use the ~Daemon Capabilities~ it offers. This *might slow down your system Startup* time, but it definitely *significantly increases* [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Startup Time~ if you connect to the server with the =emacsclient= [[id:bf9b9431-2e38-411a-904f-c5b0c913520d][command]].
@@ -560,6 +562,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
     "bs"    '(bookmark-set :which-key "Set Bookmark")
     "bl"    '(bookmark-bmenu-list :which-key "Bookmark List")
     "bt"    '(pet/current-tab-name :which-key "Current Tab Name")
+    "bw"    '(webjump :which-key "Webjump to bookmark")
 
     ;; Calculator
     "c"   '(calc :which-key "Calculator")
@@ -4091,7 +4094,6 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 =Capture templates= are a handy tool in the org mode toolbox, however the syntax for setting them up can sometimes be tricky.
 The package =DOCT= tries to ease the setup. If you need more input, here's the [[https://github.com/progfolio/doct][doc]]
 Other than that, the *documentation* for =capture templates= is [[https://orgmode.org/manual/Capture.html#Capture][here]]
-
 #+begin_src emacs-lisp
   ;; Org-Capture
   (use-package org-capture

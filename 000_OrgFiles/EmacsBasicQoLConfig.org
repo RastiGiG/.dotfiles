@@ -214,3 +214,19 @@ This section was copied from:
   (global-set-key (kbd "M-o") 'ace-window)
   
 #+end_src
+** WebJump
+
+~Webjump~ is a builtin [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:1c44cf3c-6549-4e70-a3fd-491df7996dd5][Package]] that allows you to open specified sites in an external web browser like ~Firefox~.
+#+begin_src emacs-lisp
+   ;; Add websites to webjump
+   (cl-loop for website in
+   		 '(("Google" . [simple-query "www.google.com" "www.google.com/search?q=" ""])
+              ("YouTube" . [simple-query "www.youtube.com/feed/subscriptions" "www.youtube.com/results?search_query=" ""])
+              ("CCBV" . [simple-query "https://ccbv.co.uk/" "https://ccbv.co.uk/" ""])
+              ("Nix Packages - latest" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?from=0&sort=relevance&type=packages&query=" ""])
+              ("Nix Packages - unstable" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?channel=unstable&from=0&sort=relevance&type=packages&query=" ""])
+              ("Nix Wiki" . [simple-query "https://nixos.wiki/" "https://nixos.wiki/index.php?search=" ""]))
+   		 do
+   (add-to-list 'webjump-sites website))
+
+#+end_src
