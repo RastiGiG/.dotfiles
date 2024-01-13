@@ -1,0 +1,623 @@
+#----------------------------------------------------------------------------------------------------------------------
+#      _    _        _    ____ ____  ___ _____ _______   __
+#     / \  | |      / \  / ___|  _ \|_ _|_   _|_   _\ \ / /
+#    / _ \ | |     / _ \| |   | |_) || |  | |   | |  \ V / 
+#   / ___ \| |___ / ___ \ |___|  _ < | |  | |   | |   | |  
+#  /_/   \_\_____/_/   \_\____|_| \_\___| |_|   |_|   |_|  
+#
+# - Configuration for Alacritty, the GPU enhanced terminal emulator. -
+# Source:         - .dotfiles/000_OrgFiles/AlacrittyConfig.org
+# Target:         - .dotfiles/D14_Terminals/.config/alacritty/alacritty.toml
+# Author Email:   - randomly.ventilates@simplelogin.co
+# Author GitHub:  - https://github.com/RastiGiG/
+#
+# This Configuration was adapted from:
+# - Brodie Robertson:  https://github.com/BrodieRobertson
+# - TerminalForLife:   https://github.com/terminalforlife
+#
+#----------------------------------------------------------------------------------------------------------------------
+
+# Live config reload (requires restart)
+live_config_reload = true
+working_directory = "None"
+
+#import = ["/path/to/subconfig.toml",]
+
+[env]
+TERM = "alacritty"
+
+# Window Configurations
+[window]
+decorations = "full"                 # full | none
+decorations_theme_variant = "None"   # dark | light | None
+opacity = 0.9    # <= 1.0
+startup_mode = "Windowed"            # Windowed | Maximized | Fullscreen
+# Window title
+title = "Alacritty"
+# Allow terminal applications to change the window title
+dynamic_title = true
+# Spread additional padding evenly around the terminal content.
+dynamic_padding = false
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 4
+y = 4
+
+[window.dimensions]
+#  columns = 0
+#  lines = 0
+
+[window.position]
+#  x = 0
+#  y = 0
+
+# History Scrolling
+[scrolling]
+history = 10000
+multiplier = 1
+
+# Font configuration
+[font]
+# If `true`, Alacritty will use a custom built-in font for box drawing
+# characters (Unicode points 2500 - 259f).
+builtin_box_drawing = true
+size = 12
+
+[font.normal]
+family = "Iosevka"
+style = "Medium"
+
+[font.bold]
+family = "Iosevka"
+style = "Bold"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+# Colors (Tomorrow Night Bright)
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# Default colors
+[colors.primary]
+background = "#191919"       # previous '#282a36'
+bright_foreground = "#ffffff"
+dim_foreground = "#9a9a9a"
+foreground = "#f8f8f2"       # previous '#d8dee9'
+
+# CellForeground | CellBackground | #ffffff
+[colors.cursor]
+# text = '#191919'
+# cursor = '#d8dee9'
+cursor = "CellForeground"
+text = "CellBackground"
+
+[colors.footer_bar]
+background = "#282a36"
+foreground = "#f8f8f2"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[colors.search.focused_match]
+background = "#ffb86c"
+foreground = "#44475a"
+
+[colors.search.matches]
+background = "#50fa7b"
+foreground = "#44475a"
+
+[colors.hints.end]
+background = "#282a36"
+foreground = "#f1fa8c"
+
+[colors.hints.start]
+background = "#f1fa8c"
+foreground = "#282a36"
+
+[colors.selection]
+background = "#44475a"       # Previous: '#d8dee9'
+text = "CellForeground"      # Previous: '#191919'
+
+[colors.normal]
+black = "#21222c"            # Previous: '#191919'
+blue = "#bd93f9"             # Previous: '#314ad0'
+cyan = "#8be9fd"             # Previous: '#32d0fc'
+green = "#50fa7b"            # Previous: '#40a62f'
+magenta = "#ff79c6"          # Previous: '#b30ad0'
+red = "#ff5555"              # Previous: '#b02626'
+white = "#f8f8f2"            # Previous: '#acadb1'
+yellow = "#f1fa8c"           # Previous: '#f2e635'
+
+[colors.bright]
+black = "#6272a4"            # Previous: '#36393d'
+blue = "#d6acff"             # Previous: '#2e4bea'
+cyan = "#a4ffff"             # Previous: '#54d9ff'
+green = "#69ff94"            # Previous: '#47c930'
+magenta = "#ff92df"          # Previous: '#cc15ed'
+red = "#ff6e6e"              # Previous: '#ce2727'
+white = "#ffffff"            # Previous: '#dbdbdb'
+yellow = "#ffffa5"           # Previous: '#fff138'
+
+[colors.dim]
+black = "#676f78"
+blue = "#707fd0"
+cyan = "#8adaf1"
+green = "#78a670"
+magenta = "#c583d0"
+red = "#b55454"
+white = "#e0e3e7"
+yellow = "#faf380"
+
+# Bell Configurations
+[bell]
+# Ease | EaseOut | EaseOutSine | EaseOutQuad | EaseOutCubic | 
+# EaseOutQuart | EaseOutQuint | EaseOutExpo | EaseOutCirc | Linear 
+animation = "EaseOutExpo"
+color = "#ffffff"
+duration = 0
+
+# [bell.command]
+#  program = "notify-send"
+#  args = ["Hello, World!"]
+
+[cursor]
+# vi_mode_style = "Block"
+thickness = 0.1         # 0.0 < x < 1.0
+unfocused_hollow = true
+blink_interval = 750
+
+[cursor.style]
+blinking = "On"         # Never | Off | On | Always
+shape = "Block"         # ▇ Block | _ Underline | <|> Beam
+
+# Key bindings
+
+# ACTIONS:
+#
+# Available by Default: Hide | Minimize | Quit | ToggleFullscreen | SpawnNewInstance | CreateNewWindow |
+#                       Copy | Paste | CopySelection | PasteSelection | ClearSelection | ReceiveChar | 
+#                       IncreaseFontSize | DecreaseFontSize | ResetFontSize | ScrollPageUp | ScrollPageDown | 
+#                       ScrollLineUp | ScrollLineDown | ScrollToTop | ScrollToBottom | SearchForward |
+#                       SearchBackward | ClearHistory | ClearLogNotice | ToggleViMode | 
+#                       None | command: { program: "...", args: ["..."] }
+
+# Search exclusive: SearchFocusNext | SearchFocusPrevious | SearchConfirm | SearchCancel | SearchClear |
+#                   SearchDeleteWord | SearchHistoryPrevious | SearchHistoryNext
+
+# Vi exclusive: Open | ToggleNormalSelection | ToggleLineSelection | ToggleBlockSelection | ToggleSemanticSelection |
+#               Up | Down | Left | Right | First | Last | FirstOccupied | High | Middle | Low | SemanticLeft |
+#               SemanticRight | SemanticLeftEnd | SemanticRightEnd | WordLeft | WordRight | WordLeftEnd | WordRightEnd |
+#               Bracket | SearchNext | SearchPrevious | SearchStart | SearchEnd
+
+# KEYS: A-Z | F1-F24 | Key0-Key9
+# CHARACTERS: byte sequence
+# MODS: Command | Control | Option | Super | Shift | Alt
+# MODE: AppCursor | AppKeypad | Search | Alt | Vi | ~ (modifier: NOT <MODE>)
+
+# Default
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "Up"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "Down"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+
+# Search Mode
+[[keyboard.bindings]]
+action = "SearchForward"
+key = "F"
+mode = "~Search"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "SearchBackward"
+key = "B"
+mode = "~Search"
+mods = "Control|Shift"
+
+
+
+# Vi Mode
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "Space"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Space"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "I"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "I"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "C"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "C"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ClearSelection"
+key = "Escape"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "Y"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "E"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "G"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "G"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "B"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "F"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollHalfPageUp"
+key = "U"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollHalfPageDown"
+key = "D"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Y"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ClearSelection"
+key = "Y"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ToggleNormalSelection"
+key = "V"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "ToggleLineSelection"
+key = "V"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ToggleBlockSelection"
+key = "V"
+mode = "Vi"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleSemanticSelection"
+key = "V"
+mode = "Vi"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Open"
+key = "Return"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Up"
+key = "K"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Down"
+key = "J"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Left"
+key = "H"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Right"
+key = "L"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Up"
+key = "Up"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Down"
+key = "Down"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Left"
+key = "Left"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Right"
+key = "Right"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "First"
+key = "Key0"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "Last"
+key = "Key4"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "FirstOccupied"
+key = "Key6"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "High"
+key = "H"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Middle"
+key = "M"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Low"
+key = "L"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "SemanticLeft"
+key = "B"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "SemanticRight"
+key = "W"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "SemanticRightEnd"
+key = "E"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "WordLeft"
+key = "B"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "WordRight"
+key = "W"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "WordRightEnd"
+key = "E"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Bracket"
+key = "Key5"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "SearchForward"
+key = "Slash"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "SearchBackward"
+key = "Slash"
+mode = "Vi"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "SearchNext"
+key = "N"
+mode = "Vi"
+
+[[keyboard.bindings]]
+action = "SearchPrevious"
+key = "N"
+mode = "Vi"
+mods = "Shift"
+
+# Mouse Settings
+[mouse]
+hide_when_typing = true
+
+# Mouse bindings
+# action: ExpandSelection (Mouse Exlusive) | Others (See Keybindings)
+# mouse: Left | Right  | Middle | Numeric identifier
+# mods: See Keybindings
+[[mouse.bindings]]
+action = "Copy"
+mouse = "Middle"
+
+[selection]
+save_to_clipboard = true
+
+# Settings for REGEXP Hints
+# [hints]
+# alphabet = "jfkdls;ahgurieowpq"
+# Values for `action`:
+#   - Copy
+#       Copy the hint's text to the clipboard.
+#   - Paste
+#       Paste the hint's text to the terminal or search.
+#   - Select
+#       Select the hint's text.
+#   - MoveViModeCursor
+#       Move the vi mode cursor to the beginning of the hint.
+# action = "Copy"
+
+# [hints.enabled]
+# - regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+      #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+#   command = "xdg-open"
+#   post_processing = true
+
+# [hints.enable.mouse]
+#     enabled = true
+#     mods = "None"
+
+#[hints.enable.binding]
+#     key = "U"
+#     mods = "Control|Shift"
+
+[debug]
+# Log level
+#
+# Values for `log_level`:
+#   - Off
+#   - Error
+#   - Warn
+#   - Info
+#   - Debug
+#   - Trace
+log_level = "Warn"
+# Keep the log file after quitting Alacritty.
+persistent_logging = false
+# Print all received window events.
+print_events = false
+# Display the time it takes to redraw each frame.
+render_timer = false
+
+# Highlight window damage information.
+# highlight_damage = false
