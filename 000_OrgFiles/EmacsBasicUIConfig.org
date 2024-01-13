@@ -111,6 +111,12 @@ This section configures basic UI settings that remove unneeded elements to make 
   (display-battery-mode t)
   
 #+end_src
+*** Clock
+#+begin_src emacs-lisp
+  ;; Display clock in modeline
+  (display-time-mode 1)
+  
+#+end_src
 *** Dialog Box
 Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] keyboard-driven
 #+begin_src emacs-lisp

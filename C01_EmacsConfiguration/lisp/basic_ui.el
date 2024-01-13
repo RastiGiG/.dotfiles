@@ -30,19 +30,19 @@
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
-			  prog-mode-hook
-			  conf-mode-hook))
+  			prog-mode-hook
+  			conf-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 'relative))))
 
 ;; Disable line numbers for some modes
 (dolist (mode
          '(;;org-mode-hook
-	       term-mode-hook
-	       vterm-mode-hook
-	       shell-mode-hook
-	       eshell-mode-hook
-	       pdf-view-mode-hook
-	       treemacs-mode-hook))
+  	     term-mode-hook
+  	     vterm-mode-hook
+  	     shell-mode-hook
+  	     eshell-mode-hook
+  	     pdf-view-mode-hook
+  	     treemacs-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Set up the visible bell
@@ -54,11 +54,11 @@
 ;; Disable Highlight-line for some modes
 (dolist (mode
          '(;;org-mode-hook
-	       term-mode-hook
-	       vterm-mode-hook
-	       shell-mode-hook
-	       eshell-mode-hook
-	       pdf-view-mode-hook))
+  	     term-mode-hook
+  	     vterm-mode-hook
+  	     shell-mode-hook
+  	     eshell-mode-hook
+  	     pdf-view-mode-hook))
   (add-hook mode (lambda () (hl-line-mode nil))))
 
 ;; Add a little space when displaying buffers
@@ -70,6 +70,9 @@
 
 ;; Display battery for when in full screen mode
 (display-battery-mode t)
+
+;; Display clock in modeline
+(display-time-mode 1)
 
 ;; Don't show windowed Dialog Box on Prompts
 (setq use-dialog-box nil)
@@ -89,24 +92,24 @@
 
 ;; Set default font face of present
 (when (pet/font-available-p "Iosevka")
-		(set-face-attribute 'default nil :font "Iosevka"
-							:height pet/default-font-size))
+	      (set-face-attribute 'default nil :font "Iosevka"
+						      :height pet/default-font-size))
 
 ;; Set the fixed pitch face
 (when (pet/font-available-p "Iosevka")
-		(set-face-attribute 'fixed-pitch nil :font "Iosevka"
-							:height pet/default-font-size))
+	      (set-face-attribute 'fixed-pitch nil :font "Iosevka"
+						      :height pet/default-font-size))
 
 ;; Set the variable pitch face
 (when (pet/font-available-p "Cantarell")
-		(set-face-attribute 'variable-pitch nil :font "Cantarell"
-							:height pet/default-font-size
-							:weight 'regular))
+	      (set-face-attribute 'variable-pitch nil :font "Cantarell"
+						      :height pet/default-font-size
+						      :weight 'regular))
 
 ;; (when (member "Cantarell" (font-family-list))
 ;; 	  (set-face-attribute 'variable-pitch nil :font "Cantarell"
 ;; 						  :height pet/default-font-size
-							;; :weight 'regular))
+						      ;; :weight 'regular))
 
 ;; Use specific Fontsets for Symbols
 (setq use-default-font-for-symbols nil)
@@ -139,19 +142,19 @@
 ;; (setq tab-bar-tab-name-function
 ;;       tab-bar-current-tab-name)
 
-	;; Keyboard Rules
-	;; Remove Tab Bar Buttons
-	(setq tab-bar-close-button-show nil
-		  tab-bar-new-button-show nil
-		  ;; tab-bar-button-relief               ;; controls outline of buttons
-		  ;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
-		  )
+      ;; Keyboard Rules
+      ;; Remove Tab Bar Buttons
+      (setq tab-bar-close-button-show nil
+		tab-bar-new-button-show nil
+		;; tab-bar-button-relief               ;; controls outline of buttons
+		;; tab-bar-face tab-bar-tab            ;; configure tab face (bgcolor etc.)
+		)
 
-	;; tab bar is not automatically shown
-	;; (set 1 to enable)
-	(setq tab-bar-show nil)                      
+      ;; tab bar is not automatically shown
+      ;; (set 1 to enable)
+      (setq tab-bar-show nil)                      
 
-	;; Helper function to get only the name
-	;; of current tab
-	(defun pet/current-tab-name ()
-	  (alist-get 'name (tab-bar--current-tab)))
+      ;; Helper function to get only the name
+      ;; of current tab
+      (defun pet/current-tab-name ()
+	(alist-get 'name (tab-bar--current-tab)))
