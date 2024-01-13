@@ -124,6 +124,17 @@ Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94
   (setq use-file-dialog nil)
 
 #+end_src
+*** Number of Side Windows
+
+Restrict the number of ~window slots~ available to avoid clutter.
+The numbers represent the frame directions in the following order:
+~left~ - ~top~ - ~right~ - ~bottom~
+#+begin_src emacs-lisp
+  ; Number of side window slots at
+  ; left - top - right - bottom
+  (setq window-sides-slots '(3 0 3 1))
+  
+#+end_src
 *** Popup Windows
 #+begin_src emacs-lisp
   ;; No popup windows
