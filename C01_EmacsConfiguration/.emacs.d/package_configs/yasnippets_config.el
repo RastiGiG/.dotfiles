@@ -21,3 +21,7 @@
             (lambda ()
               (yas-activate-extra-mode
                'fundamental-mode))))
+
+;; Add some predefined snippets
+(use-package yasnippet-snippets
+  :defer)

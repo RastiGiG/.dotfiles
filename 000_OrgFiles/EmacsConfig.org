@@ -953,6 +953,7 @@ It should be noted that many projectile commands seem to not work if you have se
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/yasnippets_config.el :mkdirp yes
 :END:
+*** Load Yasnippets
 
 Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration).
 [[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippets]] are an ~extension/improvement~ over the basic [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Skeletons~ 
@@ -981,6 +982,13 @@ Documentation can be found here: [[https://github.com/joaotavora/yasnippet][GitH
               (lambda ()
                 (yas-activate-extra-mode
                  'fundamental-mode))))
+
+#+end_src
+*** Yasnippet Snippets
+#+begin_src emacs-lisp
+  ;; Add some predefined snippets
+  (use-package yasnippet-snippets
+    :defer)
 
 #+end_src
 * Graphical User Interface Tweaks and Extensions
