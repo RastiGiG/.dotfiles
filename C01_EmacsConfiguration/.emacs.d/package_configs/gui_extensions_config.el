@@ -75,3 +75,9 @@
 (use-package spacious-padding
   :hook
   (after-init . spacious-padding-mode))
+
+;; Automatically adjusts the focused window
+(use-package golden-ratio
+  :hook (after-init . golden-ratio-mode)
+  :custom
+  (golden-ratio-exclude-modes '(occur-mode)))

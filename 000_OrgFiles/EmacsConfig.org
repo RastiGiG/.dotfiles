@@ -2365,6 +2365,18 @@ This Setting is meant to make that highlighting stand out more
     (after-init . spacious-padding-mode))
 
 #+end_src
+*** Golden-Ratio
+
+[[https://github.com/roman/golden-ratio.el][Golden-Ratio]] helps on this issue by resizing automatically the windows you are working on to the size specified in the ~"Golden Ratio"~.
+The behaviour can be adjusted by a couple of variables like =golden-ratio-max-width=.
+#+begin_src emacs-lisp
+  ;; Automatically adjusts the focused window
+  (use-package golden-ratio
+    :hook (after-init . golden-ratio-mode)
+    :custom
+    (golden-ratio-exclude-modes '(occur-mode)))
+
+#+end_src
 * Developement Tools
 ** Magit
 :PROPERTIES:
