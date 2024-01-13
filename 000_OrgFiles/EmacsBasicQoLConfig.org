@@ -106,6 +106,18 @@ Changing this behaviour will still ask for confirmation, but you don't need to m
   (setq global-auto-revert-non-file-buffers t)
   
 #+end_src
+** Prefer Loading newer Files
+#+begin_src emacs-lisp
+  ; Load newer file version when possible
+  (setq load-prefer-newer t)
+
+#+end_src
+** Short Answers
+#+begin_src emacs-lisp
+  ; Type ’y’ and ’n’ instead of ’yes’ or ’no’
+  (setq use-short-answers t)
+  
+#+end_src
 ** Selection Overwrite
 #+begin_src emacs-lisp
   ;; Make Selections behave as expected

@@ -70,6 +70,12 @@
 ;; Automatically revert Dired (and similar) Buffers without confirmation
 (setq global-auto-revert-non-file-buffers t)
 
+; Load newer file version when possible
+(setq load-prefer-newer t)
+
+; Type ’y’ and ’n’ instead of ’yes’ or ’no’
+(setq use-short-answers t)
+
 ;; Make Selections behave as expected
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
 
