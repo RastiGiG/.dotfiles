@@ -29,8 +29,7 @@
       ;; Autocomplete command on '\'
       (setq TeX-electric-escape t)
       ;; Autoinsert braces after '^' and '_' in math mode
-      (setq TeX-electric-sub-and-superscript t)
-      )
+      (setq TeX-electric-sub-and-superscript t))
 
 ;; Specify viewer programs
 (setq TeX-view-program-selection
@@ -119,10 +118,10 @@
 ;;  (require 'dab-python)
 ;;  )
 
-;; Enable Virtual Environment Support
-(use-package pyvenv
-      :config
-      (pyvenv-mode 1))
+;; ;; Enable Virtual Environment Support
+;; (use-package pyvenv
+;; 	:config
+;; 	(pyvenv-mode 1))
 
 ;; Add Support for Rust
 (use-package rust-mode)
@@ -195,8 +194,7 @@
 
       ;; automatically enter gnuplot mode
       (setq auto-mode-alist 
-		(append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
-      )
+		(append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist)))
 
 ;; Add PlantUML Support
 (use-package plantuml-mode

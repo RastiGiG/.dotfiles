@@ -179,8 +179,8 @@
   		 ;; ;; Load Consult Configuration
   		 ;; "package_configs/consult_config.el"
 
-  		 ;; ;; Load Traditional Language Modes
-  		 ;; "package_configs/language_modes_config.el"
+  		 ;; Load Traditional Language Modes
+  		 "package_configs/language_modes_config.el"
 
   		 ;; Load Tree-Sitter Language Modes
   		 "package_configs/language_ts_modes_config.el"

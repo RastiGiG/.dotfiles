@@ -380,8 +380,8 @@ Version mismatch is commonly encountered in the following situations:
   		   ;; ;; Load Consult Configuration
   		   ;; "package_configs/consult_config.el"
 
-  		   ;; ;; Load Traditional Language Modes
-  		   ;; "package_configs/language_modes_config.el"
+  		   ;; Load Traditional Language Modes
+  		   "package_configs/language_modes_config.el"
 
   		   ;; Load Tree-Sitter Language Modes
   		   "package_configs/language_ts_modes_config.el"
@@ -2879,7 +2879,8 @@ Improve [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] functionality of [[i
 
 The commented lines are for distributions like Ubuntu, where =python= referes to python 2 and python 3 need to be called by =python3=
 
-Pyrigth is a language server written in C# that is a lot faster then the normal pyls.
+=Pyrigth= is a ~language server~ written in C# that is a lot faster then the normal pyls, but it is not fully open-source.
+A better alternative is =jedi=
 Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alternative to "ptvsd>=4.2"), because it is recommended over the default ptsd
 #+begin_src emacs-lisp
   ;; Set Default Indentation for Python 
@@ -2895,10 +2896,10 @@ Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alt
   ;;  (require 'dab-python)
   ;;  )
 
-  ;; Enable Virtual Environment Support
-  (use-package pyvenv
-	:config
-	(pyvenv-mode 1))
+  ;; ;; Enable Virtual Environment Support
+  ;; (use-package pyvenv
+  ;; 	:config
+  ;; 	(pyvenv-mode 1))
 
 #+end_src
 ***** Rust
@@ -2932,7 +2933,7 @@ Add [[https://github.com/JuliaEditorSupport/julia-emacs][Julia Mode]] to support
   
 #+end_src
 ***** Nix
-Add https://github.com/NixOS/nix-mode to support the [[https://nixos.org/][Nix Language]] for the ~customization~ of [[id:2a8642c6-544c-4ffc-bb95-348bd5a24ee5][NixOS]]
+Add [[https://github.com/NixOS/nix-mode][Nix-Mode]] to support the [[https://nixos.org/][Nix Language]] for the ~customization~ of [[id:2a8642c6-544c-4ffc-bb95-348bd5a24ee5][NixOS]]
 #+begin_src emacs-lisp
   ;; Add Support for Nix Language and Nix Configurations
   (use-package nix-mode
@@ -2963,8 +2964,24 @@ Add https://github.com/NixOS/nix-mode to support the [[https://nixos.org/][Nix L
 ~Documentation~ can be found here: [[https://web-mode.org/][Web-Mode.org]]
 #+begin_src emacs-lisp :tangle no
   ;; Add alternative Mode for HTML Developement
-  (use-package web-mode)
-  
+  (use-package web-mode
+    :init
+    (setq-default web-mode-code-indent-offset 2)
+    ;; (setq web-mode-engines-alist '(("django" . "\\.html\\'")))
+
+    ;; :hook (web-mode . (lambda ()
+    ;;                     (highlight-indentation-mode -1)
+    ;;                     (electric-pair-local-mode -1)))
+    :custom
+    (web-mode-script-padding 0)
+    (web-mode-enable-current-element-highlight t)
+    (web-mode-enable-current-column-highlight t)
+    (web-mode-markup-indent-offset 2)
+    (web-mode-css-indent-offset 2)
+    (web-mode-sql-indent-offset 2)
+    :mode (("\\.vue\\'" . web-mode)
+  		 ("\\.html\\'" . web-mode)))
+
 #+end_src
 ***** ESS Mode
 [[https://ess.r-project.org/][ESS Mode]] (~Emacs Speaks Statistics~) is an [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] [[id:127b78f9-ac8e-4ce0-a316-0850559c44e4][Mode]] meant for ~Programming~ with [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Languages]] meant for ~statistical Computation~ like [[id:c64bc74b-bc42-4208-bf36-3c6832392de9][R]], ~S~, ~SAS~, ~SPSS~
@@ -3036,8 +3053,7 @@ Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
 
 	;; automatically enter gnuplot mode
 	(setq auto-mode-alist 
-		  (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
-	)
+		  (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist)))
   
 #+end_src
 ***** PlantUML
