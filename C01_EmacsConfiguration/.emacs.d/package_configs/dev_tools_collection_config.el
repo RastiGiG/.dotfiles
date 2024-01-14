@@ -10,7 +10,7 @@
   	"g t" '(git-timemachine :wk "Git time machine")))
 
 (use-package hl-todo
-  :hook ((org-mode . hl-todo-mode)
+  :hook (;; (org-mode . hl-todo-mode)  ;; Not needed with Org Modern
          (prog-mode . hl-todo-mode))
   :config
   (setq hl-todo-highlight-punctuation ":"

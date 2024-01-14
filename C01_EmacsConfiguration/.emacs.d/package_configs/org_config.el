@@ -904,3 +904,10 @@
 ;; To turn it off only locally, you can insert this:
 ;;
 ;; # -*- buffer-auto-save-file-name: nil; -*-
+
+;; Make org look a lot nicer
+(use-package org-modern
+  :defer
+  :after org
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda)))
