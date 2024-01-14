@@ -138,11 +138,13 @@
 ;; Add websites to webjump
 (with-eval-after-load 'webjump
   (cl-loop for website in
-		   '(("Google" . [simple-query "www.google.com" "www.google.com/search?q=" ""])
-			 ("YouTube" . [simple-query "www.youtube.com/feed/subscriptions" "www.youtube.com/results?search_query=" ""])
-			 ("CCBV" . [simple-query "https://ccbv.co.uk/" "https://ccbv.co.uk/" ""])
-			 ("Nix Packages - latest" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?from=0&sort=relevance&type=packages&query=" ""])
-			 ("Nix Packages - unstable" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?channel=unstable&from=0&sort=relevance&type=packages&query=" ""])
-			 ("Nix Wiki" . [simple-query "https://nixos.wiki/" "https://nixos.wiki/index.php?search=" ""]))
-		   do
-		   (add-to-list 'webjump-sites website)))
+  		 '(("Google" . [simple-query "www.google.com" "www.google.com/search?q=" ""])
+  		       ("YouTube" . [simple-query "www.youtube.com/feed/subscriptions" "www.youtube.com/results?search_query=" ""])
+  		       ("CCBV" . [simple-query "https://ccbv.co.uk/" "https://ccbv.co.uk/" ""])
+  		       ("Nix Packages - latest" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?from=0&sort=relevance&type=packages&query=" ""])
+  		       ("Nix Packages - unstable" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?channel=unstable&from=0&sort=relevance&type=packages&query=" ""])
+  		       ("Nix Wiki" . [simple-query "https://nixos.wiki/" "https://nixos.wiki/index.php?search=" ""])
+  		       ("Nix Documentation" . [simple-query "https://nix.dev/" "https://nix.dev/search.html?q=" ""])
+  		       ("Home-Manager Options" . [simple-query "https://mipmip.github.io/" "https://mipmip.github.io/home-manager-option-search/?query=" ""]))
+  		 do
+  		 (add-to-list 'webjump-sites website)))
