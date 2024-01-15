@@ -1,6 +1,8 @@
-#+title: Helpful Bash Functions
-#+PROPERTY: header-args:shell :tangle ../D01_Bash/.bash_functions :mkdirp yes
-#+STARTUP: show2levels
+#+title:        Helpful Bash Functions
+#+DATE:         [2024-01-15]
+#+PROPERTY:     header-args:shell :tangle ../D01_Bash/bash_functions :mkdirp yes
+#+STARTUP:      show2levels
+#+auto_tangle:  t
 
 * Introduction
 
