@@ -203,6 +203,9 @@ require('lazy').setup({
   -- Autocomplete brackets and quotes etc., integrates with cmp
   {'akinsho/toggleterm.nvim', version = "*", config = true},
 
+  -- Better integration with tmux
+  { "christoomey/vim-tmux-navigator", },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
