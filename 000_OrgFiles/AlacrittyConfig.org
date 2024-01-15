@@ -361,12 +361,12 @@ You can easily migrate your existing =alacritty.yml= to the new =alacritty.toml=
   action = "ScrollToBottom"
   key = "Space"
   mode = "Vi"
-  mods = "Control"
+  mods = "Shift"
 
   [[keyboard.bindings]]
   action = "ToggleViMode"
   key = "Space"
-  mods = "Control"
+  mods = "Shift"
 
   [[keyboard.bindings]]
   action = "ScrollToBottom"

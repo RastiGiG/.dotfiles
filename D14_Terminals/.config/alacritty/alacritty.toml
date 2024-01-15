@@ -304,12 +304,12 @@ mods = "Control|Shift"
 action = "ScrollToBottom"
 key = "Space"
 mode = "Vi"
-mods = "Control"
+mods = "Shift"
 
 [[keyboard.bindings]]
 action = "ToggleViMode"
 key = "Space"
-mods = "Control"
+mods = "Shift"
 
 [[keyboard.bindings]]
 action = "ScrollToBottom"
