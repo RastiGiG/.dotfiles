@@ -93,6 +93,10 @@ tramp
 /C01_EmacsConfiguration/**/eshell/lastdir
 
 #############
+## EWW Files
+/C01_EmacsConfiguration/**/url/
+
+#############
 ## Elfeed
 /C01_EmacsConfiguration/**/elfeed.stats
 /C01_EmacsConfiguration/**/elfeed/
