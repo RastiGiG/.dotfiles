@@ -1,10 +1,10 @@
-#+TITLE:    Configuration for GNU Readline
-#+DESCRIPTION: GNU Readline is a Library that is used by many command line tools with prompts like Bash, the Python-Shell and SQL Interpreters (psql, sqlite)
-#+DATE:     [2024-01-07]
-#+PROPERTY: header-args:shell :tangle ../D00_GeneralShell/.config/inputrc :mkdirp yes
-#+STARTUP: hideblocks show2levels
-#+OPTIONS:  toc:2
-#+auto_tangle: t
+#+TITLE:        Configuration for GNU Readline
+#+DATE:          [2024-01-07]
+#+DESCRIPTION:  GNU Readline is a Library that is used by many command line tools with prompts like Bash, the Python-Shell and SQL Interpreters (psql, sqlite)
+#+PROPERTY:     header-args:shell :tangle ../D00_GeneralShell/.inputrc :mkdirp yes
+#+STARTUP:      hideblocks show2levels
+#+OPTIONS:      toc:2
+#+auto_tangle:  t
 
 * Introduction
 
