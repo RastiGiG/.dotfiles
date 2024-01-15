@@ -1,12 +1,15 @@
 #+title:       Personal NeoVim Configuration
 #+DATE:        [2023-12-16]
-#+PROPERTY:    header-args:lua :tangle yes :mkdirp yes
+#+PROPERTY:    header-args:lua :mkdirp yes
 #+STARTUP:     show2levels
 #+auto_tangle: t
 
-* Header
-
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/init.lua
+* Root Neovim Configuration
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/init.lua :mkdirp yes
+:END:
+** Header
+#+begin_src lua 
   --[[
 
     _   _         __     ___           
@@ -25,9 +28,8 @@
   --]]
 
 #+end_src
-
-* Basic Init
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/init.lua
+** Basic Init
+#+begin_src lua
     --[[
   
   =====================================================================
@@ -50,7 +52,10 @@
 * Personal Configuration
 ** Lua - General Setup
 *** Init
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/init.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/init.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -66,7 +71,10 @@
 
 #+end_src
 *** Keybindings
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/keybindings.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/keybindings.lua :mkdirp yes
+:END:
+#+begin_src lua
     --[[
 
     =====================================================================
@@ -207,7 +215,10 @@
       
 #+end_src
 *** Settings
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/settings.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/settings.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -302,6 +313,9 @@
 
 #+end_src
 *** Colorscheme
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/lazy.lua :mkdirp yes
+:END:
 #+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/colorscheme.lua
   --[[
 
@@ -321,7 +335,10 @@
 
 #+end_src
 *** Lazy Package Manager
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/lazy.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/lua/gigus/lazy.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -545,7 +562,10 @@
 #+end_src
 ** After - Plugin Configuration
 *** GitSigns
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/gitsigns.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/gitsigns.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -662,7 +682,10 @@
   
 #+end_src
 *** Org Mode Support
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/orgmode.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/orgmode.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -684,7 +707,10 @@
 
 #+end_src
 *** LSP Server Setup
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/lsp.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/lsp.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -854,7 +880,10 @@
 
 #+end_src
 *** Modeline
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/modeline.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/modeline.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -868,7 +897,10 @@
 
 #+end_src
 *** Harpoon
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/harpoon.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/harpoon.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -890,7 +922,10 @@
 
 #+end_src
 *** Autopairs
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/autopairs.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/autopairs.lua :mkdirp yes
+:END:
+#+begin_src lua
     --[[
 
     =====================================================================
@@ -937,7 +972,10 @@
 #+end_src
 
 *** Undotree
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/undotree.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/undotree.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -950,7 +988,10 @@
 
 #+end_src
 *** NeoVim Autocompletion
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/nvim-cmp.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/nvim-cmp.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -1012,7 +1053,10 @@
 
 #+end_src
 *** Telescope
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/telescope.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/telescope.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -1113,7 +1157,10 @@
 
 #+end_src
 *** Toggleterm
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/toggleterm.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/toggleterm.lua :mkdirp yes
+:END:
+#+begin_src lua
   --[[
 
   =====================================================================
@@ -1258,7 +1305,10 @@
         
 #+end_src
 *** Tree-Sitter
-#+begin_src lua :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/treesitter.lua
+:PROPERTIES:
+:header-args:lua: :tangle ../C02_VimConfiguration/.config/nvim/after/plugin/treesitter.lua :mkdirp yes
+:END:
+#+begin_src lua
     --[[
 
   =====================================================================
