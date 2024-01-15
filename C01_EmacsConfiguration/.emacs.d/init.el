@@ -101,6 +101,9 @@
   		 ;; ;; Load Ranger Configuration
   		 ;; "package_configs/ranger_config.el"
 
+  		 ;; Load Openwith Configuration
+  		 "package_configs/openwith_config.el"
+
   		 ;; Load PDF-Tools Configuration
   		 "package_configs/pdf_tools_config.el"
 

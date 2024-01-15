@@ -27,6 +27,7 @@
   - [[#dired-extensions][Dired Extensions]]
   - [[#ranger][Ranger]]
   - [[#pdf-tools][PDF Tools]]
+  - [[#openwith][Openwith]]
 - [[#quality-of-live-extensions][Quality of Live Extensions]]
   - [[#collection-of-qol-extensions][Collection of QoL Extensions]]
   - [[#multiple-cursors][Multiple Cursors]]
@@ -301,6 +302,9 @@ Version mismatch is commonly encountered in the following situations:
 
   		   ;; ;; Load Ranger Configuration
   		   ;; "package_configs/ranger_config.el"
+
+  		   ;; Load Openwith Configuration
+  		   "package_configs/openwith_config.el"
 
   		   ;; Load PDF-Tools Configuration
   		   "package_configs/pdf_tools_config.el"
@@ -777,6 +781,74 @@ There's also a [[https://pdftools.wiki/][wiki]] for it.
     (pet/leader-keys
       ;; Toggles - Modes
       "tmp"   '(pdf-view-mode :which-key "PDF View Mode")))
+
+#+end_src
+** Openwith
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/openwith_config.el :mkdirp yes
+:END:
+
+[[https://www.metalevel.at/misc/openwith.el][Openwith]] is a small package that opens ~external programs~ based on file extensions
+#+begin_src emacs-lisp
+  ;; Add Openwidth to use more sensible programs for certain file
+  (use-package openwith
+    :config
+    (setq openwith-associations
+          (list
+           (list (openwith-make-extension-regexp
+                  '("mpg" "mpeg" "mp3" "mp4"
+                    "avi" "wmv" "wav" "mov" "flv"
+                    "ogm" "ogg" "mkv"))
+                 "mpv"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
+                 "libreoffice"
+                 '(file))
+  		 
+           '("\\.lyx" "lyx" (file))
+  		 
+           '("\\.chm" "kchmviewer" (file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("ps" "ps.gz" "dvi"))
+                 "okular"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("kdenlive"))
+                 "kdenlive-accel"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("kra"))
+                 "krita"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("blend" "blend1"))
+                 "blender"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("helio"))
+                 "helio"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("svg"))
+                 "inkscape"
+                 '(file))
+  		 
+           (list (openwith-make-extension-regexp
+                  '("flp"))
+                 "~/.local/bin/flstudio"
+                 '(file))
+           ))
+    (setq openwith-confirm-invocation t)  ;; Avoid starting other processes by accident
+    ;; Activate openwidth mode
+    (openwith-mode 1))
 
 #+end_src
 * Quality of Live Extensions
