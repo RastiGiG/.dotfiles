@@ -36,11 +36,12 @@ DIRPREFIX="${HOME}/.dotfiles/"
 
 # Directories linking into $HOME
 declare -a directory_list_home=(
-      "D00_GeneralShell"
+    "D00_GeneralShell"
+    "D01_Bash"
     "D02_Zsh"
-      "D04_Keymapping"
-      "D05_Emacs"
-      "D06_Git"
+    "D04_Keymapping"
+    "D05_Emacs"
+    "D06_Git"
 )
 
 # Directories linking into .config
