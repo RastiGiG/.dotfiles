@@ -1,0 +1,11 @@
+#+title:   Personal Dotfiles
+#+date:    2024:01:15
+#+STARTUP: show2levels
+
+* Description
+
+Guess what
+
+* Usage
+
+The =bin= directory contains a script that links all the relevant ~Dotfiles~ into the home directory
