@@ -1,11 +1,11 @@
 # -*- ispell-local-dictionary: "british"; -*-
-#+TITLE: Personal Emacs Configuration
-#+DATE:  [2024-01-06]
-#+DESCRIPTION: This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
-#+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
-#+STARTUP: hideblocks show2levels
-#+OPTIONS:  toc:2
-#+auto_tangle: t
+#+TITLE:        Personal Emacs Configuration
+#+DATE:         [2024-01-06]
+#+DESCRIPTION:  This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
+#+PROPERTY:     header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
+#+STARTUP:      hideblocks show2levels
+#+OPTIONS:      toc:2
+#+auto_tangle:  t
 
 * Table of Contents                                                     :toc:
 - [[#introduction][Introduction]]

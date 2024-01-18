@@ -21,21 +21,6 @@ The following variables are used to tweak some of the configuration pieces like 
 
 This section configures basic UI settings that remove unneeded elements to make Emacs look a lot more minimal and modern.  If you're just getting started in Emacs, the menu bar might be helpful so you can remove the =(menu-bar-mode -1)= line if you'd like to still see that.
 ** Basic UI Settings
-*** Bars and Menus
-#+begin_src emacs-lisp
-  (scroll-bar-mode -1)        ; Disable visible scrollbar
-  (tool-bar-mode -1)          ; Disable the toolbar
-  (tooltip-mode -1)           ; Disable tooltips
-  (set-fringe-mode 10)        ; Give some breathing room
-  (menu-bar-mode -1)          ; Disable the menu bar
-
-#+end_src
-*** Startup message
-#+begin_src emacs-lisp
-  ;; We don't need to see that
-  (setq inhibit-startup-message t)
-
-#+end_src
 *** Fullscreen Mode
 #+begin_src emacs-lisp
   ;; Start Emacs in Fullscreen mode and set transparancy
@@ -116,19 +101,6 @@ This section configures basic UI settings that remove unneeded elements to make 
   ;; Display clock in modeline
   (display-time-mode 1)
   
-#+end_src
-*** Dialog Box
-Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] keyboard-driven
-#+begin_src emacs-lisp
-  ;; Don't show windowed Dialog Box on Prompts
-  (setq use-dialog-box nil)
-  
-#+end_src
-*** File Dialog
-#+begin_src emacs-lisp
-  ;; No file dialog
-  (setq use-file-dialog nil)
-
 #+end_src
 *** Number of Side Windows
 

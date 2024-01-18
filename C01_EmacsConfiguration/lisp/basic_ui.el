@@ -5,15 +5,6 @@
 ;; |____/_/   \_\____/___\____|  \___/|___|  \____\___/|_| \_|_|   |___\____|
 ;;
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
-(menu-bar-mode -1)          ; Disable the menu bar
-
-;; We don't need to see that
-(setq inhibit-startup-message t)
-
 ;; Start Emacs in Fullscreen mode and set transparancy
 (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
@@ -73,12 +64,6 @@
 
 ;; Display clock in modeline
 (display-time-mode 1)
-
-;; Don't show windowed Dialog Box on Prompts
-(setq use-dialog-box nil)
-
-;; No file dialog
-(setq use-file-dialog nil)
 
 ; Number of side window slots at
 ; left - top - right - bottom

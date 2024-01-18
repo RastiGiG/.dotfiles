@@ -22,29 +22,6 @@
 #+end_src
 
 * Quality of Live Adjustments
-** Startup
-
-Make startup faster by reducing the frequency of garbage collection and then use a hook to measure Emacs startup time. 
- #+begin_src emacs-lisp
-   ;; Setting garbage collection threshold (default is 800)
-   ;; Required for speed and also LSP
-   (setq gc-cons-threshold (* 50 1000 1000)
-    gc-cons-percentage 0.6)
-
-   ;; Profile emacs startup
-   (add-hook 'emacs-startup-hook
-         (lambda ()
-           (message "*** Emacs loaded in %s with %d garbage collections."
-            (format "%.2f seconds"
-                   (float-time
-                (time-subtract after-init-time before-init-time)))
-               gcs-done)))
-
-   ;; Silence compiler warnings as they can be pretty
-   ;; disruptive
-   ;;(setq comp-async-report-warnings-errors nil)
-   
- #+end_src
 ** Tabs As Spaces
 I Prefer ~Spaces~ over ~Tabs~, if you need to enable it for certain modes, add a hook to it.
 #+begin_src emacs-lisp
@@ -111,12 +88,6 @@ Changing this behaviour will still ask for confirmation, but you don't need to m
   ; Load newer file version when possible
   (setq load-prefer-newer t)
 
-#+end_src
-** Short Answers
-#+begin_src emacs-lisp
-  ; Type ’y’ and ’n’ instead of ’yes’ or ’no’
-  (setq use-short-answers t)
-  
 #+end_src
 ** Selection Overwrite
 #+begin_src emacs-lisp

@@ -11,24 +11,6 @@
 ;; |____/|_____| |_|   |_| |___|_| \_|\____|____/ 
 ;;
 
-;; Setting garbage collection threshold (default is 800)
-;; Required for speed and also LSP
-(setq gc-cons-threshold (* 50 1000 1000)
- gc-cons-percentage 0.6)
-
-;; Profile emacs startup
-(add-hook 'emacs-startup-hook
-      (lambda ()
-        (message "*** Emacs loaded in %s with %d garbage collections."
-         (format "%.2f seconds"
-                (float-time
-             (time-subtract after-init-time before-init-time)))
-            gcs-done)))
-
-;; Silence compiler warnings as they can be pretty
-;; disruptive
-;;(setq comp-async-report-warnings-errors nil)
-
 ;; Tabs as tab-char by default.
 ;; 'nil' replaces tabs with spaces
 ;;(setq-default indent-tabs-mode nil)
@@ -72,9 +54,6 @@
 
 ; Load newer file version when possible
 (setq load-prefer-newer t)
-
-; Type ’y’ and ’n’ instead of ’yes’ or ’no’
-(setq use-short-answers t)
 
 ;; Make Selections behave as expected
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
