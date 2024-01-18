@@ -95,8 +95,7 @@ shopt -s complete_fullquote
 PROMPT_PARSER() {
     # Initialize Variables
     local GitSymbs GitStatus GitTopDir GitCheck GitBranch CurrentGitBranch\
-        X Z Line Desc Buffer ModifiedFiles TTLCommits Basename Dirname Slashes\
-        TempColumns StatusColor Line CWD NFTTL ExitStatus
+        X Line Desc Buffer ModifiedFiles TTLCommits NFTTL
 
     # Set Colors
     # Legend:
