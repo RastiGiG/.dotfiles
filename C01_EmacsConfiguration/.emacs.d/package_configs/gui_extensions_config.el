@@ -81,3 +81,6 @@
   :hook (after-init . golden-ratio-mode)
   :custom
   (golden-ratio-exclude-modes '(occur-mode)))
+
+;; Totally useless but i love it
+(use-package fireplace)

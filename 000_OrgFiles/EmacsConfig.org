@@ -2449,6 +2449,14 @@ The behaviour can be adjusted by a couple of variables like =golden-ratio-max-wi
     (golden-ratio-exclude-modes '(occur-mode)))
 
 #+end_src
+*** Fireplace
+
+Make your editor a little cozier with [[https://github.com/johanvts/emacs-fireplace][Emacs-Fireplace]]
+#+begin_src emacs-lisp
+  ;; Totally useless but i love it
+  (use-package fireplace)
+    
+#+end_src
 * Developement Tools
 ** Magit
 :PROPERTIES:
