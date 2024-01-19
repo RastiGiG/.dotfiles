@@ -99,12 +99,8 @@ not retain the generic background set by the function
   (when-let ((theme (car custom-enabled-themes)))
     (enable-theme theme)))
 
-;; Initialise installed packages at this early stage, by using the
-;; available cache.  I had tried a setup with this set to nil in the
-;; early-init.el, but (i) it ended up being slower and (ii) various
-;; package commands, like `describe-package', did not have an index of
-;; packages to work with, requiring a `package-refresh-contents'.
-(setq package-enable-at-startup t)
+;; Set this to nil, when using straight.el
+(setq package-enable-at-startup nil)
 
 ;; STOP BURNING MY EYES EMACS
 (defun pet/emacs-avoid-initial-flash-of-light ()

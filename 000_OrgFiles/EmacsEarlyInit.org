@@ -112,7 +112,7 @@ Make startup faster by reducing the frequency of garbage collection and then use
         frame-title-format '("%b"))
 
 #+end_src
-**  Startup and other inhibits
+** Startup and other inhibits
 #+begin_src emacs-lisp
   ;; Startup Messages and other inhibits
   (setq inhibit-splash-screen t
@@ -168,15 +168,11 @@ Don't show a *windowed dialog* box to keep [[id:3cf0fa83-18b3-4206-a109-f4606a94
 #+end_src
 * Package Cache
 
-Set this if you use the default package manager =package.el=.
+Set this to =t= if you use the default package manager =package.el=.
 #+begin_src emacs-lisp
-  ;; Initialise installed packages at this early stage, by using the
-  ;; available cache.  I had tried a setup with this set to nil in the
-  ;; early-init.el, but (i) it ended up being slower and (ii) various
-  ;; package commands, like `describe-package', did not have an index of
-  ;; packages to work with, requiring a `package-refresh-contents'.
-  (setq package-enable-at-startup t)
-  
+  ;; Set this to nil, when using straight.el
+  (setq package-enable-at-startup nil)
+
 #+end_src
 * Avoid initial Flash
 
