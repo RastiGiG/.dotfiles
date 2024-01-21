@@ -89,3 +89,15 @@ Using [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] in ~Daemon-Server-Mode~
   alias ec="emacsclient -tc"                    # Connect to daemon
   alias ek="emacsclient --eval '(kill-emacs)'"  # Kill Daemon
 #+end_src
+* Nix
+** NixOS
+#+begin_src shell
+  alias nrsd='sudo nixos-rebuild switch --flake ~/.dotnix#descartes'
+  
+#+end_src
+** Home-Manager
+#+begin_src shell
+  alias hmsr='home-manager switch --flake ~/.dotnix#rastibasti'
+  alias hmss='home-manager switch --flake ~/.dotnix#sebastian'
+  
+#+end_src
