@@ -37,7 +37,7 @@
 ;; Add Drag Stuff Mode
 (use-package drag-stuff
   :init
-  (drag-stuff-global-mode 1)
+  ;(drag-stuff-global-mode 1)  ;; deactivated global variant since it gets a bit annoying in org mode
   (drag-stuff-define-keys)
   (evil-define-key 'visual drag-stuff-mode-map (kbd "K") 'drag-stuff-up)
   (evil-define-key 'visual drag-stuff-mode-map (kbd "J") 'drag-stuff-down)
