@@ -55,6 +55,11 @@ alias ed="emacs --daemon"                     # Start daemon
 alias ec="emacsclient -tc"                    # Connect to daemon
 alias ek="emacsclient --eval '(kill-emacs)'"  # Kill Daemon
 
+alias smca='smartctl -a'             # Show device info
+alias smcts='smartctl -t short'      # Start a short selftest
+alias smctl='smartctl -t long'       # Start a long selftest
+alias smcstl='smartctl -l selftest'  # Start a long selftest
+
 alias nrsd='sudo nixos-rebuild switch --flake ~/.dotnix#descartes'
 
 alias hmsr='home-manager switch --flake ~/.dotnix#rastibasti'

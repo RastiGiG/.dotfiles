@@ -89,6 +89,19 @@ Using [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] in ~Daemon-Server-Mode~
   alias ec="emacsclient -tc"                    # Connect to daemon
   alias ek="emacsclient --eval '(kill-emacs)'"  # Kill Daemon
 #+end_src
+* Storagemedia and Filesystem
+** S.M.A.R.T. Control
+
+:NOTE:
+These commands need the devices to be *unmounted* to work right
+:END:
+#+begin_src shell
+  alias smca='smartctl -a'             # Show device info
+  alias smcts='smartctl -t short'      # Start a short selftest
+  alias smctl='smartctl -t long'       # Start a long selftest
+  alias smcstl='smartctl -l selftest'  # Start a long selftest
+  
+#+end_src
 * Nix
 ** NixOS
 #+begin_src shell
