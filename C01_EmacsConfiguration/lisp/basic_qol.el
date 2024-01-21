@@ -124,6 +124,7 @@
   		       ("Nix Packages - unstable" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?channel=unstable&from=0&sort=relevance&type=packages&query=" ""])
   		       ("Nix Wiki" . [simple-query "https://nixos.wiki/" "https://nixos.wiki/index.php?search=" ""])
   		       ("Nix Documentation" . [simple-query "https://nix.dev/" "https://nix.dev/search.html?q=" ""])
-  		       ("Home-Manager Options" . [simple-query "https://mipmip.github.io/" "https://mipmip.github.io/home-manager-option-search/?query=" ""]))
+  		       ("Home-Manager Options" . [simple-query "https://mipmip.github.io/" "https://mipmip.github.io/home-manager-option-search/?query=" ""])
+  		       ("Docker Hub" . [simple-query "https://hub.docker.com/" "https://hub.docker.com/search?q=" ""]))
   		 do
   		 (add-to-list 'webjump-sites website)))
