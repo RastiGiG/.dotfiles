@@ -128,3 +128,6 @@
   		       ("Docker Hub" . [simple-query "https://hub.docker.com/" "https://hub.docker.com/search?q=" ""]))
   		 do
   		 (add-to-list 'webjump-sites website)))
+
+;; Cleanup work at midnight
+(midnight-mode 1)

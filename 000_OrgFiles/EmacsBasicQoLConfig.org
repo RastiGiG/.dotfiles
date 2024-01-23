@@ -205,3 +205,11 @@ This section was copied from:
   		   (add-to-list 'webjump-sites website)))
 
 #+end_src
+** Midnight Mode
+
+~Midnight Mode~ runs certain functions at ~midnight~, so this setting can be changed with the =midnight-timer= variable.
+#+begin_src emacs-lisp
+  ;; Cleanup work at midnight
+  (midnight-mode 1)
+  
+#+end_src
