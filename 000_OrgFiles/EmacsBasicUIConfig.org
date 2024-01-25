@@ -58,6 +58,12 @@ This section configures basic UI settings that remove unneeded elements to make 
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
+*** Fill Column
+#+begin_src emacs-lisp
+  ;; Set the amount of space before lines get wrapped (default 70)
+  (setq fill-column 80)
+  
+#+end_src
 *** Don't loose your Cursor
 #+begin_src emacs-lisp  
   ;; Set up the visible bell

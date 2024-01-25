@@ -36,6 +36,9 @@
   	     treemacs-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Set the amount of space before lines get wrapped (default 70)
+(setq fill-column 80)
+
 ;; Set up the visible bell
 (setq visible-bell t)
 

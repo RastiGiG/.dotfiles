@@ -7,7 +7,7 @@
       ;; Load fill column when visual line mode
       (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
       ;; Give more space to content, default uses value of fill-column variable
-      (setq visual-fill-column-width 140)
+      (setq-default visual-fill-column-width 130)
       ;; Automatically center text in visual fill column
       (setq-default visual-fill-column-center-text t)
 
