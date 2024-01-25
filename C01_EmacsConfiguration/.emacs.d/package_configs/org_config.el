@@ -125,16 +125,48 @@
 ;; ;; Set src block automatic indent to 0 instead of 2.
 ;; (setq org-edit-src-content-indentation 0)
 
+;; Sane org agenda settings
+(setq org-agenda-span 1            ;; Number of days in overview (default is 10)
+  	org-agenda-start-date "+0d"  ;; Only display from current day
+  	org-agenda-skip-deadline-if-done t
+  	org-agenda-skip-scheduled-if-done t
+  	org-agenda-skip-scheduled-if-deadline-is-shown t
+  	org-agenda-skip-timestamp-if-deadline-is-shown t)
+
+;; Removes the lines and grids in the org agenda
+;;(setq org-agenda-current-time-string "")
+;;(setq org-agenda-time-grid '((daily) () "" ""))
+
 ;; Specify Agenda Files
 (setq org-agenda-files
-  ;;(cons (concat pet/org-dir "journal")
-      ;; Add Files a starting with "personal-"
-      (directory-files pet/org-dir t
-  		       "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
-      ;;)
-)
+  	;;(cons (concat pet/org-dir "journal")
+  	;; Add Files a starting with "personal-"
+  	(directory-files pet/org-dir t
+  					 "personal-\\(tasks\\|mail\\|chores\\|contracts\\)-?[A-Za-z]*.org")
+  	;;)
+  	)
+
+;; This line will remove all tags from the agenda view
+;;(setq org-agenda-hide-tags-regexp ".*")
+
+;; change prefix string in agenda
+(setq org-agenda-prefix-format
+      '((agenda . "  %?-2i %t ")
+  	(todo . " %i %-12:c")
+  	(tags . " %i %-12:c")
+  	(search . " %i %-12:c")))
 
 (setq org-agenda-start-with-log-mode t)
+
+;; Use custom hook to center agenda view
+(add-hook 'org-agenda-mode-hook 'pet/org-agenda-open-hook)
+
+;; Set icons for specified categories
+(setq org-agenda-category-icon-alist
+  	`(("Studies" ,(list (all-the-icons-faicon "graduation-cap" :height 0.8)) nil nil :ascent center)
+  	      ("Family" ,(list (all-the-icons-faicon "home" :v-adjust 0.005)) nil nil :ascent center)
+  	      ("Medical" ,(list (all-the-icons-faicon "medkit" :v-adjust 0.005)) nil nil :ascent center)
+  	      ("Personal" ,(list (all-the-icons-material "person" :height 0.9)) nil nil :ascent center)))
 
 ;; Use Drawer to store Information aboutTodo State Changes
 (setq org-log-done 'time)
@@ -861,6 +893,45 @@
   org-roam-ui-follow t
   org-roam-ui-update-on-save t
   org-roam-ui-open-on-start t))
+
+;; Rice up the agenda
+(use-package org-super-agenda
+  :config
+  ;; Specify the groups displayed in the agenda view
+  (setq org-super-agenda-groups
+   	      '(;; The groups have an implicit boolean OR separator between their selectors
+  		(:name "❗ Overdue "  ;
+  			       :scheduled past
+  			       :order 2
+  			       :face 'error)
+
+  		(:name "Personal "
+  			       :and(:file-path "Personal" :not (:tag "event"))
+  			       :order 3)
+
+  		(:name "Family "
+  			       :and(:file-path "Family" :not (:tag "event"))
+  			       :order 3)
+
+  		(:name "Studies "
+  			       :and(:file-path "Studies " :not (:tag "event"))
+  			       :order 3)
+
+  		(:name "🗓 Today "
+  			       :time-grid t
+  			       :date today
+  			       :scheduled today
+  			       :order 1
+  			       :face 'warning)))
+
+  ;; Activate org super agenda
+  (org-super-agenda-mode t)
+
+  ;; Add Keybindings
+  :general
+  (:keymaps 'org-super-agenda-header-map
+  	      "j" '(org-agenda-next-line :wk "Next Agenda Line")
+  	      "k" '(org-agenda-previous-line :wk "Previous Agenda Line")))
 
 ;; Load Org Ref
 (use-package org-ref
