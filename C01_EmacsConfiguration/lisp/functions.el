@@ -136,6 +136,21 @@
 (defun pet/font-available-p (font-name)
       (find-font (font-spec :name font-name)))
 
+;; Custom window split function 
+(defun pet/split-below (arg)
+  "Split window below from the parent or from root with ARG."
+  (interactive "P")
+  (split-window (if arg (frame-root-window)
+                  (window-parent (selected-window)))
+                nil 'below nil))
+
+;; Add user-facing command for dedicated windows
+(defun pet/toggle-window-dedication ()
+  "Toggles window dedication in the selected window."
+  (interactive)
+  (set-window-dedicated-p (selected-window)
+  						(not (window-dedicated-p (selected-window)))))
+
 ;; Join a line by separator
 (defun pet/join-lines (specify-separator)
       "Join lines in the active region by a separator, by default a comma.

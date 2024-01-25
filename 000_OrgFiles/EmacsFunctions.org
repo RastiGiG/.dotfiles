@@ -166,6 +166,24 @@ These are some helpful [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]] to
 	(find-font (font-spec :name font-name)))
   
 #+end_src
+** Window Management
+#+begin_src emacs-lisp
+  ;; Custom window split function 
+  (defun pet/split-below (arg)
+    "Split window below from the parent or from root with ARG."
+    (interactive "P")
+    (split-window (if arg (frame-root-window)
+                    (window-parent (selected-window)))
+                  nil 'below nil))
+
+  ;; Add user-facing command for dedicated windows
+  (defun pet/toggle-window-dedication ()
+    "Toggles window dedication in the selected window."
+    (interactive)
+    (set-window-dedicated-p (selected-window)
+  						  (not (window-dedicated-p (selected-window)))))
+
+    #+end_src
 ** Join Lines with specified Separator
 
 This code Snippet is based on [[https://whatacold.io/blog/2023-06-12-emacs-join-lines/][Whatacold: Join lines by separator]]
