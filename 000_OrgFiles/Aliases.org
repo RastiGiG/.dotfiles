@@ -114,3 +114,8 @@ These commands need the devices to be *unmounted* to work right
   alias hmss='home-manager switch --flake ~/.dotnix#sebastian'
   
 #+end_src
+* Ledger
+#+begin_src shell
+  alias ldgsd="ledger --sort='-date'"
+  
+#+end_src

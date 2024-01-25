@@ -64,3 +64,5 @@ alias nrsd='sudo nixos-rebuild switch --flake ~/.dotnix#descartes'
 
 alias hmsr='home-manager switch --flake ~/.dotnix#rastibasti'
 alias hmss='home-manager switch --flake ~/.dotnix#sebastian'
+
+alias ldgsd="ledger --sort='-date'"
