@@ -192,6 +192,10 @@ Note: it depends on s.el."
         (message "Native JSON is available")
       (message "Native JSON is *not* available")))
 
+(defun pet/org-agenda-open-hook ()
+  "Hook for org-agenda using visual-fill-column"
+(visual-fill-column-mode))
+
 ;; This function grabs a list of org files from the specified directories
 ;; I use this function in my custom time table to track worktime across different files
 (defun pet/collect-org-files ()

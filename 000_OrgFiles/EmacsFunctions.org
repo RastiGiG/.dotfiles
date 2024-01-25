@@ -384,6 +384,13 @@ These commands were intern inspired by the following forum post:
               (delete-region week-begin (line-beginning-position))))))))
   
 #+end_src
+** Org Open Agenda Function
+#+begin_src emacs-lisp
+  (defun pet/org-agenda-open-hook ()
+    "Hook for org-agenda using visual-fill-column"
+  (visual-fill-column-mode))
+  
+#+end_src
 ** Org Create Org File List Function
 #+begin_src emacs-lisp
   ;; This function grabs a list of org files from the specified directories
