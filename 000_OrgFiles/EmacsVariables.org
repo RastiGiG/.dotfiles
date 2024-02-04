@@ -165,6 +165,14 @@ More info here: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Back
    (concat pet/dotfiles-emacsconfig-dir "macros/global.macs")) 
 
 #+end_src
+** Lexical Binding
+
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][Lexical Binding]] is a way to bind variables within a ~lexical scope~, which can lead to Emacs running faster.
+#+begin_src emacs-lisp
+  ; Enable lexical binding
+  (setq lexical-binding t)
+  
+#+end_src
 ** Skeletons
 
 ~Skeletons~ are ~text constructs~ (like ~letter headers~ or ~programming templates~) that you can insert.

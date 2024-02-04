@@ -98,6 +98,9 @@
 (pet/load-file
  (concat pet/dotfiles-emacsconfig-dir "macros/global.macs"))
 
+; Enable lexical binding
+(setq lexical-binding t)
+
 ;; Article Skeleton
 (define-skeleton pet/latex-article-skeleton
   "Skeleton for article type latex documents"
