@@ -1,14 +1,14 @@
-;;  ____    _    ____ ___ ____    ___   ___  _     
-;; | __ )  / \  / ___|_ _/ ___|  / _ \ / _ \| |    
-;; |  _ \ / _ \ \___ \| | |     | | | | | | | |    
-;; | |_) / ___ \ ___) | | |___  | |_| | |_| | |___ 
+;;  ____    _    ____ ___ ____    ___   ___  _
+;; | __ )  / \  / ___|_ _/ ___|  / _ \ / _ \| |
+;; |  _ \ / _ \ \___ \| | |     | | | | | | | |
+;; | |_) / ___ \ ___) | | |___  | |_| | |_| | |___
 ;; |____/_/   \_\____/___\____|  \__\_\\___/|_____|
-;;                                                 
-;;  ____  _____ _____ _____ ___ _   _  ____ ____  
-;; / ___|| ____|_   _|_   _|_ _| \ | |/ ___/ ___| 
-;; \___ \|  _|   | |   | |  | ||  \| | |  _\___ \ 
+;;
+;;  ____  _____ _____ _____ ___ _   _  ____ ____
+;; / ___|| ____|_   _|_   _|_ _| \ | |/ ___/ ___|
+;; \___ \|  _|   | |   | |  | ||  \| | |  _\___ \
 ;;  ___) | |___  | |   | |  | || |\  | |_| |___) |
-;; |____/|_____| |_|   |_| |___|_| \_|\____|____/ 
+;; |____/|_____| |_|   |_| |___|_| \_|\____|____/
 ;;
 
 ;; Tabs as tab-char by default.
@@ -21,11 +21,15 @@
 ;; Set Number of Spaces displayed for a tab stop
 (setq-default tab-width 4)
 ;; ;; Enable Tabs for certain modes
-;; (dolist (mode '(text-mode-hook				 
+;; (dolist (mode '(text-mode-hook
 ;; 				yaml-mode-hook))
 ;;   (add-hook mode (lambda () (indent-tabs-mode t))))
 
-;; Show Calendar on StartUp                      
+;; Remove trailing whitespaces
+(add-hook 'before-save-hook
+          'delete-trailing-whitespace)
+
+;; Show Calendar on StartUp
 ;; (calendar)
 
 ;; set date format to %DD-%MM-%YYYY
@@ -39,7 +43,7 @@
 ;; Save command and file history
 (savehist-mode 1)
 
-;; Remember Cursor Positions on accessed files 
+;; Remember Cursor Positions on accessed files
 (save-place-mode 1)
 
 ;; Avoid Clutter by saving Customization Settings to a different file
