@@ -1,4 +1,4 @@
-;; Add Perspective to use sets of 
+;; Add Perspective to use sets of
 (use-package perspective
   :demand t
   ;; Setup Keybindings
@@ -27,6 +27,6 @@
   ;; Add Perspective Functions to User Leader Keys
   (pet/leader-keys
       "P"  '(:ignore t :which-key "Perspectives")
-      "Pn"  'persp-next  
+      "Pn"  'persp-next
       "Ps"  'persp-switch-to-buffer*
       "Pk"  'persp-kill-buffer*))

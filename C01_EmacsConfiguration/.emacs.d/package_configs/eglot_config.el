@@ -25,7 +25,7 @@
   		 ;; Go
   		 go-ts-mode
 
-  		 ;; Lua 
+  		 ;; Lua
   		 lua-ts-mode
 
   		 ;; HTML

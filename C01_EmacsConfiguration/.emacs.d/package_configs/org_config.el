@@ -174,7 +174,7 @@
 
 ;; Add Custom TODO Keywords - in 2 seperate Sequences
 (setq org-todo-keywords
-      ;; Sequence 1 
+      ;; Sequence 1
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
     	  ;; Sequence 2
     	  (sequence "MEET(m)")
@@ -188,8 +188,8 @@
   	       '(;; Open PDFs with Zathura
   		 ;; ("\\.pdf\\'" . "zathura %s") ;
   		 ;; Open PDFs with PDF Tools
-  		 ("\\.pdf\\'" . "pdf-tools %s")			   
-  		 ;; Open Pictures with sxiv 
+  		 ("\\.pdf\\'" . "pdf-tools %s")
+  		 ;; Open Pictures with sxiv
   		 ("\\.png\\'" . "sxiv %s")
   		 ("\\.jpg\\'" . "sxiv %s")
   		 ("\\.jpeg\\'" . "sxiv %s")
@@ -215,7 +215,7 @@
       ("note" . ?n)
       ("idea" . ?i)))
 
-;; Set Refile Targets to be considered, Emphasis on Archive 
+;; Set Refile Targets to be considered, Emphasis on Archive
 (setq org-refile-targets
   '((nil :maxlevel . 9)
       ("~/Org/personal-archive.org" :maxlevel . 1)
@@ -298,7 +298,7 @@
     		       ;; For Modern Fonts, Vektorschrift
     		       '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
 (add-to-list 'org-latex-packages-alist
-    		       ;; Fix typessetting in amsmath, extend amsmath 
+    		       ;; Fix typessetting in amsmath, extend amsmath
     		       '("fixamsmath, dissallowspace" "mathtools" t
     			 ("pdflatex" "xelatex" "lualatex")))
 (add-to-list 'org-latex-packages-alist
@@ -335,7 +335,7 @@
   			      '("moderncv"
   				"\\documentclass[11pt,
   				a4paper,
-  				sans, 
+  				sans,
   				]{moderncv}
   		 [NO-DEFAULT-PACKAGES]
   		 [PACKAGES]
@@ -352,10 +352,10 @@
    ;; Add Koma Article
    (add-to-list 'org-latex-classes
   			      '("scrartcl"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrartcl}
   	 [DEFAULT-PACKAGES]
@@ -369,10 +369,10 @@
    ;; Alternative Koma Article Name
    (add-to-list 'org-latex-classes
   			      '("koma-article"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrartcl}
   	 [DEFAULT-PACKAGES]
@@ -387,10 +387,10 @@
    ;; Add Koma Report
    (add-to-list 'org-latex-classes
   			      '("scrreprt"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrreprt}
   	 [DEFAULT-PACKAGES]
@@ -406,10 +406,10 @@
    ;; Alternative Koma Report name
    (add-to-list 'org-latex-classes
   			      '("koma-report"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrreprt}
   	 [DEFAULT-PACKAGES]
@@ -425,10 +425,10 @@
    ;; Alternative Koma Report Structure
    (add-to-list 'org-latex-classes
   			      '("koma-report-shortened"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrreprt}
   	 [DEFAULT-PACKAGES]
@@ -445,10 +445,10 @@
    ;; Add Koma Book
    (add-to-list 'org-latex-classes
   			      '("scrbook"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrbook}
   	 [DEFAULT-PACKAGES]
@@ -464,10 +464,10 @@
    ;; Alternative Koma Book name
    (add-to-list 'org-latex-classes
   			      '("koma-book"
-  				"\\documentclass[a4paper, 
+  				"\\documentclass[a4paper,
   		      parskip=half,%
-  		      fromalign=right, 
-  		      fromrule=false, 
+  		      fromalign=right,
+  		      fromrule=false,
   		      11pt
   		      ]{scrbook}
   	 [DEFAULT-PACKAGES]
@@ -492,11 +492,11 @@
    \[EXTRA]"))
      (add-to-list 'org-latex-classes
     			      '("scrlttr2-german"
-    				"\\documentclass[a4paper, 
+    				"\\documentclass[a4paper,
     		      parskip=half,%
-    		      fromalign=right, 
-    		      fromrule=false, 
-    		      11pt, 
+    		      fromalign=right,
+    		      fromrule=false,
+    		      11pt,
     		      ngerman]{scrlttr2}
     	 [NO-DEFAULT-PACKAGES]
     	 [PACKAGES]
@@ -543,13 +543,13 @@
   'org-babel-load-languages
   '((emacs-lisp . t)    ;; Elisp
     (lisp . t)          ;; Lisp
-    (clojure . t)       ;; Clojure     
+    (clojure . t)       ;; Clojure
     (scheme . t)        ;; Scheme
     (python . t)        ;; Python
     ;; (ipython . t)       ;; IPython
 
     ;;  the following two require ob-c
-    (C . t)             ;; C 
+    (C . t)             ;; C
 
     (perl . t)          ;; Perl
     ;; (php . t)           ;; PHP
@@ -558,8 +558,8 @@
     (rust . t)          ;; Rust
     (julia . t)         ;; Julia Programmin Language
     (lua . t)           ;; Lua Programming Language
-    (shell . t)         ;; Command Line Programs 
-    (latex . t)         ;; LaTeX  
+    (shell . t)         ;; Command Line Programs
+    (latex . t)         ;; LaTeX
     (nix . t)           ;; Nix
     (sql . t)           ;; SQL
     (sqlite . t)        ;; SQLite
@@ -617,7 +617,7 @@
 		       ;; YAML
 		       ("yaml" . "src yaml")
 		       ;; R
-		       ("rp"   . "src R")                                  ;; pure R             
+		       ("rp"   . "src R")                                  ;; pure R
 		       ("rr"   . "src R :results both output")             ;; R with output
 		       ("rs"   . "src R :session :results both output")    ;; R with output
 		       ;; Rust
@@ -749,7 +749,7 @@
           ("t" "Tasks / Projects")
           ("tt" "TODO Task" entry (file+olp
                                    "~/Org/personal-tasks.org" "Inbox")
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
           ("tb" "Basic task for future review" entry
            (file+headline "~/Org/personal-tasks.org" "Inbox")
            ,(concat "* %^{Title}\n"
@@ -774,7 +774,7 @@
           ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
            "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
 
-  ;; Activate Context Templates for Email 
+  ;; Activate Context Templates for Email
   (setq org-capture-templates-contexts
     '(("e" ((in-mode . "notmuch-search-mode")
             (in-mode . "notmuch-show-mode")
@@ -823,24 +823,24 @@
        :unnarrowed t)
       ("w" "wiki")
       ("wn" "wiki node" plain
-       "\n* ${title}\n\n%?" 
+       "\n* ${title}\n\n%?"
        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
               "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
        :unnarrowed t)
       ("wi" "wiki index node" plain
-       "\n* ${title} Kompendium Index\n\n%?" 
+       "\n* ${title} Kompendium Index\n\n%?"
        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                   "\n#+filetags: :index:%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
        :unnarrowed t)
       ("wr" "wiki references node" plain
-       "\n* References\n%?\n** Websites\n\n** Literature" 
+       "\n* References\n%?\n** Websites\n\n** Literature"
        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                   "\n#+filetags: :%^{filetag}:references:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
        :unnarrowed t)
       ("l" "programming language" plain
        "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
        :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-       :unnarrowed t)  
+       :unnarrowed t)
       ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
        :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
        :unnarrowed t)
@@ -952,7 +952,7 @@
 	(setq org-drill-learn-fraction 1.0)))
 
 ;; Org AddOn Auto Tangle Org Files
-;; Add '#+auto_tangle: t' to files 
+;; Add '#+auto_tangle: t' to files
 (use-package org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)

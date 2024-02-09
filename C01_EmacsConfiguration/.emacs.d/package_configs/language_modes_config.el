@@ -81,7 +81,7 @@
 (add-hook 'latex-mode-hook 'turn-on-reftex)
 
 ;; Enable auto completion of right braces (")}]\)\]\}")
-;; Use 'C-u 1' or 'C-q' before to disable 
+;; Use 'C-u 1' or 'C-q' before to disable
 (setq LaTeX-electric-left-right-brace t)
 
 ;; LatexMK support for AUCTeX
@@ -105,7 +105,7 @@
 		"tmc" '(cdlatex-mode
 				:which-key "CDLaTeX Minor Mode")))
 
-;; Set Default Indentation for Python 
+;; Set Default Indentation for Python
 (setq-default python-indent-offset 4)
 
       ;;;; Customize Python Mode for emacs, add lsp
@@ -193,7 +193,7 @@
       (setq gnuplot-program "/usr/bin/gnuplot")
 
       ;; automatically enter gnuplot mode
-      (setq auto-mode-alist 
+      (setq auto-mode-alist
 		(append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist)))
 
 ;; Add PlantUML Support

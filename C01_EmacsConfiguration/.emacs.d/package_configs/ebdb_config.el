@@ -2,7 +2,7 @@
 (use-package ebdb
   :config
   ;; Set the source files for Contact DBs
-  (setq ebdb-sources (list                        
+  (setq ebdb-sources (list
   					(concat pet/home-dir "Contacts/default-contacts.db")
   					(concat pet/home-dir "Contacts/family.db")
   					(concat pet/home-dir "Contacts/work.db")
@@ -11,7 +11,7 @@
 
   ;; Access Menu through '.' in EBDB Buffer
   ;; (define-key ebdb-mode-map
-  ;;		  "." 'hydra-ebdb-menu/body)		  
+  ;;		  "." 'hydra-ebdb-menu/body)
 
   ;; Specify the Display Format for Month and Day on Anniversaries
   ;; (setq ebdb-anniversary-md-format "%B %d")

@@ -51,7 +51,7 @@
 
   ;; COMPOSING MAIL
 
-  ;; Don't include oneself in reply by default 
+  ;; Don't include oneself in reply by default
   (setq mu4e-compose-dont-reply-to-self t)
 
   ;; ISO(ish) format date-time stamps in the header list
@@ -113,7 +113,7 @@
       "mc" 'mu4e-compose-new
       "ms" 'mu4e-update-mail-and-index))
 
-;; Sent alerts for received 
+;; Sent alerts for received
 (use-package mu4e-alert
   :after mu4e
   :config

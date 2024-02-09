@@ -4,7 +4,13 @@
   ;; uncomment this line if you want to use zsh
   ;; (setq vterm-shell "zsh")
   ;; set maximum lines of output to be stored in RAM
-  (setq vterm-max-scrollback 10000))
+  (setq vterm-max-scrollback 10000)
+  ;; Adjust vterm window management
+  (add-to-list 'display-buffer-alist
+  			 '("\\*vterm\\*" display-buffer-reuse-mode-window
+  			       ;; change to `t' to not reuse same window
+  			       (inhibit-same-window . nil)
+  			       (mode vterm-mode vterm-copy-mode))))
 
 (use-package vterm-toggle
   :after vterm

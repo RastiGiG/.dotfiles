@@ -5,7 +5,7 @@
   (general-evil-setup)
 
   (general-create-definer pet/leader-keys
-    :states '(normal insert visual emacs) 
+    :states '(normal insert visual emacs)
     :prefix "SPC" ;; leader key
     :global-prefix "M-SPC") ;; access leader in insert mode
 

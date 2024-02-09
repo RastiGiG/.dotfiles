@@ -18,7 +18,7 @@
       (insert "    " random-line)))
 
 ;; Function to insert ledger bal
-(defun pet/dashboard-ledger-monthly-balances (list-size) 
+(defun pet/dashboard-ledger-monthly-balances (list-size)
   "Return the monthly balance by using ledger"
   (interactive)
   (dashboard-insert-heading "Monthly Balance:"

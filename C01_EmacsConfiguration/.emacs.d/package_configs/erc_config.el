@@ -20,7 +20,7 @@
   		       :port   "6697"))
 
 ;; Setup ERC Chat Client
-;; Set the Prompt to represent the the buffer-name 
+;; Set the Prompt to represent the the buffer-name
 (setq erc-prompt (lambda () (concat "[" (buffer-name) "]"))
 
   	;; Basic Account Config
@@ -43,11 +43,11 @@
   	;; bury private messages in buffer list
   	erc-auto-query 'bury
 
-  	;; Autofill nickname column to 20 chars for better formatting 
+  	;; Autofill nickname column to 20 chars for better formatting
   	erc-fill-function 'erc-fill-static
   	erc-fill-static-center 30)
 
-;; Set Keyboard to be accessable by 'C-c i' 
+;; Set Keyboard to be accessable by 'C-c i'
 (global-set-key (kbd "C-c i") 'erc-tls)
 
 (pet/leader-keys

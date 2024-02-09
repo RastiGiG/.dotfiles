@@ -5,7 +5,7 @@
       (pet/leader-keys
   	"h" '(:ignore t :which-key "Hydras")))
 
-;; Define Text Scale Hydra 
+;; Define Text Scale Hydra
 (defhydra hydra-text-scale (:timeout 4)
   "Scale text"
   ("j" text-scale-increase "in")
@@ -61,8 +61,8 @@ _~_: modified
 
 	      ^^^Mark^             ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
 	      ^^^^^^^^-----------------------------------------------------------------------------------------------------
-	      _m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window 
-	      _u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window    
+	      _m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window
+	      _u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window
 	      _U_: unmark up    _R_: relocate bmk     _S_: show filenames      _e_: edit         _1_   on full window
 	      _d_: delete       _w_: write bmk list   _T_: hide filenames      ^ ^               _2_   on split vertical
 	      _D_: delete up    _i_: import bmk list  _t_: toggle filenames    ^ ^               _5_   on other frame
@@ -74,12 +74,12 @@ _~_: modified
       ("D" bookmark-bmenu-delete-backwards)
       ("x" bookmark-bmenu-execute-deletions)
       ("r" bookmark-bmenu-rename)
-      ("R" bookmark-bmenu-relocate)  
+      ("R" bookmark-bmenu-relocate)
       ("w" bookmark-bmenu-save)                   ;; 'write' bookmark list
       ("i" bookmark-bmenu-load)                   ;; 'import' bookmark list
       ("/" bookmark-bmenu-search)
       ("l" bookmark-bmenu-locate)
-      ("S" bookmark-bmenu-show-filenames)  
+      ("S" bookmark-bmenu-show-filenames)
       ("T" bookmark-bmenu-hide-filenames)
       ("t" bookmark-bmenu-toggle-filenames)
       ("a" bookmark-bmenu-show-annotation)
@@ -165,9 +165,7 @@ _v_ariable       _u_ser-option
 	(enlarge-window arg)))
 
 ;; Define Window Management Hydra
-(defhydra hydra-window (
-						:hint nil
-							      )
+(defhydra hydra-window (:hint nil)
       "
 	Movement^^        ^Split^         ^Switch^		^Resize^
 	----------------------------------------------------------------
@@ -176,7 +174,7 @@ _v_ariable       _u_ser-option
 	_M-<up>_    ↑   	_z_ undo      	_a_ce 1	    	_<up>_    X↑
 	_M-<right>_ →   	_Z_ reset      	_s_wap	     	_<right>_ X→
 	_F_ollow Mode    	_D_lt Other   	_S_ave	     max_i_mize
-	_SPC_ cancel	    _o_nly this   	_d_elete	
+	_SPC_ cancel	    _o_nly this   	_d_elete
 	"
       ;; Movement
       ("M-<left>"  windmove-left)
@@ -276,13 +274,13 @@ _a_ abbrev-mode:                         %`abbrev-mode
 _C_ display-fill-column-indicator-mode:  %`display-fill-column-indicator-mode
 _d_ debug-on-error:                      %`debug-on-error
 _f_ auto-fill-mode:                      %`auto-fill-function
-_F_ variable-pitch-mode                 
-_i_ toggle-input-method                 
+_F_ variable-pitch-mode
+_i_ toggle-input-method
 _n_ display-line-numbers-mode:           %`display-line-numbers-mode
 _M_ doom-modeline-mode:                  %`doom-modeline-mode
-_R_ read-only-mode                      
+_R_ read-only-mode
 _t_ truncate-lines:                      %`truncate-lines
-_T_ counsel-load-theme                  
+_T_ counsel-load-theme
 _v_ visual-line-mode:                    %`visual-line-mode
 _w_ whitespace-mode:                     %`whitespace-mode
 "
@@ -320,9 +318,9 @@ _w_ whitespace-mode:                     %`whitespace-mode
 _n_: next    | _s_: search        | _r_: refile  | _&_: custom    | _O_: sorting
 _p_: prev    | _S_: edit prev qry | _u_: unmk    | _+_: flag      | _P_: threading
 _]_: n unred | _/_: narrow search | _U_: unmk *  | _-_: unflag    | _Q_: full-search
-_[_: p unred | _b_: search bkmk   | _d_: trash   | _T_: thr       | _V_: skip dups 
+_[_: p unred | _b_: search bkmk   | _d_: trash   | _T_: thr       | _V_: skip dups
 _y_: sw view | _B_: edit bkmk     | _D_: delete  | _t_: subthr    | _W_: include-related
-_R_: reply   | _{_: previous qry  | _m_: move    |-^^-------------+-^^------------------ 
+_R_: reply   | _{_: previous qry  | _m_: move    |-^^-------------+-^^------------------
 _C_: compose | _}_: next query    | _a_: action  | _|_: to shell  | _´_: update, reindex
 _F_: forward | _C-+_: show more   | _A_: mk4actn | _H_: help      | _;_: context-switch
 _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2maildir "
@@ -348,7 +346,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
       ("C-+" mu4e-headers-split-view-grow)
       ("C--" mu4e-headers-split-view-shrink)
 
-      ;; mark stuff 
+      ;; mark stuff
       ("!" mu4e-headers-mark-for-read)
       ("?" mu4e-headers-mark-for-unread)
       ("r" mu4e-headers-mark-for-refile)
@@ -385,7 +383,7 @@ _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2ma
 
       ;; more miscellany
       ("´" mu4e-update-mail-and-index)           ; differs from built-in
-      (";" mu4e-context-switch)  
+      (";" mu4e-context-switch)
       ("j" mu4e~headers-jump-to-maildir)
 
       ("." nil))

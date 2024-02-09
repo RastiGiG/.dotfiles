@@ -97,7 +97,7 @@ Another good source is [[https://protesilaos.com/emacs/dotemacs][Protesilaos.com
 
 I also added parts of [[https://gitlab.com/dwt1/dotfiles/-/blob/master/.config/emacs/config.org][DT’s Emacs Config]], especially those that deal with [[*Evil Mode][Evil-Mode]].
 
-For some of the developement tools like [[*DevDocs][DevDocs]] I took inspiration from [[https://github.com/gopar/.emacs.d][GitHub.com: Gopar - Emacs.d]] 
+For some of the developement tools like [[*DevDocs][DevDocs]] I took inspiration from [[https://github.com/gopar/.emacs.d][GitHub.com: Gopar - Emacs.d]]
 
 ** Starting Emacs Daemon
 
@@ -137,12 +137,12 @@ To run Emacs service right now, use
 * Header
 #+begin_src emacs-lisp
 
-  ;;   _____ __  __    _    ____ ____  
-  ;;  | ____|  \/  |  / \  / ___/ ___| 
-  ;;  |  _| | |\/| | / _ \| |   \___ \ 
+  ;;   _____ __  __    _    ____ ____
+  ;;  | ____|  \/  |  / \  / ___/ ___|
+  ;;  |  _| | |\/| | / _ \| |   \___ \
   ;;  | |___| |  | |/ ___ \ |___ ___) |
-  ;;  |_____|_|  |_/_/   \_\____|____/ 
-  ;;                                   
+  ;;  |_____|_|  |_/_/   \_\____|____/
+  ;;
 
   ;; NOTE: init.el is generated from EmacsTestConfig.org.
   ;; Please change your settings in that file
@@ -398,7 +398,7 @@ Version mismatch is commonly encountered in the following situations:
 
   		   ;; Load Eglo Configuration
   		   "package_configs/devdocs_config.el"
-  		   
+
   		   ;; ;; Load Citeproc Configuration
   		   ;; "package_configs/citeproc_config.el"
 
@@ -445,7 +445,7 @@ Let's bring [[id:8212a283-520d-495c-86ee-fc47d1a00363][Vi]] to [[id:3cf0fa83-18b
     (setq evil-undo-system 'undo-redo)  ;; Adds vim-like C-r redo functionality
     (evil-mode))
 
-  ;; Using RETURN to follow links in Org/Evil 
+  ;; Using RETURN to follow links in Org/Evil
   ;; Unmap keys in 'evil-maps if not done, (setq org-return-follows-link t) will not work
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "SPC") nil)
@@ -467,8 +467,8 @@ Look at the GitHub Source Repo for more info.
     :after evil
     :config
     ;; Do not uncomment this unless you want to specify each and every mode
-    ;; that evil-collection should works with.  The following line is here 
-    ;; for documentation purposes in case you need it.  
+    ;; that evil-collection should works with.  The following line is here
+    ;; for documentation purposes in case you need it.
     ;; (setq evil-collection-mode-list '(calendar dashboard dired ediff info magit ibuffer))
     (add-to-list 'evil-collection-mode-list 'help) ;; evilify help mode
     (evil-collection-init))
@@ -493,7 +493,7 @@ Look at the GitHub Source Repo for more info.
 #+begin_src emacs-lisp
   ;; Bring the classic vimtutor to Emacs
   (use-package evil-tutor)
-  
+
 #+end_src
 ** General
 [[https://github.com/noctuid/general.el][general.el]] is used for easy keybinding configuration that integrates well with =which-key=.
@@ -507,11 +507,11 @@ This version specifies =C-.= as ~leader key~
   (use-package general
     :config
     (general-create-definer pet/leader-keys
-     :states '(normal insert visual emacs) 
+     :states '(normal insert visual emacs)
      :prefix "C-." ;; leader key
      :global-prefix "C-.") ;; access leader in insert mode
     )
-    
+
 #+end_src
 *** Evil Version
 :PROPERTIES:
@@ -525,9 +525,9 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
     :config
     ;; Enable evil mode integration
     (general-evil-setup)
-    
+
     (general-create-definer pet/leader-keys
-      :states '(normal insert visual emacs) 
+      :states '(normal insert visual emacs)
       :prefix "SPC" ;; leader key
       :global-prefix "M-SPC") ;; access leader in insert mode
 
@@ -541,7 +541,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
       (general-key-dispatch 'self-insert-command
         :timeout 0.25
         "k" 'evil-normal-state))
-    
+
     (pet/leader-keys
       ;; Toggles - Modes
       "tmvi"   '(evil-mode :which-key "Evil Mode")))
@@ -612,7 +612,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
     "thch"  '(pet/syntax-color-hsv
       		:which-key "HSV")
     ;; Toggles - Language Server
-    "tl"    '(:ignore t :which-key "LSP") 
+    "tl"    '(:ignore t :which-key "LSP")
     "tls"   '(eglot :which-key "Start LSP with Eglot")
     ;; Toggles - Modes
     "tm"    '(:ignore t :which-key "Modes")
@@ -647,7 +647,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
   (pet/leader-keys
 	:keymaps '(visual)
 	"Er" '(eval-region :which-key "eval region"))
-  
+
 #+end_src
 ** Which Key
 :PROPERTIES:
@@ -657,7 +657,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 [[https://github.com/justbur/emacs-which-key][which-key]] is a useful UI panel that appears when you start pressing any key binding in [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] to offer you all possible completions for the prefix.  For example, if you press =C-c= (hold control and press the letter =c=), a panel will appear at the bottom of the frame displaying all of the bindings under that prefix and which command they run.  This is very useful for learning the possible key bindings in the mode of your current buffer.
 #+begin_src emacs-lisp
   ;; Load which-key
-  ;; Loads a more helpful UI Completion buffer 
+  ;; Loads a more helpful UI Completion buffer
   (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
@@ -685,7 +685,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 
 =dired-open= is part of [[https://github.com/Fuco1/dired-hacks][Dired Hacks]]. Enables opening files with external apps directly.
 #+begin_src emacs-lisp
-  ;; Use dired-open to launch external apps 
+  ;; Use dired-open to launch external apps
   (use-package dired-open)
   ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
   ;; open .pdf in 'zahtura'
@@ -705,7 +705,7 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 #+begin_src emacs-lisp
   ;; Add Filters by file extension to dired buffer
   (use-package dired-filter)
-  
+
 #+end_src
 *** Dired Preview
 
@@ -753,7 +753,7 @@ It is inspired by the the VIM plugin ranger.
     (setq ranger-excluded-extensions ' ("mkv" "iso" "mp4" "mp3"))
     (pet/leader-keys
       "tmr"  '(ranger-mode :which-key "Ranger Mode")))
-  
+
 #+end_src
 ** PDF Tools
 :PROPERTIES:
@@ -801,46 +801,46 @@ There's also a [[https://pdftools.wiki/][wiki]] for it.
                     "ogm" "ogg" "mkv"))
                  "mpv"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("doc" "xls" "ppt" "odt" "ods" "odg" "odp"))
                  "libreoffice"
                  '(file))
-  		 
+
            '("\\.lyx" "lyx" (file))
-  		 
+
            '("\\.chm" "kchmviewer" (file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("ps" "ps.gz" "dvi"))
                  "okular"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("kdenlive"))
                  "kdenlive-accel"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("kra"))
                  "krita"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("blend" "blend1"))
                  "blender"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("helio"))
                  "helio"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("svg"))
                  "inkscape"
                  '(file))
-  		 
+
            (list (openwith-make-extension-regexp
                   '("flp"))
                  "~/.local/bin/flstudio"
@@ -883,7 +883,7 @@ If you want to make ~commenting~ easier, the following package is very helpful. 
   ;; Easier Commenting, not just for evil-mode
   (use-package evil-nerd-commenter
     :bind ("M-/" . evilnc-comment-or-uncomment-lines))
-  
+
 #+end_src
 *** Short Man Pages
 
@@ -892,7 +892,7 @@ The [[https://github.com/tldr-pages/tldr][tldr-pages]] project is a collection o
 #+begin_src emacs-lisp
   ;; Add TLDR Version of Man Pageship
   (use-package tldr)
-  
+
 #+end_src
 *** Helpful Help Commands
 
@@ -963,7 +963,7 @@ Obviously [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] has a package for t
                     'mc/mark-all-dwim)
     (define-key mc/keymap (kbd
                            "<return>") nil))
-  
+
 #+end_src
 ** Undo-Tree
 :PROPERTIES:
@@ -1032,7 +1032,7 @@ It should be noted that many projectile commands seem to not work if you have se
 *** Load Yasnippets
 
 Load ~package~ =yasnippets= (should already come preinstalled, invocation is just to do the configuration).
-[[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippets]] are an ~extension/improvement~ over the basic [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Skeletons~ 
+[[id:296fc3bb-8f64-4615-a8ad-fadb207ee770][Yasnippets]] are an ~extension/improvement~ over the basic [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] ~Skeletons~
 Documentation can be found here: [[https://github.com/joaotavora/yasnippet][GitHub.com: Yasnippet]]
 #+begin_src emacs-lisp
   ;; Yasnippets
@@ -1083,7 +1083,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
   (use-package all-the-icons
     :if (display-graphic-p))
 
-  ;; Adds icons to files and directories in dired           
+  ;; Adds icons to files and directories in dired
   (use-package all-the-icons-dired
     :hook
     (dired-mode . all-the-icons-dired-mode))
@@ -1117,7 +1117,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
           ;; needs display-time-mode to be one
           doom-modeline-time t
           doom-modeline-vcs-max-length 12           ;; length of VCS branch name displayed - default 12
-          doom-modeline-persp-icon t))              ;; adds folder icon next to persp name    
+          doom-modeline-persp-icon t))              ;; adds folder icon next to persp name
 
 #+end_src
 *** Telephone-Line
@@ -1157,7 +1157,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 
 [[https://github.com/nex3/perspective-el][Perspective]] allows you to safe a specific window layout even across sessions
 #+begin_src emacs-lisp
-  ;; Add Perspective to use sets of 
+  ;; Add Perspective to use sets of
   (use-package perspective
     :demand t
     ;; Setup Keybindings
@@ -1186,7 +1186,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
     ;; Add Perspective Functions to User Leader Keys
     (pet/leader-keys
     	"P"  '(:ignore t :which-key "Perspectives")
-    	"Pn"  'persp-next  
+    	"Pn"  'persp-next
     	"Ps"  'persp-switch-to-buffer*
     	"Pk"  'persp-kill-buffer*))
 
@@ -1198,7 +1198,7 @@ The *first time* you load your configuration on a *new machine*, you'll need to 
 *** Helper Functions
 
 These functions were taken from:
-[[https://github.com/gopar/.emacs.d][GitHub.com: Gopar - Emacs.d]] 
+[[https://github.com/gopar/.emacs.d][GitHub.com: Gopar - Emacs.d]]
 The [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger Catgories]] are specified [[file:~/.dotfiles-private/000_OrgFiles/EmacsPrivateVariables.org::*Ledger Variables][here]].
 #+begin_src emacs-lisp
   ;; Function to insert vocabulary
@@ -1221,7 +1221,7 @@ The [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger Catgories]] are specified 
   	(insert "    " random-line)))
 
   ;; Function to insert ledger bal
-  (defun pet/dashboard-ledger-monthly-balances (list-size) 
+  (defun pet/dashboard-ledger-monthly-balances (list-size)
     "Return the monthly balance by using ledger"
     (interactive)
     (dashboard-insert-heading "Monthly Balance:"
@@ -1364,7 +1364,7 @@ The [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger Catgories]] are specified 
 	:after prescient
 	:config
 	(ivy-prescient-mode 1))
-  
+
 #+end_src
 *** Extensions
 **** Ivy-Rich
@@ -1381,7 +1381,7 @@ The [[id:8fb7b917-debe-4d37-a726-4b45f93b913c][Ledger Catgories]] are specified 
     :config
     (ivy-set-display-transformer 'ivy-switch-buffer
                                  'ivy-rich-switch-buffer-transformer))
-  
+
 #+end_src
 **** All-The-Icons-Ivy-Rich
 #+begin_src emacs-lisp
@@ -1472,7 +1472,7 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 #+begin_src emacs-lisp
   ;; Add mu4e support to helm
   (use-package helm-mu)
-  
+
 #+end_src
 ** Hydra
 :PROPERTIES:
@@ -1485,7 +1485,7 @@ Add ~Bibtex~ support to [[https://oremacs.com/swiper/][Ivy]] via [[https://githu
 For example, imagine that you have bound =C-c j= and =C-c k= in your config and you want to call them in some (arbitrary) sequence. ~Hydra~ allows you to bind your functions in a way that pressing =C-c jjkk3j5k= is *equivalent to* pressing =C-c j C-c j C-c k C-c k M-3 C-c j M-5 C-c k=. *Any key other* than =j= or =k= *exits this state*.
 
 - ~Colors~ have a special meaning with ~hydras~ (=:color= ~option~). See the list below:
-  
+
   |----------+----------------------------|
   | Color    | Toggle                     |
   |----------+----------------------------|
@@ -1497,7 +1497,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
   |----------+----------------------------|
 
 - ~Hints~ are displayed next to the keys. If you add a ~Docstring~ you might want to disable that. Use =:hint nil= for that.
-  
+
 ~Documentation~ can be found here: [[https://github.com/abo-abo/hydra][GitHub.com: Hydra]]
 *** Loading Hydra Package
 #+begin_src emacs-lisp
@@ -1512,7 +1512,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 *** Hydra Definitions
 **** Text Scale Hydra
 #+begin_src emacs-lisp
-  ;; Define Text Scale Hydra 
+  ;; Define Text Scale Hydra
   (defhydra hydra-text-scale (:timeout 4)
     "Scale text"
     ("j" text-scale-increase "in")
@@ -1574,8 +1574,8 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 
 		^^^Mark^             ^Actions^            ^Search^            ^Annotations^         ^Open Bookmark
 		^^^^^^^^-----------------------------------------------------------------------------------------------------
-		_m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window 
-		_u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window    
+		_m_: mark         _x_: execute          _/_: isearch             _a_: show         _o_   on other window
+		_u_: unmark       _r_: rename           _l_: locate              _A_: show all     _C-o_ switch other window
 		_U_: unmark up    _R_: relocate bmk     _S_: show filenames      _e_: edit         _1_   on full window
 		_d_: delete       _w_: write bmk list   _T_: hide filenames      ^ ^               _2_   on split vertical
 		_D_: delete up    _i_: import bmk list  _t_: toggle filenames    ^ ^               _5_   on other frame
@@ -1587,12 +1587,12 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 	("D" bookmark-bmenu-delete-backwards)
 	("x" bookmark-bmenu-execute-deletions)
 	("r" bookmark-bmenu-rename)
-	("R" bookmark-bmenu-relocate)  
+	("R" bookmark-bmenu-relocate)
 	("w" bookmark-bmenu-save)                   ;; 'write' bookmark list
 	("i" bookmark-bmenu-load)                   ;; 'import' bookmark list
 	("/" bookmark-bmenu-search)
 	("l" bookmark-bmenu-locate)
-	("S" bookmark-bmenu-show-filenames)  
+	("S" bookmark-bmenu-show-filenames)
 	("T" bookmark-bmenu-hide-filenames)
 	("t" bookmark-bmenu-toggle-filenames)
 	("a" bookmark-bmenu-show-annotation)
@@ -1683,14 +1683,12 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 		  (windmove-find-other-window 'up))
 		(shrink-window arg)
 	  (enlarge-window arg)))
-  
+
 #+end_src
 ***** Hydra Definition
 #+begin_src emacs-lisp
   ;; Define Window Management Hydra
-  (defhydra hydra-window (
-						  :hint nil
-								)
+  (defhydra hydra-window (:hint nil)
 	"
 	  Movement^^        ^Split^         ^Switch^		^Resize^
 	  ----------------------------------------------------------------
@@ -1699,7 +1697,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 	  _M-<up>_    ↑   	_z_ undo      	_a_ce 1	    	_<up>_    X↑
 	  _M-<right>_ →   	_Z_ reset      	_s_wap	     	_<right>_ X→
 	  _F_ollow Mode    	_D_lt Other   	_S_ave	     max_i_mize
-	  _SPC_ cancel	    _o_nly this   	_d_elete	
+	  _SPC_ cancel	    _o_nly this   	_d_elete
 	  "
 	;; Movement
 	("M-<left>"  windmove-left)
@@ -1761,7 +1759,7 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
 	)
 
 #+end_src
-**** Multiple Cursors Hydra 
+**** Multiple Cursors Hydra
 #+begin_src emacs-lisp
   ;; hydra multiple cursors
   (defhydra hydra-multiple-cursors (:hint nil)
@@ -1805,13 +1803,13 @@ For example, imagine that you have bound =C-c j= and =C-c k= in your config and 
   _C_ display-fill-column-indicator-mode:  %`display-fill-column-indicator-mode
   _d_ debug-on-error:                      %`debug-on-error
   _f_ auto-fill-mode:                      %`auto-fill-function
-  _F_ variable-pitch-mode                 
-  _i_ toggle-input-method                 
+  _F_ variable-pitch-mode
+  _i_ toggle-input-method
   _n_ display-line-numbers-mode:           %`display-line-numbers-mode
   _M_ doom-modeline-mode:                  %`doom-modeline-mode
-  _R_ read-only-mode                      
+  _R_ read-only-mode
   _t_ truncate-lines:                      %`truncate-lines
-  _T_ counsel-load-theme                  
+  _T_ counsel-load-theme
   _v_ visual-line-mode:                    %`visual-line-mode
   _w_ whitespace-mode:                     %`whitespace-mode
   "
@@ -1897,7 +1895,7 @@ DISABLED FOR NOW
 
 		^Records^                ^Fields^              ^Capture
 		^^^^^^-------------------------------------------------------------------------
-		_c_  Create           
+		_c_  Create
 		_C_  Ext Create
   "
 	("c" ebdb-create-record)
@@ -1970,9 +1968,9 @@ DISABLED FOR NOW
   _n_: next    | _s_: search        | _r_: refile  | _&_: custom    | _O_: sorting
   _p_: prev    | _S_: edit prev qry | _u_: unmk    | _+_: flag      | _P_: threading
   _]_: n unred | _/_: narrow search | _U_: unmk *  | _-_: unflag    | _Q_: full-search
-  _[_: p unred | _b_: search bkmk   | _d_: trash   | _T_: thr       | _V_: skip dups 
+  _[_: p unred | _b_: search bkmk   | _d_: trash   | _T_: thr       | _V_: skip dups
   _y_: sw view | _B_: edit bkmk     | _D_: delete  | _t_: subthr    | _W_: include-related
-  _R_: reply   | _{_: previous qry  | _m_: move    |-^^-------------+-^^------------------ 
+  _R_: reply   | _{_: previous qry  | _m_: move    |-^^-------------+-^^------------------
   _C_: compose | _}_: next query    | _a_: action  | _|_: to shell  | _´_: update, reindex
   _F_: forward | _C-+_: show more   | _A_: mk4actn | _H_: help      | _;_: context-switch
   _h_: ?mode   | _C--_: show less   | _*_: *thing  | _q_: quit hdrs | _j_: jump2maildir "
@@ -1998,7 +1996,7 @@ DISABLED FOR NOW
 	("C-+" mu4e-headers-split-view-grow)
 	("C--" mu4e-headers-split-view-shrink)
 
-	;; mark stuff 
+	;; mark stuff
 	("!" mu4e-headers-mark-for-read)
 	("?" mu4e-headers-mark-for-unread)
 	("r" mu4e-headers-mark-for-refile)
@@ -2035,7 +2033,7 @@ DISABLED FOR NOW
 
 	;; more miscellany
 	("´" mu4e-update-mail-and-index)           ; differs from built-in
-	(";" mu4e-context-switch)  
+	(";" mu4e-context-switch)
 	("j" mu4e~headers-jump-to-maildir)
 
 	("." nil))
@@ -2220,7 +2218,7 @@ It's got good integration with =Projectile=
      "lt"  '(:ignore t :which-key "treemacs")
      "ltt" 'treemacs
      "ltw" 'treemacs-select-window)
-  
+
 #+end_src
 ** Neotree
 :PROPERTIES:
@@ -2256,7 +2254,7 @@ Theme can be configured by setting “two” themes for =neo-theme=: one for the
           neo-window-width 55
           neo-window-fixed-size nil
           inhibit-compacting-font-caches t
-          projectile-switch-project-action 'neotree-projectile-action) 
+          projectile-switch-project-action 'neotree-projectile-action)
     ;; truncate long file names in neotree
     (add-hook 'neo-after-create-hook
   			#'(lambda (_)
@@ -2296,7 +2294,7 @@ Documentation can be found here: [[https://github.com/Malabarba/beacon][GitHub.c
 #+begin_src emacs-lisp
   ;; Enable Command Log Mode
   (use-package command-log-mode)
-  
+
 #+end_src
 *** Visual Fill Column
 Add [[https://codeberg.org/joostkremers/visual-fill-column][Visual Fill Column Mode]] to make centering text in buffers better
@@ -2334,7 +2332,7 @@ It enables highlighting of ~Regexp Groups~ to better understand the [[id:26419d8
 #+begin_src emacs-lisp
   ;; Visually Mark Regexp
   (use-package visual-regexp)
-  
+
 #+end_src
 *** Highlight Indentation
 [[https://github.com/antonj/Highlight-Indentation-for-Emacs][Highlight-Indentation]] adds a useful visual hint to show indentations in source code - helpful for [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][languages]] like [[id:d76cab21-70db-4332-9b40-cb6b6af6643f][Python]] or [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]].
@@ -2360,14 +2358,14 @@ The code block enables ~rainbow-mode~ in all ~programming modes~ (~prog-mode~) a
     :hook org-mode prog-mode)
 
 #+end_src
-*** Rainbow Delimiters 
+*** Rainbow Delimiters
 
 [[https://github.com/Fanael/rainbow-delimiters][rainbow-delimiters]] is useful in programming modes because it colorizes nested parentheses and brackets according to their nesting depth.  This makes it a lot easier to visually match parentheses in Emacs Lisp code without having to count them yourself.
 #+begin_src emacs-lisp
   ;; Add rainbow delimiters for better readability
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
-  
+
 #+end_src
 *** Matching Parenthesis
 
@@ -2397,7 +2395,7 @@ This Setting is meant to make that highlighting stand out more
   (use-package emojify
     ;; if you want to enable emojis globally:
     :hook (after-init . global-emojify-mode))
-  
+
 #+end_src
 *** Minimap Mode
 
@@ -2455,7 +2453,7 @@ Make your editor a little cozier with [[https://github.com/johanvts/emacs-firepl
 #+begin_src emacs-lisp
   ;; Totally useless but i love it
   (use-package fireplace)
-    
+
 #+end_src
 * Developement Tools
 ** Magit
@@ -2505,7 +2503,7 @@ Make your editor a little cozier with [[https://github.com/johanvts/emacs-firepl
 #+begin_src emacs-lisp
   ;; Load Consult
   (use-package consult)
-  
+
 #+end_src
 ** Company Mode
 :PROPERTIES:
@@ -2530,7 +2528,7 @@ Make your editor a little cozier with [[https://github.com/johanvts/emacs-firepl
     (setq company-minimum-prefix-length 2)
     (setq company-show-numbers t)   ;; Show numbers in tooltip
     (global-company-mode 1)         ;; activate company mode
-    (company-tng-mode 1)            ;; make company perform completions with tab 
+    (company-tng-mode 1)            ;; make company perform completions with tab
 
     ;; Disable Company Mode in Strings or Comment
     (setq company-idle-delay
@@ -2563,7 +2561,7 @@ Make your editor a little cozier with [[https://github.com/johanvts/emacs-firepl
   (use-package company-shell
     :config
     (add-to-list 'company-backends '(company-shell company-shell-env)))
-  
+
 #+end_src
 ***** LaTeX
 ****** Company Math
@@ -2586,7 +2584,7 @@ This is an extension for [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]]. ~Do
     ;; Org Mode
     (add-hook 'org-mode-hook 'pet/company-latex-mode)
 
-    ;; global activation of the unicode symbol completion 
+    ;; global activation of the unicode symbol completion
     (add-to-list 'company-backends 'company-math-symbols-unicode))
 
 #+end_src
@@ -2708,7 +2706,7 @@ Then, while in ~normal mode~, you can use =‘CTRL-j’= and =‘CTRL-k’= to m
             ("REVIEW"     font-lock-keyword-face bold)
             ("NOTE"       success bold)
             ("DEPRECATED" font-lock-doc-face bold))))
-  
+
 #+end_src
 *** Origami Mode
 
@@ -2753,7 +2751,7 @@ This section is partially inspired by: [[https://kristofferbalintona.me/posts/20
 
     ;; List of directories for reference nodes
     (citar-notes-paths (list pet/org-dir))
-  	  
+
     (citar-open-note-function 'orb-citar-edit-note) ; Open notes in `org-roam'
     ;; (citar-at-point-function 'embark-act)           ; If use `embark'
 
@@ -2787,7 +2785,7 @@ You need to have the underlying ~Code Formatters~ like [[https://github.com/psf/
   ;; Add Apheleia Code Formatter
   (use-package apheleia
 	:config (apheleia-global-mode 1))
-  
+
 #+end_src
 ** DevDocs
 :PROPERTIES:
@@ -2886,7 +2884,7 @@ Lsp for latex should not be needed since its part of [[https://www.gnu.org/softw
 	(setq TeX-electric-escape t)
 	;; Autoinsert braces after '^' and '_' in math mode
 	(setq TeX-electric-sub-and-superscript t))
-  
+
   ;; Specify viewer programs
   (setq TeX-view-program-selection
 		'(((output-dvi has-no-display-manager) "dvi2tty")
@@ -2937,7 +2935,7 @@ Lsp for latex should not be needed since its part of [[https://www.gnu.org/softw
   (add-hook 'latex-mode-hook 'turn-on-reftex)
 
   ;; Enable auto completion of right braces (")}]\)\]\}")
-  ;; Use 'C-u 1' or 'C-q' before to disable 
+  ;; Use 'C-u 1' or 'C-q' before to disable
   (setq LaTeX-electric-left-right-brace t)
 
   ;; LatexMK support for AUCTeX
@@ -2971,7 +2969,7 @@ The commented lines are for distributions like Ubuntu, where =python= referes to
 A better alternative is =jedi=
 Python debugger is set to =debugpy= (don't forget to pip install =debugpy= - alternative to "ptvsd>=4.2"), because it is recommended over the default ptsd
 #+begin_src emacs-lisp
-  ;; Set Default Indentation for Python 
+  ;; Set Default Indentation for Python
   (setq-default python-indent-offset 4)
 
 	;;;; Customize Python Mode for emacs, add lsp
@@ -2995,7 +2993,7 @@ Add [[https://github.com/rust-lang/rust-mode][Rust Mode]] to support the [[id:a3
 #+begin_src emacs-lisp
   ;; Add Support for Rust
   (use-package rust-mode)
-  
+
 #+end_src
 ***** PHP
 ~Documentation~ can be found here: [[https://github.com/emacs-php/php-mode][GitHub.com: PHP Mode]]
@@ -3011,14 +3009,14 @@ Add [[https://github.com/rust-lang/rust-mode][Rust Mode]] to support the [[id:a3
 #+begin_src emacs-lisp
   ;; Add Mode for Lua
   (use-package lua-mode)
-  
+
 #+end_src
 ***** Julia
 Add [[https://github.com/JuliaEditorSupport/julia-emacs][Julia Mode]] to support the [[id:156ecd0f-2d32-48e4-8e8e-132831dae624][Julia Programming Language]]
 #+begin_src emacs-lisp
   ;; Add Support for the Julia Programming Language
   (use-package julia-mode)
-  
+
 #+end_src
 ***** Nix
 Add [[https://github.com/NixOS/nix-mode][Nix-Mode]] to support the [[https://nixos.org/][Nix Language]] for the ~customization~ of [[id:2a8642c6-544c-4ffc-bb95-348bd5a24ee5][NixOS]]
@@ -3076,7 +3074,7 @@ Add [[https://github.com/NixOS/nix-mode][Nix-Mode]] to support the [[https://nix
 #+begin_src emacs-lisp
   ;; Load Support for statistical Computation
   (use-package ess)
-  
+
 #+end_src
 ****** ESS Smart Equals
 
@@ -3099,7 +3097,7 @@ Add [[https://github.com/NixOS/nix-mode][Nix-Mode]] to support the [[https://nix
 #+begin_src emacs-lisp
   ;; improve interaction between ESS and R Package 'tidyverse'
   (use-package ess-r-insert-obj)
-  
+
 #+end_src
 ****** ESS View Data
 
@@ -3108,7 +3106,7 @@ Add [[https://github.com/NixOS/nix-mode][Nix-Mode]] to support the [[https://nix
 #+begin_src emacs-lisp
   ;; Tidyverse-like data views and manipulations
   (use-package ess-view-data)
-  
+
 #+end_src
 ***** CSV
 
@@ -3140,9 +3138,9 @@ Add support for [[id:cf227bfa-d401-4f12-b0ad-2fd1a233f206][YAML]] ~Files~
 	(setq gnuplot-program "/usr/bin/gnuplot")
 
 	;; automatically enter gnuplot mode
-	(setq auto-mode-alist 
+	(setq auto-mode-alist
 		  (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist)))
-  
+
 #+end_src
 ***** PlantUML
 
@@ -3266,7 +3264,7 @@ Once these modes work sufficiently enough, the old modes will be swapped over.
   ;; Add Nix support to tree-sitter
   (use-package nix-ts-mode
     :mode "\\.nix\\'")
-  
+
 #+end_src
 *** Language Servers
 **** LSP Mode
@@ -3281,7 +3279,7 @@ The lsp-keymap-prefix setting enables you to define a prefix for where lsp-mode�
 
 The which-key integration adds helpful descriptions of the various keys so you should be able to learn a lot just by pressing C-c s in a lsp-mode buffer and trying different things that you find there.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   ;; Add Language Server Support
   (use-package lsp-mode
     ;; :hook ((c-mode          ;; clangd
@@ -3340,7 +3338,7 @@ The which-key integration adds helpful descriptions of the various keys so you s
       ;; "tle" 'lsp-ui-flycheck-list
       ;; "tlS" 'lsp-ui-sideline-mode
       "tlX" 'lsp-execute-code-action)
-  
+
 #+end_src
 ***** Consult LSP
 [[https://github.com/gagbo/consult-lsp][Consult-LSP]] adds ~LSP Mode~ support to ~Consult~
@@ -3364,7 +3362,7 @@ The which-key integration adds helpful descriptions of the various keys so you s
    ;; (setq lsp-ui-sideline-show-hover nil)
    ;; (setq lsp-ui-doc-position 'bottom)
    (setq lsp-ui-sideline-delay 0.05))
-  
+
 #+end_src
 ***** lsp-treemacs
 
@@ -3382,7 +3380,7 @@ This package is built on the =treemacs= ~package~ which might be of some interes
   ;; Extend lsp and treemacs integration
   (use-package lsp-treemacs
     :after (lsp treemacs))
-  
+
 #+end_src
 ***** Debugging
 
@@ -3401,7 +3399,7 @@ Dap stands for Debug Adapter
   ;;  (dap-tooltip-mode 1)
   ;;  (require 'dap-node)
   ;;  (dap-node-setup))
-  
+
 #+end_src
 ***** LSP-Mode Languages
 ****** Python
@@ -3422,10 +3420,10 @@ Dap stands for Debug Adapter
 + [[https://github.com/latex-lsp/texlab][GitHub: LaTeX-LSP - texlab]]
 + [[https://github.com/astoff/digestif][GitHub.com: Astoff - digestif]]
 #+begin_src emacs-lisp
-  ;; Lsp-Mode Settings for LaTeX 
+  ;; Lsp-Mode Settings for LaTeX
   (setq lsp-tex-server 'digestif) ;; Use Digestif
   ;; (setq lsp-tex-server 'texlab) ;; Use texlab instead
-  
+
 #+end_src
 **** Eglot
 :PROPERTIES:
@@ -3453,7 +3451,7 @@ Dap stands for Debug Adapter
   		   ;; C Lang
   		   c-mode-hook
   		   c-ts-mode-hook
-  		   
+
   		   ;; C++ Lang
   		   c++-mode-hook
   		   c++-ts-mode-hook
@@ -3466,7 +3464,7 @@ Dap stands for Debug Adapter
   		   ;; Go
   		   go-ts-mode
 
-  		   ;; Lua 
+  		   ;; Lua
   		   lua-ts-mode
 
   		   ;; HTML
@@ -3476,10 +3474,10 @@ Dap stands for Debug Adapter
   		   ;; CSS
   		   css-mode
   		   css-ts-mode
-  		   
+
   		   ;; JSON
   		   json-ts-mode
-  		   
+
   		   ;; YAML
              yaml-ts-mode)
            do
@@ -3503,7 +3501,13 @@ You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]
     ;; uncomment this line if you want to use zsh
     ;; (setq vterm-shell "zsh")
     ;; set maximum lines of output to be stored in RAM
-    (setq vterm-max-scrollback 10000))
+    (setq vterm-max-scrollback 10000)
+    ;; Adjust vterm window management
+    (add-to-list 'display-buffer-alist
+  			   '("\\*vterm\\*" display-buffer-reuse-mode-window
+  				 ;; change to `t' to not reuse same window
+  				 (inhibit-same-window . nil)
+  				 (mode vterm-mode vterm-copy-mode))))
 
 #+end_src
 *** Vterm-Toggle
@@ -3531,7 +3535,7 @@ You can find the documentation here: [[https://github.com/akermu/emacs-libvterm]
                    ;;(dedicated . t) ;dedicated is supported in emacs27
                    (reusable-frames . visible)
                    (window-height . 0.4))))
-  
+
 #+end_src
 ** Eshell
 :PROPERTIES:
@@ -3628,7 +3632,7 @@ The ~Package~ is listed as =org-plus-contrib=
 #+begin_src emacs-lisp
    ;; Add Org Contrib Packages
    (use-package org-contrib)
-   
+
 #+end_src
 ** Vanilla Org Config
 *** Load Plain Org
@@ -3654,7 +3658,7 @@ The ~Package~ is listed as =org-plus-contrib=
   (org-cite ((t (:foreground "DarkSeaGreen4"))))
   (org-cite-key ((t (:foreground "forest green" :slant italic))))
   )
-  
+
 #+end_src
 *** Load Org Modules
 #+begin_src emacs-lisp
@@ -3766,7 +3770,7 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
 
   ;; Add Custom TODO Keywords - in 2 seperate Sequences
   (setq org-todo-keywords
-        ;; Sequence 1 
+        ;; Sequence 1
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
     	    ;; Sequence 2
     	    (sequence "MEET(m)")
@@ -3783,8 +3787,8 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
   		 '(;; Open PDFs with Zathura
   		   ;; ("\\.pdf\\'" . "zathura %s") ;
   		   ;; Open PDFs with PDF Tools
-  		   ("\\.pdf\\'" . "pdf-tools %s")			   
-  		   ;; Open Pictures with sxiv 
+  		   ("\\.pdf\\'" . "pdf-tools %s")
+  		   ;; Open Pictures with sxiv
   		   ("\\.png\\'" . "sxiv %s")
   		   ("\\.jpg\\'" . "sxiv %s")
   		   ("\\.jpeg\\'" . "sxiv %s")
@@ -3816,7 +3820,7 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
 #+end_src
 *** Org Refile Targets
 #+begin_src emacs-lisp
-  ;; Set Refile Targets to be considered, Emphasis on Archive 
+  ;; Set Refile Targets to be considered, Emphasis on Archive
   (setq org-refile-targets
     '((nil :maxlevel . 9)
   	("~/Org/personal-archive.org" :maxlevel . 1)
@@ -3906,7 +3910,7 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
     			 ;; For Modern Fonts, Vektorschrift
     			 '("" "lmodern" t ("pdflatex" "xelatex" "lualatex")))
   (add-to-list 'org-latex-packages-alist
-    			 ;; Fix typessetting in amsmath, extend amsmath 
+    			 ;; Fix typessetting in amsmath, extend amsmath
     			 '("fixamsmath, dissallowspace" "mathtools" t
     			   ("pdflatex" "xelatex" "lualatex")))
   (add-to-list 'org-latex-packages-alist
@@ -3947,7 +3951,7 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
   				'("moderncv"
   				  "\\documentclass[11pt,
   				  a4paper,
-  				  sans, 
+  				  sans,
   				  ]{moderncv}
   		   [NO-DEFAULT-PACKAGES]
   		   [PACKAGES]
@@ -3967,10 +3971,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Add Koma Article
      (add-to-list 'org-latex-classes
   				'("scrartcl"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrartcl}
   	   [DEFAULT-PACKAGES]
@@ -3984,10 +3988,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Alternative Koma Article Name
      (add-to-list 'org-latex-classes
   				'("koma-article"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrartcl}
   	   [DEFAULT-PACKAGES]
@@ -4002,10 +4006,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Add Koma Report
      (add-to-list 'org-latex-classes
   				'("scrreprt"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrreprt}
   	   [DEFAULT-PACKAGES]
@@ -4021,10 +4025,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Alternative Koma Report name
      (add-to-list 'org-latex-classes
   				'("koma-report"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrreprt}
   	   [DEFAULT-PACKAGES]
@@ -4040,10 +4044,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Alternative Koma Report Structure
      (add-to-list 'org-latex-classes
   				'("koma-report-shortened"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrreprt}
   	   [DEFAULT-PACKAGES]
@@ -4060,10 +4064,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Add Koma Book
      (add-to-list 'org-latex-classes
   				'("scrbook"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrbook}
   	   [DEFAULT-PACKAGES]
@@ -4079,10 +4083,10 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      ;; Alternative Koma Book name
      (add-to-list 'org-latex-classes
   				'("koma-book"
-  				  "\\documentclass[a4paper, 
+  				  "\\documentclass[a4paper,
   			parskip=half,%
-  			fromalign=right, 
-  			fromrule=false, 
+  			fromalign=right,
+  			fromrule=false,
   			11pt
   			]{scrbook}
   	   [DEFAULT-PACKAGES]
@@ -4110,11 +4114,11 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
      \[EXTRA]"))
        (add-to-list 'org-latex-classes
     				'("scrlttr2-german"
-    				  "\\documentclass[a4paper, 
+    				  "\\documentclass[a4paper,
     			parskip=half,%
-    			fromalign=right, 
-    			fromrule=false, 
-    			11pt, 
+    			fromalign=right,
+    			fromrule=false,
+    			11pt,
     			ngerman]{scrlttr2}
     	   [NO-DEFAULT-PACKAGES]
     	   [PACKAGES]
@@ -4162,21 +4166,21 @@ To add it run (asuming =rust= or =rustup= are installed):
 #+begin_src emacs-lisp
   ;; Load Rust Support for Org Mode
   (use-package ob-rust)
-  
+
 #+end_src
 **** Org Babel Nix
 Load [[https://codeberg.org/theesm/ob-nix][CodeBerg.org: Theesm - ob-nix]]
 #+begin_src emacs-lisp
   ;; Load Nix Support for Org Mode
   (use-package ob-nix)
-  
+
 #+end_src
 **** Use Ipython with Org
 The package [[https://github.com/gregsexton/ob-ipython][ob-ipython]] is require get [[id:5fe7783f-d441-40a9-983c-7f671966c6e1][ipython]]-like functionality in [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] WIP
 
 #+begin_src emacs-lisp :tangle no
   ;; (use-package ob-ipython)
-  
+
 #+end_src
 *** Org Babel Language Configuration
 To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use. [[file:~/Projects/InfoFiles/Emacs/Worg/org-contrib/babel/languages/index.org][Org Babel Supported Languages]] documents all of the languages that you can use with =org-babel=.
@@ -4190,13 +4194,13 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
     'org-babel-load-languages
     '((emacs-lisp . t)    ;; Elisp
       (lisp . t)          ;; Lisp
-      (clojure . t)       ;; Clojure     
+      (clojure . t)       ;; Clojure
       (scheme . t)        ;; Scheme
       (python . t)        ;; Python
       ;; (ipython . t)       ;; IPython
 
       ;;  the following two require ob-c
-      (C . t)             ;; C 
+      (C . t)             ;; C
 
       (perl . t)          ;; Perl
       ;; (php . t)           ;; PHP
@@ -4205,8 +4209,8 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       (rust . t)          ;; Rust
       (julia . t)         ;; Julia Programmin Language
       (lua . t)           ;; Lua Programming Language
-      (shell . t)         ;; Command Line Programs 
-      (latex . t)         ;; LaTeX  
+      (shell . t)         ;; Command Line Programs
+      (latex . t)         ;; LaTeX
       (nix . t)           ;; Nix
       (sql . t)           ;; SQL
       (sqlite . t)        ;; SQLite
@@ -4292,7 +4296,7 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 			 ;; YAML
 			 ("yaml" . "src yaml")
 			 ;; R
-			 ("rp"   . "src R")                                  ;; pure R             
+			 ("rp"   . "src R")                                  ;; pure R
 			 ("rr"   . "src R :results both output")             ;; R with output
 			 ("rs"   . "src R :session :results both output")    ;; R with output
 			 ;; Rust
@@ -4431,7 +4435,7 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
             ("t" "Tasks / Projects")
             ("tt" "TODO Task" entry (file+olp
                                      "~/Org/personal-tasks.org" "Inbox")
-             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)  
+             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
             ("tb" "Basic task for future review" entry
              (file+headline "~/Org/personal-tasks.org" "Inbox")
              ,(concat "* %^{Title}\n"
@@ -4456,7 +4460,7 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
             ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal/Journal.org")
              "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)))
 
-    ;; Activate Context Templates for Email 
+    ;; Activate Context Templates for Email
     (setq org-capture-templates-contexts
       '(("e" ((in-mode . "notmuch-search-mode")
               (in-mode . "notmuch-show-mode")
@@ -4468,7 +4472,7 @@ Other than that, the *documentation* for =capture templates= is [[https://orgmod
 #+end_src
 ** Org Extensions
 *** Prettier Org Heard Stars
-**** Org Bullets 
+**** Org Bullets
 [[https://github.com/sabof/org-bullets][org-bullets]] replaces the heading stars in =org-mode= buffers with nicer looking characters that you can control.
 #+begin_src emacs-lisp
   ;; Setup Org Bullets
@@ -4529,24 +4533,24 @@ Another option for header stars is [[https://github.com/integral-dw/org-supersta
            :unnarrowed t)
           ("w" "wiki")
           ("wn" "wiki node" plain
-           "\n* ${title}\n\n%?" 
+           "\n* ${title}\n\n%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                   "\n#+filetags: :%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
            :unnarrowed t)
           ("wi" "wiki index node" plain
-           "\n* ${title} Kompendium Index\n\n%?" 
+           "\n* ${title} Kompendium Index\n\n%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                       "\n#+filetags: :index:%^{filetag}:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
            :unnarrowed t)
           ("wr" "wiki references node" plain
-           "\n* References\n%?\n** Websites\n\n** Literature" 
+           "\n* References\n%?\n** Websites\n\n** Literature"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                       "\n#+filetags: :%^{filetag}:references:\n#+TITLE: ${title}\n#+AUTHOR: %^{author}\n#+DATE: %U\n\n")
            :unnarrowed t)
           ("l" "programming language" plain
            "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
            :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
-           :unnarrowed t)  
+           :unnarrowed t)
           ("b" "book notes" plain (file "~/.dotfiles/00_OrgFiles/Templates/RoamCapture-BookNoteTemp.org")
            :if-new (file+head "${slug}.org" "#+TITLE: ${title}\n")
            :unnarrowed t)
@@ -4587,7 +4591,7 @@ Another option for header stars is [[https://github.com/integral-dw/org-supersta
        (list (append (car org-roam-capture-templates)
     		 '(:immediate-finish t)))))
       (apply #'org-roam-node-insert args)))
-  
+
 #+end_src
 **** Org Roam UI
 
@@ -4610,7 +4614,7 @@ The webserver started will run here: http://127.0.0.1:35901/
     org-roam-ui-follow t
     org-roam-ui-update-on-save t
     org-roam-ui-open-on-start t))
-  
+
 #+end_src
 *** Org Super Agenda
 
@@ -4686,7 +4690,7 @@ You can find an example file here: [[id:a5bb4b50-f15b-49c5-b2cb-bc80a65c14d6][sp
 	  (setq org-drill-left-cloze-delimiter "<[")
 	  (setq org-drill-right-cloze-delimiter "]>")
 	  (setq org-drill-learn-fraction 1.0)))
-  
+
 #+end_src
 *** Org Auto Tangle
 This safes the need for the ~Helper Functions~ below that I used previously
@@ -4695,7 +4699,7 @@ You need to add =#+auto_tangle: t= to the files you want to use this feature
 :END:
 #+begin_src emacs-lisp
   ;; Org AddOn Auto Tangle Org Files
-  ;; Add '#+auto_tangle: t' to files 
+  ;; Add '#+auto_tangle: t' to files
   (use-package org-auto-tangle
     :defer t
     :hook (org-mode . org-auto-tangle-mode)
@@ -4752,7 +4756,7 @@ To turn ~auto-save~ off *only locally*, you can insert this:
     :after org
     ;; Set Contacts File
     :custom (org-contacts-files (concat pet/org-dir "personal-contacts.org")))
-  
+
 #+end_src
 *** Org Modern
 #+begin_src emacs-lisp
@@ -4790,7 +4794,7 @@ To turn ~auto-save~ off *only locally*, you can insert this:
 #+begin_src emacs-lisp
   ;; Add Citeproc for CSL style Citations
   (use-package citeproc)
-  
+
 #+end_src
 * Mail
 ** mu4e
@@ -4854,7 +4858,7 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 
     ;; COMPOSING MAIL
 
-    ;; Don't include oneself in reply by default 
+    ;; Don't include oneself in reply by default
     (setq mu4e-compose-dont-reply-to-self t)
 
     ;; ISO(ish) format date-time stamps in the header list
@@ -4921,7 +4925,7 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
 
 [[https://github.com/iqbalansari/mu4e-alert][mu4e-alert]] sends ~Notifications~ to your ~notifications daemon/window manager~
 #+begin_src emacs-lisp
-  ;; Sent alerts for received 
+  ;; Sent alerts for received
   (use-package mu4e-alert
     :after mu4e
     :config
@@ -4994,7 +4998,7 @@ DISABLED FOR NOW
   (use-package ebdb
     :config
     ;; Set the source files for Contact DBs
-    (setq ebdb-sources (list                        
+    (setq ebdb-sources (list
   					  (concat pet/home-dir "Contacts/default-contacts.db")
   					  (concat pet/home-dir "Contacts/family.db")
   					  (concat pet/home-dir "Contacts/work.db")
@@ -5003,7 +5007,7 @@ DISABLED FOR NOW
 
     ;; Access Menu through '.' in EBDB Buffer
     ;; (define-key ebdb-mode-map
-    ;;		  "." 'hydra-ebdb-menu/body)		  
+    ;;		  "." 'hydra-ebdb-menu/body)
 
     ;; Specify the Display Format for Month and Day on Anniversaries
     ;; (setq ebdb-anniversary-md-format "%B %d")
@@ -5046,7 +5050,7 @@ DISABLED FOR NOW
   			 :port   "6697"))
 
   ;; Setup ERC Chat Client
-  ;; Set the Prompt to represent the the buffer-name 
+  ;; Set the Prompt to represent the the buffer-name
   (setq erc-prompt (lambda () (concat "[" (buffer-name) "]"))
 
   	  ;; Basic Account Config
@@ -5069,11 +5073,11 @@ DISABLED FOR NOW
   	  ;; bury private messages in buffer list
   	  erc-auto-query 'bury
 
-  	  ;; Autofill nickname column to 20 chars for better formatting 
+  	  ;; Autofill nickname column to 20 chars for better formatting
   	  erc-fill-function 'erc-fill-static
   	  erc-fill-static-center 30)
 
-  ;; Set Keyboard to be accessable by 'C-c i' 
+  ;; Set Keyboard to be accessable by 'C-c i'
   (global-set-key (kbd "C-c i") 'erc-tls)
 
   (pet/leader-keys
@@ -5172,7 +5176,7 @@ Great inspirations for ~Elfeed~ Configurations can be found here:
     ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
     ;; (run-with-timer 0 (* 60 60 4) 'elfeed-update)
 
-    ;; Load Feeds and Feed Settings  
+    ;; Load Feeds and Feed Settings
     (pet/load-file (concat pet/dotfiles-emacsconfig-dir
   						 "EmacsRSSFeed.el")))
 
@@ -5258,5 +5262,5 @@ This Section is ~deprecated~ since the ~Org Auto Tangle~ was added
 			  (add-hook
 			   'after-save-hook
 			   #'pet/org-babel-tangle-emacs-config)))
-  
+
 #+end_src

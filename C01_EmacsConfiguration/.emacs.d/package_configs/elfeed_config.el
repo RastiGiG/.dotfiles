@@ -40,7 +40,7 @@
   ;; (add-to-list 'elfeed-update-hooks 'elfeed-update)
   ;; (run-with-timer 0 (* 60 60 4) 'elfeed-update)
 
-  ;; Load Feeds and Feed Settings  
+  ;; Load Feeds and Feed Settings
   (pet/load-file (concat pet/dotfiles-emacsconfig-dir
   					       "EmacsRSSFeed.el")))
 

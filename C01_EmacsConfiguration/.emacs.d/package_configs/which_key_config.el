@@ -1,5 +1,5 @@
 ;; Load which-key
-;; Loads a more helpful UI Completion buffer 
+;; Loads a more helpful UI Completion buffer
 (use-package which-key
 :init (which-key-mode)
 :diminish which-key-mode

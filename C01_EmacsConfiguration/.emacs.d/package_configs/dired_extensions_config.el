@@ -1,4 +1,4 @@
-;; Use dired-open to launch external apps 
+;; Use dired-open to launch external apps
 (use-package dired-open)
 ;; open .png files in 'sxiv' and .mp4 files to open in 'mpv'
 ;; open .pdf in 'zahtura'

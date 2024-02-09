@@ -82,6 +82,6 @@
 		      (setq lsp-pyright-python-executable-cmd "python3"))
       )
 
-;; Lsp-Mode Settings for LaTeX 
+;; Lsp-Mode Settings for LaTeX
 (setq lsp-tex-server 'digestif) ;; Use Digestif
 ;; (setq lsp-tex-server 'texlab) ;; Use texlab instead

@@ -13,7 +13,7 @@
   (setq company-minimum-prefix-length 2)
   (setq company-show-numbers t)   ;; Show numbers in tooltip
   (global-company-mode 1)         ;; activate company mode
-  (company-tng-mode 1)            ;; make company perform completions with tab 
+  (company-tng-mode 1)            ;; make company perform completions with tab
 
   ;; Disable Company Mode in Strings or Comment
   (setq company-idle-delay
@@ -57,7 +57,7 @@
   ;; Org Mode
   (add-hook 'org-mode-hook 'pet/company-latex-mode)
 
-  ;; global activation of the unicode symbol completion 
+  ;; global activation of the unicode symbol completion
   (add-to-list 'company-backends 'company-math-symbols-unicode))
 
 ;; local configuration for Python modes
