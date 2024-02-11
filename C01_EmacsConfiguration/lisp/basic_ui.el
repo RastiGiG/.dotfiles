@@ -146,3 +146,35 @@
       ;; of current tab
       (defun pet/current-tab-name ()
 	(alist-get 'name (tab-bar--current-tab)))
+
+;; Pop up buffer in new window, when calling switch to buffer in dedicated windows
+(setq switch-to-buffer-in-dedicated-window t)
+
+;; Show help buffers in same window
+(add-to-list 'display-buffer-alist
+   		       '("\\*Help\\*"
+   			 (display-buffer-reuse-window display-buffer-pop-up-window)
+   			 (inhibit-same-window . t)))
+
+;; Show info buffers in side window
+(add-to-list 'display-buffer-alist
+   		       '("\\*info\\*"
+   			 (display-buffer-in-side-window)
+   			 (side . right)
+   			 (slot . 0)
+   			 (window-width . 80)
+   			 (window-parameters
+   			      (no-delete-other-windows . t))))
+
+;; Compilation windows should reuse the same window
+(add-to-list 'display-buffer-alist
+   		       '("\\*Compilation\\*"
+   			 display-buffer-reuse-window))
+
+;; Make spezific modes reuse the same window
+(add-to-list 'display-buffer-alist
+  		       `(,(rx (| "*xref*"
+  					 "*grep*"
+  					 "*Occur*"))
+  			 display-buffer-reuse-window
+  			 (inhibit-same-window . nil)))
