@@ -151,6 +151,15 @@
   (set-window-dedicated-p (selected-window)
   						(not (window-dedicated-p (selected-window)))))
 
+;; Check if a buffer major mode is derived from a list of given major modes
+(defun pet/make-display-buffer-matcher-function (major-modes)
+  (lambda (buffer-name action)
+    (with-current-buffer buffer-name (apply #'derived-mode-p major-modes))))
+
+;; Check if a buffer is associated to a project
+(defun pet/mp-buffer-has-project-p (buffer action)
+  (with-current-buffer buffer (project-current nil)))
+
 ;; Join a line by separator
 (defun pet/join-lines (specify-separator)
       "Join lines in the active region by a separator, by default a comma.

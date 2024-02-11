@@ -184,6 +184,27 @@ These are some helpful [[id:b013a0d9-c9b0-40e5-8206-fcc68f8752fb][Functions]] to
   						  (not (window-dedicated-p (selected-window)))))
 
     #+end_src
+** Buffer Management
+
+The code below was taken from:
++ [[https://www.masteringemacs.org/article/demystifying-emacs-window-manager][MasteringEmacs.org: Demystifying the Emacs Window Manager]]
+*** Check Derived Major Modes
+#+begin_src emacs-lisp
+  ;; Check if a buffer major mode is derived from a list of given major modes
+  (defun pet/make-display-buffer-matcher-function (major-modes)
+    (lambda (buffer-name action)
+      (with-current-buffer buffer-name (apply #'derived-mode-p major-modes))))
+
+#+end_src
+*** Check Buffers with associated Projects
+
+This function returns =non-nil= if a buffer belongs to a project.
+#+begin_src emacs-lisp
+  ;; Check if a buffer is associated to a project
+  (defun pet/mp-buffer-has-project-p (buffer action)
+    (with-current-buffer buffer (project-current nil)))
+
+#+end_src
 ** Join Lines with specified Separator
 
 This code Snippet is based on [[https://whatacold.io/blog/2023-06-12-emacs-join-lines/][Whatacold: Join lines by separator]]
@@ -259,7 +280,8 @@ This code was taken from [[https://www.erichgrunewald.com/posts/how-i-track-my-h
   (defun org-dblock-write:work-report (params)
     "Calculate how many hours too many or too few I have worked. PARAMS are
   defined in the template, they are :tstart for the first day for which there's
-  data (e.g. <2022-01-01>) and :tend for the last date (e.g. <now>)."
+  data (e.g. <2022-01-01>), :tend for the last date (e.g. <now>) and :hours for
+  amount of hours per day (defaults to 8 if not specified)."
     ;; cl-flet is a macro from the common lisp emulation package that allows us to
     ;; bind functions, just like let allows us to do with values.
     (cl-flet*
@@ -268,7 +290,7 @@ This code was taken from [[https://www.erichgrunewald.com/posts/how-i-track-my-h
          (get-minutes-from-log (t1 t2) (cl-second
                                         (org-clock-get-table-data
                                          (buffer-file-name)
-                                         (list :maxlevel 0
+                                         (list :maxlevel 3
                                                :tstart (format-time t1)
                                                :tend (format-time t2))))))
       (let* ((start
@@ -288,7 +310,7 @@ This code was taken from [[https://www.erichgrunewald.com/posts/how-i-track-my-h
           ;; between hours ideally worked and hours actually worked.
           (let* ((total-minutes-worked (get-minutes-from-log start end))
                  (hours-worked (/ total-minutes-worked 60.0))
-                 (hours-per-workday 8)
+                 (hours-per-workday (or (plist-get params :hours) 8))
                  (hours-should-work (* total-days-worked hours-per-workday))
                  (hour-difference (- hours-worked hours-should-work)))
             (insert (format "%0.1f" hour-difference)))))))
