@@ -3965,7 +3965,7 @@ This section was heavily inspired by [[https://codeberg.org/librephoenix/nixos-c
   				  sans,
   				  ]{moderncv}
   		   [NO-DEFAULT-PACKAGES]
-  		   [PACKAGES]
+  		   [NO-PACKAGES]
   		   [EXTRA]"
   				  ("\\section{%s}" . "\\section*{%s}")
   				  ("\\subsection{%s}" . "\\subsection*{%s}")

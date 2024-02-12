@@ -338,7 +338,7 @@
   				sans,
   				]{moderncv}
   		 [NO-DEFAULT-PACKAGES]
-  		 [PACKAGES]
+  		 [NO-PACKAGES]
   		 [EXTRA]"
   				("\\section{%s}" . "\\section*{%s}")
   				("\\subsection{%s}" . "\\subsection*{%s}")
