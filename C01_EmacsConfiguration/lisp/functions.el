@@ -1,8 +1,8 @@
-;;  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
-;; |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
-;; | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+;;  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____
+;; |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___|
+;; | |_  | | | |  \| | |     | |  | | | | |  \| \___ \
 ;; |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
-;; |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
+;; |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/
 ;;
 
 ;; Returns the color substring from given range
@@ -14,7 +14,7 @@
 ;; hexnumber
 (defun pet/colorchannel-into-range (color)
   "Returns the range to look for a specified color.
-  Inputs must be in 'rgbRGB' " 
+  Inputs must be in 'rgbRGB' "
   (setq color (s-lower-camel-case color))
   (cond ((equal color "r") '(1 3))
     ((equal color "g") '(3 5))
@@ -46,7 +46,7 @@
 
 ;; Returns a Color that contrasts background
 (defun pet/contrast-color (bg-avg-decimal)
-  "Returns the foreground color based on the avg background 
+  "Returns the foreground color based on the avg background
   being below 128. Returns White 「#000000」 if average is
   above"
   (if (> bg-avg-decimal 128) "#000000" "#ffffff"))
@@ -136,7 +136,7 @@
 (defun pet/font-available-p (font-name)
       (find-font (font-spec :name font-name)))
 
-;; Custom window split function 
+;; Custom window split function
 (defun pet/split-below (arg)
   "Split window below from the parent or from root with ARG."
   (interactive "P")
