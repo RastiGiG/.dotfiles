@@ -201,6 +201,89 @@ Note: it depends on s.el."
         (message "Native JSON is available")
       (message "Native JSON is *not* available")))
 
+;; Custom function to calculate the time balance
+(require 'cl-lib)
+(require 'org-clock)
+
+(defun org-dblock-write:track-weekly-overtime (params)
+  "Calculate how many hours too many or too few I have worked. PARAMS are
+defined in the template, they are :tstart for the first day for which there's
+data (e.g. <2022-01-01>), :tend for the last date (e.g. <now>) and :hours for
+amount of hours per day (defaults to 8 if not specified)."
+  ;; cl-flet is a macro from the common lisp emulation package that allows us to
+  ;; bind functions, just like let allows us to do with values.
+  (cl-flet* ((format-time (time)
+  			 (format-time-string (org-time-stamp-format t t) time))
+  		       (get-minutes-from-log (t1 t2)
+  			 (cl-second (org-clock-get-table-data
+  						 (buffer-file-name)
+  						 (list :maxlevel 0
+  							       :tstart (format-time t1)
+  							       :tend (format-time t2))))))
+    (let* ((start
+            (seconds-to-time (org-matcher-time (plist-get params :tstart))))
+           (end
+            (seconds-to-time (org-matcher-time (plist-get params :tend))))
+  		 (time start)
+           (total-days-worked 0))
+      (progn
+        ;; loop through all the days in the time frame provided and count how
+        ;; many days minutes were reported.
+        (while (time-less-p time end)
+          (let* ((next-day (time-add time (date-to-time "1970-01-02T00:00Z")))
+                 (minutes-in-day (get-minutes-from-log time next-day)))
+            (if (> minutes-in-day 0) (cl-incf total-days-worked 1))
+            (setq time next-day)))
+        ;; now we can just do some simple arithmetic to get the difference
+        ;; between hours ideally worked and hours actually worked.
+        (let* ((total-minutes-worked (get-minutes-from-log start end))
+               (hours-worked (/ total-minutes-worked 60.0))
+               (hours-per-workday (or (plist-get params :hours) 8))
+               (hours-should-work (* total-days-worked hours-per-workday))
+               (hour-difference (- hours-worked hours-should-work)))
+          (insert (format "%0.1f" hour-difference)))))))
+
+;; Custom function to calculate the time balance
+(require 'cl-lib)
+(require 'org-clock)
+
+(defun org-dblock-write:track-monthly-overtime (params)
+  "Calculate how many hours too many or too few I have worked. PARAMS are
+defined in the template, they are :tstart for the first day for which there's
+data (e.g. <2022-01-01>), :tend for the last date (e.g. <now>) and :hours for
+amount of hours per month (defaults to 8 if not specified)."
+  ;; cl-flet is a macro from the common lisp emulation package that allows us to
+  ;; bind functions, just like let allows us to do with values.
+  (cl-flet* ((format-time (time)
+  			 (format-time-string (org-time-stamp-format t t) time))
+  		       (get-minutes-from-log (t1 t2)
+  			 (cl-second (org-clock-get-table-data
+  						 (buffer-file-name)
+  						 (list :maxlevel 0
+  							       :tstart (format-time t1)
+  							       :tend (format-time t2))))))
+    (let* ((start
+            (seconds-to-time (org-matcher-time (plist-get params :tstart))))
+           (end
+            (seconds-to-time (org-matcher-time (plist-get params :tend))))
+  		 (time start)
+           (total-days-worked 0))
+      (progn
+        ;; loop through all the days in the time frame provided and count how
+        ;; many days minutes were reported.
+        (while (time-less-p time end)
+          (let* ((next-day (time-add time (date-to-time "1970-01-02T00:00Z")))
+                 (minutes-in-day (get-minutes-from-log time next-day)))
+            (setq time next-day)))
+        ;; now we can just do some simple arithmetic to get the difference
+        ;; between hours ideally worked and hours actually worked.
+        (let* ((total-minutes-worked (get-minutes-from-log start end))
+               (hours-worked (/ total-minutes-worked 60.0))
+               (hours-per-month (or (plist-get params :hours) 160))
+               (hours-should-work hours-per-month)
+               (hour-difference (- hours-worked hours-should-work)))
+          (insert (format "%0.1f" hour-difference)))))))
+
 (defun pet/org-agenda-open-hook ()
   "Hook for org-agenda using visual-fill-column"
 (visual-fill-column-mode))
