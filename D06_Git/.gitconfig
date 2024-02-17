@@ -7,3 +7,12 @@
 	defaultBranch = main
 [pull]
 	rebase = false
+[alias]
+	lo = log --oneline --stat
+	aa = add --all
+	br = branch
+	cm = commit
+	co = checkout
+	st = status
+	last = log -1 HEAD
+	listaliases = config --get-regexp alias
