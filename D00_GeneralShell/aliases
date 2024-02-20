@@ -1,10 +1,10 @@
 #----------------------------------------------------------------------------------------------------------------------
-#     _    _ _                     
-#    / \  | (_) __ _ ___  ___  ___ 
+#     _    _ _
+#    / \  | (_) __ _ ___  ___  ___
 #   / _ \ | | |/ _` / __|/ _ \/ __|
 #  / ___ \| | | (_| \__ \  __/\__ \
 # /_/   \_\_|_|\__,_|___/\___||___/
-#                               
+#
 # - Collection of Aliases used in Bash and Zsh -
 # Source:         - .dotfiles/000_OrgFiles/Aliases.org
 # Target:         - .dotfiles/D00_Aliases/aliases
@@ -50,7 +50,7 @@ alias np='nano -w PKGBUILD'
 alias more=less                           # more is pretty much useless noadays
 
 #-----------------------------------------EMACS DAEMON
-# Aliases to use emacs as a daemon 
+# Aliases to use emacs as a daemon
 alias ed="emacs --daemon"                     # Start daemon
 alias ec="emacsclient -tc"                    # Connect to daemon
 alias ek="emacsclient --eval '(kill-emacs)'"  # Kill Daemon
@@ -64,5 +64,9 @@ alias nrsd='sudo nixos-rebuild switch --flake ~/.dotnix#descartes'
 
 alias hmsr='home-manager switch --flake ~/.dotnix#rastibasti'
 alias hmss='home-manager switch --flake ~/.dotnix#sebastian'
+
+alias dc='docker compose'
+
+alias pc='podman-compose'
 
 alias ldgsd="ledger --sort='-date'"
