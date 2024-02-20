@@ -16,3 +16,5 @@
 	st = status
 	last = log -1 HEAD
 	listaliases = config --get-regexp alias
+	cfggl = config --global
+	ball = branch --all

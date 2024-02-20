@@ -69,4 +69,5 @@ alias dc='docker compose'
 
 alias pc='podman-compose'
 
+alias ldg="ledger"
 alias ldgsd="ledger --sort='-date'"

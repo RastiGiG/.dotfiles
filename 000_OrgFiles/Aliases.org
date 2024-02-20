@@ -127,6 +127,7 @@ These commands need the devices to be *unmounted* to work right
 #+end_src
 * Ledger
 #+begin_src shell
+  alias ldg="ledger"
   alias ldgsd="ledger --sort='-date'"
 
 #+end_src
