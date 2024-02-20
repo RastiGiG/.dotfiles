@@ -21,6 +21,9 @@
 ***** [[id:e8e29eb5-aeec-47cb-9f64-7295f7dee882][Cloning a Repository]]
 *** [[id:51dfb2be-8d64-4d33-852e-6d1e62f92f00][Tipps]]
 **** [[id:3dd99f30-eb09-4211-aaf3-2d064fd7c25b][Git and Github Related]]
+***** [[id:91860960-3b7a-4c16-b3ef-0e005b742901][Git: rev-parse]]
+***** [[id:a10538d7-0ed2-43c0-8f6b-e7deef2fcd78][Git: Commit Message Guidelines]]
+***** [[id:f6c6d75a-6082-455e-943a-907a28dd3ee9][Git: Submodule vs Subtree]]
 
 * Read On
 
@@ -45,3 +48,5 @@
 4. [[https://www.git-tower.com][Git-Tower.com]]
 
 ** Literature
+
+1. [[file:~/Documents/07_Wissen_und_Bildung/00-Literatur/IT/Michael_Kofler-Git.pdf][Bernd Öggl, Michael Kofler - Git]]
