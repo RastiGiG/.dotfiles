@@ -262,7 +262,9 @@ amount of hours per month (defaults to 8 if not specified)."
   						 (list :maxlevel 0
   							       :tstart (format-time t1)
   							       :tend (format-time t2))))))
-    (let* ((start
+    (let* ((file
+  		      (or (plist-get params :file) (buffer-file-name)))
+  		 (start
             (seconds-to-time (org-matcher-time (plist-get params :tstart))))
            (end
             (seconds-to-time (org-matcher-time (plist-get params :tend))))
@@ -283,6 +285,44 @@ amount of hours per month (defaults to 8 if not specified)."
                (hours-should-work hours-per-month)
                (hour-difference (- hours-worked hours-should-work)))
           (insert (format "%0.1f" hour-difference)))))))
+
+(require 'cl-lib)
+(require 'org-clock)
+
+(defun org-dblock-write:track-weekly-totals (params)
+  "Calculate how many hours too many or too few I have worked. PARAMS are
+defined in the template, they are :tstart for the first day for which there's
+data (e.g. <2022-01-01>), :tend for the last date (e.g. <now>), :hours for
+amount of hours per month (defaults to 8 if not specified) and :file for the
+source file containing the clock table (defaults to current buffer)."
+  (cl-flet ((format-time (time) (format-time-string (org-time-stamp-format t t) time)))
+    (let ((file (or (plist-get params :file) (buffer-file-name)))
+          (start (seconds-to-time (org-matcher-time (plist-get params :tstart))))
+          (end (seconds-to-time (org-matcher-time (plist-get params :tend)))))
+      (while (time-less-p start end)
+        (let ((next-week (time-add start
+                                   (date-to-time "1970-01-08T00:00Z")))
+              (week-begin (line-beginning-position))
+              (week-minutes 0))
+          (insert "\nWeekly Table from " (format-time start) "\n")
+          (insert "| Day of Week | Time |\n|-\n")
+          (while (time-less-p start next-week)
+            (let* ((next-day (time-add start (date-to-time "1970-01-02T00:00Z")))
+                   (minutes
+                    (with-current-buffer (find-file-noselect file)
+                      (cadr (org-clock-get-table-data
+                             file
+                             (list :maxlevel 0
+                                   :tstart (format-time start)
+                                   :tend (format-time next-day)))))))
+              (insert "|" (format-time-string "%B" start)
+                      "|" (format "%d" minutes)
+                      "|\n")
+              (org-table-align)
+              (cl-incf week-minutes minutes)
+              (setq start next-day)))
+          (when (equal week-minutes 0)
+            (delete-region week-begin (line-beginning-position))))))))
 
 (defun pet/org-agenda-open-hook ()
   "Hook for org-agenda using visual-fill-column"
