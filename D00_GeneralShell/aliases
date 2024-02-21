@@ -60,6 +60,14 @@ alias smcts='smartctl -t short'      # Start a short selftest
 alias smctl='smartctl -t long'       # Start a long selftest
 alias smcstl='smartctl -l selftest'  # Start a long selftest
 
+alias bfsshow="sudo btrfs filesystem show"
+
+alias bfsstatus="sudo btrfs scrub status"
+alias bfsstart="sudo btrfs scurb start"
+
+alias snapshot="sudo btrfs subvolume snapshot"
+alias subvollist="sudo btrfs subvolume list"
+
 alias nrsd='sudo nixos-rebuild switch --flake ~/.dotnix#descartes'
 
 alias hmsr='home-manager switch --flake ~/.dotnix#rastibasti'
