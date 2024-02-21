@@ -102,12 +102,12 @@ These commands need the devices to be *unmounted* to work right
   alias smcstl='smartctl -l selftest'  # Start a long selftest
 
 #+end_src
-* BTRFS
+** BTRFS
 #+begin_src shell
   alias bfsshow="sudo btrfs filesystem show"
 
   alias bfsstatus="sudo btrfs scrub status"
-  alias bfsstart="sudo btrfs scurb start"
+  alias bfsstart="sudo btrfs scrub start"
 
   alias snapshot="sudo btrfs subvolume snapshot"
   alias subvollist="sudo btrfs subvolume list"
