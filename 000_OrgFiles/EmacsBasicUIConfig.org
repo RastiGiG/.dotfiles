@@ -6,14 +6,14 @@
 
 * Header
 
-#+begin_src emacs-lisp 
-  ;;  ____    _    ____ ___ ____   _   _ ___    ____ ___  _   _ _____ ___ ____ 
+#+begin_src emacs-lisp
+  ;;  ____    _    ____ ___ ____   _   _ ___    ____ ___  _   _ _____ ___ ____
   ;; | __ )  / \  / ___|_ _/ ___| | | | |_ _|  / ___/ _ \| \ | |  ___|_ _/ ___|
-  ;; |  _ \ / _ \ \___ \| | |     | | | || |  | |  | | | |  \| | |_   | | |  _ 
+  ;; |  _ \ / _ \ \___ \| | |     | | | || |  | |  | | | |  \| | |_   | | |  _
   ;; | |_) / ___ \ ___) | | |___  | |_| || |  | |__| |_| | |\  |  _|  | | |_| |
   ;; |____/_/   \_\____/___\____|  \___/|___|  \____\___/|_| \_|_|   |___\____|
-  ;;                                                                           
-    
+  ;;
+
 #+end_src
 * Basic UI Configuration
 ** Description
@@ -37,8 +37,10 @@ This section configures basic UI settings that remove unneeded elements to make 
   (column-number-mode)
   ;; Set Line Numbers Globally
   (global-display-line-numbers-mode t)
+  ;; Set default line number width
+  (setq display-line-numbers-width 4)
   ;; Adjust Line Numbers Width
-  (setq display-line-numbers-width t)
+  (setq display-line-numbers-widen t)
 
   ;; Enable line numbers for some modes
   (dolist (mode '(text-mode-hook
@@ -62,10 +64,10 @@ This section configures basic UI settings that remove unneeded elements to make 
 #+begin_src emacs-lisp
   ;; Set the amount of space before lines get wrapped (default 70)
   (setq fill-column 80)
-  
+
 #+end_src
 *** Don't loose your Cursor
-#+begin_src emacs-lisp  
+#+begin_src emacs-lisp
   ;; Set up the visible bell
   (setq visible-bell t)
 
@@ -81,7 +83,7 @@ This section configures basic UI settings that remove unneeded elements to make 
   	       eshell-mode-hook
   	       pdf-view-mode-hook))
     (add-hook mode (lambda () (hl-line-mode nil))))
-  
+
 #+end_src
 *** Line Spacing
 #+begin_src emacs-lisp
@@ -97,16 +99,16 @@ This section configures basic UI settings that remove unneeded elements to make 
 
 #+end_src
 *** Battery Status
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   ;; Display battery for when in full screen mode
   (display-battery-mode t)
-  
+
 #+end_src
 *** Clock
 #+begin_src emacs-lisp
   ;; Display clock in modeline
   (display-time-mode 1)
-  
+
 #+end_src
 *** Number of Side Windows
 
@@ -117,13 +119,13 @@ The numbers represent the frame directions in the following order:
   ; Number of side window slots at
   ; left - top - right - bottom
   (setq window-sides-slots '(3 0 3 1))
-  
+
 #+end_src
 *** Popup Windows
 #+begin_src emacs-lisp
   ;; No popup windows
   (setq pop-up-windows nil)
-  
+
 #+end_src
 *** Visual Line Mode
 
@@ -136,7 +138,7 @@ Might add that back later
 #+end_src
 ** Winner Mode
 
-~Winner mode~ is a ~global minor mode~ that records the changes in the window configuration (i.e. how the frames are partitioned into windows) so that the changes can be "undone" using the command =winner-undo=.  
+~Winner mode~ is a ~global minor mode~ that records the changes in the window configuration (i.e. how the frames are partitioned into windows) so that the changes can be "undone" using the command =winner-undo=.
 #+begin_src emacs-lisp
   ;; Enable Winner Mode
   (winner-mode 1)
@@ -205,7 +207,7 @@ First we want new tabs to always open with a *scratch* buffer
   (setq tab-bar-new-tab-choice "*scratch*")
   ;; right is default -
   ;; change if you dont like that
-  ;; (tab-bar-new-tab-to right)                
+  ;; (tab-bar-new-tab-to right)
 
   ;; Set the name of the tab to
   ;; match the current buffer
@@ -222,13 +224,13 @@ First we want new tabs to always open with a *scratch* buffer
 
 	;; tab bar is not automatically shown
 	;; (set 1 to enable)
-	(setq tab-bar-show nil)                      
+	(setq tab-bar-show nil)
 
 	;; Helper function to get only the name
 	;; of current tab
 	(defun pet/current-tab-name ()
 	  (alist-get 'name (tab-bar--current-tab)))
-  
+
 #+end_src
 ** Window Management
 #+begin_src emacs-lisp

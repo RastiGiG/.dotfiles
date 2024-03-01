@@ -1,6 +1,6 @@
-;;  ____    _    ____ ___ ____   _   _ ___    ____ ___  _   _ _____ ___ ____ 
+;;  ____    _    ____ ___ ____   _   _ ___    ____ ___  _   _ _____ ___ ____
 ;; | __ )  / \  / ___|_ _/ ___| | | | |_ _|  / ___/ _ \| \ | |  ___|_ _/ ___|
-;; |  _ \ / _ \ \___ \| | |     | | | || |  | |  | | | |  \| | |_   | | |  _ 
+;; |  _ \ / _ \ \___ \| | |     | | | || |  | |  | | | |  \| | |_   | | |  _
 ;; | |_) / ___ \ ___) | | |___  | |_| || |  | |__| |_| | |\  |  _|  | | |_| |
 ;; |____/_/   \_\____/___\____|  \___/|___|  \____\___/|_| \_|_|   |___\____|
 ;;
@@ -16,8 +16,10 @@
 (column-number-mode)
 ;; Set Line Numbers Globally
 (global-display-line-numbers-mode t)
+;; Set default line number width
+(setq display-line-numbers-width 4)
 ;; Adjust Line Numbers Width
-(setq display-line-numbers-width t)
+(setq display-line-numbers-widen t)
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
@@ -123,7 +125,7 @@
 (setq tab-bar-new-tab-choice "*scratch*")
 ;; right is default -
 ;; change if you dont like that
-;; (tab-bar-new-tab-to right)                
+;; (tab-bar-new-tab-to right)
 
 ;; Set the name of the tab to
 ;; match the current buffer
@@ -140,7 +142,7 @@
 
       ;; tab bar is not automatically shown
       ;; (set 1 to enable)
-      (setq tab-bar-show nil)                      
+      (setq tab-bar-show nil)
 
       ;; Helper function to get only the name
       ;; of current tab
