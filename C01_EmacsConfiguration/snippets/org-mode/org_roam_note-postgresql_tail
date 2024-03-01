@@ -12,6 +12,8 @@
 *** [[id:c12161f0-3c37-4a43-b2c8-c218195ac4ab][Administration Tools]]
 **** [[id:fe4797b6-25fb-40ca-a8e8-d757871cd821][PGAdmin]]
 *** [[id:1554b6d3-f1f4-4858-ad9c-899e8e674d48][Tipps]]
+**** [[id:204f50c4-45f1-4d92-9cb9-758b599ece41][Materialized Views]]
+**** [[id:84220d03-b132-4b5b-a16e-fe66e717d554][Partitioning]]
 **** [[id:67c2d175-63ba-4b99-b255-6375c702f431][Backup Database]]
 
 * Read On
@@ -43,7 +45,7 @@
 
 1. [[https://www.postgresql.org/][PostgreSQL.org]]
    1) [[https://www.postgresql.org/docs/current][PostgreSQL.org: Documents]]
-   
+
 ** Literature
 
 1. [[file:~/Documents/07_Wissen_und_Bildung/Literatur/IT/practical-sql.pdf][Anthony DeBarros - Practical SQL (First Edition)]]
