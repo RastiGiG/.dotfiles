@@ -7,10 +7,16 @@
 ** [[id:9ce0bc43-b942-4652-9629-a96f54f9dedd][PostgreSQL]]
 *** [[id:8b23e2cc-c1a5-4dab-a366-89e12bedd2e5][Setup]]
 *** [[id:bb761b2e-baef-4c18-98fb-29607985721d][Security]]
+**** [[id:d9f10852-0125-4ad3-a066-7c5b28489d0e][General Security Settings]]
+**** [[id:c8306747-e1f3-43c8-b341-a52c15ac27b7][Database User Restrictions]]
 *** [[id:c40fa55f-4f6f-418d-ae38-358bb1ac60d9][Locale Settings]]
 *** [[id:680a1437-7cbd-48c9-b14a-29e6e2c425ff][Commands]]
 *** [[id:c12161f0-3c37-4a43-b2c8-c218195ac4ab][Administration Tools]]
 **** [[id:fe4797b6-25fb-40ca-a8e8-d757871cd821][PGAdmin]]
+*** [[id:670e52db-fa33-4d7b-99a1-32ea77cda211][Extensions]]
+**** [[id:f2d4661c-f951-4e3f-8879-8fc97cf9dc81][PostGIS]]
+**** [[id:275b4661-e67c-4c8b-9711-4f3d41936496][PGCrypto]]
+**** [[id:f6049d9f-148e-473d-91ea-59aec84c7f16][Timescale]]
 *** [[id:1554b6d3-f1f4-4858-ad9c-899e8e674d48][Tipps]]
 **** [[id:67c2d175-63ba-4b99-b255-6375c702f431][Backup Database]]
 
@@ -42,8 +48,8 @@
 ** Websites
 
 1. [[https://www.postgresql.org/][PostgreSQL.org]]
-   1) [[https://www.postgresql.org/docs/current][PostgreSQL.org: Documents]]
-   
+   1) [[https://www.postgresql.org/docs/current][PostgreSQL.org: Documentation]]
+
 ** Literature
 
 1. [[file:~/Documents/07_Wissen_und_Bildung/Literatur/IT/practical-sql.pdf][Anthony DeBarros - Practical SQL (First Edition)]]
