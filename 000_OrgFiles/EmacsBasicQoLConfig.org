@@ -207,7 +207,9 @@ This section was copied from:
   			 ("Nix Wiki" . [simple-query "https://nixos.wiki/" "https://nixos.wiki/index.php?search=" ""])
   			 ("Nix Documentation" . [simple-query "https://nix.dev/" "https://nix.dev/search.html?q=" ""])
   			 ("Home-Manager Options" . [simple-query "https://mipmip.github.io/" "https://mipmip.github.io/home-manager-option-search/?query=" ""])
-  			 ("Docker Hub" . [simple-query "https://hub.docker.com/" "https://hub.docker.com/search?q=" ""]))
+  			 ("Docker Hub" . [simple-query "https://hub.docker.com/" "https://hub.docker.com/search?q=" ""])
+  			 ("Mediarath Smart Home Devices" . [simple-query "https://mediarath.de/" "https://mediarath.de/search?q=" ""])
+  			 ("BerryBase Maker Shop" . [simple-query "https://www.berrybase.de" "https://www.berrybase.de/search?sSearch=" ""]))
   		   do
   		   (add-to-list 'webjump-sites website)))
 
