@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: org-latex-math
+# key: <ltxm
+# --
+\\(${1:latex-code}\\)
