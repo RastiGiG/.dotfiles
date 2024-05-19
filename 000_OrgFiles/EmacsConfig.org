@@ -275,7 +275,7 @@ Version mismatch is commonly encountered in the following situations:
 
   ;; Load Basic QoL Adjustments
   (setq pet/ledger-categories '())  ;; incase the file can’t be loaded
-  (pet/load-file "~/.dotfiles-private/Configurations/EmacsPrivateVariables.el")
+  (pet/load-file "~/.dotfiles-private/Configurations/C2-Emacs/EmacsPrivateVariables.el")
 
 #+end_src
 * Load Package Configurations
@@ -4820,7 +4820,7 @@ Documentation can be found here: [[https://www.djcbsoftware.nl/code/mu/mu4e/][DJ
   (setq pet/mail-accounts-config
   		(concat pet/home-dir
   				(convert-standard-filename
-  				 ".dotfiles-private/MailAccounts.el")))
+  				 ".dotfiles-private/Configurations/C2-Emacs/MailAccounts.el")))
 
   ;; Load mu4e as a Mail Interface for mu
   (use-package mu4e

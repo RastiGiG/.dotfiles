@@ -2,7 +2,7 @@
 (setq pet/mail-accounts-config
   	      (concat pet/home-dir
   			      (convert-standard-filename
-  			       ".dotfiles-private/MailAccounts.el")))
+  			       ".dotfiles-private/Configurations/C2-Emacs/MailAccounts.el")))
 
 ;; Load mu4e as a Mail Interface for mu
 (use-package mu4e

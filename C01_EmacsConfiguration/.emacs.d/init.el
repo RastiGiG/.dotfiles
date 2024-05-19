@@ -76,7 +76,7 @@
 
 ;; Load Basic QoL Adjustments
 (setq pet/ledger-categories '())  ;; incase the file can’t be loaded
-(pet/load-file "~/.dotfiles-private/Configurations/EmacsPrivateVariables.el")
+(pet/load-file "~/.dotfiles-private/Configurations/C2-Emacs/EmacsPrivateVariables.el")
 
 (cl-loop for config in
   	       ;; Load Evil Configuration
