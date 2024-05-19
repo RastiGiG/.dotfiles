@@ -1,5 +1,5 @@
 #+title: Common Shell Functions
-#+PROPERTY: header-args:sh :tangle ../D00_GeneralShell/shell_functions :mkdirp yes
+#+PROPERTY: header-args:sh :tangle ../D00_GeneralShell/shell_functions.sh :mkdirp yes
 #+DESCRIPTION: This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
 #+STARTUP: hideblocks show2levels
 #+OPTIONS:  toc:2
@@ -8,25 +8,25 @@
 * Header
 #+begin_src sh
   #----------------------------------------------------------------------------------------------------------------------
-  #   ____  _   _ _____ _     _     
-  # / ___|| | | | ____| |   | |    
-  # \___ \| |_| |  _| | |   | |    
-  #  ___) |  _  | |___| |___| |___ 
+  #   ____  _   _ _____ _     _
+  # / ___|| | | | ____| |   | |
+  # \___ \| |_| |  _| | |   | |
+  #  ___) |  _  | |___| |___| |___
   # |____/|_| |_|_____|_____|_____|
-  #                                
-  #  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
-  # |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
-  # | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+  #
+  #  _____ _   _ _   _  ____ _____ ___ ___  _   _ ____
+  # |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___|
+  # | |_  | | | |  \| | |     | |  | | | | |  \| \___ \
   # |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
-  # |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
-  #                                                     
+  # |_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/
+  #
   # - List of Common Shell Functions
   # Source:         - .dotfiles/00_OrgFiles/ShellFunctions.org
-  # Target:         - .dotfiles/D00_GeneralShell/shell_functions
+  # Target:         - .dotfiles/D00_GeneralShell/shell_functions.sh
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #
-  #----------------------------------------------------------------------------------------------------------------------    
+  #----------------------------------------------------------------------------------------------------------------------
 
 #+end_src
 * Functions
@@ -93,5 +93,5 @@ I also link to the blog that explains the reasoning behind this.
           . "$1"
       fi
   }
-    
+
 #+end_src

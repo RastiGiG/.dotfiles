@@ -39,23 +39,26 @@
 ** Shell Functions
 #+begin_src sh
   # Load Shell Functions
-  SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_functions"
+  SHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_functions.sh"
   [[ -f $SHFuncs && -r $SHFuncs ]] && . "$SHFuncs"
 
+  # Load Shell Functions
+  PrSHFuncs="$HOME/.dotfiles/D00_GeneralShell/shell_functions.sh"
+  [[ -f $PrSHFuncs && -r $PrSHFuncs ]] && . "$SHFuncs"
 #+end_src
 ** Aliases
 #+begin_src sh
   # Load Shell Aliases
-  SHAlias="$HOME/.dotfiles/D00_GeneralShell/aliases"
+  SHAlias="$HOME/.dotfiles/D00_GeneralShell/aliases.sh"
   [[ -f $SHAlias && -r $SHAlias ]] && . "$SHAlias"
 
   # Load Private Shell Aliases
-  PrSHAlias="$HOME/.dotfiles-private/Configurations/private_aliases"
+  PrSHAlias="$HOME/.dotfiles-private/Configurations/C1-Shell/private_aliases.sh"
   [[ -f $PrSHAlias && -r $PrSHAlias ]] && . "$PrSHAlias"
 
 #+end_src
 ** Release Temporary Variables
 #+begin_src sh
-  unset SHEnvVar SHFuncs SHAlias PrSHAlias
+  unset SHEnvVar SHFuncs PrSHFuncs SHAlias PrSHAlias
 
 #+end_src

@@ -7,7 +7,7 @@
 #
 # - Collection of Aliases used in Bash and Zsh -
 # Source:         - .dotfiles/000_OrgFiles/Aliases.org
-# Target:         - .dotfiles/D00_Aliases/aliases
+# Target:         - .dotfiles/D00_Aliases/aliases.sh
 # Author Email:   - randomly.ventilates@simplelogin.co
 # Author GitHub:  - https://github.com/RastiGiG/
 #----------------------------------------------------------------------------------------------------------------------
