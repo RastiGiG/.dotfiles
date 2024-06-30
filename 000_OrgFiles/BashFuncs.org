@@ -13,12 +13,12 @@ like ~Zsh~ (mind compatibility!)
 
 #+begin_src shell
   #----------------------------------------------------------------------------------------------------------------------
-  #  ____    _    ____  _   _ _____ _   _ _   _  ____ _____ ___ ___  _   _ ____  
-  # | __ )  / \  / ___|| | | |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___| 
-  # |  _ \ / _ \ \___ \| |_| | |_  | | | |  \| | |     | |  | | | | |  \| \___ \ 
+  #  ____    _    ____  _   _ _____ _   _ _   _  ____ _____ ___ ___  _   _ ____
+  # | __ )  / \  / ___|| | | |  ___| | | | \ | |/ ___|_   _|_ _/ _ \| \ | / ___|
+  # |  _ \ / _ \ \___ \| |_| | |_  | | | |  \| | |     | |  | | | | |  \| \___ \
   # | |_) / ___ \ ___) |  _  |  _| | |_| | |\  | |___  | |  | | |_| | |\  |___) |
-  # |____/_/   \_\____/|_| |_|_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/ 
-  #                                                                              
+  # |____/_/   \_\____/|_| |_|_|    \___/|_| \_|\____| |_| |___\___/|_| \_|____/
+  #
   # - Collection of Functions for Bash -
   # Source:         - .dotfiles/000_OrgFiles/BashFuncs.org
   # Target:         - .dotfiles/D01_Bash/.bash_functions
@@ -28,14 +28,14 @@ like ~Zsh~ (mind compatibility!)
   # These Functions were adapted from:
   # - TerminalForLife:   https://github.com/terminalforlife
   #
-  #----------------------------------------------------------------------------------------------------------------------    
+  #----------------------------------------------------------------------------------------------------------------------
 
 #+end_src
 
 * Functions
 ** Sane Defaults
 These ~Functions~ are included into [[file:Aliases.org][Aliases]] since they fulfill a similar purpose: ~sane(r) defaults~
-The idea is taken from [[https://github.com/terminalforlife/BashConfig/blob/master/source/.profile][TerminalForLife]] 
+The idea is taken from [[https://github.com/terminalforlife/BashConfig/blob/master/source/.profile][TerminalForLife]]
 :NOTE:
 Quick note on [[id:28da9d49-b484-4ac7-9340-c800bbee5aff][ls]]:
 the =--quoting-style= option determines how ~files~ and ~directories~ with ~whitespace characters~ are displayed.
@@ -144,7 +144,7 @@ Makes use of =Err=
           esac
       done
   }
-  
+
 #+end_src
 ** Archive Extractor
 
@@ -198,7 +198,7 @@ Short function to *automatically extract* ~archives~ based on the ~file extensio
   timestamp () {
       printf '%(%F %T)T'
   }
-  
+
 #+end_src
 ** Handling Shasums
 
@@ -222,10 +222,29 @@ Short function to *automatically extract* ~archives~ based on the ~file extensio
   {
       echo "$1 $2" | sha224sum --check
   }
-  
+
   sha384()
   {
       echo "$1 $2" | sha384sum --check
   }
 #+end_src
+** PDF Size Reduction with GhostScript (GS)
 
+The command below uses gs to reduce the size of PDFs
+#+begin_src shell
+  # arcext - archive extractor
+  # usage: arcext <file>
+  pdfopt ()
+  {
+      if [ -f $1 ] ; then
+          case $1 in
+              ,*.pdf)   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=${1}-compressed.pdf $1 ;;
+              ,*)       echo "'$1' is not a PDF file" ;;
+          esac
+
+      else
+          echo "'$1' is not a valid file"
+      fi
+  }
+
+#+end_src
