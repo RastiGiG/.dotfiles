@@ -1,6 +1,6 @@
 #+title:        Helpful Bash Functions
 #+DATE:         [2024-01-15]
-#+PROPERTY:     header-args:shell :tangle ../D01_Bash/bash_functions :mkdirp yes
+#+PROPERTY:     header-args:shell :tangle ../D01_Bash/bash_functions.sh :mkdirp yes
 #+STARTUP:      show2levels
 #+auto_tangle:  t
 
@@ -21,7 +21,7 @@ like ~Zsh~ (mind compatibility!)
   #
   # - Collection of Functions for Bash -
   # Source:         - .dotfiles/000_OrgFiles/BashFuncs.org
-  # Target:         - .dotfiles/D01_Bash/.bash_functions
+  # Target:         - .dotfiles/D01_Bash/bash_functions.sh
   # Author Email:   - randomly.ventilates@simplelogin.co
   # Author GitHub:  - https://github.com/RastiGiG/
   #
@@ -143,108 +143,6 @@ Makes use of =Err=
                   Err 'Invalid response - Answer again' ;;
           esac
       done
-  }
-
-#+end_src
-** Archive Extractor
-
-Short function to *automatically extract* ~archives~ based on the ~file extension~
-#+begin_src shell
-  # arcext - archive extractor
-  # usage: arcext <file>
-  arcext ()
-  {
-      if [ -f $1 ] ; then
-          case $1 in
-              ,*.tar.bz2)   tar xjf $1   ;;
-              ,*.tar.gz)    tar xzf $1   ;;
-              ,*.bz2)       bunzip2 $1   ;;
-              ,*.rar)       unrar x $1     ;;
-              ,*.gz)        gunzip $1    ;;
-              ,*.tar)       tar xf $1    ;;
-              ,*.tbz2)      tar xjf $1   ;;
-              ,*.tgz)       tar xzf $1   ;;
-              ,*.zip)       unzip $1     ;;
-              ,*.Z)         uncompress $1;;
-              ,*.7z)        7z x $1      ;;
-              ,*)           echo "'$1' cannot be extracted via ex()" ;;
-          esac
-      else
-          echo "'$1' is not a valid file"
-      fi
-  }
-
-#+end_src
-** List Paths in PATH
-
-#+begin_src shell
-  # short helper to list path in PATH
-  path_env () {
-      # backup old IFS
-      OLD_IFS="$IFS"
-      IFS=":"
-
-      # -a splits input into array
-      read -ra paths <<< "$PATH"
-      for f in "${paths[@]}"; do
-          echo "$f"
-      done
-      IFS="$OLD_IFS"
-  }
-#+end_src
-** Timestamp
-#+begin_src shell
-  # short function to timestamp in long date format
-  timestamp () {
-      printf '%(%F %T)T'
-  }
-
-#+end_src
-** Handling Shasums
-
-#+begin_src shell
-  #Functions to automatically evaluate shasums
-  sha256()
-  {
-      echo "$1 $2" | sha256sum --check
-  }
-
-  sha512()
-  {
-      echo "$1 $2" | sha512sum --check
-  }
-
-  sha1()
-  {
-      echo "$1 $2" | sha1sum --check
-  }
-  sha224()
-  {
-      echo "$1 $2" | sha224sum --check
-  }
-
-  sha384()
-  {
-      echo "$1 $2" | sha384sum --check
-  }
-#+end_src
-** PDF Size Reduction with GhostScript (GS)
-
-The command below uses gs to reduce the size of PDFs
-#+begin_src shell
-  # arcext - archive extractor
-  # usage: arcext <file>
-  pdfopt ()
-  {
-      if [ -f $1 ] ; then
-          case $1 in
-              ,*.pdf)   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=${1}-compressed.pdf $1 ;;
-              ,*)       echo "'$1' is not a PDF file" ;;
-          esac
-
-      else
-          echo "'$1' is not a valid file"
-      fi
   }
 
 #+end_src

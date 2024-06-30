@@ -75,3 +75,18 @@ ssource () {
         . "$1"
     fi
 }
+
+# pdfopt - PDF size optimizer
+# usage: pdfopt <file>
+pdfopt ()
+{
+    if [ -f $1 ] ; then
+        case $1 in
+            *.pdf)   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=${1}-compressed.pdf $1 ;;
+            *)       echo "'$1' is not a PDF file" ;;
+        esac
+
+    else
+        echo "'$1' is not a valid file"
+    fi
+}

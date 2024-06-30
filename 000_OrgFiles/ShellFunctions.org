@@ -30,6 +30,35 @@
 
 #+end_src
 * Functions
+** Archive Extractor
+
+Short function to *automatically extract* ~archives~ based on the ~file extension~
+#+begin_src shell
+  # arcext - archive extractor
+  # usage: arcext <file>
+  arcext ()
+  {
+      if [ -f $1 ] ; then
+          case $1 in
+              ,*.tar.bz2)   tar xjf $1   ;;
+              ,*.tar.gz)    tar xzf $1   ;;
+              ,*.bz2)       bunzip2 $1   ;;
+              ,*.rar)       unrar x $1     ;;
+              ,*.gz)        gunzip $1    ;;
+              ,*.tar)       tar xf $1    ;;
+              ,*.tbz2)      tar xjf $1   ;;
+              ,*.tgz)       tar xzf $1   ;;
+              ,*.zip)       unzip $1     ;;
+              ,*.Z)         uncompress $1;;
+              ,*.7z)        7z x $1      ;;
+              ,*)           echo "'$1' cannot be extracted via ex()" ;;
+          esac
+      else
+          echo "'$1' is not a valid file"
+      fi
+  }
+
+#+end_src
 ** Environmental Helper Functions
 
 These Functions are taken from the repository below.
@@ -92,6 +121,79 @@ I also link to the blog that explains the reasoning behind this.
       if [ -r "$1" ]; then
           . "$1"
       fi
+  }
+
+#+end_src
+** Handling Shasums
+
+#+begin_src shell
+  #Functions to automatically evaluate shasums
+  sha256()
+  {
+      echo "$1 $2" | sha256sum --check
+  }
+
+  sha512()
+  {
+      echo "$1 $2" | sha512sum --check
+  }
+
+  sha1()
+  {
+      echo "$1 $2" | sha1sum --check
+  }
+  sha224()
+  {
+      echo "$1 $2" | sha224sum --check
+  }
+
+  sha384()
+  {
+      echo "$1 $2" | sha384sum --check
+  }
+#+end_src
+** List Paths in PATH
+
+#+begin_src shell
+  # short helper to list path in PATH
+  path_env () {
+      # backup old IFS
+      OLD_IFS="$IFS"
+      IFS=":"
+
+      # -a splits input into array
+      read -ra paths <<< "$PATH"
+      for f in "${paths[@]}"; do
+          echo "$f"
+      done
+      IFS="$OLD_IFS"
+  }
+#+end_src
+** PDF Size Reduction with GhostScript (GS)
+
+The command below uses gs to reduce the size of PDFs
+#+begin_src sh
+  # pdfopt - PDF size optimizer
+  # usage: pdfopt <file>
+  pdfopt ()
+  {
+      if [ -f $1 ] ; then
+          case $1 in
+              ,*.pdf)   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=${1}-compressed.pdf $1 ;;
+              ,*)       echo "'$1' is not a PDF file" ;;
+          esac
+
+      else
+          echo "'$1' is not a valid file"
+      fi
+  }
+
+#+end_src
+** Timestamp
+#+begin_src shell
+  # short function to timestamp in long date format
+  timestamp () {
+      printf '%(%F %T)T'
   }
 
 #+end_src
