@@ -110,6 +110,33 @@ This section configures basic UI settings that remove unneeded elements to make 
   (display-time-mode 1)
 
 #+end_src
+*** Calendar
+#+begin_src emacs-lisp
+  ;; Calendar week starts on Monday (1)
+  ;; default: Sunday (0)
+  (setq calendar-week-start-day 1)
+
+  ;; Display Week Numbers in Calendar
+  (copy-face font-lock-constant-face 'calendar-iso-week-face)
+  (set-face-attribute 'calendar-iso-week-face nil
+                      :height 1.0 :foreground "salmon") ;; Week Numbers display in different Color
+  (setq calendar-intermonth-text
+        '(propertize
+          (format "%2d"
+                  (car
+                   (calendar-iso-from-absolute
+                    (calendar-absolute-from-gregorian (list month day year)))))
+          'font-lock-face 'calendar-iso-week-face))
+
+  ;; Display Header for Week Numbers in Calendar
+  (copy-face 'default 'calendar-iso-week-header-face)
+  (set-face-attribute 'calendar-iso-week-header-face nil
+                      :height 1.0)
+  (setq calendar-intermonth-header
+        (propertize "KW"                  ; or e.g. "Wk" in English
+                    'font-lock-face 'calendar-iso-week-header-face))
+
+#+end_src
 *** Number of Side Windows
 
 Restrict the number of ~window slots~ available to avoid clutter.
