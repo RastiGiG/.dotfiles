@@ -1,10 +1,10 @@
 #----------------------------------------------------------------------------------------------------------------------
-#  ____    _    ____  _   _ 
+#  ____    _    ____  _   _
 # | __ )  / \  / ___|| | | |
 # |  _ \ / _ \ \___ \| |_| |
 # | |_) / ___ \ ___) |  _  |
 # |____/_/   \_\____/|_| |_|
-#                               
+#
 # - Bash, the Bourne Again Shell -
 # Source:         - .dotfiles/00_OrgFiles/BashConfig.org
 # Target:         - .dotfiles/D01_Bash/.bashrc
@@ -124,7 +124,7 @@ PROMPT_PARSER() {
 
     # Evaluate Exit Status (safed to arg1, see below)
     X="$1 "
-    # if the smallest match for X is 0 (no error), set X to be an empty string 
+    # if the smallest match for X is 0 (no error), set X to be an empty string
     (( ${X% } == 0 )) && X=
 
     # SSH - Prompt for Working Remotely
@@ -152,6 +152,13 @@ PROMPT_PARSER() {
 
         return
     fi
+
+      # Check for Guix Virtual Environments
+      if [ -n "$GUIX_ENVIRONMENT" ]; then
+  	      if [[ $PS1 =~ (.*)"\\$" ]]; then
+  		      PS1="${BASH_REMATCH[1]} [env]\\\$ "
+  	      fi
+      fi
 
     # GIT - Prompt customization for Working in Git Repos
 

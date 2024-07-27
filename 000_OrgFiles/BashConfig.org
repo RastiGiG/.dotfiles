@@ -7,12 +7,12 @@
 
 #+begin_src bash
   #----------------------------------------------------------------------------------------------------------------------
-  #  ____    _    ____  _   _ 
+  #  ____    _    ____  _   _
   # | __ )  / \  / ___|| | | |
   # |  _ \ / _ \ \___ \| |_| |
   # | |_) / ___ \ ___) |  _  |
   # |____/_/   \_\____/|_| |_|
-  #                               
+  #
   # - Bash, the Bourne Again Shell -
   # Source:         - .dotfiles/00_OrgFiles/BashConfig.org
   # Target:         - .dotfiles/D01_Bash/.bashrc
@@ -22,8 +22,8 @@
   # Parts of this Configuration were adapted from:
   # - TerminalForLife:   https://github.com/terminalforlife
   #
-  #----------------------------------------------------------------------------------------------------------------------    
-  
+  #----------------------------------------------------------------------------------------------------------------------
+
 #+end_src
 * Basic Setup
 
@@ -119,171 +119,178 @@
 
 The section concerning [[id:1f5328c3-41a1-429a-8ddf-669d4b949033][git directories]] was adapted from [[https://github.com/terminalforlife][TerminalForLife]]
 #+begin_src bash
-   #----------------------------PROMPT
-   # Safe certain ANSI color escape sequences.
-   PROMPT_PARSER() {
-       # Initialize Variables
-       local GitSymbs GitStatus GitTopDir GitCheck GitBranch CurrentGitBranch\
-           X Line Desc Buffer ModifiedFiles TTLCommits NFTTL
+  #----------------------------PROMPT
+  # Safe certain ANSI color escape sequences.
+  PROMPT_PARSER() {
+      # Initialize Variables
+      local GitSymbs GitStatus GitTopDir GitCheck GitBranch CurrentGitBranch\
+          X Line Desc Buffer ModifiedFiles TTLCommits NFTTL
 
-       # Set Colors
-       # Legend:
-       # "C" only - Normal
-       # "CB"     - Bold Variant
-       # "C_B"    - Bright Variant
-       # "CB_B"   - Bright and Bold Variant
-       # "C_D"    - Dark Variant
-       # "C_DB"   - Darkend Bright Variant
-       local C_Cyan='\033[36m' C_BCyan='\033[96m' CB_Cyan='\033[01;36m' CB_BCyan='\033[01;96m'\
-             C_Cyan_Back='\033[46m' C_BCyan_Back='\033[106m'
-             C_Red='\e[31m' C_BRed='\e[91m' CB_Red='\e[01;31m' CB_BRed='\e[01;91m'\
-             C_Green='\e[32m' C_BGreen='\e[92m' CB_Green='\e[01;32m' CB_BGreen='\e[01;92m'\
-             C_DGreen='\e[02;32m' C_DBGreen='\e[02;92m' C_Green_Back='\e[42m'\
-             C_BGreen_Back='\e[102m'\
-             C_Blue='\e[34m' C_BBlue='\e[94m' C_DBlue='\e[02;34m' C_DBBlue='\e[02;94m'\
-             CB_Blue='\e[01;34m' CB_BBlue='\e[01;94m' C_Blue_Back='\e[44m'\
-             C_BBlue_Back='\e[104m'\
-             C_Yellow='\e[33m' C_BYellow='\e[93m' C_DYellow='\e[02;33m' C_DBYellow='\e[02;93m'\
-             C_Magenta='\033[35m' C_BMagenta='\033[95m' C_DMagenta='\033[2;35m'\
-             C_DBMagenta='\033[02;95m' CB_Magenta='\033[01;35m' CB_BMagenta='\033[01;95m'\
-             C_Magenta_Back='\033[45m' C_BMagenta_Back='\033[105m' CD_BMagenta_Back='\033[02;105m'\
-             C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' CB_White='\e[01;97m'\
-             C_Black='\033[30m' C_Black_Back='\033[40m' CB_Black='\033[01;30m' \
-             C_Reset='\e[0m'
+      # Set Colors
+      # Legend:
+      # "C" only - Normal
+      # "CB"     - Bold Variant
+      # "C_B"    - Bright Variant
+      # "CB_B"   - Bright and Bold Variant
+      # "C_D"    - Dark Variant
+      # "C_DB"   - Darkend Bright Variant
+      local C_Cyan='\033[36m' C_BCyan='\033[96m' CB_Cyan='\033[01;36m' CB_BCyan='\033[01;96m'\
+            C_Cyan_Back='\033[46m' C_BCyan_Back='\033[106m'
+            C_Red='\e[31m' C_BRed='\e[91m' CB_Red='\e[01;31m' CB_BRed='\e[01;91m'\
+            C_Green='\e[32m' C_BGreen='\e[92m' CB_Green='\e[01;32m' CB_BGreen='\e[01;92m'\
+            C_DGreen='\e[02;32m' C_DBGreen='\e[02;92m' C_Green_Back='\e[42m'\
+            C_BGreen_Back='\e[102m'\
+            C_Blue='\e[34m' C_BBlue='\e[94m' C_DBlue='\e[02;34m' C_DBBlue='\e[02;94m'\
+            CB_Blue='\e[01;34m' CB_BBlue='\e[01;94m' C_Blue_Back='\e[44m'\
+            C_BBlue_Back='\e[104m'\
+            C_Yellow='\e[33m' C_BYellow='\e[93m' C_DYellow='\e[02;33m' C_DBYellow='\e[02;93m'\
+            C_Magenta='\033[35m' C_BMagenta='\033[95m' C_DMagenta='\033[2;35m'\
+            C_DBMagenta='\033[02;95m' CB_Magenta='\033[01;35m' CB_BMagenta='\033[01;95m'\
+            C_Magenta_Back='\033[45m' C_BMagenta_Back='\033[105m' CD_BMagenta_Back='\033[02;105m'\
+            C_Grey='\e[37m' C_White='\e[97m' CB_Grey='\e[01;37m' CB_White='\e[01;97m'\
+            C_Black='\033[30m' C_Black_Back='\033[40m' CB_Black='\033[01;30m' \
+            C_Reset='\e[0m'
 
-       # Evaluate Exit Status (safed to arg1, see below)
-       X="$1 "
-       # if the smallest match for X is 0 (no error), set X to be an empty string 
-       (( ${X% } == 0 )) && X=
+      # Evaluate Exit Status (safed to arg1, see below)
+      X="$1 "
+      # if the smallest match for X is 0 (no error), set X to be an empty string
+      (( ${X% } == 0 )) && X=
 
-       # SSH - Prompt for Working Remotely
-       # If I'm on a remote server, just use a barebones prompt, with the exit
-       # status, if non-zero, and a note saying you're working remotely.
-       if [[ -n $SSH_CLIENT ]]; then
-           if [[ -n $X ]]; then
-               PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$C_BRed\]\n$X\[$C_Reset\] \[$CB_BMagenta\]\$\[$C_Reset\] "
-           else
-               PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$CB_BMagenta\]\n\$\[$C_Reset\] "
-           fi
+      # SSH - Prompt for Working Remotely
+      # If I'm on a remote server, just use a barebones prompt, with the exit
+      # status, if non-zero, and a note saying you're working remotely.
+      if [[ -n $SSH_CLIENT ]]; then
+          if [[ -n $X ]]; then
+              PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$C_BRed\]\n$X\[$C_Reset\] \[$CB_BMagenta\]\$\[$C_Reset\] "
+          else
+              PS1="\n\[$C_Grey\]<remote>\[$C_Reset\] \[${CB_BMagenta}\][\u@\h\[${C_Reset}\]\[$CB_BMagenta\]\n\$\[$C_Reset\] "
+          fi
 
-           return
-       fi
+          return
+      fi
 
-       # PYVENV - Python Virtualenv Prompt to show if virtualenv is active
-       # If I'm on a remote server, just use a barebones prompt, with the exit
-       # status, if non-zero, and a note saying you're working remotely.
-       if [[ -n $VIRTUAL_ENV ]]; then
-           if [[ -n $X ]]; then
-               PS1="\n\[${C_Cyan_Back}${C_Black}\] ${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${C_Cyan}\]\W\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Cyan\]\$\[$C_Reset\] "
-           else
-               PS1="\n\[${C_Cyan_Back}${C_Black}\] ${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${CB_Cyan}\]\W\[${C_Reset}\]\n\[$C_Cyan\]\$\[$C_Reset\] "
-           fi
+      # PYVENV - Python Virtualenv Prompt to show if virtualenv is active
+      # If I'm on a remote server, just use a barebones prompt, with the exit
+      # status, if non-zero, and a note saying you're working remotely.
+      if [[ -n $VIRTUAL_ENV ]]; then
+          if [[ -n $X ]]; then
+              PS1="\n\[${C_Cyan_Back}${C_Black}\] ${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${C_Cyan}\]\W\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Cyan\]\$\[$C_Reset\] "
+          else
+              PS1="\n\[${C_Cyan_Back}${C_Black}\] ${VIRTUAL_ENV##*/} <VIRTUAL> \[${C_Reset}\]| \[${CB_Cyan}\]\W\[${C_Reset}\]\n\[$C_Cyan\]\$\[$C_Reset\] "
+          fi
 
-           return
-       fi
+          return
+      fi
 
-       # GIT - Prompt customization for Working in Git Repos
+  	# Check for Guix Virtual Environments
+  	if [ -n "$GUIX_ENVIRONMENT" ]; then
+  		if [[ $PS1 =~ (.*)"\\$" ]]; then
+  			PS1="${BASH_REMATCH[1]} [env]\\\$ "
+  		fi
+  	fi
 
-       # The first check was added as a result of Issue #3 and a recent (April -
-       # 2022) change to git(1) which was pushed in response to a CVE.
-       GitCheck=`git rev-parse --is-inside-work-tree 2>&1`
-       if [[ $GitCheck == 'fatal: unsafe repository '* ]]; then
-           Desc="${C_BRed}!!  ${C_Grey}Unsafe repository detected."
-       elif [[ $GitCheck == 'fatal: '* ]]; then
-           # Don't want to catch all fatals straight away, because not being in a
-           # git(1) repository is a 'fatal' error -- stupid git(1).
-           #
-           # This lets me catch specific unwanted fatal errors, as well as general
-           # fatal errors which are one of the specific ones.
-           if [[ $GitCheck != 'fatal: not a git repository '* ]]; then
-               Desc="${C_BRed}!!  ${C_Grey}Unrecognised fatal error detected."
-           fi
-       elif [[ $GitCheck == true ]]; then
-           # Custom Symbols for git
-           GitSymbs=(
-               '≎' # 0: Clean
-               '≍' # 1: Uncommitted changes
-               '≭' # 2: Unstaged changes
-               '≺' # 3: New file(s)
-               '⊀' # 4: Removed file(s)
-               '≔' # 5: Initial commit
-               '∾' # 6: Branch is ahead
-               '⮂' # 7: Fix conflicts
-               '-' # 8: Removed file(s)
-           )
+      # GIT - Prompt customization for Working in Git Repos
 
-           # Store current Git Status
-           GitStatus=`git status 2>&1`
-           # Store Toplevel Directory
-           GitTopDir=`git rev-parse --show-toplevel 2>&1`
-           # Store basename of Toplevel Directory
-           GitTopDirBase=${GitTopDir##*/}
-           # Store Name of GIT-Subdir in current Repo
-           GitDir=`git rev-parse --git-dir 2>&1`
+      # The first check was added as a result of Issue #3 and a recent (April -
+      # 2022) change to git(1) which was pushed in response to a CVE.
+      GitCheck=`git rev-parse --is-inside-work-tree 2>&1`
+      if [[ $GitCheck == 'fatal: unsafe repository '* ]]; then
+          Desc="${C_BRed}!!  ${C_Grey}Unsafe repository detected."
+      elif [[ $GitCheck == 'fatal: '* ]]; then
+          # Don't want to catch all fatals straight away, because not being in a
+          # git(1) repository is a 'fatal' error -- stupid git(1).
+          #
+          # This lets me catch specific unwanted fatal errors, as well as general
+          # fatal errors which are one of the specific ones.
+          if [[ $GitCheck != 'fatal: not a git repository '* ]]; then
+              Desc="${C_BRed}!!  ${C_Grey}Unrecognised fatal error detected."
+          fi
+      elif [[ $GitCheck == true ]]; then
+          # Custom Symbols for git
+          GitSymbs=(
+              '≎' # 0: Clean
+              '≍' # 1: Uncommitted changes
+              '≭' # 2: Unstaged changes
+              '≺' # 3: New file(s)
+              '⊀' # 4: Removed file(s)
+              '≔' # 5: Initial commit
+              '∾' # 6: Branch is ahead
+              '⮂' # 7: Fix conflicts
+              '-' # 8: Removed file(s)
+          )
 
-           # Change Description if in GIT-Subdir
-           if [[ $GitDir == . || $GitDir == "${PWD%%/.git/*}/.git" ]]; then
-               Desc="${C_BRed}∷  ${C_Grey}Looking under the hood..."
-           else
-               if [[ -n $GitTopDir ]]; then
-                   # Get the current branch name.
-                   IFS='/' read -a A < "$GitTopDir/.git/HEAD"
-                   CurrentGitBranch=${A[${#A[@]}-1]}
-               fi
+          # Store current Git Status
+          GitStatus=`git status 2>&1`
+          # Store Toplevel Directory
+          GitTopDir=`git rev-parse --show-toplevel 2>&1`
+          # Store basename of Toplevel Directory
+          GitTopDirBase=${GitTopDir##*/}
+          # Store Name of GIT-Subdir in current Repo
+          GitDir=`git rev-parse --git-dir 2>&1`
 
-               # The following is in a very specific order of priority.
-               if [[ -z $(git rev-parse --branches 2>&1) ]]; then
-                   Desc="${C_BCyan}${GitSymbs[5]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' awaits its initial commit."
-               else
-                   while read -ra Line; do
-                       if [[ ${Line[0]}${Line[1]}${Line[2]} == \(fixconflictsand ]]; then
-                           Desc="${C_BCyan}${GitSymbs[7]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has conflict(s)."
-                           break
-                       elif [[ ${Line[0]}${Line[1]} == Untrackedfiles: ]]; then
-                           NFTTL=0
-                           while read -a Line; do
-                               [[ ${Line[0]} == ?? ]] && (( NFTTL++ ))
-                           done <<< "$(git status --short 2>&1)"
-                           printf -v NFTTL "%'d" $NFTTL
+          # Change Description if in GIT-Subdir
+          if [[ $GitDir == . || $GitDir == "${PWD%%/.git/*}/.git" ]]; then
+              Desc="${C_BRed}∷  ${C_Grey}Looking under the hood..."
+          else
+              if [[ -n $GitTopDir ]]; then
+                  # Get the current branch name.
+                  IFS='/' read -a A < "$GitTopDir/.git/HEAD"
+                  CurrentGitBranch=${A[${#A[@]}-1]}
+              fi
 
-                           Desc="${C_BCyan}${GitSymbs[3]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has $NFTTL new file(s)."
-                           break
-                       elif [[ ${Line[0]} == deleted: ]]; then
-                           Desc="${C_BCyan}${GitSymbs[8]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' detects removed file(s)."
-                           break
-                       elif [[ ${Line[0]} == modified: ]]; then
-                           readarray Buffer <<< "$(git --no-pager diff --name-only 2>&1)"
-                           printf -v ModifiedFiles "%'d" ${#Buffer[@]}
-                           Desc="${C_BCyan}${GitSymbs[2]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has $ModifiedFiles modified file(s)."
-                           break
-                       elif [[ ${Line[0]}${Line[1]}${Line[2]}${Line[3]} == Changestobecommitted: ]]; then
-                           Desc="${C_BCyan}${GitSymbs[1]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has changes to commit."
-                           break
-                       elif [[ ${Line[0]}${Line[1]}${Line[3]} == Yourbranchahead ]]; then
-                           printf -v TTLCommits "%'d" "${Line[7]}"
-                           Desc="${C_BCyan}${GitSymbs[6]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' leads by $TTLCommits commit(s)."
-                           break
-                       elif [[ ${Line[0]}${Line[1]}${Line[2]} == nothingtocommit, ]]; then
-                           printf -v TTLCommits "%'d" "$(git rev-list --count HEAD 2>&1)"
+              # The following is in a very specific order of priority.
+              if [[ -z $(git rev-parse --branches 2>&1) ]]; then
+                  Desc="${C_BCyan}${GitSymbs[5]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' awaits its initial commit."
+              else
+                  while read -ra Line; do
+                      if [[ ${Line[0]}${Line[1]}${Line[2]} == \(fixconflictsand ]]; then
+                          Desc="${C_BCyan}${GitSymbs[7]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has conflict(s)."
+                          break
+                      elif [[ ${Line[0]}${Line[1]} == Untrackedfiles: ]]; then
+                          NFTTL=0
+                          while read -a Line; do
+                              [[ ${Line[0]} == ?? ]] && (( NFTTL++ ))
+                          done <<< "$(git status --short 2>&1)"
+                          printf -v NFTTL "%'d" $NFTTL
 
-                           Desc="${C_BCyan}${GitSymbs[0]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' is $TTLCommits commit(s) clean."
-                           break
-                       fi
-                   done <<< "$GitStatus"
-               fi
-           fi
-       fi
+                          Desc="${C_BCyan}${GitSymbs[3]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has $NFTTL new file(s)."
+                          break
+                      elif [[ ${Line[0]} == deleted: ]]; then
+                          Desc="${C_BCyan}${GitSymbs[8]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' detects removed file(s)."
+                          break
+                      elif [[ ${Line[0]} == modified: ]]; then
+                          readarray Buffer <<< "$(git --no-pager diff --name-only 2>&1)"
+                          printf -v ModifiedFiles "%'d" ${#Buffer[@]}
+                          Desc="${C_BCyan}${GitSymbs[2]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has $ModifiedFiles modified file(s)."
+                          break
+                      elif [[ ${Line[0]}${Line[1]}${Line[2]}${Line[3]} == Changestobecommitted: ]]; then
+                          Desc="${C_BCyan}${GitSymbs[1]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' has changes to commit."
+                          break
+                      elif [[ ${Line[0]}${Line[1]}${Line[3]} == Yourbranchahead ]]; then
+                          printf -v TTLCommits "%'d" "${Line[7]}"
+                          Desc="${C_BCyan}${GitSymbs[6]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' leads by $TTLCommits commit(s)."
+                          break
+                      elif [[ ${Line[0]}${Line[1]}${Line[2]} == nothingtocommit, ]]; then
+                          printf -v TTLCommits "%'d" "$(git rev-list --count HEAD 2>&1)"
 
-       # Set the Default Prompt here
-       if [[ -n $Desc ]]; then
-           PS1="\n\[${C_Green_Back}${C_Black}\] ${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
-       else
-           PS1="\n\[${CB_Magenta}\][\u@\h\[${C_Reset}\] \[${CB_Blue}\]\w\[${C_Reset}\]\[${CB_Magenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_Magenta}\]\$ \[${C_Reset}\]"
-       fi
-   }
+                          Desc="${C_BCyan}${GitSymbs[0]}  ${C_Grey}Branch '${CurrentGitBranch:-?}' is $TTLCommits commit(s) clean."
+                          break
+                      fi
+                  done <<< "$GitStatus"
+              fi
+          fi
+      fi
 
-   # Set the Prompt Command (Safe Exit Status to variable X)
-   PROMPT_COMMAND='PROMPT_PARSER $?'
+      # Set the Default Prompt here
+      if [[ -n $Desc ]]; then
+          PS1="\n\[${C_Green_Back}${C_Black}\] ${GitTopDirBase} \[${C_Reset}\]| \[${C_Green}\]\W\[${C_Reset}\]\n \[${C_Reset}\]${Desc}\[${C_Reset}\]\n\[$C_BRed\]${X}\[$C_Reset\]\[$C_Green\]\$ \[$C_Reset\]"
+      else
+          PS1="\n\[${CB_Magenta}\][\u@\h\[${C_Reset}\] \[${CB_Blue}\]\w\[${C_Reset}\]\[${CB_Magenta}\]]\n\[${C_Reset}\]\[$C_BRed\]${X}\[$C_Reset\]\[${CB_Magenta}\]\$ \[${C_Reset}\]"
+      fi
+  }
+
+  # Set the Prompt Command (Safe Exit Status to variable X)
+  PROMPT_COMMAND='PROMPT_PARSER $?'
 
 #+end_src
 
@@ -415,19 +422,19 @@ This section is used to enable Colors *ONLY* for [[id:aaca657c-b263-46d6-b4b0-52
   # End bold, blinking, standout, underline
   # export LESS_TERMCAP_me=$'\E[0m'
   export LESS_TERMCAP_me=$(tput sgr0)
-  
+
 #+end_src
 * Load External Files
 #+begin_src bash
   #----------------------------EXTERNAL FILES
-  
+
 #+end_src
 ** Functions
 #+begin_src bash
   # Load Bash Functions
   BSHFuncs="$HOME/.dotfiles/D01_Bash/.bash_functions"
   [[ -f $BSHFuncs && -r $BSHFuncs ]] && . "$BSHFuncs"
-  
+
 #+end_src
 ** Bash Completion
 
@@ -451,19 +458,19 @@ You could also achieve it like this, if you don't want to rely on *Bash-only fea
   bind 'set show-all-if-ambiguous on'
   # Set up tab to cycle completion options and show options first
   bind 'TAB:menu-complete'
-  
+
 #+end_src
 ** Profile
 #+begin_src bash
   # Load Profile
   SHProf="$HOME/.dotfiles/D00_GeneralShell/.profile"
   [[ -f $SHProf && -r $SHProf ]] && . "$SHProf"
-  
+
 #+end_src
 ** Release Temporary Variables
 #+begin_src bash
   unset SHProf BSHFuncs UsrBashComp
-  
+
 #+end_src
 * Load External Programs
 
