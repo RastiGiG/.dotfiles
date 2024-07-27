@@ -4,6 +4,7 @@
 #+STARTUP: hideblocks show2levels
 #+OPTIONS:  toc:2
 #+auto_tangle: t
+#+STARTUP: show2levels
 
 * Header
 #+begin_src sh
