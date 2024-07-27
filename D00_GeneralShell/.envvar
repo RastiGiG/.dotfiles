@@ -1,10 +1,10 @@
 #----------------------------------------------------------------------------------------------------------------------
-#  _____ _   ___     ____     ___    ____  
-# | ____| \ | \ \   / /\ \   / / \  |  _ \ 
+#  _____ _   ___     ____     ___    ____
+# | ____| \ | \ \   / /\ \   / / \  |  _ \
 # |  _| |  \| |\ \ / /  \ \ / / _ \ | |_) |
-# | |___| |\  | \ V /    \ V / ___ \|  _ < 
+# | |___| |\  | \ V /    \ V / ___ \|  _ <
 # |_____|_| \_|  \_/      \_/_/   \_\_| \_\
-#                                          
+#
 # - Collection of Environmental Variables for Shells -
 # Source:         - .dotfiles/000_OrgFiles/ShellEnvVar.org
 # Target:         - .dotfiles/D00_GeneralShell/.envvar
@@ -51,7 +51,7 @@ fi
 export INFOPATH
 
 #---------------------------INPUTRC
-# Add inputrc config path (GNU Readline) 
+# Add inputrc config path (GNU Readline)
 if ! [[ "$INPUTRC" = "~/.config/inputrc" ]]
 then
   	INPUTRC="~/.config/inputrc"
@@ -59,11 +59,30 @@ fi
 
 export INPUTRC
 
+#----------------------GUIX PROFILE
+# Add Guix Profile Path
+if ! [[ "$GUIX_PROFILE" = "$HOME/.guix-profile" ]]
+then
+  	GUIX_PROFILE="$HOME/.guix-profile"
+  	. "$GUIX_PROFILE/etc/profile"
+fi
+
+export GUIX_PROFILE
+
+#-----------------------GUIX LOCALE
+# Add Guix Locale Path
+if ! [[ "$GUIX_LOCPATH" = "$HOME/.guix-profile/lib/locale" ]]
+then
+  	GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+fi
+
+export GUIX_LOCPATH
+
 #-------------------------BIBINPUTS
 # Add Bibliography Input Path Variable
 if ! [[ "$BIBINPUTS" =~ "$HOME/Projects/Writing/00_Bibliographies/" ]]
 then
-	BIBINPUTS="$HOME/Projects/Writing/00_Bibliographies/"  
+	BIBINPUTS="$HOME/Projects/Writing/00_Bibliographies/"
 fi
 
 export BIBINPUTS
@@ -110,7 +129,7 @@ export PERL_MB_OPT
 if ! [[ "$PERL_MM_OPT" =~ "INSTALL_BASE=/home/rastibasti/perl5" ]]
 then
 	      PERL_MM_OPT="INSTALL_BASE=/home/rastibasti/perl5"
-fi  
+fi
 export PERL_MM_OPT
 
 #---------------------------VAGRANT

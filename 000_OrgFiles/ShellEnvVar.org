@@ -11,12 +11,12 @@ This ~File~ is meant to *outsource* Environmental Variables in order to load the
 
 #+begin_src shell
   #----------------------------------------------------------------------------------------------------------------------
-  #  _____ _   ___     ____     ___    ____  
-  # | ____| \ | \ \   / /\ \   / / \  |  _ \ 
+  #  _____ _   ___     ____     ___    ____
+  # | ____| \ | \ \   / /\ \   / / \  |  _ \
   # |  _| |  \| |\ \ / /  \ \ / / _ \ | |_) |
-  # | |___| |\  | \ V /    \ V / ___ \|  _ < 
+  # | |___| |\  | \ V /    \ V / ___ \|  _ <
   # |_____|_| \_|  \_/      \_/_/   \_\_| \_\
-  #                                          
+  #
   # - Collection of Environmental Variables for Shells -
   # Source:         - .dotfiles/000_OrgFiles/ShellEnvVar.org
   # Target:         - .dotfiles/D00_GeneralShell/.envvar
@@ -24,14 +24,14 @@ This ~File~ is meant to *outsource* Environmental Variables in order to load the
   # Author GitHub:  - https://github.com/RastiGiG/
   #
   #
-  #----------------------------------------------------------------------------------------------------------------------    
+  #----------------------------------------------------------------------------------------------------------------------
 
 #+end_src
 
 * Environment Variables
 ** PATH
 These ~Functions~ are included into [[file:Aliases.org][Aliases]] since they fulfill a similar purpose: ~sane(r) defaults~
-The idea is taken from [[https://github.com/terminalforlife/BashConfig/blob/master/source/.profile][TerminalForLife]] 
+The idea is taken from [[https://github.com/terminalforlife/BashConfig/blob/master/source/.profile][TerminalForLife]]
 :NOTE:
 Quick note on [[id:28da9d49-b484-4ac7-9340-c800bbee5aff][ls]]:
 the =--quoting-style= option determines how ~files~ and ~directories~ with ~whitespace characters~ are displayed.
@@ -51,7 +51,7 @@ Default is the =shell= version.
   then
 	  PATH="$HOME/.cargo/bin:$PATH"
   fi
-  
+
   # Add texlive to path
   if ! [[ "$PATH" =~ "/usr/local/texlive/current/bin/x86_64-linux:" ]]
   then
@@ -82,14 +82,36 @@ Default is the =shell= version.
 ** INPUTRC
 #+begin_src shell
   #---------------------------INPUTRC
-  # Add inputrc config path (GNU Readline) 
+  # Add inputrc config path (GNU Readline)
   if ! [[ "$INPUTRC" = "~/.config/inputrc" ]]
   then
   	  INPUTRC="~/.config/inputrc"
   fi
 
   export INPUTRC
-  
+
+#+end_src
+** GUIX
+#+begin_src shell
+  #----------------------GUIX PROFILE
+  # Add Guix Profile Path
+  if ! [[ "$GUIX_PROFILE" = "$HOME/.guix-profile" ]]
+  then
+  	  GUIX_PROFILE="$HOME/.guix-profile"
+  	  . "$GUIX_PROFILE/etc/profile"
+  fi
+
+  export GUIX_PROFILE
+
+  #-----------------------GUIX LOCALE
+  # Add Guix Locale Path
+  if ! [[ "$GUIX_LOCPATH" = "$HOME/.guix-profile/lib/locale" ]]
+  then
+  	  GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+  fi
+
+  export GUIX_LOCPATH
+
 #+end_src
 ** BIBINPUTS
 This is meant to be the path to the Main Bibliography file
@@ -98,7 +120,7 @@ This is meant to be the path to the Main Bibliography file
   # Add Bibliography Input Path Variable
   if ! [[ "$BIBINPUTS" =~ "$HOME/Projects/Writing/00_Bibliographies/" ]]
   then
-	  BIBINPUTS="$HOME/Projects/Writing/00_Bibliographies/"  
+	  BIBINPUTS="$HOME/Projects/Writing/00_Bibliographies/"
   fi
 
   export BIBINPUTS
@@ -148,7 +170,7 @@ This is meant to be the path to the Main Bibliography file
   if ! [[ "$PERL_MM_OPT" =~ "INSTALL_BASE=/home/rastibasti/perl5" ]]
   then
 		PERL_MM_OPT="INSTALL_BASE=/home/rastibasti/perl5"
-  fi  
+  fi
   export PERL_MM_OPT
 
 #+end_src
@@ -163,4 +185,3 @@ This is meant to be the path to the Main Bibliography file
   export VAGRANT_DEFAULT_PROVIDER
 
 #+end_src
-
