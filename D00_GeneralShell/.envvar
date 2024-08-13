@@ -18,19 +18,25 @@
 # Add user specific binaries to path
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
-	PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+  	PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
 # Add Rust Packages to Path
 if ! [[ "$PATH" =~ "$HOME/.cargo/bin" ]]
 then
-	PATH="$HOME/.cargo/bin:$PATH"
+  	PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+# Add Zig Binaries to Path
+if ! [[ "$PATH" =~ "$HOME/.cargo/bin" ]]
+then
+  	PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Add texlive to path
 if ! [[ "$PATH" =~ "/usr/local/texlive/current/bin/x86_64-linux:" ]]
 then
-	PATH="/usr/local/texlive/current/bin/x86_64-linux:$PATH"
+  	PATH="/usr/local/texlive/current/bin/x86_64-linux:$PATH"
 fi
 
 export PATH
@@ -61,11 +67,18 @@ export INPUTRC
 
 #----------------------GUIX PROFILE
 # Add Guix Profile Path
+# -> The first one is only used after fresh installs of guix
 if ! [[ "$GUIX_PROFILE" = "$HOME/.guix-profile" ]]
 then
   	GUIX_PROFILE="$HOME/.guix-profile"
-  	. "$GUIX_PROFILE/etc/profile"
 fi
+
+# -> commet this one out, if you just installed guix
+if ! [[ "$GUIX_PROFILE" = "$HOME/.config/guix/current" ]]
+then
+  	GUIX_PROFILE="$HOME/.config/guix/current"
+fi
+. "$GUIX_PROFILE/etc/profile"
 
 export GUIX_PROFILE
 
