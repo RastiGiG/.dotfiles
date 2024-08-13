@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: GitIgnoreZig
+# key: <gizig
+# --
+#########################################
+### Ignore Zig Build Folders
+**/zig-cache/*
+**/zig-out/*
