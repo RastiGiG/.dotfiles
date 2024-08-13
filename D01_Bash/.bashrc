@@ -140,6 +140,19 @@ PROMPT_PARSER() {
         return
     fi
 
+    # GUIX - Prompt for working with guix development Shells
+    # If I'm in a guix shell, add the [dev] string to the Prompt
+    # status, if non-zero, and a note saying you're working remotely.
+    if [ -n "$GUIX_ENVIRONMENT" ]; then
+  	      # if [[ $PS1 =~ (.*)"\\$" ]]; then
+  	      # 	PS1="\n\[${CB_BGreen}${BASH_REMATCH[1]}\]\n\$\[$C_Reset\] "
+  	      # else
+  	      # fi
+  	      PS1="\n\[(${CB_BGreen}\u@\h\]\[${C_Reset}\]\[${C_White}\])-(\[${CB_Blue}\]\W\[${C_Reset}\]\[${CB_BGreen}\]${C_White})\n<dev> \[${CB_BGreen}->\]\[$C_Reset\] "
+
+        return
+    fi
+
     # PYVENV - Python Virtualenv Prompt to show if virtualenv is active
     # If I'm on a remote server, just use a barebones prompt, with the exit
     # status, if non-zero, and a note saying you're working remotely.
@@ -152,13 +165,6 @@ PROMPT_PARSER() {
 
         return
     fi
-
-      # Check for Guix Virtual Environments
-      if [ -n "$GUIX_ENVIRONMENT" ]; then
-  	      if [[ $PS1 =~ (.*)"\\$" ]]; then
-  		      PS1="${BASH_REMATCH[1]} [env]\\\$ "
-  	      fi
-      fi
 
     # GIT - Prompt customization for Working in Git Repos
 
