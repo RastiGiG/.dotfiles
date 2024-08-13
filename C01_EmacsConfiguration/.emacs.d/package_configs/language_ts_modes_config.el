@@ -61,8 +61,13 @@
   	      (json-mode . json-ts-mode)
   	      (css-mode . css-ts-mode)
   	      (rust-mode . rust-ts-mode)
+  	      ;; (zig-mode . zig-ts-mode)
   	      (python-mode . python-ts-mode)))
 
 ;; Add Nix support to tree-sitter
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
+
+;; Add Nix support to tree-sitter
+(use-package zig-ts-mode
+  :mode "\\.zig\\'")

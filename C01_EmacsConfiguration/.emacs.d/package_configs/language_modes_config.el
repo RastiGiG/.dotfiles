@@ -139,6 +139,10 @@
 (use-package julia-mode)
 
 ;; Add Support for Nix Language and Nix Configurations
+(use-package zig-mode
+      :mode ("\\.zig\\'"))
+
+;; Add Support for Nix Language and Nix Configurations
 (use-package nix-mode
       :mode ("\\.nix\\'" "\\.nix.in\\'"))
 ;; Viewing Nix .drv Files

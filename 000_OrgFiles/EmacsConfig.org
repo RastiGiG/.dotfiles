@@ -3036,6 +3036,14 @@ Add [[https://github.com/JuliaEditorSupport/julia-emacs][Julia Mode]] to support
   (use-package julia-mode)
 
 #+end_src
+***** Zig
+Add [[https://github.com/ziglang/zig-mode][Zig-Mode]] to support the [[https://ziglang.org/][Zig Programming Language]], a modern ~system's~ [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][programming language]]
+#+begin_src emacs-lisp
+  ;; Add Support for Nix Language and Nix Configurations
+  (use-package zig-mode
+	:mode ("\\.zig\\'"))
+
+#+end_src
 ***** Nix
 Add [[https://github.com/NixOS/nix-mode][Nix-Mode]] to support the [[https://nixos.org/][Nix Language]] for the ~customization~ of [[id:2a8642c6-544c-4ffc-bb95-348bd5a24ee5][NixOS]]
 #+begin_src emacs-lisp
@@ -3274,6 +3282,7 @@ Once these modes work sufficiently enough, the old modes will be swapped over.
   		(json-mode . json-ts-mode)
   		(css-mode . css-ts-mode)
   		(rust-mode . rust-ts-mode)
+  		;; (zig-mode . zig-ts-mode)
   		(python-mode . python-ts-mode)))
 
 #+end_src
@@ -3282,6 +3291,231 @@ Once these modes work sufficiently enough, the old modes will be swapped over.
   ;; Add Nix support to tree-sitter
   (use-package nix-ts-mode
     :mode "\\.nix\\'")
+
+#+end_src
+***** Zig TS Mode
+#+begin_src emacs-lisp
+  ;; Add Nix support to tree-sitter
+  (use-package zig-ts-mode
+    :mode "\\.zig\\'")
+
+#+end_src
+*** Language Servers
+**** LSP Mode
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/lsp_mode_config.el :mkdirp yes
+:END:
+***** Setup
+We use the [[ https://emacs-lsp.github.io/lsp-mode/][lsp-mode]] to enable ~IDE-like functionality~ for many different programming languages via “language servers” that speak the *Language Server Protocol*.
+Before trying to set up =lsp-mode= for a particular language, check out the documentation for your language so that you can learn which [[https://emacs-lsp.github.io/lsp-mode/page/languages/][language servers are available]] and how to install them.
+
+The lsp-keymap-prefix setting enables you to define a prefix for where lsp-mode’s default keybindings will be added. I highly recommend using the prefix to find out what you can do with lsp-mode in a buffer.
+
+The which-key integration adds helpful descriptions of the various keys so you should be able to learn a lot just by pressing C-c s in a lsp-mode buffer and trying different things that you find there.
+
+#+begin_src emacs-lisp
+  ;; Add Language Server Support
+  (use-package lsp-mode
+    ;; :hook ((c-mode          ;; clangd
+    ;;         c++-mode        ;; clangd
+    ;;         c-or-c++-mode   ;; clangd
+    ;;         python-mode     ;; pyright
+    ;;         typescript-mode ;; ts-ls (tsserver wrapper)
+    ;;         js-mode         ;; ts-ls (tsserver wrapper)
+    ;;         web-mode        ;; ts-ls/HTML/CSS
+    ;;         ) . lsp-deferred)
+    :commands (lsp lsp-deferred)
+    :bind (:map lsp-mode-map
+        ("M-TAB" . completion-at-point))
+    :custom (lsp-headerline-breadcrumb-enable nil)
+    :config (lsp-enable-which-key-integration t)
+    ;; automatically set project root as determined by projectile
+    ;; (setq lsp-auto-guess-root t)
+    ;; Disable logging of all language server message for performance
+    (setq lsp-log-io nil)
+    ;; Set LSP Restart to auto (interactive by default)
+    ;; (setq lsp-restart 'auto-restart)
+    ;; disable symbol references
+    (setq lsp-enable-symbol-highlighting nil)
+    ;; disable on type formatting
+    (setq lsp-enable-on-type-formatting nil)
+    ;; disable signature conditions and documentation
+    (setq lsp-signature-auto-activate nil)
+    (setq lsp-signature-render-documentation nil)
+    ;; disable eldoc hook
+    (setq lsp-eldoc-hook nil)
+    ;; disable modeline informations
+    (setq lsp-modeline-code-actions-enable nil)
+    (setq lsp-modeline-diagnostics-enable nil)
+    ;; disable breadcrumb/headerline
+    (setq lsp-headerline-breadcrumb-enable nil)
+    ;; disable semantic tokens
+    (setq lsp-semantic-tokens-enable nil)
+    ;; disable code folding
+    (setq lsp-enable-folding nil)
+    ;; dont enable imenu automatically
+    (setq lsp-enable-imenu nil)
+    ;; disable snippet completion
+    (setq lsp-enable-snippet nil)
+    ;; Set delay (0.5 is default)
+    (setq lsp-idle-delay 0.5)
+    ;; Increase amount of data read from process for lsp (1MB)
+    (setq read-process-output-max (* 1024 1024))
+
+    ;; Add Lsp Functions to Leader Keys
+    (pet/leader-keys
+      "tld" 'xref-find-definitions
+      "tlr" 'xref-find-references
+      ;; "tln" 'lsp-ui-find-next-reference
+      ;; "tlp" 'lsp-ui-find-prev-reference
+      "tls" 'counsel-imenu
+      ;; "tle" 'lsp-ui-flycheck-list
+      ;; "tlS" 'lsp-ui-sideline-mode
+      "tlX" 'lsp-execute-code-action)
+
+#+end_src
+***** Consult LSP
+[[https://github.com/gagbo/consult-lsp][Consult-LSP]] adds ~LSP Mode~ support to ~Consult~
+***** lsp-ui
+
+=lsp-ui= is a set of UI enhancements built on top of lsp-mode which make Emacs feel even more like an IDE. Check out the screenshots on the [[https://emacs-lsp.github.io/lsp-ui/][lsp-ui homepage]] to see examples of what it can do.
+
+#+begin_src emacs-lisp :tangle no
+  ;; Add lsp ui for higher level ui options
+  (use-package lsp-ui
+   :commands lsp-ui-mode
+   ;; :hook (lsp-mode . lsp-ui-mode)
+   ;; Show lsp info on sideline
+   :config
+   (setq lsp-ui-doc-enable nil)
+   (setq lsp-ui-doc-header t)
+   (setq lsp-ui-doc-include-signature t)
+   (setq lsp-ui-doc-border (face-foreground 'default))
+   (setq lsp-ui-sideline-show-code-actions t)
+   ;; (setq lsp-ui-sideline-enable t)
+   ;; (setq lsp-ui-sideline-show-hover nil)
+   ;; (setq lsp-ui-doc-position 'bottom)
+   (setq lsp-ui-sideline-delay 0.05))
+
+#+end_src
+***** lsp-treemacs
+
++ =lsp-treemacs= provides nice tree views for different aspects of your code like symbols in a file, references of a symbol, or diagnostic messages (errors and warnings) that are found in your code.
+
+Try these commands with =M-x=:
+
+ - =lsp-treemacs-symbols= - Show a tree view of the symbols in the current file
+ - =lsp-treemacs-references= - Show a tree view for the references of the symbol under the cursor
+ - =lsp-treemacs-error-list= - Show a tree view for the diagnostic messages in the project
+
+This package is built on the =treemacs= ~package~ which might be of some interest to you if you like to have a file browser at the left side of your screen in your editor.
+
+#+begin_src emacs-lisp
+  ;; Extend lsp and treemacs integration
+  (use-package lsp-treemacs
+    :after (lsp treemacs))
+
+#+end_src
+***** Debugging
+
+There's a companion mode for =lps-mode= specifically for debugging
+Dap stands for Debug Adapter
+#+begin_src emacs-lisp
+  (use-package dap-mode
+    :after lsp-mode
+    :config (dap-auto-configure-mode))
+  ;;(use-package dap-mode
+  ;;  :after lsp-mode
+  ;;  :custom
+  ;;  (lsp-enable-dap-auto-configure nil)
+  ;;  :config
+  ;;  (dap-ui-mode 1)
+  ;;  (dap-tooltip-mode 1)
+  ;;  (require 'dap-node)
+  ;;  (dap-node-setup))
+
+#+end_src
+***** LSP-Mode Languages
+****** Python
+#+begin_src emacs-lisp
+  ;; Setup lsp-pyright Server
+  (use-package lsp-pyright
+	:hook (python-mode . (lambda () (require 'lsp-pyright)))
+	;; Use Python 3 in case Python 2 is installed as well
+	:init (when (executable-find "python3")
+			(setq lsp-pyright-python-executable-cmd "python3"))
+	)
+
+
+
+#+end_src
+****** LaTeX
+~LSP Options~ for [[id:62eadd2d-023b-4d03-8eb0-527528f6e224][LaTeX]]:
++ [[https://github.com/latex-lsp/texlab][GitHub: LaTeX-LSP - texlab]]
++ [[https://github.com/astoff/digestif][GitHub.com: Astoff - digestif]]
+#+begin_src emacs-lisp
+  ;; Lsp-Mode Settings for LaTeX
+  (setq lsp-tex-server 'digestif) ;; Use Digestif
+  ;; (setq lsp-tex-server 'texlab) ;; Use texlab instead
+
+#+end_src
+**** Eglot
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/eglot_config.el :mkdirp yes
+:END:
+***** Setup
+[[https://github.com/joaotavora/eglot][Eglot]] comes preconfigured with [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]] since Version 29
+#+begin_src emacs-lisp
+  ;; add language-servers
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                 '((rust-mode rust-ts-mode) . ("rust-analyzer" ))))
+
+#+end_src
+***** Consult Eglot
+[[https://github.com/gagbo/consult-lsp][Consult-Eglot]] adds ~Eglot~ support to ~Consult~
+***** Eglot Languages
+#+begin_src emacs-lisp
+  ;; Automatically start eglot for listed languages
+  (cl-loop for lang in
+           '(;; Python
+             python-mode-hook
+             python-ts-mode-hook
+
+  		   ;; C Lang
+  		   c-mode-hook
+  		   c-ts-mode-hook
+
+  		   ;; C++ Lang
+  		   c++-mode-hook
+  		   c++-ts-mode-hook
+  		   c-or-c++-mode-hook
+  		   c-or-c++-ts-mode-hook
+
+  		   ;; Rust
+  		   rust-ts-mode
+
+  		   ;; Go
+  		   go-ts-mode
+
+  		   ;; Lua
+  		   lua-ts-mode
+
+  		   ;; HTML
+  		   html-mode
+  		   html-ts-mode
+
+  		   ;; CSS
+  		   css-mode
+  		   css-ts-mode
+
+  		   ;; JSON
+  		   json-ts-mode
+
+  		   ;; YAML
+             yaml-ts-mode)
+           do
+           (add-hook lang 'eglot-ensure))
 
 #+end_src
 *** Language Servers
