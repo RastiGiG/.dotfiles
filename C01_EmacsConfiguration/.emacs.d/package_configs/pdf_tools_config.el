@@ -1,5 +1,6 @@
 ;; Load PDF Tools to replace DocView
 (use-package pdf-tools
+  :straight nil  ;; loaded with guix package manage
   :defer t
   :commands (pdf-loader-install)
   :mode "\\.pdf\\'"
@@ -16,3 +17,9 @@
   (pet/leader-keys
     ;; Toggles - Modes
     "tmp"   '(pdf-view-mode :which-key "PDF View Mode")))
+
+;; Enable bookmarking in pdf-view buffers
+(use-package saveplace-pdf-view
+  :after pdf-tools
+  :config
+  (save-place-mode 1))
