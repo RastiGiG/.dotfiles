@@ -5,8 +5,15 @@
 * Topic Overview
 
 ** [[id:ba074e3c-58a2-4d3a-b1ec-4475993eaa99][C/C++/C#]]
-*** [[id:30e0dabc-680b-4bb8-92f0-282955e60245][C Standards]]
-**** [[id:4bb03b1c-c08b-4370-ae89-f6d3332a4e5e][Date String Format Codes]]
+*** Language Overview
+**** [[id:6c4f4e22-621c-4c71-94b7-9b5030ef584e][Datatypes]]
+***** [[id:3a2bde4c-7cb2-4cac-b8c8-6d556439a5e0][Strings]]
+**** [[id:30e0dabc-680b-4bb8-92f0-282955e60245][C Standards]]
+***** [[id:dbea5fda-50b5-4938-8a37-62a57106b58a][Format Specifiers]]
+****** [[id:07a6b53c-a4e8-4d67-8a60-ab5b989d74d4][General Format Specifiers]]
+****** [[id:4bb03b1c-c08b-4370-ae89-f6d3332a4e5e][Date String Format Codes]]
+*** [[id:4f7b1fe9-d021-465a-9af2-fee19af20c63][Tipps]]
+*** [[id:c7aff1d1-be8e-4b8c-a615-9dbfc5f27cf1][Differences between the 3 Variations]]
 
 * Read On
 
