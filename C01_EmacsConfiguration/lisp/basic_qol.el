@@ -74,6 +74,8 @@
 ;; Places newline characters automatically
 (electric-layout-mode 1)
 
+(add-hook 'before-save-hook 'time-stamp)
+
 (setq explicit-shell-file-name "bash")
 ;;(setq explicit-zsh-args '())
 ;; Regexp to use when searching for last prompt

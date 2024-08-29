@@ -1,5 +1,6 @@
 #+TITLE:    Emacs Basic Quality of Live Adjustments
 #+DATE:     [2024-01-04]
+#+MODIFIED: Time-stamp: <2024-08-29 09:17:42 rastibasti>
 #+PROPERTY: header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/lisp/basic_qol.el :mkdirp yes
 #+STARTUP:  show2levels hideblocks
 #+auto_tangle: t
@@ -121,6 +122,19 @@ Changing this behaviour will still ask for confirmation, but you don't need to m
 #+begin_src emacs-lisp
   ;; Places newline characters automatically
   (electric-layout-mode 1)
+
+#+end_src
+** Automatic Time Stamp
+
+This enables ~automatic time stamps~.
+To use them, just add the following [[id:8423804b-6360-40bc-96a9-e027898aaab3][strings]] to the *first 8 lines* of a ~file~:
+#+begin_src org
+  Time-stamp: <>
+  # OR
+  Time-stamp: ""
+#+end_src
+#+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'time-stamp)
 
 #+end_src
 ** Indentation
