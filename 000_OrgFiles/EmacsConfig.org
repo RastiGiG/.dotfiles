@@ -1,9 +1,10 @@
 # -*- ispell-local-dictionary: "british"; -*-
 #+TITLE:        Personal Emacs Configuration
 #+DATE:         [2024-01-06]
+#+MODIFIED:     Time-stamp: <2024-08-29 09:30:54 rastibasti>
 #+DESCRIPTION:  This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
 #+PROPERTY:     header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
-#+STARTUP:      hideblocks show2levels
+#+STARTUP:      hideblocks overview
 #+OPTIONS:      toc:2
 #+auto_tangle:  t
 
@@ -183,6 +184,8 @@ If you set up ~straight.el~ with ~use-package~ (straight-use-package 'use-packag
 
   ;; Make sure to always install packages (pendant to use-package-always-ensure)
   (setq straight-use-package-by-default t)
+  ;; Use ssh as default for github repositories
+  (setq straight-vc-git-default-protocol 'ssh)
 
 #+end_src
 ** Package Repositories

@@ -31,6 +31,8 @@
 
 ;; Make sure to always install packages (pendant to use-package-always-ensure)
 (setq straight-use-package-by-default t)
+;; Use ssh as default for github repositories
+(setq straight-vc-git-default-protocol 'ssh)
 
 ;; This is set just to be able to lookup packages
 ;; It's not required since we use straight anyway
