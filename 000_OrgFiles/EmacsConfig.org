@@ -66,6 +66,7 @@
   - [[#structure-templates][Structure Templates]]
   - [[#capture-templates][Capture Templates]]
   - [[#org-extensions][Org Extensions]]
+- [[#markdown-mode][Markdown Mode]]
 - [[#legder-mode][Legder Mode]]
 - [[#citeproc][Citeproc]]
 - [[#mail][Mail]]
@@ -360,9 +361,6 @@ Version mismatch is commonly encountered in the following situations:
   		   ;; ;; Load Hydra Configuration
   		   ;; "package_configs/hydra_config.el"
 
-  		   ;; Load Org Configuration
-  		   "package_configs/org_config.el"
-
   		   ;; Load Ledger Mode Configuration
   		   "package_configs/ledger_mode_config.el"
 
@@ -393,7 +391,13 @@ Version mismatch is commonly encountered in the following situations:
   		   ;; ;; Load LSP Mode Configuration
   		   ;; "package_configs/lsp_mode_config.el"
 
-  		   ;; Load Eglo Configuration
+  		   ;; Load Org Configuration -- NEEDS to be loaded after language modes
+  		   "package_configs/org_config.el"
+
+  		   ;; Load Markdown Mode Configuration
+  		   "package_configs/markdown_config.el"
+
+  		   ;; Load Eglot Configuration
   		   "package_configs/eglot_config.el"
 
   		   ;; Load Eglo Configuration
@@ -5018,6 +5022,17 @@ To turn ~auto-save~ off *only locally*, you can insert this:
     :after org
     :hook ((org-mode . org-modern-mode)
            (org-agenda-finalize . org-modern-agenda)))
+
+#+end_src
+* Markdown Mode
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/markdown_config.el :mkdirp yes
+:END:
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :mode ("README\\.md\\'" . gfm-mode)
+    ;; :init (setq markdown-command "multimarkdown")
+    )
 
 #+end_src
 * Legder Mode

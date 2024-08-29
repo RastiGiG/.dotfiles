@@ -158,9 +158,6 @@
   		 ;; ;; Load Hydra Configuration
   		 ;; "package_configs/hydra_config.el"
 
-  		 ;; Load Org Configuration
-  		 "package_configs/org_config.el"
-
   		 ;; Load Ledger Mode Configuration
   		 "package_configs/ledger_mode_config.el"
 
@@ -191,7 +188,13 @@
   		 ;; ;; Load LSP Mode Configuration
   		 ;; "package_configs/lsp_mode_config.el"
 
-  		 ;; Load Eglo Configuration
+  		 ;; Load Org Configuration -- NEEDS to be loaded after language modes
+  		 "package_configs/org_config.el"
+
+  		 ;; Load Markdown Mode Configuration
+  		 "package_configs/markdown_config.el"
+
+  		 ;; Load Eglot Configuration
   		 "package_configs/eglot_config.el"
 
   		 ;; Load Eglo Configuration
