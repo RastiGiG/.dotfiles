@@ -3298,7 +3298,7 @@ Once these modes work sufficiently enough, the old modes will be swapped over.
 
 #+end_src
 ***** Zig TS Mode
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; Add Nix support to tree-sitter
   (use-package zig-ts-mode
     :mode "\\.zig\\'")
@@ -4431,6 +4431,19 @@ Load [[https://codeberg.org/theesm/ob-nix][CodeBerg.org: Theesm - ob-nix]]
   (use-package ob-nix)
 
 #+end_src
+**** Org Babel Zig
+
+Load [[https://github.com/jolby/ob-zig.el][Ob-zig]] to support the [[id:af113201-ed84-4d96-8b34-a23bd0b1fcc2][Zig Programming Language]]
+#+begin_src emacs-lisp
+  ;; Load Zig Support for Org Mode
+  (use-package ob-zig
+    :straight (ob-zig :type git :host github :repo "jolby/ob-zig.el"
+                      :fork (:host github
+  								 :repo "RastiGiG/org-babel-zig"
+  								 :protocol ssh)))
+
+#+end_src
+
 **** Use Ipython with Org
 The package [[https://github.com/gregsexton/ob-ipython][ob-ipython]] is require get [[id:5fe7783f-d441-40a9-983c-7f671966c6e1][ipython]]-like functionality in [[id:8510330a-9746-4684-ba60-04255df37924][Org Mode]] WIP
 
@@ -4439,7 +4452,8 @@ The package [[https://github.com/gregsexton/ob-ipython][ob-ipython]] is require 
 
 #+end_src
 *** Org Babel Language Configuration
-To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use. [[file:~/Projects/InfoFiles/Emacs/Worg/org-contrib/babel/languages/index.org][Org Babel Supported Languages]] documents all of the languages that you can use with =org-babel=.
+To execute or export code in =org-mode= code blocks, you'll need to set up =org-babel-load-languages= for each language you'd like to use.
+[[file:~/Projects/InfoFiles/Emacs/Worg/org-contrib/babel/languages/index.org][Org Babel Supported Languages]] documents all of the languages that you can use with =org-babel=.
 
 #+begin_src emacs-lisp
   ;; (require 'ob-ledger)
@@ -4463,6 +4477,7 @@ To execute or export code in =org-mode= code blocks, you'll need to set up =org-
       (R . t)             ;; R
       ;; (Ruby . t)          ;; Ruby
       (rust . t)          ;; Rust
+      (zig . t)           ;; Zig
       (julia . t)         ;; Julia Programmin Language
       (lua . t)           ;; Lua Programming Language
       (shell . t)         ;; Command Line Programs
@@ -4516,58 +4531,62 @@ The second part to the [[id:59b9aa51-d637-43f5-b4c6-645bc7be0bc9][cons cell]] to
 
   ;; Setup Source Block Templates
   (cl-loop for block in
-		   '(;; AWK
-			 ("aw"   . "src awk")
-			 ;; C and Cpp
-			 ("cs"   . "src C")
-			 ("cp"   . "src C++")
-			 ;; Emacs-Lisp
-			 ("el"   . "src emacs-lisp")
-			 ;; JSON
-			 ("json" . "src json")
-			 ;; Lua
-			 ("lua"  . "src lua")
-			 ;; Ledger
-			 ("ldg"  . "src ledger :noweb yes")
-			 ;; LaTeX
-			 ("ltx"   . "src latex")
-			 ;; Nix
-			 ("nix"   . "src nix")
-			 ;; Makefile
-			 ("mf"   . "src makefile")
-			 ;; Octave
-			 ("oc"   . "src octave")
-			 ;; Perl
-			 ("perl" . "src perl")
-			 ;; PHP
-			 ("ph"   . "src php")
-			 ;; Python
-			 ("py"   . "src python")
-			 ;; Scheme
-			 ("sc"   . "src scheme")
-			 ;; Shell
-			 ("sh"   . "src shell")
-			 ;; SQL
-			 ("sql"   . "src sql")
-			 ;; YAML
-			 ("yaml" . "src yaml")
-			 ;; R
-			 ("rp"   . "src R")                                  ;; pure R
-			 ("rr"   . "src R :results both output")             ;; R with output
-			 ("rs"   . "src R :session :results both output")    ;; R with output
-			 ;; Rust
-			 ("ru"   . "src rust ")    ;; pure rust
+  		 '(;; AWK
+  		   ("aw"   . "src awk")
+  		   ;; C and Cpp
+  		   ("cs"   . "src C")
+  		   ("cp"   . "src C++")
+  		   ;; Emacs-Lisp
+  		   ("el"   . "src emacs-lisp")
+  		   ;; Go
+  		   ("go" . "src go")
+  		   ;; JSON
+  		   ("json" . "src json")
+  		   ;; Lua
+  		   ("lua"  . "src lua")
+  		   ;; Ledger
+  		   ("ldg"  . "src ledger :noweb yes")
+  		   ;; LaTeX
+  		   ("ltx"   . "src latex")
+  		   ;; Nix
+  		   ("nix"   . "src nix")
+  		   ;; Makefile
+  		   ("mf"   . "src makefile")
+  		   ;; Octave
+  		   ("oc"   . "src octave")
+  		   ;; Perl
+  		   ("perl" . "src perl")
+  		   ;; PHP
+  		   ("ph"   . "src php")
+  		   ;; Python
+  		   ("py"   . "src python")
+  		   ;; Scheme
+  		   ("sc"   . "src scheme")
+  		   ;; Shell
+  		   ("sh"   . "src shell")
+  		   ;; SQL
+  		   ("sql"   . "src sql")
+  		   ;; Typescript
+  		   ("ts" . "src typescript")
+  		   ;; R
+  		   ("rp"   . "src R")                                  ;; pure R
+  		   ("rr"   . "src R :results both output")             ;; R with output
+  		   ("rs"   . "src R :session :results both output")    ;; R with output
+  		   ;; Rust
+  		   ("ru"   . "src rust ")    ;; pure rust
+  		   ;; YAML
+  		   ("yaml" . "src yaml")
+  		   ;; Zig
+  		   ("z"   . "src zig ")    ;; pure rust
 
-			 ;; ("go" . "src go")
-			 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
-			 ;; ("ts" . "src typescript"))
-			 ;; This is an alternative Block
-			 ;; For IPython
-			 ;; ("si" . "src ipython :session :async :results output")
-			 )
-		   do
-		   (add-to-list
-			'org-structure-template-alist block))
+  		   ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+  		   ;; This is an alternative Block
+  		   ;; For IPython
+  		   ;; ("si" . "src ipython :session :async :results output")
+  		   )
+  		 do
+  		 (add-to-list
+  		  'org-structure-template-alist block))
 
 #+end_src
 ** Capture Templates

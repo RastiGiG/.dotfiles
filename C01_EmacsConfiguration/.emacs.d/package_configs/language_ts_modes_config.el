@@ -67,7 +67,3 @@
 ;; Add Nix support to tree-sitter
 (use-package nix-ts-mode
   :mode "\\.nix\\'")
-
-;; Add Nix support to tree-sitter
-(use-package zig-ts-mode
-  :mode "\\.zig\\'")

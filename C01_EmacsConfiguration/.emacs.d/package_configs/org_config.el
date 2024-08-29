@@ -535,6 +535,13 @@
 ;; Load Nix Support for Org Mode
 (use-package ob-nix)
 
+;; Load Zig Support for Org Mode
+(use-package ob-zig
+  :straight (ob-zig :type git :host github :repo "jolby/ob-zig.el"
+                    :fork (:host github
+  							       :repo "RastiGiG/org-babel-zig"
+  							       :protocol ssh)))
+
 ;; (require 'ob-ledger)
 ;; (require-package 'ob-ipython)
 
@@ -556,6 +563,7 @@
     (R . t)             ;; R
     ;; (Ruby . t)          ;; Ruby
     (rust . t)          ;; Rust
+    (zig . t)           ;; Zig
     (julia . t)         ;; Julia Programmin Language
     (lua . t)           ;; Lua Programming Language
     (shell . t)         ;; Command Line Programs
@@ -581,58 +589,62 @@
 
 ;; Setup Source Block Templates
 (cl-loop for block in
-		 '(;; AWK
-		       ("aw"   . "src awk")
-		       ;; C and Cpp
-		       ("cs"   . "src C")
-		       ("cp"   . "src C++")
-		       ;; Emacs-Lisp
-		       ("el"   . "src emacs-lisp")
-		       ;; JSON
-		       ("json" . "src json")
-		       ;; Lua
-		       ("lua"  . "src lua")
-		       ;; Ledger
-		       ("ldg"  . "src ledger :noweb yes")
-		       ;; LaTeX
-		       ("ltx"   . "src latex")
-		       ;; Nix
-		       ("nix"   . "src nix")
-		       ;; Makefile
-		       ("mf"   . "src makefile")
-		       ;; Octave
-		       ("oc"   . "src octave")
-		       ;; Perl
-		       ("perl" . "src perl")
-		       ;; PHP
-		       ("ph"   . "src php")
-		       ;; Python
-		       ("py"   . "src python")
-		       ;; Scheme
-		       ("sc"   . "src scheme")
-		       ;; Shell
-		       ("sh"   . "src shell")
-		       ;; SQL
-		       ("sql"   . "src sql")
-		       ;; YAML
-		       ("yaml" . "src yaml")
-		       ;; R
-		       ("rp"   . "src R")                                  ;; pure R
-		       ("rr"   . "src R :results both output")             ;; R with output
-		       ("rs"   . "src R :session :results both output")    ;; R with output
-		       ;; Rust
-		       ("ru"   . "src rust ")    ;; pure rust
+  	       '(;; AWK
+  		 ("aw"   . "src awk")
+  		 ;; C and Cpp
+  		 ("cs"   . "src C")
+  		 ("cp"   . "src C++")
+  		 ;; Emacs-Lisp
+  		 ("el"   . "src emacs-lisp")
+  		 ;; Go
+  		 ("go" . "src go")
+  		 ;; JSON
+  		 ("json" . "src json")
+  		 ;; Lua
+  		 ("lua"  . "src lua")
+  		 ;; Ledger
+  		 ("ldg"  . "src ledger :noweb yes")
+  		 ;; LaTeX
+  		 ("ltx"   . "src latex")
+  		 ;; Nix
+  		 ("nix"   . "src nix")
+  		 ;; Makefile
+  		 ("mf"   . "src makefile")
+  		 ;; Octave
+  		 ("oc"   . "src octave")
+  		 ;; Perl
+  		 ("perl" . "src perl")
+  		 ;; PHP
+  		 ("ph"   . "src php")
+  		 ;; Python
+  		 ("py"   . "src python")
+  		 ;; Scheme
+  		 ("sc"   . "src scheme")
+  		 ;; Shell
+  		 ("sh"   . "src shell")
+  		 ;; SQL
+  		 ("sql"   . "src sql")
+  		 ;; Typescript
+  		 ("ts" . "src typescript")
+  		 ;; R
+  		 ("rp"   . "src R")                                  ;; pure R
+  		 ("rr"   . "src R :results both output")             ;; R with output
+  		 ("rs"   . "src R :session :results both output")    ;; R with output
+  		 ;; Rust
+  		 ("ru"   . "src rust ")    ;; pure rust
+  		 ;; YAML
+  		 ("yaml" . "src yaml")
+  		 ;; Zig
+  		 ("z"   . "src zig ")    ;; pure rust
 
-		       ;; ("go" . "src go")
-		       ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
-		       ;; ("ts" . "src typescript"))
-		       ;; This is an alternative Block
-		       ;; For IPython
-		       ;; ("si" . "src ipython :session :async :results output")
-		       )
-		 do
-		 (add-to-list
-		      'org-structure-template-alist block))
+  		 ;; ("ip" . "src ipython :session :async :exports both :results raw drawer")
+  		 ;; This is an alternative Block
+  		 ;; For IPython
+  		 ;; ("si" . "src ipython :session :async :results output")
+  		 )
+  	       do
+  	       (add-to-list
+  		'org-structure-template-alist block))
 
 ;; Org-Capture
 (use-package org-capture
