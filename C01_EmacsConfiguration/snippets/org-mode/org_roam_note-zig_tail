@@ -1,0 +1,62 @@
+# -*- mode: snippet -*-
+# name: org_roam_note-zig_tail
+# key: <ornzigt
+# --
+* Topic Overview
+
+** [[id:af113201-ed84-4d96-8b34-a23bd0b1fcc2][Zig]]
+*** Language Overview
+**** [[id:ceb7d824-0789-4bce-87c9-7dfe0b627ea5][Datatypes]]
+**** [[id:3ae15d2a-cc13-4cf0-a118-bdc958243af1][Datastructures]]
+**** [[id:29f39ab8-b02e-4ade-a2d7-1fd5204cc446][Language Syntax]]
+**** [[id:8a3904e4-4a9a-4d66-bef6-1e4c600d9762][Keywords]]
+**** [[id:2b8f847f-ea05-442f-bf84-2c550c383b75][Table of Operators]]
+*** Additional Features
+**** [[id:9653616c-a6e0-4ba2-bd1e-e6276e9220e0][C Functions in Zig]]
+*** [[id:a843a1dc-9157-455f-a26c-416fde699343][Packages]]
+**** [[id:25df0848-2ed0-44d4-a870-2c3245eb658a][The Standard Library]]
+*** [[id:0afd21bd-605f-488e-acf6-21fd68c4c1f8][Tipps]]
+
+* Read On
+
+** [[id:7d5273e4-608e-404a-9973-e49c5605d682][Personal Wiki]]
+*** [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]]
+*** [[id:814c0a9b-7666-40ad-83d8-fed3c4b351e4][Computer Science]]
+**** [[id:e0b33151-ac48-4ed4-bbd4-bfa7c09bfd46][Computer Programming]]
+***** [[id:8b26358a-672f-43c1-8507-1b388b3a31cd][Programming Languages]]
+****** [[id:af113201-ed84-4d96-8b34-a23bd0b1fcc2][Zig]]
+**** [[id:67f6ce7c-cf72-4812-9712-a9bfaac84581][Algorithmic]]
+*** [[id:b02415ea-81e4-4681-97c8-ce08034eb471][Terminology]]
+
+* References
+
+[[id:35dda122-8283-4549-882a-3d2d3dbcbb30][Zig References]]
+
+** Websites
+*** Documentation
+
+1. [[https://ziglang.org/][ZigLang.org]]
+   1) [[https://ziglang.org/documentation/master/][ZigLang.org: Documentation]]
+      + [[https://ziglang.org/documentation/master/#Inferred-Error-Sets][ZigLang.org: Documentation - Infered Error Sets]]
+   2) [[https://ziglang.org/documentation/master/std/][ZigLang.org: Standard Library Documentation]]
+2. [[https://ieeexplore.ieee.org/][IEEEexplore.IEEE.org]]
+   1) [[https://ieeexplore.ieee.org/document/][IEEEexplore.IEEE.org: Documentation]]
+      * [[https://ieeexplore.ieee.org/document/8766229][IEEEexplore.IEEE.org: Documentation - Standard IEEE-754]]
+
+*** Developement
+
+1. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
+   1) [[https://github.com/ziglang/zig][GitHub.com: Zig Lang]]
+
+*** Learning Resources
+
+1. [[https://www.github.com/][GitHub.com - Software Developement Platform]]
+   1) [[https://codeberg.org/ziglings/][GitHub.com: Ziglings]]
+      + [[https://codeberg.org/ziglings/exercises/][GitHub.com: Ziglings - Exercises]]
+
+*** Other Resources
+
+1. [[https://en.wikipedia.org][WikiPedia.org - The Free Encyclopedia]]
+   1) [[https://de.wikipedia.org/wiki/Leibniz-Reihe][WikiPedia.org: Leibniz-Reihe]]
+
+** Literature
