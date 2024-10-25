@@ -124,7 +124,7 @@
 (with-eval-after-load 'webjump
   (cl-loop for website in
   		 '(("Google" . [simple-query "www.google.com" "www.google.com/search?q=" ""])
-  		       ("YouTube" . [simple-query "www.youtube.com/feed/subscriptions" "www.youtube.com/results?search_query=" ""])
+  		       ("BerryBase Maker Shop" . [simple-query "https://www.berrybase.de" "https://www.berrybase.de/search?sSearch=" ""])
   		       ("CCBV" . [simple-query "https://ccbv.co.uk/" "https://ccbv.co.uk/" ""])
   		       ("Nix Packages - latest" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?from=0&sort=relevance&type=packages&query=" ""])
   		       ("Nix Packages - unstable" . [simple-query "https://search.nixos.org/" "https://search.nixos.org/packages?channel=unstable&from=0&sort=relevance&type=packages&query=" ""])
@@ -133,7 +133,8 @@
   		       ("Home-Manager Options" . [simple-query "https://mipmip.github.io/" "https://mipmip.github.io/home-manager-option-search/?query=" ""])
   		       ("Docker Hub" . [simple-query "https://hub.docker.com/" "https://hub.docker.com/search?q=" ""])
   		       ("Mediarath Smart Home Devices" . [simple-query "https://mediarath.de/" "https://mediarath.de/search?q=" ""])
-  		       ("BerryBase Maker Shop" . [simple-query "https://www.berrybase.de" "https://www.berrybase.de/search?sSearch=" ""]))
+  		       ("Guix Packages" . [simple-query "https://packages.guix.gnu.org/" "https://packages.guix.gnu.org/search/?query=" ""])
+  		       ("YouTube" . [simple-query "www.youtube.com/feed/subscriptions" "www.youtube.com/results?search_query=" ""]))
   		 do
   		 (add-to-list 'webjump-sites website)))
 

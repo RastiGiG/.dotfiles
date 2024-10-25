@@ -35,6 +35,10 @@
 
 
   ;; Files
+      "E"   '(:ignore t :which-key "eval")
+
+
+  ;; Files
   "f"     '(:ignore t :which-key "Files")
   "fR"    'recentf-open-files
 
@@ -80,4 +84,7 @@
   "Tdd"     '(dictionary :which-key "Open Dictionary")
   "Tdl"     '(dictionary-lookup-definition :which-key "Lookup Definition")
   "Tdm"     '(dictionary-match-words :which-key "Match Words")
-  "Tds"     '(dictionary-search :which-key "Search Dictionary"))
+  "Tds"     '(dictionary-search :which-key "Search Dictionary")
+
+  ;; Menus
+  "M"       '(:ignore t :which-key "Menus"))

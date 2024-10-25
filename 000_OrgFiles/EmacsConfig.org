@@ -1,7 +1,7 @@
 # -*- ispell-local-dictionary: "british"; -*-
 #+TITLE:        Personal Emacs Configuration
 #+DATE:         [2024-01-06]
-#+MODIFIED:     Time-stamp: <2024-08-29 09:30:54 rastibasti>
+#+MODIFIED:     Time-stamp: <2024-10-25 20:34:59 rastibasti>
 #+DESCRIPTION:  This configuration is organized into subdirectories, which makes it easier to enable or disable large parts of it
 #+PROPERTY:     header-args:emacs-lisp :tangle ../C01_EmacsConfiguration/.emacs.d/init.el :mkdirp yes
 #+STARTUP:      hideblocks overview
@@ -79,6 +79,7 @@
   - [[#ebdb][EBDB]]
 - [[#erc][ERC]]
 - [[#eradio][ERadio]]
+- [[#ebuku][EBuku]]
 - [[#elfeed---emacs-rss-feed][Elfeed - Emacs RSS Feed]]
   - [[#load-elfeed][Load Elfeed]]
   - [[#elfeed-score][Elfeed-Score]]
@@ -427,6 +428,9 @@ Version mismatch is commonly encountered in the following situations:
   		   ;; Load ERC Configuration
   		   "package_configs/erc_config.el"
 
+  		   ;; Load Ebuku Configuration
+  		   "package_configs/ebuku_config.el"
+
   		   ;; Load ERadio Configuration
              "package_configs/eradio_config.el")
            do
@@ -597,6 +601,10 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
 
 
     ;; Files
+	"E"   '(:ignore t :which-key "eval")
+
+
+    ;; Files
     "f"     '(:ignore t :which-key "Files")
     "fR"    'recentf-open-files
 
@@ -642,13 +650,15 @@ This version specifies =SPC= instead of =C-.= as ~leader key~
     "Tdd"     '(dictionary :which-key "Open Dictionary")
     "Tdl"     '(dictionary-lookup-definition :which-key "Lookup Definition")
     "Tdm"     '(dictionary-match-words :which-key "Match Words")
-    "Tds"     '(dictionary-search :which-key "Search Dictionary"))
+    "Tds"     '(dictionary-search :which-key "Search Dictionary")
+
+    ;; Menus
+    "M"       '(:ignore t :which-key "Menus"))
 
 #+end_src
 *** Elisp Leader Keys
 #+begin_src emacs-lisp
   (pet/leader-keys
-	"E"   '(:ignore t :which-key "eval")
 	"Eb"  '(eval-buffer :which-key "eval buffer"))
 
   (pet/leader-keys
@@ -5410,6 +5420,19 @@ This config sets ~eradio~ to use =‘mpv’= instead of =‘vlc’= because it s
                             ("PopStars" . "https://zeno.fm/radio/popstars/")
                             ("RadioMetal" . "https://zeno.fm/radio/radio-metal/")
                             ("RocknRoll Radio" . "https://zeno.fm/radio/rocknroll-radio994c7517qs8uv/"))))
+
+#+end_src
+* EBuku
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ../C01_EmacsConfiguration/.emacs.d/package_configs/ebuku_config.el :mkdirp yes
+:END:
+[[https://github.com/flexibeast/ebuku][Ebuku]] is an ~interface~ to the [[https://github.com/jarun/buku][buku]] ~Web Bookmark Manager~ for [[id:3cf0fa83-18b3-4206-a109-f4606a94b8c1][Emacs]].
+#+begin_src emacs-lisp
+  ;; Add interface for buku
+  (use-package ebuku)
+
+  (pet/leader-keys
+  	"Mb"  '(ebuku :which-key "ebuku"))
 
 #+end_src
 * Elfeed - Emacs RSS Feed

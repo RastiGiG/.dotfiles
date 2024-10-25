@@ -223,13 +223,15 @@
   		 ;; Load ERC Configuration
   		 "package_configs/erc_config.el"
 
+  		 ;; Load Ebuku Configuration
+  		 "package_configs/ebuku_config.el"
+
   		 ;; Load ERadio Configuration
            "package_configs/eradio_config.el")
          do
          (pet/load-file (concat user-emacs-directory config)))
 
 (pet/leader-keys
-      "E"   '(:ignore t :which-key "eval")
       "Eb"  '(eval-buffer :which-key "eval buffer"))
 
 (pet/leader-keys
