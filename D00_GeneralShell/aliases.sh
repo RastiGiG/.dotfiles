@@ -79,3 +79,6 @@ alias pc='podman-compose'
 
 alias ldg="ledger"
 alias ldgsd="ledger --sort='-date'"
+
+# Alternate Configuration File for ABCDE - A Better CD Encoder
+alias abcde="abcde -c $HOME/.config/abcde/abcde.conf"

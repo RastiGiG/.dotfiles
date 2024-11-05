@@ -143,3 +143,9 @@ These commands need the devices to be *unmounted* to work right
   alias ldgsd="ledger --sort='-date'"
 
 #+end_src
+* Media Software
+#+begin_src shell
+  # Alternate Configuration File for ABCDE - A Better CD Encoder
+  alias abcde="abcde -c $HOME/.config/abcde/abcde.conf"
+
+#+end_src
