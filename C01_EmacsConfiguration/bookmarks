@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("E 00 Engineering"
+(("M 00 Music"
+ (filename . "~/Music/")
+ (front-context-string . "Peter_Schilling\n")
+ (rear-context-string . "0K Oct 31 20:36 ")
+ (position . 77488)
+ (last-modified 26409 12890 885965 217000))
+("E 00 Engineering"
  (filename . "~/Projects/Engineering/")
  (front-context-string)
  (rear-context-string . "0K May 10 15:36 ")
@@ -283,11 +289,11 @@
  (rear-context-string . "K  5. Jan 03:26 ")
  (position . 183))
 ("org-capture-last-stored"
- (filename . "~/Org/20240806132542-recipies_sauces_hummus.org")
- (front-context-string . "* Recipies - Sau")
+ (filename . "~/Org/20240902233946-computer_programming_standards_and_guidelines_casings_and_naming_conventions.org")
+ (front-context-string . "* Computer Progr")
  (rear-context-string . "P: show2levels\n\n")
- (position . 216)
- (last-modified 26290 2125 866087 837000))
+ (position . 254)
+ (last-modified 26326 12463 512080 843000))
 ("C 02-B Emacs Backup Config"
  (filename . "~/.dotfiles/000_OrgFiles/EmacsBackupConfig.org")
  (front-context-string . "\n      (\"n\" \"Nex")
