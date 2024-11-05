@@ -65,6 +65,15 @@ fi
 
 export INPUTRC
 
+#----------------------------EDITOR
+# Set default text editor to VIM
+if ! [[ "EDITOR" = "/usr/bin/vim" ]]
+then
+  	INPUTRC="/usr/bin/vim"
+fi
+
+export EDITOR
+
 #----------------------GUIX PROFILE
 # Add Guix Profile Path
 # -> The first one is only used after fresh installs of guix

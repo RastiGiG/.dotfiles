@@ -97,6 +97,18 @@ Default is the =shell= version.
   export INPUTRC
 
 #+end_src
+** EDITOR
+#+begin_src shell
+  #----------------------------EDITOR
+  # Set default text editor to VIM
+  if ! [[ "EDITOR" = "/usr/bin/vim" ]]
+  then
+  	  INPUTRC="/usr/bin/vim"
+  fi
+
+  export EDITOR
+
+#+end_src
 ** GUIX
 #+begin_src shell
   #----------------------GUIX PROFILE
